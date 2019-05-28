@@ -1,10 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import AppContainer from "./containers/appContainer"
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+import store from './store';
+
+import 'pace-js'
+import 'pace-js/themes/green/pace-theme-minimal.css'
+
+
+ReactDOM.render(
+    <Provider store={store}>
+        <div className="App Fade">
+            <BrowserRouter>
+                <AppContainer />
+            </BrowserRouter>
+        </div>
+    </Provider>
+    , document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
