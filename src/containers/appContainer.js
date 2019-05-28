@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, withRouter, Switch } from "react-router
 import ScrollUpButton from "react-scroll-up-button";
 
 // import requiresAuth from '../helpers/requiresAuth';
-// import NavigationContainer from './navigation/navigationContainer';
-// import NotFound404Container from './navigation/notFound404Container';
+import NavigationContainer from './navigation/navigationContainer';
+import NotFound404Container from './navigation/notFound404Container';
 // import PrivacyContainer from './general/privacyContainer';
 // import TermsContainer from './general/termsContainer';
 import HomeContainer from './general/homeContainer';
@@ -23,33 +23,31 @@ import HomeContainer from './general/homeContainer';
 
 
 class AppContainer extends React.Component {
-  render() {
-    return (
-        <Router>
-            <div className="container-fluid" id="outer-container">
+    render() {
+        return (
+            <Router>
+                <div className="container-fluid" id="outer-container">
 
-{ /*
-                <NavigationContainer
-                    history={this.props.history}
-                    location={this.props.location}
-                    match={this.props.match}
-                    staticContext={this.props.staticContext}
-                />
-*/ }
+                    <NavigationContainer
+                        history={this.props.history}
+                        location={this.props.location}
+                        match={this.props.match}
+                        staticContext={this.props.staticContext}
+                    />
 
-                <div className="d-flex align-items-stretch">
-                    <main id="main" role="main">
-                        <ScrollUpButton />
-                        <Switch>
-                            <Route path="/" exact component={HomeContainer} />
-                            { /* <Route component={NotFound404Container} /> */ }
-                        </Switch>
-                    </main>
+                    <div className="d-flex align-items-stretch">
+                        <main id="main" role="main">
+                            <ScrollUpButton />
+                            <Switch>
+                                <Route path="/" exact component={HomeContainer} />
+                                <Route component={NotFound404Container} />
+                            </Switch>
+                        </main>
+                    </div>
                 </div>
-            </div>
-        </Router>
-    );
-  }
+            </Router>
+        );
+    }
 }
 
 export default withRouter(AppContainer);

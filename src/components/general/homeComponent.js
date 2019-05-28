@@ -21,8 +21,8 @@ class HomeComponent extends Component {
                     <div className="col-md-12">
 
                         <div className="jumbotron">
-                            <h1 className="display-4">Mikaponics</h1>
-                            <p className="lead">A telemetry and alarm service for your aquaponics and hydroponics.</p>
+                            <h1 className="display-4">Neighourhood Watch</h1>
+                            <p className="lead">TODO: PLEASE ADD DESCRIPTION.</p>
                             <hr className="my-4" />
                             <p>If you already have an account, login through here.</p>
 
