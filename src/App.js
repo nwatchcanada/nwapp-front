@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { getTenantSchema } from "./helpers/subdomainUtility";
+import { getTenantSchema } from "./helpers/tenantSchemaUtility";
 
 
 class App extends Component {
     render() {
         const tenantSchema = getTenantSchema();
-        console.log("SCHEMA:", tenantSchema);
+        console.log("TENANT SCHEMA:", tenantSchema);
 
       return (
         <div className="App">

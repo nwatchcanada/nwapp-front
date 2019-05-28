@@ -4,12 +4,10 @@
  */
 export function getTenantSchema() {
     let host = window.location.host;
-    // let protocol = window.location.protocol;
     let parts = host.split(".");
     let subdomain = "";
-    // If we get more than 3 parts, then we have a subdomain
-    // INFO: This could be 4, if you have a co.uk TLD or something like that.
 
+    // If we have no subdomains then we return nothing.
     if (parts.length <= 1) {
         return null;
     }
