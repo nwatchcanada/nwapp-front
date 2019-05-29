@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, withRouter, Switch } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 
+import getSubdomain from '../helpers/subdomainUtility';
 // import requiresAuth from '../helpers/requiresAuth';
 import NavigationContainer from './navigation/navigationContainer';
 import NotFound404Container from './navigation/notFound404Container';
@@ -24,6 +25,7 @@ import HomeContainer from './general/homeContainer';
 
 class AppContainer extends React.Component {
     render() {
+        console.log("Subdomain:", getSubdomain());
         return (
             <Router>
                 <div className="container-fluid" id="outer-container">

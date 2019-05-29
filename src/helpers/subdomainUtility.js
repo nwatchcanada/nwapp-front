@@ -2,7 +2,7 @@
  * Function will get the subdomain that the browser is currentl in.
  * Special thanks to: https://stackoverflow.com/a/38863509
  */
-export function getTenantSchema() {
+export default function getSubdomain() {
     let host = window.location.host;
     let parts = host.split(".");
     let subdomain = "";
