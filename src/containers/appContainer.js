@@ -9,7 +9,7 @@ import NotFound404Container from './navigation/notFound404Container';
 // import PrivacyContainer from './general/privacyContainer';
 // import TermsContainer from './general/termsContainer';
 import HomeContainer from './general/homeContainer';
-// import LoginContainer from "./account/loginContainer";
+import LoginContainer from "./account/loginContainer";
 // import LogoutContainer from "./account/logoutContainer";
 // import RegisterContainer from "./account/registerContainer";
 // import RegisterSuccessContainer from "./account/registerSuccessContainer";
@@ -42,6 +42,7 @@ class AppContainer extends React.Component {
                             <ScrollUpButton />
                             <Switch>
                                 <Route path="/" exact component={HomeContainer} />
+                                <Route path="/login" exact component={LoginContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
