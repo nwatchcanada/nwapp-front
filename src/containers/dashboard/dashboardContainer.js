@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ExecutiveDashboardComponent from "../../components/dashboard/executiveDashboardComponent";
+import StaffDashboardComponent from "../../components/dashboard/staffDashboardComponent";
 // import { pullDashboard } from "../../actions/dashboardActions";
 
 
-class ExecutiveDashboardContainer extends Component {
+class DashboardContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -30,7 +30,7 @@ class ExecutiveDashboardContainer extends Component {
 
     render() {
         return (
-            <ExecutiveDashboardComponent
+            <StaffDashboardComponent
                 // dashboard={this.props.dashboard}
                 user={this.props.user}
             />
@@ -57,4 +57,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ExecutiveDashboardContainer);
+)(DashboardContainer);
