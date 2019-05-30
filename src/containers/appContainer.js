@@ -6,8 +6,8 @@ import getSubdomain from '../helpers/subdomainUtility';
 // import requiresAuth from '../helpers/requiresAuth';
 import NavigationContainer from './navigation/navigationContainer';
 import NotFound404Container from './navigation/notFound404Container';
-// import PrivacyContainer from './general/privacyContainer';
-// import TermsContainer from './general/termsContainer';
+import PrivacyContainer from './general/privacyContainer';
+import TermsContainer from './general/termsContainer';
 import HomeContainer from './general/homeContainer';
 import LoginContainer from "./account/loginContainer";
 // import LogoutContainer from "./account/logoutContainer";
@@ -44,6 +44,8 @@ class AppContainer extends React.Component {
                                 <Route path="/" exact component={HomeContainer} />
                                 <Route path="/login" exact component={LoginContainer} />
                                 <Route path="/register" exact component={RegisterContainer} />
+                                <Route path="/privacy" exact component={PrivacyContainer} />
+                                <Route path="/terms" exact component={TermsContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
