@@ -29,7 +29,7 @@ class LoginContainer extends Component {
     }
 
     /**
-     *  Component Life-cycle
+     *  Component Life-cycle Management
      *------------------------------------------------------------
      */
 
