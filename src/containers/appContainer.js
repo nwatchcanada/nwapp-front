@@ -11,7 +11,7 @@ import NotFound404Container from './navigation/notFound404Container';
 import HomeContainer from './general/homeContainer';
 import LoginContainer from "./account/loginContainer";
 // import LogoutContainer from "./account/logoutContainer";
-// import RegisterContainer from "./account/registerContainer";
+import RegisterContainer from "./account/registerContainer";
 // import RegisterSuccessContainer from "./account/registerSuccessContainer";
 // import ActivateContainer from "./account/activateContainer";
 // import SendResetPasswordContainer from "./account/sendResetPasswordContainer";
@@ -43,6 +43,7 @@ class AppContainer extends React.Component {
                             <Switch>
                                 <Route path="/" exact component={HomeContainer} />
                                 <Route path="/login" exact component={LoginContainer} />
+                                <Route path="/register" exact component={RegisterContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
