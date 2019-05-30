@@ -23,7 +23,7 @@ export default function getSubdomain() {
     subdomain = parts[0];
 
     // Return our subdomain if it is a valid subdomain.
-    if (subdomain === "www" || subdomain === "api") {
+    if (subdomain === "www" || subdomain === "nwapp") {
         return null;
     } else {
         return subdomain;
