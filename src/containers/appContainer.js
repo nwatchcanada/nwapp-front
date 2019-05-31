@@ -20,7 +20,7 @@ import RegisterSuccessContainer from "./account/registerSuccessContainer";
 // import ResetPasswordSuccessContainer from "./account/resetPasswordSuccessContainer";
 // import ReferralContainer from "./account/referralContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
-import ExecutiveDashboardContainer from "./dashboard/executiveDashboardContainer";
+import SharedOrganizationListContainer from "./organization/shared/sharedOrganizationListContainer";
 
 
 
@@ -48,7 +48,7 @@ class AppContainer extends React.Component {
                                 <Route path="/register-success" exact component={RegisterSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
-                                <Route path="/super-dashboard" exact component={ExecutiveDashboardContainer} />
+                                <Route path="/organizations" exact component={SharedOrganizationListContainer} />
                                 <Route path="/dashboard" exact component={DashboardContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>

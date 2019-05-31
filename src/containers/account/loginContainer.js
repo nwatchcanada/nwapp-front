@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
+import { EXECUTIVE_GROUP_ID } from '../../constants/api';
 import LoginComponent from '../../components/account/loginComponent';
 import validateInput from "../../validators/loginValidator";
 import { postLogin } from "../../actions/loginAction";
@@ -62,9 +63,14 @@ class LoginContainer extends Component {
      */
     onSuccessfulSubmissionCallback(profile) {
         this.setState({ errors: {}, });
-        const schema = profile.schema;
-        const location = process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_DOMAIN + "/dashboard";
-        window.location = location; // Do not use `react-router-dom` library.
+        const { schema, groupMembershipId } = profile;
+        if (groupMembershipId === EXECUTIVE_GROUP_ID) {
+            const location = process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_DOMAIN + "/organizations";
+            window.location = location; // Do not use `react-router-dom` library.
+        } else {
+            const location = process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_DOMAIN + "/dashboard";
+            window.location = location; // Do not use `react-router-dom` library.
+        }
     }
 
     onFailedSubmissionCallback(errors) {
