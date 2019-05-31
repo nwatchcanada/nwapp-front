@@ -3,6 +3,7 @@ import Scroll from 'react-scroll';
 // import { connect } from 'react-redux';
 
 import RegisterComponent from '../../components/account/registerComponent';
+import validateInput from '../../validators/registerValidator';
 // import { postRegister, clearRegister } from "../../actions/registerAction";
 
 
@@ -36,6 +37,8 @@ class RegisterContainer extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -63,13 +66,13 @@ class RegisterContainer extends Component {
         this.setState({
             errors: {},
         });
-        // this.props.history.push(this.props.productionDetail.absoluteUrl+"/inspection");
+        this.props.history.push("/register-success");
     }
 
-    onFailedSubmissionCallback() {
-        // this.setState({
-        //     errors: this.props.productionInspectionDetail.errors
-        // })
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -96,8 +99,22 @@ class RegisterContainer extends Component {
     }
 
     onSubmit(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        alert("TODO: IMPLEMENT");
+
+        // Perform client-side validation.
+        const { errors, isValid } = validateInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
+
+        // validateInput
         // this.props.postRegister(
         //     this.state,
         //     (data) => {

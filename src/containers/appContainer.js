@@ -12,7 +12,7 @@ import HomeContainer from './general/homeContainer';
 import LoginContainer from "./account/loginContainer";
 // import LogoutContainer from "./account/logoutContainer";
 import RegisterContainer from "./account/registerContainer";
-// import RegisterSuccessContainer from "./account/registerSuccessContainer";
+import RegisterSuccessContainer from "./account/registerSuccessContainer";
 // import ActivateContainer from "./account/activateContainer";
 // import SendResetPasswordContainer from "./account/sendResetPasswordContainer";
 // import SendResetPasswordSuccessContainer from "./account/sendResetPasswordSuccessContainer";
@@ -45,6 +45,7 @@ class AppContainer extends React.Component {
                                 <Route path="/" exact component={HomeContainer} />
                                 <Route path="/login" exact component={LoginContainer} />
                                 <Route path="/register" exact component={RegisterContainer} />
+                                <Route path="/register-success" exact component={RegisterSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
                                 <Route path="/super-dashboard" exact component={ExecutiveDashboardContainer} />
