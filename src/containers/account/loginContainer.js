@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import LoginComponent from '../../components/account/loginComponent';
 import validateInput from "../../validators/loginValidator";
-// import { attemptLoginRestForm, attemptLogin } from "../../actions/loginAction";
+import { postLogin } from "../../actions/loginAction";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
 
 
@@ -26,6 +26,8 @@ class LoginContainer extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -54,10 +56,15 @@ class LoginContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback() {
+    /**
+     *  Function will redirect the user, using the browsers redirect function,
+     *  to the user's respected dashboard belonging to the tenant they belong to.
+     */
+    onSuccessfulSubmissionCallback(profile) {
         this.setState({ errors: {}, });
-        alert("TODO");
-        // this.props.history.push(this.props.productionDetail.absoluteUrl+"/inspection");
+        const schema = profile.schema;
+        const location = process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_DOMAIN + "/dashboard";
+        window.location = location; // Do not use `react-router-dom` library.
     }
 
     onFailedSubmissionCallback(errors) {
@@ -92,7 +99,16 @@ class LoginContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            // Clear any and all flash messages in our queue to be rendered.
+            this.props.clearFlashMessage();
+
+            this.setState({ errors: {}, isLoading: true, })
+            this.props.postLogin(
+                this.state.email,
+                this.state.password,
+                this.onSuccessfulSubmissionCallback,
+                this.onFailedSubmissionCallback
+            );
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -130,9 +146,9 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // attemptLogin: (email, password) => {
-        //     dispatch(attemptLogin(email, password))
-        // },
+        postLogin: (email, password, successCallback, failureCallback) => {
+            dispatch(postLogin(email, password, successCallback, failureCallback))
+        },
         // attemptLoginRestForm: () => {
         //     dispatch(attemptLoginRestForm())
         // },
