@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import SharedOrganizationListComponent from "../../../components/organizations/shared/sharedOrganizationListComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class SharedOrganizationListContainer extends Component {
@@ -20,9 +22,35 @@ class SharedOrganizationListContainer extends Component {
         return (
             <SharedOrganizationListComponent
                 tableData={sampleData}
+                flashMessage={this.props.flashMessage}
             />
         );
     }
 }
 
-export default SharedOrganizationListContainer;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState,
+        // device: store.deviceState,
+        flashMessage: store.flashMessageState,
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        // pullDevice: (user, deviceSlug) => {
+        //     dispatch(
+        //         pullDevice(user, deviceSlug)
+        //     )
+        // },
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
+        }
+    }
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SharedOrganizationListContainer);

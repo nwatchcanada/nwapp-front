@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { FlashMessageComponent } from "../../flashMessageComponent";
+
 
 class TableRow extends Component {
     render() {
@@ -22,13 +24,15 @@ class TableRow extends Component {
 
 class SharedOrganizationListComponent extends Component {
     render() {
-        const { tableData } = this.props;
+        const { tableData, flashMessage } = this.props;
         return (
             <div className="container-fluid">
 
                 <div className="d-flex align-items-stretch">
                     <main id="main" role="main">
                 <h1>Organizations</h1>
+
+                <FlashMessageComponent object={flashMessage} />
 
                 <div className="col-sm-12 mx-auto mt-4 pt-4">
 
