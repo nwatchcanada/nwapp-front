@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 class TableRow extends Component {
@@ -25,12 +25,54 @@ class SharedOrganizationListComponent extends Component {
         const { tableData } = this.props;
         return (
             <div className="container-fluid">
+
                 <div className="d-flex align-items-stretch">
                     <main id="main" role="main">
-                <h1>System Tenants</h1>
+                <h1>Organizations</h1>
 
                 <div className="col-sm-12 mx-auto mt-4 pt-4">
-                    <h2>Organizations</h2>
+
+                    <section className="row text-center placeholders">
+                        <div className="col-sm-3 placeholder">
+                            <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
+                                <Link to="#" className="d-block link-ndecor" title="add">
+                                    <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
+                                </Link>
+                            </div>
+                            <h4>Add</h4>
+                            <div className="text-muted">Add an organization</div>
+                        </div>
+                        { /*
+                        <div className="col-sm-3 placeholder">
+                            <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
+                                <Link to="#" className="d-block link-ndecor" title="Jobs">
+                                    <h1 className="circle-title">10,000</h1>
+                                </Link>
+                            </div>
+                            <h4>Jobs</h4>
+                            <span className="text-muted">View your job history</span>
+                        </div>
+                        <div className="col-sm-3 placeholder">
+                            <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
+                                <Link to="#" className="d-block link-ndecor" title="Members">
+                                    <h1 className="circle-title">2,200</h1>
+                                </Link>
+                            </div>
+                            <h4>Associate Members</h4>
+                            <span className="text-muted">View Member Data</span>
+                        </div>
+                        <div className="col-sm-3 placeholder">
+                            <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
+                                <Link to="#" className="d-block link-ndecor" title="Tasks">
+                                    <h1 className="circle-title">12</h1>
+                                </Link>
+                            </div>
+                            <h4>Tasks</h4>
+                            <span className="text-muted">View your tasks</span>
+                        </div>
+                        */ }
+                    </section>
+
                     <div className="table-responsive">
                         <table className="table table-striped">
                             <thead>
