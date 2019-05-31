@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import LoginComponent from '../../components/account/loginComponent';
-// import validateInput from "../../validations/login";
+import validateInput from "../../validators/loginValidator";
 // import { attemptLoginRestForm, attemptLogin } from "../../actions/loginAction";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
 
@@ -55,16 +55,15 @@ class LoginContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback() {
-        this.setState({
-            errors: {},
-        });
+        this.setState({ errors: {}, });
+        alert("TODO");
         // this.props.history.push(this.props.productionDetail.absoluteUrl+"/inspection");
     }
 
-    onFailedSubmissionCallback() {
-        // this.setState({
-        //     errors: this.props.productionInspectionDetail.errors
-        // })
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -88,13 +87,17 @@ class LoginContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
+        // Perform client-side validation.
+        const { errors, isValid } = validateInput(this.state);
 
-        this.setState({ errors: {}, isLoading: true, })
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
 
-        alert("TODO: IMPLEMENT");
-        // this.props.attemptLogin(this.state.email, this.state.password);
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
     }
 
     /**
