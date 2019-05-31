@@ -6,8 +6,21 @@ import SharedOrganizationListComponent from "../../../components/organizations/s
 class SharedOrganizationListContainer extends Component {
     render() {
         // Return our GUI.
+        const sampleData = [
+            {
+                "schema": "london",
+                "name": "City of London Neigbhourhood Watch",
+                "absoluteUrl": "http://london."+process.env.REACT_APP_DOMAIN+"/dashboard"
+            },{
+                "schema": "toronto",
+                "name": "City of Toronto Neigbhourhood Watch",
+                "absoluteUrl": "http://toronto."+process.env.REACT_APP_DOMAIN+"/dashboard"
+            }
+        ]
         return (
-            <SharedOrganizationListComponent />
+            <SharedOrganizationListComponent
+                tableData={sampleData}
+            />
         );
     }
 }
