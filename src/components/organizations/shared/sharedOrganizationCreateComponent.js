@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapCheckbox } from "../../bootstrap/bootstrapCheckbox";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect'
@@ -18,7 +17,7 @@ class SharedOrganizationCreateComponent extends Component {
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
-                           <Link to="/organizations"><i className="fas fa-table"></i>&nbsp;Organizations</Link>
+                           <Link to="/organizations"><i className="fas fa-building"></i>&nbsp;Organizations</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page"><i className="fas fa-plus"></i>&nbsp;Add</li>
                     </ol>
@@ -107,7 +106,7 @@ class SharedOrganizationCreateComponent extends Component {
                                 <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-secondary" onClick={onCancelClick}>
                                     <i className="fas fa-times"></i>&nbsp;Cancel
                                 </button>
-                                <button type="button" className="btn btn-lg float-right pl-4 pr-4 btn-success" onClick={onClick}>
+                                <button type="button" className="btn btn-lg float-right pl-4 pr-4 btn-success" onClick={onClick} disabled={isLoading}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
                             </div>

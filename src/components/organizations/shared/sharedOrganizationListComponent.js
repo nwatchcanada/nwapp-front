@@ -30,7 +30,7 @@ class SharedOrganizationListComponent extends Component {
 
                 <div className="d-flex align-items-stretch">
                     <main id="main" role="main">
-                <h1>Organizations</h1>
+                <h1><i className="fas fa-building"></i>&nbsp;Organizations</h1>
 
                 <FlashMessageComponent object={flashMessage} />
 
