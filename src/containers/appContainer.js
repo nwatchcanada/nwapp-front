@@ -21,7 +21,7 @@ import RegisterSuccessContainer from "./account/registerSuccessContainer";
 // import ReferralContainer from "./account/referralContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
 import SharedOrganizationListContainer from "./organization/shared/sharedOrganizationListContainer";
-
+import SharedOrganizationCreateContainer from "./organization/shared/sharedOrganizationCreateContainer";
 
 
 class AppContainer extends React.Component {
@@ -49,6 +49,7 @@ class AppContainer extends React.Component {
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
                                 <Route path="/organizations" exact component={SharedOrganizationListContainer} />
+                                <Route path="/organization/add" exact component={SharedOrganizationCreateContainer} />
                                 <Route path="/dashboard" exact component={DashboardContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
