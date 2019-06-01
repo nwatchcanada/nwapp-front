@@ -8,6 +8,7 @@ import {
     NWAPP_ACTIVATE_API_URL
 } from "../constants/api";
 import {
+    getAccessTokenFromLocalStorage,
     setAccessTokenInLocalStorage,
     setRefreshTokenInLocalStorage,
     attachAxiosRefreshTokenHandler
@@ -35,18 +36,20 @@ export const setProfileFailure = profile => ({
 });
 
 
-export function pullProfile(user, successCallback=null, failedCallback=null) {
+export function pullProfile(successCallback=null, failedCallback=null) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
             setProfileRequest()
         );
 
+        const accessToken = getAccessTokenFromLocalStorage();
+
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
             headers: {
-                'Authorization': "Bearer " + user.accessToken.token,
+                'Authorization': "Bearer " + accessToken.token,
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Accept': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -118,18 +121,20 @@ export function pullProfile(user, successCallback=null, failedCallback=null) {
 }
 
 
-export function postProfile(user, data, successCallback, failedCallback) {
+export function postProfile(data, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
             setProfileRequest()
         );
 
+        const accessToken = getAccessTokenFromLocalStorage();
+
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
             headers: {
-                'Authorization': "Bearer " + user.accessToken.token,
+                'Authorization': "Bearer " + accessToken.token,
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Accept': 'application/json',
                 'Access-Control-Allow-Origin': '*',
