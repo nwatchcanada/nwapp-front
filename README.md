@@ -1,4 +1,11 @@
 
+#### Chrome Extensions Required
+Please download the following Chrome extensions.
+
+* [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+* [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
+* [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
+
 #### Host File Setup
 This project is uses ``django-tenants`` library and is setup to work with multiple domains. As a result, we will need to bind the address **workery.ca** to your ``localhost``. To do this follow these instructions.
 

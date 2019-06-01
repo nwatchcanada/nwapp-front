@@ -4,6 +4,7 @@ import { camelizeKeys } from 'humps';
 
 import { LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../constants/actionTypes"
 import { NWAPP_LOGIN_API_URL } from "../constants/api"
+import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../helpers/tokenUtility';
 
 
 export const setLoginRequest = () => ({
@@ -34,7 +35,16 @@ export function postLogin(email, password, successCallback=null, failedCallback=
             setLoginRequest()
         );
 
-        axios.post(NWAPP_LOGIN_API_URL, {
+        // Create a new Axios instance.
+        const customAxios = axios.create({
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+
+        customAxios.post(NWAPP_LOGIN_API_URL, {
             'email': email,
             'password': password,
         }).then( (successResult) => {
@@ -52,6 +62,11 @@ export function postLogin(email, password, successCallback=null, failedCallback=
             store.dispatch(
                 setLoginSuccess(profile)
             );
+
+            // SAVE OUR CREDENTIALS IN PERSISTENT STORAGE. THIS IS AN IMPORTANT
+            // STEP BECAUSE OUR TOKEN UTILITY HELPER NEEDS THIS.
+            setAccessTokenInLocalStorage(profile.accessToken);
+            setRefreshTokenInLocalStorage(profile.refreshToken);
 
             // DEVELOPERS NOTE:
             // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON

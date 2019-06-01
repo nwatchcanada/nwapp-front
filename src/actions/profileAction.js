@@ -7,6 +7,11 @@ import {
     NWAPP_GET_PROFILE_API_URL,
     NWAPP_ACTIVATE_API_URL
 } from "../constants/api";
+import {
+    setAccessTokenInLocalStorage,
+    setRefreshTokenInLocalStorage,
+    attachAxiosRefreshTokenHandler
+} from '../helpers/tokenUtility';
 
 
 export const setProfileRequest = () => ({
@@ -37,15 +42,23 @@ export function pullProfile(user, successCallback=null, failedCallback=null) {
             setProfileRequest()
         );
 
-        // Create our oAuth 2.0 authenticated API header to use with our
-        // submission.
-        const config = {
-            headers: {'Authorization': "Bearer " + user.token}
-        };
+        // Create a new Axios instance using our oAuth 2.0 bearer token
+        // and various other headers.
+        const customAxios = axios.create({
+            headers: {
+                'Authorization': "Bearer " + user.accessToken.token,
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
 
-        axios.get(
-            NWAPP_GET_PROFILE_API_URL,
-            config
+        // Attach our Axios "refesh token" interceptor.
+        attachAxiosRefreshTokenHandler(customAxios);
+
+        // Run our Axios post.
+        customAxios.get(
+            NWAPP_GET_PROFILE_API_URL
         ).then( (successResult) => { // SUCCESS
             // console.log(successResult); // For debugging purposes.
 
@@ -63,6 +76,11 @@ export function pullProfile(user, successCallback=null, failedCallback=null) {
             store.dispatch(
                 setProfileSuccess(profile)
             );
+
+            // SAVE OUR CREDENTIALS IN PERSISTENT STORAGE. THIS IS AN IMPORTANT
+            // STEP BECAUSE OUR TOKEN UTILITY HELPER NEEDS THIS.
+            setAccessTokenInLocalStorage(profile.accessToken);
+            setRefreshTokenInLocalStorage(profile.refreshToken);
 
             // DEVELOPERS NOTE:
             // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
@@ -107,41 +125,52 @@ export function postProfile(user, data, successCallback, failedCallback) {
             setProfileRequest()
         );
 
-        // Create our oAuth 2.0 authenticated API header to use with our
-        // submission.
-        const config = {
-            headers: {'Authorization': "Bearer " + user.token}
-        };
+        // Create a new Axios instance using our oAuth 2.0 bearer token
+        // and various other headers.
+        const customAxios = axios.create({
+            headers: {
+                'Authorization': "Bearer " + user.accessToken.token,
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+
+        // Attach our Axios "refesh token" interceptor.
+        attachAxiosRefreshTokenHandler(customAxios);
 
         // The following code will convert the `camelized` data into `snake case`
         // data so our API endpoint will be able to read it.
         let decamelizedData = decamelizeKeys(data);
 
         // Perform our API submission.
-        axios.post(NWAPP_GET_PROFILE_API_URL, decamelizedData, config).then( (successResult) => {
+        customAxios.post(NWAPP_GET_PROFILE_API_URL, decamelizedData).then( (successResult) => {
 
             const responseData = successResult.data;
-            let device = camelizeKeys(responseData);
+            let profile = camelizeKeys(responseData);
 
             // Extra.
-            device['isAPIRequestRunning'] = false;
-            device['errors'] = {};
+            profile['isAPIRequestRunning'] = false;
+            profile['errors'] = {};
 
-            // Run our success callback function.
-            successCallback(device);
+            // SAVE OUR CREDENTIALS IN PERSISTENT STORAGE. THIS IS AN IMPORTANT
+            // STEP BECAUSE OUR TOKEN UTILITY HELPER NEEDS THIS.
+            setAccessTokenInLocalStorage(profile.accessToken);
+            setRefreshTokenInLocalStorage(profile.refreshToken);
 
             // Update the global state of the application to store our
             // user device for the application.
             store.dispatch(
-                setProfileSuccess(device)
+                setProfileSuccess(profile)
             );
+
+            // Run our success callback function.
+            successCallback(profile);
+
         }).catch( (errorResult) => {
             const responseData = errorResult.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
             let errors = camelizeKeys(responseData);
             // console.log(errors);
-
-            // Run our failure callback function.
-            failedCallback(errors);
 
             store.dispatch(
                 setProfileFailure({
@@ -149,6 +178,9 @@ export function postProfile(user, data, successCallback, failedCallback) {
                     errors: errors
                 })
             );
+
+            // Run our failure callback function.
+            failedCallback(errors);
 
         }).then( () => {
             // Do nothing.
