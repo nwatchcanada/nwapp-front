@@ -43,6 +43,7 @@ export function pullProfile(successCallback=null, failedCallback=null) {
             setProfileRequest()
         );
 
+        // IMPORTANT: THIS IS THE ONLY WAY WE CAN GET THE ACCESS TOKEN.
         const accessToken = getAccessTokenFromLocalStorage();
 
         // Create a new Axios instance using our oAuth 2.0 bearer token

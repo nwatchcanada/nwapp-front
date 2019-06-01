@@ -14,7 +14,8 @@ import AssociateDashboardComponent from "../../components/dashboard/associateDas
 import AreaCoordinatorDashboardComponent from "../../components/dashboard/areaCoordinatorDashboardComponent";
 import MemberDashboardComponent from "../../components/dashboard/memberDashboardComponent";
 import { pullProfile } from "../../actions/profileAction";
-// import { pullDashboard } from "../../actions/dashboardActions";
+import { pullDashboard } from "../../actions/dashboardActions";
+import getSubdomain from '../../helpers/subdomainUtility';
 
 
 class DashboardContainer extends Component {
@@ -42,6 +43,7 @@ class DashboardContainer extends Component {
 
     componentDidMount() {
         this.props.pullProfile(this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+        this.props.pullDashboard(getSubdomain(), this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
         window.scrollTo(0, 0);  // Start the page at the top of the page.
     }
 
@@ -144,7 +146,7 @@ class DashboardContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        // dashboard: store.dashboardState,
+        dashboard: store.dashboardState,
     };
 }
 
@@ -152,6 +154,9 @@ const mapDispatchToProps = dispatch => {
     return {
         pullProfile: (successCallback, failureCallback) => {
             dispatch(pullProfile(successCallback, failureCallback))
+        },
+        pullDashboard: (schema, successCallback, failureCallback) => {
+            dispatch(pullDashboard(schema, successCallback, failureCallback))
         }
     }
 }
