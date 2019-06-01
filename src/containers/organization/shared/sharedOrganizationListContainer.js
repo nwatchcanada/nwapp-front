@@ -2,10 +2,68 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import SharedOrganizationListComponent from "../../../components/organizations/shared/sharedOrganizationListComponent";
+import { pullProfile } from "../../../actions/profileAction";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class SharedOrganizationListContainer extends Component {
+
+    /**
+     *  Initializer & Utility
+     *------------------------------------------------------------
+     */
+
+    /**
+     *  Component Life-cycle Management
+     *------------------------------------------------------------
+     */
+
+    componentDidMount() {
+        this.props.pullProfile(this.props.user);
+        window.scrollTo(0, 0);  // Start the page at the top of the page.
+    }
+
+    componentWillUnmount() {
+        // This code will fix the "ReactJS & Redux: Can't perform a React state
+        // update on an unmounted component" issue as explained in:
+        // https://stackoverflow.com/a/53829700
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
+    /**
+     *  API callback functions
+     *------------------------------------------------------------
+     */
+
+    onSuccessfulSubmissionCallback(profile) {
+        console.log(profile);
+    }
+
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
+
+        // // The following code will cause the screen to scroll to the top of
+        // // the page. Please see ``react-scroll`` for more information:
+        // // https://github.com/fisshy/react-scroll
+        // var scroll = Scroll.animateScroll;
+        // scroll.scrollToTop();
+    }
+
+    /**
+     *  Event handling functions
+     *------------------------------------------------------------
+     */
+
+
+    /**
+     *  Main render function
+     *------------------------------------------------------------
+     */
+
     render() {
         // Return our GUI.
         const sampleData = [
@@ -18,7 +76,7 @@ class SharedOrganizationListContainer extends Component {
                 "name": "City of Toronto Neigbhourhood Watch",
                 "absoluteUrl": "http://toronto."+process.env.REACT_APP_DOMAIN+"/dashboard"
             }
-        ]
+        ];
         return (
             <SharedOrganizationListComponent
                 tableData={sampleData}
@@ -38,11 +96,9 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // pullDevice: (user, deviceSlug) => {
-        //     dispatch(
-        //         pullDevice(user, deviceSlug)
-        //     )
-        // },
+        pullProfile: (user, successCallback, failureCallback) => {
+            dispatch(pullProfile(user, successCallback, failureCallback))
+        },
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         }
