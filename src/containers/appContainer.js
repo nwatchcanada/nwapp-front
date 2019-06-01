@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, withRouter, Switch } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 
-import getSubdomain from '../helpers/subdomainUtility';
 // import requiresAuth from '../helpers/requiresAuth';
 import NavigationContainer from './navigation/navigationContainer';
 import NotFound404Container from './navigation/notFound404Container';
@@ -19,14 +18,14 @@ import RegisterSuccessContainer from "./account/registerSuccessContainer";
 // import ResetPasswordContainer from "./account/resetPasswordContainer";
 // import ResetPasswordSuccessContainer from "./account/resetPasswordSuccessContainer";
 // import ReferralContainer from "./account/referralContainer";
-import DashboardContainer from "./dashboard/dashboardContainer";
 import SharedOrganizationListContainer from "./organization/shared/sharedOrganizationListContainer";
 import SharedOrganizationCreateContainer from "./organization/shared/sharedOrganizationCreateContainer";
+import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
+import DashboardContainer from "./dashboard/dashboardContainer";
 
 
 class AppContainer extends React.Component {
     render() {
-        console.log("Subdomain:", getSubdomain());
         return (
             <Router>
                 <div className="container-fluid" id="outer-container">
@@ -50,6 +49,7 @@ class AppContainer extends React.Component {
                                 <Route path="/terms" exact component={TermsContainer} />
                                 <Route path="/organizations" exact component={SharedOrganizationListContainer} />
                                 <Route path="/organization/add" exact component={SharedOrganizationCreateContainer} />
+                                <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={TenantDashboardRedirectContainer} />
                                 <Route path="/dashboard" exact component={DashboardContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>

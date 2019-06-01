@@ -30,7 +30,7 @@ class DashboardContainer extends Component {
      */
 
     componentDidMount() {
-        this.props.pullProfile(this.props.user, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+        this.props.pullProfile(this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
         window.scrollTo(0, 0);  // Start the page at the top of the page.
     }
 
@@ -95,8 +95,8 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        pullProfile: (user, successCallback, failureCallback) => {
-            dispatch(pullProfile(user, successCallback, failureCallback))
+        pullProfile: (successCallback, failureCallback) => {
+            dispatch(pullProfile(successCallback, failureCallback))
         }
     }
 }
