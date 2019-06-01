@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import {
+    EXECUTIVE_GROUP_ID,
+    MANAGEMENT_GROUP_ID,
+    FRONTLINE_STAFF_GROUP_ID,
+    ASSOCIATE_GROUP_ID,
+    AREA_COORDINATOR_GROUP_ID,
+    MEMBER_GROUP_ID
+} from '../../constants/api';
 import StaffDashboardComponent from "../../components/dashboard/staffDashboardComponent";
+import AssociateDashboardComponent from "../../components/dashboard/associateDashboardComponent";
+import AreaCoordinatorDashboardComponent from "../../components/dashboard/areaCoordinatorDashboardComponent";
+import MemberDashboardComponent from "../../components/dashboard/memberDashboardComponent";
 import { pullProfile } from "../../actions/profileAction";
 // import { pullDashboard } from "../../actions/dashboardActions";
 
@@ -76,14 +87,58 @@ class DashboardContainer extends Component {
      */
 
     render() {
-        const { groupMembershipId } = this.props.user
-        return (
-            <StaffDashboardComponent
-                // dashboard={this.props.dashboard}
-                user={this.props.user}
-            />
-        );
-    }
+        const { groupMembershipId } = this.props.user;
+        if (groupMembershipId === EXECUTIVE_GROUP_ID) {
+            return (
+                <StaffDashboardComponent
+                    // dashboard={this.props.dashboard}
+                    user={this.props.user}
+                />
+            );
+        }
+        else if (groupMembershipId === MANAGEMENT_GROUP_ID) {
+            return (
+                <StaffDashboardComponent
+                    // dashboard={this.props.dashboard}
+                    user={this.props.user}
+                />
+            );
+        }
+        else if (groupMembershipId === FRONTLINE_STAFF_GROUP_ID) {
+            return (
+                <StaffDashboardComponent
+                    // dashboard={this.props.dashboard}
+                    user={this.props.user}
+                />
+            );
+        }
+        else if (groupMembershipId === ASSOCIATE_GROUP_ID) {
+            return (
+                <AssociateDashboardComponent
+                    // dashboard={this.props.dashboard}
+                    user={this.props.user}
+                />
+            );
+        }
+        else if (groupMembershipId === AREA_COORDINATOR_GROUP_ID) {
+            return (
+                <AreaCoordinatorDashboardComponent
+                    // dashboard={this.props.dashboard}
+                    user={this.props.user}
+                />
+            );
+        }
+        else if (groupMembershipId === MEMBER_GROUP_ID) {
+            return (
+                <MemberDashboardComponent
+                    // dashboard={this.props.dashboard}
+                    user={this.props.user}
+                />
+            );
+        } else {
+            return null;
+        }
+    };
 }
 
 const mapStateToProps = function(store) {

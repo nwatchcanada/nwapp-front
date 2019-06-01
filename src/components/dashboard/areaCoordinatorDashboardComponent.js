@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-class MemberDashboardComponent extends Component {
+class AreaCoordinatorDashboardComponent extends Component {
     render() {
         return (
             <div className="Dashboard">
@@ -14,4 +14,4 @@ class MemberDashboardComponent extends Component {
     }
 }
 
-export default MemberDashboardComponent;
+export default AreaCoordinatorDashboardComponent;
