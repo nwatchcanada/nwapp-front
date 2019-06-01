@@ -7,6 +7,7 @@ import LoginComponent from '../../components/account/loginComponent';
 import validateInput from "../../validators/loginValidator";
 import { postLogin } from "../../actions/loginAction";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
+import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../helpers/tokenUtility';
 
 
 class LoginContainer extends Component {
@@ -68,7 +69,9 @@ class LoginContainer extends Component {
             const location = process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_DOMAIN + "/organizations";
             window.location = location; // Do not use `react-router-dom` library.
         } else {
-            const location = process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_DOMAIN + "/dashboard";
+            const accessToken = getAccessTokenFromLocalStorage();
+            const refreshToken = getRefreshTokenFromLocalStorage();
+            const location = process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_DOMAIN + "/dashboard-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
             window.location = location; // Do not use `react-router-dom` library.
         }
     }

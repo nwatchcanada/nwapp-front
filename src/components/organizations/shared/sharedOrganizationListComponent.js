@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FlashMessageComponent } from "../../flashMessageComponent";
 import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../../helpers/tokenUtility';
 
+
 class TableRow extends Component {
     render() {
         const { schema, name, absoluteUrl } = this.props.datum;
@@ -11,8 +12,7 @@ class TableRow extends Component {
         const refreshToken = getRefreshTokenFromLocalStorage();
 
         // Generate our redirect address.
-        let modifiedAbsoluteUrl = absoluteUrl +"-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
-        console.log(modifiedAbsoluteUrl);
+        const modifiedAbsoluteUrl = absoluteUrl +"-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
         return (
             <tr>
                 <td>{schema}</td>
