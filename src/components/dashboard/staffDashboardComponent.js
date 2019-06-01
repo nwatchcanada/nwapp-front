@@ -8,7 +8,7 @@ class StaffDashboardComponent extends Component {
             <div className="container-fluid">
                 <div className="d-flex align-items-stretch">
                     <main id="main">
-                        <h1>Dashboard</h1>
+                        <h1><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</h1>
                         <section className="row text-center placeholders">
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
