@@ -42,6 +42,11 @@ import AssociateRetrieveContainer from "./associates/associateRetrieveContainer"
 import AssociateCreateContainer from "./associates/associateCreateContainer";
 import AssociateUpdateContainer from "./associates/associateUpdateContainer";
 
+import CoordinatorListContainer from "./coordinators/coordinatorListContainer";
+import CoordinatorRetrieveContainer from "./coordinators/coordinatorRetrieveContainer";
+import CoordinatorCreateContainer from "./coordinators/coordinatorCreateContainer";
+import CoordinatorUpdateContainer from "./coordinators/coordinatorUpdateContainer";
+
 
 class AppContainer extends React.Component {
     render() {
@@ -86,6 +91,10 @@ class AppContainer extends React.Component {
                                 <Route path="/associate/add" exact component={AssociateCreateContainer} />
                                 <Route path="/associate/:slug" exact component={AssociateRetrieveContainer} />
                                 <Route path="/associate/:slug/update" exact component={AssociateUpdateContainer} />
+                                <Route path="/area-coordinators" exact component={CoordinatorListContainer} />
+                                <Route path="/area-coordinator/add" exact component={CoordinatorCreateContainer} />
+                                <Route path="/area-coordinator/:slug" exact component={CoordinatorRetrieveContainer} />
+                                <Route path="/area-coordinator/:slug/update" exact component={CoordinatorUpdateContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>

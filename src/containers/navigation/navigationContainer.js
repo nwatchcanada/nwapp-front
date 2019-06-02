@@ -50,7 +50,7 @@ const authenticatedFullMenuData = [
         id: "full-area-coordinator",
         icon: "horse-head",
         title: "Area Coordinators",
-        url: "/coordinators"
+        url: "/area-coordinators"
     },{
         id: "full-staff",
         icon: "user-tie",
