@@ -53,6 +53,11 @@ import StaffRetrieveContainer from "./staff/staffRetrieveContainer";
 import StaffCreateContainer from "./staff/staffCreateContainer";
 import StaffUpdateContainer from "./staff/staffUpdateContainer";
 
+import TaskListContainer from "./tasks/taskListContainer";
+import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
+import TaskCreateContainer from "./tasks/taskCreateContainer";
+import TaskUpdateContainer from "./tasks/taskUpdateContainer";
+
 class AppContainer extends React.Component {
     render() {
         return (
@@ -104,6 +109,10 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/add" exact component={StaffCreateContainer} />
                                 <Route path="/staff/:slug" exact component={StaffRetrieveContainer} />
                                 <Route path="/staff/:slug/update" exact component={StaffUpdateContainer} />
+                                <Route path="/tasks" exact component={TaskListContainer} />
+                                <Route path="/task/add" exact component={TaskCreateContainer} />
+                                <Route path="/task/:slug" exact component={TaskRetrieveContainer} />
+                                <Route path="/task/:slug/update" exact component={TaskUpdateContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
