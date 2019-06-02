@@ -18,10 +18,10 @@ class DistrictUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/districts"><i className="fas fa-torii-gate"></i>&nbsp;Districts</Link>
+                            <Link to="/districts"><i className="fas fa-city"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/district/argyle"><i className="fas fa-torii-gate"></i>&nbsp;Argyle</Link>
+                            <Link to="/district/argyle"><i className="fas fa-city"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update

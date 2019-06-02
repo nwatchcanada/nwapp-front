@@ -34,14 +34,14 @@ class DistrictsListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-torii-gate"></i>&nbsp;Districts
+                            <i className="fas fa-city"></i>&nbsp;Districts
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-torii-gate"></i>&nbsp;Districts</h1>
+                <h1><i className="fas fa-city"></i>&nbsp;Districts</h1>
                 <div className="row">
                     <div className="col-md-12">
 

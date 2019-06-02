@@ -33,17 +33,17 @@ const authenticatedFullMenuData = [
         url: "/members"
     },{
         id: "full-items",
-        icon: "question",
+        icon: "map-pin",
         title: "Items",
         url: "/items"
     },{
         id: "full-districts",
-        icon: "torii-gate",
+        icon: "city",
         title: "Districts",
         url: "/districts"
     },{
         id: "full-staff",
-        icon: "question",
+        icon: "user-tie",
         title: "Staff",
         url: "/staff"
     },{
