@@ -22,6 +22,7 @@ import SharedOrganizationListContainer from "./organization/shared/sharedOrganiz
 import SharedOrganizationCreateContainer from "./organization/shared/sharedOrganizationCreateContainer";
 import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
+
 import DistrictsListContainer from "./districts/districtsListContainer";
 import DistrictRetrieveContainer from "./districts/districtRetrieveContainer";
 import DistrictCreateContainer from "./districts/districtCreateContainer";
@@ -47,6 +48,10 @@ import CoordinatorRetrieveContainer from "./coordinators/coordinatorRetrieveCont
 import CoordinatorCreateContainer from "./coordinators/coordinatorCreateContainer";
 import CoordinatorUpdateContainer from "./coordinators/coordinatorUpdateContainer";
 
+import StaffListContainer from "./staff/staffListContainer";
+import StaffRetrieveContainer from "./staff/staffRetrieveContainer";
+import StaffCreateContainer from "./staff/staffCreateContainer";
+import StaffUpdateContainer from "./staff/staffUpdateContainer";
 
 class AppContainer extends React.Component {
     render() {
@@ -95,6 +100,10 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinator/add" exact component={CoordinatorCreateContainer} />
                                 <Route path="/area-coordinator/:slug" exact component={CoordinatorRetrieveContainer} />
                                 <Route path="/area-coordinator/:slug/update" exact component={CoordinatorUpdateContainer} />
+                                <Route path="/staff" exact component={StaffListContainer} />
+                                <Route path="/staff/add" exact component={StaffCreateContainer} />
+                                <Route path="/staff/:slug" exact component={StaffRetrieveContainer} />
+                                <Route path="/staff/:slug/update" exact component={StaffUpdateContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
