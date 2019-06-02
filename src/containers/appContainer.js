@@ -9,7 +9,7 @@ import PrivacyContainer from './general/privacyContainer';
 import TermsContainer from './general/termsContainer';
 import HomeContainer from './general/homeContainer';
 import LoginContainer from "./account/loginContainer";
-// import LogoutContainer from "./account/logoutContainer";
+import LogoutContainer from "./account/logoutContainer";
 import RegisterContainer from "./account/registerContainer";
 import RegisterSuccessContainer from "./account/registerSuccessContainer";
 // import ActivateContainer from "./account/activateContainer";
@@ -77,6 +77,7 @@ class AppContainer extends React.Component {
                             <Switch>
                                 <Route path="/" exact component={HomeContainer} />
                                 <Route path="/login" exact component={LoginContainer} />
+                                <Route path="/logout" exact component={LogoutContainer} />
                                 <Route path="/register" exact component={RegisterContainer} />
                                 <Route path="/register-success" exact component={RegisterSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
