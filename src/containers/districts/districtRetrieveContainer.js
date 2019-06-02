@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import DistrictsListComponent from "../../components/districts/districtsListComponent";
+import DistrictRetrieveComponent from "../../components/districts/districtRetrieveComponent";
 
 
-class DistrictsListContainer extends Component {
+class DistrictRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -43,28 +43,18 @@ class DistrictsListContainer extends Component {
      */
 
     render() {
-        const tableData = [{
+        const districtData = {
             'slug': 'Argyle',
             'number': 1,
             'name': 'Argyle',
             'absoluteUrl': '/district/argyle'
-        },{
-            'slug': 'byron',
-            'number': 2,
-            'name': 'Byron',
-            'absoluteUrl': '/district/byron'
-        },{
-            'slug': 'carling',
-            'number': 3,
-            'name': 'Carling',
-            'absoluteUrl': '/district/carling'
-        }];
+        };
         return (
-            <DistrictsListComponent
-                tableData={tableData}
+            <DistrictRetrieveComponent
+                districtData={districtData}
             />
         );
     }
 }
 
-export default DistrictsListContainer;
+export default DistrictRetrieveContainer;

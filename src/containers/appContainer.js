@@ -23,6 +23,7 @@ import SharedOrganizationCreateContainer from "./organization/shared/sharedOrgan
 import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
 import DistrictsListContainer from "./districts/districtsListContainer";
+import DistrictRetrieveContainer from "./districts/districtRetrieveContainer";
 
 
 class AppContainer extends React.Component {
@@ -53,6 +54,7 @@ class AppContainer extends React.Component {
                                 <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={TenantDashboardRedirectContainer} />
                                 <Route path="/dashboard" exact component={DashboardContainer} />
                                 <Route path="/districts" exact component={DistrictsListContainer} />
+                                <Route path="/district/:slug" exact component={DistrictRetrieveContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
