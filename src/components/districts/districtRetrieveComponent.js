@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../flashMessageComponent";
 
 class DistrictRetrieveComponent extends Component {
     render() {
-        const { onClick, onCancel, flashMessage } = this.props;
+        const { onClick, onBack, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -24,7 +24,7 @@ class DistrictRetrieveComponent extends Component {
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
-                
+
                 <h1><i className="fas fa-torii-gate"></i>&nbsp;Argyle</h1>
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
@@ -127,13 +127,9 @@ class DistrictRetrieveComponent extends Component {
                                 <i className="fas fa-edit"></i>&nbsp;Update
                             </button>
 
-                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onCancel}>
-                                <i className="fas fa-times"></i> Cancel
+                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onBack}>
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </button>
-
-                            <Link to="/districts" className="">
-
-                            </Link>
                         </div>
 
                     </div>

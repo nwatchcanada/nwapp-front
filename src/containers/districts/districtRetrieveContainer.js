@@ -23,6 +23,7 @@ class DistrictRetrieveContainer extends Component {
             slug: slug,
         }
 
+        this.onBack = this.onBack.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -65,10 +66,10 @@ class DistrictRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onCancel(e) {
+    onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/district/"+this.state.slug);
+        this.props.history.push("/districts/");
     }
 
     onClick(e) {
@@ -92,7 +93,7 @@ class DistrictRetrieveContainer extends Component {
         return (
             <DistrictRetrieveComponent
                 districtData={districtData}
-                onCancel={this.onCancel}
+                onBack={this.onBack}
                 onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
             />
