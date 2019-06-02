@@ -45,7 +45,7 @@ class LoginComponent extends Component {
             <AlertComponent />
             <div className="row">
                 <div className="col-sm-12 text-center">
-                <img className="img-fluid" src="/img/mikaponics-logo.png" alt="Logo" width="180px" /></div>
+                <img className="img-fluid" src="/img/nwl-logo.png" alt="Logo" width="180px" /></div>
             </div>
             <div className="row">
                 <div className="col-sm-8 col-lg-6 col-xl-4 mx-auto">

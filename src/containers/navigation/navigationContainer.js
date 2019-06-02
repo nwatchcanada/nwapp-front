@@ -207,7 +207,7 @@ class NavigationContainer extends React.Component {
         <div>
             <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
                 <Link className="navbar-brand" to="/">
-                    <img className="img-fluid" src="/img/compressed-logo.png" alt="Mikaponics" width="200px" />
+                    <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
                 </Link>
                 <ul className="navbar-nav flex-row">
                     <li className="nav-item">
