@@ -16,16 +16,16 @@ class StaffDashboardComponent extends Component {
                                         <h1 className="circle-title">1,100</h1>
                                     </Link>
                                 </div>
-                                <h4>Members</h4>
+                                <h4><i className="fas fa-id-card"></i>&nbsp;Members</h4>
                                 <div className="text-muted">View your members list</div>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="#" className="d-block link-ndecor" title="Jobs">
+                                    <Link to="/items" className="d-block link-ndecor" title="Jobs">
                                         <h1 className="circle-title">10,000</h1>
                                     </Link>
                                 </div>
-                                <h4>Items</h4>
+                                <h4><i className="fas fa-map-pin"></i>&nbsp;Items</h4>
                                 <span className="text-muted">View your items history</span>
                             </div>
                             <div className="col-sm-3 placeholder">
@@ -43,7 +43,7 @@ class StaffDashboardComponent extends Component {
                                         <h1 className="circle-title">12</h1>
                                     </Link>
                                 </div>
-                                <h4>Tasks</h4>
+                                <h4><i className="fas fa-tasks"></i>&nbsp;Tasks</h4>
                                 <span className="text-muted">View your tasks</span>
                             </div>
                         </section>
