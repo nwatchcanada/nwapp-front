@@ -37,6 +37,12 @@ import ItemRetrieveContainer from "./items/itemRetrieveContainer";
 import ItemCreateContainer from "./items/itemCreateContainer";
 import ItemUpdateContainer from "./items/itemUpdateContainer";
 
+import AssociateListContainer from "./associates/associateListContainer";
+import AssociateRetrieveContainer from "./associates/associateRetrieveContainer";
+import AssociateCreateContainer from "./associates/associateCreateContainer";
+import AssociateUpdateContainer from "./associates/associateUpdateContainer";
+
+
 class AppContainer extends React.Component {
     render() {
         return (
@@ -76,6 +82,10 @@ class AppContainer extends React.Component {
                                 <Route path="/item/add" exact component={ItemCreateContainer} />
                                 <Route path="/item/:slug" exact component={ItemRetrieveContainer} />
                                 <Route path="/item/:slug/update" exact component={ItemUpdateContainer} />
+                                <Route path="/associates" exact component={AssociateListContainer} />
+                                <Route path="/associate/add" exact component={AssociateCreateContainer} />
+                                <Route path="/associate/:slug" exact component={AssociateRetrieveContainer} />
+                                <Route path="/associate/:slug/update" exact component={AssociateUpdateContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
