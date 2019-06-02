@@ -28,7 +28,7 @@ const authenticatedFullMenuData = [
         url: "/dashboard"
     },{
         id: "full-members",
-        icon: "question",
+        icon: "id-card",
         title: "Members",
         url: "/members"
     },{
@@ -54,7 +54,7 @@ const authenticatedFullMenuData = [
     },{
         id: "full-account",
         title: "Account",
-        icon: "id-card",
+        icon: "id-badge",
         url: "",
         children:[
             {
