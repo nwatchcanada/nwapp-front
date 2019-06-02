@@ -55,6 +55,7 @@ class DistrictsListComponent extends Component {
                                 <h4>Add</h4>
                                 <div className="text-muted">Add a district</div>
                             </div>
+                            { /*
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
                                     <Link to="#" className="d-block link-ndecor" title="Jobs">
@@ -64,7 +65,7 @@ class DistrictsListComponent extends Component {
                                 <h4>Search</h4>
                                 <span className="text-muted">Search your districts</span>
                             </div>
-                            { /*
+
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
                                     <Link to="#" className="d-block link-ndecor" title="Members">
