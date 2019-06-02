@@ -9,8 +9,21 @@ class DistrictsListContainer extends Component {
     }
 
     render() {
+        const tableData = [{
+            'slug': 'Argyle',
+            'number': 1,
+            'name': 'Argyle',
+            'absoluteUrl': '/district/argyle'
+        },{
+            'slug': 'byron',
+            'number': 2,
+            'name': 'Byron',
+            'absoluteUrl': '/district/byron'
+        }];
         return (
-            <DistrictsListComponent />
+            <DistrictsListComponent
+                tableData={tableData}
+            />
         );
     }
 }
