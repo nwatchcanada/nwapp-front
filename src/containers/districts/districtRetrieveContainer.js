@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import DistrictRetrieveComponent from "../../components/districts/districtRetrieveComponent";
+import { clearFlashMessage } from "../../actions/flashMessageActions";
 
 
 class DistrictRetrieveContainer extends Component {
@@ -9,14 +11,41 @@ class DistrictRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
+        // Update state.
+        this.state = {
+            slug: slug,
+        }
+
+        this.onClick = this.onClick.bind(this);
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
      */
 
-    componentDidMount() {
-        window.scrollTo(0, 0);  // Start the page at the top of the page.
-    }
+     componentDidMount() {
+         window.scrollTo(0, 0);  // Start the page at the top of the page.
+     }
+
+     componentWillUnmount() {
+         // This code will fix the "ReactJS & Redux: Can't perform a React state
+         // update on an unmounted component" issue as explained in:
+         // https://stackoverflow.com/a/53829700
+         this.setState = (state,callback)=>{
+             return;
+         };
+
+         // Clear any and all flash messages in our queue to be rendered.
+         this.props.clearFlashMessage();
+     }
 
     /**
      *  API callback functions
@@ -36,6 +65,17 @@ class DistrictRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onCancel(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+        this.props.history.push("/district/"+this.state.slug);
+    }
+
+    onClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+        this.props.history.push("/district/"+this.state.slug+"/update");
+    }
 
     /**
      *  Main render function
@@ -52,9 +92,31 @@ class DistrictRetrieveContainer extends Component {
         return (
             <DistrictRetrieveComponent
                 districtData={districtData}
+                onCancel={this.onCancel}
+                onClick={this.onClick}
+                flashMessage={this.props.flashMessage}
             />
         );
     }
 }
 
-export default DistrictRetrieveContainer;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState,
+        flashMessage: store.flashMessageState,
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
+        }
+    }
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(DistrictRetrieveContainer);

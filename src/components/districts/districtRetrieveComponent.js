@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { FlashMessageComponent } from "../flashMessageComponent";
+
 
 class DistrictRetrieveComponent extends Component {
     render() {
-        // const { districtData } = this.props;
+        const { onClick, onCancel, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -12,7 +14,7 @@ class DistrictRetrieveComponent extends Component {
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
-                        <li className="breadcrumb-item active" aria-current="page">
+                        <li className="breadcrumb-item" aria-current="page">
                             <Link to="/districts"><i className="fas fa-torii-gate"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -20,6 +22,9 @@ class DistrictRetrieveComponent extends Component {
                         </li>
                     </ol>
                 </nav>
+
+                <FlashMessageComponent object={flashMessage} />
+                
                 <h1><i className="fas fa-torii-gate"></i>&nbsp;Argyle</h1>
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
@@ -118,11 +123,16 @@ class DistrictRetrieveComponent extends Component {
                         </table>
 
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
-                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" type="submit">
+                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
                                 <i className="fas fa-edit"></i>&nbsp;Update
                             </button>
-                            <Link to="/districts" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                <i className="fas fa-arrow-left"></i> Back
+
+                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onCancel}>
+                                <i className="fas fa-times"></i> Cancel
+                            </button>
+
+                            <Link to="/districts" className="">
+
                             </Link>
                         </div>
 

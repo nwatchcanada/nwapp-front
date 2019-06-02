@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../bootstrap/bootstrapInput";
 
 
-class DistrictCreateComponent extends Component {
+class DistrictUpdateComponent extends Component {
     render() {
         const { name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -20,8 +20,11 @@ class DistrictCreateComponent extends Component {
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/districts"><i className="fas fa-torii-gate"></i>&nbsp;Districts</Link>
                         </li>
+                        <li className="breadcrumb-item" aria-current="page">
+                            <Link to="/district/argyle"><i className="fas fa-torii-gate"></i>&nbsp;Argyle</Link>
+                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add
+                            <i className="fas fa-edit"></i>&nbsp;Update
                         </li>
                     </ol>
                 </nav>
@@ -29,7 +32,7 @@ class DistrictCreateComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New District</h1>
+                            <h1>Update District</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -49,7 +52,7 @@ class DistrictCreateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/districts" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/district/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>
@@ -63,4 +66,4 @@ class DistrictCreateComponent extends Component {
     }
 }
 
-export default DistrictCreateComponent;
+export default DistrictUpdateComponent;

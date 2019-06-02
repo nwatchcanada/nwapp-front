@@ -25,6 +25,7 @@ import DashboardContainer from "./dashboard/dashboardContainer";
 import DistrictsListContainer from "./districts/districtsListContainer";
 import DistrictRetrieveContainer from "./districts/districtRetrieveContainer";
 import DistrictCreateContainer from "./districts/districtCreateContainer";
+import DistrictUpdateContainer from "./districts/districtUpdateContainer";
 
 
 class AppContainer extends React.Component {
@@ -57,6 +58,7 @@ class AppContainer extends React.Component {
                                 <Route path="/districts" exact component={DistrictsListContainer} />
                                 <Route path="/district/add" exact component={DistrictCreateContainer} />
                                 <Route path="/district/:slug" exact component={DistrictRetrieveContainer} />
+                                <Route path="/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
