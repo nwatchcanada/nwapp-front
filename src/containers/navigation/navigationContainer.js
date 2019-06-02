@@ -62,31 +62,16 @@ const authenticatedFullMenuData = [
         title: "Tasks",
         url: "/tasks"
     },{
-        id: "full-account",
-        title: "Account",
-        icon: "id-badge",
-        url: "",
-        children:[
-            {
-                id: "full-profile",
-                icon: "user-circle",
-                title: "Profile",
-                url: "/profile"
-            },{
-                id: "full-invoices",
-                icon: "book",
-                title: "Invoices",
-                url: "/invoices"
-            },{
-                id: "full-referral",
-                icon: "heart",
-                title: "Referrals",
-                url: "/referrals"
-            }
-        ]
+        id: "full-reports",
+        icon: "book",
+        title: "Reports",
+        url: "/reports"
+    },{
+        id: "full-settings",
+        icon: "cogs",
+        title: "Settings",
+        url: "/settings"
     },
-
-
     {
         id: "full-logout",
         icon: "sign-out-alt",

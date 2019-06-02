@@ -58,6 +58,11 @@ import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
 import TaskCreateContainer from "./tasks/taskCreateContainer";
 import TaskUpdateContainer from "./tasks/taskUpdateContainer";
 
+import ReportListContainer from "./reports/reportListContainer";
+
+import SettingListContainer from "./settings/settingListContainer";
+
+
 class AppContainer extends React.Component {
     render() {
         return (
@@ -114,6 +119,8 @@ class AppContainer extends React.Component {
                                 <Route path="/task/add" exact component={TaskCreateContainer} />
                                 <Route path="/task/:slug" exact component={TaskRetrieveContainer} />
                                 <Route path="/task/:slug/update" exact component={TaskUpdateContainer} />
+                                <Route path="/reports" exact component={ReportListContainer} />
+                                <Route path="/settings" exact component={SettingListContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
