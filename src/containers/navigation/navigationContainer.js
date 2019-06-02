@@ -42,6 +42,16 @@ const authenticatedFullMenuData = [
         title: "Districts",
         url: "/districts"
     },{
+        id: "full-associates",
+        icon: "crown",
+        title: "Associates",
+        url: "/associates"
+    },{
+        id: "full-area-coordinator",
+        icon: "horse-head",
+        title: "Area Coordinators",
+        url: "/coordinators"
+    },{
         id: "full-staff",
         icon: "user-tie",
         title: "Staff",
