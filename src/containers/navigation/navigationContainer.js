@@ -27,20 +27,25 @@ const authenticatedFullMenuData = [
         title: "Dashboard",
         url: "/dashboard"
     },{
-        id: "full-crops",
-        icon: "industry",
-        title: "Production",
-        url: "/productions"
+        id: "full-members",
+        icon: "question",
+        title: "Members",
+        url: "/members"
     },{
-        id: "full-devices",
-        icon: "cubes",
-        title: "Devices",
-        url: "/devices"
+        id: "full-items",
+        icon: "question",
+        title: "Items",
+        url: "/items"
     },{
-        id: "full-alerts",
-        icon: "bell",
-        title: "Alerts",
-        url: "/alerts"
+        id: "full-districts",
+        icon: "question",
+        title: "Districts",
+        url: "/districts"
+    },{
+        id: "full-staff",
+        icon: "question",
+        title: "Staff",
+        url: "/staff"
     },{
         id: "full-tasks",
         icon: "tasks",
@@ -81,19 +86,19 @@ const authenticatedFullMenuData = [
 ]
 
 
-const authenticatedLiteMenuData = [
-    {
-        id: "lite-dashboard",
-        icon: "tachometer-alt",
-        title: "Dashboard",
-        url: "/onboard"
-    },{
-        id: "lite-logout",
-        icon: "sign-out-alt",
-        title: "Logout",
-        url: "/logout"
-    }
-]
+// const authenticatedLiteMenuData = [
+//     {
+//         id: "lite-dashboard",
+//         icon: "tachometer-alt",
+//         title: "Dashboard",
+//         url: "/onboard"
+//     },{
+//         id: "lite-logout",
+//         icon: "sign-out-alt",
+//         title: "Logout",
+//         url: "/logout"
+//     }
+// ]
 
 class ItemNode extends React.Component {
     constructor(props)
@@ -169,13 +174,16 @@ class NavigationContainer extends React.Component {
             // Generate a friendly message in the menu for authenitcatd users.
             menuTitle = "Hi, "+user.firstName;
 
-            // Generate our menu based on whether the user was "onboarded" or not.
-            const { wasOnboarded } = user;
-            if (wasOnboarded) {
-                menuData = authenticatedFullMenuData;
-            } else {
-                menuData = authenticatedLiteMenuData;
-            }
+            // console.log(user); // For debugging purposes only.
+            menuData = authenticatedFullMenuData;
+
+            // // Generate our menu based on whether the user was "onboarded" or not.
+            // const { groupMembershipId } = user;
+            // if (groupMembershipId === 1) {
+            //     menuData = authenticatedFullMenuData;
+            // } else {
+            //     menuData = authenticatedLiteMenuData;
+            // }
         }
     }
 

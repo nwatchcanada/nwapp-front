@@ -16,8 +16,8 @@ class StaffDashboardComponent extends Component {
                                         <h1 className="circle-title">1,100</h1>
                                     </Link>
                                 </div>
-                                <h4>Clients</h4>
-                                <div className="text-muted">View your client list</div>
+                                <h4>Members</h4>
+                                <div className="text-muted">View your members list</div>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
@@ -25,8 +25,8 @@ class StaffDashboardComponent extends Component {
                                         <h1 className="circle-title">10,000</h1>
                                     </Link>
                                 </div>
-                                <h4>Jobs</h4>
-                                <span className="text-muted">View your job history</span>
+                                <h4>Items</h4>
+                                <span className="text-muted">View your items history</span>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
@@ -34,8 +34,8 @@ class StaffDashboardComponent extends Component {
                                         <h1 className="circle-title">2,200</h1>
                                     </Link>
                                 </div>
-                                <h4>Associate Members</h4>
-                                <span className="text-muted">View Member Data</span>
+                                <h4>Associates</h4>
+                                <span className="text-muted">View associate Data</span>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
