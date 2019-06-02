@@ -38,7 +38,7 @@ const authenticatedFullMenuData = [
         url: "/items"
     },{
         id: "full-districts",
-        icon: "question",
+        icon: "torii-gate",
         title: "Districts",
         url: "/districts"
     },{
