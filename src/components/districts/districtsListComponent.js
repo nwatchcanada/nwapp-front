@@ -40,7 +40,49 @@ class DistrictsListComponent extends Component {
                 <div className="row">
                     <div className="col-md-12">
 
+                        <section className="row text-center placeholders">
+                            <div className="col-sm-3 placeholder">
+                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
+                                    <Link to="#" className="d-block link-ndecor" title="Clients">
+                                        <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
+                                    </Link>
+                                </div>
+                                <h4>Add</h4>
+                                <div className="text-muted">Add a district</div>
+                            </div>
+                            <div className="col-sm-3 placeholder">
+                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
+                                    <Link to="#" className="d-block link-ndecor" title="Jobs">
+                                        <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
+                                    </Link>
+                                </div>
+                                <h4>Search</h4>
+                                <span className="text-muted">Search your districts</span>
+                            </div>
+                            { /*
+                            <div className="col-sm-3 placeholder">
+                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
+                                    <Link to="#" className="d-block link-ndecor" title="Members">
+                                        <h1 className="circle-title">2,200</h1>
+                                    </Link>
+                                </div>
+                                <h4>Associate Members</h4>
+                                <span className="text-muted">View Member Data</span>
+                            </div>
+                            <div className="col-sm-3 placeholder">
+                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
+                                    <Link to="#" className="d-block link-ndecor" title="Tasks">
+                                        <h1 className="circle-title">12</h1>
+                                    </Link>
+                                </div>
+                                <h4>Tasks</h4>
+                                <span className="text-muted">View your tasks</span>
+                            </div>
+                            */ }
+                        </section>
+
                         <h2>List</h2>
+
                         <div className="table-responsive">
                             <table className="table table-striped">
                                 <thead>

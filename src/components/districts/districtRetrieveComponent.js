@@ -116,10 +116,20 @@ class DistrictRetrieveComponent extends Component {
                             </tr>
                             </tbody>
                         </table>
+
+                        <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
+                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" type="submit">
+                                <i className="fas fa-edit"></i>&nbsp;Update
+                            </button>
+                            <Link to="/districts" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <i className="fas fa-arrow-left"></i> Back
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
 
-                
+
             </div>
         );
     }
