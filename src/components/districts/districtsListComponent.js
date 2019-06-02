@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { FlashMessageComponent } from "../flashMessageComponent";
+
 
 class TableRow extends Component {
     render() {
@@ -23,7 +25,7 @@ class TableRow extends Component {
 
 class DistrictsListComponent extends Component {
     render() {
-        const { tableData } = this.props;
+        const { tableData, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -36,6 +38,9 @@ class DistrictsListComponent extends Component {
                         </li>
                     </ol>
                 </nav>
+
+                <FlashMessageComponent object={flashMessage} />
+
                 <h1><i className="fas fa-torii-gate"></i>&nbsp;Districts</h1>
                 <div className="row">
                     <div className="col-md-12">
@@ -43,7 +48,7 @@ class DistrictsListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="#" className="d-block link-ndecor" title="Clients">
+                                    <Link to="/district/add" className="d-block link-ndecor" title="Clients">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class DistrictRetrieveComponent extends Component {
     render() {
-        const { districtData } = this.props;
+        // const { districtData } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">

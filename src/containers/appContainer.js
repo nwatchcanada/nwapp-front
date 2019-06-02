@@ -24,6 +24,7 @@ import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirec
 import DashboardContainer from "./dashboard/dashboardContainer";
 import DistrictsListContainer from "./districts/districtsListContainer";
 import DistrictRetrieveContainer from "./districts/districtRetrieveContainer";
+import DistrictCreateContainer from "./districts/districtCreateContainer";
 
 
 class AppContainer extends React.Component {
@@ -54,6 +55,7 @@ class AppContainer extends React.Component {
                                 <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={TenantDashboardRedirectContainer} />
                                 <Route path="/dashboard" exact component={DashboardContainer} />
                                 <Route path="/districts" exact component={DistrictsListContainer} />
+                                <Route path="/district/add" exact component={DistrictCreateContainer} />
                                 <Route path="/district/:slug" exact component={DistrictRetrieveContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
