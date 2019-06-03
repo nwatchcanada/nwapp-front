@@ -13,6 +13,7 @@ npm install --save validator
 npm install --save react-router-dom
 npm install --save lodash
 npm install --save axios
+npm install --save axios-jsonp
 npm install --save redux
 npm install --save react-redux
 npm install --save redux-devtools-extension
