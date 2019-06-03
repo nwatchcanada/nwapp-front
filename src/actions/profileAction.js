@@ -57,7 +57,8 @@ export function pullProfile(successCallback=null, failedCallback=null) {
                 'Access-Control-Allow-Credentials': 'true',
                 'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
                 'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-            }
+            },
+            crossDomain: true
         })
 
         // Attach our Axios "refesh token" interceptor.
@@ -145,7 +146,8 @@ export function postProfile(data, successCallback, failedCallback) {
                 'Access-Control-Allow-Credentials': 'true',
                 'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
                 'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-            }
+            },
+            crossDomain: true
         })
 
         // Attach our Axios "refesh token" interceptor.

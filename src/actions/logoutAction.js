@@ -56,7 +56,8 @@ export function postLogout(user) {
         // Create our oAuth 2.0 authenticated API header to use with our
         // submission.
         const config = {
-            headers: {'Authorization': "Bearer " + user.token}
+            headers: {'Authorization': "Bearer " + user.token},
+            crossDomain: true
         };
 
         const decamelizedData = {
