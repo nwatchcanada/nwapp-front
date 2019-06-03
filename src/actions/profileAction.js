@@ -54,6 +54,9 @@ export function pullProfile(successCallback=null, failedCallback=null) {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Accept': 'application/json',
                 'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+                'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
             }
         })
 
@@ -139,6 +142,9 @@ export function postProfile(data, successCallback, failedCallback) {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Accept': 'application/json',
                 'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+                'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
             }
         })
 
