@@ -34,6 +34,7 @@ npm install --save react-to-print
 npm install --save react-scroll-up-button
 npm install --save react-modal
 npm install --save react-spinners
+npm install --save msgpack-lite
 ```
 
 Upgrade doing the following:

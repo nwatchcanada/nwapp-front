@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '../store';
 import { camelizeKeys } from 'humps';
+import msgpack from 'msgpack-lite';
 
 import { LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../constants/actionTypes"
 import { NWAPP_LOGIN_API_URL } from "../constants/api"
@@ -35,21 +36,27 @@ export function postLogin(email, password, successCallback=null, failedCallback=
             setLoginRequest()
         );
 
-        // Create a new Axios instance.
+        // Create a new Axios instance which will be sending and receiving in
+        // MessagePack (Buffer) format.
         const customAxios = axios.create({
             headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Accept': 'application/json',
+                'Content-Type': 'application/msgpack;',
+                'Accept': 'application/msgpack',
             },
+            responseType: 'arraybuffer'
         })
 
-        customAxios.post(NWAPP_LOGIN_API_URL, {
+        // Encode from JS Object to MessagePack (Buffer)
+        var buffer = msgpack.encode({
             'email': email,
             'password': password,
-        }).then( (successResult) => {
-            // console.log(successResult); // For debugging purposes.
+        });
 
-            const responseData = successResult.data;
+        customAxios.post(NWAPP_LOGIN_API_URL, buffer).then( (successResponse) => {
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
+
+            // Snake-case from API to camel-case for React.
             let profile = camelizeKeys(responseData);
 
             // Extra.
