@@ -53,7 +53,7 @@ TODO: Add description.
     cp .env .env.local
     ```
 
-9. Edit your environment variables file to your specification.
+9. (OPTIONAL) Edit your environment variables file to your specification.
 
     ```bash
     vi .env.local
@@ -70,3 +70,6 @@ Start up the web-server:
   ```
   npm start
   ```
+
+## License
+This library is licensed under the **BSD** license. See [LICENSE](LICENSE) for more information.
