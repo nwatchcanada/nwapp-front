@@ -1,21 +1,36 @@
+# Neighbourhood Watch Frontend
+TODO: Add description.
 
-#### Chrome Extensions Required
-Please download the following Chrome extensions.
+## Installation
 
-* [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-* [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
-* [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
+1. Clone this project by running the following command.
 
-#### Host File Setup
-This project is uses ``django-tenants`` library and is setup to work with multiple domains. As a result, we will need to bind the address **workery.ca** to your ``localhost``. To do this follow these instructions.
+  ```
+  git clone https://github.com/nwatchcanada/nwapp-front.git
+  cd nwapp-front
+  ```
 
-1. Update your hosts file to support our applications domain.
+2. Intall the dependent libraries.
+
+  ```
+  npm install
+  ```
+
+3. (OPTIONAL) If you are using [Google Chrome](https://www.google.com/chrome/) web-browser, Please download the following **Chrome extensions** to assist you in your development.
+
+  * [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+  * [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
+  * [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
+
+4. This project is uses subdomains to seperate tenants. As a result, we will need to bind a few subdomains to your ``hosts`` file. To do this follow these instructions.
+
+5. Update your hosts file to support our applications domain.
 
   ```
   sudo vi /etc/hosts
   ```
 
-2. Append to the file...
+6. Append to the file...
 
   ```
   127.0.0.1       public.localhost
@@ -26,7 +41,7 @@ This project is uses ``django-tenants`` library and is setup to work with multip
   ```
 
 
-3. Refresh the dns on your machine to support our new domains.
+7. Refresh the dns on your machine to support our new domains.
 
   ```
   dscacheutil -flushcache
