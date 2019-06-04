@@ -81,32 +81,33 @@ export function postLogin(email, password, successCallback=null, failedCallback=
                 successCallback(profile);
             }
 
-        }).catch( (errorResult) => {
-            // console.log(errorResult);
-            // alert("Error fetching latest invoice.");
+        }).catch( (exception) => {
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
-            const responseData = errorResult.data;
-            let errors = camelizeKeys(responseData);
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
 
-            // Send our failure to the redux.
-            store.dispatch(
-                setLoginFailure({
-                    isAPIRequestRunning: false,
-                    errors: errors
-                })
-            );
+                let errors = camelizeKeys(responseData);
 
-            // DEVELOPERS NOTE:
-            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
-            // OBJECT WE GOT FROM THE API.
-            if (failedCallback) {
-                failedCallback(errors);
+                // Send our failure to the redux.
+                store.dispatch(
+                    setLoginFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (failedCallback) {
+                    failedCallback(errors);
+                }
             }
-
         }).then( () => {
             // Do nothing.
         });
-
     }
 }
 

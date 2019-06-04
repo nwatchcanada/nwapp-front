@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '../store';
 import { camelizeKeys } from 'humps';
+import msgpack from 'msgpack-lite';
 
 import { LOGOUT_REQUEST, LOGOUT_FAILURE, LOGOUT_SUCCESS } from "../constants/actionTypes"
 import { NWAPP_LOGOUT_API_URL } from "../constants/api"
@@ -58,19 +59,21 @@ export function postLogout(user) {
         const config = {
             headers: {
                 'Authorization': "Bearer " + user.token,
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Accept': 'application/json',
-            }
+                'Content-Type': 'application/msgpack;',
+                'Accept': 'application/msgpack',
+            },
+            responseType: 'arraybuffer'
         };
 
-        const decamelizedData = {
+        // Encode from JS Object to MessagePack (Buffer)
+        var buffer = msgpack.encode({
             token: user.token
-        }
+        });
 
-        axios.post(aURL, decamelizedData, config).then( (successResult) => {
-            // console.log(successResult); // For debugging purposes.
+        axios.post(aURL, buffer, config).then( (successResponse) => {
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
 
-            const responseData = successResult.data;
             let profile = camelizeKeys(responseData);
 
             // Extra.
@@ -83,18 +86,23 @@ export function postLogout(user) {
                 setLogoutSuccess()
             );
 
-        }).catch( (errorResult) => {
-            store.dispatch(
-                setLogoutFailure({
-                    isAPIRequestRunning: false,
-                    errors: {
-                        email: errorResult.response.data.email,
-                        password: errorResult.response.data.password,
-                        nonFieldErrors: errorResult.response.data.non_field_errors
-                    }
-                })
-            );
+        }).catch( (exception) => {
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
+
+                let errors = camelizeKeys(responseData);
+
+                // Send our failure to the redux.
+                store.dispatch(
+                    setLogoutFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+            }
         }).then( () => {
             // Do nothing.
         });
