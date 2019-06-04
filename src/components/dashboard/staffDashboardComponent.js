@@ -50,13 +50,12 @@ class StaffDashboardComponent extends Component {
 
                         <div className="jumbotron">
                             <h1 className="display-4"><i className="fas fa-bullhorn"></i>&nbsp;Announcements</h1>
-                            <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra
-                                attention to featured content or information.</p>
-                            <hr className="my-4" />
-                            <p>It uses utility classes for typography and spacing to space content out within the larger
-                                container.</p>
+                            <p className="lead">There doesn't appear to be any announcements, begin creating your announcement below.</p>
+
                             <p className="lead">
-                                <Link className="btn btn-primary btn-lg" to="#">Learn more&nbsp;<i className="fas fa-chevron-right"></i></Link>
+                                <Link className="btn btn-success btn-lg" to="#">
+                                    <i className="fas fa-plus"></i>&nbsp;Add
+                                </Link>
                             </p>
                         </div>
 
