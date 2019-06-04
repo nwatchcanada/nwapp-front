@@ -4,7 +4,8 @@ import { camelizeKeys } from 'humps';
 import msgpack from 'msgpack-lite';
 
 import { LOGOUT_REQUEST, LOGOUT_FAILURE, LOGOUT_SUCCESS } from "../constants/actionTypes"
-import { NWAPP_LOGOUT_API_URL } from "../constants/api"
+import { NWAPP_LOGOUT_API_ENDPOINT } from "../constants/api"
+import { getAPIBaseURL } from '../helpers/urlUtility';
 
 
 export const setLogoutRequest = () => ({
@@ -51,12 +52,10 @@ export function postLogout(user) {
 
         attemptLogout();
 
-        // Generate the URL.
-        let aURL = NWAPP_LOGOUT_API_URL;
-
         // Create our oAuth 2.0 authenticated API header to use with our
         // submission.
         const config = {
+            baseURL: getAPIBaseURL(),
             headers: {
                 'Authorization': "Bearer " + user.token,
                 'Content-Type': 'application/msgpack;',
@@ -70,7 +69,7 @@ export function postLogout(user) {
             token: user.token
         });
 
-        axios.post(aURL, buffer, config).then( (successResponse) => {
+        axios.post(NWAPP_LOGOUT_API_ENDPOINT, buffer, config).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 

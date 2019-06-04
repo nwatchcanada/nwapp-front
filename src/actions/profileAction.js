@@ -5,8 +5,8 @@ import msgpack from 'msgpack-lite';
 
 import { PROFILE_REQUEST, PROFILE_SUCCESS, PROFILE_FAILURE } from "../constants/actionTypes";
 import {
-    NWAPP_GET_PROFILE_API_URL,
-    NWAPP_ACTIVATE_API_URL
+    NWAPP_PROFILE_API_ENDPOINT,
+    NWAPP_ACTIVATE_API_ENDPOINT
 } from "../constants/api";
 import {
     getAccessTokenFromLocalStorage,
@@ -14,6 +14,7 @@ import {
     setRefreshTokenInLocalStorage,
     attachAxiosRefreshTokenHandler
 } from '../helpers/tokenUtility';
+import { getAPIBaseURL } from '../helpers/urlUtility';
 
 
 export const setProfileRequest = () => ({
@@ -50,6 +51,7 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
+            baseURL: getAPIBaseURL(),
             headers: {
                 'Authorization': "Bearer " + accessToken.token,
                 'Content-Type': 'application/msgpack;',
@@ -62,9 +64,7 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         attachAxiosRefreshTokenHandler(customAxios);
 
         // Run our Axios post.
-        customAxios.get(
-            NWAPP_GET_PROFILE_API_URL
-        ).then( (successResponse) => { // SUCCESS
+        customAxios.get(NWAPP_PROFILE_API_ENDPOINT).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -138,6 +138,7 @@ export function postProfile(data, successCallback, failedCallback) {
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
+            baseURL: getAPIBaseURL(),
             headers: {
                 'Authorization': "Bearer " + accessToken.token,
                 'Content-Type': 'application/msgpack;',
@@ -157,7 +158,7 @@ export function postProfile(data, successCallback, failedCallback) {
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(NWAPP_GET_PROFILE_API_URL, buffer).then( (successResponse) => {
+        customAxios.post(NWAPP_PROFILE_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -205,7 +206,6 @@ export function postProfile(data, successCallback, failedCallback) {
                     failedCallback(errors);
                 }
             }
-
         }).then( () => {
             // Do nothing.
         });
@@ -221,12 +221,25 @@ export function postActivateProfile(accessCode, successCallback, failedCallback)
             setProfileRequest()
         );
 
-        axios.post(NWAPP_ACTIVATE_API_URL, {
-            'pr_access_code': accessCode
-        }).then( (successResult) => {
-            // console.log(successResult); // For debugging purposes.
+        // Create a new Axios instance.
+        const customAxios = axios.create({
+            baseURL: getAPIBaseURL(),
+            headers: {
+                'Content-Type': 'application/msgpack;',
+                'Accept': 'application/msgpack',
+            },
+            responseType: 'arraybuffer'
+        })
 
-            const responseData = successResult.data;
+        // Encode from JS Object to MessagePack (Buffer)
+        var buffer = msgpack.encode({
+            'pr_access_code': accessCode  // Set to `snake-case` for API server.
+        });
+
+        customAxios.post(NWAPP_ACTIVATE_API_ENDPOINT, buffer).then( (successResponse) => {
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
+
             let profile = camelizeKeys(responseData);
 
             // Extra.
@@ -241,21 +254,30 @@ export function postActivateProfile(accessCode, successCallback, failedCallback)
 
             successCallback(profile);
 
-        }).catch( (errorResult) => {
-            const responseData = errorResult.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
-            let errors = camelizeKeys(responseData);
-            // console.log(errors);
+        }).catch( (exception) => {
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
-            store.dispatch(
-                setProfileFailure({
-                    isAPIRequestRunning: false,
-                    errors: errors
-                })
-            );
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
 
-            // Run our failure callback function.
-            failedCallback(errors);
+                let errors = camelizeKeys(responseData);
 
+                // Send our failure to the redux.
+                store.dispatch(
+                    setProfileFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (failedCallback) {
+                    failedCallback(errors);
+                }
+            }
         }).then( () => {
             // Do nothing.
         });

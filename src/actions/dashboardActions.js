@@ -8,6 +8,8 @@ import { DASHBOARD_REQUEST, DASHBOARD_FAILURE, DASHBOARD_SUCCESS } from '../cons
 import {
     getAccessTokenFromLocalStorage, attachAxiosRefreshTokenHandler
 } from '../helpers/tokenUtility';
+import { getAPIBaseURL } from '../helpers/urlUtility';
+import { NWAPP_DASHBOARD_API_ENDPOINT } from "../constants/api"
 
 
 export const setDashboardRequest = () => ({
@@ -48,6 +50,7 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
+            baseURL: getAPIBaseURL(),
             headers: {
                 'Authorization': "Bearer " + accessToken.token,
                 'Content-Type': 'application/msgpack;',
@@ -59,13 +62,8 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
         // Attach our Axios "refesh token" interceptor.
         attachAxiosRefreshTokenHandler(customAxios);
 
-        // Generate the API endpoint to the web-service.
-        const apiEndpintURL = process.env.REACT_APP_API_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + "/api/dashboard";
-
         // Make the call to the web-service.
-        customAxios.get(
-            apiEndpintURL
-        ).then( (successResponse) => { // SUCCESS
+        customAxios.get(NWAPP_DASHBOARD_API_ENDPOINT).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 

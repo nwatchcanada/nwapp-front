@@ -2,7 +2,7 @@
  * Function will get the subdomain that the browser is currentl in.
  * Special thanks to: https://stackoverflow.com/a/38863509
  */
-export default function getSubdomain() {
+export function getSubdomain() {
     let host = window.location.host;
     let parts = host.split(".");
     let subdomain = "";
@@ -27,5 +27,21 @@ export default function getSubdomain() {
         return null;
     } else {
         return subdomain;
+    }
+}
+
+
+/**
+ *  Function takes the React environment variables and returns the base URL used
+ *  for all API communication with our web-service. Function takes into account
+ *  subdomains (a.k.a. tenancy) as well. Please use this function to set the
+ *  ``Axios`` base URL when making API calls to the backend server.
+ */
+export function getAPIBaseURL() {
+    const schema = getSubdomain();
+    if (schema !== null && schema !== undefined && schema !== "www") {
+        return process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + '/api';
+    } else {
+        return process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_API_DOMAIN + '/api';
     }
 }

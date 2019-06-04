@@ -15,7 +15,7 @@ import AreaCoordinatorDashboardComponent from "../../components/dashboard/areaCo
 import MemberDashboardComponent from "../../components/dashboard/memberDashboardComponent";
 import { pullProfile } from "../../actions/profileAction";
 import { pullDashboard } from "../../actions/dashboardActions";
-import getSubdomain from '../../helpers/subdomainUtility';
+import { getSubdomain } from '../../helpers/urlUtility';
 
 
 class DashboardContainer extends Component {
