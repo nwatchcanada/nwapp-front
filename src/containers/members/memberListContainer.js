@@ -59,18 +59,30 @@ class MemberListContainer extends Component {
     render() {
         const tableData = [{
             'slug': 'Argyle',
+            'icon': 'house',
             'number': 1,
-            'name': 'Argyle',
+            'firstName': 'Shinji',
+            'lastName': 'Ikari',
+            'phone': '(789) 789-7890',
+            'email': 'shinji.ikari@nerv.worldgov',
             'absoluteUrl': '/member/argyle'
         },{
             'slug': 'byron',
+            'icon': 'house',
             'number': 2,
-            'name': 'Byron',
+            'firstName': 'Mariya',
+            'lastName': 'Takeuchi',
+            'phone': '(321) 321-3210',
+            'email': 'plastic_lover@gmail.com',
             'absoluteUrl': '/member/byron'
         },{
             'slug': 'carling',
+            'icon': 'briefcase',
             'number': 3,
-            'name': 'Carling',
+            'firstName': 'Rei',
+            'lastName': 'Ayanami',
+            'phone': '(123) 123-1234',
+            'email': 'rei.ayanami@nerv.worldgov',
             'absoluteUrl': '/member/carling'
         }];
         return (
