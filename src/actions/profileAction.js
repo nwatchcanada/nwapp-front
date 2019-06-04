@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '../store';
 import { camelizeKeys, decamelizeKeys } from 'humps';
+import msgpack from 'msgpack-lite';
 
 import { PROFILE_REQUEST, PROFILE_SUCCESS, PROFILE_FAILURE } from "../constants/actionTypes";
 import {
@@ -51,9 +52,10 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         const customAxios = axios.create({
             headers: {
                 'Authorization': "Bearer " + accessToken.token,
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Accept': 'application/json',
-            }
+                'Content-Type': 'application/msgpack;',
+                'Accept': 'application/msgpack',
+            },
+            responseType: 'arraybuffer'
         })
 
         // Attach our Axios "refesh token" interceptor.
@@ -62,10 +64,10 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         // Run our Axios post.
         customAxios.get(
             NWAPP_GET_PROFILE_API_URL
-        ).then( (successResult) => { // SUCCESS
-            // console.log(successResult); // For debugging purposes.
+        ).then( (successResponse) => { // SUCCESS
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
 
-            const responseData = successResult.data;
             let profile = camelizeKeys(responseData);
 
             // Extra.
@@ -92,27 +94,30 @@ export function pullProfile(successCallback=null, failedCallback=null) {
                 successCallback(profile);
             }
 
-        }).catch( (errorResult) => { // ERROR
-            // // console.log(errorResult);
-            // alert("Error fetching latest profile");
+        }).catch( (exception) => { // ERROR
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
-            const responseData = errorResult.data;
-            let errors = camelizeKeys(responseData);
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
 
-            store.dispatch(
-                setProfileFailure({
-                    isAPIRequestRunning: false,
-                    errors: errors
-                })
-            );
+                let errors = camelizeKeys(responseData);
 
-            // DEVELOPERS NOTE:
-            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
-            // OBJECT WE GOT FROM THE API.
-            if (failedCallback) {
-                failedCallback(errors);
+                // Send our failure to the redux.
+                store.dispatch(
+                    setProfileFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (failedCallback) {
+                    failedCallback(errors);
+                }
             }
-
         }).then( () => { // FINALLY
             // Do nothing.
         });
@@ -135,9 +140,10 @@ export function postProfile(data, successCallback, failedCallback) {
         const customAxios = axios.create({
             headers: {
                 'Authorization': "Bearer " + accessToken.token,
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Accept': 'application/json',
-            }
+                'Content-Type': 'application/msgpack;',
+                'Accept': 'application/msgpack',
+            },
+            responseType: 'arraybuffer'
         })
 
         // Attach our Axios "refesh token" interceptor.
@@ -147,10 +153,14 @@ export function postProfile(data, successCallback, failedCallback) {
         // data so our API endpoint will be able to read it.
         let decamelizedData = decamelizeKeys(data);
 
-        // Perform our API submission.
-        customAxios.post(NWAPP_GET_PROFILE_API_URL, decamelizedData).then( (successResult) => {
+        // Encode from JS Object to MessagePack (Buffer)
+        var buffer = msgpack.encode(decamelizedData);
 
-            const responseData = successResult.data;
+        // Perform our API submission.
+        customAxios.post(NWAPP_GET_PROFILE_API_URL, buffer).then( (successResponse) => {
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
+
             let profile = camelizeKeys(responseData);
 
             // Extra.
@@ -171,20 +181,30 @@ export function postProfile(data, successCallback, failedCallback) {
             // Run our success callback function.
             successCallback(profile);
 
-        }).catch( (errorResult) => {
-            const responseData = errorResult.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
-            let errors = camelizeKeys(responseData);
-            // console.log(errors);
+        }).catch( (exception) => {
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
-            store.dispatch(
-                setProfileFailure({
-                    isAPIRequestRunning: false,
-                    errors: errors
-                })
-            );
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
 
-            // Run our failure callback function.
-            failedCallback(errors);
+                let errors = camelizeKeys(responseData);
+
+                // Send our failure to the redux.
+                store.dispatch(
+                    setProfileFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (failedCallback) {
+                    failedCallback(errors);
+                }
+            }
 
         }).then( () => {
             // Do nothing.

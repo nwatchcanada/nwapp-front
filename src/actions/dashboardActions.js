@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '../store';
 import { camelizeKeys } from 'humps';
+import msgpack from 'msgpack-lite';
 
 import { DASHBOARD_REQUEST, DASHBOARD_FAILURE, DASHBOARD_SUCCESS } from '../constants/actionTypes';
 // import { NWAPP_DASHBOARD_API_URL } from '../constants/api';
@@ -49,9 +50,10 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
         const customAxios = axios.create({
             headers: {
                 'Authorization': "Bearer " + accessToken.token,
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Accept': 'application/json',
-            }
+                'Content-Type': 'application/msgpack;',
+                'Accept': 'application/msgpack',
+            },
+            responseType: 'arraybuffer'
         })
 
         // Attach our Axios "refesh token" interceptor.
@@ -63,10 +65,10 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
         // Make the call to the web-service.
         customAxios.get(
             apiEndpintURL
-        ).then( (successResult) => { // SUCCESS
-            // console.log(successResult); // For debugging purposes.
+        ).then( (successResponse) => { // SUCCESS
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
 
-            const responseData = successResult.data;
             let dashboard = camelizeKeys(responseData);
 
             // Extra.
@@ -86,27 +88,30 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
                 successCallback(dashboard);
             }
 
-        }).catch( (errorResult) => { // ERROR
-            // console.log(errorResult);
-            // alert("Error fetching latest dashboard");
+        }).catch( (exception) => {
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
-            const responseData = errorResult.data;
-            let errors = camelizeKeys(responseData);
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
 
-            store.dispatch(
-                setDashboardFailure({
-                    isAPIRequestRunning: false,
-                    errors: errors
-                })
-            );
+                let errors = camelizeKeys(responseData);
 
-            // DEVELOPERS NOTE:
-            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
-            // OBJECT WE GOT FROM THE API.
-            if (failedCallback) {
-                failedCallback(errors);
+                // Send our failure to the redux.
+                store.dispatch(
+                    setDashboardFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (failedCallback) {
+                    failedCallback(errors);
+                }
             }
-
         }).then( () => { // FINALLY
             // Do nothing.
         });
