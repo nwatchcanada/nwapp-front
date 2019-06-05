@@ -12,7 +12,7 @@ class StaffDashboardComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/members" className="d-block link-ndecor" title="Members">
+                                    <Link to="/members/active" className="d-block link-ndecor" title="Members">
                                         <h1 className="circle-title">1,100</h1>
                                     </Link>
                                 </div>

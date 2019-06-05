@@ -9,7 +9,7 @@ import { BootstrapInput } from "../bootstrap/bootstrapInput";
 
 class MemberUpdateComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { urlArgument, slug, name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -21,7 +21,7 @@ class MemberUpdateComponent extends Component {
                             <Link to="/members"><i className="fas fa-id-card"></i>&nbsp;Member</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/member/argyle"><i className="fas fa-id-card"></i>&nbsp;Argyle</Link>
+                            <Link to={`/members/${urlArgument}/${slug}`}><i className="fas fa-id-card"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update

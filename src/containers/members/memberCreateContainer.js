@@ -53,7 +53,7 @@ class MemberCreateContainer extends Component {
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members");
+        this.props.history.push("/members/active");
     }
 
     onFailedSubmissionCallback(errors) {

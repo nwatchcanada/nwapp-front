@@ -16,10 +16,11 @@ class MemberRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
+        const { urlArgument, slug } = this.props.match.params;
 
         // Update state.
         this.state = {
+            urlArgument: urlArgument,
             slug: slug,
         }
 
@@ -69,13 +70,13 @@ class MemberRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/members/");
+        this.props.history.push("/members/"+this.state.urlArgument);
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/member/"+this.state.slug+"/update");
+        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/update");
     }
 
     /**
@@ -92,6 +93,8 @@ class MemberRetrieveContainer extends Component {
         };
         return (
             <MemberRetrieveComponent
+                urlArgument={this.state.urlArgument}
+                slug={this.state.slug}
                 memberData={memberData}
                 onBack={this.onBack}
                 onClick={this.onClick}

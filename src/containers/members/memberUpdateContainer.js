@@ -18,12 +18,13 @@ class MemberUpdateContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
+        const { urlArgument, slug } = this.props.match.params;
 
         this.state = {
             name: null,
             errors: {},
             isLoading: false,
+            urlArgument: urlArgument,
             slug: slug
         }
 
@@ -59,7 +60,7 @@ class MemberUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Member has been successfully updated.");
-        this.props.history.push("/member/"+this.state.slug);
+        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -109,9 +110,11 @@ class MemberUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { name, errors, urlArgument, slug, } = this.state;
         return (
             <MemberUpdateComponent
+                urlArgument={urlArgument}
+                slug={slug}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
