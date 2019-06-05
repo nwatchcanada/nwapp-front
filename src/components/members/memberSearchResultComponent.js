@@ -16,9 +16,9 @@ class TableRow extends Component {
                 <td>{phone}</td>
                 <td>{email}</td>
                 <td>
-                    <a href={absoluteUrl}>
-                        View&nbsp;<i className="fas fa-chevron-right"></i>
-                    </a>
+                    <Link to={absoluteUrl}  target="_blank">
+                        View&nbsp;<i className="fas fa-external-link-alt"></i>
+                    </Link>
                 </td>
             </tr>
         );
