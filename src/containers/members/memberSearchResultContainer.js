@@ -73,7 +73,7 @@ class MemberSearchResultContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/members/all/argyle'
+            'absoluteUrl': '/members/active/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -82,7 +82,7 @@ class MemberSearchResultContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/members/all/byron'
+            'absoluteUrl': '/members/active/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -91,7 +91,7 @@ class MemberSearchResultContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/members/all/carling'
+            'absoluteUrl': '/members/active/carling'
         }];
         return (
             <MemberSearchResultComponent

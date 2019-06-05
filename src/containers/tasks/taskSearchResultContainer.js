@@ -73,7 +73,7 @@ class TaskSearchResultContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/tasks/all/argyle'
+            'absoluteUrl': '/tasks/pending/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -82,7 +82,7 @@ class TaskSearchResultContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/tasks/all/byron'
+            'absoluteUrl': '/tasks/pending/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -91,7 +91,7 @@ class TaskSearchResultContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/tasks/all/carling'
+            'absoluteUrl': '/tasks/pending/carling'
         }];
         return (
             <TaskSearchResultComponent
