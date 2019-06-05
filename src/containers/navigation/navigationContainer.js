@@ -32,6 +32,16 @@ const authenticatedFullMenuData = [
         title: "Members",
         url: "/members/active"
     },{
+        id: "full-area-coordinator",
+        icon: "horse-head",
+        title: "Area Coordinators",
+        url: "/area-coordinators/active"
+    },{
+        id: "full-associates",
+        icon: "crown",
+        title: "Associates",
+        url: "/associates/active"
+    },{
         id: "full-items",
         icon: "map-pin",
         title: "Items",
@@ -42,21 +52,6 @@ const authenticatedFullMenuData = [
         title: "Districts",
         url: "/districts"
     },{
-        id: "full-associates",
-        icon: "crown",
-        title: "Associates",
-        url: "/associates/active"
-    },{
-        id: "full-area-coordinator",
-        icon: "horse-head",
-        title: "Area Coordinators",
-        url: "/area-coordinators/active"
-    },{
-        id: "full-staff",
-        icon: "user-tie",
-        title: "Staff",
-        url: "/staff"
-    },{
         id: "full-tasks",
         icon: "tasks",
         title: "Tasks",
@@ -66,6 +61,11 @@ const authenticatedFullMenuData = [
         icon: "book",
         title: "Reports",
         url: "/reports"
+    },{
+        id: "full-staff",
+        icon: "user-tie",
+        title: "Staff",
+        url: "/staff"
     },{
         id: "full-settings",
         icon: "cogs",
