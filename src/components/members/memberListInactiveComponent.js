@@ -99,19 +99,6 @@ class MemberListComponent extends Component {
                 <h1><i className="fas fa-id-card"></i>&nbsp;Members</h1>
 
                 <div className="row">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey ">
-                            <Link to="/members/active">
-                                <i className="fas fa-user-check"></i>&nbsp;<span className="">Active Members (3)</span>
-                            </Link>
-                        </div>
-                        <div id="step-2" className="st-grey active">
-                            <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive Members (8)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row">
                     <div className="col-md-12">
 
                         <section className="row text-center placeholders">
@@ -136,7 +123,19 @@ class MemberListComponent extends Component {
 
                         </section>
 
-                        <h2><i className="fas fa-user-times"></i>&nbsp;Inactive Members List</h2>
+                        <h2>
+                            <i className="fas fa-user-times"></i>&nbsp;Inactive Members List
+                            <div className="step-navigation float-right">
+                                <div id="step-1" className="st-grey ">
+                                    <Link to="/members/active">
+                                        <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
+                                    </Link>
+                                </div>
+                                <div id="step-2" className="st-grey active">
+                                    <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (8)</span>
+                                </div>
+                            </div>
+                        </h2>
 
                         <div className="table-responsive">
                             <table className="table table-striped">
