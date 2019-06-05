@@ -27,6 +27,11 @@ import DistrictRetrieveContainer from "./settings/districts/districtRetrieveCont
 import DistrictCreateContainer from "./settings/districts/districtCreateContainer";
 import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
 
+import TagsListContainer from "./settings/tags/tagListContainer";
+import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
+import TagCreateContainer from "./settings/tags/tagCreateContainer";
+import TagUpdateContainer from "./settings/tags/tagUpdateContainer";
+
 import MemberListActiveContainer from "./members/memberListActiveContainer";
 import MemberListInactiveContainer from "./members/memberListInactiveContainer";
 import MemberSearchContainer from "./members/memberSearchContainer";
@@ -109,6 +114,10 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district/add" exact component={DistrictCreateContainer} />
                                 <Route path="/settings/district/:slug" exact component={DistrictRetrieveContainer} />
                                 <Route path="/settings/district/:slug/update" exact component={DistrictUpdateContainer} />
+                                <Route path="/settings/tags" exact component={TagsListContainer} />
+                                <Route path="/settings/tag/add" exact component={TagCreateContainer} />
+                                <Route path="/settings/tag/:slug" exact component={TagRetrieveContainer} />
+                                <Route path="/settings/tag/:slug/update" exact component={TagUpdateContainer} />
                                 <Route path="/members/add" exact component={MemberCreateContainer} />
                                 <Route path="/members/active" exact component={MemberListActiveContainer} />
                                 <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
