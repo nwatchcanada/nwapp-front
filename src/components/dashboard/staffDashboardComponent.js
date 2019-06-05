@@ -21,12 +21,12 @@ class StaffDashboardComponent extends Component {
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="/items" className="d-block link-ndecor" title="Jobs">
+                                    <Link to="/area-coordinators" className="d-block link-ndecor" title="Jobs">
                                         <h1 className="circle-title">10,000</h1>
                                     </Link>
                                 </div>
-                                <h4><i className="fas fa-map-pin"></i>&nbsp;Items</h4>
-                                <span className="text-muted">View your items history</span>
+                                <h4><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</h4>
+                                <span className="text-muted">View your area coordinators</span>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
@@ -39,12 +39,12 @@ class StaffDashboardComponent extends Component {
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
-                                    <Link to="/tasks" className="d-block link-ndecor" title="Tasks">
+                                    <Link to="/items" className="d-block link-ndecor" title="Tasks">
                                         <h1 className="circle-title">12</h1>
                                     </Link>
                                 </div>
-                                <h4><i className="fas fa-tasks"></i>&nbsp;Tasks</h4>
-                                <span className="text-muted">View your tasks</span>
+                                <h4><i className="fas fa-map-pin"></i>&nbsp;Items</h4>
+                                <span className="text-muted">View your items</span>
                             </div>
                         </section>
 
