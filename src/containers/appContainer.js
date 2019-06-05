@@ -28,8 +28,8 @@ import DistrictRetrieveContainer from "./districts/districtRetrieveContainer";
 import DistrictCreateContainer from "./districts/districtCreateContainer";
 import DistrictUpdateContainer from "./districts/districtUpdateContainer";
 
-import MemberActiveListContainer from "./members/memberActiveListContainer";
-import MemberFullListContainer from "./members/memberFullListContainer";
+import MemberListActiveContainer from "./members/memberListActiveContainer";
+import MemberListInactiveContainer from "./members/memberListInactiveContainer";
 import MemberSearchContainer from "./members/memberSearchContainer";
 import MemberSearchResultContainer from "./members/memberSearchResultContainer";
 import MemberRetrieveContainer from "./members/memberRetrieveContainer";
@@ -99,8 +99,8 @@ class AppContainer extends React.Component {
                                 <Route path="/district/:slug" exact component={DistrictRetrieveContainer} />
                                 <Route path="/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route path="/members/add" exact component={MemberCreateContainer} />
-                                <Route path="/members/active" exact component={MemberActiveListContainer} />
-                                <Route path="/members/all" exact component={MemberFullListContainer} />
+                                <Route path="/members/active" exact component={MemberListActiveContainer} />
+                                <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
                                 <Route path="/members/search" exact component={MemberSearchContainer} />
                                 <Route path="/members/search-results" exact component={MemberSearchResultContainer} />
                                 <Route path="/members/:urlArgument/:slug" exact component={MemberRetrieveContainer} />

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberActiveListComponent from "../../components/members/memberActiveListComponent";
+import MemberFullListComponent from "../../components/members/memberListInactiveComponent";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
 
 
-class MemberActiveListContainer extends Component {
+class MemberListInactiveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -65,7 +65,7 @@ class MemberActiveListContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/members/active/argyle'
+            'absoluteUrl': '/members/inactive/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -74,7 +74,7 @@ class MemberActiveListContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/members/active/byron'
+            'absoluteUrl': '/members/inactive/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -83,10 +83,10 @@ class MemberActiveListContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/members/active/carling'
+            'absoluteUrl': '/members/inactive/carling'
         }];
         return (
-            <MemberActiveListComponent
+            <MemberFullListComponent
                 tableData={tableData}
                 flashMessage={this.props.flashMessage}
             />
@@ -113,4 +113,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberActiveListContainer);
+)(MemberListInactiveContainer);

@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../flashMessageComponent";
 
 class MemberRetrieveComponent extends Component {
     render() {
-        const { urlArgument, slug, onClick, onBack, flashMessage } = this.props;
+        const { urlArgument, onClick, onBack, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">

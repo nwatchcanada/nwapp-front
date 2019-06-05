@@ -52,8 +52,8 @@ class MemberActiveListComponent extends Component {
                             <i className="fas fa-user-check"></i>&nbsp;<span className="">Active Members (3)</span>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to="/members/all">
-                                <i className="fas fa-users"></i>&nbsp;<span className="">All Members (3)</span>
+                            <Link to="/members/inactive">
+                                <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive Members (3)</span>
                             </Link>
                         </div>
                     </div>
@@ -84,7 +84,7 @@ class MemberActiveListComponent extends Component {
 
                         </section>
 
-                        <h2>Active Members List</h2>
+                        <h2><i className="fas fa-user-check"></i>&nbsp;Active Members List</h2>
 
                         <div className="table-responsive">
                             <table className="table table-striped">

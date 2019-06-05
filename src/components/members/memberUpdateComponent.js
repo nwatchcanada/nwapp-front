@@ -18,7 +18,7 @@ class MemberUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-id-card"></i>&nbsp;Member</Link>
+                            <Link to={`/members/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Member</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/members/${urlArgument}/${slug}`}><i className="fas fa-id-card"></i>&nbsp;Argyle</Link>
@@ -52,7 +52,7 @@ class MemberUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/member/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/members/${urlArgument}/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>

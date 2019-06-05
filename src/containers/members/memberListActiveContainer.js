@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberFullListComponent from "../../components/members/memberFullListComponent";
+import MemberActiveListComponent from "../../components/members/memberListActiveComponent";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
 
 
-class MemberListContainer extends Component {
+class MemberListActiveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -65,7 +65,7 @@ class MemberListContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/members/all/argyle'
+            'absoluteUrl': '/members/active/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -74,7 +74,7 @@ class MemberListContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/members/all/byron'
+            'absoluteUrl': '/members/active/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -83,10 +83,10 @@ class MemberListContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/members/all/carling'
+            'absoluteUrl': '/members/active/carling'
         }];
         return (
-            <MemberFullListComponent
+            <MemberActiveListComponent
                 tableData={tableData}
                 flashMessage={this.props.flashMessage}
             />
@@ -113,4 +113,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberListContainer);
+)(MemberListActiveContainer);
