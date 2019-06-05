@@ -195,11 +195,20 @@ class NavigationContainer extends React.Component {
                     <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
                 </Link>
                 <ul className="navbar-nav flex-row">
+                    <li className="dropdown-list dropdown nav-item">
+                        <Link aria-haspopup="true" to="/tasks/pending" className="dropdown-toggle-nocaret nav-link" aria-expanded="false">
+                            <i className="fa fa-bell"></i>
+                            <span className="badge badge-danger">11</span>
+                        </Link>
+                    </li>
                     <li className="nav-item">
-                    <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
-                        onClick = { this.sideMenuToggle }>
-                        <i className="fa fa-bars"></i>
-                    </button>
+                        &nbsp;&nbsp;&nbsp;
+                    </li>
+                    <li className="nav-item">
+                        <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
+                            onClick = { this.sideMenuToggle }>
+                            <i className="fa fa-bars"></i>
+                        </button>
                     </li>
                 </ul>
 
