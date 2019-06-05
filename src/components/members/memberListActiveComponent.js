@@ -4,6 +4,58 @@ import { Link } from "react-router-dom";
 import { FlashMessageComponent } from "../flashMessageComponent";
 
 
+/**
+ *  Component is responsible for rendering a single column header and the
+ *  following functionality:
+ *
+ *  1. Make headers clickable.
+ *  2. If clicked for the first time then let the container know of the user
+ *     click event and add an ascending sort icon to this header.
+ *  3. If clicked again then let the container know of the click event and add
+ *     a descending sort icon to this header.
+ *  4. If clicked again then reset the table to no longer have sorting. Also
+ *     let the container know of the click event.
+ */
+class TableSortableCol extends Component {
+    render() {
+        const { onTableColumnClick, text, columnKey, selectedColumnKey, selectedColumnOrder } = this.props
+
+        if (selectedColumnKey === columnKey && selectedColumnOrder === "asc") {
+            return (
+                <th>
+                    <Link onClick={()=>{ onTableColumnClick(columnKey, "desc"); }}>
+                    {text}&nbsp;<i className="fas fa-sort-up"></i>
+                    </Link>
+                </th>
+            );
+        }
+        else if (selectedColumnKey === columnKey && selectedColumnOrder === "desc") {
+            return (
+                <th>
+                    <Link onClick={()=>{ onTableColumnClick(null, null); }}>
+                    {text}&nbsp;<i className="fas fa-sort-down"></i>
+                    </Link>
+                </th>
+            );
+
+        // CASE 3 OF 3:
+        // Column was never selected before.
+        } else {
+            return (
+                <th>
+                    <Link onClick={()=>{ onTableColumnClick(columnKey, "asc"); }}>
+                    {text}
+                    </Link>
+                </th>
+            );
+        }
+    };
+}
+
+
+/**
+ *  Component is responsible for rendering a single table row.
+ */
 class TableRow extends Component {
     render() {
         const { slug, icon, firstName, lastName, phone, email, absoluteUrl } = this.props.datum;
@@ -28,7 +80,7 @@ class TableRow extends Component {
 
 class MemberActiveListComponent extends Component {
     render() {
-        const { tableData, flashMessage } = this.props;
+        const { selectedColumnKey, selectedColumnOrder, onTableColumnClick, tableData, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -91,10 +143,34 @@ class MemberActiveListComponent extends Component {
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
+                                        <TableSortableCol
+                                            onTableColumnClick={onTableColumnClick}
+                                            selectedColumnKey={selectedColumnKey}
+                                            selectedColumnOrder={selectedColumnOrder}
+                                            text="First Name"
+                                            columnKey="first_name"
+                                        />
+                                        <TableSortableCol
+                                            onTableColumnClick={onTableColumnClick}
+                                            selectedColumnKey={selectedColumnKey}
+                                            selectedColumnOrder={selectedColumnOrder}
+                                            text="Last Name"
+                                            columnKey="last_name"
+                                        />
+                                        <TableSortableCol
+                                            onTableColumnClick={onTableColumnClick}
+                                            selectedColumnKey={selectedColumnKey}
+                                            selectedColumnOrder={selectedColumnOrder}
+                                            text="Phone"
+                                            columnKey="phone"
+                                        />
+                                        <TableSortableCol
+                                            onTableColumnClick={onTableColumnClick}
+                                            selectedColumnKey={selectedColumnKey}
+                                            selectedColumnOrder={selectedColumnOrder}
+                                            text="Email"
+                                            columnKey="email"
+                                        />
                                         <th></th>
                                     </tr>
                                     </thead>

@@ -11,6 +11,15 @@ class MemberListActiveContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedColumnKey: null,
+            selectedColumnOrder: null
+        }
+        this.onTableColumnClick = this.onTableColumnClick.bind(this);
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -50,6 +59,13 @@ class MemberListActiveContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onTableColumnClick(columnKey, order) {
+        this.setState({
+            selectedColumnKey: columnKey,
+            selectedColumnOrder: order,
+        })
+    }
+
 
     /**
      *  Main render function
@@ -87,6 +103,9 @@ class MemberListActiveContainer extends Component {
         }];
         return (
             <MemberActiveListComponent
+                selectedColumnKey={this.state.selectedColumnKey}
+                selectedColumnOrder={this.state.selectedColumnOrder}
+                onTableColumnClick={this.onTableColumnClick}
                 tableData={tableData}
                 flashMessage={this.props.flashMessage}
             />
