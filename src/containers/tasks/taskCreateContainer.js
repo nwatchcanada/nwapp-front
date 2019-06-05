@@ -53,7 +53,7 @@ class TaskCreateContainer extends Component {
     onSuccessfulSubmissionCallback(task) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Task has been successfully created.");
-        this.props.history.push("/tasks");
+        this.props.history.push("/tasks/active");
     }
 
     onFailedSubmissionCallback(errors) {

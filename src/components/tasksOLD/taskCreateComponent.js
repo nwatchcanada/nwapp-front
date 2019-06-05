@@ -18,7 +18,7 @@ class TaskCreateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/tasks/active"><i className="fas fa-id-card"></i>&nbsp;Tasks</Link>
+                            <Link to="/tasks"><i className="fas fa-tasks"></i>&nbsp;Task</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -49,7 +49,7 @@ class TaskCreateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/tasks/active" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/tasks" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>

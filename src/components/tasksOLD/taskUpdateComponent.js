@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../bootstrap/bootstrapInput";
 
 
-class TaskCreateComponent extends Component {
+class TaskUpdateComponent extends Component {
     render() {
         const { name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -18,10 +18,13 @@ class TaskCreateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/tasks/active"><i className="fas fa-id-card"></i>&nbsp;Tasks</Link>
+                            <Link to="/tasks"><i className="fas fa-tasks"></i>&nbsp;Task</Link>
+                        </li>
+                        <li className="breadcrumb-item" aria-current="page">
+                            <Link to="/task/argyle"><i className="fas fa-tasks"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add
+                            <i className="fas fa-edit"></i>&nbsp;Update
                         </li>
                     </ol>
                 </nav>
@@ -29,7 +32,7 @@ class TaskCreateComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New Task</h1>
+                            <h1>Update Task</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -49,7 +52,7 @@ class TaskCreateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/tasks/active" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/task/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>
@@ -63,4 +66,4 @@ class TaskCreateComponent extends Component {
     }
 }
 
-export default TaskCreateComponent;
+export default TaskUpdateComponent;

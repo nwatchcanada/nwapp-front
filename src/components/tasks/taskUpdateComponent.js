@@ -9,7 +9,7 @@ import { BootstrapInput } from "../bootstrap/bootstrapInput";
 
 class TaskUpdateComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { urlArgument, slug, name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -18,10 +18,10 @@ class TaskUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/tasks"><i className="fas fa-tasks"></i>&nbsp;Task</Link>
+                            <Link to={`/tasks/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Task</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/task/argyle"><i className="fas fa-tasks"></i>&nbsp;Argyle</Link>
+                            <Link to={`/tasks/${urlArgument}/${slug}`}><i className="fas fa-id-card"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -52,7 +52,7 @@ class TaskUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/task/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/tasks/${urlArgument}/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>

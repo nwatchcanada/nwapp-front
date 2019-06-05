@@ -65,7 +65,10 @@ import StaffRetrieveContainer from "./staff/staffRetrieveContainer";
 import StaffCreateContainer from "./staff/staffCreateContainer";
 import StaffUpdateContainer from "./staff/staffUpdateContainer";
 
-import TaskListContainer from "./tasks/taskListContainer";
+import TaskListActiveContainer from "./tasks/taskListActiveContainer";
+import TaskListInactiveContainer from "./tasks/taskListInactiveContainer";
+import TaskSearchContainer from "./tasks/taskSearchContainer";
+import TaskSearchResultContainer from "./tasks/taskSearchResultContainer";
 import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
 import TaskCreateContainer from "./tasks/taskCreateContainer";
 import TaskUpdateContainer from "./tasks/taskUpdateContainer";
@@ -139,10 +142,13 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/:urlArgument/search-results" exact component={StaffSearchResultContainer} />
                                 <Route path="/staff/:urlArgument/:slug" exact component={StaffRetrieveContainer} />
                                 <Route path="/staff/:urlArgument/:slug/update" exact component={StaffUpdateContainer} />
-                                <Route path="/tasks" exact component={TaskListContainer} />
-                                <Route path="/task/add" exact component={TaskCreateContainer} />
-                                <Route path="/task/:slug" exact component={TaskRetrieveContainer} />
-                                <Route path="/task/:slug/update" exact component={TaskUpdateContainer} />
+                                <Route path="/tasks/add" exact component={TaskCreateContainer} />
+                                <Route path="/tasks/active" exact component={TaskListActiveContainer} />
+                                <Route path="/tasks/inactive" exact component={TaskListInactiveContainer} />
+                                <Route path="/tasks/:urlArgument/search" exact component={TaskSearchContainer} />
+                                <Route path="/tasks/:urlArgument/search-results" exact component={TaskSearchResultContainer} />
+                                <Route path="/tasks/:urlArgument/:slug" exact component={TaskRetrieveContainer} />
+                                <Route path="/tasks/:urlArgument/:slug/update" exact component={TaskUpdateContainer} />
                                 <Route path="/reports" exact component={ReportListContainer} />
                                 <Route path="/settings" exact component={SettingListContainer} />
                                 <Route component={NotFound404Container} />

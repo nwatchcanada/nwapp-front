@@ -18,13 +18,12 @@ class TaskUpdateContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         this.state = {
             name: null,
             errors: {},
             isLoading: false,
-            urlArgument: urlArgument,
             slug: slug
         }
 
@@ -60,7 +59,7 @@ class TaskUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(task) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Task has been successfully updated.");
-        this.props.history.push("/tasks/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/task/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -110,11 +109,9 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors, urlArgument, slug, } = this.state;
+        const { name, errors } = this.state;
         return (
             <TaskUpdateComponent
-                urlArgument={urlArgument}
-                slug={slug}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import TaskUpdateComponent from "../../components/tasks/taskUpdateComponent";
+import TaskCreateComponent from "../../components/tasks/taskCreateComponent";
 import { setFlashMessage } from "../../actions/flashMessageActions";
 import validateInput from "../../validators/taskValidator";
 
 
-class TaskUpdateContainer extends Component {
+class TaskCreateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -15,17 +15,10 @@ class TaskUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
-
         this.state = {
             name: null,
             errors: {},
-            isLoading: false,
-            urlArgument: urlArgument,
-            slug: slug
+            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -59,8 +52,8 @@ class TaskUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(task) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Task has been successfully updated.");
-        this.props.history.push("/tasks/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.setFlashMessage("success", "Task has been successfully created.");
+        this.props.history.push("/tasks");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -110,11 +103,9 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors, urlArgument, slug, } = this.state;
+        const { name, errors } = this.state;
         return (
-            <TaskUpdateComponent
-                urlArgument={urlArgument}
-                slug={slug}
+            <TaskCreateComponent
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -142,4 +133,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TaskUpdateContainer);
+)(TaskCreateContainer);

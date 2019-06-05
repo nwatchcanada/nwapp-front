@@ -55,7 +55,7 @@ const authenticatedFullMenuData = [
         id: "full-tasks",
         icon: "tasks",
         title: "Tasks",
-        url: "/tasks"
+        url: "/tasks/active"
     },{
         id: "full-reports",
         icon: "book",

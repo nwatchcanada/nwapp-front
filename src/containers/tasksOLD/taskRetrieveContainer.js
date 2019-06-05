@@ -16,11 +16,10 @@ class TaskRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
         }
 
@@ -70,13 +69,13 @@ class TaskRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/tasks/"+this.state.urlArgument);
+        this.props.history.push("/tasks/");
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/tasks/"+this.state.urlArgument+"/"+this.state.slug+"/update");
+        this.props.history.push("/task/"+this.state.slug+"/update");
     }
 
     /**
@@ -93,8 +92,6 @@ class TaskRetrieveContainer extends Component {
         };
         return (
             <TaskRetrieveComponent
-                urlArgument={this.state.urlArgument}
-                slug={this.state.slug}
                 taskData={taskData}
                 onBack={this.onBack}
                 onClick={this.onClick}
