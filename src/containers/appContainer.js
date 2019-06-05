@@ -22,10 +22,10 @@ import SharedOrganizationCreateContainer from "./organization/shared/sharedOrgan
 import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
 
-import DistrictsListContainer from "./districts/districtsListContainer";
-import DistrictRetrieveContainer from "./districts/districtRetrieveContainer";
-import DistrictCreateContainer from "./districts/districtCreateContainer";
-import DistrictUpdateContainer from "./districts/districtUpdateContainer";
+import DistrictsListContainer from "./settings/districts/districtsListContainer";
+import DistrictRetrieveContainer from "./settings/districts/districtRetrieveContainer";
+import DistrictCreateContainer from "./settings/districts/districtCreateContainer";
+import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
 
 import MemberListActiveContainer from "./members/memberListActiveContainer";
 import MemberListInactiveContainer from "./members/memberListInactiveContainer";
@@ -105,10 +105,10 @@ class AppContainer extends React.Component {
                                 <Route path="/organization/add" exact component={SharedOrganizationCreateContainer} />
                                 <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={TenantDashboardRedirectContainer} />
                                 <Route path="/dashboard" exact component={DashboardContainer} />
-                                <Route path="/districts" exact component={DistrictsListContainer} />
-                                <Route path="/district/add" exact component={DistrictCreateContainer} />
-                                <Route path="/district/:slug" exact component={DistrictRetrieveContainer} />
-                                <Route path="/district/:slug/update" exact component={DistrictUpdateContainer} />
+                                <Route path="/settings/districts" exact component={DistrictsListContainer} />
+                                <Route path="/settings/district/add" exact component={DistrictCreateContainer} />
+                                <Route path="/settings/district/:slug" exact component={DistrictRetrieveContainer} />
+                                <Route path="/settings/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route path="/members/add" exact component={MemberCreateContainer} />
                                 <Route path="/members/active" exact component={MemberListActiveContainer} />
                                 <Route path="/members/inactive" exact component={MemberListInactiveContainer} />

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DistrictRetrieveComponent from "../../components/districts/districtRetrieveComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import DistrictRetrieveComponent from "../../../components/settings/districts/districtRetrieveComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class DistrictRetrieveContainer extends Component {
@@ -69,13 +69,13 @@ class DistrictRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/districts/");
+        this.props.history.push("/settings/districts/");
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/district/"+this.state.slug+"/update");
+        this.props.history.push("/settings/district/"+this.state.slug+"/update");
     }
 
     /**
@@ -88,7 +88,7 @@ class DistrictRetrieveContainer extends Component {
             'slug': 'Argyle',
             'number': 1,
             'name': 'Argyle',
-            'absoluteUrl': '/district/argyle'
+            'absoluteUrl': '/settings/district/argyle'
         };
         return (
             <DistrictRetrieveComponent

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DistrictsListComponent from "../../components/districts/districtsListComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import DistrictsListComponent from "../../../components/settings/districts/districtsListComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class DistrictsListContainer extends Component {
@@ -61,17 +61,17 @@ class DistrictsListContainer extends Component {
             'slug': 'Argyle',
             'number': 1,
             'name': 'Argyle',
-            'absoluteUrl': '/district/argyle'
+            'absoluteUrl': '/settings/district/argyle'
         },{
             'slug': 'byron',
             'number': 2,
             'name': 'Byron',
-            'absoluteUrl': '/district/byron'
+            'absoluteUrl': '/settings/district/byron'
         },{
             'slug': 'carling',
             'number': 3,
             'name': 'Carling',
-            'absoluteUrl': '/district/carling'
+            'absoluteUrl': '/settings/district/carling'
         }];
         return (
             <DistrictsListComponent

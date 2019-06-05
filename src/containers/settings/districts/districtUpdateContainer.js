@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictUpdateComponent from "../../components/districts/districtUpdateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import validateInput from "../../validators/districtValidator";
+import DistrictUpdateComponent from "../../../components/settings/districts/districtUpdateComponent";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import validateInput from "../../../validators/districtValidator";
 
 
 class DistrictUpdateContainer extends Component {
@@ -59,7 +59,7 @@ class DistrictUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/district/"+this.state.slug);
+        this.props.history.push("/settings/district/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {

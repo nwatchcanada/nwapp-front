@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../flashMessageComponent";
+import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
 class DistrictRetrieveComponent extends Component {
@@ -14,18 +14,21 @@ class DistrictRetrieveComponent extends Component {
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
+                        <li className="breadcrumb-item">
+                           <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
+                        </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/districts"><i className="fas fa-city"></i>&nbsp;Districts</Link>
+                            <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-city"></i>&nbsp;Argyle
+                            <i className="fas fa-map"></i>&nbsp;Argyle
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-city"></i>&nbsp;Argyle</h1>
+                <h1><i className="fas fa-map"></i>&nbsp;Argyle</h1>
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <p><strong>Please confirm these details before adding the residential client:</strong></p>
