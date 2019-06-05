@@ -118,11 +118,16 @@ class TaskListComponent extends Component {
                             <i className="fas fa-check-circle"></i>&nbsp;Closed List
                             <div className="step-navigation float-right">
                                 <div id="step-1" className="st-grey ">
+                                    <Link to="/tasks/unassigned">
+                                        <i className="fas fa-question-circle"></i>&nbsp;<span className="">Unassigned (1)</span>
+                                    </Link>
+                                </div>
+                                <div id="step-2" className="st-grey ">
                                     <Link to="/tasks/pending">
                                         <i className="fas fa-clock"></i>&nbsp;<span className="">Pending (3)</span>
                                     </Link>
                                 </div>
-                                <div id="step-2" className="st-grey active">
+                                <div id="step-3" className="st-grey active">
                                     <i className="fas fa-check-circle"></i>&nbsp;<span className="">Closed (8)</span>
                                 </div>
                             </div>

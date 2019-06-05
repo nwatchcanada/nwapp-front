@@ -78,7 +78,7 @@ class TableRow extends Component {
 }
 
 
-class TaskActiveListComponent extends Component {
+class TaskUnassignedListComponent extends Component {
     render() {
         const { selectedColumnKey, selectedColumnOrder, onTableColumnClick, tableData, flashMessage } = this.props;
         return (
@@ -115,15 +115,15 @@ class TaskActiveListComponent extends Component {
                         </section>
 
                         <h2>
-                            <i className="fas fa-clock"></i>&nbsp;Pending List
+                            <i className="fas fa-clock"></i>&nbsp;Unassigned List
                             <div className="step-navigation float-right">
-                                <div id="step-1" className="st-grey ">
-                                    <Link to="/tasks/unassigned">
-                                        <i className="fas fa-question-circle"></i>&nbsp;<span className="">Unassigned (1)</span>
-                                    </Link>
+                                <div id="step-1" className="st-grey active">
+                                    <i className="fas fa-question-circle"></i>&nbsp;<span className="">Unassigned (1)</span>
                                 </div>
-                                <div id="step-2" className="st-grey active">
-                                    <i className="fas fa-clock"></i>&nbsp;<span className="">Pending (3)</span>
+                                <div id="step-2" className="st-grey">
+                                    <Link to="/tasks/pending">
+                                        <i className="fas fa-clock"></i>&nbsp;<span className="">Pending (3)</span>
+                                    </Link>
                                 </div>
                                 <div id="step-3" className="st-grey">
                                     <Link to="/tasks/closed">
@@ -184,4 +184,4 @@ class TaskActiveListComponent extends Component {
     }
 }
 
-export default TaskActiveListComponent;
+export default TaskUnassignedListComponent;

@@ -67,6 +67,7 @@ import StaffUpdateContainer from "./staff/staffUpdateContainer";
 
 import TaskListActiveContainer from "./tasks/taskListActiveContainer";
 import TaskListInactiveContainer from "./tasks/taskListInactiveContainer";
+import TaskListUnassignedContainer from "./tasks/taskListUnassignedContainer";
 import TaskSearchContainer from "./tasks/taskSearchContainer";
 import TaskSearchResultContainer from "./tasks/taskSearchResultContainer";
 import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
@@ -141,6 +142,7 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/:urlArgument/search-results" exact component={StaffSearchResultContainer} />
                                 <Route path="/staff/:urlArgument/:slug" exact component={StaffRetrieveContainer} />
                                 <Route path="/staff/:urlArgument/:slug/update" exact component={StaffUpdateContainer} />
+                                <Route path="/tasks/unassigned" exact component={TaskListUnassignedContainer} />
                                 <Route path="/tasks/pending" exact component={TaskListActiveContainer} />
                                 <Route path="/tasks/closed" exact component={TaskListInactiveContainer} />
                                 <Route path="/tasks/:urlArgument/search" exact component={TaskSearchContainer} />
