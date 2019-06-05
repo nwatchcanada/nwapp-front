@@ -63,11 +63,11 @@ class MemberListContainer extends Component {
     }
 
     onSearchClick() {
-        this.props.history.push("/members/search-results");
+        this.props.history.push("/search-members-results");
     }
 
     onAdvancedSearchClick() {
-        this.props.history.push("/members/search-results");
+        this.props.history.push("/search-members-results");
     }
 
     /**

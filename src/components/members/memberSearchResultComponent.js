@@ -40,7 +40,7 @@ class MemberSearchResultComponent extends Component {
                            <Link to="/members"><i className="fas fa-id-card"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/members/search"><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to="/search-members"><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results
