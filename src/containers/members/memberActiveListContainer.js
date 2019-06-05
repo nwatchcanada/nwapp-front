@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberListComponent from "../../components/members/memberListComponent";
+import MemberActiveListComponent from "../../components/members/memberActiveListComponent";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
 
 
-class MemberListContainer extends Component {
+class MemberActiveListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -59,7 +59,7 @@ class MemberListContainer extends Component {
     render() {
         const tableData = [{
             'slug': 'Argyle',
-            'icon': 'house',
+            'icon': 'home',
             'number': 1,
             'firstName': 'Shinji',
             'lastName': 'Ikari',
@@ -68,7 +68,7 @@ class MemberListContainer extends Component {
             'absoluteUrl': '/member/argyle'
         },{
             'slug': 'byron',
-            'icon': 'house',
+            'icon': 'home',
             'number': 2,
             'firstName': 'Mariya',
             'lastName': 'Takeuchi',
@@ -86,7 +86,7 @@ class MemberListContainer extends Component {
             'absoluteUrl': '/member/carling'
         }];
         return (
-            <MemberListComponent
+            <MemberActiveListComponent
                 tableData={tableData}
                 flashMessage={this.props.flashMessage}
             />
@@ -113,4 +113,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberListContainer);
+)(MemberActiveListContainer);

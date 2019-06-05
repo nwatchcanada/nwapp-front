@@ -6,11 +6,11 @@ import { FlashMessageComponent } from "../flashMessageComponent";
 
 class TableRow extends Component {
     render() {
-        const { slug, firstName, lastName, phone, email, number, absoluteUrl } = this.props.datum;
+        const { slug, icon, firstName, lastName, phone, email, absoluteUrl } = this.props.datum;
 
         return (
             <tr slug={slug}>
-                <td>{number}</td>
+                <td><i className={`fas fa-${icon}`}></i></td>
                 <td>{firstName}</td>
                 <td>{lastName}</td>
                 <td>{phone}</td>
@@ -26,7 +26,7 @@ class TableRow extends Component {
 }
 
 
-class MemberListComponent extends Component {
+class MemberActiveListComponent extends Component {
     render() {
         const { tableData, flashMessage } = this.props;
         return (
@@ -37,14 +37,14 @@ class MemberListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-id-card"></i>&nbsp;Member
+                            <i className="fas fa-id-card"></i>&nbsp;Members
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-id-card"></i>&nbsp;Member</h1>
+                <h1><i className="fas fa-id-card"></i>&nbsp;Members</h1>
                 <div className="row">
                     <div className="col-md-12">
 
@@ -70,7 +70,7 @@ class MemberListComponent extends Component {
 
                             <div className="col-sm-4 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
-                                    <Link to="#" className="d-block link-ndecor" title="List">
+                                    <Link to="/all-members" className="d-block link-ndecor" title="List">
                                         <span className="r-circle"><i className="fas fa-list fa-3x"></i></span>
                                     </Link>
                                 </div>
@@ -119,4 +119,4 @@ class MemberListComponent extends Component {
     }
 }
 
-export default MemberListComponent;
+export default MemberActiveListComponent;

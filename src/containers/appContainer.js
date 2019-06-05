@@ -28,7 +28,8 @@ import DistrictRetrieveContainer from "./districts/districtRetrieveContainer";
 import DistrictCreateContainer from "./districts/districtCreateContainer";
 import DistrictUpdateContainer from "./districts/districtUpdateContainer";
 
-import MemberListContainer from "./members/memberListContainer";
+import MemberActiveListContainer from "./members/memberActiveListContainer";
+import MemberFullListContainer from "./members/memberFullListContainer";
 import MemberRetrieveContainer from "./members/memberRetrieveContainer";
 import MemberCreateContainer from "./members/memberCreateContainer";
 import MemberUpdateContainer from "./members/memberUpdateContainer";
@@ -95,7 +96,8 @@ class AppContainer extends React.Component {
                                 <Route path="/district/add" exact component={DistrictCreateContainer} />
                                 <Route path="/district/:slug" exact component={DistrictRetrieveContainer} />
                                 <Route path="/district/:slug/update" exact component={DistrictUpdateContainer} />
-                                <Route path="/members" exact component={MemberListContainer} />
+                                <Route path="/members" exact component={MemberActiveListContainer} />
+                                <Route path="/all-members" exact component={MemberFullListContainer} />
                                 <Route path="/member/add" exact component={MemberCreateContainer} />
                                 <Route path="/member/:slug" exact component={MemberRetrieveContainer} />
                                 <Route path="/member/:slug/update" exact component={MemberUpdateContainer} />
