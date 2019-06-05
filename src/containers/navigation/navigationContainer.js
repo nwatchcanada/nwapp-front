@@ -161,11 +161,15 @@ class NavigationContainer extends React.Component {
     const { user } = this.props;
     let menuTitle;
     let menuData;
+    let isAuthenticated = false;
 
     if (user !== null && user !== undefined) {
         const keysArr = Object.keys(user);
         const count = keysArr.length;
         if (count > 0) {
+            // Indicate we are authenticated.
+            isAuthenticated = true;
+
             // Generate a friendly message in the menu for authenitcatd users.
             menuTitle = "Hi, "+user.firstName;
 
@@ -184,6 +188,7 @@ class NavigationContainer extends React.Component {
 
     // If no menu was set then we will create our anonymous menu by default.
     if (menuData === null || menuData === undefined) {
+        isAuthenticated = false;
         menuTitle = "Menu"
         menuData = anonymousMenuData;
     }
@@ -195,15 +200,19 @@ class NavigationContainer extends React.Component {
                     <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
                 </Link>
                 <ul className="navbar-nav flex-row">
-                    <li className="dropdown-list dropdown nav-item">
-                        <Link aria-haspopup="true" to="/tasks/pending" className="dropdown-toggle-nocaret nav-link" aria-expanded="false">
-                            <i className="fa fa-bell"></i>
-                            <span className="badge badge-danger">11</span>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        &nbsp;&nbsp;&nbsp;
-                    </li>
+                    {isAuthenticated &&
+                        <li className="dropdown-list dropdown nav-item">
+                            <Link aria-haspopup="true" to="/tasks/pending" className="dropdown-toggle-nocaret nav-link" aria-expanded="false">
+                                <i className="fa fa-bell"></i>
+                                <span className="badge badge-danger">11</span>
+                            </Link>
+                        </li>
+                    }
+                    {isAuthenticated &&
+                        <li className="nav-item">
+                            &nbsp;&nbsp;&nbsp;
+                        </li>
+                    }
                     <li className="nav-item">
                         <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
                             onClick = { this.sideMenuToggle }>
