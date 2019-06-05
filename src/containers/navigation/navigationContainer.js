@@ -65,7 +65,7 @@ const authenticatedFullMenuData = [
         id: "full-staff",
         icon: "user-tie",
         title: "Staff",
-        url: "/staff"
+        url: "/staff/active"
     },{
         id: "full-settings",
         icon: "cogs",

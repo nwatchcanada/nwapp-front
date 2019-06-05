@@ -53,7 +53,7 @@ class StaffCreateContainer extends Component {
     onSuccessfulSubmissionCallback(staff) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Staff has been successfully created.");
-        this.props.history.push("/staff");
+        this.props.history.push("/staff/active");
     }
 
     onFailedSubmissionCallback(errors) {

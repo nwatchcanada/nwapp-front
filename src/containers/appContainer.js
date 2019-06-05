@@ -57,7 +57,10 @@ import AreaCoordinatorRetrieveContainer from "./areaCoordinators/areaCoordinator
 import AreaCoordinatorCreateContainer from "./areaCoordinators/areaCoordinatorCreateContainer";
 import AreaCoordinatorUpdateContainer from "./areaCoordinators/areaCoordinatorUpdateContainer";
 
-import StaffListContainer from "./staff/staffListContainer";
+import StaffListActiveContainer from "./staff/staffListActiveContainer";
+import StaffListInactiveContainer from "./staff/staffListInactiveContainer";
+import StaffSearchContainer from "./staff/staffSearchContainer";
+import StaffSearchResultContainer from "./staff/staffSearchResultContainer";
 import StaffRetrieveContainer from "./staff/staffRetrieveContainer";
 import StaffCreateContainer from "./staff/staffCreateContainer";
 import StaffUpdateContainer from "./staff/staffUpdateContainer";
@@ -129,10 +132,13 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinators/:urlArgument/search-results" exact component={AreaCoordinatorSearchResultContainer} />
                                 <Route path="/area-coordinators/:urlArgument/:slug" exact component={AreaCoordinatorRetrieveContainer} />
                                 <Route path="/area-coordinators/:urlArgument/:slug/update" exact component={AreaCoordinatorUpdateContainer} />
-                                <Route path="/staff" exact component={StaffListContainer} />
                                 <Route path="/staff/add" exact component={StaffCreateContainer} />
-                                <Route path="/staff/:slug" exact component={StaffRetrieveContainer} />
-                                <Route path="/staff/:slug/update" exact component={StaffUpdateContainer} />
+                                <Route path="/staff/active" exact component={StaffListActiveContainer} />
+                                <Route path="/staff/inactive" exact component={StaffListInactiveContainer} />
+                                <Route path="/staff/:urlArgument/search" exact component={StaffSearchContainer} />
+                                <Route path="/staff/:urlArgument/search-results" exact component={StaffSearchResultContainer} />
+                                <Route path="/staff/:urlArgument/:slug" exact component={StaffRetrieveContainer} />
+                                <Route path="/staff/:urlArgument/:slug/update" exact component={StaffUpdateContainer} />
                                 <Route path="/tasks" exact component={TaskListContainer} />
                                 <Route path="/task/add" exact component={TaskCreateContainer} />
                                 <Route path="/task/:slug" exact component={TaskRetrieveContainer} />

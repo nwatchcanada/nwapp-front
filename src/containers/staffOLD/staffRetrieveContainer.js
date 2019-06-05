@@ -16,11 +16,10 @@ class StaffRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
         }
 
@@ -70,13 +69,13 @@ class StaffRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/staff/"+this.state.urlArgument);
+        this.props.history.push("/staff/");
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/staff/"+this.state.urlArgument+"/"+this.state.slug+"/update");
+        this.props.history.push("/staff/"+this.state.slug+"/update");
     }
 
     /**
@@ -93,8 +92,6 @@ class StaffRetrieveContainer extends Component {
         };
         return (
             <StaffRetrieveComponent
-                urlArgument={this.state.urlArgument}
-                slug={this.state.slug}
                 staffData={staffData}
                 onBack={this.onBack}
                 onClick={this.onClick}

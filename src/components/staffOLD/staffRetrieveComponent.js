@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../flashMessageComponent";
 
 class StaffRetrieveComponent extends Component {
     render() {
-        const { urlArgument, onClick, onBack, flashMessage } = this.props;
+        const { onClick, onBack, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@ class StaffRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/staff/${urlArgument}`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
+                            <Link to="/staff"><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user-tie"></i>&nbsp;Argyle
