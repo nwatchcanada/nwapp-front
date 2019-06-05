@@ -23,7 +23,7 @@ class StaffDashboardComponent extends Component {
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="/area-coordinators" className="d-block link-ndecor" title="Area Coordinators">
+                                    <Link to="/area-coordinators/active" className="d-block link-ndecor" title="Area Coordinators">
                                         <h1 className="circle-title">10,000</h1>
                                     </Link>
                                 </div>
