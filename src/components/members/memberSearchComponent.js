@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class MemberSearchComponent extends Component {
     render() {
-        const { advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
+        const { onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -25,12 +25,14 @@ class MemberSearchComponent extends Component {
 
                 <div id="m-search" className="col-sm-5 mx-auto mt-4 pt-4">
 
-                    <form id="searchForm" method="get" className="needs-validation" action="" noValidate>
+                    <form id="searchForm" className="needs-validation" noValidate>
                         <div className="input-group mb-2">
                             <input type="text" className="form-control form-control-lg border border-primary" id="keyword"
                                 name="search" placeholder="Search..." minLength="3" required="" />
                             <div className="input-group-append">
-                                <button className="btn btn-primary btn-lg" type="submit"><i className="fas fa-search"></i></button>
+                                <button className="btn btn-primary btn-lg" type="button" onClick={onSearchClick}>
+                                    <i className="fas fa-search"></i>
+                                </button>
                             </div>
                             <div id="search-error" className="invalid-feedback"></div>
                         </div>
@@ -133,8 +135,8 @@ class MemberSearchComponent extends Component {
                             </div>
                         </div>
                         <div className="form-group col-md-12 mb-3 mx-auto text-center">
-                            <button className="btn btn-success btn-lg btn-fxw mt-3" type="submit"><i className="fas fa-search"></i>
-                                Search
+                            <button className="btn btn-success btn-lg btn-fxw mt-3" type="button" onClick={onAdvancedSearchClick}>
+                                <i className="fas fa-search"></i>&nbsp;Search
                             </button>
                         </div>
                     </form>
