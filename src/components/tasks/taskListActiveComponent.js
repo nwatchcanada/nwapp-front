@@ -89,31 +89,22 @@ class TaskActiveListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-id-card"></i>&nbsp;Tasks
+                            <i className="fas fa-tasks"></i>&nbsp;Tasks
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-id-card"></i>&nbsp;Tasks</h1>
+                <h1><i className="fas fa-tasks"></i>&nbsp;Tasks</h1>
 
                 <div className="row">
                     <div className="col-md-12">
 
                         <section className="row text-center placeholders">
                             <div className="col-sm-6 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/tasks/add" className="d-block link-ndecor" title="Clients">
-                                        <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
-                                    </Link>
-                                </div>
-                                <h4>Add</h4>
-                                <div className="text-muted">Add a task</div>
-                            </div>
-                            <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="/tasks/active/search" className="d-block link-ndecor" title="Search">
+                                    <Link to="/tasks/pending/search" className="d-block link-ndecor" title="Search">
                                         <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
                                     </Link>
                                 </div>
@@ -124,14 +115,14 @@ class TaskActiveListComponent extends Component {
                         </section>
 
                         <h2>
-                            <i className="fas fa-user-check"></i>&nbsp;Active Tasks List
+                            <i className="fas fa-clock"></i>&nbsp;Pending List
                             <div className="step-navigation float-right">
                                 <div id="step-1" className="st-grey active">
-                                    <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
+                                    <i className="fas fa-clock"></i>&nbsp;<span className="">Pending (3)</span>
                                 </div>
                                 <div id="step-2" className="st-grey">
-                                    <Link to="/tasks/inactive">
-                                        <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (3)</span>
+                                    <Link to="/tasks/closed">
+                                        <i className="fas fa-check-circle"></i>&nbsp;<span className="">Closed (3)</span>
                                     </Link>
                                 </div>
                             </div>

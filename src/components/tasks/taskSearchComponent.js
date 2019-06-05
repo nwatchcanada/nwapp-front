@@ -13,7 +13,7 @@ class TaskSearchComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/tasks/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Tasks</Link>
+                            <Link to={`/tasks/${urlArgument}`}><i className="fas fa-tasks"></i>&nbsp;Tasks</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-search"></i>&nbsp;Search

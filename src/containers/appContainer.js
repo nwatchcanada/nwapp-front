@@ -70,7 +70,6 @@ import TaskListInactiveContainer from "./tasks/taskListInactiveContainer";
 import TaskSearchContainer from "./tasks/taskSearchContainer";
 import TaskSearchResultContainer from "./tasks/taskSearchResultContainer";
 import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
-import TaskCreateContainer from "./tasks/taskCreateContainer";
 import TaskUpdateContainer from "./tasks/taskUpdateContainer";
 
 import ReportListContainer from "./reports/reportListContainer";
@@ -142,9 +141,8 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/:urlArgument/search-results" exact component={StaffSearchResultContainer} />
                                 <Route path="/staff/:urlArgument/:slug" exact component={StaffRetrieveContainer} />
                                 <Route path="/staff/:urlArgument/:slug/update" exact component={StaffUpdateContainer} />
-                                <Route path="/tasks/add" exact component={TaskCreateContainer} />
-                                <Route path="/tasks/active" exact component={TaskListActiveContainer} />
-                                <Route path="/tasks/inactive" exact component={TaskListInactiveContainer} />
+                                <Route path="/tasks/pending" exact component={TaskListActiveContainer} />
+                                <Route path="/tasks/closed" exact component={TaskListInactiveContainer} />
                                 <Route path="/tasks/:urlArgument/search" exact component={TaskSearchContainer} />
                                 <Route path="/tasks/:urlArgument/search-results" exact component={TaskSearchResultContainer} />
                                 <Route path="/tasks/:urlArgument/:slug" exact component={TaskRetrieveContainer} />

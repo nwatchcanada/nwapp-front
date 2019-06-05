@@ -37,7 +37,7 @@ class TaskSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/tasks/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Tasks</Link>
+                           <Link to={`/tasks/${urlArgument}`}><i className="fas fa-tasks"></i>&nbsp;Tasks</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/tasks/${urlArgument}/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
@@ -50,7 +50,7 @@ class TaskSearchResultComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-id-card"></i>&nbsp;Tasks</h1>
+                <h1><i className="fas fa-tasks"></i>&nbsp;Tasks</h1>
                 <div className="row">
                     <div className="col-md-12">
 

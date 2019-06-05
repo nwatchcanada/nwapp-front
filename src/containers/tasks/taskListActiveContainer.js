@@ -81,7 +81,7 @@ class TaskListActiveContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/tasks/active/argyle'
+            'absoluteUrl': '/tasks/pending/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -90,7 +90,7 @@ class TaskListActiveContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/tasks/active/byron'
+            'absoluteUrl': '/tasks/pending/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -99,7 +99,7 @@ class TaskListActiveContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/tasks/active/carling'
+            'absoluteUrl': '/tasks/pending/carling'
         }];
         return (
             <TaskActiveListComponent
