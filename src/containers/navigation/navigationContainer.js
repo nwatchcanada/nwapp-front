@@ -47,11 +47,6 @@ const authenticatedFullMenuData = [
         title: "Items",
         url: "/items"
     },{
-        id: "full-districts",
-        icon: "city",
-        title: "Districts",
-        url: "/districts"
-    },{
         id: "full-tasks",
         icon: "tasks",
         title: "Tasks",

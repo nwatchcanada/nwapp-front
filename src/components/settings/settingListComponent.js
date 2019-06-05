@@ -18,14 +18,14 @@ class SettingListComponent extends Component {
                                    <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                                 </li>
                                 <li className="breadcrumb-item active" aria-current="page">
-                                    <i className="fas fa-id-card"></i>&nbsp;Setting
+                                    <i className="fas fa-cogs"></i>&nbsp;Setting
                                 </li>
                             </ol>
                         </nav>
 
                         <FlashMessageComponent object={flashMessage} />
 
-                        <h1><i className="fas fa-id-card"></i>&nbsp;Setting</h1>
+                        <h1><i className="fas fa-cogs"></i>&nbsp;Setting</h1>
                         <div className="row">
                             <div className="col-md-12">
 
@@ -33,12 +33,12 @@ class SettingListComponent extends Component {
                                 <div className="col-sm-3">
                                     <div className="card box-shadow text-center mx-auto">
                                         <div className="card-custom-top-2">
-                                            <i className="fas fa-user fa-3x"></i>
+                                            <i className="fas fa-map fa-3x"></i>
                                         </div>
                                         <div className="card-body">
-                                            <h3 className="card-title">Crime Setting</h3>
-                                            <p className="card-text">View setting about crimes types</p>
-                                            <Link to="#" className="btn btn-success btn-lg">
+                                            <h3 className="card-title">Districts</h3>
+                                            <p className="card-text">View setting about districts</p>
+                                            <Link to="/districts" className="btn btn-success btn-lg">
                                                 Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                             </Link>
                                         </div>
