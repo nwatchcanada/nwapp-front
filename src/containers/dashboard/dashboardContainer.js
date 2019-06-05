@@ -89,12 +89,33 @@ class DashboardContainer extends Component {
      */
 
     render() {
+        const dashboardData = {
+            latestTasks: [
+                {
+                    'slug': 'Argyle',
+                    'number': 1,
+                    'name': 'Argyle',
+                    'absoluteUrl': '/item/argyle'
+                },{
+                    'slug': 'byron',
+                    'number': 2,
+                    'name': 'Byron',
+                    'absoluteUrl': '/item/byron'
+                },{
+                    'slug': 'carling',
+                    'number': 3,
+                    'name': 'Carling',
+                    'absoluteUrl': '/item/carling'
+                }
+            ]
+        };
         const { groupMembershipId } = this.props.user;
         if (groupMembershipId === EXECUTIVE_GROUP_ID) {
             return (
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
+                    dashboardData={dashboardData}
                 />
             );
         }
@@ -103,6 +124,7 @@ class DashboardContainer extends Component {
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
+                    dashboardData={dashboardData}
                 />
             );
         }
@@ -111,6 +133,7 @@ class DashboardContainer extends Component {
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
+                    dashboardData={dashboardData}
                 />
             );
         }
@@ -127,6 +150,7 @@ class DashboardContainer extends Component {
                 <AreaCoordinatorDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
+                    dashboardData={dashboardData}
                 />
             );
         }
@@ -135,6 +159,7 @@ class DashboardContainer extends Component {
                 <MemberDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
+                    dashboardData={dashboardData}
                 />
             );
         } else {

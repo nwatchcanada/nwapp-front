@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 class StaffDashboardComponent extends Component {
     render() {
+        const { dashboardData } = this.props;
+        const { latestTasks } = dashboardData;
         return (
             <div className="container-fluid">
                 <div className="d-flex align-items-stretch">
@@ -59,9 +61,47 @@ class StaffDashboardComponent extends Component {
                             </p>
                         </div>
 
+                        <h2><i className="fas fa-tasks"></i>&nbsp;Tasks List</h2>
+
+                        <div className="table-responsive">
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Task #</th>
+                                        <th>Name</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {latestTasks && latestTasks.map(
+                                        (latestTask, i) => <TableRow datum={latestTask} key={i} />)
+                                    }
+                                </tbody>
+                            </table>
+                            <Link to="/tasks" className="float-right">See more&nbsp;<i className="fas fa-chevron-right"></i></Link>
+                        </div>
+
                     </main>
                 </div>
             </div>
+        );
+    }
+}
+
+class TableRow extends Component {
+    render() {
+        const { slug, number, name, absoluteUrl } = this.props.datum;
+
+        return (
+            <tr slug={slug}>
+                <td>{number}</td>
+                <td>{name}</td>
+                <td>
+                    <a href={absoluteUrl}>
+                        View&nbsp;<i className="fas fa-chevron-right"></i>
+                    </a>
+                </td>
+            </tr>
         );
     }
 }
