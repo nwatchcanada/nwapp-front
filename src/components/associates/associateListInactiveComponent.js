@@ -89,14 +89,14 @@ class AssociateListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active">
-                            <i className="fas fa-id-card"></i>&nbsp;Associates
+                            <i className="fas fa-crown"></i>&nbsp;Associates
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-id-card"></i>&nbsp;Associates</h1>
+                <h1><i className="fas fa-crown"></i>&nbsp;Associates</h1>
 
                 <div className="row">
                     <div className="col-md-12">
