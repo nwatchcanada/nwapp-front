@@ -101,8 +101,8 @@ class AppContainer extends React.Component {
                                 <Route path="/members/add" exact component={MemberCreateContainer} />
                                 <Route path="/members/active" exact component={MemberListActiveContainer} />
                                 <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
-                                <Route path="/members/search" exact component={MemberSearchContainer} />
-                                <Route path="/members/search-results" exact component={MemberSearchResultContainer} />
+                                <Route path="/members/:urlArgument/search" exact component={MemberSearchContainer} />
+                                <Route path="/members/:urlArgument/search-results" exact component={MemberSearchResultContainer} />
                                 <Route path="/members/:urlArgument/:slug" exact component={MemberRetrieveContainer} />
                                 <Route path="/members/:urlArgument/:slug/update" exact component={MemberUpdateContainer} />
                                 <Route path="/items" exact component={ItemListContainer} />

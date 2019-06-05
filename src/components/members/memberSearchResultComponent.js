@@ -28,7 +28,7 @@ class TableRow extends Component {
 
 class MemberSearchResultComponent extends Component {
     render() {
-        const { tableData, flashMessage } = this.props;
+        const { urlArgument, tableData, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -37,10 +37,10 @@ class MemberSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/members/active"><i className="fas fa-id-card"></i>&nbsp;Members</Link>
+                           <Link to={`/members/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/members/search"><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to={`/members/${urlArgument}/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results

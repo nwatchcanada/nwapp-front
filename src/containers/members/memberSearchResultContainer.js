@@ -10,6 +10,18 @@ class MemberSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props)
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { urlArgument } = this.props.match.params;
+
+        this.state = {
+            urlArgument: urlArgument
+        }
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -83,6 +95,7 @@ class MemberSearchResultContainer extends Component {
         }];
         return (
             <MemberSearchResultComponent
+                urlArgument={this.state.urlArgument}
                 tableData={tableData}
             />
         );
