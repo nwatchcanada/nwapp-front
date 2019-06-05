@@ -16,11 +16,10 @@ class AssociateRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
         }
 
@@ -70,13 +69,13 @@ class AssociateRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/associates/"+this.state.urlArgument);
+        this.props.history.push("/associates/");
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/associates/"+this.state.urlArgument+"/"+this.state.slug+"/update");
+        this.props.history.push("/associate/"+this.state.slug+"/update");
     }
 
     /**
@@ -93,8 +92,6 @@ class AssociateRetrieveContainer extends Component {
         };
         return (
             <AssociateRetrieveComponent
-                urlArgument={this.state.urlArgument}
-                slug={this.state.slug}
                 associateData={associateData}
                 onBack={this.onBack}
                 onClick={this.onClick}

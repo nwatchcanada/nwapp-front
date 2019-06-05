@@ -53,7 +53,7 @@ class AssociateCreateContainer extends Component {
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Associate has been successfully created.");
-        this.props.history.push("/associates");
+        this.props.history.push("/associates/active");
     }
 
     onFailedSubmissionCallback(errors) {

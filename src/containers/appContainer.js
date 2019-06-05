@@ -41,7 +41,10 @@ import ItemRetrieveContainer from "./items/itemRetrieveContainer";
 import ItemCreateContainer from "./items/itemCreateContainer";
 import ItemUpdateContainer from "./items/itemUpdateContainer";
 
-import AssociateListContainer from "./associates/associateListContainer";
+import AssociateListActiveContainer from "./associates/associateListActiveContainer";
+import AssociateListInactiveContainer from "./associates/associateListInactiveContainer";
+import AssociateSearchContainer from "./associates/associateSearchContainer";
+import AssociateSearchResultContainer from "./associates/associateSearchResultContainer";
 import AssociateRetrieveContainer from "./associates/associateRetrieveContainer";
 import AssociateCreateContainer from "./associates/associateCreateContainer";
 import AssociateUpdateContainer from "./associates/associateUpdateContainer";
@@ -109,10 +112,13 @@ class AppContainer extends React.Component {
                                 <Route path="/item/add" exact component={ItemCreateContainer} />
                                 <Route path="/item/:slug" exact component={ItemRetrieveContainer} />
                                 <Route path="/item/:slug/update" exact component={ItemUpdateContainer} />
-                                <Route path="/associates" exact component={AssociateListContainer} />
-                                <Route path="/associate/add" exact component={AssociateCreateContainer} />
-                                <Route path="/associate/:slug" exact component={AssociateRetrieveContainer} />
-                                <Route path="/associate/:slug/update" exact component={AssociateUpdateContainer} />
+                                <Route path="/associates/add" exact component={AssociateCreateContainer} />
+                                <Route path="/associates/active" exact component={AssociateListActiveContainer} />
+                                <Route path="/associates/inactive" exact component={AssociateListInactiveContainer} />
+                                <Route path="/associates/:urlArgument/search" exact component={AssociateSearchContainer} />
+                                <Route path="/associates/:urlArgument/search-results" exact component={AssociateSearchResultContainer} />
+                                <Route path="/associates/:urlArgument/:slug" exact component={AssociateRetrieveContainer} />
+                                <Route path="/associates/:urlArgument/:slug/update" exact component={AssociateUpdateContainer} />
                                 <Route path="/area-coordinators" exact component={CoordinatorListContainer} />
                                 <Route path="/area-coordinator/add" exact component={CoordinatorCreateContainer} />
                                 <Route path="/area-coordinator/:slug" exact component={CoordinatorRetrieveContainer} />

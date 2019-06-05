@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AssociateUpdateComponent from "../../components/associates/associateUpdateComponent";
+import AssociateCreateComponent from "../../components/associates/associateCreateComponent";
 import { setFlashMessage } from "../../actions/flashMessageActions";
 import validateInput from "../../validators/associateValidator";
 
 
-class AssociateUpdateContainer extends Component {
+class AssociateCreateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -15,17 +15,10 @@ class AssociateUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
-
         this.state = {
             name: null,
             errors: {},
-            isLoading: false,
-            urlArgument: urlArgument,
-            slug: slug
+            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -59,8 +52,8 @@ class AssociateUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Associate has been successfully updated.");
-        this.props.history.push("/associates/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.setFlashMessage("success", "Associate has been successfully created.");
+        this.props.history.push("/associates");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -110,11 +103,9 @@ class AssociateUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors, urlArgument, slug, } = this.state;
+        const { name, errors } = this.state;
         return (
-            <AssociateUpdateComponent
-                urlArgument={urlArgument}
-                slug={slug}
+            <AssociateCreateComponent
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -142,4 +133,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AssociateUpdateContainer);
+)(AssociateCreateContainer);

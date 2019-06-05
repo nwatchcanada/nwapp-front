@@ -18,13 +18,12 @@ class AssociateUpdateContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         this.state = {
             name: null,
             errors: {},
             isLoading: false,
-            urlArgument: urlArgument,
             slug: slug
         }
 
@@ -60,7 +59,7 @@ class AssociateUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Associate has been successfully updated.");
-        this.props.history.push("/associates/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/associate/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -110,11 +109,9 @@ class AssociateUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors, urlArgument, slug, } = this.state;
+        const { name, errors } = this.state;
         return (
             <AssociateUpdateComponent
-                urlArgument={urlArgument}
-                slug={slug}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}

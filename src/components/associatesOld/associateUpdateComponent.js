@@ -9,7 +9,7 @@ import { BootstrapInput } from "../bootstrap/bootstrapInput";
 
 class AssociateUpdateComponent extends Component {
     render() {
-        const { urlArgument, slug, name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -18,10 +18,10 @@ class AssociateUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/associates/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Associate</Link>
+                            <Link to="/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/associates/${urlArgument}/${slug}`}><i className="fas fa-id-card"></i>&nbsp;Argyle</Link>
+                            <Link to="/associate/argyle"><i className="fas fa-crown"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -52,7 +52,7 @@ class AssociateUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to={`/associates/${urlArgument}/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/associate/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>

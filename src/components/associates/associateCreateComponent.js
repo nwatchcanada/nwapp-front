@@ -18,7 +18,7 @@ class AssociateCreateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
+                            <Link to="/associates/active"><i className="fas fa-id-card"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -49,7 +49,7 @@ class AssociateCreateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/associates" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/associates/active" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>
