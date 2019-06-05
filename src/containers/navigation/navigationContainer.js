@@ -30,7 +30,7 @@ const authenticatedFullMenuData = [
         id: "full-members",
         icon: "id-card",
         title: "Members",
-        url: "/members"
+        url: "/members/active"
     },{
         id: "full-items",
         icon: "map-pin",
@@ -45,12 +45,12 @@ const authenticatedFullMenuData = [
         id: "full-associates",
         icon: "crown",
         title: "Associates",
-        url: "/associates"
+        url: "/associates/active"
     },{
         id: "full-area-coordinator",
         icon: "horse-head",
         title: "Area Coordinators",
-        url: "/area-coordinators"
+        url: "/area-coordinators/active"
     },{
         id: "full-staff",
         icon: "user-tie",

@@ -49,10 +49,13 @@ import AssociateRetrieveContainer from "./associates/associateRetrieveContainer"
 import AssociateCreateContainer from "./associates/associateCreateContainer";
 import AssociateUpdateContainer from "./associates/associateUpdateContainer";
 
-import CoordinatorListContainer from "./coordinators/coordinatorListContainer";
-import CoordinatorRetrieveContainer from "./coordinators/coordinatorRetrieveContainer";
-import CoordinatorCreateContainer from "./coordinators/coordinatorCreateContainer";
-import CoordinatorUpdateContainer from "./coordinators/coordinatorUpdateContainer";
+import AreaCoordinatorListActiveContainer from "./areaCoordinators/areaCoordinatorListActiveContainer";
+import AreaCoordinatorListInactiveContainer from "./areaCoordinators/areaCoordinatorListInactiveContainer";
+import AreaCoordinatorSearchContainer from "./areaCoordinators/areaCoordinatorSearchContainer";
+import AreaCoordinatorSearchResultContainer from "./areaCoordinators/areaCoordinatorSearchResultContainer";
+import AreaCoordinatorRetrieveContainer from "./areaCoordinators/areaCoordinatorRetrieveContainer";
+import AreaCoordinatorCreateContainer from "./areaCoordinators/areaCoordinatorCreateContainer";
+import AreaCoordinatorUpdateContainer from "./areaCoordinators/areaCoordinatorUpdateContainer";
 
 import StaffListContainer from "./staff/staffListContainer";
 import StaffRetrieveContainer from "./staff/staffRetrieveContainer";
@@ -119,10 +122,13 @@ class AppContainer extends React.Component {
                                 <Route path="/associates/:urlArgument/search-results" exact component={AssociateSearchResultContainer} />
                                 <Route path="/associates/:urlArgument/:slug" exact component={AssociateRetrieveContainer} />
                                 <Route path="/associates/:urlArgument/:slug/update" exact component={AssociateUpdateContainer} />
-                                <Route path="/area-coordinators" exact component={CoordinatorListContainer} />
-                                <Route path="/area-coordinator/add" exact component={CoordinatorCreateContainer} />
-                                <Route path="/area-coordinator/:slug" exact component={CoordinatorRetrieveContainer} />
-                                <Route path="/area-coordinator/:slug/update" exact component={CoordinatorUpdateContainer} />
+                                <Route path="/area-coordinators/add" exact component={AreaCoordinatorCreateContainer} />
+                                <Route path="/area-coordinators/active" exact component={AreaCoordinatorListActiveContainer} />
+                                <Route path="/area-coordinators/inactive" exact component={AreaCoordinatorListInactiveContainer} />
+                                <Route path="/area-coordinators/:urlArgument/search" exact component={AreaCoordinatorSearchContainer} />
+                                <Route path="/area-coordinators/:urlArgument/search-results" exact component={AreaCoordinatorSearchResultContainer} />
+                                <Route path="/area-coordinators/:urlArgument/:slug" exact component={AreaCoordinatorRetrieveContainer} />
+                                <Route path="/area-coordinators/:urlArgument/:slug/update" exact component={AreaCoordinatorUpdateContainer} />
                                 <Route path="/staff" exact component={StaffListContainer} />
                                 <Route path="/staff/add" exact component={StaffCreateContainer} />
                                 <Route path="/staff/:slug" exact component={StaffRetrieveContainer} />
