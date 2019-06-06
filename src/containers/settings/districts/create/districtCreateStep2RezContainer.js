@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictCreateComponent from "../../../components/settings/districts/districtCreateComponent";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/districtValidator";
+import DistrictCreateStep1RezComponent from "../../../../components/settings/districts/create/districtCreateStep2RezComponent";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import validateInput from "../../../../validators/districtValidator";
 
 
-class DistrictCreateContainer extends Component {
+class DistrictCreateStep2ResidentialContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -105,7 +105,7 @@ class DistrictCreateContainer extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <DistrictCreateComponent
+            <DistrictCreateStep1RezComponent
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -133,4 +133,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictCreateContainer);
+)(DistrictCreateStep2ResidentialContainer);

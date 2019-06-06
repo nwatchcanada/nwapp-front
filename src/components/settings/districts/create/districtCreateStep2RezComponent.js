@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 
 
-class DistrictCreateComponent extends Component {
+class DistrictCreateStep1RezComponent extends Component {
     render() {
         const { name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -29,10 +29,33 @@ class DistrictCreateComponent extends Component {
                     </ol>
                 </nav>
 
+                <h1>Create District - Residential Details</h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <span className="num">1.</span><span className="">Select Type</span>
+                        </div>
+                        <div id="step-2" className="st-grey active">
+                            <span className="num">2.</span><span className="">Details</span>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <span className="num">3.</span><span className="">Review</span>
+                        </div>
+                        { /* <div id="step-4" className="st-grey">
+                            <span className="num">4.</span><span className="">Skills Required</span>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Review</span>
+                        </div>
+                        */ }
+                    </div>
+                </div>
+
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New District</h1>
+
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -52,7 +75,7 @@ class DistrictCreateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/settings/districts" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/settings/district/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>
@@ -66,4 +89,4 @@ class DistrictCreateComponent extends Component {
     }
 }
 
-export default DistrictCreateComponent;
+export default DistrictCreateStep1RezComponent;

@@ -24,8 +24,9 @@ import DashboardContainer from "./dashboard/dashboardContainer";
 
 import DistrictsListContainer from "./settings/districts/districtsListContainer";
 import DistrictRetrieveContainer from "./settings/districts/districtRetrieveContainer";
-import DistrictCreateContainer from "./settings/districts/districtCreateContainer";
 import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
+import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
+import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
@@ -116,7 +117,8 @@ class AppContainer extends React.Component {
                                 <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={TenantDashboardRedirectContainer} />
                                 <Route path="/dashboard" exact component={DashboardContainer} />
                                 <Route path="/settings/districts" exact component={DistrictsListContainer} />
-                                <Route path="/settings/district/add" exact component={DistrictCreateContainer} />
+                                <Route path="/settings/district/step-1-create" exact component={DistrictCreateStepContainer} />
+                                <Route path="/settings/district/step-2-create-rez" exact component={DistrictCreateStep2ResidentialContainer} />
                                 <Route path="/settings/district/:slug" exact component={DistrictRetrieveContainer} />
                                 <Route path="/settings/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route path="/settings/tags" exact component={TagsListContainer} />
