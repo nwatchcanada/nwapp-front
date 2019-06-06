@@ -21,7 +21,7 @@ class HowHearCreateComponent extends Component {
                            <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/how-hears"><i className="fas fa-tty"></i>&nbsp;How Hears</Link>
+                            <Link to="/settings/how-hears"><i className="fas fa-tty"></i>&nbsp;How did you hear?</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -32,7 +32,7 @@ class HowHearCreateComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New HowHear</h1>
+                            <h1>Create New Option</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />

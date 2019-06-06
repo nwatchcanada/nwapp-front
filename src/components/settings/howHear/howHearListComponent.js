@@ -37,14 +37,14 @@ class HowHearsListComponent extends Component {
                            <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-tty"></i>&nbsp;HowHears
+                            <i className="fas fa-tty"></i>&nbsp;How did you hear?
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-tty"></i>&nbsp;HowHears</h1>
+                <h1><i className="fas fa-tty"></i>&nbsp;How did you hear?</h1>
                 <div className="row">
                     <div className="col-md-12">
 

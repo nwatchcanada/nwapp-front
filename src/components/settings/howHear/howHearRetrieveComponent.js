@@ -18,17 +18,17 @@ class HowHearRetrieveComponent extends Component {
                            <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/how-hears"><i className="fas fa-tty"></i>&nbsp;HowHears</Link>
+                            <Link to="/settings/how-hears"><i className="fas fa-tty"></i>&nbsp;How did you hear?</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-howHear"></i>&nbsp;Argyle
+                            <i className="fas fa-tty"></i>&nbsp;Option
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-howHear"></i>&nbsp;Argyle</h1>
+                <h1><i className="fas fa-howHear"></i>&nbsp;How did you hear?</h1>
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <p><strong>Please confirm these details before adding the residential client:</strong></p>
