@@ -75,7 +75,7 @@ class DistrictCreateStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Business</h3>
                                 <p className="card-text">Add a business district</p>
-                                <Link to="#" className="btn btn-success btn-lg">
+                                <Link to="/settings/district/step-2-create-biz" className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>
