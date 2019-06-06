@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 
 
-class DistrictCreateStep1BizComponent extends Component {
+class DistrictCreateStep1ComComponent extends Component {
     render() {
         const { name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -29,7 +29,7 @@ class DistrictCreateStep1BizComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1>Create District - Business Details</h1>
+                <h1>Create District - Community Cares Details</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -91,4 +91,4 @@ class DistrictCreateStep1BizComponent extends Component {
     }
 }
 
-export default DistrictCreateStep1BizComponent;
+export default DistrictCreateStep1ComComponent;

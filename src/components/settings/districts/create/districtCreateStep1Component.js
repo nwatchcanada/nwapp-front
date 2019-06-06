@@ -34,7 +34,7 @@ class DistrictCreateStep1Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey active">
-                            <span className="num">1.</span><span className="">Select Type</span>
+                            <span className="num">1.</span><span className="">Type</span>
                         </div>
                         <div id="step-2" className="st-grey">
                             <span className="num">2.</span><span className="">Details</span>
@@ -89,7 +89,7 @@ class DistrictCreateStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Community Cares</h3>
                                 <p className="card-text">Add a community cares district</p>
-                                <Link to="#" className="btn btn-success btn-lg">
+                                <Link to="/settings/district/step-2-create-cc" className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>

@@ -34,7 +34,9 @@ class DistrictCreateStep1RezComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <span className="num">1.</span><span className="">Select Type</span>
+                            <Link to="/settings/district/step-1-create">
+                                <span className="num">1.</span><span className="">Type</span>
+                            </Link>
                         </div>
                         <div id="step-2" className="st-grey active">
                             <span className="num">2.</span><span className="">Details</span>
