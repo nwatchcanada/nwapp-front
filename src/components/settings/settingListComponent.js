@@ -66,7 +66,7 @@ class SettingListComponent extends Component {
                                             <div className="card-body">
                                                 <h3 className="card-title">How did you hear?</h3>
                                                 <p className="card-text">Modify how users heard about you.</p>
-                                                <Link to="/settings/tags" className="btn btn-success btn-lg">
+                                                <Link to="/settings/how-hears" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
                                             </div>
