@@ -2,14 +2,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
-
 
 class DistrictCreateStep1Component extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -100,7 +96,7 @@ class DistrictCreateStep1Component extends Component {
                 <div className="form-group">
 
                     <Link to="/settings/districts" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                        <i className="fas fa-arrow-left"></i> Back
+                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>
                 </div>
 

@@ -27,7 +27,7 @@ class DistrictCreateStep3ComComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1>Create District - Business Details</h1>
+                <h1>Create District - Community Cares Details</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -156,7 +156,7 @@ class DistrictCreateStep3ComComponent extends Component {
                                 <i className="fas fa-check"></i>&nbsp;Submit
                             </button>
                             <Link to="/settings/district/step-2-create-biz" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                <i className="fas fa-arrow-left"></i> Back
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>
                         </form>

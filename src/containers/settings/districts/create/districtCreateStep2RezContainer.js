@@ -53,7 +53,7 @@ class DistrictCreateStep2ResidentialContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully created.");
-        this.props.history.push("/settings/districts");
+        this.props.history.push("/settings/district/step-3-create-rez");
     }
 
     onFailedSubmissionCallback(errors) {

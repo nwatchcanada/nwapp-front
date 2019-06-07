@@ -27,6 +27,7 @@ import DistrictRetrieveContainer from "./settings/districts/districtRetrieveCont
 import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
 import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
 import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
+import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
 import DistrictCreateStep2BusinessContainer from "./settings/districts/create/districtCreateStep2BizContainer";
 import DistrictCreateStep3BusinessContainer from "./settings/districts/create/districtCreateStep3BizContainer";
 import DistrictCreateStep2CommunityCareContainer from "./settings/districts/create/districtCreateStep2ComContainer";
@@ -123,6 +124,7 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/districts" exact component={DistrictsListContainer} />
                                 <Route path="/settings/district/step-1-create" exact component={DistrictCreateStepContainer} />
                                 <Route path="/settings/district/step-2-create-rez" exact component={DistrictCreateStep2ResidentialContainer} />
+                                <Route path="/settings/district/step-3-create-rez" exact component={DistrictCreateStep3ResidentialContainer} />
                                 <Route path="/settings/district/step-2-create-biz" exact component={DistrictCreateStep2BusinessContainer} />
                                 <Route path="/settings/district/step-3-create-biz" exact component={DistrictCreateStep3BusinessContainer} />
                                 <Route path="/settings/district/step-2-create-cc" exact component={DistrictCreateStep2CommunityCareContainer} />
