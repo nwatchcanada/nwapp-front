@@ -16,6 +16,10 @@ class DistrictCreateStep3BusinessContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: localStorage.getItem('temp-district-biz-name'),
+            description: localStorage.getItem('temp-district-biz-description'),
+            websiteURL: localStorage.getItem('temp-district-biz-websiteURL'),
+            logo: JSON.parse(localStorage.getItem('temp-district-biz-logo')),
             errors: {},
             isLoading: false
         }
@@ -102,12 +106,18 @@ class DistrictCreateStep3BusinessContainer extends Component {
      */
 
     render() {
-        const { errors } = this.state;
+        const { name, description, websiteURL, logo, errors, isLoading } = this.state;
         return (
             <DistrictCreateStep3BizComponent
+                name={name}
+                description={description}
+                websiteURL={websiteURL}
+                logo={logo}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
+                onDrop={this.onDrop}
+                isLoading={isLoading}
             />
         );
     }

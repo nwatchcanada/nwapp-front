@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictCreateStep2BizComponent from "../../../../components/settings/districts/create/districtCreateStep2BizComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateInput } from "../../../../validators/districtValidator";
+import { validateBusinessInput } from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2BusinessContainer extends Component {
@@ -19,7 +19,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
             name: localStorage.getItem('temp-district-biz-name'),
             description: localStorage.getItem('temp-district-biz-description'),
             websiteURL: localStorage.getItem('temp-district-biz-websiteURL'),
-            logo: localStorage.getItem('temp-district-biz-logo'),
+            logo: JSON.parse(localStorage.getItem('temp-district-biz-logo')),
             errors: {},
             isLoading: false
         }
@@ -80,7 +80,8 @@ class DistrictCreateStep2BusinessContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        localStorage.setItem('temp-district-biz-'+[e.target.name], e.target.value);
     }
 
     onClick(e) {
@@ -88,7 +89,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateBusinessInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -106,13 +107,20 @@ class DistrictCreateStep2BusinessContainer extends Component {
     onDrop(acceptedFiles) {
         const file = acceptedFiles[0];
 
+        // For debuging purposes only.
+        console.log("DEBUG | onDrop | file", file);
+
         const fileWithPreview = Object.assign(file, {
             preview: URL.createObjectURL(file)
         });
 
         // For debugging purposes.
-        // console.log("onDrop | fileWithPreview", fileWithPreview);
+        console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
 
+        // Save to local storage our OBJECT.
+        localStorage.setItem('temp-district-biz-logo', JSON.stringify(fileWithPreview));
+
+        // Update our local state to update the GUI.
         this.setState({
             logo: fileWithPreview
         })
@@ -125,7 +133,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
      */
 
     render() {
-        const { name, description, websiteURL, logo, errors } = this.state;
+        const { name, description, websiteURL, logo, errors, isLoading } = this.state;
         return (
             <DistrictCreateStep2BizComponent
                 name={name}
@@ -136,6 +144,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
                 onDrop={this.onDrop}
+                isLoading={isLoading}
             />
         );
     }

@@ -7,7 +7,29 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 
 class DistrictCreateStep3BizComponent extends Component {
     render() {
-        const { errors, isLoading, onClick } = this.props;
+        const {
+            name, description, websiteURL, logo, errors, isLoading, onClick
+        } = this.props;
+
+
+        const thumb = { // Source: https://react-dropzone.js.org/#previews
+            display: 'inline-flex',
+            // borderRadius: 2,
+            // border: '1px solid #eaeaea',
+            marginBottom: 8,
+            marginRight: 8,
+            width: 100,
+            height: 100,
+            padding: 4,
+            boxSizing: 'border-box'
+        };
+
+        const img = { // Source: https://react-dropzone.js.org/#previews
+            display: 'block',
+            width: 'auto',
+            height: '100%'
+        };
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -60,94 +82,37 @@ class DistrictCreateStep3BizComponent extends Component {
                         <p><strong>Please confirm these details before adding the residential client:</strong></p>
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
-                            <tr className="bg-dark">
-                                <th scope="row" colSpan="2" className="text-light">Personal details</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">First name</th>
-                                <td>Rodolfo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Last name</th>
-                                <td>Martinez</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Phone</th>
-                                <td>(xxx) xxx-xxxx</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Mobile</th>
-                                <td>---</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">E-Mail</th>
-                                <td>example@example.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Ok to E-Mail?</th>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Ok to Text?</th>
-                                <td>No</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Date of Birth</th>
-                                <td>30/03/1994</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Gender</th>
-                                <td>Male</td>
-                            </tr>
-                            <tr className="bg-dark">
-                                <th scope="row" colSpan="2" className="text-light">Address</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Street No.</th>
-                                <td>XYZ</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Street name</th>
-                                <td>Southdale road</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Neighbourhood</th>
-                                <td>---</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">City</th>
-                                <td>London</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">State/Province</th>
-                                <td>Ontario</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Postal code</th>
-                                <td>N0L 1E0</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Country</th>
-                                <td>Canada</td>
-                            </tr>
-                            <tr className="bg-dark">
-                                <th scope="row" colSpan="2" className="text-light">Skills</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Client&apos;s skills</th>
-                                <td><span className="badge badge-info badge-lg">Skill 1</span> <span
-                                        className="badge badge-info badge-lg">Skill 2</span>
-                                    <span className="badge badge-info badge-lg">HTML</span> <span
-                                            className="badge badge-info badge-lg">PHP</span> <span
-                                            className="badge badge-info badge-lg">Bootstrap</span> <span
-                                            className="badge badge-info badge-lg">Django</span> <span
-                                            className="badge badge-info badge-lg">Photoshop</span> <span
-                                            className="badge badge-info badge-lg">Python</span> <span
-                                            className="badge badge-info badge-lg">ASP.net</span> <span
-                                            className="badge badge-info badge-lg">Android</span> <span
-                                            className="badge badge-info badge-lg">jQuery</span>
-                                </td>
-                            </tr>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">District details</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">name</th>
+                                    <td>{name}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{description}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Website URL</th>
+                                    <td>{websiteURL}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Logo</th>
+                                    <td>
+                                        {logo &&
+                                            <div style={thumb}>
+                                                <img
+                                                    src={logo.preview}
+                                                    style={img}
+                                                    alt="Logo"
+                                                />
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+
+
                             </tbody>
                         </table>
                         <form>

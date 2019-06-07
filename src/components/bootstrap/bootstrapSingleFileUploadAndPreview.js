@@ -20,8 +20,8 @@ export const BootstrapSingleFileUploadAndPreview = ({
 
     const thumb = {
         display: 'inline-flex',
-        borderRadius: 2,
-        border: '1px solid #eaeaea',
+        // borderRadius: 2,
+        // border: '1px solid #eaeaea',
         marginBottom: 8,
         marginRight: 8,
         width: 100,
@@ -40,7 +40,6 @@ export const BootstrapSingleFileUploadAndPreview = ({
         <div className={classnames(divClassName, { 'has-error': error })}>
             <label htmlFor={name} className="control-label">{label}</label>
             <Dropzone
-
                 onDrop={onDrop}
                 accept="image/*"
                 minSize={0}
@@ -76,6 +75,7 @@ export const BootstrapSingleFileUploadAndPreview = ({
             }
 
             { /* The following code will render the file name. */ }
+            { /*
             <ul className="list-group mt-2">
                 {fileObj &&
                     <li className="list-group-item list-group-item-success">
@@ -83,6 +83,7 @@ export const BootstrapSingleFileUploadAndPreview = ({
                     </li>
                 }
             </ul>
+            */ }
 
         </div>
     );
