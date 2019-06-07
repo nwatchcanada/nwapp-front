@@ -18,6 +18,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-datepicker": "^2.5.0",
     "react-dom": "^16.8.6",
+    "react-dropzone": "^10.1.5",
     "react-modal": "^3.8.1",
     "react-moment": "^0.9.2",
     "react-redux": "^7.0.3",

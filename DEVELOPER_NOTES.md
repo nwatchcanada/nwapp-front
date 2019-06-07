@@ -35,6 +35,7 @@ npm install --save react-scroll-up-button
 npm install --save react-modal
 npm install --save react-spinners
 npm install --save msgpack-lite
+npm install --save react-dropzone
 ```
 
 Upgrade doing the following:

@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import shortid from "shortid";
 
 /**
- * Primitive bootstrap alert wnich can be populated with any text. Primarly used
+ * Primitive bootstrap alert which can be populated with any text. Primarly used
  * as a banner in our application.
  */
 export const BootstrapInputGroup = (

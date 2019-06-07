@@ -19,12 +19,14 @@ class DistrictCreateStep2BusinessContainer extends Component {
             name: localStorage.getItem('temp-district-biz-name'),
             description: localStorage.getItem('temp-district-biz-description'),
             websiteURL: localStorage.getItem('temp-district-biz-websiteURL'),
+            logo: localStorage.getItem('temp-district-biz-logo'),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -98,6 +100,24 @@ class DistrictCreateStep2BusinessContainer extends Component {
         }
     }
 
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // For debugging purposes.
+        // console.log("onDrop | fileWithPreview", fileWithPreview);
+
+        this.setState({
+            logo: fileWithPreview
+        })
+    }
+
 
     /**
      *  Main render function
@@ -105,15 +125,17 @@ class DistrictCreateStep2BusinessContainer extends Component {
      */
 
     render() {
-        const { name, description, websiteURL, errors } = this.state;
+        const { name, description, websiteURL, logo, errors } = this.state;
         return (
             <DistrictCreateStep2BizComponent
                 name={name}
                 description={description}
                 websiteURL={websiteURL}
+                logo={logo}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
+                onDrop={this.onDrop}
             />
         );
     }

@@ -6,11 +6,12 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleFileUploadAndPreview } from "../../../bootstrap/bootstrapSingleFileUploadAndPreview";
 
 
 class DistrictCreateStep1BizComponent extends Component {
     render() {
-        const { name, description, websiteURL, errors, onTextChange, isLoading, onClick } = this.props;
+        const { name, description, websiteURL, logo, errors, onTextChange, isLoading, onClick, onDrop } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -95,6 +96,14 @@ class DistrictCreateStep1BizComponent extends Component {
                                 value={websiteURL}
                                 name="websiteURL"
                                 type="text"
+                            />
+
+                            <BootstrapSingleFileUploadAndPreview
+                                error={errors.image}
+                                label="Logo"
+                                onDrop={onDrop}
+                                name="logo"
+                                fileObj={logo}
                             />
 
                             <div className="form-group">
