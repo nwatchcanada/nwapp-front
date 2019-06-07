@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictCreateStep3BizComponent from "../../../../components/settings/districts/create/districtCreateStep3BizComponent";
+import DistrictCreateStep3RezComponent from "../../../../components/settings/districts/create/districtCreateStep3RezComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import validateInput from "../../../../validators/districtValidator";
 
 
-class DistrictCreateStep3BusinessContainer extends Component {
+class DistrictCreateStep3ResidentialContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -20,7 +20,6 @@ class DistrictCreateStep3BusinessContainer extends Component {
             isLoading: false
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -72,12 +71,6 @@ class DistrictCreateStep3BusinessContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -104,7 +97,7 @@ class DistrictCreateStep3BusinessContainer extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <DistrictCreateStep3BizComponent
+            <DistrictCreateStep3RezComponent
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
@@ -131,4 +124,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictCreateStep3BusinessContainer);
+)(DistrictCreateStep3ResidentialContainer);
