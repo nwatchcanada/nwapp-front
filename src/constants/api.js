@@ -58,3 +58,11 @@ export const GROUP_MEMBERSHIP_CHOICES = [
         label: "Aquaculture"
     }
 ];
+
+
+/**
+ *  The generic type of that we can use in the system.
+ */
+export const RESIDENCE_TYPE_OF = 1
+export const BUSINESS_TYPE_OF = 2
+export const COMMUNITY_CARES_TYPE_OF = 3

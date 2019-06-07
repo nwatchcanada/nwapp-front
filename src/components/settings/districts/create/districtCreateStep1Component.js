@@ -2,10 +2,16 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../../constants/api';
+
 
 class DistrictCreateStep1Component extends Component {
     render() {
-        const { isLoading, onClick } = this.props;
+        const { onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -57,9 +63,9 @@ class DistrictCreateStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Residential</h3>
                                 <p className="card-text">Add a residential district</p>
-                                <Link to="/settings/district/step-2-create-rez" className="btn btn-success btn-lg">
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, RESIDENCE_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -71,9 +77,9 @@ class DistrictCreateStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Business</h3>
                                 <p className="card-text">Add a business district</p>
-                                <Link to="/settings/district/step-2-create-biz" className="btn btn-success btn-lg">
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, BUSINESS_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -85,9 +91,9 @@ class DistrictCreateStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Community Cares</h3>
                                 <p className="card-text">Add a community cares district</p>
-                                <Link to="/settings/district/step-2-create-cc" className="btn btn-success btn-lg">
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, COMMUNITY_CARES_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>

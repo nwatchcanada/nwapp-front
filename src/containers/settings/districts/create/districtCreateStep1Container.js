@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Scroll from 'react-scroll';
 
 import DistrictCreateStep1Component from "../../../../components/settings/districts/create/districtCreateStep1Component";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import validateInput from "../../../../validators/districtValidator";
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../../constants/api';
 
 
 class DistrictCreateContainer extends Component {
@@ -16,15 +18,10 @@ class DistrictCreateContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
-            errors: {},
-            isLoading: false
+            typeOf: null,
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -50,52 +47,29 @@ class DistrictCreateContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(district) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "District has been successfully created.");
-        this.props.history.push("/settings/districts");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    onClick(e) {
+    onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        // Save to our browsers memory.
+        localStorage.setItem('temp-typeOf', typeOf);
 
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
+        // Redirect to the next page.
+        if (typeOf === RESIDENCE_TYPE_OF) {
+            this.props.history.push("/settings/district/step-2-create-rez");
+        }
+        else if (typeOf === BUSINESS_TYPE_OF) {
+            this.props.history.push("/settings/district/step-2-create-biz");
+        }
+        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
+            this.props.history.push("/settings/district/step-2-create-cc");
         }
     }
-
 
     /**
      *  Main render function
@@ -103,12 +77,8 @@ class DistrictCreateContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
         return (
             <DistrictCreateStep1Component
-                name={name}
-                errors={errors}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />
         );
@@ -122,11 +92,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 
