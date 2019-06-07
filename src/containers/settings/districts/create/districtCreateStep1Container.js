@@ -57,7 +57,7 @@ class DistrictCreateContainer extends Component {
         e.preventDefault();
 
         // Save to our browsers memory.
-        localStorage.setItem('temp-typeOf', typeOf);
+        localStorage.setItem('temp-district-program', typeOf);
 
         // Redirect to the next page.
         if (typeOf === RESIDENCE_TYPE_OF) {

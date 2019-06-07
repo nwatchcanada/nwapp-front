@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
 class DistrictCreateStep1RezComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const {
+            name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading,
+            onTextChange, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -70,6 +73,85 @@ class DistrictCreateStep1RezComponent extends Component {
                                 onChange={onTextChange}
                                 value={name}
                                 name="name"
+                                type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please set the district description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the residential district."
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.counselorName}
+                                label="Counselor Name (*)"
+                                onChange={onTextChange}
+                                value={counselorName}
+                                name="counselorName"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.counselorEmail}
+                                label="Counselor Email (*)"
+                                onChange={onTextChange}
+                                value={counselorEmail}
+                                name="counselorEmail"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.counselorPhone}
+                                label="Counselor Phone (*)"
+                                onChange={onTextChange}
+                                value={counselorPhone}
+                                name="counselorPhone"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.cityRoleNumber}
+                                label="City Role Number (*)"
+                                onChange={onTextChange}
+                                value={cityRoleNumber}
+                                name="cityRoleNumber"
+                                type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="legalDescription"
+                                borderColour="border-primary"
+                                label="Legal Description (*)"
+                                placeholder="Please set the legal district description"
+                                rows="5"
+                                value={legalDescription}
+                                helpText="This is the legal description of the residential district."
+                                onChange={onTextChange}
+                                error={errors.legalDescription}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.linkToCityWebsite}
+                                label="Link to City Website (*)"
+                                onChange={onTextChange}
+                                value={linkToCityWebsite}
+                                name="linkToCityWebsite"
                                 type="text"
                             />
 

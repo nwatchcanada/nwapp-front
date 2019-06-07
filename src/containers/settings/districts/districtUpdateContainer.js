@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictUpdateComponent from "../../../components/settings/districts/districtUpdateComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/districtValidator";
+import { validateInput } from "../../../validators/districtValidator";
 
 
 class DistrictUpdateContainer extends Component {

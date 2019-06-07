@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictCreateStep1RezComponent from "../../../../components/settings/districts/create/districtCreateStep2RezComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import validateInput from "../../../../validators/districtValidator";
+import { validateResidentialInput } from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2ResidentialContainer extends Component {
@@ -16,7 +16,16 @@ class DistrictCreateStep2ResidentialContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
+            name: localStorage.getItem('temp-district-rez-name'),
+            description: localStorage.getItem('temp-district-rez-description'),
+            counselorName: localStorage.getItem('temp-district-rez-counselorName'),
+            counselorEmail: localStorage.getItem('temp-district-rez-counselorEmail'),
+            counselorPhone: localStorage.getItem('temp-district-rez-counselorPhone'),
+            cityRoleNumber: localStorage.getItem('temp-district-rez-cityRoleNumber'),
+            legalDescription: localStorage.getItem('temp-district-rez-legalDescription'),
+            linkToCityWebsite: localStorage.getItem('temp-district-rez-linkToCityWebsite'),
+            image: localStorage.getItem('temp-district-rez-image'),
+            program: localStorage.getItem('temp-district-program'),
             errors: {},
             isLoading: false
         }
@@ -77,6 +86,7 @@ class DistrictCreateStep2ResidentialContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
+        localStorage.setItem('temp-district-rez-'+[e.target.name], e.target.value);
     }
 
     onClick(e) {
@@ -84,7 +94,7 @@ class DistrictCreateStep2ResidentialContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateResidentialInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -103,11 +113,19 @@ class DistrictCreateStep2ResidentialContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading } = this.state;
         return (
             <DistrictCreateStep1RezComponent
                 name={name}
+                description={description}
+                counselorName={counselorName}
+                counselorEmail={counselorEmail}
+                counselorPhone={counselorPhone}
+                cityRoleNumber={cityRoleNumber}
+                legalDescription={legalDescription}
+                linkToCityWebsite={linkToCityWebsite}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />

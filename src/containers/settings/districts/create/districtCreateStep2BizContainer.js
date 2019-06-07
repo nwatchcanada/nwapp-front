@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictCreateStep2BizComponent from "../../../../components/settings/districts/create/districtCreateStep2BizComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import validateInput from "../../../../validators/districtValidator";
+import { validateInput } from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2BusinessContainer extends Component {

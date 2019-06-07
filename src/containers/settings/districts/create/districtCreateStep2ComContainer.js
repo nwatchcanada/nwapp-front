@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictCreateStep1ComComponent from "../../../../components/settings/districts/create/districtCreateStep2ComComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import validateInput from "../../../../validators/districtValidator";
+import { validateInput } from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2CommunityCareContainer extends Component {

@@ -4,7 +4,6 @@ import Scroll from 'react-scroll';
 
 import DistrictCreateStep3RezComponent from "../../../../components/settings/districts/create/districtCreateStep3RezComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import validateInput from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep3ResidentialContainer extends Component {
@@ -16,6 +15,16 @@ class DistrictCreateStep3ResidentialContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: localStorage.getItem('temp-district-rez-name'),
+            description: localStorage.getItem('temp-district-rez-description'),
+            counselorName: localStorage.getItem('temp-district-rez-counselorName'),
+            counselorEmail: localStorage.getItem('temp-district-rez-counselorEmail'),
+            counselorPhone: localStorage.getItem('temp-district-rez-counselorPhone'),
+            cityRoleNumber: localStorage.getItem('temp-district-rez-cityRoleNumber'),
+            legalDescription: localStorage.getItem('temp-district-rez-legalDescription'),
+            linkToCityWebsite: localStorage.getItem('temp-district-rez-linkToCityWebsite'),
+            image: localStorage.getItem('temp-district-rez-image'),
+            program: localStorage.getItem('temp-district-program'),
             errors: {},
             isLoading: false
         }
@@ -48,7 +57,7 @@ class DistrictCreateStep3ResidentialContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(district) {
+    onSuccessfulSubmissionCallback() {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully created.");
         this.props.history.push("/settings/districts");
@@ -76,16 +85,7 @@ class DistrictCreateStep3ResidentialContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        this.onSuccessfulSubmissionCallback();
     }
 
 
@@ -95,11 +95,19 @@ class DistrictCreateStep3ResidentialContainer extends Component {
      */
 
     render() {
-        const { errors } = this.state;
+        const { name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading } = this.state;
         return (
             <DistrictCreateStep3RezComponent
+                name={name}
+                description={description}
+                counselorName={counselorName}
+                counselorEmail={counselorEmail}
+                counselorPhone={counselorPhone}
+                cityRoleNumber={cityRoleNumber}
+                legalDescription={legalDescription}
+                linkToCityWebsite={linkToCityWebsite}
                 errors={errors}
-                onTextChange={this.onTextChange}
+                isLoading={isLoading}
                 onClick={this.onClick}
             />
         );
