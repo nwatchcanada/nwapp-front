@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictCreateStep2BizComponent from "../../../../components/settings/districts/create/districtCreateStep2BizComponent";
+import DistrictCreateStep3BizComponent from "../../../../components/settings/districts/create/districtCreateStep3BizComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import validateInput from "../../../../validators/districtValidator";
 
 
-class DistrictCreateStep2BusinessContainer extends Component {
+class DistrictCreateStep3BusinessContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,7 +16,6 @@ class DistrictCreateStep2BusinessContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
             errors: {},
             isLoading: false
         }
@@ -52,8 +51,8 @@ class DistrictCreateStep2BusinessContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        // this.props.setFlashMessage("success", "District has been successfully created.");
-        this.props.history.push("/settings/district/step-3-create-biz");
+        this.props.setFlashMessage("success", "District has been successfully created.");
+        this.props.history.push("/settings/districts");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -105,8 +104,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <DistrictCreateStep2BizComponent
-                name={name}
+            <DistrictCreateStep3BizComponent
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
@@ -133,4 +131,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictCreateStep2BusinessContainer);
+)(DistrictCreateStep3BusinessContainer);
