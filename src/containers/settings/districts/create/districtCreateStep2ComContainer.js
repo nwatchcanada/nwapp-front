@@ -17,6 +17,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         super(props);
         this.state = {
             name: null,
+            description: null,
             errors: {},
             isLoading: false
         }
@@ -103,10 +104,11 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { name, description, errors } = this.state;
         return (
             <DistrictCreateStep1ComComponent
                 name={name}
+                description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
