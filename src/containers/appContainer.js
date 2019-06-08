@@ -23,7 +23,6 @@ import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirec
 import DashboardContainer from "./dashboard/dashboardContainer";
 
 import DistrictsListContainer from "./settings/districts/districtsListContainer";
-import DistrictRetrieveContainer from "./settings/districts/districtRetrieveContainer";
 import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
 import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
 import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
@@ -133,7 +132,6 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district/step-3-create-biz" exact component={DistrictCreateStep3BusinessContainer} />
                                 <Route path="/settings/district/step-2-create-cc" exact component={DistrictCreateStep2CommunityCareContainer} />
                                 <Route path="/settings/district/step-3-create-cc" exact component={DistrictCreateStep3CommunityCareContainer} />
-                                <Route path="/settings/district/:slug" exact component={DistrictRetrieveContainer} />
                                 <Route path="/settings/district-biz/:slug" exact component={DistrictRetrieveBizContainer} />
                                 <Route path="/settings/district-cc/:slug" exact component={DistrictRetrieveComContainer} />
                                 <Route path="/settings/district-rez/:slug" exact component={DistrictRetrieveRezContainer} />

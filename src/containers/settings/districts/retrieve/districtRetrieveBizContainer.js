@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DistrictRetrieveBizComponent from "../../../../components/settings/districts/retrieve/districtRetrieveRezComponent";
+import DistrictRetrieveBizComponent from "../../../../components/settings/districts/retrieve/districtRetrieveBizComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 
 
@@ -85,10 +85,13 @@ class DistrictRetrieveBizContainer extends Component {
 
     render() {
         const districtData = {
-            'slug': 'Argyle',
+            'slug': 'argyle-biz',
             'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/settings/district/argyle'
+            'name': 'Argyle (Biz)',
+            'description': 'This is a business district.',
+            'websiteURL': 'http://google.com',
+            'logo': 'https://o55.ca/wp-content/uploads/2018/02/O55_Logo-Rect.png',
+            'absoluteUrl': '/settings/district-biz/argyle'
         };
         return (
             <DistrictRetrieveBizComponent
