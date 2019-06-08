@@ -88,6 +88,20 @@ class DistrictRetrieveComContainer extends Component {
             'slug': 'Argyle',
             'number': 1,
             'name': 'Argyle',
+            'description': 'This is a community cares district.',
+            'streetsArray': [
+                {
+                    'streetAddress': '240 First Street',
+                    'streetNumber': '240',
+                    'streetName': 'First',
+                    'streetType': 'Street',
+                },{
+                    'streetAddress': '51 Downtown Avenue',
+                    'streetNumber': '51',
+                    'streetName': 'Downtown',
+                    'streetType': 'Avenue',
+                }
+            ],
             'absoluteUrl': '/settings/district/argyle'
         };
         return (
