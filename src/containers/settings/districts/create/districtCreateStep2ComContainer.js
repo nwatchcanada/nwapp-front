@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictCreateStep1ComComponent from "../../../../components/settings/districts/create/districtCreateStep2ComComponent";
+import DistrictCreateStep2ComComponent from "../../../../components/settings/districts/create/districtCreateStep2ComComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateInput } from "../../../../validators/districtValidator";
+import { validateInput, validateCommunityCaresModalSaveInput } from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2CommunityCareContainer extends Component {
@@ -15,15 +15,48 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Extract our plants array (which is used to populate the table) from
+        // the users's local storage.
+        const stringStreetsArr = localStorage.getItem("temp-district-com-streets");
+        let streetsArr = JSON.parse(stringStreetsArr);
+        if (streetsArr  === undefined || streetsArr === null) {
+            streetsArr = [];
+        }
+
         this.state = {
+            // DEVELOPERS NOTE: This variable is used as the main way to add
+            // GUI modification to the fields. Simply adding a key and the
+            // message will result in an error message displaying for that
+            // field. Please make sure the `name` in the HTML field equals
+            // the `name` dictonary key in this dictionary.
+            errors: {},
+
+            // Variable used to lock buttons when makig submissions.
+            isLoading: false,
+
+            // Variable used to indicate if the modal should appear.
+            isShowingModal: false,
+
             name: localStorage.getItem('temp-district-com-name'),
             description: localStorage.getItem('temp-district-com-description'),
-            errors: {},
-            isLoading: false
+
+            // ALL OUR OBJECTS ARE STORED HERE.
+            streetsArray: streetsArr,
+
+            // DEVELOPERS NOTE: The following state objects are used to store
+            // the data from the modal.
+            streetNumber: null,
+            streetName: null,
+            streetType: null,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onAddClick = this.onAddClick.bind(this);
+        this.onSaveClick = this.onSaveClick.bind(this);
+        this.onCloseClick = this.onCloseClick.bind(this);
+        this.onRemoveClick = this.onRemoveClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -98,6 +131,101 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         }
     }
 
+    onAddClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Load the modal.
+        this.setState({isShowingModal: true});
+    }
+
+    onSaveClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Perform client-side validation.
+        const { errors, isValid } = validateCommunityCaresModalSaveInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            // Append our array.
+            let a = this.state.streetsArray.slice(); //creates the clone of the state
+            const streetAddress = this.state.streetNumber+" "+this.state.streetName+" "+this.state.streetType;
+            a.push({
+                streetAddress: streetAddress,
+                streetNumber: this.state.streetNumber,
+                streetName: this.state.streetName,
+                streetType: this.state.streetType,
+            });
+
+            // Update our state.
+            this.setState({
+                isShowingModal: false,
+                errors: {},
+                streetsArray: a,
+            })
+
+            // Save our table data.
+            localStorage.setItem("temp-district-com-streets", JSON.stringify(a))
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.setState({
+                errors: errors
+            })
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
+        }
+    }
+
+    onCloseClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Load the modal.
+        this.setState({isShowingModal: false});
+    }
+
+    onRemoveClick(streetAddress) {
+        const streetsArray = this.state.streetsArray;
+        for (let i = 0; i < streetsArray.length; i++) {
+            let row = streetsArray[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(streetAddress);
+
+            if (row.streetAddress === streetAddress) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredItems = streetsArray.slice(
+                    0, i
+                ).concat(
+                    streetsArray.slice(
+                        i + 1, streetsArray.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    streetsArray: filteredItems
+                });
+
+                // Save our table data.
+                localStorage.setItem("temp-district-com-streets", JSON.stringify(filteredItems))
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
+    }
+
 
     /**
      *  Main render function
@@ -105,14 +233,23 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
      */
 
     render() {
-        const { name, description, errors } = this.state;
+        const { name, description, streetNumber, streetName, streetType, errors, isShowingModal, streetsArray } = this.state;
         return (
-            <DistrictCreateStep1ComComponent
+            <DistrictCreateStep2ComComponent
+                isShowingModal={isShowingModal}
                 name={name}
                 description={description}
+                streetNumber={streetNumber}
+                streetName={streetName}
+                streetType={streetType}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
+                onAddClick={this.onAddClick}
+                onSaveClick={this.onSaveClick}
+                onCloseClick={this.onCloseClick}
+                onRemoveClick={this.onRemoveClick}
+                streetsArray={streetsArray}
             />
         );
     }
