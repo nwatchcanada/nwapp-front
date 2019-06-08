@@ -85,10 +85,17 @@ class DistrictRetrieveRezContainer extends Component {
 
     render() {
         const districtData = {
-            'slug': 'Argyle',
+            'slug': 'argyle-rez',
             'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/settings/district/argyle'
+            'name': 'Argyle (Rez)',
+            'description': 'This is a residential district.',
+            'counselorName': 'Bart Mika',
+            'counselorEmail': 'bart@mikasoftware.com',
+            'counselorPhone': '(111) 222-3333',
+            'cityRoleNumber': '123456',
+            'legalDescription': 'Argyle',
+            'linkToCityWebsite': 'http://google.com',
+            'absoluteUrl': '/settings/district-rez/argyle'
         };
         return (
             <DistrictRetrieveRezComponent
