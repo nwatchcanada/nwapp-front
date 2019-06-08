@@ -6,10 +6,11 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 class TableRow extends Component {
     render() {
-        const { slug, number, name, absoluteUrl } = this.props.datum;
+        const { slug, icon, number, name, absoluteUrl } = this.props.datum;
 
         return (
             <tr slug={slug}>
+                <td><i className={`fas fa-${icon}`}></i></td>
                 <td>{number}</td>
                 <td>{name}</td>
                 <td>
@@ -96,7 +97,8 @@ class DistrictsListComponent extends Component {
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>District #</th>
+                                        <th></th>
+                                        <th>Number</th>
                                         <th>Name</th>
                                         <th></th>
                                     </tr>

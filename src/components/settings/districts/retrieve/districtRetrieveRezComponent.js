@@ -45,7 +45,10 @@ class DistrictRetrieveRezComponent extends Component {
                                     <th scope="row" className="bg-light">Description</th>
                                     <td>{districtData.description}</td>
                                 </tr>
-                                { /* , , , cityRoleNumber, legalDescription, linkToCityWebsite, */}
+                                <tr>
+                                    <th scope="row" className="bg-light">Type</th>
+                                    <td>Residential District</td>
+                                </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Counselor Name</th>
                                     <td>{districtData.counselorName}</td>

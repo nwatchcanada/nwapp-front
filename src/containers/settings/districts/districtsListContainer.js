@@ -59,16 +59,19 @@ class DistrictsListContainer extends Component {
     render() {
         const tableData = [{
             'slug': 'Argyle',
+            'icon': 'building',
             'number': 1,
             'name': 'Argyle (Biz)',
             'absoluteUrl': '/settings/district-biz/argyle'
         },{
             'slug': 'byron',
+            'icon': 'home',
             'number': 2,
             'name': 'Byron (Com)',
             'absoluteUrl': '/settings/district-cc/byron'
         },{
             'slug': 'carling',
+            'icon': 'university',
             'number': 3,
             'name': 'Carling (Rez)',
             'absoluteUrl': '/settings/district-rez/carling'

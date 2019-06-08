@@ -56,6 +56,10 @@ class DistrictRetrieveComComponent extends Component {
                                     <td>{districtData.description}</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row" className="bg-light">Type</th>
+                                    <td>Community Cares District</td>
+                                </tr>
+                                <tr>
                                     <th scope="row" className="bg-light">Addresses</th>
                                     <td>
                                         <ul>
