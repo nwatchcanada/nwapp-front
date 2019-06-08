@@ -60,18 +60,18 @@ class DistrictsListContainer extends Component {
         const tableData = [{
             'slug': 'Argyle',
             'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/settings/district/argyle'
+            'name': 'Argyle (Biz)',
+            'absoluteUrl': '/settings/district-biz/argyle'
         },{
             'slug': 'byron',
             'number': 2,
-            'name': 'Byron',
-            'absoluteUrl': '/settings/district/byron'
+            'name': 'Byron (Com)',
+            'absoluteUrl': '/settings/district-cc/byron'
         },{
             'slug': 'carling',
             'number': 3,
-            'name': 'Carling',
-            'absoluteUrl': '/settings/district/carling'
+            'name': 'Carling (Rez)',
+            'absoluteUrl': '/settings/district-rez/carling'
         }];
         return (
             <DistrictsListComponent

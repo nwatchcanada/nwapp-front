@@ -33,6 +33,10 @@ import DistrictCreateStep3BusinessContainer from "./settings/districts/create/di
 import DistrictCreateStep2CommunityCareContainer from "./settings/districts/create/districtCreateStep2ComContainer";
 import DistrictCreateStep3CommunityCareContainer from "./settings/districts/create/districtCreateStep3ComContainer";
 
+import DistrictRetrieveBizContainer from "./settings/districts/retrieve/districtRetrieveBizContainer";
+import DistrictRetrieveComContainer from "./settings/districts/retrieve/districtRetrieveComContainer";
+import DistrictRetrieveRezContainer from "./settings/districts/retrieve/districtRetrieveRezContainer";
+
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
 import TagCreateContainer from "./settings/tags/tagCreateContainer";
@@ -130,6 +134,9 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district/step-2-create-cc" exact component={DistrictCreateStep2CommunityCareContainer} />
                                 <Route path="/settings/district/step-3-create-cc" exact component={DistrictCreateStep3CommunityCareContainer} />
                                 <Route path="/settings/district/:slug" exact component={DistrictRetrieveContainer} />
+                                <Route path="/settings/district-biz/:slug" exact component={DistrictRetrieveBizContainer} />
+                                <Route path="/settings/district-cc/:slug" exact component={DistrictRetrieveComContainer} />
+                                <Route path="/settings/district-rez/:slug" exact component={DistrictRetrieveRezContainer} />
                                 <Route path="/settings/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route path="/settings/tags" exact component={TagsListContainer} />
                                 <Route path="/settings/tag/add" exact component={TagCreateContainer} />
