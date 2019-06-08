@@ -38,6 +38,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             // Variable used to indicate if the modal should appear.
             isShowingModal: false,
 
+            // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: localStorage.getItem('temp-district-com-name'),
             description: localStorage.getItem('temp-district-com-description'),
 

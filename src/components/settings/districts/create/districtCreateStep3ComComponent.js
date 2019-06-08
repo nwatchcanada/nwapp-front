@@ -5,9 +5,19 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
 
+class StreetAddressBulletItem extends Component {
+    render() {
+        const { streetAddress } = this.props.datum;
+        return (
+            <li>{streetAddress}</li>
+        );
+    }
+}
+
+
 class DistrictCreateStep3ComComponent extends Component {
     render() {
-        const { name, description, errors, isLoading, onClick } = this.props;
+        const { name, description, errors, isLoading, onClick, streetsArray } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -44,24 +54,17 @@ class DistrictCreateStep3ComComponent extends Component {
                         <div id="step-3" className="st-grey active">
                             <span className="num">3.</span><span className="">Review</span>
                         </div>
-                        { /* <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Skills Required</span>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Review</span>
-                        </div>
-                        */ }
                     </div>
                 </div>
 
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before adding the residential client:</strong></p>
+                        <p><strong>Please confirm these details before submitting the community cares district.</strong></p>
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">Personal details</th>
+                                    <th scope="row" colSpan="2" className="text-light">Details</th>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Name</th>
@@ -70,6 +73,16 @@ class DistrictCreateStep3ComComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
                                     <td>{description}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Addresses</th>
+                                    <td>
+                                        <ul>
+                                            {streetsArray && streetsArray.map(
+                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
+                                            }
+                                        </ul>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
