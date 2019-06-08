@@ -16,8 +16,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
-            description: null,
+            name: localStorage.getItem('temp-district-com-name'),
+            description: localStorage.getItem('temp-district-com-description'),
             errors: {},
             isLoading: false
         }
@@ -77,7 +77,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        localStorage.setItem('temp-district-com-'+[e.target.name], e.target.value);
     }
 
     onClick(e) {

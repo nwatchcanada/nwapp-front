@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
 class DistrictCreateStep1ComComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { name, description, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -71,6 +72,18 @@ class DistrictCreateStep1ComComponent extends Component {
                                 value={name}
                                 name="name"
                                 type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please set the district description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the business district."
+                                onChange={onTextChange}
+                                error={errors.description}
                             />
 
                             <div className="form-group">

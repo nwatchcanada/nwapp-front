@@ -16,6 +16,8 @@ class DistrictCreateStep3BusinessContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: localStorage.getItem('temp-district-com-name'),
+            description: localStorage.getItem('temp-district-com-description'),
             errors: {},
             isLoading: false
         }
@@ -102,9 +104,11 @@ class DistrictCreateStep3BusinessContainer extends Component {
      */
 
     render() {
-        const { errors } = this.state;
+        const { name, description, errors } = this.state;
         return (
             <DistrictCreateStep3ComComponent
+                name={name}
+                description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
