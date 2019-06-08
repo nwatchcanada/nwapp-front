@@ -86,6 +86,7 @@ class DistrictRetrieveBizContainer extends Component {
     render() {
         const districtData = {
             'slug': 'argyle-biz',
+            'icon': 'building',
             'number': 1,
             'name': 'Argyle (Biz)',
             'description': 'This is a business district.',

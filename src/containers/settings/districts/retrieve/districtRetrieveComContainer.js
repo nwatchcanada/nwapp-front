@@ -86,6 +86,7 @@ class DistrictRetrieveComContainer extends Component {
     render() {
         const districtData = {
             'slug': 'Argyle',
+            'icon': 'university',
             'number': 1,
             'name': 'Argyle',
             'description': 'This is a community cares district.',

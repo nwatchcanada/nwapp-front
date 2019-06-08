@@ -65,13 +65,13 @@ class DistrictsListContainer extends Component {
             'absoluteUrl': '/settings/district-biz/argyle'
         },{
             'slug': 'byron',
-            'icon': 'home',
+            'icon': 'university',
             'number': 2,
             'name': 'Byron (Com)',
             'absoluteUrl': '/settings/district-cc/byron'
         },{
             'slug': 'carling',
-            'icon': 'university',
+            'icon': 'home',
             'number': 3,
             'name': 'Carling (Rez)',
             'absoluteUrl': '/settings/district-rez/carling'

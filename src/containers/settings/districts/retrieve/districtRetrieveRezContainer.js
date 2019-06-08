@@ -86,6 +86,7 @@ class DistrictRetrieveRezContainer extends Component {
     render() {
         const districtData = {
             'slug': 'argyle-rez',
+            'icon': 'home',
             'number': 1,
             'name': 'Argyle (Rez)',
             'description': 'This is a residential district.',
