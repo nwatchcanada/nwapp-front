@@ -47,8 +47,18 @@ class DistrictRetrieveBizComponent extends Component {
                                 <td>{districtData.description}</td>
                             </tr>
                             <tr>
+                                <th scope="row" className="bg-light">Type</th>
+                                <td>Business District</td>
+                            </tr>
+                            <tr>
                                 <th scope="row" className="bg-light">Website URL</th>
-                                <td>{districtData.websiteURL}</td>
+                                <td>
+                                    {districtData.websiteURL &&
+                                        <a href={districtData.websiteURL} target="_blank" rel="noopener noreferrer">
+                                            {districtData.websiteURL}&nbsp;<i className="fas fa-external-link-alt"></i>
+                                        </a>
+                                    }
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Logo</th>
