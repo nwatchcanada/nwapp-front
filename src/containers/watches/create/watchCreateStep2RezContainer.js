@@ -10,6 +10,7 @@ import {
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../constants/api';
+import { localStorageGetObjectItem, localStorageSetObjectItem } from '../../../helpers/localStorageUtility';
 
 
 class WatchCreateStep2RezContainer extends Component {
@@ -20,25 +21,15 @@ class WatchCreateStep2RezContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Extract our plants array (which is used to populate the table) from
-        // the users's local storage.
-        const stringAssociateOption = localStorage.getItem("temp-watch-rez-associateOption");
-        let associateOption = JSON.parse(stringAssociateOption);
-        if (associateOption  === undefined || associateOption === null) {
-            associateOption = {};
-        }
-
         this.state = {
             name: localStorage.getItem('temp-watch-rez-name'),
             associate: localStorage.getItem('temp-watch-rez-associate'),
-            associateOption: associateOption,
+            associateOption: localStorageGetObjectItem('temp-watch-rez-associateOption'),
             primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
             secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
             streetMembersArray: localStorage.getItem('temp-watch-rez-streetMembersArray'),
             errors: {}
         }
-
         this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
@@ -138,7 +129,7 @@ class WatchCreateStep2RezContainer extends Component {
             optionKey: option,
         })
         localStorage.setItem('temp-watch-rez-'+key, option.value);
-        localStorage.setItem('temp-watch-rez-'+optionKey, JSON.stringify(option));
+        localStorageSetObjectItem(optionKey, option);
         // console.log(this.state); // For debugging purposes only.
     }
 

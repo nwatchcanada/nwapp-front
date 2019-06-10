@@ -10,7 +10,7 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 class WatchCreateStep2RezComponent extends Component {
     render() {
-        const { name, associate, errors, associateOptions, isLoading, onClick, onTextChange, onSelectChange } = this.props;
+        const { name, associate, associateOptions, errors, isLoading, onClick, onTextChange, onSelectChange } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
