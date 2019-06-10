@@ -23,7 +23,7 @@ import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirec
 import DashboardContainer from "./dashboard/dashboardContainer";
 
 import DistrictsListContainer from "./settings/districts/districtsListContainer";
-import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
+import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer"; // Deprecated
 import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
 import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
 import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
@@ -31,10 +31,12 @@ import DistrictCreateStep2BusinessContainer from "./settings/districts/create/di
 import DistrictCreateStep3BusinessContainer from "./settings/districts/create/districtCreateStep3BizContainer";
 import DistrictCreateStep2CommunityCareContainer from "./settings/districts/create/districtCreateStep2ComContainer";
 import DistrictCreateStep3CommunityCareContainer from "./settings/districts/create/districtCreateStep3ComContainer";
-
 import DistrictRetrieveBizContainer from "./settings/districts/retrieve/districtRetrieveBizContainer";
 import DistrictRetrieveComContainer from "./settings/districts/retrieve/districtRetrieveComContainer";
 import DistrictRetrieveRezContainer from "./settings/districts/retrieve/districtRetrieveRezContainer";
+import DistrictUpdateBizContainer from "./settings/districts/update/districtUpdateBizContainer";
+import DistrictUpdateComContainer from "./settings/districts/update/districtUpdateComContainer";
+// import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
@@ -135,6 +137,8 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district-biz/:slug" exact component={DistrictRetrieveBizContainer} />
                                 <Route path="/settings/district-cc/:slug" exact component={DistrictRetrieveComContainer} />
                                 <Route path="/settings/district-rez/:slug" exact component={DistrictRetrieveRezContainer} />
+                                <Route path="/settings/district-biz/:slug/update" exact component={DistrictUpdateBizContainer} />
+                                <Route path="/settings/district-cc/:slug/update" exact component={DistrictUpdateComContainer} />
                                 <Route path="/settings/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route path="/settings/tags" exact component={TagsListContainer} />
                                 <Route path="/settings/tag/add" exact component={TagCreateContainer} />
