@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictUpdateBizComponent from "../../../../components/settings/districts/update/districtUpdateBizComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateInput } from "../../../../validators/districtValidator";
+import { validateBusinessInput } from "../../../../validators/districtValidator";
 
 
 class DistrictUpdateBizContainer extends Component {
@@ -21,10 +21,13 @@ class DistrictUpdateBizContainer extends Component {
         const { slug } = this.props.match.params;
 
         this.state = {
+            slug: slug,
             name: null,
+            description: null,
+            websiteURL: null,
+            logo: null,
             errors: {},
-            isLoading: false,
-            slug: slug
+            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -40,6 +43,17 @@ class DistrictUpdateBizContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // This is where the API updates the state.
+        this.setState({
+            'slug': 'argyle',
+            'icon': 'building',
+            'number': 1,
+            'name': 'Argyle (Biz)',
+            'description': 'This is a business district.',
+            'websiteURL': 'http://google.com',
+            'logo': 'https://o55.ca/wp-content/uploads/2018/02/O55_Logo-Rect.png',
+        });
     }
 
     componentWillUnmount() {
@@ -90,7 +104,7 @@ class DistrictUpdateBizContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateBusinessInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -109,22 +123,16 @@ class DistrictUpdateBizContainer extends Component {
      */
 
     render() {
-        const districtData = {
-            'slug': 'argyle',
-            'icon': 'building',
-            'number': 1,
-            'name': 'Argyle (Biz)',
-            'description': 'This is a business district.',
-            'websiteURL': 'http://google.com',
-            'logo': 'https://o55.ca/wp-content/uploads/2018/02/O55_Logo-Rect.png',
-            'absoluteUrl': '/settings/district-biz/argyle'
-        };
-
-        const { name, errors } = this.state;
+        const { slug, icon, number, name, description, websiteURL, logo, errors } = this.state;
         return (
             <DistrictUpdateBizComponent
-                districtData={districtData}
+                slug={slug}
+                icon={icon}
+                number={number}
                 name={name}
+                description={description}
+                websiteURL={websiteURL}
+                logo={logo}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
