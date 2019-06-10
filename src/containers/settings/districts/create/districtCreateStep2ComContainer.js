@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictCreateStep2ComComponent from "../../../../components/settings/districts/create/districtCreateStep2ComComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateInput, validateCommunityCaresModalSaveInput } from "../../../../validators/districtValidator";
+import { validateCommunityCaresInput, validateCommunityCaresModalSaveInput } from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2CommunityCareContainer extends Component {
@@ -120,7 +120,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateCommunityCaresInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

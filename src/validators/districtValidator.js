@@ -79,6 +79,27 @@ export function validateBusinessInput(data) {
 
 
 /**
+ *  Validator will validate the community cares district create / update form.
+ */
+export function validateCommunityCaresInput(data) {
+    let errors = {};
+
+    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "" || data.name === "null") {
+        errors.name = 'This field is required';
+    }
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "" || data.description === "null") {
+        errors.description = 'This field is required';
+    }
+    console.log(data);
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+/**
  *  Validator will validate the business district create / update form.
  */
 export function validateCommunityCaresModalSaveInput(data) {
