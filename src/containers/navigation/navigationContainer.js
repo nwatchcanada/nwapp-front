@@ -42,6 +42,11 @@ const authenticatedFullMenuData = [
         title: "Associates",
         url: "/associates/active"
     },{
+        id: "full-watches",
+        icon: "shield-alt",
+        title: "Watches",
+        url: "/watches"
+    },{
         id: "full-items",
         icon: "map-pin",
         title: "Items",

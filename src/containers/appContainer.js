@@ -37,6 +37,8 @@ import DistrictUpdateBizContainer from "./settings/districts/update/districtUpda
 import DistrictUpdateComContainer from "./settings/districts/update/districtUpdateComContainer";
 import DistrictUpdateRezContainer from "./settings/districts/update/districtUpdateRezContainer";
 
+import WatchListContainer from "./watches/list/watchListContainer";
+
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
 import TagCreateContainer from "./settings/tags/tagCreateContainer";
@@ -188,6 +190,7 @@ class AppContainer extends React.Component {
                                 <Route path="/tasks/:urlArgument/:slug/update" exact component={TaskUpdateContainer} />
                                 <Route path="/reports" exact component={ReportListContainer} />
                                 <Route path="/settings" exact component={SettingListContainer} />
+                                <Route path="/watches" exact component={WatchListContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
