@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import WatchCreateStep2ComComponent from "../../../components/watches/create/watchCreateStep2ComComponent";
+import WatchCreateStep3RezComponent from "../../../components/watches/create/watchCreateStep3RezComponent";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -9,7 +9,7 @@ import {
 } from '../../../constants/api';
 
 
-class WatchCreateStep2ComContainer extends Component {
+class WatchCreateStep3RezContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -56,7 +56,19 @@ class WatchCreateStep2ComContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        this.props.history.push("/watches/step-3-create-cc");
+        // Save to our browsers memory.
+        localStorage.setItem('temp-district-program', typeOf);
+
+        // Redirect to the next page.
+        if (typeOf === RESIDENCE_TYPE_OF) {
+            this.props.history.push("/watches/step-2-create-rez");
+        }
+        else if (typeOf === BUSINESS_TYPE_OF) {
+            this.props.history.push("/watches/step-2-create-biz");
+        }
+        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
+            this.props.history.push("/watches/step-2-create-cc");
+        }
     }
 
     /**
@@ -66,7 +78,7 @@ class WatchCreateStep2ComContainer extends Component {
 
     render() {
         return (
-            <WatchCreateStep2ComComponent
+            <WatchCreateStep3RezComponent
                 onClick={this.onClick}
             />
         );
@@ -87,4 +99,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(WatchCreateStep2ComContainer);
+)(WatchCreateStep3RezContainer);

@@ -56,19 +56,7 @@ class WatchCreateStep2RezContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Save to our browsers memory.
-        localStorage.setItem('temp-district-program', typeOf);
-
-        // Redirect to the next page.
-        if (typeOf === RESIDENCE_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-rez");
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-biz");
-        }
-        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-cc");
-        }
+        this.props.history.push("/watches/step-3-create-rez");
     }
 
     /**

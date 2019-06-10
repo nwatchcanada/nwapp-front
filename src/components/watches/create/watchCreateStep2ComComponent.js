@@ -11,7 +11,7 @@ import {
 
 class WatchCreateStep2ComComponent extends Component {
     render() {
-        const { onClick } = this.props;
+        const { isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -28,14 +28,18 @@ class WatchCreateStep2ComComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1>Create Watch - Select Type</h1>
+                <h1>Create Watch - Details</h1>
 
                 <div className="row">
                     <div className="step-navigation">
-                        <div id="step-1" className="st-grey active">
-                            <span className="num">1.</span><span className="">Type</span>
+                        <div id="step-1" className="st-grey">
+                            <Link to="/watches/step-1-create">
+                                <span className="num">1.</span><span className="">
+                                    Type
+                                </span>
+                            </Link>
                         </div>
-                        <div id="step-2" className="st-grey">
+                        <div id="step-2" className="st-grey active">
                             <span className="num">2.</span><span className="">Details</span>
                         </div>
                         <div id="step-3" className="st-grey">
@@ -52,7 +56,9 @@ class WatchCreateStep2ComComponent extends Component {
                 </div>
 
                 <div className="form-group">
-
+                    <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                        Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                    </button>
                     <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                         <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>
