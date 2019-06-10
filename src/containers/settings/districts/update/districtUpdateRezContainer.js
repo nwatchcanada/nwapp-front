@@ -59,7 +59,7 @@ class DistrictUpdateRezContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district/"+this.state.slug);
+        this.props.history.push("/settings/district-rez/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -109,9 +109,25 @@ class DistrictUpdateRezContainer extends Component {
      */
 
     render() {
+        const districtData = {
+            'slug': 'argyle',
+            'icon': 'home',
+            'number': 1,
+            'name': 'Argyle (Rez)',
+            'description': 'This is a residential district.',
+            'counselorName': 'Bart Mika',
+            'counselorEmail': 'bart@mikasoftware.com',
+            'counselorPhone': '(111) 222-3333',
+            'cityRoleNumber': '123456',
+            'legalDescription': 'Argyle',
+            'linkToCityWebsite': 'http://google.com',
+            'absoluteUrl': '/settings/district-rez/argyle'
+        };
+
         const { name, errors } = this.state;
         return (
             <DistrictUpdateRezComponent
+                districtData={districtData}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}

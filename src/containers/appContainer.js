@@ -36,7 +36,7 @@ import DistrictRetrieveComContainer from "./settings/districts/retrieve/district
 import DistrictRetrieveRezContainer from "./settings/districts/retrieve/districtRetrieveRezContainer";
 import DistrictUpdateBizContainer from "./settings/districts/update/districtUpdateBizContainer";
 import DistrictUpdateComContainer from "./settings/districts/update/districtUpdateComContainer";
-// import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer";
+import DistrictUpdateRezContainer from "./settings/districts/update/districtUpdateRezContainer";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
@@ -139,6 +139,7 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district-rez/:slug" exact component={DistrictRetrieveRezContainer} />
                                 <Route path="/settings/district-biz/:slug/update" exact component={DistrictUpdateBizContainer} />
                                 <Route path="/settings/district-cc/:slug/update" exact component={DistrictUpdateComContainer} />
+                                <Route path="/settings/district-rez/:slug/update" exact component={DistrictUpdateRezContainer} />
                                 <Route path="/settings/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route path="/settings/tags" exact component={TagsListContainer} />
                                 <Route path="/settings/tag/add" exact component={TagCreateContainer} />

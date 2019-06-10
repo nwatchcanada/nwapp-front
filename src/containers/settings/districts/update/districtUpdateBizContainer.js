@@ -59,7 +59,7 @@ class DistrictUpdateBizContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district/"+this.state.slug);
+        this.props.history.push("/settings/district-biz/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -109,9 +109,21 @@ class DistrictUpdateBizContainer extends Component {
      */
 
     render() {
+        const districtData = {
+            'slug': 'argyle',
+            'icon': 'building',
+            'number': 1,
+            'name': 'Argyle (Biz)',
+            'description': 'This is a business district.',
+            'websiteURL': 'http://google.com',
+            'logo': 'https://o55.ca/wp-content/uploads/2018/02/O55_Logo-Rect.png',
+            'absoluteUrl': '/settings/district-biz/argyle'
+        };
+
         const { name, errors } = this.state;
         return (
             <DistrictUpdateBizComponent
+                districtData={districtData}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}

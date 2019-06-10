@@ -59,7 +59,7 @@ class DistrictUpdateComContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district/"+this.state.slug);
+        this.props.history.push("/settings/district-cc/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -109,9 +109,32 @@ class DistrictUpdateComContainer extends Component {
      */
 
     render() {
+        const districtData = {
+            'slug': 'argyle',
+            'icon': 'university',
+            'number': 1,
+            'name': 'Argyle',
+            'description': 'This is a community cares district.',
+            'streetsArray': [
+                {
+                    'streetAddress': '240 First Street',
+                    'streetNumber': '240',
+                    'streetName': 'First',
+                    'streetType': 'Street',
+                },{
+                    'streetAddress': '51 Downtown Avenue',
+                    'streetNumber': '51',
+                    'streetName': 'Downtown',
+                    'streetType': 'Avenue',
+                }
+            ],
+            'absoluteUrl': '/settings/district/argyle'
+        };
+
         const { name, errors } = this.state;
         return (
             <DistrictUpdateComComponent
+                districtData={districtData}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}

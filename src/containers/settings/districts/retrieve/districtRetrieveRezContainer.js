@@ -75,7 +75,7 @@ class DistrictRetrieveRezContainer extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/settings/district/"+this.state.slug+"/update");
+        this.props.history.push("/settings/district-rez/"+this.state.slug+"/update");
     }
 
     /**

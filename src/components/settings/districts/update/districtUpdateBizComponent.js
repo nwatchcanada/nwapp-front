@@ -9,7 +9,7 @@ import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 
 class DistrictUpdateBizComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { districtData, name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -24,7 +24,9 @@ class DistrictUpdateBizComponent extends Component {
                             <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/district/argyle"><i className="fas fa-map"></i>&nbsp;Argyle</Link>
+                            <Link to={`/settings/district-biz/${districtData.slug}`}>
+                                <i className="fas fa-building"></i>&nbsp;{districtData.name}
+                            </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -55,7 +57,7 @@ class DistrictUpdateBizComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/settings/district/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/settings/district-biz/${districtData.slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>
