@@ -90,15 +90,14 @@ class WatchCreateStep2RezContainer extends Component {
     }
 
     onSelectChange(option) {
-        const key = [option.selectName];
         const optionKey = [option.selectName]+"Option";
         this.setState({
-            key: option.value,
+            [option.selectName]: option.value,
             optionKey: option,
-        })
-        localStorage.setItem('temp-watch-rez-'+key, option.value);
+        });
+        localStorage.setItem('temp-watch-rez-'+[option.selectName], option.value);
         localStorageSetObjectItem(optionKey, option);
-        // console.log(this.state); // For debugging purposes only.
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onClick(e) {
@@ -124,7 +123,7 @@ class WatchCreateStep2RezContainer extends Component {
      */
 
     render() {
-        const { name, associate, district, errors } = this.state;
+        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors } = this.state;
 
         const associateListObject = {
             results: [
@@ -159,10 +158,10 @@ class WatchCreateStep2RezContainer extends Component {
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}
                 districtOptions={getDistrictReactSelectOptions(districtListObject)}
-                primaryAreaCoordinator={district}
-                primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject)}
-                secondaryAreaCoordinator={district}
-                secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject)}
+                primaryAreaCoordinator={primaryAreaCoordinator}
+                primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
+                secondaryAreaCoordinator={secondaryAreaCoordinator}
+                secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
