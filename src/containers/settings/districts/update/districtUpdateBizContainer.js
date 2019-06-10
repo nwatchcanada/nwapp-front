@@ -32,6 +32,7 @@ class DistrictUpdateBizContainer extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -116,6 +117,27 @@ class DistrictUpdateBizContainer extends Component {
         }
     }
 
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onDrop | file", file);
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // For debugging purposes.
+        console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+
+        // Update our local state to update the GUI.
+        this.setState({
+            logo: fileWithPreview
+        })
+    }
 
     /**
      *  Main render function
