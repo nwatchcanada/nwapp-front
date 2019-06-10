@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import WatchCreateStep1Component from "../../../components/watches/create/watchCreateStep1Component";
+import WatchCreateStep2BizComponent from "../../../components/watches/create/watchCreateStep2BizComponent";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -9,7 +9,7 @@ import {
 } from '../../../constants/api';
 
 
-class WatchCreateStep1Container extends Component {
+class WatchCreateStep2BizContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -78,7 +78,7 @@ class WatchCreateStep1Container extends Component {
 
     render() {
         return (
-            <WatchCreateStep1Component
+            <WatchCreateStep2BizComponent
                 onClick={this.onClick}
             />
         );
@@ -99,4 +99,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(WatchCreateStep1Container);
+)(WatchCreateStep2BizContainer);
