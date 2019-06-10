@@ -3,6 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Select from 'react-select';
 import shortid from "shortid";
+import PropTypes from 'prop-types';
 
 
 /**
@@ -28,7 +29,7 @@ export const BootstrapSingleSelect = ({
     value = null,
     helpText,
     error,
-    onSelectChange
+    onSelectChange,
 }) => {
     const id = shortid.generate();
 
@@ -37,6 +38,22 @@ export const BootstrapSingleSelect = ({
 
     const selectedOption = getSelectedOption(options, value)
 
+    const customStyles = {
+        container: (base) => ({
+            ...base,
+            fontSize: '1rem'
+        }),
+        control: (base, state) => ({
+            ...base,
+            borderColor: error ? 'red': '#007bff',
+            boxShadow: error ? state.isFocused ? '0 0 0 2px rgba(255,0,0,0.3)' : null : state.isFocused ? '0 0 0 2px rgba(0,123,255,0.3)' : null,
+            "&:hover": {
+                borderColor: error ? 'red': '#007bff'
+            }
+        })
+    }
+    // console.log("error: ", error);
+
     // Render our output for this component.
     return (
         <div className={classnames("form-group", { 'has-error': error } )}>
@@ -44,13 +61,14 @@ export const BootstrapSingleSelect = ({
 
             <Select
                 key={id}
-                className={classnames('form-control', { 'is-invalid': error })}
+                className={classnames('react-select', { 'is-invalid': error })}
                 name={name}
                 value={selectedOption}
                 onChange={onSelectChange}
                 options={options}
+                styles={customStyles}
             />
-            {error && <span className="help-block">{error}</span>}
+            {error && <div className="invalid-feedback" style={{display: 'block'}}>{error}</div>}
         </div>
     )
 }
