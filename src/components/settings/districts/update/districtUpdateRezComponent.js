@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
 class DistrictUpdateRezComponent extends Component {
     render() {
-        const { districtData, name, errors, onTextChange, isLoading, onClick } = this.props;
+        const {
+            slug, name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading,
+            onTextChange, onClick
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -24,8 +28,8 @@ class DistrictUpdateRezComponent extends Component {
                             <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/settings/district-rez/${districtData.slug}`}>
-                                <i className="fas fa-home"></i>&nbsp;{districtData.name}
+                            <Link to={`/settings/district-rez/${slug}`}>
+                                <i className="fas fa-home"></i>&nbsp;{name}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -53,11 +57,90 @@ class DistrictUpdateRezComponent extends Component {
                                 type="text"
                             />
 
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please set the district description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the residential district."
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.counselorName}
+                                label="Counselor Name (*)"
+                                onChange={onTextChange}
+                                value={counselorName}
+                                name="counselorName"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.counselorEmail}
+                                label="Counselor Email (*)"
+                                onChange={onTextChange}
+                                value={counselorEmail}
+                                name="counselorEmail"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.counselorPhone}
+                                label="Counselor Phone (*)"
+                                onChange={onTextChange}
+                                value={counselorPhone}
+                                name="counselorPhone"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.cityRoleNumber}
+                                label="City Role Number (*)"
+                                onChange={onTextChange}
+                                value={cityRoleNumber}
+                                name="cityRoleNumber"
+                                type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="legalDescription"
+                                borderColour="border-primary"
+                                label="Legal Description (*)"
+                                placeholder="Please set the legal district description"
+                                rows="5"
+                                value={legalDescription}
+                                helpText="This is the legal description of the residential district."
+                                onChange={onTextChange}
+                                error={errors.legalDescription}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.linkToCityWebsite}
+                                label="Link to City Website (*)"
+                                onChange={onTextChange}
+                                value={linkToCityWebsite}
+                                name="linkToCityWebsite"
+                                type="text"
+                            />
+
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to={`/settings/district-rez/${districtData.slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/settings/district-rez/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>

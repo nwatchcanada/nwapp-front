@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import DistrictUpdateRezComponent from "../../../../components/settings/districts/update/districtUpdateRezComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateInput } from "../../../../validators/districtValidator";
+import { validateResidentialInput } from "../../../../validators/districtValidator";
 
 
 class DistrictUpdateRezContainer extends Component {
@@ -21,10 +21,18 @@ class DistrictUpdateRezContainer extends Component {
         const { slug } = this.props.match.params;
 
         this.state = {
+            slug: slug,
+            icon: null,
+            number: 0,
             name: null,
+            description: null,
+            counselorName: null,
+            counselorEmail: null,
+            counselorPhone: null,
+            cityRoleNumber: null,
+            legalDescription: null,
+            linkToCityWebsite: null,
             errors: {},
-            isLoading: false,
-            slug: slug
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -40,6 +48,22 @@ class DistrictUpdateRezContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // THIS IS WHERE YOUR API SAVES THE DATA.
+        this.setState({
+            slug: 'argyle-rez',
+            icon: 'home',
+            number: 1,
+            name: 'Argyle (Rez)',
+            description: 'This is a residential district.',
+            counselorName: 'Bart Mika',
+            counselorEmail: 'bart@mikasoftware.com',
+            counselorPhone: '(111) 222-3333',
+            cityRoleNumber: '123456',
+            legalDescription: 'Argyle',
+            linkToCityWebsite: 'http://google.com',
+            errors: {},
+        });
     }
 
     componentWillUnmount() {
@@ -90,7 +114,7 @@ class DistrictUpdateRezContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateResidentialInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -109,27 +133,20 @@ class DistrictUpdateRezContainer extends Component {
      */
 
     render() {
-        const districtData = {
-            'slug': 'argyle',
-            'icon': 'home',
-            'number': 1,
-            'name': 'Argyle (Rez)',
-            'description': 'This is a residential district.',
-            'counselorName': 'Bart Mika',
-            'counselorEmail': 'bart@mikasoftware.com',
-            'counselorPhone': '(111) 222-3333',
-            'cityRoleNumber': '123456',
-            'legalDescription': 'Argyle',
-            'linkToCityWebsite': 'http://google.com',
-            'absoluteUrl': '/settings/district-rez/argyle'
-        };
-
-        const { name, errors } = this.state;
+        const { slug, name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading } = this.state;
         return (
             <DistrictUpdateRezComponent
-                districtData={districtData}
+                slug={slug}
                 name={name}
+                description={description}
+                counselorName={counselorName}
+                counselorEmail={counselorEmail}
+                counselorPhone={counselorPhone}
+                cityRoleNumber={cityRoleNumber}
+                legalDescription={legalDescription}
+                linkToCityWebsite={linkToCityWebsite}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />
