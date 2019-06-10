@@ -11,7 +11,9 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 class WatchCreateStep2RezComponent extends Component {
     render() {
         const {
-            name, associate, associateOptions, district, districtOptions, errors, isLoading, onClick, onTextChange, onSelectChange
+            name, associate, associateOptions, district, districtOptions,
+            primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions,
+            errors, isLoading, onClick, onTextChange, onSelectChange
         } = this.props;
         return (
             <main id="main" role="main">
@@ -93,6 +95,26 @@ class WatchCreateStep2RezComponent extends Component {
                                 options={districtOptions}
                                 value={district}
                                 error={errors.district}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Primary Area Coordinator (*)"
+                                name="primaryAreaCoordinator"
+                                defaultOptionLabel="Please select the primary area coordinator."
+                                options={primaryAreaCoordinatorOptions}
+                                value={primaryAreaCoordinator}
+                                error={errors.primaryAreaCoordinator}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Secondary Area Coordinator (*)"
+                                name="secondaryAreaCoordinator"
+                                defaultOptionLabel="Please select the secondary area coordinator."
+                                options={secondaryAreaCoordinatorOptions}
+                                value={secondaryAreaCoordinator}
+                                error={errors.secondaryAreaCoordinator}
                                 onSelectChange={onSelectChange}
                             />
 

@@ -7,6 +7,7 @@ import WatchCreateStep2RezComponent from "../../../components/watches/create/wat
 import { localStorageGetObjectItem, localStorageSetObjectItem } from '../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
+import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
 
 
 class WatchCreateStep2RezContainer extends Component {
@@ -24,7 +25,9 @@ class WatchCreateStep2RezContainer extends Component {
             district: localStorage.getItem('temp-watch-rez-district'),
             districtOption: localStorageGetObjectItem('temp-watch-rez-districtOption'),
             primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
+            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
+            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
             streetMembersArray: localStorage.getItem('temp-watch-rez-streetMembersArray'),
             errors: {}
         }
@@ -136,8 +139,16 @@ class WatchCreateStep2RezContainer extends Component {
             results: [
                 {'slug': 'wanchai', 'name': 'Wanchai Market'},
                 {'slug': 'versalife', 'name': 'VersaLife'},
-                {'slug': 'new-york', 'name': 'New York'},
+                {'slug': 'battery-park', 'name': 'Battery Park'},
                 {'slug': 'area-51', 'name': 'Area 51'}
+            ]
+        }; // TODO: REPLACTE WITH API DATA.
+
+        const areaCoordinatorListObject = {
+            results: [
+                {'slug': 'tracer-tong', 'name': 'Tracer Tong'},
+                {'slug': 'icarus', 'name': 'Icarus'},
+                {'slug': 'datalus', 'name': 'Datalus'},
             ]
         }; // TODO: REPLACTE WITH API DATA.
 
@@ -148,6 +159,10 @@ class WatchCreateStep2RezContainer extends Component {
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}
                 districtOptions={getDistrictReactSelectOptions(districtListObject)}
+                primaryAreaCoordinator={district}
+                primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject)}
+                secondaryAreaCoordinator={district}
+                secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject)}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}

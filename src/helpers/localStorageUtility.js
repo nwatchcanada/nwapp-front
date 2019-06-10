@@ -15,5 +15,5 @@ export function localStorageGetObjectItem(key) {
 }
 
 export function localStorageSetObjectItem(key, value) {
-    this.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
 }
