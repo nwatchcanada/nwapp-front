@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
-import isEmpty from 'lodash/isEmpty';
 
 import { validateResidentialInput } from "../../../validators/watchValidator";
 import WatchCreateStep2RezComponent from "../../../components/watches/create/watchCreateStep2RezComponent";
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
 import { localStorageGetObjectItem, localStorageSetObjectItem } from '../../../helpers/localStorageUtility';
+import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
+import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 
 
 class WatchCreateStep2RezContainer extends Component {
@@ -25,6 +21,8 @@ class WatchCreateStep2RezContainer extends Component {
             name: localStorage.getItem('temp-watch-rez-name'),
             associate: localStorage.getItem('temp-watch-rez-associate'),
             associateOption: localStorageGetObjectItem('temp-watch-rez-associateOption'),
+            district: localStorage.getItem('temp-watch-rez-district'),
+            districtOption: localStorageGetObjectItem('temp-watch-rez-districtOption'),
             primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
             secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
             streetMembersArray: localStorage.getItem('temp-watch-rez-streetMembersArray'),
@@ -33,39 +31,6 @@ class WatchCreateStep2RezContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-    }
-
-    /**
-     * Utility function takes the API data and converts it to HTML dropdown
-     * options which will be consumed by the `react-select` library elements.
-     */
-    getAssociateOptions() {
-        const associateOptions = [];
-        // const associateList = this.props.cropLifeCycleStageList; // TODO: REPLACE WITH API.
-        const associateList = {
-            results: [
-                {'slug': 'bob-page', 'name': 'Bob Page'},
-                {'slug': 'jc-denton', 'name': 'JC Denton'},
-                {'slug': 'paul-denton', 'name': 'Paul Denton'},
-                {'slug': 'gunter-herman', 'name': 'Gunter Herman'}
-            ]
-        };
-        const isNotProductionsEmpty = isEmpty(associateList) === false;
-        if (isNotProductionsEmpty) {
-            const results = associateList.results;
-            const isResultsNotEmpty = isEmpty(results) === false;
-            if (isResultsNotEmpty) {
-                for (let i = 0; i < results.length; i++) {
-                    let associate = results[i];
-                    associateOptions.push({
-                        selectName: "associate",
-                        value: associate.slug,
-                        label: associate.name
-                    });
-                }
-            }
-        }
-        return associateOptions;
     }
 
     /**
@@ -156,13 +121,34 @@ class WatchCreateStep2RezContainer extends Component {
      */
 
     render() {
-        const { name, associate, errors } = this.state;
+        const { name, associate, district, errors } = this.state;
+
+        const associateListObject = {
+            results: [
+                {'slug': 'bob-page', 'name': 'Bob Page'},
+                {'slug': 'jc-denton', 'name': 'JC Denton'},
+                {'slug': 'paul-denton', 'name': 'Paul Denton'},
+                {'slug': 'gunter-herman', 'name': 'Gunter Herman'}
+            ]
+        }; // TODO: REPLACTE WITH API DATA.
+
+        const districtListObject = {
+            results: [
+                {'slug': 'wanchai', 'name': 'Wanchai Market'},
+                {'slug': 'versalife', 'name': 'VersaLife'},
+                {'slug': 'new-york', 'name': 'New York'},
+                {'slug': 'area-51', 'name': 'Area 51'}
+            ]
+        }; // TODO: REPLACTE WITH API DATA.
+
         return (
             <WatchCreateStep2RezComponent
                 name={name}
                 associate={associate}
+                associateOptions={getAssociateReactSelectOptions(associateListObject)}
+                district={district}
+                districtOptions={getDistrictReactSelectOptions(districtListObject)}
                 errors={errors}
-                associateOptions={this.getAssociateOptions()}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

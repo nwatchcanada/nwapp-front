@@ -10,7 +10,9 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 class WatchCreateStep2RezComponent extends Component {
     render() {
-        const { name, associate, associateOptions, errors, isLoading, onClick, onTextChange, onSelectChange } = this.props;
+        const {
+            name, associate, associateOptions, district, districtOptions, errors, isLoading, onClick, onTextChange, onSelectChange
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -81,6 +83,16 @@ class WatchCreateStep2RezComponent extends Component {
                                 options={associateOptions}
                                 value={associate}
                                 error={errors.associate}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="District (*)"
+                                name="district"
+                                defaultOptionLabel="Please select the residential district."
+                                options={districtOptions}
+                                value={district}
+                                error={errors.district}
                                 onSelectChange={onSelectChange}
                             />
 
