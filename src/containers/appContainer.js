@@ -38,6 +38,7 @@ import DistrictUpdateComContainer from "./settings/districts/update/districtUpda
 import DistrictUpdateRezContainer from "./settings/districts/update/districtUpdateRezContainer";
 
 import WatchListContainer from "./watches/list/watchListContainer";
+import WatchCreateStepContainer from "./watches/create/watchCreateStep1Container";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
@@ -191,6 +192,7 @@ class AppContainer extends React.Component {
                                 <Route path="/reports" exact component={ReportListContainer} />
                                 <Route path="/settings" exact component={SettingListContainer} />
                                 <Route path="/watches" exact component={WatchListContainer} />
+                                <Route path="/watches/step-1-create" exact component={WatchCreateStepContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
