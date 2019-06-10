@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { validateCommunityCaresInput } from "../../../validators/watchValidator";
 import WatchCreateStep3ComComponent from "../../../components/watches/create/watchCreateStep3ComComponent";
 import {
     RESIDENCE_TYPE_OF,

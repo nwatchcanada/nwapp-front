@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WatchCreateStep2BizComponent from "../../../components/watches/create/watchCreateStep2BizComponent";
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+// import {
+//     RESIDENCE_TYPE_OF,
+//     BUSINESS_TYPE_OF,
+//     COMMUNITY_CARES_TYPE_OF
+// } from '../../../constants/api';
 
 
 class WatchCreateStep2BizContainer extends Component {

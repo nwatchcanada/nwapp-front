@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { validateBusinessInput } from "../../../validators/watchValidator";
 import WatchCreateStep3BizComponent from "../../../components/watches/create/watchCreateStep3BizComponent";
 import {
     RESIDENCE_TYPE_OF,

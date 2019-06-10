@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Scroll from 'react-scroll';
 
+import { validateResidentialInput } from "../../../validators/watchValidator";
 import WatchCreateStep2RezComponent from "../../../components/watches/create/watchCreateStep2RezComponent";
 import {
     RESIDENCE_TYPE_OF,
@@ -18,7 +20,11 @@ class WatchCreateStep2RezContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            typeOf: null,
+            name: localStorage.getItem('temp-watch-rez-name'),
+            associate: localStorage.getItem('temp-watch-rez-associate'),
+            primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
+            secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
+            streetMembersArray: localStorage.getItem('temp-watch-rez-streetMembersArray'),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -47,16 +53,51 @@ class WatchCreateStep2RezContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback(district) {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "District has been successfully created.");
+        this.props.history.push("/settings/district/step-3-create-rez");
+    }
+
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onClick(e, typeOf) {
+    onTextChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+        localStorage.setItem('temp-watch-rez-'+[e.target.name], e.target.value);
+    }
+
+    onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        this.props.history.push("/watches/step-3-create-rez");
+        // Perform client-side validation.
+        const { errors, isValid } = validateResidentialInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
     }
 
     /**
