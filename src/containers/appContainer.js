@@ -23,7 +23,6 @@ import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirec
 import DashboardContainer from "./dashboard/dashboardContainer";
 
 import DistrictsListContainer from "./settings/districts/districtsListContainer";
-import DistrictUpdateContainer from "./settings/districts/districtUpdateContainer"; // Deprecated
 import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
 import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
 import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
@@ -140,7 +139,6 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district-biz/:slug/update" exact component={DistrictUpdateBizContainer} />
                                 <Route path="/settings/district-cc/:slug/update" exact component={DistrictUpdateComContainer} />
                                 <Route path="/settings/district-rez/:slug/update" exact component={DistrictUpdateRezContainer} />
-                                <Route path="/settings/district/:slug/update" exact component={DistrictUpdateContainer} />
                                 <Route path="/settings/tags" exact component={TagsListContainer} />
                                 <Route path="/settings/tag/add" exact component={TagCreateContainer} />
                                 <Route path="/settings/tag/:slug" exact component={TagRetrieveContainer} />
