@@ -2,16 +2,19 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-// import {
-//     RESIDENCE_TYPE_OF,
-//     BUSINESS_TYPE_OF,
-//     COMMUNITY_CARES_TYPE_OF
-// } from '../../../constants/api';
+import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 
 class WatchCreateStep2BizComponent extends Component {
     render() {
-        const { isLoading, onClick } = this.props;
+        const {
+            name, associate, associateOptions, district, districtOptions,
+            primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions,
+            errors, isLoading, onClick, onTextChange, onSelectChange,
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -51,6 +54,68 @@ class WatchCreateStep2BizComponent extends Component {
                         </div>
                         */ }
                     </div>
+                </div>
+
+                <div className="col-md-5 mx-auto mt-2">
+                    <h3 className="pt-4 pb-2 text-center">Details</h3>
+                    <form id="business-form" method="post" className="needs-validation" action="" noValidate>
+                        <div className="form-group">
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.name}
+                                label="Name (*)"
+                                onChange={onTextChange}
+                                value={name}
+                                name="name"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Associate (*)"
+                                name="associate"
+                                defaultOptionLabel="Please select the associate."
+                                options={associateOptions}
+                                value={associate}
+                                error={errors.associate}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="District (*)"
+                                name="district"
+                                defaultOptionLabel="Please select the residential district."
+                                options={districtOptions}
+                                value={district}
+                                error={errors.district}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Primary Area Coordinator (*)"
+                                name="primaryAreaCoordinator"
+                                defaultOptionLabel="Please select the primary area coordinator."
+                                options={primaryAreaCoordinatorOptions}
+                                value={primaryAreaCoordinator}
+                                error={errors.primaryAreaCoordinator}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Secondary Area Coordinator (*)"
+                                name="secondaryAreaCoordinator"
+                                defaultOptionLabel="Please select the secondary area coordinator."
+                                options={secondaryAreaCoordinatorOptions}
+                                value={secondaryAreaCoordinator}
+                                error={errors.secondaryAreaCoordinator}
+                                onSelectChange={onSelectChange}
+                            />
+                        </div>
+                    </form>
                 </div>
 
                 <div className="form-group">
