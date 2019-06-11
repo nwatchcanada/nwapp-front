@@ -142,12 +142,14 @@ class WatchUpdateRezContainer extends Component {
     }
 
     onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
+        const optionKey = [option.selectName].toString().concat("Option");
         this.setState({
             [option.selectName]: option.value,
             optionKey: option,
         });
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+
+        // For debugging purposes only.
+        console.log("SELECTED\noptionKey", optionKey, "\noption", option, "\n");
     }
 
     onClick(e) {
