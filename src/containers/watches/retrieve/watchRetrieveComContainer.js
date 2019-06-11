@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WatchRetrieveComComponent from "../../../components/watches/retrieve/watchRetrieveComComponent";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class WatchRetrieveComContainer extends Component {
@@ -69,6 +69,9 @@ class WatchRetrieveComContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
+
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
     }
 
     /**
@@ -123,8 +126,8 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
         }
     }
 }

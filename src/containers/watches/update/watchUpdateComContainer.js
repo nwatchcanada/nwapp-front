@@ -110,7 +110,6 @@ class WatchUpdateComContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('temp-watch-com-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {

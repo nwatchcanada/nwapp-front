@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WatchRetrieveRezComponent from "../../../components/watches/retrieve/watchRetrieveRezComponent";
-import {
-    localStorageGetObjectItem, localStorageGetArrayItem
-} from '../../../helpers/localStorageUtility';
 import { RESIDENCE_TYPE_OF } from '../../../constants/api';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class WatchRetrieveRezContainer extends Component {
@@ -19,16 +16,17 @@ class WatchRetrieveRezContainer extends Component {
         super(props);
         this.state = {
             program: RESIDENCE_TYPE_OF,
-            name: localStorage.getItem('temp-watch-rez-name'),
-            associate: localStorage.getItem('temp-watch-rez-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-rez-associateOption'),
-            district: localStorage.getItem('temp-watch-rez-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-rez-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
-            streetMembership: localStorageGetArrayItem('temp-watch-rez-streetMembership'),
+            slug: "carling",
+            name: "",
+            associate: "",
+            associateOption: "",
+            district: "",
+            districtOption: "",
+            primaryAreaCoordinator: "",
+            primaryAreaCoordinatorOption: "",
+            secondaryAreaCoordinator: "",
+            secondaryAreaCoordinatorOption: "",
+            streetMembership: [],
             errors: {},
         }
 
@@ -42,6 +40,39 @@ class WatchRetrieveRezContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // REPLACE THIS WITH API ENDPOINT.
+        this.setState({
+            name: "Hells Kitchen",
+            description: "This is a test watch",
+            associate: "jc-denton",
+            associateOption: {
+                selectName: "associate", value: "jc-denton", label: "JC Denton"
+            },
+            district: "new-york",
+            districtOption: {
+                selectName: "district", value: "new-york", label: "New York"
+            },
+            primaryAreaCoordinator: "walter-simons",
+            primaryAreaCoordinatorOption: {
+                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
+            },
+            secondaryAreaCoordinator: "joseph-manderly",
+            secondaryAreaCoordinatorOption: {
+                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
+            },
+            streetMembership: [
+                {
+                    streetAddress: "Singleton Avenue N from 1 to 1000",
+                    streetDirection: "N",
+                    streetName: "Singleton",
+                    streetNumberFinish: "1000",
+                    streetNumberStart: "1",
+                    streetType: "Avenue"
+                }
+            ],
+            errors: {},
+        });
     }
 
     componentWillUnmount() {
@@ -51,6 +82,9 @@ class WatchRetrieveRezContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
+
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
     }
 
     /**
@@ -101,8 +135,8 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
         }
     }
 }
