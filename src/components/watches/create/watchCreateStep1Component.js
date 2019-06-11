@@ -59,7 +59,7 @@ class WatchCreateStep1Component extends Component {
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Residential</h3>
-                                <p className="card-text">Add a residential district</p>
+                                <p className="card-text">Add a residential watch</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, RESIDENCE_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
@@ -73,7 +73,7 @@ class WatchCreateStep1Component extends Component {
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Business</h3>
-                                <p className="card-text">Add a business district</p>
+                                <p className="card-text">Add a business watch</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, BUSINESS_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
@@ -87,7 +87,7 @@ class WatchCreateStep1Component extends Component {
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Community Cares</h3>
-                                <p className="card-text">Add a community cares district</p>
+                                <p className="card-text">Add a community cares watch</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, COMMUNITY_CARES_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>

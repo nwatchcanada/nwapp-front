@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import { validateResidentialInput } from "../../../validators/watchValidator";
+import {
+    validateResidentialInput, validateResidentialModalSaveInput
+} from "../../../validators/watchValidator";
 import WatchCreateStep2RezComponent from "../../../components/watches/create/watchCreateStep2RezComponent";
-import { localStorageGetObjectItem, localStorageSetObjectItem } from '../../../helpers/localStorageUtility';
+import { localStorageGetObjectItem, localStorageSetObjectItem, localStorageGetArrayItem } from '../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
@@ -29,7 +31,7 @@ class WatchCreateStep2RezContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
-            streetMembershipArray: localStorageGetObjectItem('temp-watch-rez-streetMembershipArray'),
+            streetMembershipArray: localStorageGetArrayItem('temp-watch-rez-streetMembershipArray'),
             errors: {},
 
             // Modal related.
@@ -134,18 +136,90 @@ class WatchCreateStep2RezContainer extends Component {
         }
     }
 
-    onAddClick() {
-        this.setState({
-            showModal: true
-        })
+    onAddClick(e) {
+        e.preventDefault();  // Prevent the default HTML form submit code to run on the browser side.
+        this.setState({showModal: true});  // Load the modal.
     }
 
-    onRemoveClick() {
+    onRemoveClick(streetAddress) {
+        const streetMembershipArray = this.state.streetMembershipArray;
+        for (let i = 0; i < streetMembershipArray.length; i++) {
+            let row = streetMembershipArray[i];
 
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(streetAddress);
+
+            if (row.streetAddress === streetAddress) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredItems = streetMembershipArray.slice(
+                    0, i
+                ).concat(
+                    streetMembershipArray.slice(
+                        i + 1, streetMembershipArray.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    streetMembershipArray: filteredItems
+                });
+
+                // Save our table data.
+                localStorageSetObjectItem("temp-watch-rez-streetMembershipArray", filteredItems);
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
     }
 
-    onSaveClick() {
+    onSaveClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
 
+        // Perform client-side validation.
+        const { errors, isValid } = validateResidentialModalSaveInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            // Append our array.
+            let a = this.state.streetMembershipArray.slice(); //creates the clone of the state
+            const streetAddress = this.state.streetNumberStart+" "+this.state.streetNumberFinish+" "+this.state.streetName+" "+this.state.streetType+this.state.streetDirection;
+            a.push({
+                streetAddress: streetAddress,
+                streetNumberStart: this.state.streetNumberStart,
+                streetNumberFinish: this.state.streetNumberFinish,
+                streetName: this.state.streetName,
+                streetType: this.state.streetType,
+                streetDirection: this.state.streetDirection,
+            });
+
+            // Update our state.
+            this.setState({
+                showModal: false,
+                errors: {},
+                streetMembershipArray: a,
+            })
+
+            // Save our table data.
+            localStorageSetObjectItem("temp-watch-rez-streetMembershipArray", a);
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.setState({
+                errors: errors
+            })
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
+        }
     }
 
     onCloseClick() {

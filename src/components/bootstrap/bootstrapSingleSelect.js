@@ -3,7 +3,6 @@ import React from 'react';
 import classnames from 'classnames';
 import Select from 'react-select';
 import shortid from "shortid";
-import PropTypes from 'prop-types';
 
 
 /**

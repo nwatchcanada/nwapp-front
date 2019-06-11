@@ -191,12 +191,12 @@ class StreetMembershipRow extends Component {
 
 class StreetMembershipTable extends Component {
     render() {
-        const { streetsArray, onAddClick, onRemoveClick } = this.props;
+        const { streetMembershipArray, onAddClick, onRemoveClick } = this.props;
 
         let elements = [];
-        if (streetsArray !== undefined && streetsArray !== null) {
-            for (let i = 0; i < streetsArray.length; i++) {
-                let rowData = streetsArray[i];
+        if (streetMembershipArray !== undefined && streetMembershipArray !== null) {
+            for (let i = 0; i < streetMembershipArray.length; i++) {
+                let rowData = streetMembershipArray[i];
                 if (rowData !== null && rowData !== undefined) {
                     elements.push(
                         <StreetMembershipRow

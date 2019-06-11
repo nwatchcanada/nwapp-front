@@ -14,6 +14,15 @@ export function localStorageGetObjectItem(key) {
     return anObject;
 }
 
+export function localStorageGetArrayItem(key) {
+    const stringifiedObject = localStorage.getItem(key);
+    let anObject = JSON.parse(stringifiedObject);
+    if (anObject  === undefined || anObject === null) {
+        anObject = [];
+    }
+    return anObject;
+}
+
 export function localStorageSetObjectItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
