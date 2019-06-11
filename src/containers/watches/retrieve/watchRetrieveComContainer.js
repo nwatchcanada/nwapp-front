@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Scroll from 'react-scroll';
 
 import WatchRetrieveComComponent from "../../../components/watches/retrieve/watchRetrieveComComponent";
 import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
@@ -55,23 +54,6 @@ class WatchRetrieveComContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback() {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Community cares watch has been successfully created.");
-        this.props.history.push("/watches");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
 
     /**
      *  Event handling functions
@@ -81,7 +63,7 @@ class WatchRetrieveComContainer extends Component {
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.onSuccessfulSubmissionCallback();
+        this.props.history.push("/watch-cc/byron/update");
     }
 
     /**

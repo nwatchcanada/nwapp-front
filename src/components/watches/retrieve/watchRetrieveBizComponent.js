@@ -23,7 +23,7 @@ export default class WatchRetrieveBizComponent extends Component {
                 </nav>
 
                 <h1>
-                    <i className="fas fa-building"></i>&nbsp;Business Watch
+                    <i className="fas fa-building"></i>&nbsp;{name}
                 </h1>
 
                 <div className="row mt-4 pt-3 mb-4 pb-2">
@@ -63,10 +63,10 @@ export default class WatchRetrieveBizComponent extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check"></i>&nbsp;Submit
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    <i className="fas fa-edit"></i>&nbsp;Update
                                 </button>
-                                <Link to="/watches/step-2-create-biz" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/watches" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

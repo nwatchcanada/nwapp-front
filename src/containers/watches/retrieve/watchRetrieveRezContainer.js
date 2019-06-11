@@ -64,9 +64,7 @@ class WatchRetrieveRezContainer extends Component {
      */
 
     onClick(e, typeOf) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Residential watch has been successfully created.");
-        this.props.history.push("/watches");
+        this.props.history.push("/watch-rez/carling/update");
     }
 
     /**
