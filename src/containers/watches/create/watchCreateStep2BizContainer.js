@@ -21,7 +21,6 @@ class WatchCreateStep2BizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // Page related.
             name: localStorage.getItem('temp-watch-biz-name'),
             associate: localStorage.getItem('temp-watch-biz-associate'),
             associateOption: localStorageGetObjectItem('temp-watch-biz-associateOption'),

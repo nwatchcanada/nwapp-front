@@ -116,15 +116,16 @@ class WatchCreateStep2BizComponent extends Component {
                             />
                         </div>
                     </form>
-                </div>
 
-                <div className="form-group">
-                    <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                        Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                    </button>
-                    <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                    </Link>
+                    <div className="form-group">
+                        <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                            Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                        </button>
+                        <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                        </Link>
+                    </div>
+
                 </div>
 
             </main>
