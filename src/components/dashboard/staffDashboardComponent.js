@@ -67,14 +67,14 @@ class StaffDashboardComponent extends Component {
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Task #</th>
-                                        <th>Name</th>
+                                        <th>Watch Name</th>
+                                        <th>Type</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {latestTasks && latestTasks.map(
-                                        (latestTask, i) => <TableRow datum={latestTask} key={i} />)
+                                        (latestTask, i) => <LastestTaskTableRow datum={latestTask} key={i} />)
                                     }
                                 </tbody>
                             </table>
@@ -88,14 +88,14 @@ class StaffDashboardComponent extends Component {
     }
 }
 
-class TableRow extends Component {
+class LastestTaskTableRow extends Component {
     render() {
-        const { slug, number, name, absoluteUrl } = this.props.datum;
+        const { slug, watchName, prettyTypeOf, absoluteUrl } = this.props.datum;
 
         return (
             <tr slug={slug}>
-                <td>{number}</td>
-                <td>{name}</td>
+                <td>{watchName}</td>
+                <td>{prettyTypeOf}</td>
                 <td>
                     <a href={absoluteUrl}>
                         View&nbsp;<i className="fas fa-chevron-right"></i>
