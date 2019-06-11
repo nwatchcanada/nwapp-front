@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
@@ -11,7 +11,7 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 class WatchCreateStep2ComComponent extends Component {
     render() {
         const {
-            name, associate, associateOptions, district, districtOptions,
+            name, description, associate, associateOptions, district, districtOptions,
             primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions,
             errors, isLoading, onClick, onTextChange, onSelectChange,
         } = this.props;
@@ -75,6 +75,18 @@ class WatchCreateStep2ComComponent extends Component {
                                 value={name}
                                 name="name"
                                 type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please set the watch description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the watch."
+                                onChange={onTextChange}
+                                error={errors.description}
                             />
 
                             <BootstrapSingleSelect

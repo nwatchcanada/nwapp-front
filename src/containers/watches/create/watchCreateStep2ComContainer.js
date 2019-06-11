@@ -126,7 +126,7 @@ class WatchCreateStep2ComContainer extends Component {
 
     render() {
         const {
-            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
+            name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
         } = this.state;
 
         const associateListObject = {
@@ -158,6 +158,7 @@ class WatchCreateStep2ComContainer extends Component {
         return (
             <WatchCreateStep2ComComponent
                 name={name}
+                description={description}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}

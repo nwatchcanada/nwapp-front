@@ -17,6 +17,7 @@ class WatchCreateStep3ComContainer extends Component {
         super(props);
         this.state = {
             name: localStorage.getItem('temp-watch-com-name'),
+            description: localStorage.getItem('temp-watch-com-description'),
             associate: localStorage.getItem('temp-watch-com-associate'),
             associateOption: localStorageGetObjectItem('temp-watch-com-associateOption'),
             district: localStorage.getItem('temp-watch-com-district'),
@@ -56,7 +57,7 @@ class WatchCreateStep3ComContainer extends Component {
 
     onSuccessfulSubmissionCallback() {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Business watch has been successfully created.");
+        this.props.setFlashMessage("success", "Community cares watch has been successfully created.");
         this.props.history.push("/watches");
     }
 
@@ -90,11 +91,12 @@ class WatchCreateStep3ComContainer extends Component {
 
     render() {
         const {
-            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
+            name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
         } = this.state;
         return (
             <WatchCreateStep3ComComponent
                 name={name}
+                description={description}
                 associate={associateOption}
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}

@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 class WatchCreateStep3ComComponent extends Component {
     render() {
-        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, isLoading, onClick, errors } = this.props;
+        const { name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, isLoading, onClick, errors } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -65,6 +65,10 @@ class WatchCreateStep3ComComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Name</th>
                                     <td>{name}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{description}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">District</th>
