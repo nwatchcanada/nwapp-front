@@ -4,6 +4,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import { connect } from 'react-redux';
 
 import { setFlashMessage } from "../../actions/flashMessageActions";
+import { getSubdomain } from '../../helpers/urlUtility';
 
 
 const anonymousMenuData = [
@@ -193,6 +194,11 @@ class NavigationContainer extends React.Component {
         menuData = anonymousMenuData;
     }
 
+    // Check if we are in a tenant or not.
+    const subdomain = getSubdomain();
+    const isTenant = subdomain !== null && subdomain !== undefined;
+
+    // Render our top navigation.
     return (
         <div>
             <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
@@ -200,7 +206,7 @@ class NavigationContainer extends React.Component {
                     <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
                 </Link>
                 <ul className="navbar-nav flex-row">
-                    {isAuthenticated &&
+                    {isAuthenticated && isTenant &&
                         <li className="dropdown-list dropdown nav-item">
                             <Link aria-haspopup="true" to="/tasks/pending" className="dropdown-toggle-nocaret nav-link" aria-expanded="false">
                                 <i className="fa fa-bell"></i>
