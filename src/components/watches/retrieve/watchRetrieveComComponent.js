@@ -70,7 +70,7 @@ export default class WatchRetrieveComComponent extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-edit"></i>&nbsp;Update
                                 </button>
-                                <Link to="/watches/step-2-create-cc" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/watches" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
