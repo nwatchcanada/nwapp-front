@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Scroll from 'react-scroll';
 
 import WatchCreateStep3ComComponent from "../../../components/watches/create/watchCreateStep3ComComponent";
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
-} from '../../../helpers/localStorageUtility';
-import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
-import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
-import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
-import { validateBusinessInput } from "../../../validators/watchValidator";
+import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class WatchCreateStep3ComContainer extends Component {
@@ -58,6 +54,24 @@ class WatchCreateStep3ComContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback() {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Business watch has been successfully created.");
+        this.props.history.push("/watches");
+    }
+
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -66,6 +80,7 @@ class WatchCreateStep3ComContainer extends Component {
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
+        this.onSuccessfulSubmissionCallback();
     }
 
     /**
@@ -74,8 +89,17 @@ class WatchCreateStep3ComContainer extends Component {
      */
 
     render() {
+        const {
+            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
+        } = this.state;
         return (
             <WatchCreateStep3ComComponent
+                name={name}
+                associate={associateOption}
+                district={districtOption}
+                primaryAreaCoordinator={primaryAreaCoordinatorOption}
+                secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
+                errors={errors}
                 onClick={this.onClick}
             />
         );
@@ -89,7 +113,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
