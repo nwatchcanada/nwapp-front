@@ -86,6 +86,7 @@ class WatchRetrieveRezContainer extends Component {
                 streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}
+                flashMessage={this.props.flashMessage}
             />
         );
     }
@@ -94,6 +95,7 @@ class WatchRetrieveRezContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        flashMessage: store.flashMessageState,
     };
 }
 

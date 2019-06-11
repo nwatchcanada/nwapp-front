@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import WatchUpdateBizComponent from "../../../components/watches/create/watchCreateStep2BizComponent";
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
-} from '../../../helpers/localStorageUtility';
+import WatchUpdateBizComponent from "../../../components/watches/update/watchUpdateBizComponent";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
 import { validateBusinessInput } from "../../../validators/watchValidator";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class WatchUpdateBizContainer extends Component {
@@ -21,15 +19,16 @@ class WatchUpdateBizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-watch-biz-name'),
-            associate: localStorage.getItem('temp-watch-biz-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-biz-associateOption'),
-            district: localStorage.getItem('temp-watch-biz-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-biz-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-biz-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-biz-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-biz-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-biz-secondaryAreaCoordinatorOption'),
+            slug: "argyle",
+            name: "",
+            associate: "",
+            associateOption: "",
+            district: "",
+            districtOption: "",
+            primaryAreaCoordinator: "",
+            primaryAreaCoordinatorOption: "",
+            secondaryAreaCoordinator: "",
+            secondaryAreaCoordinatorOption: "",
             errors: {},
         }
 
@@ -45,6 +44,28 @@ class WatchUpdateBizContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // REPLACE THIS WITH API ENDPOINT.
+        this.setState({
+            name: "Hells Kitchen",
+            associate: "jc-denton",
+            associateOption: {
+                selectName: "associate", value: "jc-denton", label: "JC Denton"
+            },
+            district: "new-york",
+            districtOption: {
+                selectName: "district", value: "new-york", label: "New York"
+            },
+            primaryAreaCoordinator: "walter-simons",
+            primaryAreaCoordinatorOption: {
+                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
+            },
+            secondaryAreaCoordinator: "joseph-manderly",
+            secondaryAreaCoordinatorOption: {
+                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
+            },
+            errors: {},
+        });
     }
 
     componentWillUnmount() {
@@ -63,7 +84,8 @@ class WatchUpdateBizContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-3-create-biz");
+        this.props.setFlashMessage("success", "Business watch has been successfully updated.");
+        this.props.history.push("/watch-biz/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -87,7 +109,6 @@ class WatchUpdateBizContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('temp-watch-biz-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -96,9 +117,7 @@ class WatchUpdateBizContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-watch-biz-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-watch-biz-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+        // console.log(this.state); // For debugging purposes only.
     }
 
     onClick(e) {
@@ -125,7 +144,7 @@ class WatchUpdateBizContainer extends Component {
 
     render() {
         const {
-            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
+            slug, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
         } = this.state;
 
         const associateListObject = {
@@ -142,7 +161,8 @@ class WatchUpdateBizContainer extends Component {
                 {'slug': 'wanchai', 'name': 'Wanchai Market'},
                 {'slug': 'versalife', 'name': 'VersaLife'},
                 {'slug': 'battery-park', 'name': 'Battery Park'},
-                {'slug': 'area-51', 'name': 'Area 51'}
+                {'slug': 'area-51', 'name': 'Area 51'},
+                {'slug': 'new-york', 'name': 'New York'}
             ]
         }; // TODO: REPLACTE WITH API DATA.
 
@@ -151,11 +171,14 @@ class WatchUpdateBizContainer extends Component {
                 {'slug': 'tracer-tong', 'name': 'Tracer Tong'},
                 {'slug': 'icarus', 'name': 'Icarus'},
                 {'slug': 'datalus', 'name': 'Datalus'},
+                {'slug': 'walter-simons', 'name': 'Walter Simons'},
+                {'slug': 'joseph-manderly', 'name': 'Joseph Manderly'}
             ]
         }; // TODO: REPLACTE WITH API DATA.
 
         return (
             <WatchUpdateBizComponent
+                slug={slug}
                 name={name}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
@@ -181,7 +204,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 

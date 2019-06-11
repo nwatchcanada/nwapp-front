@@ -11,7 +11,7 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 export default class WatchUpdateBizComponent extends Component {
     render() {
         const {
-            name, associate, associateOptions, district, districtOptions,
+            slug, name, associate, associateOptions, district, districtOptions,
             primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions,
             errors, isLoading, onClick, onTextChange, onSelectChange,
         } = this.props;
@@ -25,36 +25,18 @@ export default class WatchUpdateBizComponent extends Component {
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
+                        <li className="breadcrumb-item" aria-current="page">
+                            <Link to={`/watch-biz/${slug}`}><i className="fas fa-building"></i>&nbsp;{name}</Link>
+                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add
+                            <i className="fas fa-edit"></i>&nbsp;Update
                         </li>
                     </ol>
                 </nav>
 
-                <h1>Create Watch - Details</h1>
-
-                <div className="row">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey">
-                            <Link to="/watches/step-1-create">
-                                <span className="num">1.</span><span className="">Type</span>
-                            </Link>
-                        </div>
-                        <div id="step-2" className="st-grey active">
-                            <span className="num">2.</span><span className="">Details</span>
-                        </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
-                        </div>
-                        { /* <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Skills Required</span>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Review</span>
-                        </div>
-                        */ }
-                    </div>
-                </div>
+                <h1>
+                    <i className="fas fa-edit"></i>&nbsp;Update
+                </h1>
 
                 <div className="col-md-5 mx-auto mt-2">
                     <h3 className="pt-4 pb-2 text-center">Details</h3>
@@ -119,9 +101,9 @@ export default class WatchUpdateBizComponent extends Component {
 
                     <div className="form-group">
                         <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                            Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                            <i className="fas fa-check"></i>&nbsp;Submit
                         </button>
-                        <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                        <Link to={`/watch-biz/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                             <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                         </Link>
                     </div>

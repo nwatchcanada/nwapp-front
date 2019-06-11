@@ -83,6 +83,7 @@ class WatchRetrieveBizContainer extends Component {
                 secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
                 errors={errors}
                 onClick={this.onClick}
+                flashMessage={this.props.flashMessage}
             />
         );
     }
@@ -91,6 +92,7 @@ class WatchRetrieveBizContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        flashMessage: store.flashMessageState,
     };
 }
 

@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { FlashMessageComponent } from "../../flashMessageComponent";
+
 
 export default class WatchRetrieveRezComponent extends Component {
     render() {
-        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick } = this.props;
+        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, flashMessage } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -21,6 +23,8 @@ export default class WatchRetrieveRezComponent extends Component {
                         </li>
                     </ol>
                 </nav>
+
+                <FlashMessageComponent object={flashMessage} />
 
                 <h1>
                     <i className="fas fa-home"></i>&nbsp;{name}
