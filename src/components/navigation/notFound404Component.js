@@ -7,10 +7,10 @@ class AuthenticatedMessage extends Component {
         const { user } = this.props;
         return (
             <div>
-                <p className="text-center text-secondary lead mb-4">Unfortunately we are having trouble loading the page your are looking for. You can return to your <Link to={user.dashboardPath}>dashboard</Link>. For immediate help, contact  <a href="mailto:support@mikaponics.com">support.</a></p>
+                <p className="text-center text-secondary lead mb-4">Unfortunately we are having trouble loading the page your are looking for. You can return to your <Link to={user.dashboardPath}>dashboard</Link>. For immediate help, contact  <a href="mailto:info@nwlondon.ca">support.</a></p>
                 <br />
-                <h4>Phone: <a href="tel:2262351368">(226) 235-1368</a></h4>
-                <h4>E-Mail: <a href="mailto:support@mikaponics.com">support@mikaponics.com</a></h4>
+                <h4>Phone: <a href="tel:5196614553">(519) 661-4553</a></h4>
+                <h4>E-Mail: <a href="mailto:info@nwlondon.ca">info@nwlondon.ca</a></h4>
                 <br />
                 <br />
                 <p className="text-center">
@@ -25,10 +25,10 @@ class AnonymousMessage extends Component {
     render() {
         return (
             <div>
-                <p className="text-center text-secondary lead mb-4">Unfortunately we are having trouble loading the page your are looking for. You can return to the <Link to="/">home</Link> page. For immediate help, contact  <a href="mailto:support@mikaponics.com">support.</a></p>
+                <p className="text-center text-secondary lead mb-4">Unfortunately we are having trouble loading the page your are looking for. You can return to the <Link to="/">home</Link> page. For immediate help, contact  <a href="mailto:info@nwlondon.ca">support.</a></p>
                 <br />
-                <h4>Phone: <a href="tel:2262351368">(226) 235-1368</a></h4>
-                <h4>E-Mail: <a href="mailto:support@mikaponics.com">support@mikaponics.com</a></h4>
+                <h4>Phone: <a href="tel:5196614553">(519) 661-4553</a></h4>
+                <h4>E-Mail: <a href="mailto:info@nwlondon.ca">info@nwlondon.ca</a></h4>
                 <br />
                 <br />
                 <p className="text-center">
