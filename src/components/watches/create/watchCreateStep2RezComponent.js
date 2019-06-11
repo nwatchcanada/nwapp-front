@@ -14,7 +14,7 @@ export default class WatchCreateStep2RezComponent extends Component {
         const {
             // Page related.
             name, associate, associateOptions, district, districtOptions,
-            primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions, streetMembershipArray,
+            primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions, streetMembership,
             errors, isLoading, onClick, onTextChange, onSelectChange,
 
             // Modal related.
@@ -138,7 +138,7 @@ export default class WatchCreateStep2RezComponent extends Component {
                             />
 
                             <StreetMembershipTable
-                               streetMembershipArray={streetMembershipArray}
+                               streetMembership={streetMembership}
                                onAddClick={onAddClick}
                                onRemoveClick={onRemoveClick}
                             />
@@ -191,12 +191,12 @@ class StreetMembershipRow extends Component {
 
 class StreetMembershipTable extends Component {
     render() {
-        const { streetMembershipArray, onAddClick, onRemoveClick } = this.props;
+        const { streetMembership, onAddClick, onRemoveClick } = this.props;
 
         let elements = [];
-        if (streetMembershipArray !== undefined && streetMembershipArray !== null) {
-            for (let i = 0; i < streetMembershipArray.length; i++) {
-                let rowData = streetMembershipArray[i];
+        if (streetMembership !== undefined && streetMembership !== null) {
+            for (let i = 0; i < streetMembership.length; i++) {
+                let rowData = streetMembership[i];
                 if (rowData !== null && rowData !== undefined) {
                     elements.push(
                         <StreetMembershipRow

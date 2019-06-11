@@ -23,6 +23,6 @@ export function localStorageGetArrayItem(key) {
     return anObject;
 }
 
-export function localStorageSetObjectItem(key, value) {
+export function localStorageSetObjectOrArrayItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }

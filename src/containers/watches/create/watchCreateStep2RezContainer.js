@@ -6,7 +6,9 @@ import {
     validateResidentialInput, validateResidentialModalSaveInput
 } from "../../../validators/watchValidator";
 import WatchCreateStep2RezComponent from "../../../components/watches/create/watchCreateStep2RezComponent";
-import { localStorageGetObjectItem, localStorageSetObjectItem, localStorageGetArrayItem } from '../../../helpers/localStorageUtility';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+} from '../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
@@ -31,7 +33,7 @@ class WatchCreateStep2RezContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
-            streetMembershipArray: localStorageGetArrayItem('temp-watch-rez-streetMembershipArray'),
+            streetMembership: localStorageGetArrayItem('temp-watch-rez-streetMembership'),
             errors: {},
 
             // Modal related.
@@ -80,8 +82,7 @@ class WatchCreateStep2RezContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "District has been successfully created.");
-        this.props.history.push("/settings/district/step-3-create-rez");
+        this.props.history.push("/watches/step-3-create-rez");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -115,7 +116,7 @@ class WatchCreateStep2RezContainer extends Component {
             optionKey: option,
         });
         localStorage.setItem('temp-watch-rez-'+[option.selectName], option.value);
-        localStorageSetObjectItem(optionKey, option);
+        localStorageSetObjectOrArrayItem(optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -138,13 +139,16 @@ class WatchCreateStep2RezContainer extends Component {
 
     onAddClick(e) {
         e.preventDefault();  // Prevent the default HTML form submit code to run on the browser side.
-        this.setState({showModal: true});  // Load the modal.
+        this.setState({
+            showModal: true,
+            errors: {},
+        });  // Load the modal.
     }
 
     onRemoveClick(streetAddress) {
-        const streetMembershipArray = this.state.streetMembershipArray;
-        for (let i = 0; i < streetMembershipArray.length; i++) {
-            let row = streetMembershipArray[i];
+        const streetMembership = this.state.streetMembership;
+        for (let i = 0; i < streetMembership.length; i++) {
+            let row = streetMembership[i];
 
             // // For debugging purposes only.
             // console.log(row);
@@ -154,22 +158,22 @@ class WatchCreateStep2RezContainer extends Component {
                 //
                 // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
                 //
-                const filteredItems = streetMembershipArray.slice(
+                const filteredItems = streetMembership.slice(
                     0, i
                 ).concat(
-                    streetMembershipArray.slice(
-                        i + 1, streetMembershipArray.length
+                    streetMembership.slice(
+                        i + 1, streetMembership.length
                     )
                 )
 
                 // Update our state with our NEW ARRAY which no longer has
                 // the item we deleted.
                 this.setState({
-                    streetMembershipArray: filteredItems
+                    streetMembership: filteredItems
                 });
 
                 // Save our table data.
-                localStorageSetObjectItem("temp-watch-rez-streetMembershipArray", filteredItems);
+                localStorageSetObjectOrArrayItem("temp-watch-rez-streetMembership", filteredItems);
 
                 // Terminate our for-loop.
                 return;
@@ -187,7 +191,7 @@ class WatchCreateStep2RezContainer extends Component {
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             // Append our array.
-            let a = this.state.streetMembershipArray.slice(); //creates the clone of the state
+            let a = this.state.streetMembership.slice(); //creates the clone of the state
             const streetAddress = this.state.streetNumberStart+" "+this.state.streetNumberFinish+" "+this.state.streetName+" "+this.state.streetType+this.state.streetDirection;
             a.push({
                 streetAddress: streetAddress,
@@ -202,11 +206,11 @@ class WatchCreateStep2RezContainer extends Component {
             this.setState({
                 showModal: false,
                 errors: {},
-                streetMembershipArray: a,
+                streetMembership: a,
             })
 
             // Save our table data.
-            localStorageSetObjectItem("temp-watch-rez-streetMembershipArray", a);
+            localStorageSetObjectOrArrayItem("temp-watch-rez-streetMembership", a);
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -224,7 +228,8 @@ class WatchCreateStep2RezContainer extends Component {
 
     onCloseClick() {
         this.setState({
-            showModal: false
+            showModal: false,
+            errors: {},
         })
     }
 
@@ -236,7 +241,7 @@ class WatchCreateStep2RezContainer extends Component {
     render() {
         const {
             // Page related.
-            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembershipArray, errors,
+            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
             streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, showModal,
@@ -279,7 +284,7 @@ class WatchCreateStep2RezContainer extends Component {
                 primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
                 secondaryAreaCoordinator={secondaryAreaCoordinator}
                 secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
-                streetMembershipArray={streetMembershipArray}
+                streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
