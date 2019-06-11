@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WatchRetrieveComComponent from "../../../components/watches/retrieve/watchRetrieveComComponent";
-import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -15,16 +14,16 @@ class WatchRetrieveComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-watch-com-name'),
-            description: localStorage.getItem('temp-watch-com-description'),
-            associate: localStorage.getItem('temp-watch-com-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-com-associateOption'),
-            district: localStorage.getItem('temp-watch-com-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-com-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-com-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-com-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-secondaryAreaCoordinatorOption'),
+            slug: "byron",
+            name: "",
+            associate: "",
+            associateOption: "",
+            district: "",
+            districtOption: "",
+            primaryAreaCoordinator: "",
+            primaryAreaCoordinatorOption: "",
+            secondaryAreaCoordinator: "",
+            secondaryAreaCoordinatorOption: "",
             errors: {},
         }
 
@@ -38,6 +37,29 @@ class WatchRetrieveComContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // REPLACE THIS WITH API ENDPOINT.
+        this.setState({
+            name: "Hells Kitchen",
+            description: "This is a test watch",
+            associate: "jc-denton",
+            associateOption: {
+                selectName: "associate", value: "jc-denton", label: "JC Denton"
+            },
+            district: "new-york",
+            districtOption: {
+                selectName: "district", value: "new-york", label: "New York"
+            },
+            primaryAreaCoordinator: "walter-simons",
+            primaryAreaCoordinatorOption: {
+                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
+            },
+            secondaryAreaCoordinator: "joseph-manderly",
+            secondaryAreaCoordinatorOption: {
+                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
+            },
+            errors: {},
+        });
     }
 
     componentWillUnmount() {
@@ -73,10 +95,11 @@ class WatchRetrieveComContainer extends Component {
 
     render() {
         const {
-            name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
+            slug, name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
         } = this.state;
         return (
             <WatchRetrieveComComponent
+                slug={slug}
                 name={name}
                 description={description}
                 associate={associateOption}

@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import WatchUpdateComComponent from "../../../components/watches/update/watchUpdateComComponent";
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
-} from '../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
 import { validateCommunityCaresInput } from "../../../validators/watchValidator";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class WatchUpdateComContainer extends Component {
@@ -21,16 +19,16 @@ class WatchUpdateComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-watch-com-name'),
-            description: localStorage.getItem('temp-watch-com-description'),
-            associate: localStorage.getItem('temp-watch-com-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-com-associateOption'),
-            district: localStorage.getItem('temp-watch-com-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-com-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-com-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-com-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-secondaryAreaCoordinatorOption'),
+            slug: "byron",
+            name: "",
+            associate: "",
+            associateOption: "",
+            district: "",
+            districtOption: "",
+            primaryAreaCoordinator: "",
+            primaryAreaCoordinatorOption: "",
+            secondaryAreaCoordinator: "",
+            secondaryAreaCoordinatorOption: "",
             errors: {},
         }
 
@@ -46,6 +44,29 @@ class WatchUpdateComContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // REPLACE THIS WITH API ENDPOINT.
+        this.setState({
+            name: "Hells Kitchen",
+            description: "This is a test watch",
+            associate: "jc-denton",
+            associateOption: {
+                selectName: "associate", value: "jc-denton", label: "JC Denton"
+            },
+            district: "new-york",
+            districtOption: {
+                selectName: "district", value: "new-york", label: "New York"
+            },
+            primaryAreaCoordinator: "walter-simons",
+            primaryAreaCoordinatorOption: {
+                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
+            },
+            secondaryAreaCoordinator: "joseph-manderly",
+            secondaryAreaCoordinatorOption: {
+                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
+            },
+            errors: {},
+        });
     }
 
     componentWillUnmount() {
@@ -64,7 +85,8 @@ class WatchUpdateComContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-3-create-cc");
+        this.props.setFlashMessage("success", "Community care watch has been successfully updated.");
+        this.props.history.push("/watch-cc/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -97,8 +119,6 @@ class WatchUpdateComContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-watch-com-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-watch-com-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -126,7 +146,7 @@ class WatchUpdateComContainer extends Component {
 
     render() {
         const {
-            name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
+            slug, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
         } = this.state;
 
         const associateListObject = {
@@ -143,7 +163,8 @@ class WatchUpdateComContainer extends Component {
                 {'slug': 'wanchai', 'name': 'Wanchai Market'},
                 {'slug': 'versalife', 'name': 'VersaLife'},
                 {'slug': 'battery-park', 'name': 'Battery Park'},
-                {'slug': 'area-51', 'name': 'Area 51'}
+                {'slug': 'area-51', 'name': 'Area 51'},
+                {'slug': 'new-york', 'name': 'New York'}
             ]
         }; // TODO: REPLACTE WITH API DATA.
 
@@ -152,11 +173,14 @@ class WatchUpdateComContainer extends Component {
                 {'slug': 'tracer-tong', 'name': 'Tracer Tong'},
                 {'slug': 'icarus', 'name': 'Icarus'},
                 {'slug': 'datalus', 'name': 'Datalus'},
+                {'slug': 'walter-simons', 'name': 'Walter Simons'},
+                {'slug': 'joseph-manderly', 'name': 'Joseph Manderly'}
             ]
         }; // TODO: REPLACTE WITH API DATA.
 
         return (
             <WatchUpdateComComponent
+                slug={slug}
                 name={name}
                 description={description}
                 associate={associate}
@@ -183,7 +207,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
