@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { validateCommunityCaresInput } from "../../../validators/watchValidator";
 import WatchCreateStep3ComComponent from "../../../components/watches/create/watchCreateStep3ComComponent";
 import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../helpers/localStorageUtility';
+import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
+import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
+import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
+import { validateBusinessInput } from "../../../validators/watchValidator";
 
 
 class WatchCreateStep3ComContainer extends Component {
@@ -19,7 +20,16 @@ class WatchCreateStep3ComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            typeOf: null,
+            name: localStorage.getItem('temp-watch-com-name'),
+            associate: localStorage.getItem('temp-watch-com-associate'),
+            associateOption: localStorageGetObjectItem('temp-watch-com-associateOption'),
+            district: localStorage.getItem('temp-watch-com-district'),
+            districtOption: localStorageGetObjectItem('temp-watch-com-districtOption'),
+            primaryAreaCoordinator: localStorage.getItem('temp-watch-com-primaryAreaCoordinator'),
+            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-primaryAreaCoordinatorOption'),
+            secondaryAreaCoordinator: localStorage.getItem('temp-watch-com-secondaryAreaCoordinator'),
+            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-secondaryAreaCoordinatorOption'),
+            errors: {},
         }
 
         this.onClick = this.onClick.bind(this);
@@ -56,20 +66,6 @@ class WatchCreateStep3ComContainer extends Component {
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-
-        // Save to our browsers memory.
-        localStorage.setItem('temp-district-program', typeOf);
-
-        // Redirect to the next page.
-        if (typeOf === RESIDENCE_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-rez");
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-biz");
-        }
-        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-cc");
-        }
     }
 
     /**

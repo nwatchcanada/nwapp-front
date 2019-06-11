@@ -2,16 +2,19 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-// import {
-//     RESIDENCE_TYPE_OF,
-//     BUSINESS_TYPE_OF,
-//     COMMUNITY_CARES_TYPE_OF
-// } from '../../../constants/api';
+import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 
 class WatchCreateStep2ComComponent extends Component {
     render() {
-        const { isLoading, onClick } = this.props;
+        const {
+            name, associate, associateOptions, district, districtOptions,
+            primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions,
+            errors, isLoading, onClick, onTextChange, onSelectChange,
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -55,13 +58,76 @@ class WatchCreateStep2ComComponent extends Component {
                     </div>
                 </div>
 
-                <div className="form-group">
-                    <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                        Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                    </button>
-                    <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                    </Link>
+                <div className="col-md-5 mx-auto mt-2">
+                    <h3 className="pt-4 pb-2 text-center">Details</h3>
+                    <form id="business-form" method="post" className="needs-validation" action="" noValidate>
+                        <div className="form-group">
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.name}
+                                label="Name (*)"
+                                onChange={onTextChange}
+                                value={name}
+                                name="name"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Associate (*)"
+                                name="associate"
+                                defaultOptionLabel="Please select the associate."
+                                options={associateOptions}
+                                value={associate}
+                                error={errors.associate}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="District (*)"
+                                name="district"
+                                defaultOptionLabel="Please select the residential district."
+                                options={districtOptions}
+                                value={district}
+                                error={errors.district}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Primary Area Coordinator (*)"
+                                name="primaryAreaCoordinator"
+                                defaultOptionLabel="Please select the primary area coordinator."
+                                options={primaryAreaCoordinatorOptions}
+                                value={primaryAreaCoordinator}
+                                error={errors.primaryAreaCoordinator}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Secondary Area Coordinator (*)"
+                                name="secondaryAreaCoordinator"
+                                defaultOptionLabel="Please select the secondary area coordinator."
+                                options={secondaryAreaCoordinatorOptions}
+                                value={secondaryAreaCoordinator}
+                                error={errors.secondaryAreaCoordinator}
+                                onSelectChange={onSelectChange}
+                            />
+                        </div>
+                    </form>
+
+                    <div className="form-group">
+                        <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                            Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                        </button>
+                        <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                        </Link>
+                    </div>
+
                 </div>
 
             </main>
