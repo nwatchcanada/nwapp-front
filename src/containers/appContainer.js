@@ -48,6 +48,9 @@ import WatchCreateStep3ComContainer from "./watches/create/watchCreateStep3ComCo
 import WatchRetrieveRezContainer from "./watches/retrieve/watchRetrieveRezContainer";
 import WatchRetrieveBizContainer from "./watches/retrieve/watchRetrieveBizContainer";
 import WatchRetrieveComContainer from "./watches/retrieve/watchRetrieveComContainer";
+import WatchUpdateRezContainer from "./watches/update/watchUpdateRezContainer";
+import WatchUpdateBizContainer from "./watches/update/watchUpdateBizContainer";
+import WatchUpdateComContainer from "./watches/update/watchUpdateComContainer";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
@@ -211,6 +214,9 @@ class AppContainer extends React.Component {
                                 <Route path="/watch-biz/:slug" exact component={WatchRetrieveBizContainer} />
                                 <Route path="/watch-cc/:slug" exact component={WatchRetrieveComContainer} />
                                 <Route path="/watch-rez/:slug" exact component={WatchRetrieveRezContainer} />
+                                <Route path="/watch-biz/:slug/update" exact component={WatchUpdateBizContainer} />
+                                <Route path="/watch-cc/:slug/update" exact component={WatchUpdateComContainer} />
+                                <Route path="/watch-rez/:slug/update" exact component={WatchUpdateRezContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
