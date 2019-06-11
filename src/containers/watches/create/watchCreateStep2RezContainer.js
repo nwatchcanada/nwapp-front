@@ -19,6 +19,7 @@ class WatchCreateStep2RezContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // Page related.
             name: localStorage.getItem('temp-watch-rez-name'),
             associate: localStorage.getItem('temp-watch-rez-associate'),
             associateOption: localStorageGetObjectItem('temp-watch-rez-associateOption'),
@@ -28,12 +29,28 @@ class WatchCreateStep2RezContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
-            streetMembersArray: localStorage.getItem('temp-watch-rez-streetMembersArray'),
-            errors: {}
+            streetMembershipArray: localStorageGetObjectItem('temp-watch-rez-streetMembershipArray'),
+            errors: {},
+
+            // Modal related.
+            streetNumberStart: "",
+            streetNumberFinish: "",
+            streetName: "",
+            streetType: "",
+            streetDirection: "",
+            showModal: false, // Variable used to indicate if the modal should appear.
         }
+
+        // Page related.
         this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+
+        // Modal related.
+        this.onAddClick = this.onAddClick.bind(this);
+        this.onRemoveClick = this.onRemoveClick.bind(this);
+        this.onSaveClick = this.onSaveClick.bind(this);
+        this.onCloseClick = this.onCloseClick.bind(this);
     }
 
     /**
@@ -117,13 +134,39 @@ class WatchCreateStep2RezContainer extends Component {
         }
     }
 
+    onAddClick() {
+        this.setState({
+            showModal: true
+        })
+    }
+
+    onRemoveClick() {
+
+    }
+
+    onSaveClick() {
+
+    }
+
+    onCloseClick() {
+        this.setState({
+            showModal: false
+        })
+    }
+
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors } = this.state;
+        const {
+            // Page related.
+            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembershipArray, errors,
+
+            // Modal relate.
+            streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, showModal,
+        } = this.state;
 
         const associateListObject = {
             results: [
@@ -162,10 +205,21 @@ class WatchCreateStep2RezContainer extends Component {
                 primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
                 secondaryAreaCoordinator={secondaryAreaCoordinator}
                 secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
+                streetMembershipArray={streetMembershipArray}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                showModal={showModal}
+                streetNumberStart={streetNumberStart}
+                streetNumberFinish={streetNumberFinish}
+                streetName={streetName}
+                streetType={streetType}
+                streetDirection={streetDirection}
+                onAddClick={this.onAddClick}
+                onRemoveClick={this.onRemoveClick}
+                onSaveClick={this.onSaveClick}
+                onCloseClick={this.onCloseClick}
             />
         );
     }
