@@ -116,7 +116,7 @@ class WatchCreateStep2RezContainer extends Component {
             optionKey: option,
         });
         localStorage.setItem('temp-watch-rez-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem(optionKey, option);
+        localStorageSetObjectOrArrayItem('temp-watch-rez-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -192,7 +192,7 @@ class WatchCreateStep2RezContainer extends Component {
         if (isValid) {
             // Append our array.
             let a = this.state.streetMembership.slice(); //creates the clone of the state
-            const streetAddress = this.state.streetNumberStart+" "+this.state.streetNumberFinish+" "+this.state.streetName+" "+this.state.streetType+this.state.streetDirection;
+            const streetAddress = this.state.streetName+" "+this.state.streetType+" "+this.state.streetDirection+" from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
             a.push({
                 streetAddress: streetAddress,
                 streetNumberStart: this.state.streetNumberStart,

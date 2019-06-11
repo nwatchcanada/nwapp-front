@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import WatchCreateStep3RezComponent from "../../../components/watches/create/watchCreateStep3RezComponent";
 import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+    localStorageGetObjectItem, localStorageGetArrayItem
+} from '../../../helpers/localStorageUtility';
+import { RESIDENCE_TYPE_OF } from '../../../constants/api';
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class WatchCreateStep3RezContainer extends Component {
@@ -18,7 +18,18 @@ class WatchCreateStep3RezContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            typeOf: null,
+            program: RESIDENCE_TYPE_OF,
+            name: localStorage.getItem('temp-watch-rez-name'),
+            associate: localStorage.getItem('temp-watch-rez-associate'),
+            associateOption: localStorageGetObjectItem('temp-watch-rez-associateOption'),
+            district: localStorage.getItem('temp-watch-rez-district'),
+            districtOption: localStorageGetObjectItem('temp-watch-rez-districtOption'),
+            primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
+            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
+            secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
+            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
+            streetMembership: localStorageGetArrayItem('temp-watch-rez-streetMembership'),
+            errors: {},
         }
 
         this.onClick = this.onClick.bind(this);
@@ -53,22 +64,9 @@ class WatchCreateStep3RezContainer extends Component {
      */
 
     onClick(e, typeOf) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Save to our browsers memory.
-        localStorage.setItem('temp-district-program', typeOf);
-
-        // Redirect to the next page.
-        if (typeOf === RESIDENCE_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-rez");
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-biz");
-        }
-        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
-            this.props.history.push("/watches/step-2-create-cc");
-        }
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Residential watch has been successfully created.");
+        this.props.history.push("/watches");
     }
 
     /**
@@ -77,8 +75,18 @@ class WatchCreateStep3RezContainer extends Component {
      */
 
     render() {
+        const {
+            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+        } = this.state;
         return (
             <WatchCreateStep3RezComponent
+                name={name}
+                associate={associateOption}
+                district={districtOption}
+                primaryAreaCoordinator={primaryAreaCoordinatorOption}
+                secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
+                streetMembership={streetMembership}
+                errors={errors}
                 onClick={this.onClick}
             />
         );
@@ -92,7 +100,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 

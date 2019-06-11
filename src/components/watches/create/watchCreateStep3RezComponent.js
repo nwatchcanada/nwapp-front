@@ -2,16 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-// import {
-//     RESIDENCE_TYPE_OF,
-//     BUSINESS_TYPE_OF,
-//     COMMUNITY_CARES_TYPE_OF
-// } from '../../../constants/api';
+import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
-class WatchCreateStep3RezComponent extends Component {
+export default class WatchCreateStep3RezComponent extends Component {
     render() {
-        const { onClick } = this.props;
+        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, errors } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -55,15 +51,76 @@ class WatchCreateStep3RezComponent extends Component {
                     </div>
                 </div>
 
-                <div className="form-group">
-                    <Link to="/watches/step-2-create-rez" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                    </Link>
+                <div className="row mt-4 pt-3 mb-4 pb-2">
+                    <div className="col-md-10 mx-auto p-2">
+                        <BootstrapErrorsProcessingAlert errors={errors} />
+                        <p><strong>Please confirm these details before adding the residential client:</strong></p>
+                        <table className="table table-bordered custom-cell-w">
+                            <tbody>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-table"></i>&nbsp;District details
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Name</th>
+                                    <td>{name}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">District</th>
+                                    <td>{district.label}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Program</th>
+                                    <td>Residential</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Associate</th>
+                                    <td>{associate.label}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Primary Area Coordinator</th>
+                                    <td>{primaryAreaCoordinator.label}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Secondary Area Coordinator</th>
+                                    <td>{secondaryAreaCoordinator.label}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Addresses</th>
+                                    <td>
+                                        <ul>
+                                            {streetMembership && streetMembership.map(
+                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form>
+                            <div className="form-group">
+                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    <i className="fas fa-check"></i>&nbsp;Submit
+                                </button>
+                                <Link to="/watches/step-2-create-rez" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
             </main>
         );
     }
 }
 
-export default WatchCreateStep3RezComponent;
+
+class StreetAddressBulletItem extends Component {
+    render() {
+        const { streetAddress } = this.props.datum;
+        return (
+            <li>{streetAddress}</li>
+        );
+    }
+}
