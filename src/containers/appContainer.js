@@ -58,7 +58,7 @@ import TagCreateContainer from "./settings/tags/tagCreateContainer";
 import TagUpdateContainer from "./settings/tags/tagUpdateContainer";
 
 import HowHearsListContainer from "./settings/howHear/howHearListContainer";
-import HowHearRetrieveContainer from "./settings/howHear/howHearRetrieveContainer";
+import HowHearDeleteContainer from "./settings/howHear/howHearDeleteContainer";
 import HowHearCreateContainer from "./settings/howHear/howHearCreateContainer";
 import HowHearUpdateContainer from "./settings/howHear/howHearUpdateContainer";
 
@@ -160,7 +160,7 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/tag/:slug/update" exact component={TagUpdateContainer} />
                                 <Route path="/settings/how-hears" exact component={HowHearsListContainer} />
                                 <Route path="/settings/how-hears/add" exact component={HowHearCreateContainer} />
-                                <Route path="/settings/how-hear/:slug" exact component={HowHearRetrieveContainer} />
+                                <Route path="/settings/how-hear/:slug/delete" exact component={HowHearDeleteContainer} />
                                 <Route path="/settings/how-hear/:slug/update" exact component={HowHearUpdateContainer} />
                                 <Route path="/members/add" exact component={MemberCreateContainer} />
                                 <Route path="/members/active" exact component={MemberListActiveContainer} />

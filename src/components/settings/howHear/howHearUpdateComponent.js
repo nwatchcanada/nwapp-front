@@ -23,9 +23,6 @@ class HowHearUpdateComponent extends Component {
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/settings/how-hears"><i className="fas fa-tty"></i>&nbsp;How did you hear?</Link>
                         </li>
-                        <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/how-hear/argyle"><i className="fas fa-tty"></i>&nbsp;Option</Link>
-                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
                         </li>
@@ -55,7 +52,7 @@ class HowHearUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/settings/how-hear/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/settings/how-hears" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>

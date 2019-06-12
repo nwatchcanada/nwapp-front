@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import HowHearRetrieveComponent from "../../../components/settings/howHear/howHearRetrieveComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import HowHearDeleteComponent from "../../../components/settings/howHear/howHearDeleteComponent";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class HowHearRetrieveContainer extends Component {
+class HowHearDeleteContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -43,9 +43,6 @@ class HowHearRetrieveContainer extends Component {
          this.setState = (state,callback)=>{
              return;
          };
-
-         // Clear any and all flash messages in our queue to be rendered.
-         this.props.clearFlashMessage();
      }
 
     /**
@@ -75,7 +72,9 @@ class HowHearRetrieveContainer extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/settings/how-hear/"+this.state.slug+"/update");
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "How hear has been successfully deleted.");
+        this.props.history.push("/settings/how-hears");
     }
 
     /**
@@ -91,7 +90,7 @@ class HowHearRetrieveContainer extends Component {
             'absoluteUrl': '/settings/how-hear/argyle'
         };
         return (
-            <HowHearRetrieveComponent
+            <HowHearDeleteComponent
                 howHearData={howHearData}
                 onBack={this.onBack}
                 onClick={this.onClick}
@@ -110,8 +109,8 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         }
     }
 }
@@ -120,4 +119,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(HowHearRetrieveContainer);
+)(HowHearDeleteContainer);

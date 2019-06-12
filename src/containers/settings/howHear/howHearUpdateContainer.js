@@ -58,8 +58,8 @@ class HowHearUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(howHear) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "HowHear has been successfully updated.");
-        this.props.history.push("/settings/how-hear/"+this.state.slug);
+        this.props.setFlashMessage("success", "How hear has been successfully updated.");
+        this.props.history.push("/settings/how-hears");
     }
 
     onFailedSubmissionCallback(errors) {
