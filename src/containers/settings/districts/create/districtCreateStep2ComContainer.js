@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import DistrictCreateStep2ComComponent from "../../../../components/settings/districts/create/districtCreateStep2ComComponent";
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateCommunityCaresInput, validateCommunityCaresModalSaveInput } from "../../../../validators/districtValidator";
+import { BASIC_STREET_TYPE_CHOICES } from "../../../../constants/api";
 
 
 class DistrictCreateStep2CommunityCareContainer extends Component {
@@ -47,9 +51,11 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
 
             // DEVELOPERS NOTE: The following state objects are used to store
             // the data from the modal.
-            streetNumber: null,
-            streetName: null,
-            streetType: null,
+            streetNumber: "",
+            streetName: "",
+            streetType: "",
+            streetTypeOption: localStorageGetObjectItem('temp-district-com-streetTypeOption'),
+            streetTypeOther: "",
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -60,6 +66,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         this.onRemoveClick = this.onRemoveClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
     }
 
     /**
@@ -115,6 +122,17 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         localStorage.setItem('temp-district-com-'+[e.target.name], e.target.value);
     }
 
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('temp-district-com-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('temp-district-com-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -151,12 +169,13 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         if (isValid) {
             // Append our array.
             let a = this.state.streetsArray.slice(); //creates the clone of the state
-            const streetAddress = this.state.streetNumber+" "+this.state.streetName+" "+this.state.streetType;
+            const streetAddress = this.state.streetNumber+" "+this.state.streetName+" "+this.state.streetType+" "+this.state.streetTypeOther;
+            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
             a.push({
                 streetAddress: streetAddress,
                 streetNumber: this.state.streetNumber,
                 streetName: this.state.streetName,
-                streetType: this.state.streetType,
+                streetType: actualStreetType,
             });
 
             // Update our state.
@@ -164,6 +183,10 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
                 isShowingModal: false,
                 errors: {},
                 streetsArray: a,
+                streetNumber: "", // Clear fields.
+                streetName: "",
+                streetType: "",
+                streetTypeOther: "",
             })
 
             // Save our table data.
@@ -188,7 +211,14 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         e.preventDefault();
 
         // Load the modal.
-        this.setState({isShowingModal: false});
+        this.setState({
+            isShowingModal: false,
+            errors:{},
+            streetNumber: "",  // Clear fields.
+            streetName: "",
+            streetType: "",
+            streetTypeOther: "",
+        });
     }
 
     onRemoveClick(streetAddress) {
@@ -227,14 +257,13 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         }
     }
 
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { name, description, streetNumber, streetName, streetType, errors, isShowingModal, streetsArray } = this.state;
+        const { name, description, streetNumber, streetName, streetType, streetTypeOther, errors, isShowingModal, streetsArray } = this.state;
         return (
             <DistrictCreateStep2ComComponent
                 isShowingModal={isShowingModal}
@@ -243,8 +272,11 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
+                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
+                streetTypeOther={streetTypeOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
                 onAddClick={this.onAddClick}
                 onSaveClick={this.onSaveClick}

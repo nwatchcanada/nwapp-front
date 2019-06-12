@@ -66,3 +66,35 @@ export const GROUP_MEMBERSHIP_CHOICES = [
 export const RESIDENCE_TYPE_OF = 1
 export const BUSINESS_TYPE_OF = 2
 export const COMMUNITY_CARES_TYPE_OF = 3
+
+
+/**
+ *  A list of simple street types to choose from.
+ */
+export const BASIC_STREET_TYPE_CHOICES = [
+    {
+        selectName: "streetType",
+        value: "Avenue",
+        label: "Avenue"
+    },{
+        selectName: "streetType",
+        value: "Drive",
+        label: "Drive"
+    },{
+        selectName: "streetType",
+        value: "Road",
+        label: "Road"
+    },{
+        selectName: "streetType",
+        value: "Street",
+        label: "Street"
+    },{
+        selectName: "streetType",
+        value: "Way",
+        label: "Way"
+    },{
+        selectName: "streetType",
+        value: "Other",
+        label: "Other"
+    }
+];

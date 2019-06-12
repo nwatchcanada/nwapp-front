@@ -7,13 +7,14 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 
 
 class AddModalComponent extends Component {
     render() {
         const {
-            streetNumber, streetName, streetType, onTextChange, errors,
-            isShowingModal, onSaveClick, onCloseClick } = this.props;
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, onTextChange, errors,
+            isShowingModal, onSaveClick, onCloseClick, onSelectChange } = this.props;
 
         // Apply our styling for our modal component.
         const customStyles = {
@@ -24,6 +25,8 @@ class AddModalComponent extends Component {
                 marginBottom          : '0%',
             }
         };
+
+        const isOtherStreetTypeSelected = streetType === 'Other';
 
         return (
             <div>
@@ -69,16 +72,28 @@ class AddModalComponent extends Component {
                                     type="text"
                                 />
 
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.streetType}
+                                <BootstrapSingleSelect
                                     label="Street Type (*)"
-                                    onChange={onTextChange}
-                                    value={streetType}
                                     name="streetType"
-                                    type="text"
+                                    defaultOptionLabel="Please select a street type."
+                                    options={streetTypeOptions}
+                                    value={streetType}
+                                    error={errors.streetType}
+                                    onSelectChange={onSelectChange}
                                 />
+
+                                {isOtherStreetTypeSelected &&
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.streetTypeOther}
+                                        label="Street Type Other (*)"
+                                        onChange={onTextChange}
+                                        value={streetTypeOther}
+                                        name="streetTypeOther"
+                                        type="text"
+                                    />
+                                }
 
                                 <button
                                     onClick={onCloseClick}
@@ -104,11 +119,11 @@ class AddModalComponent extends Component {
 }
 
 
-class DistrictUpdateComComponent extends Component {
+export default class DistrictUpdateComComponent extends Component {
     render() {
         const {
-            slug, name, description, streetNumber, streetName, streetType, errors, onTextChange, isLoading, onClick,
-            streetsArray, isShowingModal, onAddClick, onSaveClick, onCloseClick, onRemoveClick
+            slug, name, description, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, errors, onTextChange, isLoading, onClick,
+            streetsArray, isShowingModal, onAddClick, onSaveClick, onCloseClick, onRemoveClick, onSelectChange
         } = this.props;
         return (
             <main id="main" role="main">
@@ -169,7 +184,10 @@ class DistrictUpdateComComponent extends Component {
                                 streetNumber={streetNumber}
                                 streetName={streetName}
                                 streetType={streetType}
+                                streetTypeOptions={streetTypeOptions}
+                                streetTypeOther={streetTypeOther}
                                 onTextChange={onTextChange}
+                                onSelectChange={onSelectChange}
                                 errors={errors}
                                 isShowingModal={isShowingModal}
                                 onSaveClick={onSaveClick}
@@ -199,8 +217,6 @@ class DistrictUpdateComComponent extends Component {
         );
     }
 }
-
-export default DistrictUpdateComComponent;
 
 
 class StreetTableRow extends Component {

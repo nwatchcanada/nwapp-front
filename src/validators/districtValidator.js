@@ -85,6 +85,12 @@ export function validateCommunityCaresModalSaveInput(data) {
     }
     if (data.streetType === undefined || data.streetType === null || validator.isEmpty(data.streetType) || data.streetType === "" || data.streetType === "null") {
         errors.streetType = 'This field is required';
+    } else {
+        if (data.streetType === "Other") {
+            if (data.streetTypeOther === undefined || data.streetTypeOther === null || validator.isEmpty(data.streetTypeOther) || data.streetTypeOther === "" || data.streetTypeOther === "null") {
+                errors.streetTypeOther = 'This field is required';
+            }
+        }
     }
 
     return {
