@@ -122,9 +122,11 @@ class StaffListComponent extends Component {
                             </div>
 
                         </section>
+                    </div>
+                </div>
 
-                        <h2>
-                            <i className="fas fa-user-times"></i>&nbsp;Inactive Staff List
+                <div className="row">
+                    <div className="col-md-8">
                             <div className="step-navigation float-right">
                                 <div id="step-1" className="st-grey ">
                                     <Link to="/staff/active">
@@ -135,6 +137,14 @@ class StaffListComponent extends Component {
                                     <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (8)</span>
                                 </div>
                             </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12">
+
+                        <h2>
+                           <i className="fas fa-user-times"></i>&nbsp;Inactive Staff List
                         </h2>
 
                         <div className="table-responsive">

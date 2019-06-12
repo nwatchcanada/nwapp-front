@@ -100,7 +100,6 @@ class AreaCoordinatorListComponent extends Component {
 
                 <div className="row">
                     <div className="col-md-12">
-
                         <section className="row text-center placeholders">
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
@@ -120,23 +119,30 @@ class AreaCoordinatorListComponent extends Component {
                                 <h4>Search</h4>
                                 <span className="text-muted">Search your area coordinators</span>
                             </div>
-
                         </section>
+                    </div>
+                </div>
 
+                <div className="row">
+                    <div className="col-md-8">
+                        <div className="step-navigation float-right">
+                            <div id="step-1" className="st-grey ">
+                                <Link to="/area-coordinators/active">
+                                    <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
+                                </Link>
+                            </div>
+                            <div id="step-2" className="st-grey active">
+                                <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (8)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12">
                         <h2>
                             <i className="fas fa-user-times"></i>&nbsp;Inactive List
-                            <div className="step-navigation float-right">
-                                <div id="step-1" className="st-grey ">
-                                    <Link to="/area-coordinators/active">
-                                        <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
-                                    </Link>
-                                </div>
-                                <div id="step-2" className="st-grey active">
-                                    <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (8)</span>
-                                </div>
-                            </div>
                         </h2>
-
                         <div className="table-responsive">
                             <table className="table table-striped">
                                 <thead>

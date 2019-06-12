@@ -122,21 +122,30 @@ class StaffActiveListComponent extends Component {
                             </div>
 
                         </section>
+                    </div>
+                </div>
 
+                <div className="row">
+                    <div className="col-md-8">
+                        <div className="step-navigation float-right">
+                            <div id="step-1" className="st-grey active">
+                                <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
+                            </div>
+                            <div id="step-2" className="st-grey">
+                                <Link to="/staff/inactive">
+                                    <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (3)</span>
+                                </Link>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12">
                         <h2>
                             <i className="fas fa-user-check"></i>&nbsp;Active Staff List
-                            <div className="step-navigation float-right">
-                                <div id="step-1" className="st-grey active">
-                                    <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
-                                </div>
-                                <div id="step-2" className="st-grey">
-                                    <Link to="/staff/inactive">
-                                        <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (3)</span>
-                                    </Link>
-                                </div>
-                            </div>
                         </h2>
-
                         <div className="table-responsive">
                             <table className="table table-striped">
                                 <thead>
