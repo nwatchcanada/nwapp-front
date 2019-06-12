@@ -13,7 +13,7 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 class AddModalComponent extends Component {
     render() {
         const {
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, onTextChange, errors,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
             isShowingModal, onSaveClick, onCloseClick, onSelectChange } = this.props;
 
         // Apply our styling for our modal component.
@@ -73,6 +73,7 @@ class AddModalComponent extends Component {
                                 />
 
                                 <BootstrapSingleSelect
+                                    borderColour="border-primary"
                                     label="Street Type (*)"
                                     name="streetType"
                                     defaultOptionLabel="Please select a street type."
@@ -94,6 +95,17 @@ class AddModalComponent extends Component {
                                         type="text"
                                     />
                                 }
+
+                                <BootstrapSingleSelect
+                                    borderColour="border-successs"
+                                    label="Street Direction"
+                                    name="streetDirection"
+                                    defaultOptionLabel="Please select a street direction."
+                                    options={streetDirectionOptions}
+                                    value={streetDirection}
+                                    error={errors.streetDirection}
+                                    onSelectChange={onSelectChange}
+                                />
 
                                 <button
                                     onClick={onCloseClick}
@@ -122,7 +134,7 @@ class AddModalComponent extends Component {
 export default class DistrictUpdateComComponent extends Component {
     render() {
         const {
-            slug, name, description, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, errors, onTextChange, isLoading, onClick,
+            slug, name, description, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, errors, onTextChange, isLoading, onClick,
             streetsArray, isShowingModal, onAddClick, onSaveClick, onCloseClick, onRemoveClick, onSelectChange
         } = this.props;
         return (
@@ -186,6 +198,8 @@ export default class DistrictUpdateComComponent extends Component {
                                 streetType={streetType}
                                 streetTypeOptions={streetTypeOptions}
                                 streetTypeOther={streetTypeOther}
+                                streetDirection={streetDirection}
+                                streetDirectionOptions={streetDirectionOptions}
                                 onTextChange={onTextChange}
                                 onSelectChange={onSelectChange}
                                 errors={errors}
@@ -221,7 +235,7 @@ export default class DistrictUpdateComComponent extends Component {
 
 class StreetTableRow extends Component {
     render() {
-        const { streetAddress, streetNumber, streetName, streetType, onRemoveClick } = this.props;
+        const { streetAddress, streetNumber, streetName, streetType, streetDirection, onRemoveClick } = this.props;
         return (
             <tr key={streetAddress}>
                 <td>
@@ -232,6 +246,9 @@ class StreetTableRow extends Component {
                 </td>
                 <td>
                     {streetType}
+                </td>
+                <td>
+                    {streetDirection}
                 </td>
                 <td>
                     <button type="button" className="btn btn-danger float-right" aria-label="prev" onClick={() => onRemoveClick(streetAddress)}>
@@ -260,6 +277,7 @@ class StreetsTable extends Component {
                             streetNumber={rowData.streetNumber}
                             streetName={rowData.streetName}
                             streetType={rowData.streetType}
+                            streetDirection={rowData.streetDirection}
                             onRemoveClick={onRemoveClick}
                         />
                     );
@@ -276,6 +294,7 @@ class StreetsTable extends Component {
                     <th>Street #</th>
                     <th>Street Name</th>
                     <th>Street Type</th>
+                    <th>Direction</th>
                     <th>
                     <button type="button" className="btn btn-success float-right" onClick={onAddClick}>
                         <span className="fa fa-plus"></span>

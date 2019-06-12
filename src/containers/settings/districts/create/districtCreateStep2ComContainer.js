@@ -8,7 +8,7 @@ import {
 } from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateCommunityCaresInput, validateCommunityCaresModalSaveInput } from "../../../../validators/districtValidator";
-import { BASIC_STREET_TYPE_CHOICES } from "../../../../constants/api";
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
 class DistrictCreateStep2CommunityCareContainer extends Component {
@@ -56,6 +56,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             streetType: "",
             streetTypeOption: localStorageGetObjectItem('temp-district-com-streetTypeOption'),
             streetTypeOther: "",
+            streetDirection: "",
+            streetDirectionOption: localStorageGetObjectItem('temp-district-com-streetDirectionOption'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -167,15 +169,22 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+
+            // Generate our new address.
+            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
+            let streetAddress = this.state.streetNumber+" "+this.state.streetName+" "+actualStreetType;
+            if (this.state.streetDirection) {
+                streetAddress += " " + this.state.streetDirection;
+            }
+
             // Append our array.
             let a = this.state.streetsArray.slice(); //creates the clone of the state
-            const streetAddress = this.state.streetNumber+" "+this.state.streetName+" "+this.state.streetType+" "+this.state.streetTypeOther;
-            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
             a.push({
                 streetAddress: streetAddress,
                 streetNumber: this.state.streetNumber,
                 streetName: this.state.streetName,
                 streetType: actualStreetType,
+                streetDirection: this.state.streetDirection,
             });
 
             // Update our state.
@@ -187,7 +196,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
                 streetName: "",
                 streetType: "",
                 streetTypeOther: "",
-            })
+                streetDirection: "",
+            });
 
             // Save our table data.
             localStorage.setItem("temp-district-com-streets", JSON.stringify(a))
@@ -218,6 +228,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             streetName: "",
             streetType: "",
             streetTypeOther: "",
+            streetDirection: ""
         });
     }
 
@@ -263,7 +274,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
      */
 
     render() {
-        const { name, description, streetNumber, streetName, streetType, streetTypeOther, errors, isShowingModal, streetsArray } = this.state;
+        const { name, description, streetNumber, streetName, streetType, streetTypeOther, streetDirection, errors, isShowingModal, streetsArray } = this.state;
         return (
             <DistrictCreateStep2ComComponent
                 isShowingModal={isShowingModal}
@@ -274,6 +285,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
                 streetType={streetType}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
                 streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

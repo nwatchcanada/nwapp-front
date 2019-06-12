@@ -98,3 +98,29 @@ export const BASIC_STREET_TYPE_CHOICES = [
         label: "Other"
     }
 ];
+
+
+/**
+ *  A list of directions to choose from.
+ */
+export const STREET_DIRECTION_CHOICES = [
+    {
+        selectName: "streetDirection", value: "", label: "-"
+    },{
+        selectName: "streetDirection", value: "E", label: "East"
+    },{
+        selectName: "streetDirection", value: "N", label: "North"
+    },{
+        selectName: "streetDirection", value: "NE", label: "Northeast"
+    },{
+        selectName: "streetDirection", value: "NW", label: "Northwest"
+    },{
+        selectName: "streetDirection", value: "S", label: "South"
+    },{
+        selectName: "streetDirection", value: "SE", label: "Southeast"
+    },{
+        selectName: "streetDirection", value: "SW", label: "Southwest"
+    },{
+        selectName: "streetDirection", value: "W", label: "West"
+    }
+];

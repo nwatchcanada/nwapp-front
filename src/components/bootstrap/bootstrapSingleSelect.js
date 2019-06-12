@@ -32,6 +32,7 @@ export const BootstrapSingleSelect = ({
     helpText,
     error,
     onSelectChange,
+    borderColour="border-primary"
 }) => {
     const id = shortid.generate();
 
@@ -40,6 +41,10 @@ export const BootstrapSingleSelect = ({
 
     const selectedOption = getSelectedOption(options, value)
 
+    // Set the border color based on text.
+    const borderColourHex = borderColour === "border-primary" ? "#007bff"  : "#28a745";
+
+    // Generate our custom style.
     const customStyles = {
         container: (base) => ({
             ...base,
@@ -47,10 +52,10 @@ export const BootstrapSingleSelect = ({
         }),
         control: (base, state) => ({
             ...base,
-            borderColor: error ? 'red': '#007bff',
+            borderColor: error ? 'red': borderColourHex,
             boxShadow: error ? state.isFocused ? '0 0 0 2px rgba(255,0,0,0.3)' : null : state.isFocused ? '0 0 0 2px rgba(0,123,255,0.3)' : null,
             "&:hover": {
-                borderColor: error ? 'red': '#007bff'
+                borderColor: error ? 'red': borderColourHex
             }
         })
     }
