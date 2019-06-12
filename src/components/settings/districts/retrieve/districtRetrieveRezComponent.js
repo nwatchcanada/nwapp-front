@@ -63,24 +63,6 @@ class DistrictRetrieveRezComponent extends Component {
                                     <th scope="row" className="bg-light">Counselor Phone</th>
                                     <td>{districtData.counselorPhone}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">City Role Number</th>
-                                    <td>{districtData.cityRoleNumber}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Legal Description</th>
-                                    <td>{districtData.legalDescription}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Link to City Website</th>
-                                    <td>
-                                        {districtData.linkToCityWebsite &&
-                                            <a href={districtData.linkToCityWebsite} target="_blank" rel="noopener noreferrer">
-                                                {districtData.linkToCityWebsite}&nbsp;<i className="fas fa-external-link-alt"></i>
-                                            </a>
-                                        }
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
 

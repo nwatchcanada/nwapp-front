@@ -23,15 +23,6 @@ export function validateResidentialInput(data) {
     if (data.counselorPhone === undefined || data.counselorPhone === null || validator.isEmpty(data.counselorPhone) || data.counselorPhone === "" || data.counselorPhone === "null") {
         errors.counselorPhone = 'This field is required';
     }
-    if (data.cityRoleNumber === undefined || data.cityRoleNumber === null || validator.isEmpty(data.cityRoleNumber) || data.cityRoleNumber === "" || data.cityRoleNumber === "null") {
-        errors.cityRoleNumber = 'This field is required';
-    }
-    if (data.legalDescription === undefined || data.legalDescription === null || validator.isEmpty(data.legalDescription) || data.legalDescription === "" || data.legalDescription === "null") {
-        errors.legalDescription = 'This field is required';
-    }
-    if (data.linkToCityWebsite === undefined || data.linkToCityWebsite === null || validator.isEmpty(data.linkToCityWebsite) || data.linkToCityWebsite === "" || data.linkToCityWebsite === "null") {
-        errors.linkToCityWebsite = 'This field is required';
-    }
 
     return {
         errors,

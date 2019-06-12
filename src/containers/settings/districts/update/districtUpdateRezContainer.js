@@ -29,9 +29,6 @@ class DistrictUpdateRezContainer extends Component {
             counselorName: null,
             counselorEmail: null,
             counselorPhone: null,
-            cityRoleNumber: null,
-            legalDescription: null,
-            linkToCityWebsite: null,
             errors: {},
         }
 
@@ -59,9 +56,6 @@ class DistrictUpdateRezContainer extends Component {
             counselorName: 'Bart Mika',
             counselorEmail: 'bart@mikasoftware.com',
             counselorPhone: '(111) 222-3333',
-            cityRoleNumber: '123456',
-            legalDescription: 'Argyle',
-            linkToCityWebsite: 'http://google.com',
             errors: {},
         });
     }
@@ -133,7 +127,7 @@ class DistrictUpdateRezContainer extends Component {
      */
 
     render() {
-        const { slug, name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading } = this.state;
+        const { slug, name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.state;
         return (
             <DistrictUpdateRezComponent
                 slug={slug}
@@ -142,9 +136,6 @@ class DistrictUpdateRezContainer extends Component {
                 counselorName={counselorName}
                 counselorEmail={counselorEmail}
                 counselorPhone={counselorPhone}
-                cityRoleNumber={cityRoleNumber}
-                legalDescription={legalDescription}
-                linkToCityWebsite={linkToCityWebsite}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}

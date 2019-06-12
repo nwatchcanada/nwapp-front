@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 
 class DistrictCreateStep3RezComponent extends Component {
     render() {
-        const { name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading } = this.props;
+        const { name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.props;
         const { onClick } = this.props;
         return (
             <main id="main" role="main">
@@ -72,7 +72,6 @@ class DistrictCreateStep3RezComponent extends Component {
                                     <th scope="row" className="bg-light">Description</th>
                                     <td>{description}</td>
                                 </tr>
-                                { /* , , , cityRoleNumber, legalDescription, linkToCityWebsite, */}
                                 <tr>
                                     <th scope="row" className="bg-light">Counselor Name</th>
                                     <td>{counselorName}</td>
@@ -84,18 +83,6 @@ class DistrictCreateStep3RezComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Counselor Phone</th>
                                     <td>{counselorPhone}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">City Role Number</th>
-                                    <td>{cityRoleNumber}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Legal Description</th>
-                                    <td>{legalDescription}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Link to City Website</th>
-                                    <td>{linkToCityWebsite}</td>
                                 </tr>
                             </tbody>
                         </table>

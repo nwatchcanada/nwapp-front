@@ -20,9 +20,6 @@ class DistrictCreateStep3ResidentialContainer extends Component {
             counselorName: localStorage.getItem('temp-district-rez-counselorName'),
             counselorEmail: localStorage.getItem('temp-district-rez-counselorEmail'),
             counselorPhone: localStorage.getItem('temp-district-rez-counselorPhone'),
-            cityRoleNumber: localStorage.getItem('temp-district-rez-cityRoleNumber'),
-            legalDescription: localStorage.getItem('temp-district-rez-legalDescription'),
-            linkToCityWebsite: localStorage.getItem('temp-district-rez-linkToCityWebsite'),
             image: localStorage.getItem('temp-district-rez-image'),
             program: localStorage.getItem('temp-district-program'),
             errors: {},
@@ -95,7 +92,7 @@ class DistrictCreateStep3ResidentialContainer extends Component {
      */
 
     render() {
-        const { name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading } = this.state;
+        const { name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.state;
         return (
             <DistrictCreateStep3RezComponent
                 name={name}
@@ -103,9 +100,6 @@ class DistrictCreateStep3ResidentialContainer extends Component {
                 counselorName={counselorName}
                 counselorEmail={counselorEmail}
                 counselorPhone={counselorPhone}
-                cityRoleNumber={cityRoleNumber}
-                legalDescription={legalDescription}
-                linkToCityWebsite={linkToCityWebsite}
                 errors={errors}
                 isLoading={isLoading}
                 onClick={this.onClick}

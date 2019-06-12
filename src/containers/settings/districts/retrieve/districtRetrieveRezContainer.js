@@ -93,9 +93,6 @@ class DistrictRetrieveRezContainer extends Component {
             'counselorName': 'Bart Mika',
             'counselorEmail': 'bart@mikasoftware.com',
             'counselorPhone': '(111) 222-3333',
-            'cityRoleNumber': '123456',
-            'legalDescription': 'Argyle',
-            'linkToCityWebsite': 'http://google.com',
             'absoluteUrl': '/settings/district-rez/argyle'
         };
         return (

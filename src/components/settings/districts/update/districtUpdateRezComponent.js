@@ -11,7 +11,7 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 class DistrictUpdateRezComponent extends Component {
     render() {
         const {
-            slug, name, description, counselorName, counselorEmail, counselorPhone, cityRoleNumber, legalDescription, linkToCityWebsite, errors, isLoading,
+            slug, name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading,
             onTextChange, onClick
         } = this.props;
         return (
@@ -99,40 +99,6 @@ class DistrictUpdateRezComponent extends Component {
                                 onChange={onTextChange}
                                 value={counselorPhone}
                                 name="counselorPhone"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.cityRoleNumber}
-                                label="City Role Number (*)"
-                                onChange={onTextChange}
-                                value={cityRoleNumber}
-                                name="cityRoleNumber"
-                                type="text"
-                            />
-
-                            <BootstrapTextarea
-                                name="legalDescription"
-                                borderColour="border-primary"
-                                label="Legal Description (*)"
-                                placeholder="Please set the legal district description"
-                                rows="5"
-                                value={legalDescription}
-                                helpText="This is the legal description of the residential district."
-                                onChange={onTextChange}
-                                error={errors.legalDescription}
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.linkToCityWebsite}
-                                label="Link to City Website (*)"
-                                onChange={onTextChange}
-                                value={linkToCityWebsite}
-                                name="linkToCityWebsite"
                                 type="text"
                             />
 
