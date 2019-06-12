@@ -110,20 +110,22 @@ class DistrictCreateStep2BusinessContainer extends Component {
         // For debuging purposes only.
         console.log("DEBUG | onDrop | file", file);
 
-        const fileWithPreview = Object.assign(file, {
-            preview: URL.createObjectURL(file)
-        });
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
 
-        // For debugging purposes.
-        console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+            // For debugging purposes.
+            console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
 
-        // Save to local storage our OBJECT.
-        localStorage.setItem('temp-district-biz-logo', JSON.stringify(fileWithPreview));
+            // Save to local storage our OBJECT.
+            localStorage.setItem('temp-district-biz-logo', JSON.stringify(fileWithPreview));
 
-        // Update our local state to update the GUI.
-        this.setState({
-            logo: fileWithPreview
-        })
+            // Update our local state to update the GUI.
+            this.setState({
+                logo: fileWithPreview
+            })
+        }        
     }
 
 

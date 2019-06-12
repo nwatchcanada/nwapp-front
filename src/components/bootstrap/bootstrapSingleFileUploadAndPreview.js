@@ -16,7 +16,7 @@ export const BootstrapSingleFileUploadAndPreview = ({
     inputClassName = "form-group",
     fileObj = null
 }) => {
-    const maxSize = 1048576;
+    const maxSize = parseInt(process.env.REACT_APP_IMAGE_UPLOAD_MAX_FILESIZE_IN_BYTES);
 
     const thumb = {
         display: 'inline-flex',
@@ -55,7 +55,7 @@ export const BootstrapSingleFileUploadAndPreview = ({
                     {isDragReject && "File type not accepted, sorry!"}
                     {isFileTooLarge && (
                       <div className="text-danger mt-2">
-                        File is too large.
+                        {process.env.REACT_APP_IMAGE_UPLOAD_MAX_FILESIZE_ERROR_MESSAGE}
                       </div>
                     )}
                   </div>
