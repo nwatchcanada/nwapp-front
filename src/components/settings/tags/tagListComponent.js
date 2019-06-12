@@ -6,16 +6,19 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 class TableRow extends Component {
     render() {
-        const { slug, number, name, absoluteUrl } = this.props.datum;
+        const { slug, number, name } = this.props.datum;
 
         return (
             <tr slug={slug}>
                 <td>{number}</td>
                 <td>{name}</td>
                 <td>
-                    <a href={absoluteUrl}>
-                        View&nbsp;<i className="fas fa-chevron-right"></i>
-                    </a>
+                    <Link to={`/settings/tag/${slug}/update`} className="btn btn-primary pl-4 pr-4">
+                        <i className="fas fa-edit"></i>&nbsp;Edit
+                    </Link>&nbsp;&nbsp;&nbsp;
+                    <Link to={`/settings/tag/${slug}/delete`} className="btn btn-danger pl-4 pr-4">
+                        <i className="fas fa-minus"></i>&nbsp;Remove
+                    </Link>
                 </td>
             </tr>
         );

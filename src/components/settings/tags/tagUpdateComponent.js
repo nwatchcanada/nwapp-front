@@ -23,9 +23,6 @@ class TagUpdateComponent extends Component {
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/settings/tags"><i className="fas fa-tags"></i>&nbsp;Tags</Link>
                         </li>
-                        <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/tag/argyle"><i className="fas fa-tag"></i>&nbsp;Argyle</Link>
-                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
                         </li>
@@ -55,7 +52,7 @@ class TagUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
-                                <Link to="/settings/tag/argyle" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/settings/tags" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
                                 </Link>
                             </div>

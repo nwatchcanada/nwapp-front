@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TagRetrieveComponent from "../../../components/settings/tags/tagRetrieveComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import TagDeleteComponent from "../../../components/settings/tags/tagDeleteComponent";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class TagRetrieveContainer extends Component {
+class TagDeleteContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -43,9 +43,6 @@ class TagRetrieveContainer extends Component {
          this.setState = (state,callback)=>{
              return;
          };
-
-         // Clear any and all flash messages in our queue to be rendered.
-         this.props.clearFlashMessage();
      }
 
     /**
@@ -75,7 +72,8 @@ class TagRetrieveContainer extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/settings/tag/"+this.state.slug+"/update");
+        this.props.setFlashMessage("success", "Tag has been successfully deleted.");
+        this.props.history.push("/settings/tags");
     }
 
     /**
@@ -91,7 +89,7 @@ class TagRetrieveContainer extends Component {
             'absoluteUrl': '/settings/tag/argyle'
         };
         return (
-            <TagRetrieveComponent
+            <TagDeleteComponent
                 tagData={tagData}
                 onBack={this.onBack}
                 onClick={this.onClick}
@@ -110,8 +108,8 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         }
     }
 }
@@ -120,4 +118,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TagRetrieveContainer);
+)(TagDeleteContainer);

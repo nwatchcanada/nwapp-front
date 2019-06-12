@@ -53,7 +53,7 @@ import WatchUpdateBizContainer from "./watches/update/watchUpdateBizContainer";
 import WatchUpdateComContainer from "./watches/update/watchUpdateComContainer";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
-import TagRetrieveContainer from "./settings/tags/tagRetrieveContainer";
+import TagDeleteContainer from "./settings/tags/tagDeleteContainer";
 import TagCreateContainer from "./settings/tags/tagCreateContainer";
 import TagUpdateContainer from "./settings/tags/tagUpdateContainer";
 
@@ -156,7 +156,7 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district-rez/:slug/update" exact component={DistrictUpdateRezContainer} />
                                 <Route path="/settings/tags" exact component={TagsListContainer} />
                                 <Route path="/settings/tag/add" exact component={TagCreateContainer} />
-                                <Route path="/settings/tag/:slug" exact component={TagRetrieveContainer} />
+                                <Route path="/settings/tag/:slug/delete" exact component={TagDeleteContainer} />
                                 <Route path="/settings/tag/:slug/update" exact component={TagUpdateContainer} />
                                 <Route path="/settings/how-hears" exact component={HowHearsListContainer} />
                                 <Route path="/settings/how-hears/add" exact component={HowHearCreateContainer} />

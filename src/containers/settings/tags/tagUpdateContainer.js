@@ -59,7 +59,7 @@ class TagUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(tag) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Tag has been successfully updated.");
-        this.props.history.push("/settings/tag/"+this.state.slug);
+        this.props.history.push("/settings/tags");
     }
 
     onFailedSubmissionCallback(errors) {
