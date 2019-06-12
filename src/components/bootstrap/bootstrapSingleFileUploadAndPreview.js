@@ -14,7 +14,8 @@ export const BootstrapSingleFileUploadAndPreview = ({
     divClassName = "form-group",
     borderColour = '',
     inputClassName = "form-group",
-    fileObj = null
+    fileObj = null,
+    onRemoveUploadClick = null
 }) => {
     const maxSize = parseInt(process.env.REACT_APP_IMAGE_UPLOAD_MAX_FILESIZE_IN_BYTES);
 
@@ -65,12 +66,19 @@ export const BootstrapSingleFileUploadAndPreview = ({
 
             { /* The follwoing code will render our stylized preview image. */ }
             {fileObj &&
-                <div style={thumb}>
-                    <img
-                        src={fileObj.preview}
-                        style={img}
-                        alt={label}
-                    />
+                <div>
+                    <div style={thumb}>
+                        <img
+                            src={fileObj.preview}
+                            style={img}
+                            alt={label}
+                        />
+                    </div>
+                    <br />
+                    <button className="btn btn-danger btn-sm float-left" onClick={onRemoveUploadClick}>
+                        <i className="fas fa-trash-alt"></i>&nbsp;Remove Upload
+                    </button>
+                    <br />
                 </div>
             }
 

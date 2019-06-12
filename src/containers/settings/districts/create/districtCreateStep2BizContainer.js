@@ -29,6 +29,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
         this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
     }
 
     /**
@@ -125,7 +126,13 @@ class DistrictCreateStep2BusinessContainer extends Component {
             this.setState({
                 logo: fileWithPreview
             })
-        }        
+        }
+    }
+
+    onRemoveUploadClick(e) {
+        this.setState({
+            logo: null
+        })
     }
 
 
@@ -147,6 +154,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
                 onClick={this.onClick}
                 onDrop={this.onDrop}
                 isLoading={isLoading}
+                onRemoveUploadClick={this.onRemoveUploadClick}
             />
         );
     }

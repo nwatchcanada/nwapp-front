@@ -11,7 +11,7 @@ import { BootstrapSingleFileUploadAndPreview } from "../../../bootstrap/bootstra
 
 class DistrictCreateStep1BizComponent extends Component {
     render() {
-        const { name, description, websiteURL, logo, errors, onTextChange, isLoading, onClick, onDrop } = this.props;
+        const { name, description, websiteURL, logo, errors, onTextChange, isLoading, onClick, onDrop, onRemoveUploadClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -104,6 +104,7 @@ class DistrictCreateStep1BizComponent extends Component {
                                 onDrop={onDrop}
                                 name="logo"
                                 fileObj={logo}
+                                onRemoveUploadClick={onRemoveUploadClick}
                             />
 
                             <div className="form-group">
