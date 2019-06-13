@@ -77,6 +77,16 @@ class WatchCreateStep2ComComponent extends Component {
                                 type="text"
                             />
 
+                            <BootstrapSingleSelect
+                                label="District (*)"
+                                name="district"
+                                defaultOptionLabel="Please select the residential district."
+                                options={districtOptions}
+                                value={district}
+                                error={errors.district}
+                                onSelectChange={onSelectChange}
+                            />
+
                             <BootstrapTextarea
                                 name="description"
                                 borderColour="border-primary"
@@ -96,16 +106,6 @@ class WatchCreateStep2ComComponent extends Component {
                                 options={associateOptions}
                                 value={associate}
                                 error={errors.associate}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            <BootstrapSingleSelect
-                                label="District (*)"
-                                name="district"
-                                defaultOptionLabel="Please select the residential district."
-                                options={districtOptions}
-                                value={district}
-                                error={errors.district}
                                 onSelectChange={onSelectChange}
                             />
 

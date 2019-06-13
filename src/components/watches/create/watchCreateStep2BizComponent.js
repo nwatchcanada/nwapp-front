@@ -76,22 +76,22 @@ class WatchCreateStep2BizComponent extends Component {
                             />
 
                             <BootstrapSingleSelect
-                                label="Associate (*)"
-                                name="associate"
-                                defaultOptionLabel="Please select the associate."
-                                options={associateOptions}
-                                value={associate}
-                                error={errors.associate}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            <BootstrapSingleSelect
                                 label="District (*)"
                                 name="district"
                                 defaultOptionLabel="Please select the residential district."
                                 options={districtOptions}
                                 value={district}
                                 error={errors.district}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Associate (*)"
+                                name="associate"
+                                defaultOptionLabel="Please select the associate."
+                                options={associateOptions}
+                                value={associate}
+                                error={errors.associate}
                                 onSelectChange={onSelectChange}
                             />
 
