@@ -19,7 +19,7 @@ class StaffDashboardComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4><i className="fas fa-users"></i>&nbsp;Members</h4>
-                                <div className="text-muted">View your members list</div>
+                                <div className="text-muted">View Members</div>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
@@ -28,7 +28,7 @@ class StaffDashboardComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</h4>
-                                <span className="text-muted">View your area coordinators</span>
+                                <span className="text-muted">View Area Coordinators</span>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
@@ -37,7 +37,7 @@ class StaffDashboardComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4><i className="fas fa-crown"></i>&nbsp;Associates</h4>
-                                <span className="text-muted">View associate Data</span>
+                                <span className="text-muted">View Associates</span>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
@@ -46,13 +46,13 @@ class StaffDashboardComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4><i className="fas fa-map-pin"></i>&nbsp;Items</h4>
-                                <span className="text-muted">View your items</span>
+                                <span className="text-muted">View Items</span>
                             </div>
                         </section>
 
                         <div className="jumbotron">
                             <h1 className="display-4"><i className="fas fa-bullhorn"></i>&nbsp;Announcements</h1>
-                            <p className="lead">There doesn't appear to be any announcements, begin creating your announcement below.</p>
+                            <p className="lead">There are no announcements. Feel free to add one.</p>
 
                             <p className="lead">
                                 <Link className="btn btn-success btn-lg" to="#">
