@@ -73,6 +73,10 @@ import MemberSearchContainer from "./members/memberSearchContainer";
 import MemberSearchResultContainer from "./members/memberSearchResultContainer";
 import MemberRetrieveContainer from "./members/memberRetrieveContainer";
 import MemberCreateContainer from "./members/memberCreateContainer";
+import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
+import MemberCreateStep2BizContainer from "./members/create/memberCreateStep2BizContainer";
+import MemberCreateStep2RezOrComContainer from "./members/create/memberCreateStep2RezOrComContainer";
+import MemberCreateStep3Container from "./members/create/memberCreateStep3Container";
 import MemberUpdateContainer from "./members/memberUpdateContainer";
 
 import ItemListContainer from "./items/itemListContainer";
@@ -177,6 +181,10 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/announcement/:slug/delete" exact component={AnnouncementDeleteContainer} />
                                 <Route path="/settings/announcement/:slug/update" exact component={AnnouncementUpdateContainer} />
                                 <Route path="/members/add" exact component={MemberCreateContainer} />
+                                <Route path="/members/add/step-1" exact component={MemberCreateStep1Container} />
+                                <Route path="/members/add/step-2-biz" exact component={MemberCreateStep2BizContainer} />
+                                <Route path="/members/add/step-2-rez-or-cc" exact component={MemberCreateStep2RezOrComContainer} />
+                                <Route path="/members/add/step-3" exact component={MemberCreateStep3Container} />
                                 <Route path="/members/active" exact component={MemberListActiveContainer} />
                                 <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
                                 <Route path="/members/:urlArgument/search" exact component={MemberSearchContainer} />

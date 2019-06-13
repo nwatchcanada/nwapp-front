@@ -103,7 +103,7 @@ class MemberActiveListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/members/add" className="d-block link-ndecor" title="Clients">
+                                    <Link to="/members/add/step-1" className="d-block link-ndecor" title="Clients">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
@@ -125,7 +125,7 @@ class MemberActiveListComponent extends Component {
                 </div>
 
                 <div className="row">
-                    <div className="col-md-8">        
+                    <div className="col-md-8">
                         <div className="step-navigation float-right">
                             <div id="step-1" className="st-grey active">
                                 <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
