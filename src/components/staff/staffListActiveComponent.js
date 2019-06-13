@@ -109,7 +109,7 @@ class StaffActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Add</h4>
-                                <div className="text-muted">Add a staff</div>
+                                <div className="text-muted">Add Staff</div>
                             </div>
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
@@ -118,7 +118,7 @@ class StaffActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Search</h4>
-                                <span className="text-muted">Search your staffs</span>
+                                <span className="text-muted">Search Staff</span>
                             </div>
 
                         </section>
@@ -144,7 +144,7 @@ class StaffActiveListComponent extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h2>
-                            <i className="fas fa-user-check"></i>&nbsp;Active Staff List
+                            <i className="fas fa-user-check"></i>&nbsp;Active Staff 
                         </h2>
                         <div className="table-responsive">
                             <table className="table table-striped">
