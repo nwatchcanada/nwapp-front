@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
+import MemberCreateStep6Component from "../../../components/members/create/memberCreateStep6Component";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF,
@@ -11,7 +12,7 @@ import {
 } from '../../../constants/api';
 
 
-class MemberCreateStep5Container extends Component {
+class MemberCreateStep6Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -40,8 +41,6 @@ class MemberCreateStep5Container extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -67,23 +66,6 @@ class MemberCreateStep5Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(member) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-6");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -99,17 +81,9 @@ class MemberCreateStep5Container extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Member has been successfully created.");
+        this.props.history.push("/members/active");
     }
 
 
@@ -121,7 +95,7 @@ class MemberCreateStep5Container extends Component {
     render() {
         const { returnURL, name, errors } = this.state;
         return (
-            <MemberCreateStep5Component
+            <MemberCreateStep6Component
                 returnURL={returnURL}
                 name={name}
                 errors={errors}
@@ -139,11 +113,15 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep5Container);
+)(MemberCreateStep6Container);
