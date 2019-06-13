@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../bootstrap/bootstrapInput";
+import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 
-class ItemCreateComponent extends Component {
+class ItemCreateStep3Component extends Component {
     render() {
         const { name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -63,4 +63,4 @@ class ItemCreateComponent extends Component {
     }
 }
 
-export default ItemCreateComponent;
+export default ItemCreateStep3Component;

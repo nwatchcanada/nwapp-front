@@ -77,7 +77,9 @@ import MemberUpdateContainer from "./members/memberUpdateContainer";
 
 import ItemListContainer from "./items/itemListContainer";
 import ItemRetrieveContainer from "./items/itemRetrieveContainer";
-import ItemCreateContainer from "./items/itemCreateContainer";
+import ItemCreateStep1Container from "./items/create/itemCreateStep1Container";
+import ItemCreateStep2Container from "./items/create/itemCreateStep2Container";
+import ItemCreateStep3Container from "./items/create/itemCreateStep3Container";
 import ItemUpdateContainer from "./items/itemUpdateContainer";
 
 import AssociateListActiveContainer from "./associates/associateListActiveContainer";
@@ -179,7 +181,9 @@ class AppContainer extends React.Component {
                                 <Route path="/members/:urlArgument/:slug" exact component={MemberRetrieveContainer} />
                                 <Route path="/members/:urlArgument/:slug/update" exact component={MemberUpdateContainer} />
                                 <Route path="/items" exact component={ItemListContainer} />
-                                <Route path="/item/add" exact component={ItemCreateContainer} />
+                                <Route path="/item/add/step-1" exact component={ItemCreateStep1Container} />
+                                <Route path="/item/add/step-2" exact component={ItemCreateStep2Container} />
+                                <Route path="/item/add/step-3" exact component={ItemCreateStep3Container} />
                                 <Route path="/item/:slug" exact component={ItemRetrieveContainer} />
                                 <Route path="/item/:slug/update" exact component={ItemUpdateContainer} />
                                 <Route path="/associates/add" exact component={AssociateCreateContainer} />

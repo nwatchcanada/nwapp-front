@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateComponent from "../../components/items/itemCreateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import validateInput from "../../validators/itemValidator";
+import ItemCreateStep1Component from "../../../components/items/create/itemCreateStep1Component";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import validateInput from "../../../validators/itemValidator";
 
 
-class ItemCreateContainer extends Component {
+class ItemCreateStep1Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -79,21 +79,10 @@ class ItemCreateContainer extends Component {
         })
     }
 
-    onClick(e) {
+    onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-
-        // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        this.props.history.push("/item/add/step-2");
     }
 
 
@@ -105,7 +94,7 @@ class ItemCreateContainer extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <ItemCreateComponent
+            <ItemCreateStep1Component
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -133,4 +122,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateContainer);
+)(ItemCreateStep1Container);
