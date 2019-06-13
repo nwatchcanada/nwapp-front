@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import MemberCreateStep2RezOrComComponent from "../../../components/members/create/memberCreateStep2RezOrComComponent";
-import validateInput from "../../../validators/memberValidator";
+import { validateStep2RezOrComCreateInput } from "../../../validators/memberValidator";
 import { RESIDENCE_TYPE_OF } from '../../../constants/api';
 
 
@@ -16,7 +16,11 @@ class MemberCreateStep2RezOrComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
+            firstName: "",
+            lastName: "",
+            primaryPhone: "",
+            secondaryPhone: "",
+            email: "",
             errors: {},
             isLoading: false
         }
@@ -83,7 +87,7 @@ class MemberCreateStep2RezOrComContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateStep2RezOrComCreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -102,10 +106,14 @@ class MemberCreateStep2RezOrComContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { firstName, lastName, primaryPhone, secondaryPhone, email, errors } = this.state;
         return (
             <MemberCreateStep2RezOrComComponent
-                name={name}
+                firstName={firstName}
+                lastName={lastName}
+                primaryPhone={primaryPhone}
+                secondaryPhone={secondaryPhone}
+                email={email}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

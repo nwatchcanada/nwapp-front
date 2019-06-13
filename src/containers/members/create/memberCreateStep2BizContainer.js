@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import MemberCreateStep2BizComponent from "../../../components/members/create/memberCreateStep2BizComponent";
-import validateInput from "../../../validators/memberValidator";
+import { validateInput } from "../../../validators/memberValidator";
 import { BUSINESS_TYPE_OF } from '../../../constants/api';
 
 

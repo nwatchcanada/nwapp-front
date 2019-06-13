@@ -9,7 +9,7 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 class MemberCreateStep2RezOrComComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { firstName, lastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -68,11 +68,55 @@ class MemberCreateStep2RezOrComComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
+                                error={errors.firstName}
+                                label="First Name (*)"
                                 onChange={onTextChange}
-                                value={name}
-                                name="name"
+                                value={firstName}
+                                name="firstName"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.lastName}
+                                label="Last Name (*)"
+                                onChange={onTextChange}
+                                value={lastName}
+                                name="lastName"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.primaryPhone}
+                                label="Primary Phone (*)"
+                                onChange={onTextChange}
+                                value={primaryPhone}
+                                name="primaryPhone"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.secondaryPhone}
+                                label="Secondary Phone (*)"
+                                onChange={onTextChange}
+                                value={secondaryPhone}
+                                name="secondaryPhone"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.email}
+                                label="Email (*)"
+                                onChange={onTextChange}
+                                value={email}
+                                name="email"
                                 type="text"
                             />
 

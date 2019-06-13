@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import MemberCreateComponent from "../../components/members/memberCreateComponent";
 import { setFlashMessage } from "../../actions/flashMessageActions";
-import validateInput from "../../validators/memberValidator";
+import { validateInput } from "../../validators/memberValidator";
 
 
 class MemberCreateContainer extends Component {

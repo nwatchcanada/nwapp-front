@@ -2,14 +2,37 @@ import validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
 
-/**
- *  Validator will validate the register form.
- */
-export default function validateInput(data) {
+export function validateInput(data) {
     let errors = {};
 
     if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
         errors.name = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+/**
+ *  Validator will validate step 1 in the member creation form.
+ */
+export function validateStep2RezOrComCreateInput(data) {
+    let errors = {};
+
+    if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
+        errors.firstName = 'This field is required';
+    }
+    if (data.lastName === undefined || data.lastName === null || validator.isEmpty(data.lastName) || data.lastName === "") {
+        errors.lastName = 'This field is required';
+    }
+    if (data.primaryPhone === undefined || data.primaryPhone === null || validator.isEmpty(data.primaryPhone) || data.primaryPhone === "") {
+        errors.primaryPhone = 'This field is required';
+    }
+    if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
+        errors.email = 'This field is required';
     }
 
     return {
