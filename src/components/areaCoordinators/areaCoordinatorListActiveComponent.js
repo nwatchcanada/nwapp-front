@@ -108,7 +108,7 @@ class AreaCoordinatorActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Add</h4>
-                                <div className="text-muted">Add an area coordinator</div>
+                                <div className="text-muted">Add Area Coordinator</div>
                             </div>
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
@@ -117,7 +117,7 @@ class AreaCoordinatorActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Search</h4>
-                                <span className="text-muted">Search your area coordinators</span>
+                                <span className="text-muted">Search Area Coordinators</span>
                             </div>
                         </section>
                     </div>
