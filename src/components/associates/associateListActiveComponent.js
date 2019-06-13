@@ -108,7 +108,7 @@ class AssociateActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Add</h4>
-                                <div className="text-muted">Add a associate</div>
+                                <div className="text-muted">Add Associate</div>
                             </div>
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
@@ -117,7 +117,7 @@ class AssociateActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Search</h4>
-                                <span className="text-muted">Search your associates</span>
+                                <span className="text-muted">Search Associates</span>
                             </div>
                         </section>
                     </div>
@@ -144,7 +144,7 @@ class AssociateActiveListComponent extends Component {
                     <div className="col-md-12">
 
                         <h2>
-                            <i className="fas fa-user-check"></i>&nbsp;Active Associates List
+                            <i className="fas fa-user-check"></i>&nbsp;Active Associates 
                         </h2>
 
                         <div className="table-responsive">
