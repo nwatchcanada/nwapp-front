@@ -117,7 +117,7 @@ class MemberActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Search</h4>
-                                <span className="text-muted">Search your members</span>
+                                <span className="text-muted">Search members</span>
                             </div>
 
                         </section>
@@ -142,7 +142,7 @@ class MemberActiveListComponent extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h2>
-                            <i className="fas fa-user-check"></i>&nbsp;Active Members List
+                            <i className="fas fa-user-check"></i>&nbsp;Active Members
                         </h2>
 
                         <div className="table-responsive">
