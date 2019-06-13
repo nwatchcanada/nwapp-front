@@ -18,14 +18,14 @@ class ReportListComponent extends Component {
                                    <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                                 </li>
                                 <li className="breadcrumb-item active" aria-current="page">
-                                    <i className="fas fa-book"></i>&nbsp;Report
+                                    <i className="fas fa-book"></i>&nbsp;Reports
                                 </li>
                             </ol>
                         </nav>
 
                         <FlashMessageComponent object={flashMessage} />
 
-                        <h1><i className="fas fa-book"></i>&nbsp;Report</h1>
+                        <h1><i className="fas fa-book"></i>&nbsp;Reports</h1>
                         <div className="row">
                             <div className="col-md-12">
 
@@ -37,7 +37,7 @@ class ReportListComponent extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <h3 className="card-title">Associates Report</h3>
-                                                <p className="card-text">View report about associates.</p>
+                                                <p className="card-text">View Associates Report</p>
                                                 <Link to="#" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
@@ -51,7 +51,7 @@ class ReportListComponent extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <h3 className="card-title">Area Coordinators Report</h3>
-                                                <p className="card-text">View report about area coordinators.</p>
+                                                <p className="card-text">View AC Report</p>
                                                 <Link to="#" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
@@ -65,7 +65,7 @@ class ReportListComponent extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <h3 className="card-title">Members Report</h3>
-                                                <p className="card-text">View report about members.</p>
+                                                <p className="card-text">View Members Report</p>
                                                 <Link to="#" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
@@ -79,7 +79,7 @@ class ReportListComponent extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <h3 className="card-title">District Overview Report</h3>
-                                                <p className="card-text">View report about district overview.</p>
+                                                <p className="card-text">View District Report</p>
                                                 <Link to="#" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
@@ -93,7 +93,7 @@ class ReportListComponent extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <h3 className="card-title">Business Watch Report</h3>
-                                                <p className="card-text">View report about business watch.</p>
+                                                <p className="card-text">View BW Report</p>
                                                 <Link to="#" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
@@ -106,8 +106,8 @@ class ReportListComponent extends Component {
                                                 <i className="fas fa-university fa-3x"></i>
                                             </div>
                                             <div className="card-body">
-                                                <h3 className="card-title">Community Cares Watch Report</h3>
-                                                <p className="card-text">View report about community cares watch.</p>
+                                                <h3 className="card-title">Community Cares Report</h3>
+                                                <p className="card-text">View CC Report</p>
                                                 <Link to="#" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
@@ -121,7 +121,7 @@ class ReportListComponent extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <h3 className="card-title">Residential Watch Report</h3>
-                                                <p className="card-text">View report about residential watch.</p>
+                                                <p className="card-text">View RW Report</p>
                                                 <Link to="#" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
