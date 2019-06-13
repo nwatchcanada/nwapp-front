@@ -108,7 +108,7 @@ class TaskActiveListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Search</h4>
-                                <span className="text-muted">Search your tasks</span>
+                                <span className="text-muted">Search Tasks</span>
                             </div>
                         </section>
                     </div>
@@ -137,7 +137,7 @@ class TaskActiveListComponent extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h2>
-                            <i className="fas fa-clock"></i>&nbsp;Pending List
+                            <i className="fas fa-clock"></i>&nbsp;Pending Tasks
                         </h2>
 
                         <div className="table-responsive">
