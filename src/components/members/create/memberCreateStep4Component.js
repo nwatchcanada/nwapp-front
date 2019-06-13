@@ -2,14 +2,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
-
-class MemberCreateStep4Component extends Component {
+export default class MemberCreateStep4Component extends Component {
     render() {
-        const { returnURL, name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { returnURL, tableData, isLoading, onTableRowClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -51,7 +47,7 @@ class MemberCreateStep4Component extends Component {
                             <span className="num">4.</span><span className="">Watch</span>
                         </div>
                          <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Additional</span>
+                            <span className="num">5.</span><span className="">Metrics</span>
                         </div>
                         <div id="step-6" className="st-grey">
                             <span className="num">6.</span><span className="">Review</span>
@@ -65,25 +61,26 @@ class MemberCreateStep4Component extends Component {
                             <h2>
                                 <i className="fas fa-shield-alt"></i>&nbsp;Watch
                             </h2>
-                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+                            <p>You are eligable for the following watches, please select the watch which is appropriate for the member:</p>
 
-                            <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
-                                onChange={onTextChange}
-                                value={name}
-                                name="name"
-                                type="text"
-                            />
+                            <div className="table-responsive">
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Name</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {tableData && tableData.map(
+                                            (tableDatum, i) => <TableRow datum={tableDatum} key={i} onTableRowClick={onTableRowClick} isLoading={isLoading} />)
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-arrow-right"></i>&nbsp;Next
-                                </button>
                                 <Link to="/members/add/step-3" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
@@ -98,4 +95,22 @@ class MemberCreateStep4Component extends Component {
     }
 }
 
-export default MemberCreateStep4Component;
+class TableRow extends Component {
+    render() {
+        const { slug, icon, name } = this.props.datum;
+        const { onTableRowClick, isLoading } = this.props;
+
+        return (
+            <tr slug={slug}>
+                <td><i className={`fas fa-${icon}`}></i></td>
+                <td>{name}</td>
+                <td>
+
+                    <button className="btn btn-primary btn-sm float-right" disabled={isLoading} onClick={ (event) => { onTableRowClick(event, slug) } }>
+                        Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                    </button>
+                </td>
+            </tr>
+        );
+    }
+}

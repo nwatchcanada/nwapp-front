@@ -42,14 +42,18 @@ class MemberCreateStep4Component extends Component {
                                 <span className="num">2.</span><span className="">Contact</span>
                             </Link>
                         </div>
-                        <div id="step-3" className="st-grey active">
-                            <span className="num">3.</span><span className="">Address</span>
+                        <div id="step-3" className="st-grey">
+                            <Link to="/members/add/step-3">
+                                <span className="num">3.</span><span className="">Address</span>
+                            </Link>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Watch</span>
+                            <Link to="/members/add/step-4">
+                                <span className="num">4.</span><span className="">Watch</span>
+                            </Link>
                         </div>
-                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Additional</span>
+                         <div id="step-5" className="st-grey active">
+                            <span className="num">5.</span><span className="">Metrics</span>
                         </div>
                         <div id="step-6" className="st-grey">
                             <span className="num">6.</span><span className="">Review</span>
@@ -61,7 +65,7 @@ class MemberCreateStep4Component extends Component {
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
                             <h2>
-                                <i className="fas fa-address-book"></i>&nbsp;Address
+                                <i className="fas fa-chart-pie"></i>&nbsp;Metrics
                             </h2>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
@@ -80,9 +84,9 @@ class MemberCreateStep4Component extends Component {
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-arrow-right"></i>&nbsp;Next
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to={returnURL} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/members/add/step-4" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

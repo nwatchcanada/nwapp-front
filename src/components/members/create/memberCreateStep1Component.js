@@ -47,7 +47,7 @@ class MemberCreateStep1Component extends Component {
                             <span className="num">4.</span><span className="">Watch</span>
                         </div>
                          <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Additional</span>
+                            <span className="num">5.</span><span className="">Metrics</span>
                         </div>
                         <div id="step-6" className="st-grey">
                             <span className="num">6.</span><span className="">Review</span>

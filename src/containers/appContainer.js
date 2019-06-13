@@ -78,6 +78,7 @@ import MemberCreateStep2BizContainer from "./members/create/memberCreateStep2Biz
 import MemberCreateStep2RezOrComContainer from "./members/create/memberCreateStep2RezOrComContainer";
 import MemberCreateStep3Container from "./members/create/memberCreateStep3Container";
 import MemberCreateStep4Container from "./members/create/memberCreateStep4Container";
+import MemberCreateStep5Container from "./members/create/memberCreateStep5Container";
 import MemberUpdateContainer from "./members/memberUpdateContainer";
 
 import ItemListContainer from "./items/itemListContainer";
@@ -187,6 +188,7 @@ class AppContainer extends React.Component {
                                 <Route path="/members/add/step-2-rez-or-cc" exact component={MemberCreateStep2RezOrComContainer} />
                                 <Route path="/members/add/step-3" exact component={MemberCreateStep3Container} />
                                 <Route path="/members/add/step-4" exact component={MemberCreateStep4Container} />
+                                <Route path="/members/add/step-5" exact component={MemberCreateStep5Container} />
                                 <Route path="/members/active" exact component={MemberListActiveContainer} />
                                 <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
                                 <Route path="/members/:urlArgument/search" exact component={MemberSearchContainer} />

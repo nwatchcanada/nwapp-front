@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep4Component from "../../../components/members/create/memberCreateStep4Component";
+import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/memberValidator";
 import {
@@ -12,7 +12,7 @@ import {
 } from '../../../constants/api';
 
 
-class MemberCreateStep4Container extends Component {
+class MemberCreateStep5Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -123,7 +123,7 @@ class MemberCreateStep4Container extends Component {
     render() {
         const { returnURL, name, errors } = this.state;
         return (
-            <MemberCreateStep4Component
+            <MemberCreateStep5Component
                 returnURL={returnURL}
                 name={name}
                 errors={errors}
@@ -152,4 +152,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep4Container);
+)(MemberCreateStep5Container);

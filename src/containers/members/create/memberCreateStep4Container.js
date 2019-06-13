@@ -34,15 +34,7 @@ class MemberCreateStep4Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            name: null,
-            errors: {},
-            isLoading: false
         }
-
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -52,6 +44,32 @@ class MemberCreateStep4Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // REPLACE THIS CODE WITH API CODE.
+        const tableData = [
+            {
+                slug: "argyle-watch",
+                icon: "home",
+                name: "Argyle Community Watch"
+            },{
+                slug: "byron-watch",
+                icon: "building",
+                name: "Byron Business Watch"
+            },{
+                slug: "carling-watch",
+                icon: "university",
+                name: "Carling Retirement Centre Watch"
+            }
+        ];
+
+        // Set our state.
+        this.setState({
+            tableData: tableData,
+            isLoading: false,
+        });
+
+        // Set our event handling.
+        this.onTableRowClick = this.onTableRowClick.bind(this);
     }
 
     componentWillUnmount() {
@@ -68,50 +86,17 @@ class MemberCreateStep4Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(member) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members/active");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
+    onTableRowClick(e, slug) {
         e.preventDefault();
-
-        // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        this.setState({
+            isLoading: true
+        })
+        this.props.history.push("/members/add/step-5");
     }
 
 
@@ -121,14 +106,13 @@ class MemberCreateStep4Container extends Component {
      */
 
     render() {
-        const { returnURL, name, errors } = this.state;
+        const { returnURL, tableData, isLoading } = this.state;
         return (
             <MemberCreateStep4Component
+                tableData={tableData}
                 returnURL={returnURL}
-                name={name}
-                errors={errors}
-                onTextChange={this.onTextChange}
-                onClick={this.onClick}
+                isLoading={isLoading}
+                onTableRowClick={this.onTableRowClick}
             />
         );
     }
