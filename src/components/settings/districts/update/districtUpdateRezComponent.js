@@ -107,7 +107,7 @@ class DistrictUpdateRezComponent extends Component {
                                     <i className="fas fa-check"></i>&nbsp;Submit
                                 </button>
                                 <Link to={`/settings/district-rez/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-left"></i> Back
+                                    <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
 
