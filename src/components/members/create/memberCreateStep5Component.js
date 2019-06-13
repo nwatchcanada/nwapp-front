@@ -7,9 +7,9 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 
-class MemberCreateStep2RezOrComComponent extends Component {
+class MemberCreateStep4Component extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { returnURL, name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -37,10 +37,12 @@ class MemberCreateStep2RezOrComComponent extends Component {
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
-                        <div id="step-2" className="st-grey active">
-                            <span className="num">2.</span><span className="">Contact</span>
+                        <div id="step-2" className="st-grey">
+                            <Link to={returnURL}>
+                                <span className="num">2.</span><span className="">Contact</span>
+                            </Link>
                         </div>
-                        <div id="step-3" className="st-grey">
+                        <div id="step-3" className="st-grey active">
                             <span className="num">3.</span><span className="">Address</span>
                         </div>
                         <div id="step-4" className="st-grey">
@@ -59,7 +61,7 @@ class MemberCreateStep2RezOrComComponent extends Component {
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
                             <h2>
-                                <i className="fas fa-id-card"></i>&nbsp;Contact
+                                <i className="fas fa-address-book"></i>&nbsp;Address
                             </h2>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
@@ -78,9 +80,9 @@ class MemberCreateStep2RezOrComComponent extends Component {
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    <i className="fas fa-arrow-right"></i>&nbsp;Next
                                 </button>
-                                <Link to="/members/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={returnURL} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i>&nbsp;Back
                                 </Link>
                             </div>
@@ -94,4 +96,4 @@ class MemberCreateStep2RezOrComComponent extends Component {
     }
 }
 
-export default MemberCreateStep2RezOrComComponent;
+export default MemberCreateStep4Component;

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep3Component from "../../../components/members/create/memberCreateStep3Component";
+import MemberCreateStep4Component from "../../../components/members/create/memberCreateStep4Component";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF,
@@ -11,7 +12,7 @@ import {
 } from '../../../constants/api';
 
 
-class MemberCreateStep3Container extends Component {
+class MemberCreateStep4Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -69,7 +70,8 @@ class MemberCreateStep3Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-4");
+        this.props.setFlashMessage("success", "Member has been successfully created.");
+        this.props.history.push("/members/active");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -121,7 +123,7 @@ class MemberCreateStep3Container extends Component {
     render() {
         const { returnURL, name, errors } = this.state;
         return (
-            <MemberCreateStep3Component
+            <MemberCreateStep4Component
                 returnURL={returnURL}
                 name={name}
                 errors={errors}
@@ -139,11 +141,15 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep3Container);
+)(MemberCreateStep4Container);

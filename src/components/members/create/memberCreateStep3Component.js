@@ -46,7 +46,7 @@ class MemberCreateStep3Component extends Component {
                             <span className="num">3.</span><span className="">Address</span>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">District</span>
+                            <span className="num">4.</span><span className="">Watch</span>
                         </div>
                          <div id="step-5" className="st-grey">
                             <span className="num">5.</span><span className="">Additional</span>
@@ -80,7 +80,7 @@ class MemberCreateStep3Component extends Component {
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-arrow-right"></i>&nbsp;Next
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to={returnURL} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i>&nbsp;Back
