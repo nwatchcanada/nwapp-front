@@ -78,7 +78,10 @@ import MemberUpdateContainer from "./members/memberUpdateContainer";
 import ItemListContainer from "./items/itemListContainer";
 import ItemRetrieveContainer from "./items/itemRetrieveContainer";
 import ItemCreateStep1Container from "./items/create/itemCreateStep1Container";
-import ItemCreateStep2Container from "./items/create/itemCreateStep2Container";
+import ItemCreateStep2ConcernContainer from "./items/create/itemCreateStep2ConcernContainer";
+import ItemCreateStep2EventContainer from "./items/create/itemCreateStep2EventContainer";
+import ItemCreateStep2IncidentContainer from "./items/create/itemCreateStep2IncidentContainer";
+import ItemCreateStep2InformationContainer from "./items/create/itemCreateStep2InformationContainer";
 import ItemCreateStep3Container from "./items/create/itemCreateStep3Container";
 import ItemUpdateContainer from "./items/itemUpdateContainer";
 
@@ -182,7 +185,10 @@ class AppContainer extends React.Component {
                                 <Route path="/members/:urlArgument/:slug/update" exact component={MemberUpdateContainer} />
                                 <Route path="/items" exact component={ItemListContainer} />
                                 <Route path="/item/add/step-1" exact component={ItemCreateStep1Container} />
-                                <Route path="/item/add/step-2" exact component={ItemCreateStep2Container} />
+                                <Route path="/item/add/step-2-concern" exact component={ItemCreateStep2ConcernContainer} />
+                                <Route path="/item/add/step-2-event" exact component={ItemCreateStep2EventContainer} />
+                                <Route path="/item/add/step-2-incident" exact component={ItemCreateStep2IncidentContainer} />
+                                <Route path="/item/add/step-2-information" exact component={ItemCreateStep2InformationContainer} />
                                 <Route path="/item/add/step-3" exact component={ItemCreateStep3Container} />
                                 <Route path="/item/:slug" exact component={ItemRetrieveContainer} />
                                 <Route path="/item/:slug/update" exact component={ItemUpdateContainer} />

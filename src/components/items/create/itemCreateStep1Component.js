@@ -2,9 +2,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
@@ -15,7 +12,7 @@ import {
 
 class ItemCreateStep1Component extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -32,6 +29,19 @@ class ItemCreateStep1Component extends Component {
                     </ol>
                 </nav>
 
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey active">
+                            <span className="num">1.</span><span className="">Type</span>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <span className="num">2.</span><span className="">Details</span>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <span className="num">3.</span><span className="">Review</span>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="card-group row">
                     <div className="col-sm-3">

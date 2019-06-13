@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep2Component from "../../../components/items/create/itemCreateStep2Component";
+import ItemCreateStep3Component from "../../../components/items/create/itemCreateStep3Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/itemValidator";
+import {
+    INCIDENT_ITEM_TYPE_OF,
+    EVENT_ITEM_TYPE_OF,
+    CONCERN_ITEM_TYPE_OF,
+    INFORMATION_ITEM_TYPE_OF
+} from "../../../constants/api";
 
 
 class ItemCreateStep3Container extends Component {
@@ -15,12 +21,30 @@ class ItemCreateStep3Container extends Component {
 
     constructor(props) {
         super(props);
+
+        // Extract the type of container.
+        const typeOf = parseInt(localStorage.getItem("temp-item-create-typeOf"));
+        let returnURL;
+        if (typeOf === INCIDENT_ITEM_TYPE_OF) {
+            returnURL = "/item/add/step-2-incident";
+        } else if (typeOf === EVENT_ITEM_TYPE_OF) {
+            returnURL = "/item/add/step-2-event";
+        } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
+            returnURL = "/item/add/step-2-concern";
+        } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
+            returnURL = "/item/add/step-2-information";
+        }
+
+        // Set the state.
         this.state = {
-            name: null,
+            typeOf: typeOf,
+            returnURL: returnURL,
+            name: localStorage.getItem("temp-item-create-name"),
             errors: {},
             isLoading: false
         }
 
+        // Set the functions.
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
@@ -103,9 +127,10 @@ class ItemCreateStep3Container extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { returnURL, name, errors } = this.state;
         return (
-            <ItemCreateStep2Component
+            <ItemCreateStep3Component
+                returnURL={returnURL}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}

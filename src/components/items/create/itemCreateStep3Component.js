@@ -3,13 +3,11 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 
-class ItemCreateStep3Component extends Component {
+export default class ItemCreateStep3Component extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { returnURL, name, errors, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -27,40 +25,53 @@ class ItemCreateStep3Component extends Component {
                 </nav>
 
                 <div className="row">
-                    <div className="col-md-5 mx-auto mt-2">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <Link to="/item/add/step-1">
+                                <span className="num">1.</span><span className="">Type</span>
+                            </Link>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <Link to={returnURL}>
+                                <span className="num">2.</span><span className="">Details</span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey active">
+                            <span className="num">3.</span><span className="">Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row mt-4 pt-3 mb-4 pb-2">
+                    <div className="col-md-10 mx-auto p-2">
+                        <BootstrapErrorsProcessingAlert errors={errors} />
+                        <p><strong>Please confirm these details before adding the residential client:</strong></p>
+                        <table className="table table-bordered custom-cell-w">
+                            <tbody>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">District details</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Name</th>
+                                    <td>{name}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <form>
-                            <h1>Create New Item</h1>
-                            <p>All fields which have the (*) symbol are required to be filled out.</p>
-
-                            <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
-                                onChange={onTextChange}
-                                value={name}
-                                name="name"
-                                type="text"
-                            />
-
-                            <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check"></i>&nbsp;Submit
-                                </button>
-                                <Link to="/items" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-left"></i> Back
-                                </Link>
-                            </div>
-
+                        <div className="form-group">
+                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                <i className="fas fa-check"></i>&nbsp;Submit
+                            </button>
+                            <Link to={returnURL} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                            </Link>
+                        </div>
                         </form>
                     </div>
                 </div>
+
 
             </main>
         );
     }
 }
-
-export default ItemCreateStep3Component;

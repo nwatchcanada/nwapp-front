@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep1Component from "../../../components/items/create/itemCreateStep1Component";
+import ItemCreateStep2EventComponent from "../../../components/items/create/itemCreateStep2EventComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import {
-    INCIDENT_ITEM_TYPE_OF,
-    EVENT_ITEM_TYPE_OF,
-    CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
-} from "../../../constants/api";
+import validateInput from "../../../validators/itemValidator";
 
 
-class ItemCreateStep1Container extends Component {
+class ItemCreateStep2EventContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -21,7 +16,7 @@ class ItemCreateStep1Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
+            name: localStorage.getItem("temp-item-create-name"),
             errors: {},
             isLoading: false
         }
@@ -58,7 +53,7 @@ class ItemCreateStep1Container extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/items");
+        this.props.history.push("/item/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -81,27 +76,29 @@ class ItemCreateStep1Container extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        const key = "temp-item-create-"+[e.target.name];
+        console.log(key);
+        localStorage.setItem(key, e.target.value)
     }
 
-    onClick(e, typeOf) {
+    onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Save our data.
-        localStorage.setItem("temp-item-create-typeOf", typeOf)
+        // Perform client-side validation.
+        const { errors, isValid } = validateInput(this.state);
 
-        // Redirect to the type of item it is.
-        if (typeOf === INCIDENT_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-incident");
-        } else if (typeOf === EVENT_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-event");
-        } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-concern");
-        } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-information");
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
         }
     }
+
 
     /**
      *  Main render function
@@ -111,7 +108,7 @@ class ItemCreateStep1Container extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <ItemCreateStep1Component
+            <ItemCreateStep2EventComponent
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -139,4 +136,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep1Container);
+)(ItemCreateStep2EventContainer);

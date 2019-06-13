@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 
-class ItemCreateStep2Component extends Component {
+class ItemCreateStep2IncidentComponent extends Component {
     render() {
         const { name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -27,9 +27,25 @@ class ItemCreateStep2Component extends Component {
                 </nav>
 
                 <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <Link to="/item/add/step-1">
+                                <span className="num">1.</span><span className="">Type</span>
+                            </Link>
+                        </div>
+                        <div id="step-2" className="st-grey active">
+                            <span className="num">2.</span><span className="">Details</span>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <span className="num">3.</span><span className="">Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New Item</h1>
+                            <h1>Create New Incident Item</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -47,7 +63,7 @@ class ItemCreateStep2Component extends Component {
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check"></i>&nbsp;Submit
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-left"></i> Back
@@ -63,4 +79,4 @@ class ItemCreateStep2Component extends Component {
     }
 }
 
-export default ItemCreateStep2Component;
+export default ItemCreateStep2IncidentComponent;

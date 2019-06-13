@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep2Component from "../../../components/items/create/itemCreateStep2Component";
+import ItemCreateStep2InformationComponent from "../../../components/items/create/itemCreateStep2InformationComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/itemValidator";
 
 
-class ItemCreateStep2Container extends Component {
+class ItemCreateStep2InformationContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,7 +16,7 @@ class ItemCreateStep2Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
+            name: localStorage.getItem("temp-item-create-name"),
             errors: {},
             isLoading: false
         }
@@ -53,7 +53,7 @@ class ItemCreateStep2Container extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/items");
+        this.props.history.push("/item/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -76,7 +76,10 @@ class ItemCreateStep2Container extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        const key = "temp-item-create-"+[e.target.name];
+        console.log(key);
+        localStorage.setItem(key, e.target.value)
     }
 
     onClick(e) {
@@ -105,7 +108,7 @@ class ItemCreateStep2Container extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <ItemCreateStep2Component
+            <ItemCreateStep2InformationComponent
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -133,4 +136,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep2Container);
+)(ItemCreateStep2InformationContainer);
