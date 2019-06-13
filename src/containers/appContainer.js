@@ -62,6 +62,11 @@ import HowHearDeleteContainer from "./settings/howHear/howHearDeleteContainer";
 import HowHearCreateContainer from "./settings/howHear/howHearCreateContainer";
 import HowHearUpdateContainer from "./settings/howHear/howHearUpdateContainer";
 
+import AnnouncementListContainer from "./settings/announcements/announcementListContainer";
+import AnnouncementDeleteContainer from "./settings/announcements/announcementDeleteContainer";
+import AnnouncementCreateContainer from "./settings/announcements/announcementCreateContainer";
+import AnnouncementUpdateContainer from "./settings/announcements/announcementUpdateContainer";
+
 import MemberListActiveContainer from "./members/memberListActiveContainer";
 import MemberListInactiveContainer from "./members/memberListInactiveContainer";
 import MemberSearchContainer from "./members/memberSearchContainer";
@@ -162,6 +167,10 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/how-hears/add" exact component={HowHearCreateContainer} />
                                 <Route path="/settings/how-hear/:slug/delete" exact component={HowHearDeleteContainer} />
                                 <Route path="/settings/how-hear/:slug/update" exact component={HowHearUpdateContainer} />
+                                <Route path="/settings/announcements" exact component={AnnouncementListContainer} />
+                                <Route path="/settings/announcements/add" exact component={AnnouncementCreateContainer} />
+                                <Route path="/settings/announcement/:slug/delete" exact component={AnnouncementDeleteContainer} />
+                                <Route path="/settings/announcement/:slug/update" exact component={AnnouncementUpdateContainer} />
                                 <Route path="/members/add" exact component={MemberCreateContainer} />
                                 <Route path="/members/active" exact component={MemberListActiveContainer} />
                                 <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
