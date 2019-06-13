@@ -89,14 +89,14 @@ class MemberActiveListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-id-card"></i>&nbsp;Members
+                            <i className="fas fa-users"></i>&nbsp;Members
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-id-card"></i>&nbsp;Members</h1>
+                <h1><i className="fas fa-users"></i>&nbsp;Members</h1>
 
                 <div className="row">
                     <div className="col-md-12">

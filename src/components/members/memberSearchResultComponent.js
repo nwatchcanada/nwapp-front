@@ -37,7 +37,7 @@ class MemberSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/members/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Members</Link>
+                           <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/members/${urlArgument}/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
@@ -50,7 +50,7 @@ class MemberSearchResultComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-id-card"></i>&nbsp;Members</h1>
+                <h1><i className="fas fa-users"></i>&nbsp;Members</h1>
                 <div className="row">
                     <div className="col-md-12">
 

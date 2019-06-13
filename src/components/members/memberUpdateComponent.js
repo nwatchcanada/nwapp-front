@@ -18,10 +18,10 @@ class MemberUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/members/${urlArgument}`}><i className="fas fa-id-card"></i>&nbsp;Member</Link>
+                            <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Member</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/members/${urlArgument}/${slug}`}><i className="fas fa-id-card"></i>&nbsp;Argyle</Link>
+                            <Link to={`/members/${urlArgument}/${slug}`}><i className="fas fa-users"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update

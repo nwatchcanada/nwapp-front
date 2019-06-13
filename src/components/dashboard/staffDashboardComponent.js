@@ -18,7 +18,7 @@ class StaffDashboardComponent extends Component {
                                         <h1 className="circle-title">1,100</h1>
                                     </Link>
                                 </div>
-                                <h4><i className="fas fa-id-card"></i>&nbsp;Members</h4>
+                                <h4><i className="fas fa-users"></i>&nbsp;Members</h4>
                                 <div className="text-muted">View your members list</div>
                             </div>
                             <div className="col-sm-3 placeholder">

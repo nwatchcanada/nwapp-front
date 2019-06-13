@@ -29,7 +29,7 @@ const authenticatedFullMenuData = [
         url: "/dashboard"
     },{
         id: "full-members",
-        icon: "id-card",
+        icon: "users",
         title: "Members",
         url: "/members/active"
     },{
