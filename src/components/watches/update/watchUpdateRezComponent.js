@@ -18,7 +18,7 @@ export default class WatchUpdateRezComponent extends Component {
             errors, isLoading, onClick, onTextChange, onSelectChange,
 
             // Modal related.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection,
+            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
             showModal, onAddClick, onRemoveClick, onSaveClick, onCloseClick
         } = this.props;
         return (
@@ -109,8 +109,12 @@ export default class WatchUpdateRezComponent extends Component {
                                 streetNumberFinish={streetNumberFinish}
                                 streetName={streetName}
                                 streetType={streetType}
+                                streetTypeOptions={streetTypeOptions}
+                                streetTypeOther={streetTypeOther}
                                 streetDirection={streetDirection}
+                                streetDirectionOptions={streetDirectionOptions}
                                 onTextChange={onTextChange}
+                                onSelectChange={onSelectChange}
                                 errors={errors}
                                 showModal={showModal}
                                 onSaveClick={onSaveClick}
@@ -143,7 +147,7 @@ export default class WatchUpdateRezComponent extends Component {
 
 class StreetMembershipRow extends Component {
     render() {
-        const { streetAddress, streetNumberStart, streetNumberFinish, streetName, streetType, onRemoveClick } = this.props;
+        const { streetAddress, streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, onRemoveClick } = this.props;
         return (
             <tr key={streetAddress}>
                 <td>
@@ -157,6 +161,9 @@ class StreetMembershipRow extends Component {
                 </td>
                 <td>
                     {streetType}
+                </td>
+                <td>
+                    {streetDirection}
                 </td>
                 <td>
                     <button type="button" className="btn btn-danger float-right" aria-label="prev" onClick={() => onRemoveClick(streetAddress)}>
@@ -186,6 +193,7 @@ class StreetMembershipTable extends Component {
                             streetNumberFinish={rowData.streetNumberFinish}
                             streetName={rowData.streetName}
                             streetType={rowData.streetType}
+                            streetDirection={rowData.streetDirection}
                             onRemoveClick={onRemoveClick}
                         />
                     );
@@ -202,6 +210,7 @@ class StreetMembershipTable extends Component {
                             <th>Street # (Finish)</th>
                             <th>Street Name</th>
                             <th>Street Type</th>
+                            <th>Direction</th>
                             <th>
                             <button type="button" className="btn btn-success float-right" onClick={onAddClick}>
                                 <span className="fa fa-plus"></span>
@@ -223,7 +232,7 @@ class StreetMembershipTable extends Component {
 class AddModalComponent extends Component {
     render() {
         const {
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, onTextChange, errors,
+            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, onSelectChange, errors,
             showModal, onSaveClick, onCloseClick } = this.props;
 
         // Apply our styling for our modal component.
@@ -235,6 +244,8 @@ class AddModalComponent extends Component {
                 marginBottom          : '0%',
             }
         };
+
+        const isOtherStreetTypeSelected = streetType === 'Other';
 
         return (
             <div>
@@ -291,26 +302,39 @@ class AddModalComponent extends Component {
                                     type="text"
                                 />
 
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
+                                <BootstrapSingleSelect
                                     borderColour="border-primary"
-                                    error={errors.streetType}
                                     label="Street Type (*)"
-                                    onChange={onTextChange}
-                                    value={streetType}
                                     name="streetType"
-                                    type="text"
+                                    defaultOptionLabel="Please select a street type."
+                                    options={streetTypeOptions}
+                                    value={streetType}
+                                    error={errors.streetType}
+                                    onSelectChange={onSelectChange}
                                 />
 
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-success"
-                                    error={errors.streetDirection}
+                                {isOtherStreetTypeSelected &&
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.streetTypeOther}
+                                        label="Street Type Other (*)"
+                                        onChange={onTextChange}
+                                        value={streetTypeOther}
+                                        name="streetTypeOther"
+                                        type="text"
+                                    />
+                                }
+
+                                <BootstrapSingleSelect
+                                    borderColour="border-successs"
                                     label="Street Direction"
-                                    onChange={onTextChange}
-                                    value={streetDirection}
                                     name="streetDirection"
-                                    type="text"
+                                    defaultOptionLabel="Please select a street direction."
+                                    options={streetDirectionOptions}
+                                    value={streetDirection}
+                                    error={errors.streetDirection}
+                                    onSelectChange={onSelectChange}
                                 />
 
                                 <button

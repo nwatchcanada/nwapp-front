@@ -61,6 +61,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onAddClick = this.onAddClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
@@ -68,7 +69,6 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         this.onRemoveClick = this.onRemoveClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
     }
 
     /**

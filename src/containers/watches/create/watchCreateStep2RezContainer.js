@@ -12,6 +12,7 @@ import {
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 
 class WatchCreateStep2RezContainer extends Component {
@@ -41,7 +42,10 @@ class WatchCreateStep2RezContainer extends Component {
             streetNumberFinish: "",
             streetName: "",
             streetType: "",
+            streetTypeOption: localStorageGetObjectItem('temp-watch-rez-streetTypeOption'),
+            streetTypeOther: "",
             streetDirection: "",
+            streetDirectionOption: localStorageGetObjectItem('temp-watch-rez-streetDirectionOption'),
             showModal: false, // Variable used to indicate if the modal should appear.
         }
 
@@ -190,23 +194,37 @@ class WatchCreateStep2RezContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+
+            // Generate our new address.
+            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
+            let streetAddress = this.state.streetName+" "+actualStreetType;
+            if (this.state.streetDirection) {
+                streetAddress += " " + this.state.streetDirection;
+            }
+            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
+
             // Append our array.
             let a = this.state.streetMembership.slice(); //creates the clone of the state
-            const streetAddress = this.state.streetName+" "+this.state.streetType+" "+this.state.streetDirection+" from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
             a.push({
                 streetAddress: streetAddress,
                 streetNumberStart: this.state.streetNumberStart,
                 streetNumberFinish: this.state.streetNumberFinish,
                 streetName: this.state.streetName,
-                streetType: this.state.streetType,
+                streetType: actualStreetType,
                 streetDirection: this.state.streetDirection,
             });
 
-            // Update our state.
+            // Update the state.
             this.setState({
                 showModal: false,
                 errors: {},
                 streetMembership: a,
+                streetNumberStart: "", // Clear fields.
+                streetNumberFinish: "",
+                streetName: "",
+                streetType: "",
+                streetTypeOther: "",
+                streetDirection: "",
             })
 
             // Save our table data.
@@ -230,6 +248,12 @@ class WatchCreateStep2RezContainer extends Component {
         this.setState({
             showModal: false,
             errors: {},
+            streetNumberStart: "", // Clear fields.
+            streetNumberFinish: "",
+            streetName: "",
+            streetType: "",
+            streetTypeOther: "",
+            streetDirection: ""
         })
     }
 
@@ -244,7 +268,7 @@ class WatchCreateStep2RezContainer extends Component {
             name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, showModal,
+            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
         } = this.state;
 
         const associateListObject = {
@@ -294,7 +318,10 @@ class WatchCreateStep2RezContainer extends Component {
                 streetNumberFinish={streetNumberFinish}
                 streetName={streetName}
                 streetType={streetType}
+                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
+                streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
+                streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 onAddClick={this.onAddClick}
                 onRemoveClick={this.onRemoveClick}
                 onSaveClick={this.onSaveClick}
