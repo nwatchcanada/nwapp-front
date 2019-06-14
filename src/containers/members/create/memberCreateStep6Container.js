@@ -109,10 +109,44 @@ class MemberCreateStep6Container extends Component {
      */
 
     render() {
-        const { returnURL, errors } = this.state;
+        const {
+            returnURL, typeOf, errors,
+            bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
+            rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
+            streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
+            watchSlug, watchIcon, watchName, dobObj,
+            howDidYouHear, howDidYouHearOption, howDidYouHearOther
+        } = this.state;
+
         return (
             <MemberCreateStep6Component
                 returnURL={returnURL}
+                typeOf={typeOf}
+                bizCompanyName={bizCompanyName}
+                bizContactFirstName={bizContactFirstName}
+                bizContactLastName={bizContactLastName}
+                bizPrimaryPhone={bizPrimaryPhone}
+                bizSecondaryPhone={bizSecondaryPhone}
+                bizEmail={bizEmail}
+                rezFirstName={rezFirstName}
+                rezLastName={rezLastName}
+                rezPrimaryPhone={rezPrimaryPhone}
+                rezSecondaryPhone={rezSecondaryPhone}
+                rezEmail={rezEmail}
+                streetNumber={streetNumber}
+                streetName={streetName}
+                streetType={streetType}
+                streetTypeOption={streetTypeOption}
+                streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOption={streetDirectionOption}
+                watchSlug={watchSlug}
+                watchIcon={watchIcon}
+                watchName={watchName}
+                dobObj={dobObj}
+                howDidYouHear={howDidYouHear}
+                howDidYouHearOption={howDidYouHearOption}
+                howDidYouHearOther={howDidYouHearOther}
                 errors={errors}
                 onClick={this.onClick}
             />
