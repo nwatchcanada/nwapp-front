@@ -48,7 +48,9 @@ class MemberCreateStep1Component extends Component {
                     </div>
                 </div>
 
-                <h2>Select Member Type</h2>
+                <h2>
+                    <i className="fas fa-sitemap"></i>&nbsp;Select Member Type
+                </h2>
 
                 <div className="card-group row">
                     <div className="col-sm-6">
