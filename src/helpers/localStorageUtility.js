@@ -23,6 +23,11 @@ export function localStorageGetArrayItem(key) {
     return anObject;
 }
 
+export function localStorageGetDateItem(key) {
+    const stringifiedObject = localStorageGetObjectItem(key);
+    return new Date(stringifiedObject);
+}
+
 export function localStorageSetObjectOrArrayItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }

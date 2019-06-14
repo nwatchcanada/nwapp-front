@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Scroll from 'react-scroll';
 
 import MemberCreateStep4Component from "../../../components/members/create/memberCreateStep4Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateInput } from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,

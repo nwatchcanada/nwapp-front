@@ -113,3 +113,26 @@ export function validateStep4CreateInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+/**
+ *  Validator will validate step 5 in the member creation form.
+ */
+export function validateStep5CreateInput(data) {
+    let errors = {};
+
+    if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
+        errors.howDidYouHear = 'This field is required';
+    } else {
+        if (data.howDidYouHear === "Other") {
+            if (data.howDidYouHearOther === undefined || data.howDidYouHearOther === null || validator.isEmpty(data.howDidYouHearOther) || data.howDidYouHearOther === "") {
+                errors.howDidYouHearOther = 'This field is required';
+            }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}

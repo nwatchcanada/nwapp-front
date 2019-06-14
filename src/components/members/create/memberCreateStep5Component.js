@@ -5,13 +5,14 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 
-class MemberCreateStep4Component extends Component {
+class MemberCreateStep5Component extends Component {
     render() {
-        const { returnURL, dobObj, errors, onTextChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
+        const { returnURL, dobObj, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
+        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -79,6 +80,32 @@ class MemberCreateStep4Component extends Component {
                                 onChange={onDOBDateTimeChange}
                             />
 
+                            <br />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="How did you hear about us? (*)"
+                                name="howDidYouHear"
+                                defaultOptionLabel="Please select how the member heard about us."
+                                options={howDidYouHearOptions}
+                                value={howDidYouHear}
+                                error={errors.howDidYouHear}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {isOtherHowDidYouHearSelected &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.howDidYouHearOther}
+                                    label="Other (*)"
+                                    onChange={onTextChange}
+                                    value={howDidYouHearOther}
+                                    name="howDidYouHearOther"
+                                    type="text"
+                                />
+                            }
+
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
@@ -97,4 +124,4 @@ class MemberCreateStep4Component extends Component {
     }
 }
 
-export default MemberCreateStep4Component;
+export default MemberCreateStep5Component;

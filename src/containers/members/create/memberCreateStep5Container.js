@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
-import { validateStep4CreateInput } from "../../../validators/memberValidator";
+import { validateStep5CreateInput } from "../../../validators/memberValidator";
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem
+} from '../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -33,13 +36,17 @@ class MemberCreateStep5Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            dobObj: null,
+            dobObj: localStorageGetDateItem("temp-create-member-dobObj"),
+            howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("temp-create-member-howDidYouHearOther"),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -94,12 +101,25 @@ class MemberCreateStep5Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
+        localStorage.setItem('temp-create-member-'+[e.target.name], e.target.value);
     }
 
     onDOBDateTimeChange(dateObj) {
         this.setState({
             dobObj: dateObj,
         })
+        localStorageSetObjectOrArrayItem('temp-create-member-dobObj', dateObj);
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('temp-create-member-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('temp-create-member-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onClick(e) {
@@ -107,7 +127,7 @@ class MemberCreateStep5Container extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateStep4CreateInput(this.state);
+        const { errors, isValid } = validateStep5CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -119,19 +139,40 @@ class MemberCreateStep5Container extends Component {
         }
     }
 
-    onDOBDateTimeChange(dateObj) {
-        this.setState({
-            dobObj: dateObj,
-        })
-    }
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { returnURL, dobObj, errors } = this.state;
+        const { returnURL, dobObj, howDidYouHear, howDidYouHearOther, errors } = this.state;
+        const howDidYouHearOptions = [
+            {
+                selectName: "howDidYouHear",
+                value: "Friend",
+                label: "Friend"
+            },{
+                selectName: "howDidYouHear",
+                value: "Workplace",
+                label: "Workplace"
+            },{
+                selectName: "howDidYouHear",
+                value: "Social Media",
+                label: "Social Media"
+            },{
+                selectName: "howDidYouHear",
+                value: "Family",
+                label: "Family"
+            },{
+                selectName: "howDidYouHear",
+                value: "Internt",
+                label: "Internet"
+            },{
+                selectName: "howDidYouHear",
+                value: "Other",
+                label: "Other"
+            }
+        ];
         return (
             <MemberCreateStep5Component
                 returnURL={returnURL}
@@ -139,6 +180,10 @@ class MemberCreateStep5Container extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onDOBDateTimeChange={this.onDOBDateTimeChange}
+                howDidYouHear={howDidYouHear}
+                howDidYouHearOptions={howDidYouHearOptions}
+                howDidYouHearOther={howDidYouHearOther}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );

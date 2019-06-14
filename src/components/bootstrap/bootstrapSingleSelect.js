@@ -9,7 +9,6 @@ import shortid from "shortid";
  *  Utility function used to find the "option" for the inputted parameter "value".
  */
 function getSelectedOption(options, value) {
-    console.log(">", options);
     if (options !== null && options !== undefined) {
         const optionsLength = options.length;
         for (let i = 0; i < optionsLength; i++ ) {
