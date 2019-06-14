@@ -106,7 +106,7 @@ class TableRow extends Component {
                 <td>{name}</td>
                 <td>
 
-                    <button className="btn btn-primary btn-sm float-right" disabled={isLoading} onClick={ (event) => { onTableRowClick(event, slug) } }>
+                    <button className="btn btn-primary btn-sm float-right" disabled={isLoading} onClick={ (event) => { onTableRowClick(event, slug, icon, name) } }>
                         Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                     </button>
                 </td>

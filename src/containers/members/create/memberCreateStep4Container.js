@@ -31,6 +31,9 @@ class MemberCreateStep4Container extends Component {
 
         this.state = {
             returnURL: returnURL,
+            watchSlug: localStorage.getItem('temp-create-member-watch-slug'),
+            watchIcon: localStorage.getItem('temp-create-member-watch-icon'),
+            watchName: localStorage.getItem('temp-create-member-watch-name'),
             typeOf: typeOf,
         }
     }
@@ -89,11 +92,14 @@ class MemberCreateStep4Container extends Component {
      *------------------------------------------------------------
      */
 
-    onTableRowClick(e, slug) {
+    onTableRowClick(e, slug, icon, name) {
         e.preventDefault();
         this.setState({
             isLoading: true
         })
+        localStorage.setItem('temp-create-member-watch-slug', slug);
+        localStorage.setItem('temp-create-member-watch-icon', icon);
+        localStorage.setItem('temp-create-member-watch-name', name);
         this.props.history.push("/members/add/step-5");
     }
 

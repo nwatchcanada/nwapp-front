@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import MemberCreateStep6Component from "../../../components/members/create/memberCreateStep6Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { localStorageGetObjectItem, localStorageGetDateItem } from '../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -32,12 +33,35 @@ class MemberCreateStep6Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            name: null,
+            bizCompanyName: localStorage.getItem("temp-create-member-biz-companyName"),
+            bizContactFirstName: localStorage.getItem("temp-create-member-biz-contactFirstName"),
+            bizContactLastName: localStorage.getItem("temp-create-member-biz-contactLastName"),
+            bizPrimaryPhone: localStorage.getItem("temp-create-member-biz-primaryPhone"),
+            bizSecondaryPhone: localStorage.getItem("temp-create-member-biz-secondaryPhone"),
+            bizEmail: localStorage.getItem("temp-create-member-biz-email"),
+            rezFirstName: localStorage.getItem("temp-create-member-rez-or-com-firstName"),
+            rezLastName: localStorage.getItem("temp-create-member-rez-or-com-lastName"),
+            rezPrimaryPhone: localStorage.getItem("temp-create-member-rez-or-com-primaryPhone"),
+            rezSecondaryPhone: localStorage.getItem("temp-create-member-rez-or-com-secondaryPhone"),
+            rezEmail: localStorage.getItem("temp-create-member-rez-or-com-email"),
+            streetNumber: localStorage.getItem("temp-create-member-streetNumber"),
+            streetName: localStorage.getItem("temp-create-member-streetName"),
+            streetType: localStorage.getItem("temp-create-member-streetType"),
+            streetTypeOption: localStorageGetObjectItem('temp-create-member-streetTypeOption'),
+            streetTypeOther: localStorage.getItem("temp-create-member-streetTypeOther"),
+            streetDirection: localStorage.getItem("temp-create-member-streetDirection"),
+            streetDirectionOption: localStorageGetObjectItem('temp-create-member-streetDirectionOption'),
+            watchSlug: localStorage.getItem('temp-create-member-watch-slug'),
+            watchIcon: localStorage.getItem('temp-create-member-watch-icon'),
+            watchName: localStorage.getItem('temp-create-member-watch-name'),
+            dobObj: localStorageGetDateItem("temp-create-member-dobObj"),
+            howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("temp-create-member-howDidYouHearOther"),
             errors: {},
             isLoading: false
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -69,12 +93,6 @@ class MemberCreateStep6Container extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -91,13 +109,11 @@ class MemberCreateStep6Container extends Component {
      */
 
     render() {
-        const { returnURL, name, errors } = this.state;
+        const { returnURL, errors } = this.state;
         return (
             <MemberCreateStep6Component
                 returnURL={returnURL}
-                name={name}
                 errors={errors}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />
         );
