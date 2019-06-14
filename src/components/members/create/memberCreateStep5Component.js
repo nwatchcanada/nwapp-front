@@ -1,6 +1,8 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
@@ -9,7 +11,7 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 class MemberCreateStep4Component extends Component {
     render() {
-        const { returnURL, name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { returnURL, dobObj, errors, onTextChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -71,15 +73,10 @@ class MemberCreateStep4Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
-                                onChange={onTextChange}
-                                value={name}
-                                name="name"
-                                type="text"
+                            <p>Please pick the date of birth</p>
+                            <DatePicker
+                                selected={dobObj}
+                                onChange={onDOBDateTimeChange}
                             />
 
                             <div className="form-group">

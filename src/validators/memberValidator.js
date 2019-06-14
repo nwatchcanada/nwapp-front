@@ -98,3 +98,18 @@ export function validateStep3CreateInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+/**
+ *  Validator will validate step 4 in the member creation form.
+ */
+export function validateStep4CreateInput(data) {
+    let errors = {};
+
+    // Do nothing.
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
-import { validateInput } from "../../../validators/memberValidator";
+import { validateStep4CreateInput } from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -33,12 +33,13 @@ class MemberCreateStep5Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            name: null,
+            dobObj: null,
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -95,12 +96,18 @@ class MemberCreateStep5Container extends Component {
         })
     }
 
+    onDOBDateTimeChange(dateObj) {
+        this.setState({
+            dobObj: dateObj,
+        })
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateStep4CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -112,6 +119,11 @@ class MemberCreateStep5Container extends Component {
         }
     }
 
+    onDOBDateTimeChange(dateObj) {
+        this.setState({
+            dobObj: dateObj,
+        })
+    }
 
     /**
      *  Main render function
@@ -119,13 +131,14 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, name, errors } = this.state;
+        const { returnURL, dobObj, errors } = this.state;
         return (
             <MemberCreateStep5Component
                 returnURL={returnURL}
-                name={name}
+                dobObj={dobObj}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onDOBDateTimeChange={this.onDOBDateTimeChange}
                 onClick={this.onClick}
             />
         );
