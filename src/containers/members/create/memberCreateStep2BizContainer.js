@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import MemberCreateStep2BizComponent from "../../../components/members/create/memberCreateStep2BizComponent";
-import { validateInput } from "../../../validators/memberValidator";
+import { validateStep2BizCreateInput } from "../../../validators/memberValidator";
 import { BUSINESS_TYPE_OF } from '../../../constants/api';
 
 
@@ -16,7 +16,12 @@ class MemberCreateStep2BizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
+            companyName: "",
+            contactFirstName: "",
+            contactLastName: "",
+            primaryPhone: "",
+            secondaryPhone: "",
+            email: "",
             errors: {},
             isLoading: false
         }
@@ -83,7 +88,7 @@ class MemberCreateStep2BizContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateStep2BizCreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -102,10 +107,15 @@ class MemberCreateStep2BizContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { companyName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors } = this.state;
         return (
             <MemberCreateStep2BizComponent
-                name={name}
+                companyName={companyName}
+                contactFirstName={contactFirstName}
+                contactLastName={contactLastName}
+                primaryPhone={primaryPhone}
+                secondaryPhone={secondaryPhone}
+                email={email}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

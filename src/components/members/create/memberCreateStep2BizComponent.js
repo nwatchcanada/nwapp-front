@@ -9,7 +9,7 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 class MemberCreateStep2BizComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { companyName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -68,11 +68,66 @@ class MemberCreateStep2BizComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
+                                error={errors.companyName}
+                                label="Company Name (*)"
                                 onChange={onTextChange}
-                                value={name}
-                                name="name"
+                                value={companyName}
+                                name="companyName"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.contactFirstName}
+                                label="Contact First Name (*)"
+                                onChange={onTextChange}
+                                value={contactFirstName}
+                                name="contactFirstName"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.contactLastName}
+                                label="Contact Last Name (*)"
+                                onChange={onTextChange}
+                                value={contactLastName}
+                                name="contactLastName"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.primaryPhone}
+                                label="Primary Phone (*)"
+                                onChange={onTextChange}
+                                value={primaryPhone}
+                                name="primaryPhone"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.secondaryPhone}
+                                label="Secondary Phone (*)"
+                                onChange={onTextChange}
+                                value={secondaryPhone}
+                                name="secondaryPhone"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.email}
+                                label="Email (*)"
+                                onChange={onTextChange}
+                                value={email}
+                                name="email"
                                 type="text"
                             />
 
