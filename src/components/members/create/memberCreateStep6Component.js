@@ -1,6 +1,8 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
+// import 'moment-timezone';
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import {
@@ -11,14 +13,15 @@ import {
 
 
 class MemberCreateStep6Component extends Component {
+    // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
         const {
             returnURL, typeOf, errors, onClick, isLoading,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
-            streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
+            streetNumber, streetName, streetType, streetTypeOther, streetDirection,
             watchSlug, watchIcon, watchName,
-            dobObj, howDidYouHear, howDidYouHearOption, howDidYouHearOther
+            dobObj, howDidYouHear, howDidYouHearOther
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -235,12 +238,14 @@ class MemberCreateStep6Component extends Component {
                                         <i className="fas fa-chart-pie"></i>&nbsp;Metrics
                                     </th>
                                 </tr>
-                                { /*
-                                <tr>
-                                    <th scope="row" className="bg-light">Date of Birth</th>
-                                    <td>{dobObj}</td>
-                                </tr>
-                                */ }
+                                {dobObj &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Date of Birth</th>
+                                        <td>
+                                            <Moment format="YYYY/MM/DD">{dobObj}</Moment>
+                                        </td>
+                                    </tr>
+                                }
                                 <tr>
                                     <th scope="row" className="bg-light">How did you hear about us?</th>
                                     <td>{howDidYouHear}</td>
