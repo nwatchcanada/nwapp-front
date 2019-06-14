@@ -3,13 +3,19 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 
 class MemberCreateStep3Component extends Component {
     render() {
-        const { returnURL, name, errors, onTextChange, isLoading, onClick } = this.props;
+        const {
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
+            returnURL, errors, onTextChange, onSelectChange, isLoading, onClick
+        } = this.props;
+
+        const isOtherStreetTypeSelected = streetType === 'Other';
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -70,12 +76,58 @@ class MemberCreateStep3Component extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
+                                error={errors.streetNumber}
+                                label="Street Number (*)"
                                 onChange={onTextChange}
-                                value={name}
-                                name="name"
+                                value={streetNumber}
+                                name="streetNumber"
                                 type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetName}
+                                label="Street Name (*)"
+                                onChange={onTextChange}
+                                value={streetName}
+                                name="streetName"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Street Type (*)"
+                                name="streetType"
+                                defaultOptionLabel="Please select a street type."
+                                options={streetTypeOptions}
+                                value={streetType}
+                                error={errors.streetType}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {isOtherStreetTypeSelected &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.streetTypeOther}
+                                    label="Street Type Other (*)"
+                                    onChange={onTextChange}
+                                    value={streetTypeOther}
+                                    name="streetTypeOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
+                                borderColour="border-successs"
+                                label="Street Direction"
+                                name="streetDirection"
+                                defaultOptionLabel="Please select a street direction."
+                                options={streetDirectionOptions}
+                                value={streetDirection}
+                                error={errors.streetDirection}
+                                onSelectChange={onSelectChange}
                             />
 
                             <div className="form-group">

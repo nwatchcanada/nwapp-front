@@ -61,7 +61,7 @@ export default class MemberCreateStep4Component extends Component {
                             <h2>
                                 <i className="fas fa-shield-alt"></i>&nbsp;Watch
                             </h2>
-                            <p>You are eligable for the following watches, please select the watch which is appropriate for the member:</p>
+                            <p>According to the address you entered, you are eligable for the following watches, please select the watch which is appropriate for the member:</p>
 
                             <div className="table-responsive">
                                 <table className="table table-striped">

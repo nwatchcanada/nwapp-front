@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import MemberCreateStep3Component from "../../../components/members/create/memberCreateStep3Component";
-import { validateInput } from "../../../validators/memberValidator";
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../helpers/localStorageUtility';
+import { validateStep3CreateInput } from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../constants/api';
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
+
 
 
 class MemberCreateStep3Container extends Component {
@@ -33,12 +38,19 @@ class MemberCreateStep3Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            name: null,
+            streetNumber: localStorage.getItem("temp-create-member-streetNumber"),
+            streetName: localStorage.getItem("temp-create-member-streetName"),
+            streetType: localStorage.getItem("temp-create-member-streetType"),
+            streetTypeOption: localStorageGetObjectItem('temp-create-member-streetTypeOption'),
+            streetTypeOther: localStorage.getItem("temp-create-member-streetTypeOther"),
+            streetDirection: localStorage.getItem("temp-create-member-streetDirection"),
+            streetDirectionOption: localStorageGetObjectItem('temp-create-member-streetDirectionOption'),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -92,7 +104,19 @@ class MemberCreateStep3Container extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        localStorage.setItem('temp-create-member-'+[e.target.name], e.target.value);
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('temp-create-member-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('temp-create-member-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onClick(e) {
@@ -100,7 +124,7 @@ class MemberCreateStep3Container extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateStep3CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -119,13 +143,20 @@ class MemberCreateStep3Container extends Component {
      */
 
     render() {
-        const { returnURL, name, errors } = this.state;
+        const { returnURL, streetNumber, streetName, streetType, streetTypeOther, streetDirection, errors } = this.state;
         return (
             <MemberCreateStep3Component
                 returnURL={returnURL}
-                name={name}
+                streetNumber={streetNumber}
+                streetName={streetName}
+                streetType={streetType}
+                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
+                streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );

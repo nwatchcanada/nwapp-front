@@ -17,7 +17,7 @@ export function validateInput(data) {
 
 
 /**
- *  Validator will validate step 1 in the member creation form.
+ *  Validator will validate step 2 in the member creation form.
  */
 export function validateStep2RezOrComCreateInput(data) {
     let errors = {};
@@ -43,7 +43,7 @@ export function validateStep2RezOrComCreateInput(data) {
 
 
 /**
- *  Validator will validate step 1 in the member creation form.
+ *  Validator will validate step 2 in the member creation form.
  */
 export function validateStep2BizCreateInput(data) {
     let errors = {};
@@ -62,6 +62,35 @@ export function validateStep2BizCreateInput(data) {
     }
     if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
         errors.email = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+/**
+ *  Validator will validate step 3 in the member creation form.
+ */
+export function validateStep3CreateInput(data) {
+    let errors = {};
+
+    if (data.streetNumber === undefined || data.streetNumber === null || validator.isEmpty(data.streetNumber) || data.streetNumber === "") {
+        errors.streetNumber = 'This field is required';
+    }
+    if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "") {
+        errors.streetName = 'This field is required';
+    }
+    if (data.streetType === undefined || data.streetType === null || validator.isEmpty(data.streetType) || data.streetType === "") {
+        errors.streetType = 'This field is required';
+    } else {
+        if (data.streetType === "Other") {
+            if (data.streetTypeOther === undefined || data.streetTypeOther === null || validator.isEmpty(data.streetTypeOther) || data.streetTypeOther === "") {
+                errors.streetTypeOther = 'This field is required';
+            }
+        }
     }
 
     return {
