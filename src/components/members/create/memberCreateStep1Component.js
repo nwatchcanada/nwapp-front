@@ -2,16 +2,9 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
-
 
 class MemberCreateStep1Component extends Component {
     render() {
-        const { onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
