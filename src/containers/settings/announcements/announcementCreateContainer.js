@@ -52,7 +52,7 @@ class AnnouncementCreateContainer extends Component {
 
     onSuccessfulSubmissionCallback(tag) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Tag has been successfully created.");
+        this.props.setFlashMessage("success", "Announcement has been successfully created.");
         this.props.history.push("/settings/announcements");
     }
 
