@@ -7,6 +7,7 @@ import NavigationContainer from './navigation/navigationContainer';
 import NotFound404Container from './navigation/notFound404Container';
 import PrivacyContainer from './general/privacyContainer';
 import TermsContainer from './general/termsContainer';
+import HelpContainer from './general/helpContainer';
 import LoginContainer from "./account/loginContainer";
 import LogoutContainer from "./account/logoutContainer";
 import RegisterContainer from "./account/registerContainer";
@@ -153,6 +154,7 @@ class AppContainer extends React.Component {
                                 <Route path="/register-success" exact component={RegisterSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
+                                <Route path="/help" exact component={HelpContainer} />
                                 <Route path="/organizations" exact component={SharedOrganizationListContainer} />
                                 <Route path="/organization/add" exact component={SharedOrganizationCreateContainer} />
                                 <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={TenantDashboardRedirectContainer} />

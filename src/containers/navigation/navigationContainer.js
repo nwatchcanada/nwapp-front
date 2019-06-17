@@ -72,8 +72,12 @@ const authenticatedFullMenuData = [
         icon: "cogs",
         title: "Settings",
         url: "/settings"
-    },
-    {
+    },{
+        id: "full-help",
+        icon: "question-circle",
+        title: "Help",
+        url: "/help"
+    },{
         id: "full-logout",
         icon: "sign-out-alt",
         title: "Logout",
