@@ -59,7 +59,7 @@ class AnnouncementListComponent extends Component {
                                     </Link>
                                 </div>
                                 <h4>Add</h4>
-                                <div className="text-muted">Add a Announcement</div>
+                                <div className="text-muted">Add Announcement</div>
                             </div>
                             { /*
                             <div className="col-sm-3 placeholder">
