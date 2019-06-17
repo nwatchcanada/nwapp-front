@@ -36,10 +36,10 @@ class AddModalComponent extends Component {
                     contentLabel="Minimal Modal Example"
                 >
                     <h1>
-                      Add Location
-                       <button type="button" className="btn btn-secondary btn-lg float-right" onClick={onCloseClick}>
-                           <span className="fa fa-times"></span>
-                       </button>
+                        <i className="fas fa-plus"></i>&nbsp;Add Location
+                        <button type="button" className="btn btn-secondary btn-lg float-right" onClick={onCloseClick}>
+                            <span className="fa fa-times"></span>
+                        </button>
                     </h1>
 
                     <div className="row">
@@ -305,29 +305,31 @@ class StreetsTable extends Component {
         }
 
         return (
-            <div className="table-responsive">
+            <div>
+                <div className="row">
+                    <div className="col-md-12 mx-auto mt-2">
+                        <button type="button" className="btn btn-success float-right" onClick={onAddClick}>
+                            <span className="fa fa-plus">&nbsp;Add Address Info</span>
+                        </button>
+                    </div>
+                </div>
 
-
-                <table className="table table-striped">
-
-                <thead>
-                <tr>
-                    <th>Street #</th>
-                    <th>Street Name</th>
-                    <th>Street Type</th>
-                    <th>Direction</th>
-                    <th>
-                    <button type="button" className="btn btn-success float-right" onClick={onAddClick}>
-                        <span className="fa fa-plus"></span>
-                    </button>
-
-                    </th>
-                </tr>
-                </thead>
-                    <tbody>
-                        {elements}
-                    </tbody>
-                </table>
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Street #</th>
+                        <th>Street Name</th>
+                        <th>Street Type</th>
+                        <th>Direction</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                            {elements}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }
