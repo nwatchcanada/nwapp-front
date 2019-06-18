@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep2IncidentComponent from "../../../components/items/create/itemCreateStep2IncidentComponent";
+import {
+    // localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem, localStorageGetDateItem
+} from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateInput } from "../../../validators/itemValidator";
+import { validateIncidentInput } from "../../../validators/itemValidator";
 
 
 class ItemCreateStep2IncidentContainer extends Component {
@@ -16,7 +20,10 @@ class ItemCreateStep2IncidentContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem("temp-item-create-name"),
+            title: localStorage.getItem("temp-item-create-title"),
+            date: localStorageGetDateItem("temp-item-create-date"),
+            description: localStorage.getItem("temp-item-create-description"),
+            location: localStorage.getItem("temp-item-create-location"),
             errors: {},
             isLoading: false
         }
@@ -78,8 +85,26 @@ class ItemCreateStep2IncidentContainer extends Component {
             [e.target.name]: e.target.value,
         });
         const key = "temp-item-create-"+[e.target.name];
-        console.log(key);
         localStorage.setItem(key, e.target.value)
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('temp-item-create-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('temp-item-create-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+        // console.log(this.state);
+    }
+
+    onDateTimeChange(dateObj) {
+        this.setState({
+            date: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('temp-item-create-date', dateObj);
     }
 
     onClick(e) {
@@ -87,7 +112,7 @@ class ItemCreateStep2IncidentContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateIncidentInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -106,12 +131,16 @@ class ItemCreateStep2IncidentContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { title, date, description, location, errors } = this.state;
         return (
             <ItemCreateStep2IncidentComponent
-                name={name}
+                title={title}
+                date={date}
+                description={description}
+                location={location}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onDateTimeChange={this.onDateTimeChange}
                 onClick={this.onClick}
             />
         );

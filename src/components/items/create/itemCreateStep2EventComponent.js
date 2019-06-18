@@ -92,7 +92,7 @@ class ItemCreateStep2EventComponent extends Component {
                                 />
                             }
                             <BootstrapDatePicker
-                                label="Date"
+                                label="Date (*)"
                                 name="date"
                                 dateObj={date}
                                 onTimeChange={onDateTimeChange}
