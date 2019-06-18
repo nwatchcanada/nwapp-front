@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapMultipleFileUploadAndPreview } from "../../bootstrap/bootstrapMultipleFileUploadAndPreview";
 
 
 class ItemCreateStep2ConcernComponent extends Component {
     render() {
-        const { title, description, location, errors, onTextChange, isLoading, onClick } = this.props;
+        const {
+            title, description, location, errors, onTextChange, isLoading, onClick,
+            photos, onDrop, onRemoveUploadClick
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -82,6 +86,15 @@ class ItemCreateStep2ConcernComponent extends Component {
                                 value={location}
                                 name="location"
                                 type="text"
+                            />
+
+                            <BootstrapMultipleFileUploadAndPreview
+                                error={errors.photos}
+                                label="Photos"
+                                onDrop={onDrop}
+                                name="photos"
+                                filesArray={photos}
+                                onRemoveUploadClick={onRemoveUploadClick}
                             />
 
                             <div className="form-group">
