@@ -25,6 +25,7 @@ class ResourceCreateContainer extends Component {
             url: "",
             youTubeEmbedCode: "",
             imageFile: null,
+            file: null,
             description: "",
             errors: {},
             isLoading: false
@@ -147,14 +148,13 @@ class ResourceCreateContainer extends Component {
         })
     }
 
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { category, typeOf, name, url, youTubeEmbedCode, imageFile, description, errors } = this.state;
+        const { category, typeOf, name, url, youTubeEmbedCode, imageFile, file, description, errors } = this.state;
         return (
             <ResourceCreateComponent
                 category={category}
@@ -165,6 +165,7 @@ class ResourceCreateContainer extends Component {
                 url={url}
                 youTubeEmbedCode={youTubeEmbedCode}
                 imageFile={imageFile}
+                file={file}
                 description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}

@@ -19,7 +19,7 @@ export default class ResourceCreateComponent extends Component {
     render() {
         const {
             category, categoryOptions, typeOf, typeOfOptions, name, url, description, youTubeEmbedCode, errors,
-            imageFile,
+            imageFile, file,
             onTextChange, onSelectChange, isLoading, onClick, onDrop, onRemoveUploadClick
         } = this.props;
         const isLinkTypeOf = typeOf === LINK_RESOURCE_TYPE_OF;
@@ -97,6 +97,17 @@ export default class ResourceCreateComponent extends Component {
                                 <ImageFormComponent
                                     name={name}
                                     imageFile={imageFile}
+                                    description={description}
+                                    errors={errors}
+                                    onTextChange={onTextChange}
+                                    onDrop={onDrop}
+                                    onRemoveUploadClick={onRemoveUploadClick}
+                                />
+                            }
+                            {isFileTypeOf &&
+                                <FileFormComponent
+                                    name={name}
+                                    file={file}
                                     description={description}
                                     errors={errors}
                                     onTextChange={onTextChange}
@@ -230,6 +241,46 @@ class ImageFormComponent extends Component {
                     onDrop={onDrop}
                     name="imageFile"
                     fileObj={imageFile}
+                    onRemoveUploadClick={onRemoveUploadClick}
+                />
+                <BootstrapTextarea
+                    name="description"
+                    borderColour="border-primary"
+                    label="Description (*)"
+                    placeholder="Please set the link description"
+                    rows="5"
+                    value={description}
+                    helpText="This is the description of the link."
+                    onChange={onTextChange}
+                    error={errors.description}
+                />
+            </div>
+        );
+    };
+}
+
+
+class FileFormComponent extends Component {
+    render() {
+        const { name, file, description, errors, onTextChange, onDrop, onRemoveUploadClick } = this.props;
+        return (
+            <div>
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.name}
+                    label="Name (*)"
+                    onChange={onTextChange}
+                    value={name}
+                    name="name"
+                    type="text"
+                />
+                <BootstrapSingleFileUploadAndPreview
+                    error={errors.file}
+                    label="File"
+                    onDrop={onDrop}
+                    name="file"
+                    fileObj={file}
                     onRemoveUploadClick={onRemoveUploadClick}
                 />
                 <BootstrapTextarea
