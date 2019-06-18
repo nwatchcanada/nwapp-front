@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep2EventComponent from "../../../components/items/create/itemCreateStep2EventComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/itemValidator";
+import { validateInput } from "../../../validators/itemValidator";
 
 
 class ItemCreateStep2EventContainer extends Component {

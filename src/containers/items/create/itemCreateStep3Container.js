@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep3Component from "../../../components/items/create/itemCreateStep3Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/itemValidator";
+import { validateInput } from "../../../validators/itemValidator";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,

@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep2ConcernComponent from "../../../components/items/create/itemCreateStep2ConcernComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/itemValidator";
+import { validateInput } from "../../../validators/itemValidator";
 
 
 class ItemCreateStep2ConcernContainer extends Component {
@@ -16,7 +16,10 @@ class ItemCreateStep2ConcernContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem("temp-item-create-name"),
+            title: localStorage.getItem("temp-item-create-title"),
+            description: localStorage.getItem("temp-item-create-description"),
+            location: localStorage.getItem("temp-item-create-location"),
+            photos: localStorage.getItem("temp-item-create-photos"),
             errors: {},
             isLoading: false
         }
@@ -106,10 +109,13 @@ class ItemCreateStep2ConcernContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { title, description, location, photos, errors } = this.state;
         return (
             <ItemCreateStep2ConcernComponent
-                name={name}
+                title={title}
+                description={description}
+                location={location}
+                photos={photos}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

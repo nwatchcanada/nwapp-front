@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 
 class ItemCreateStep2ConcernComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { title, description, location, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -53,11 +53,34 @@ class ItemCreateStep2ConcernComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
+                                error={errors.title}
+                                label="Title (*)"
                                 onChange={onTextChange}
-                                value={name}
-                                name="name"
+                                value={title}
+                                name="title"
+                                type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please describe your concern"
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.location}
+                                label="Location (*)"
+                                onChange={onTextChange}
+                                value={location}
+                                name="location"
                                 type="text"
                             />
 
