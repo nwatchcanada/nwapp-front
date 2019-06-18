@@ -24,6 +24,7 @@ class ResourceCreateContainer extends Component {
             name: "",
             url: "",
             youTubeEmbedCode: "",
+            imageFile: null,
             description: "",
             errors: {},
             isLoading: false
@@ -31,6 +32,8 @@ class ResourceCreateContainer extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -114,6 +117,36 @@ class ResourceCreateContainer extends Component {
         }
     }
 
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
+
+            // For debugging purposes.
+            console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                imageFile: fileWithPreview
+            })
+        }
+    }
+
+    onRemoveUploadClick(e) {
+        this.setState({
+            imageFile: null
+        })
+    }
+
 
     /**
      *  Main render function
@@ -121,7 +154,7 @@ class ResourceCreateContainer extends Component {
      */
 
     render() {
-        const { category, typeOf, name, url, youTubeEmbedCode, description, errors } = this.state;
+        const { category, typeOf, name, url, youTubeEmbedCode, imageFile, description, errors } = this.state;
         return (
             <ResourceCreateComponent
                 category={category}
@@ -131,10 +164,13 @@ class ResourceCreateContainer extends Component {
                 name={name}
                 url={url}
                 youTubeEmbedCode={youTubeEmbedCode}
+                imageFile={imageFile}
                 description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onDrop={this.onDrop}
+                onRemoveUploadClick={this.onRemoveUploadClick}
                 onClick={this.onClick}
             />
         );

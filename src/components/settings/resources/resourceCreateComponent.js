@@ -6,6 +6,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleFileUploadAndPreview } from "../../bootstrap/bootstrapSingleFileUploadAndPreview";
 import {
     LINK_RESOURCE_TYPE_OF,
     YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
@@ -17,7 +18,9 @@ import {
 export default class ResourceCreateComponent extends Component {
     render() {
         const {
-            category, categoryOptions, typeOf, typeOfOptions, name, url, description, youTubeEmbedCode, errors, onTextChange, onSelectChange, isLoading, onClick
+            category, categoryOptions, typeOf, typeOfOptions, name, url, description, youTubeEmbedCode, errors,
+            imageFile,
+            onTextChange, onSelectChange, isLoading, onClick, onDrop, onRemoveUploadClick
         } = this.props;
         const isLinkTypeOf = typeOf === LINK_RESOURCE_TYPE_OF;
         const isYouTubeVideoTypeOf = typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF;
@@ -90,6 +93,17 @@ export default class ResourceCreateComponent extends Component {
                                     onTextChange={onTextChange}
                                 />
                             }
+                            {isImageTypeOf &&
+                                <ImageFormComponent
+                                    name={name}
+                                    imageFile={imageFile}
+                                    description={description}
+                                    errors={errors}
+                                    onTextChange={onTextChange}
+                                    onDrop={onDrop}
+                                    onRemoveUploadClick={onRemoveUploadClick}
+                                />
+                            }
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
@@ -152,7 +166,6 @@ class LinkFormComponent extends Component {
 }
 
 
-
 class YouTubeVideoFormComponent extends Component {
     render() {
         const { name, youTubeEmbedCode, description, errors, onTextChange } = this.props;
@@ -178,6 +191,46 @@ class YouTubeVideoFormComponent extends Component {
                     helpText="This is the embed code of the video."
                     onChange={onTextChange}
                     error={errors.youTubeEmbedCode}
+                />
+                <BootstrapTextarea
+                    name="description"
+                    borderColour="border-primary"
+                    label="Description (*)"
+                    placeholder="Please set the link description"
+                    rows="5"
+                    value={description}
+                    helpText="This is the description of the link."
+                    onChange={onTextChange}
+                    error={errors.description}
+                />
+            </div>
+        );
+    };
+}
+
+
+class ImageFormComponent extends Component {
+    render() {
+        const { name, imageFile, description, errors, onTextChange, onDrop, onRemoveUploadClick } = this.props;
+        return (
+            <div>
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.name}
+                    label="Name (*)"
+                    onChange={onTextChange}
+                    value={name}
+                    name="name"
+                    type="text"
+                />
+                <BootstrapSingleFileUploadAndPreview
+                    error={errors.imageFile}
+                    label="Image File"
+                    onDrop={onDrop}
+                    name="imageFile"
+                    fileObj={imageFile}
+                    onRemoveUploadClick={onRemoveUploadClick}
                 />
                 <BootstrapTextarea
                     name="description"
