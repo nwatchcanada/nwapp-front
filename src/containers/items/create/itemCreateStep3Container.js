@@ -10,7 +10,6 @@ import {
     localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateInput } from "../../../validators/itemValidator";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,

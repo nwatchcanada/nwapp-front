@@ -7,7 +7,32 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 export default class ItemCreateStep3ConcernComponent extends Component {
     render() {
-        const { returnURL, name, errors, isLoading, onClick } = this.props;
+        const {
+            returnURL, errors, isLoading, onClick,
+            concernTitle,
+            concernDescription,
+            concernLocation,
+            concernPhotos,
+        } = this.props;
+
+        // COPIED FROM: /components/boostrap/bootstrapMultipleFileUploadAndPreview.js
+        const thumb = {
+            display: 'inline-flex',
+            // borderRadius: 2,
+            // border: '1px solid #eaeaea',
+            marginBottom: 8,
+            marginRight: 8,
+            width: 100,
+            height: 100,
+            padding: 4,
+            boxSizing: 'border-box'
+        };
+        const img = {
+            display: 'block',
+            width: 'auto',
+            height: '100%'
+        };
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -54,8 +79,37 @@ export default class ItemCreateStep3ConcernComponent extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">Name</th>
-                                    <td>{name}</td>
+                                    <th scope="row" className="bg-light">Type</th>
+                                    <td>Concern</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Title</th>
+                                    <td>{concernTitle}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{concernDescription}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Location</th>
+                                    <td>{concernLocation}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Photos</th>
+                                    <td>
+                                        {concernPhotos && concernPhotos.map(
+                                            (photoObj, i) => <div key={i}>
+                                                <div style={thumb}>
+                                                    <img
+                                                        src={photoObj.preview}
+                                                        style={img}
+                                                        alt={photoObj.name}
+                                                    />
+                                                </div>
+                                                <br />
+                                            </div>
+                                        )}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
