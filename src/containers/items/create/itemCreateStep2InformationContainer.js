@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep2InformationComponent from "../../../components/items/create/itemCreateStep2InformationComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateInput } from "../../../validators/itemValidator";
+import { validateInformationInput } from "../../../validators/itemValidator";
 
 
 class ItemCreateStep2InformationContainer extends Component {
@@ -16,7 +16,7 @@ class ItemCreateStep2InformationContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem("temp-item-create-name"),
+            description: localStorage.getItem("temp-item-create-information-description"),
             errors: {},
             isLoading: false
         }
@@ -52,7 +52,6 @@ class ItemCreateStep2InformationContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Item has been successfully created.");
         this.props.history.push("/item/add/step-3");
     }
 
@@ -77,8 +76,7 @@ class ItemCreateStep2InformationContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "temp-item-create-"+[e.target.name];
-        console.log(key);
+        const key = "temp-item-create-information-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
     }
 
@@ -87,7 +85,7 @@ class ItemCreateStep2InformationContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateInformationInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -106,10 +104,10 @@ class ItemCreateStep2InformationContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { description, errors } = this.state;
         return (
             <ItemCreateStep2InformationComponent
-                name={name}
+                description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

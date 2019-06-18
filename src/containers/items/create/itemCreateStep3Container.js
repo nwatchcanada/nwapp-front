@@ -68,6 +68,7 @@ class ItemCreateStep3Container extends Component {
             incidentPhotos: localStorageGetArrayItem("temp-item-create-incident-photos"),
 
             // Information
+            informationDescription: localStorage.getItem("temp-item-create-information-description"),
 
             errors: {},
             isLoading: false
@@ -169,6 +170,8 @@ class ItemCreateStep3Container extends Component {
             incidentLocation,
             incidentPhotos,
 
+            // Information
+            informationDescription
         } = this.state;
 
         if (typeOf === INCIDENT_ITEM_TYPE_OF) {
@@ -226,6 +229,8 @@ class ItemCreateStep3Container extends Component {
                     errors={errors}
                     onTextChange={this.onTextChange}
                     onClick={this.onClick}
+
+                    informationDescription={informationDescription}
                 />
             );
         } else {

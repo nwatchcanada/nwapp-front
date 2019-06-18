@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 export default class ItemCreateStep3InformationComponent extends Component {
     render() {
-        const { returnURL, name, errors, isLoading, onClick } = this.props;
+        const { returnURL, informationDescription, errors, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -54,8 +54,12 @@ export default class ItemCreateStep3InformationComponent extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">Name</th>
-                                    <td>{name}</td>
+                                    <th scope="row" className="bg-light">Type</th>
+                                    <td>Information</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{informationDescription}</td>
                                 </tr>
                             </tbody>
                         </table>

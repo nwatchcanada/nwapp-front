@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 
 
 class ItemCreateStep2InformationComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { description, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -50,15 +49,16 @@ class ItemCreateStep2InformationComponent extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
+                            <BootstrapTextarea
+                                name="description"
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
+                                label="What information do you request? (*)"
+                                placeholder="Please write a description of what your rquest is."
+                                rows="5"
+                                value={description}
+                                helpText=""
                                 onChange={onTextChange}
-                                value={name}
-                                name="name"
-                                type="text"
+                                error={errors.description}
                             />
 
                             <div className="form-group">

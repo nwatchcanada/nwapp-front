@@ -92,3 +92,20 @@ export function validateIncidentInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+/**
+ *  Validator will validate the `information` item.
+ */
+export function validateInformationInput(data) {
+    let errors = {};
+
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+        errors.description = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
