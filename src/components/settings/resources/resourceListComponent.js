@@ -6,12 +6,13 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 class TableRow extends Component {
     render() {
-        const { slug, number, name } = this.props.datum;
+        const { slug, number, name, typeOf } = this.props.datum;
 
         return (
             <tr slug={slug}>
                 <td>{number}</td>
                 <td>{name}</td>
+                <td>{typeOf}</td>
                 <td>
                     <Link to={`/settings/resource/${slug}/update`} className="btn btn-primary pl-4 pr-4">
                         <i className="fas fa-edit"></i>&nbsp;Edit
@@ -101,6 +102,7 @@ class ResourcesListComponent extends Component {
                                     <tr>
                                         <th>Resource #</th>
                                         <th>Name</th>
+                                        <th>Type</th>
                                         <th></th>
                                     </tr>
                                     </thead>

@@ -61,16 +61,19 @@ class ResourcesListContainer extends Component {
             'slug': 'Argyle',
             'number': 1,
             'name': 'Argyle',
+            'typeOf': 'Emergency',
             'absoluteUrl': '/settings/resource/argyle'
         },{
             'slug': 'byron',
             'number': 2,
             'name': 'Byron',
+            'typeOf': 'Municipal',
             'absoluteUrl': '/settings/resource/byron'
         },{
             'slug': 'carling',
             'number': 3,
             'name': 'Carling',
+            'typeOf': 'Housing',
             'absoluteUrl': '/settings/resource/carling'
         }];
         return (
