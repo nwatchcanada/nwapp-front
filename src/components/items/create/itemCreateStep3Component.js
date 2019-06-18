@@ -45,11 +45,11 @@ export default class ItemCreateStep3Component extends Component {
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before adding the residential client:</strong></p>
+                        <p><strong>Please confirm these details before adding the item.</strong></p>
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">District details</th>
+                                    <th scope="row" colSpan="2" className="text-light">Item details</th>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Name</th>
