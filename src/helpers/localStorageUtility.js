@@ -16,7 +16,9 @@ export function localStorageGetObjectItem(key) {
 
 export function localStorageGetArrayItem(key) {
     const stringifiedObject = localStorage.getItem(key);
+    console.log("localStorageGetArrayItem | String:", stringifiedObject);
     let anObject = JSON.parse(stringifiedObject);
+    console.log("localStorageGetArrayItem | Object:", anObject);
     if (anObject  === undefined || anObject === null) {
         anObject = [];
     }

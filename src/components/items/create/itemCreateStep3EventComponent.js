@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
-export default class ItemCreateStep3Component extends Component {
+export default class ItemCreateStep3EventComponent extends Component {
     render() {
         const { returnURL, name, errors, isLoading, onClick } = this.props;
         return (

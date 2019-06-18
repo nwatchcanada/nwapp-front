@@ -20,12 +20,12 @@ class ItemCreateStep2EventContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: localStorage.getItem("temp-item-create-title"),
-            eventTypeOf: parseInt(localStorage.getItem("temp-item-create-eventTypeOf")),
-            eventTypeOfOption: localStorageGetObjectItem('temp-item-create-eventTypeOfOption'),
-            eventTypeOfOther: localStorage.getItem("temp-item-create-eventTypeOfOther"),
-            date: localStorageGetDateItem("temp-item-create-date"),
-            description: localStorage.getItem("temp-item-create-description"),
+            title: localStorage.getItem("temp-item-create-event-title"),
+            eventTypeOf: parseInt(localStorage.getItem("temp-item-create-event-eventTypeOf")),
+            eventTypeOfOption: localStorageGetObjectItem('temp-item-create-event-eventTypeOfOption'),
+            eventTypeOfOther: localStorage.getItem("temp-item-create-event-eventTypeOfOther"),
+            date: localStorageGetDateItem("temp-item-create-event-date"),
+            description: localStorage.getItem("temp-item-create-event-description"),
             errors: {},
             isLoading: false
         }
@@ -88,7 +88,7 @@ class ItemCreateStep2EventContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "temp-item-create-"+[e.target.name];
+        const key = "temp-item-create-event-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
     }
 
@@ -99,7 +99,7 @@ class ItemCreateStep2EventContainer extends Component {
             optionKey: option,
         });
         localStorage.setItem('temp-item-create-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-item-create-'+optionKey, option);
+        localStorageSetObjectOrArrayItem('temp-item-create-event-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
         // console.log(this.state);
     }
@@ -108,7 +108,7 @@ class ItemCreateStep2EventContainer extends Component {
         this.setState({
             date: dateObj,
         })
-        localStorageSetObjectOrArrayItem('temp-item-create-date', dateObj);
+        localStorageSetObjectOrArrayItem('temp-item-create-event-date', dateObj);
     }
 
     onClick(e) {

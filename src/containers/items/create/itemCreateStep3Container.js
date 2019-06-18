@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep3Component from "../../../components/items/create/itemCreateStep3Component";
+import ItemCreateStep3ConcernComponent from "../../../components/items/create/itemCreateStep3ConcernComponent";
+import ItemCreateStep3EventComponent from "../../../components/items/create/itemCreateStep3EventComponent";
+import ItemCreateStep3IncidentComponent from "../../../components/items/create/itemCreateStep3IncidentComponent";
+import ItemCreateStep3InformationComponent from "../../../components/items/create/itemCreateStep3InformationComponent";
+import {
+    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
+} from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateInput } from "../../../validators/itemValidator";
 import {
@@ -39,7 +45,30 @@ class ItemCreateStep3Container extends Component {
         this.state = {
             typeOf: typeOf,
             returnURL: returnURL,
-            name: localStorage.getItem("temp-item-create-name"),
+
+            // Concern Type
+            concernTitle: localStorage.getItem("temp-item-create-concern-title"),
+            concernDescription: localStorage.getItem("temp-item-create-concern-description"),
+            concernLocation: localStorage.getItem("temp-item-create-concern-location"),
+            concernPhotos: localStorageGetArrayItem("temp-item-create-concern-photos"),
+
+            // Event
+            eventTitle: localStorage.getItem("temp-item-create-event-title"),
+            eventTypeOf: parseInt(localStorage.getItem("temp-item-create-event-eventTypeOf")),
+            eventTypeOfOption: localStorageGetObjectItem('temp-item-create-event-eventTypeOfOption'),
+            eventTypeOfOther: localStorage.getItem("temp-item-create-event-eventTypeOfOther"),
+            eventDate: localStorageGetDateItem("temp-item-create-event-date"),
+            eventDescription: localStorage.getItem("temp-item-create-event-description"),
+
+            // Incident
+            incidentTitle: localStorage.getItem("temp-item-create-incident-title"),
+            incidentDate: localStorageGetDateItem("temp-item-create-incident-date"),
+            incidentDescription: localStorage.getItem("temp-item-create-incident-description"),
+            incidentLocation: localStorage.getItem("temp-item-create-incident-location"),
+            incidentPhotos: localStorageGetArrayItem("temp-item-create-incident-photos"),
+
+            // Information
+
             errors: {},
             isLoading: false
         }
@@ -127,16 +156,92 @@ class ItemCreateStep3Container extends Component {
      */
 
     render() {
-        const { returnURL, name, errors } = this.state;
-        return (
-            <ItemCreateStep3Component
-                returnURL={returnURL}
-                name={name}
-                errors={errors}
-                onTextChange={this.onTextChange}
-                onClick={this.onClick}
-            />
-        );
+        const {
+            typeOf, returnURL, errors,
+
+            // Concern Type
+            concernTitle,
+            concernDescription,
+            concernLocation,
+            concernPhotos,
+
+            // Event
+            eventTitle,
+            eventTypeOf,
+            eventTypeOfOther,
+            eventDate,
+            eventDescription,
+
+            // Incident
+            incidentTitle,
+            incidentDate,
+            incidentDescription,
+            incidentLocation,
+            incidentPhotos,
+
+        } = this.state;
+
+        if (typeOf === INCIDENT_ITEM_TYPE_OF) {
+
+            return (
+                <ItemCreateStep3IncidentComponent
+                    typeOf={typeOf}
+                    returnURL={returnURL}
+                    errors={errors}
+                    onTextChange={this.onTextChange}
+                    onClick={this.onClick}
+
+                    incidentTitle={incidentTitle}
+                    incidentDate={incidentDate}
+                    incidentDescription={incidentDescription}
+                    incidentLocation={incidentLocation}
+                    incidentPhotos={incidentPhotos}
+                />
+            );
+        } else if (typeOf === EVENT_ITEM_TYPE_OF) {
+            return (
+                <ItemCreateStep3EventComponent
+                    typeOf={typeOf}
+                    returnURL={returnURL}
+                    errors={errors}
+                    onTextChange={this.onTextChange}
+                    onClick={this.onClick}
+
+                    eventTitle={eventTitle}
+                    eventTypeOf={eventTypeOf}
+                    eventTypeOfOther={eventTypeOfOther}
+                    eventDate={eventDate}
+                    eventDescription={eventDescription}
+                />
+            );
+        } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
+            return (
+                <ItemCreateStep3ConcernComponent
+                    typeOf={typeOf}
+                    returnURL={returnURL}
+                    errors={errors}
+                    onTextChange={this.onTextChange}
+                    onClick={this.onClick}
+
+                    concernTitle={concernTitle}
+                    concernDescription={concernDescription}
+                    concernLocation={concernLocation}
+                    concernPhotos={concernPhotos}
+                />
+            );
+        } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
+            return (
+                <ItemCreateStep3InformationComponent
+                    typeOf={typeOf}
+                    returnURL={returnURL}
+                    errors={errors}
+                    onTextChange={this.onTextChange}
+                    onClick={this.onClick}
+                />
+            );
+        } else {
+            this.props.history.push("/404");
+        }
     }
 }
 
