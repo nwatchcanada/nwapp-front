@@ -6,7 +6,7 @@ import classnames from 'classnames';
 /**
  * Primitive bootstrap image upload (single) GUI and preview.
  */
-export const BootstrapSingleFileUploadAndPreview = ({
+export const BootstrapSingleImageUploadAndPreview = ({
     label,
     name,
     onDrop,

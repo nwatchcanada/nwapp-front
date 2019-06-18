@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapMultipleFileUploadAndPreview } from "../../bootstrap/bootstrapMultipleFileUploadAndPreview";
+import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 
 
 class ItemCreateStep2ConcernComponent extends Component {
@@ -88,7 +88,7 @@ class ItemCreateStep2ConcernComponent extends Component {
                                 type="text"
                             />
 
-                            <BootstrapMultipleFileUploadAndPreview
+                            <BootstrapMultipleImageUploadAndPreview
                                 error={errors.photos}
                                 label="Photos"
                                 onDrop={onDrop}

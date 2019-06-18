@@ -6,7 +6,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
-import { BootstrapSingleFileUploadAndPreview } from "../../bootstrap/bootstrapSingleFileUploadAndPreview";
+import { BootstrapSingleImageUploadAndPreview } from "../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import {
     LINK_RESOURCE_TYPE_OF,
     YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
@@ -235,7 +235,7 @@ class ImageFormComponent extends Component {
                     name="name"
                     type="text"
                 />
-                <BootstrapSingleFileUploadAndPreview
+                <BootstrapSingleImageUploadAndPreview
                     error={errors.imageFile}
                     label="Image File"
                     onDrop={onDrop}
@@ -275,7 +275,7 @@ class FileFormComponent extends Component {
                     name="name"
                     type="text"
                 />
-                <BootstrapSingleFileUploadAndPreview
+                <BootstrapSingleImageUploadAndPreview
                     error={errors.file}
                     label="File"
                     onDrop={onDrop}

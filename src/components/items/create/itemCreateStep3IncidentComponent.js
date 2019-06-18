@@ -18,7 +18,7 @@ export default class ItemCreateStep3IncidentComponent extends Component {
             incidentPhotos,
         } = this.props;
 
-        // COPIED FROM: /components/boostrap/bootstrapMultipleFileUploadAndPreview.js
+        // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
         const thumb = {
             display: 'inline-flex',
             // borderRadius: 2,

@@ -15,7 +15,7 @@ export default class ItemCreateStep3ConcernComponent extends Component {
             concernPhotos,
         } = this.props;
 
-        // COPIED FROM: /components/boostrap/bootstrapMultipleFileUploadAndPreview.js
+        // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
         const thumb = {
             display: 'inline-flex',
             // borderRadius: 2,

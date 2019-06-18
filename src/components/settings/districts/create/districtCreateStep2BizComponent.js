@@ -6,7 +6,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
-import { BootstrapSingleFileUploadAndPreview } from "../../../bootstrap/bootstrapSingleFileUploadAndPreview";
+import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
 
 
 class DistrictCreateStep1BizComponent extends Component {
@@ -98,7 +98,7 @@ class DistrictCreateStep1BizComponent extends Component {
                                 type="text"
                             />
 
-                            <BootstrapSingleFileUploadAndPreview
+                            <BootstrapSingleImageUploadAndPreview
                                 error={errors.image}
                                 label="Logo"
                                 onDrop={onDrop}

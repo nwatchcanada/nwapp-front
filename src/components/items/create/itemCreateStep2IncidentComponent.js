@@ -6,7 +6,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
-import { BootstrapMultipleFileUploadAndPreview } from "../../bootstrap/bootstrapMultipleFileUploadAndPreview";
+import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 
 
 class ItemCreateStep2IncidentComponent extends Component {
@@ -99,7 +99,7 @@ class ItemCreateStep2IncidentComponent extends Component {
                                 type="text"
                             />
 
-                            <BootstrapMultipleFileUploadAndPreview
+                            <BootstrapMultipleImageUploadAndPreview
                                 error={errors.photos}
                                 label="Photos"
                                 onDrop={onDrop}
