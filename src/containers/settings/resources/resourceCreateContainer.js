@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import ResourceCreateComponent from "../../../components/settings/resources/resourceCreateComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/resourceValidator";
-import { RESOURCE_CATEGORY_CHOICES } from "../../../constants/api";
+import { RESOURCE_CATEGORY_CHOICES, RESOURCE_TYPE_OF_CHOICES } from "../../../constants/api";
 
 
 class ResourceCreateContainer extends Component {
@@ -19,8 +19,12 @@ class ResourceCreateContainer extends Component {
         this.state = {
             category: "",
             categoryOption: {},
-
+            typeOf: "",
+            typeOfOption: {},
             name: "",
+            url: "",
+            youTubeEmbedCode: "",
+            description: "",
             errors: {},
             isLoading: false
         }
@@ -117,12 +121,17 @@ class ResourceCreateContainer extends Component {
      */
 
     render() {
-        const { category, name, errors } = this.state;
+        const { category, typeOf, name, url, youTubeEmbedCode, description, errors } = this.state;
         return (
             <ResourceCreateComponent
                 category={category}
                 categoryOptions={RESOURCE_CATEGORY_CHOICES}
+                typeOf={typeOf}
+                typeOfOptions={RESOURCE_TYPE_OF_CHOICES}
                 name={name}
+                url={url}
+                youTubeEmbedCode={youTubeEmbedCode}
+                description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

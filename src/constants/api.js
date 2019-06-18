@@ -202,13 +202,13 @@ export const EVENT_TYPE_CHOICES = [
  */
 export const HEALTH_RESOURCE_CATEGORY = 2
 export const HOUSING_RESOURCE_CATEGORY = 3
-export const LONELINESS_CATEGORY = 4
-export const FOOD_SECURITY_CATEGORY = 5
-export const EDUCATION_CATEGORY = 6
-export const MUNICIPAL_CATEGORY = 7
-export const POLICE_CATEGORY = 8
-export const FIRE_CATEGORY = 9
-export const EMERGENCY_CATEGORY = 10
+export const LONELINESS_RESOURCE_CATEGORY = 4
+export const FOOD_SECURITY_RESOUCE_CATEGORY = 5
+export const EDUCATION_RESOURCE_CATEGORY = 6
+export const MUNICIPAL_RESOURCE_CATEGORY = 7
+export const POLICE_RESOURCE_CATEGORY = 8
+export const FIRE_RESOURCE_CATEGORY = 9
+export const EMERGENCY_RESOURCE_CATEGORY = 10
 export const RESOURCE_CATEGORY_CHOICES = [
     {
         selectName: "category",
@@ -220,31 +220,59 @@ export const RESOURCE_CATEGORY_CHOICES = [
         label: "Housing"
     },{
         selectName: "category",
-        value: LONELINESS_CATEGORY,
+        value: LONELINESS_RESOURCE_CATEGORY,
         label: "Loneliness"
     },{
         selectName: "category",
-        value: FOOD_SECURITY_CATEGORY,
+        value: FOOD_SECURITY_RESOUCE_CATEGORY,
         label: "Food Security"
     },{
         selectName: "category",
-        value: EDUCATION_CATEGORY,
+        value: EDUCATION_RESOURCE_CATEGORY,
         label: "Education"
     },{
         selectName: "category",
-        value: MUNICIPAL_CATEGORY,
+        value: MUNICIPAL_RESOURCE_CATEGORY,
         label: "Municipal"
     },{
         selectName: "category",
-        value: POLICE_CATEGORY,
+        value: POLICE_RESOURCE_CATEGORY,
         label: "Police"
     },{
         selectName: "category",
-        value: FIRE_CATEGORY,
+        value: FIRE_RESOURCE_CATEGORY,
         label: "Fire"
     },{
         selectName: "category",
-        value: EMERGENCY_CATEGORY,
+        value: EMERGENCY_RESOURCE_CATEGORY,
         label: "Emergency"
+    }
+];
+
+
+/**
+ *  The resource type of that we can use in the system.
+ */
+export const LINK_RESOURCE_TYPE_OF = 2;
+export const YOUTUBE_VIDEO_RESOURCE_TYPE_OF = 3;
+export const IMAGE_RESOURCE_TYPE_OF = 4;
+export const FILE_RESOURCE_TYPE_OF = 5;
+export const RESOURCE_TYPE_OF_CHOICES = [
+    {
+        selectName: "typeOf",
+        value: LINK_RESOURCE_TYPE_OF,
+        label: "Link"
+    },{
+        selectName: "typeOf",
+        value: YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
+        label: "YouTube Video"
+    },{
+        selectName: "typeOf",
+        value: IMAGE_RESOURCE_TYPE_OF,
+        label: "Image"
+    },{
+        selectName: "typeOf",
+        value: FILE_RESOURCE_TYPE_OF,
+        label: "File"
     }
 ];

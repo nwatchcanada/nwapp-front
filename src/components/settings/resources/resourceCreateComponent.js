@@ -5,11 +5,24 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import {
+    LINK_RESOURCE_TYPE_OF,
+    YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
+    IMAGE_RESOURCE_TYPE_OF,
+    FILE_RESOURCE_TYPE_OF
+} from "../../../constants/api";
 
 
-class ResourceCreateComponent extends Component {
+export default class ResourceCreateComponent extends Component {
     render() {
-        const { category, categoryOptions, name, errors, onTextChange, onSelectChange, isLoading, onClick } = this.props;
+        const {
+            category, categoryOptions, typeOf, typeOfOptions, name, url, description, youTubeEmbedCode, errors, onTextChange, onSelectChange, isLoading, onClick
+        } = this.props;
+        const isLinkTypeOf = typeOf === LINK_RESOURCE_TYPE_OF;
+        const isYouTubeVideoTypeOf = typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF;
+        const isImageTypeOf = typeOf === IMAGE_RESOURCE_TYPE_OF;
+        const isFileTypeOf = typeOf === FILE_RESOURCE_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -44,20 +57,39 @@ class ResourceCreateComponent extends Component {
                                 defaultOptionLabel="Please select the category."
                                 options={categoryOptions}
                                 value={category}
-                                error={errors.eventTypeOf}
+                                error={errors.category}
                                 onSelectChange={onSelectChange}
                             />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
+                            <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
-                                onChange={onTextChange}
-                                value={name}
-                                name="name"
-                                type="text"
+                                label="Type (*)"
+                                name="typeOf"
+                                defaultOptionLabel="Please select the type."
+                                options={typeOfOptions}
+                                value={typeOf}
+                                error={errors.typeOf}
+                                onSelectChange={onSelectChange}
                             />
+
+                            {isLinkTypeOf &&
+                                <LinkFormComponent
+                                    name={name}
+                                    url={url}
+                                    description={description}
+                                    errors={errors}
+                                    onTextChange={onTextChange}
+                                />
+                            }
+                            {isYouTubeVideoTypeOf &&
+                                <YouTubeVideoFormComponent
+                                    name={name}
+                                    youTubeEmbedCode={youTubeEmbedCode}
+                                    description={description}
+                                    errors={errors}
+                                    onTextChange={onTextChange}
+                                />
+                            }
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
@@ -77,4 +109,88 @@ class ResourceCreateComponent extends Component {
     }
 }
 
-export default ResourceCreateComponent;
+
+class LinkFormComponent extends Component {
+    render() {
+        const { name, url, description, errors, onTextChange } = this.props;
+        return (
+            <div>
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.name}
+                    label="Name (*)"
+                    onChange={onTextChange}
+                    value={name}
+                    name="name"
+                    type="text"
+                />
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.url}
+                    label="URL (*)"
+                    onChange={onTextChange}
+                    value={url}
+                    name="url"
+                    type="text"
+                />
+                <BootstrapTextarea
+                    name="description"
+                    borderColour="border-primary"
+                    label="Description (*)"
+                    placeholder="Please set the link description"
+                    rows="5"
+                    value={description}
+                    helpText="This is the description of the link."
+                    onChange={onTextChange}
+                    error={errors.description}
+                />
+            </div>
+        );
+    };
+}
+
+
+
+class YouTubeVideoFormComponent extends Component {
+    render() {
+        const { name, youTubeEmbedCode, description, errors, onTextChange } = this.props;
+        return (
+            <div>
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.name}
+                    label="Name (*)"
+                    onChange={onTextChange}
+                    value={name}
+                    name="name"
+                    type="text"
+                />
+                <BootstrapTextarea
+                    name="youTubeEmbedCode"
+                    borderColour="border-primary"
+                    label="YouTube Embed Code (*)"
+                    placeholder="Please set the YouTube embed code"
+                    rows="5"
+                    value={youTubeEmbedCode}
+                    helpText="This is the embed code of the video."
+                    onChange={onTextChange}
+                    error={errors.youTubeEmbedCode}
+                />
+                <BootstrapTextarea
+                    name="description"
+                    borderColour="border-primary"
+                    label="Description (*)"
+                    placeholder="Please set the link description"
+                    rows="5"
+                    value={description}
+                    helpText="This is the description of the link."
+                    onChange={onTextChange}
+                    error={errors.description}
+                />
+            </div>
+        );
+    };
+}
