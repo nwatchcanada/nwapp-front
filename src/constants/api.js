@@ -195,3 +195,56 @@ export const EVENT_TYPE_CHOICES = [
         label: "Other"
     }
 ];
+
+
+/**
+ *  The resource category of that we can use in the system.
+ */
+export const HEALTH_RESOURCE_CATEGORY = 2
+export const HOUSING_RESOURCE_CATEGORY = 3
+export const LONELINESS_CATEGORY = 4
+export const FOOD_SECURITY_CATEGORY = 5
+export const EDUCATION_CATEGORY = 6
+export const MUNICIPAL_CATEGORY = 7
+export const POLICE_CATEGORY = 8
+export const FIRE_CATEGORY = 9
+export const EMERGENCY_CATEGORY = 10
+export const RESOURCE_CATEGORY_CHOICES = [
+    {
+        selectName: "category",
+        value: HEALTH_RESOURCE_CATEGORY,
+        label: "Health"
+    },{
+        selectName: "category",
+        value: HOUSING_RESOURCE_CATEGORY,
+        label: "Housing"
+    },{
+        selectName: "category",
+        value: LONELINESS_CATEGORY,
+        label: "Loneliness"
+    },{
+        selectName: "category",
+        value: FOOD_SECURITY_CATEGORY,
+        label: "Food Security"
+    },{
+        selectName: "category",
+        value: EDUCATION_CATEGORY,
+        label: "Education"
+    },{
+        selectName: "category",
+        value: MUNICIPAL_CATEGORY,
+        label: "Municipal"
+    },{
+        selectName: "category",
+        value: POLICE_CATEGORY,
+        label: "Police"
+    },{
+        selectName: "category",
+        value: FIRE_CATEGORY,
+        label: "Fire"
+    },{
+        selectName: "category",
+        value: EMERGENCY_CATEGORY,
+        label: "Emergency"
+    }
+];

@@ -5,6 +5,7 @@ import Scroll from 'react-scroll';
 import ResourceCreateComponent from "../../../components/settings/resources/resourceCreateComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/resourceValidator";
+import { RESOURCE_CATEGORY_CHOICES } from "../../../constants/api";
 
 
 class ResourceCreateContainer extends Component {
@@ -16,12 +17,16 @@ class ResourceCreateContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
+            category: "",
+            categoryOption: {},
+
+            name: "",
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -79,6 +84,15 @@ class ResourceCreateContainer extends Component {
         })
     }
 
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        console.log("optionKey", optionKey);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -103,12 +117,15 @@ class ResourceCreateContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { category, name, errors } = this.state;
         return (
             <ResourceCreateComponent
+                category={category}
+                categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );

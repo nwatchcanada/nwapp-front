@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 
 class ResourceCreateComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { category, categoryOptions, name, errors, onTextChange, onSelectChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -36,6 +36,17 @@ class ResourceCreateComponent extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Category (*)"
+                                name="category"
+                                defaultOptionLabel="Please select the category."
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.eventTypeOf}
+                                onSelectChange={onSelectChange}
+                            />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
