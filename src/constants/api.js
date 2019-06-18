@@ -152,3 +152,46 @@ export const ITEM_TYPE_CHOICES = [
         label: "Information"
     }
 ];
+
+
+/**
+ *  The item type of that we can use in the system.
+ */
+export const OTHER_EVENT_TYPE_OF = 1;
+export const GARAGE_SALE_EVENT_TYPE_OF = 2;
+export const GATHERING_EVENT_TYPE_OF = 3;
+export const SPORTS_ITEM_TYPE_OF = 4;
+export const BBQ_ITEM_TYPE_OF = 5;
+export const FUNDRAISER_ITEM_TYPE_OF = 6;
+export const ARTS_ITEM_TYPE_OF = 7;
+export const EVENT_TYPE_CHOICES = [
+    {
+        selectName: "eventTypeOf",
+        value: GARAGE_SALE_EVENT_TYPE_OF,
+        label: "Garage Sale"
+    },{
+        selectName: "eventTypeOf",
+        value: GATHERING_EVENT_TYPE_OF,
+        label: "Gathering"
+    },{
+        selectName: "eventTypeOf",
+        value: SPORTS_ITEM_TYPE_OF,
+        label: "Sports"
+    },{
+        selectName: "eventTypeOf",
+        value: BBQ_ITEM_TYPE_OF,
+        label: "BBQ"
+    },{
+        selectName: "eventTypeOf",
+        value: FUNDRAISER_ITEM_TYPE_OF,
+        label: "Fundraiser"
+    },{
+        selectName: "eventTypeOf",
+        value: ARTS_ITEM_TYPE_OF,
+        label: "Arts"
+    },{
+        selectName: "eventTypeOf",
+        value: OTHER_EVENT_TYPE_OF,
+        label: "Other"
+    }
+];

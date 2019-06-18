@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep2EventComponent from "../../../components/items/create/itemCreateStep2EventComponent";
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateInput } from "../../../validators/itemValidator";
+import { validateEventInput } from "../../../validators/itemValidator";
+import { EVENT_TYPE_CHOICES } from "../../../constants/api";
 
 
 class ItemCreateStep2EventContainer extends Component {
@@ -16,12 +20,16 @@ class ItemCreateStep2EventContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem("temp-item-create-name"),
+            title: localStorage.getItem("temp-item-create-title"),
+            eventTypeOf: parseInt(localStorage.getItem("temp-item-create-eventTypeOf")),
+            eventTypeOfOption: localStorageGetObjectItem('temp-item-create-eventTypeOfOption'),
+            eventTypeOfOther: localStorage.getItem("temp-item-create-eventTypeOfOther"),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -78,8 +86,19 @@ class ItemCreateStep2EventContainer extends Component {
             [e.target.name]: e.target.value,
         });
         const key = "temp-item-create-"+[e.target.name];
-        console.log(key);
         localStorage.setItem(key, e.target.value)
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('temp-item-create-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('temp-item-create-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+        // console.log(this.state);
     }
 
     onClick(e) {
@@ -87,7 +106,7 @@ class ItemCreateStep2EventContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateEventInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -99,19 +118,22 @@ class ItemCreateStep2EventContainer extends Component {
         }
     }
 
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { title, eventTypeOf, eventTypeOfOther, errors } = this.state;
         return (
             <ItemCreateStep2EventComponent
-                name={name}
+                title={title}
+                eventTypeOf={eventTypeOf}
+                eventTypeOfOptions={EVENT_TYPE_CHOICES}
+                eventTypeOfOther={eventTypeOfOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );

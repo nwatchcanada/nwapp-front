@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
 
 
 class ItemCreateStep2EventComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { title, eventTypeOf, eventTypeOfOptions, eventTypeOfOther, errors, onTextChange, isLoading, onClick, onSelectChange } = this.props;
+        const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -45,7 +48,7 @@ class ItemCreateStep2EventComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New Event Item</h1>
+                            <h1><i className="fas fa-glass-cheers"></i>&nbsp;Event Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -53,13 +56,37 @@ class ItemCreateStep2EventComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
+                                error={errors.title}
+                                label="Title (*)"
                                 onChange={onTextChange}
-                                value={name}
-                                name="name"
+                                value={title}
+                                name="title"
                                 type="text"
                             />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Event Type (*)"
+                                name="eventTypeOf"
+                                defaultOptionLabel="Please select the event type."
+                                options={eventTypeOfOptions}
+                                value={eventTypeOf}
+                                error={errors.eventTypeOf}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {isOtherEventTypeOf &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.eventTypeOfOther}
+                                    label="Event Type - Other (*)"
+                                    onChange={onTextChange}
+                                    value={eventTypeOfOther}
+                                    name="eventTypeOfOther"
+                                    type="text"
+                                />
+                            }
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

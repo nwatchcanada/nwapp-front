@@ -45,7 +45,7 @@ class ItemCreateStep2ConcernComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New Concern Item</h1>
+                            <h1><i className="fas fa-exclamation-circle"></i>&nbsp;Concern Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
