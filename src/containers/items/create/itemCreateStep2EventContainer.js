@@ -8,7 +8,7 @@ import {
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateEventInput } from "../../../validators/itemValidator";
-import { EVENT_TYPE_CHOICES } from "../../../constants/api";
+import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF } from "../../../constants/api";
 
 
 class ItemCreateStep2EventContainer extends Component {
@@ -98,7 +98,7 @@ class ItemCreateStep2EventContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-item-create-'+[option.selectName], option.value);
+        localStorage.setItem('temp-item-create-event-'+[option.selectName], option.value);
         localStorageSetObjectOrArrayItem('temp-item-create-event-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
         // console.log(this.state);
@@ -120,6 +120,15 @@ class ItemCreateStep2EventContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+
+            // Save for convinence the event type depending on if the user
+            // chose a standard option or the `other` option.
+            if (this.state.eventTypeOf.value === OTHER_EVENT_TYPE_OF) {
+                localStorage.setItem('temp-item-create-event-pretty-event-type', this.state.eventTypeOfOther);
+            } else {
+                localStorage.setItem('temp-item-create-event-pretty-event-type', this.state.eventTypeOfOption.label);
+            }            
+
             this.onSuccessfulSubmissionCallback();
 
         // CASE 2 OF 2: Validation was a failure.

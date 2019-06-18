@@ -49,7 +49,9 @@ export default class ItemCreateStep3ConcernComponent extends Component {
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">Item details</th>
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-table"></i>&nbsp;Item details
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Name</th>

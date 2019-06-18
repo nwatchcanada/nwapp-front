@@ -8,7 +8,7 @@ import shortid from "shortid";
 /**
  *  Utility function used to find the "option" for the inputted parameter "value".
  */
-function getSelectedOption(options, value) {
+export function getSelectedOption(options, value) {
     if (options !== null && options !== undefined) {
         const optionsLength = options.length;
         for (let i = 0; i < optionsLength; i++ ) {
@@ -22,6 +22,9 @@ function getSelectedOption(options, value) {
 }
 
 
+/**
+ *  Primitive boostrap select element.
+ */
 export const BootstrapSingleSelect = ({
     label,
     name,

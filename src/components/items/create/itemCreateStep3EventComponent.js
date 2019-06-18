@@ -1,13 +1,18 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
+// import 'moment-timezone';
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
 export default class ItemCreateStep3EventComponent extends Component {
     render() {
-        const { returnURL, name, errors, isLoading, onClick } = this.props;
+        const {
+            returnURL, errors, isLoading, onClick,
+            eventTitle, eventPrettyEventTypeOf, eventDate, eventDescription,
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -49,11 +54,29 @@ export default class ItemCreateStep3EventComponent extends Component {
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">Item details</th>
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-table"></i>&nbsp;Item details
+                                    </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">Name</th>
-                                    <td>{name}</td>
+                                    <th scope="row" className="bg-light">Type</th>
+                                    <td>Event</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Title</th>
+                                    <td>{eventTitle}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Event Type</th>
+                                    <td>{eventPrettyEventTypeOf}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Date</th>
+                                    <td><Moment format="YYYY/MM/DD">{eventDate}</Moment></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{eventDescription}</td>
                                 </tr>
                             </tbody>
                         </table>

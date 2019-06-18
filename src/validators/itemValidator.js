@@ -31,6 +31,9 @@ export function validateConcernInput(data) {
     if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
         errors.description = 'This field is required';
     }
+    if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+        errors.location = 'This field is required';
+    }
 
     return {
         errors,
@@ -74,9 +77,6 @@ export function validateIncidentInput(data) {
     if (data.title === undefined || data.title === null || validator.isEmpty(data.title) || data.title === "") {
         errors.title = 'This field is required';
     }
-    // if (data.eventTypeOf === undefined || data.eventTypeOf === null || data.eventTypeOf === "") {
-    //     errors.eventTypeOf = 'This field is required';
-    // }
     if (data.date === undefined || data.date === null || data.date === "") {
         errors.date = 'This field is required';
     }

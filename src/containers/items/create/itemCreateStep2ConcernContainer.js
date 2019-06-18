@@ -7,7 +7,7 @@ import {
     localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateInput } from "../../../validators/itemValidator";
+import { validateConcernInput } from "../../../validators/itemValidator";
 
 
 class ItemCreateStep2ConcernContainer extends Component {
@@ -94,7 +94,7 @@ class ItemCreateStep2ConcernContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateConcernInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

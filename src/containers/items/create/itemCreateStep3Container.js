@@ -57,6 +57,7 @@ class ItemCreateStep3Container extends Component {
             eventTypeOf: parseInt(localStorage.getItem("temp-item-create-event-eventTypeOf")),
             eventTypeOfOption: localStorageGetObjectItem('temp-item-create-event-eventTypeOfOption'),
             eventTypeOfOther: localStorage.getItem("temp-item-create-event-eventTypeOfOther"),
+            eventPrettyEventTypeOf: localStorage.getItem('temp-item-create-event-pretty-event-type'),
             eventDate: localStorageGetDateItem("temp-item-create-event-date"),
             eventDescription: localStorage.getItem("temp-item-create-event-description"),
 
@@ -136,17 +137,8 @@ class ItemCreateStep3Container extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        // Simply submit.
+        this.onSuccessfulSubmissionCallback();
     }
 
 
@@ -167,8 +159,7 @@ class ItemCreateStep3Container extends Component {
 
             // Event
             eventTitle,
-            eventTypeOf,
-            eventTypeOfOther,
+            eventPrettyEventTypeOf,
             eventDate,
             eventDescription,
 
@@ -208,8 +199,7 @@ class ItemCreateStep3Container extends Component {
                     onClick={this.onClick}
 
                     eventTitle={eventTitle}
-                    eventTypeOf={eventTypeOf}
-                    eventTypeOfOther={eventTypeOfOther}
+                    eventPrettyEventTypeOf={eventPrettyEventTypeOf}
                     eventDate={eventDate}
                     eventDescription={eventDescription}
                 />
