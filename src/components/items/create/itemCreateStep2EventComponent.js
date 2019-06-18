@@ -3,15 +3,19 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
 
 
 class ItemCreateStep2EventComponent extends Component {
     render() {
-        const { title, eventTypeOf, eventTypeOfOptions, eventTypeOfOther, errors, onTextChange, isLoading, onClick, onSelectChange } = this.props;
+        const {
+            title, eventTypeOf, eventTypeOfOptions, eventTypeOfOther, date, description, errors, isLoading,
+            onClick,  onTextChange, onSelectChange, onDateTimeChange
+        } = this.props;
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
         return (
             <main id="main" role="main">
@@ -87,6 +91,27 @@ class ItemCreateStep2EventComponent extends Component {
                                     type="text"
                                 />
                             }
+                            <BootstrapDatePicker
+                                label="Date"
+                                name="date"
+                                dateObj={date}
+                                onTimeChange={onDateTimeChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.date}
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please describe your event"
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

@@ -51,6 +51,12 @@ export function validateEventInput(data) {
     if (data.eventTypeOf === undefined || data.eventTypeOf === null || data.eventTypeOf === "") {
         errors.eventTypeOf = 'This field is required';
     }
+    if (data.date === undefined || data.date === null || data.date === "") {
+        errors.date = 'This field is required';
+    }
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+        errors.description = 'This field is required';
+    }
 
     return {
         errors,

@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep2EventComponent from "../../../components/items/create/itemCreateStep2EventComponent";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateEventInput } from "../../../validators/itemValidator";
@@ -24,12 +24,15 @@ class ItemCreateStep2EventContainer extends Component {
             eventTypeOf: parseInt(localStorage.getItem("temp-item-create-eventTypeOf")),
             eventTypeOfOption: localStorageGetObjectItem('temp-item-create-eventTypeOfOption'),
             eventTypeOfOther: localStorage.getItem("temp-item-create-eventTypeOfOther"),
+            date: localStorageGetDateItem("temp-item-create-date"),
+            description: localStorage.getItem("temp-item-create-description"),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -101,6 +104,13 @@ class ItemCreateStep2EventContainer extends Component {
         // console.log(this.state);
     }
 
+    onDateTimeChange(dateObj) {
+        this.setState({
+            date: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('temp-item-create-date', dateObj);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -124,17 +134,20 @@ class ItemCreateStep2EventContainer extends Component {
      */
 
     render() {
-        const { title, eventTypeOf, eventTypeOfOther, errors } = this.state;
+        const { title, eventTypeOf, eventTypeOfOther, date, description, errors } = this.state;
         return (
             <ItemCreateStep2EventComponent
                 title={title}
                 eventTypeOf={eventTypeOf}
                 eventTypeOfOptions={EVENT_TYPE_CHOICES}
                 eventTypeOfOther={eventTypeOfOther}
+                date={date}
+                description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
+                onDateTimeChange={this.onDateTimeChange}
             />
         );
     }

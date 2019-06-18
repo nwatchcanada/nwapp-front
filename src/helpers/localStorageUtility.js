@@ -25,7 +25,16 @@ export function localStorageGetArrayItem(key) {
 
 export function localStorageGetDateItem(key) {
     const stringifiedObject = localStorageGetObjectItem(key);
-    return new Date(stringifiedObject);
+    const date = new Date(stringifiedObject);
+    if (Object.prototype.toString.call(date) === "[object Date]") {
+        if (isNaN(date.getTime())) {  // d.valueOf() could also work
+            return null; // date is not valid
+        } else {
+            return date;// date is valid
+        }
+    } else {
+        return null; // not a date
+    }
 }
 
 export function localStorageSetObjectOrArrayItem(key, value) {

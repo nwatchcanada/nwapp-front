@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react';
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import classnames from 'classnames';
