@@ -80,9 +80,12 @@ export function validateIncidentInput(data) {
     if (data.date === undefined || data.date === null || data.date === "") {
         errors.date = 'This field is required';
     }
-    // if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
-    //     errors.description = 'This field is required';
-    // }
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+        errors.description = 'This field is required';
+    }
+    if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+        errors.location = 'This field is required';
+    }
 
     return {
         errors,
