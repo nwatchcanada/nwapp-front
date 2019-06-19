@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 
 import ItemRetrieveComponent from "../../../components/items/retrieve/itemRetrieveComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import {
+   INCIDENT_ITEM_TYPE_OF,
+   EVENT_ITEM_TYPE_OF,
+   CONCERN_ITEM_TYPE_OF,
+   INFORMATION_ITEM_TYPE_OF,
+   ITEM_TYPE_CHOICES
+} from "../../../constants/api";
 
 
 class ItemRetrieveContainer extends Component {
@@ -21,6 +28,7 @@ class ItemRetrieveContainer extends Component {
         // Update state.
         this.state = {
             slug: slug,
+            itemData: {}
         }
 
         this.onBack = this.onBack.bind(this);
@@ -32,21 +40,61 @@ class ItemRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-     componentDidMount() {
-         window.scrollTo(0, 0);  // Start the page at the top of the page.
-     }
+    componentDidMount() {
+        window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-     componentWillUnmount() {
-         // This code will fix the "ReactJS & Redux: Can't perform a React state
-         // update on an unmounted component" issue as explained in:
-         // https://stackoverflow.com/a/53829700
-         this.setState = (state,callback)=>{
-             return;
-         };
+        //TODO: REPLACE THIS CODE WITH API FETCHING CODE.
+        const itemsArray = [{
+            'typeOf': INCIDENT_ITEM_TYPE_OF,
+            'slug': 'argyle',
+            'number': 1,
+            'name': 'Argyle',
+            'description': 'This is the description for argyle.',
+            'absoluteUrl': '/item/argyle'
+        },{
+            'typeOf': EVENT_ITEM_TYPE_OF,
+            'slug': 'byron',
+            'number': 2,
+            'name': 'Byron',
+            'description': 'This is the description for byron.',
+            'absoluteUrl': '/item/byron'
+        },{
+            'typeOf': CONCERN_ITEM_TYPE_OF,
+            'slug': 'carling',
+            'number': 3,
+            'name': 'Carling',
+            'description': 'This is the description for carling.',
+            'absoluteUrl': '/item/carling'
+        },{
+            'typeOf': INFORMATION_ITEM_TYPE_OF,
+            'slug': 'darlyn',
+            'number': 4,
+            'name': 'Darlyn',
+            'description': 'This is the description for darlyn.',
+            'absoluteUrl': '/item/darlyn'
+        }];
+        for (let i = 0; i < itemsArray.length; i++) {
+            const itemData = itemsArray[i];
+            if (itemData['slug'] === this.state.slug) {
+                this.setState({
+                    'itemData': itemData
+                });
+                console.log("componentDidMount | itemData:", itemData);
+            }
+        }
+    }
 
-         // Clear any and all flash messages in our queue to be rendered.
-         this.props.clearFlashMessage();
-     }
+    componentWillUnmount() {
+        // This code will fix the "ReactJS & Redux: Can't perform a React state
+        // update on an unmounted component" issue as explained in:
+        // https://stackoverflow.com/a/53829700
+        this.setState = (state,callback)=>{
+            return;
+        };
+
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
+    }
 
     /**
      *  API callback functions
@@ -84,15 +132,10 @@ class ItemRetrieveContainer extends Component {
      */
 
     render() {
-        const itemData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/item/argyle'
-        };
+
         return (
             <ItemRetrieveComponent
-                itemData={itemData}
+                itemData={this.state.itemData}
                 onBack={this.onBack}
                 onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
