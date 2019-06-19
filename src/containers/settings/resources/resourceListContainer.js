@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 
 import ResourcesListComponent from "../../../components/settings/resources/resourceListComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import {
+    LINK_RESOURCE_TYPE_OF,
+    YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
+    IMAGE_RESOURCE_TYPE_OF,
+    FILE_RESOURCE_TYPE_OF
+} from "../../../constants/api";
 
 
 class ResourcesListContainer extends Component {
@@ -58,23 +64,33 @@ class ResourcesListContainer extends Component {
 
     render() {
         const tableData = [{
-            'slug': 'Argyle',
+            'slug': 'argyle',
             'number': 1,
             'name': 'Argyle',
-            'typeOf': 'Emergency',
+            'category': 'Emergency',
+            'typeOf': LINK_RESOURCE_TYPE_OF,
             'absoluteUrl': '/settings/resource/argyle'
         },{
             'slug': 'byron',
             'number': 2,
             'name': 'Byron',
-            'typeOf': 'Municipal',
+            'category': 'Municipal',
+            'typeOf': YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
             'absoluteUrl': '/settings/resource/byron'
         },{
             'slug': 'carling',
             'number': 3,
             'name': 'Carling',
-            'typeOf': 'Housing',
+            'category': 'Housing',
+            'typeOf': IMAGE_RESOURCE_TYPE_OF,
             'absoluteUrl': '/settings/resource/carling'
+        },{
+            'slug': 'darlyn',
+            'number': 4,
+            'name': 'Darlyn',
+            'category': 'Housing',
+            'typeOf': FILE_RESOURCE_TYPE_OF,
+            'absoluteUrl': '/settings/resource/darlyn'
         }];
         return (
             <ResourcesListComponent
