@@ -2,28 +2,15 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { FlashMessageComponent } from "../flashMessageComponent";
+import {
+    INCIDENT_ITEM_TYPE_OF,
+    EVENT_ITEM_TYPE_OF,
+    CONCERN_ITEM_TYPE_OF,
+    INFORMATION_ITEM_TYPE_OF
+} from "../../constants/api";
 
 
-class TableRow extends Component {
-    render() {
-        const { slug, number, name, absoluteUrl } = this.props.datum;
-
-        return (
-            <tr slug={slug}>
-                <td>{number}</td>
-                <td>{name}</td>
-                <td>
-                    <a href={absoluteUrl}>
-                        View&nbsp;<i className="fas fa-chevron-right"></i>
-                    </a>
-                </td>
-            </tr>
-        );
-    }
-}
-
-
-class ItemListComponent extends Component {
+export default class ItemListComponent extends Component {
     render() {
         const { tableData, flashMessage } = this.props;
         return (
@@ -55,36 +42,6 @@ class ItemListComponent extends Component {
                                 <h4>Add</h4>
                                 <div className="text-muted">Add a item</div>
                             </div>
-                            { /*
-                            <div className="col-sm-3 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="#" className="d-block link-ndecor" title="Jobs">
-                                        <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
-                                    </Link>
-                                </div>
-                                <h4>Search</h4>
-                                <span className="text-muted">Search your items</span>
-                            </div>
-
-                            <div className="col-sm-3 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
-                                    <Link to="#" className="d-block link-ndecor" title="Item">
-                                        <h1 className="circle-title">2,200</h1>
-                                    </Link>
-                                </div>
-                                <h4>Associate Item</h4>
-                                <span className="text-muted">View Item Data</span>
-                            </div>
-                            <div className="col-sm-3 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
-                                    <Link to="#" className="d-block link-ndecor" title="Tasks">
-                                        <h1 className="circle-title">12</h1>
-                                    </Link>
-                                </div>
-                                <h4>Tasks</h4>
-                                <span className="text-muted">View your tasks</span>
-                            </div>
-                            */ }
                         </section>
 
                         <h2>List</h2>
@@ -95,6 +52,7 @@ class ItemListComponent extends Component {
                                     <tr>
                                         <th>Item #</th>
                                         <th>Name</th>
+                                        <th>Type</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -113,4 +71,39 @@ class ItemListComponent extends Component {
     }
 }
 
-export default ItemListComponent;
+
+class TableRow extends Component {
+    render() {
+        const { slug, number, name, typeOf, absoluteUrl } = this.props.datum;
+
+        return (
+            <tr slug={slug}>
+                <td>{number}</td>
+                <td>{name}</td>
+                <td>
+                    <PrettyTypeOf typeOf={typeOf} />
+                </td>
+                <td>
+                    <a href={absoluteUrl}>
+                        View&nbsp;<i className="fas fa-chevron-right"></i>
+                    </a>
+                </td>
+            </tr>
+        );
+    }
+}
+
+
+export const PrettyTypeOf = ({ typeOf }) => {
+    if (typeOf === INCIDENT_ITEM_TYPE_OF) {
+        return "Incident";
+    } else if (typeOf === EVENT_ITEM_TYPE_OF) {
+        return "Event";
+    } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
+        return "Concern";
+    } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
+        return "Information";
+    } else {
+        return null;
+    }
+}

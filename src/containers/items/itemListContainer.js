@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 
 import ItemListComponent from "../../components/items/itemListComponent";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
+import {
+    INCIDENT_ITEM_TYPE_OF,
+    EVENT_ITEM_TYPE_OF,
+    CONCERN_ITEM_TYPE_OF,
+    INFORMATION_ITEM_TYPE_OF
+} from "../../constants/api";
 
 
 class ItemListContainer extends Component {
@@ -61,17 +67,26 @@ class ItemListContainer extends Component {
             'slug': 'Argyle',
             'number': 1,
             'name': 'Argyle',
+            'typeOf': INCIDENT_ITEM_TYPE_OF,
             'absoluteUrl': '/item/argyle'
         },{
             'slug': 'byron',
             'number': 2,
             'name': 'Byron',
+            'typeOf': EVENT_ITEM_TYPE_OF,
             'absoluteUrl': '/item/byron'
         },{
             'slug': 'carling',
             'number': 3,
             'name': 'Carling',
+            'typeOf': CONCERN_ITEM_TYPE_OF,
             'absoluteUrl': '/item/carling'
+        },{
+            'slug': 'darlyn',
+            'number': 4,
+            'name': 'Darlyn',
+            'typeOf': INFORMATION_ITEM_TYPE_OF,
+            'absoluteUrl': '/item/darlyn'
         }];
         return (
             <ItemListComponent
