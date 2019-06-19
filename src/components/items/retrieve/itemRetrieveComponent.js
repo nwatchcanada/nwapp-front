@@ -8,8 +8,7 @@ import {
    INCIDENT_ITEM_TYPE_OF,
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
-   INFORMATION_ITEM_TYPE_OF,
-   ITEM_TYPE_CHOICES
+   INFORMATION_ITEM_TYPE_OF
 } from "../../../constants/api";
 
 
@@ -66,7 +65,7 @@ export default class ItemRetrieveComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Type</th>
                                     <td>
-                                        <PrettyTypeOf typeOf={itemData.typeOf} />
+                                        <PrettyIcon typeOf={itemData.typeOf} />&nbsp;<PrettyTypeOf typeOf={itemData.typeOf} />
                                     </td>
                                 </tr>
                                 {itemData.name &&
@@ -184,6 +183,23 @@ export const PrettyTypeOf = ({ typeOf }) => {
         return "Concern";
     } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
         return "Information";
+    } else {
+        return null;
+    }
+}
+
+
+
+
+export const PrettyIcon = ({ typeOf }) => {
+    if (typeOf === INCIDENT_ITEM_TYPE_OF) {
+        return <i className="fas fa-fire"></i>;
+    } else if (typeOf === EVENT_ITEM_TYPE_OF) {
+        return <i className="fas fa-glass-cheers"></i>;
+    } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
+        return <i className="fas fa-exclamation-circle"></i>;
+    } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
+        return <i className="fas fa-info-circle"></i>;
     } else {
         return null;
     }

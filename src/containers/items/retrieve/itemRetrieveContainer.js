@@ -7,8 +7,7 @@ import {
    INCIDENT_ITEM_TYPE_OF,
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
-   INFORMATION_ITEM_TYPE_OF,
-   ITEM_TYPE_CHOICES
+   INFORMATION_ITEM_TYPE_OF
 } from "../../../constants/api";
 
 
@@ -46,6 +45,7 @@ class ItemRetrieveContainer extends Component {
         //TODO: REPLACE THIS CODE WITH API FETCHING CODE.
         const itemsArray = [{
             'typeOf': INCIDENT_ITEM_TYPE_OF,
+            'icon': 'fire',
             'slug': 'argyle',
             'number': 1,
             'name': 'Argyle',
@@ -63,6 +63,7 @@ class ItemRetrieveContainer extends Component {
             'absoluteUrl': '/item/argyle'
         },{
             'typeOf': EVENT_ITEM_TYPE_OF,
+            'icon': 'glass-cheers',
             'slug': 'byron',
             'number': 2,
             'name': 'Byron',
@@ -71,6 +72,7 @@ class ItemRetrieveContainer extends Component {
             'absoluteUrl': '/item/byron'
         },{
             'typeOf': CONCERN_ITEM_TYPE_OF,
+            'icon': 'exclamation-circle',
             'slug': 'carling',
             'number': 3,
             'name': 'Carling',
@@ -88,6 +90,7 @@ class ItemRetrieveContainer extends Component {
             'absoluteUrl': '/item/carling'
         },{
             'typeOf': INFORMATION_ITEM_TYPE_OF,
+            'icon': 'info-circle',
             'slug': 'darlyn',
             'number': 4,
             'name': null,
