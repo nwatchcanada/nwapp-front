@@ -242,7 +242,7 @@ class ImageFormComponent extends Component {
                 />
                 <BootstrapSingleImageUploadAndPreview
                     error={errors.imageFile}
-                    label="Image File"
+                    label="Image File (*)"
                     onDrop={onImageDrop}
                     name="imageFile"
                     fileObj={imageFile}
@@ -285,7 +285,7 @@ class FileFormComponent extends Component {
                 />
                 <BootstrapSingleFileUploadAndPreview
                     error={errors.file}
-                    label="File"
+                    label="File (*)"
                     onDrop={onFileDrop}
                     name="file"
                     fileObj={file}
