@@ -5,7 +5,8 @@ import {
    INCIDENT_ITEM_TYPE_OF,
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
-   INFORMATION_ITEM_TYPE_OF
+   INFORMATION_ITEM_TYPE_OF,
+   OTHER_EVENT_TYPE_OF
 } from "../constants/api";
 
 
@@ -64,6 +65,12 @@ export function validateEventInput(data) {
     }
     if (data.eventTypeOf === undefined || data.eventTypeOf === null || data.eventTypeOf === "") {
         errors.eventTypeOf = 'This field is required';
+    } else {
+        if (data.eventTypeOf === OTHER_EVENT_TYPE_OF) {
+            if (data.eventTypeOfOther === undefined || data.eventTypeOfOther === null || validator.isEmpty(data.eventTypeOfOther) || data.eventTypeOfOther === "") {
+                errors.eventTypeOfOther = 'This field is required';
+            }
+        }
     }
     if (data.date === undefined || data.date === null || data.date === "") {
         errors.date = 'This field is required';

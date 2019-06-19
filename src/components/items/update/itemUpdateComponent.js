@@ -13,7 +13,7 @@ import {
    INCIDENT_ITEM_TYPE_OF,
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
-   INFORMATION_ITEM_TYPE_OF
+   // INFORMATION_ITEM_TYPE_OF
 } from "../../../constants/api";
 
 
@@ -26,7 +26,6 @@ class ItemUpdateComponent extends Component {
             description,
             location,
             eventTypeOf,
-            eventTypeOfOption,
             eventTypeOfOptions,
             eventTypeOfOther,
             date,
@@ -50,10 +49,10 @@ class ItemUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Item</Link>
+                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/item/argyle"><i className="fas fa-map-pin"></i>&nbsp;Argyle</Link>
+                            <Link to={`/item/${slug}`}><i className="fas fa-map-pin"></i>&nbsp;Item</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -131,7 +130,7 @@ class ItemUpdateComponent extends Component {
                                 />
                             }
 
-                            {isIncidentItemOrConcernItemOrEventItem &&
+                            {isIncidentItemOrConcernItem &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
@@ -142,7 +141,7 @@ class ItemUpdateComponent extends Component {
                                     name="location"
                                     type="text"
                                 />
-                            }                            
+                            }
 
                             {isIncidentItemOrConcernItem &&
                                 <BootstrapMultipleImageUploadAndPreview

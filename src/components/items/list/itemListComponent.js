@@ -21,14 +21,14 @@ export default class ItemListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-map-pin"></i>&nbsp;Item
+                            <i className="fas fa-map-pin"></i>&nbsp;Items
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-map-pin"></i>&nbsp;Item</h1>
+                <h1><i className="fas fa-map-pin"></i>&nbsp;Items</h1>
                 <div className="row">
                     <div className="col-md-12">
 

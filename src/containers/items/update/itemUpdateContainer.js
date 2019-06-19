@@ -10,7 +10,7 @@ import {
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
    INFORMATION_ITEM_TYPE_OF,
-   EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF
+   EVENT_TYPE_CHOICES
 } from "../../../constants/api";
 
 
@@ -83,8 +83,10 @@ class ItemUpdateContainer extends Component {
             'icon': 'glass-cheers',
             'slug': 'byron',
             'number': 2,
-            'title': 'Byron',
+            'title': 'Byron Weekend Garage Sale',
             'description': 'This is the description for byron.',
+            'eventTypeOf': 2,
+            'eventTypeOfOption': {selectName: "eventTypeOf", value: 2, label: "Garage Sale"},
             'eventPrettyEventTypeOf': "Garage Sale",
             'absoluteUrl': '/item/byron'
         },{
@@ -125,6 +127,8 @@ class ItemUpdateContainer extends Component {
                     'name': itemData.name,
                     'description': itemData.description,
                     'location': itemData.location,
+                    'eventTypeOf': itemData.eventTypeOf,
+                    'eventTypeOfOption': itemData.eventTypeOfOption,
                     'eventPrettyEventTypeOf': itemData.eventPrettyEventTypeOf,
                     'photos': itemData.photos,
                     'absoluteUrl': itemData.absoluteUrl,
@@ -182,6 +186,8 @@ class ItemUpdateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
+        console.log("onSelectChange | optionKey", optionKey);
+        console.log("onSelectChange | state", this.state);
     }
 
     onDateTimeChange(dateObj) {
