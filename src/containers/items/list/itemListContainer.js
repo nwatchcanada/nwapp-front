@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemListComponent from "../../components/items/itemListComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import ItemListComponent from "../../../components/items/list/itemListComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
     CONCERN_ITEM_TYPE_OF,
     INFORMATION_ITEM_TYPE_OF
-} from "../../constants/api";
+} from "../../../constants/api";
 
 
 class ItemListContainer extends Component {

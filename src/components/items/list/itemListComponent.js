@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../flashMessageComponent";
+import { FlashMessageComponent } from "../../flashMessageComponent";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
     CONCERN_ITEM_TYPE_OF,
     INFORMATION_ITEM_TYPE_OF
-} from "../../constants/api";
+} from "../../../constants/api";
 
 
 export default class ItemListComponent extends Component {

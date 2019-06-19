@@ -88,7 +88,7 @@ import MemberCreateStep5Container from "./members/create/memberCreateStep5Contai
 import MemberCreateStep6Container from "./members/create/memberCreateStep6Container";
 import MemberUpdateContainer from "./members/memberUpdateContainer";
 
-import ItemListContainer from "./items/itemListContainer";
+import ItemListContainer from "./items/list/itemListContainer";
 import ItemRetrieveContainer from "./items/itemRetrieveContainer";
 import ItemCreateStep1Container from "./items/create/itemCreateStep1Container";
 import ItemCreateStep2ConcernContainer from "./items/create/itemCreateStep2ConcernContainer";
