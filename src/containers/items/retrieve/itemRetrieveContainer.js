@@ -50,6 +50,16 @@ class ItemRetrieveContainer extends Component {
             'number': 1,
             'name': 'Argyle',
             'description': 'This is the description for argyle.',
+            'location': 'London',
+            'photos': [
+                {
+                    'path': 'Test File #1',
+                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
+                },{
+                    'path': 'Test File #2',
+                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
+                }
+            ],
             'absoluteUrl': '/item/argyle'
         },{
             'typeOf': EVENT_ITEM_TYPE_OF,
@@ -57,6 +67,7 @@ class ItemRetrieveContainer extends Component {
             'number': 2,
             'name': 'Byron',
             'description': 'This is the description for byron.',
+            'eventPrettyEventTypeOf': "Garage Sale",
             'absoluteUrl': '/item/byron'
         },{
             'typeOf': CONCERN_ITEM_TYPE_OF,
@@ -64,13 +75,23 @@ class ItemRetrieveContainer extends Component {
             'number': 3,
             'name': 'Carling',
             'description': 'This is the description for carling.',
+            'location': 'London',
+            'photos': [
+                {
+                    'path': 'Test File #1',
+                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
+                },{
+                    'path': 'Test File #2',
+                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
+                }
+            ],
             'absoluteUrl': '/item/carling'
         },{
             'typeOf': INFORMATION_ITEM_TYPE_OF,
             'slug': 'darlyn',
             'number': 4,
-            'name': 'Darlyn',
-            'description': 'This is the description for darlyn.',
+            'name': null,
+            'description': 'What is the contact information for my area coordinator, I need to speak with her, this is in regards to a private matter.',
             'absoluteUrl': '/item/darlyn'
         }];
         for (let i = 0; i < itemsArray.length; i++) {

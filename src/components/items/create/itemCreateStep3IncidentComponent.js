@@ -36,6 +36,9 @@ export default class ItemCreateStep3IncidentComponent extends Component {
             height: '100%'
         };
 
+        // For debugging purposes only.
+        console.log(incidentPhotos);
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">

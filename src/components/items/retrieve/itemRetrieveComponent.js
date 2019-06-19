@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
+// import 'moment-timezone';
 
 import { FlashMessageComponent } from "../../flashMessageComponent";
 import {
@@ -14,6 +16,25 @@ import {
 export default class ItemRetrieveComponent extends Component {
     render() {
         const { itemData, onClick, onBack, flashMessage } = this.props;
+
+        // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
+        const thumb = {
+            display: 'inline-flex',
+            // borderRadius: 2,
+            // border: '1px solid #eaeaea',
+            marginBottom: 8,
+            marginRight: 8,
+            width: 100,
+            height: 100,
+            padding: 4,
+            boxSizing: 'border-box'
+        };
+        const img = {
+            display: 'block',
+            width: 'auto',
+            height: '100%'
+        };
+
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -48,14 +69,89 @@ export default class ItemRetrieveComponent extends Component {
                                         <PrettyTypeOf typeOf={itemData.typeOf} />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Name</th>
-                                    <td>{itemData.name}</td>
-                                </tr>
+                                {itemData.name &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Name</th>
+                                        <td>{itemData.name}</td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Event Type</th>
+                                        <td>{itemData.eventPrettyEventTypeOf}</td>
+                                    </tr>
+                                }
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
                                     <td>{itemData.description}</td>
                                 </tr>
+                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Date</th>
+                                        <td>
+                                            <Moment format="YYYY/MM/DD">{itemData.date}</Moment>
+                                        </td>
+                                    </tr>
+                                }
+
+                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Date</th>
+                                        <td>
+                                            <Moment format="YYYY/MM/DD">{itemData.date}</Moment>
+                                        </td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Location</th>
+                                        <td>{itemData.location}</td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Photos</th>
+                                        <td>
+                                            {itemData.photos && itemData.photos.map(
+                                                (photoObj, i) => <div key={i}>
+                                                    <div style={thumb}>
+                                                        <img
+                                                            src={photoObj.preview}
+                                                            style={img}
+                                                            alt={photoObj.name}
+                                                        />
+                                                    </div>
+                                                    <br />
+                                                </div>
+                                            )}
+                                        </td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === CONCERN_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Location</th>
+                                        <td>{itemData.location}</td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === CONCERN_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Photos</th>
+                                        <td>
+                                            {itemData.photos && itemData.photos.map(
+                                                (photoObj, i) => <div key={i}>
+                                                    <div style={thumb}>
+                                                        <img
+                                                            src={photoObj.preview}
+                                                            style={img}
+                                                            alt={photoObj.name}
+                                                        />
+                                                    </div>
+                                                    <br />
+                                                </div>
+                                            )}
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
 
@@ -77,8 +173,6 @@ export default class ItemRetrieveComponent extends Component {
         );
     }
 }
-
-
 
 
 export const PrettyTypeOf = ({ typeOf }) => {
