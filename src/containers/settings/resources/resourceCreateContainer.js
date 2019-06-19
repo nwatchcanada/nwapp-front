@@ -33,8 +33,10 @@ class ResourceCreateContainer extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+        this.onImageDrop = this.onImageDrop.bind(this);
+        this.onFileDrop = this.onFileDrop.bind(this);
+        this.onRemoveImageUploadClick = this.onRemoveImageUploadClick.bind(this);
+        this.onRemoveFileUploadClick = this.onRemoveFileUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -121,11 +123,12 @@ class ResourceCreateContainer extends Component {
     /**
      *  Special Thanks: https://react-dropzone.netlify.com/#previews
      */
-    onDrop(acceptedFiles) {
+    onImageDrop(acceptedFiles) {
+        console.log("DEBUG | onImageDrop | acceptedFiles", acceptedFiles);
         const file = acceptedFiles[0];
 
         // For debuging purposes only.
-        console.log("DEBUG | onDrop | file", file);
+        console.log("DEBUG | onImageDrop | file", file);
 
         if (file !== undefined && file !== null) {
             const fileWithPreview = Object.assign(file, {
@@ -133,7 +136,7 @@ class ResourceCreateContainer extends Component {
             });
 
             // For debugging purposes.
-            console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+            console.log("DEBUG | onImageDrop | fileWithPreview", fileWithPreview);
 
             // Update our local state to update the GUI.
             this.setState({
@@ -142,9 +145,48 @@ class ResourceCreateContainer extends Component {
         }
     }
 
-    onRemoveUploadClick(e) {
+    onRemoveImageUploadClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Clear image.
         this.setState({
             imageFile: null
+        })
+    }
+
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onFileDrop(acceptedFiles) {
+        console.log("DEBUG | onFileDrop | acceptedFiles", acceptedFiles);
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onFileDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
+
+            // For debugging purposes.
+            console.log("DEBUG | onFileDrop | fileWithPreview", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                file: fileWithPreview
+            })
+        }
+    }
+
+    onRemoveFileUploadClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Clear uploaded file.
+        this.setState({
+            file: null
         })
     }
 
@@ -170,8 +212,10 @@ class ResourceCreateContainer extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                onDrop={this.onDrop}
-                onRemoveUploadClick={this.onRemoveUploadClick}
+                onImageDrop={this.onImageDrop}
+                onFileDrop={this.onFileDrop}
+                onRemoveImageUploadClick={this.onRemoveImageUploadClick}
+                onRemoveFileUploadClick={this.onRemoveFileUploadClick}
                 onClick={this.onClick}
             />
         );

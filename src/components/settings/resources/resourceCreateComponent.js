@@ -7,6 +7,7 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleImageUploadAndPreview } from "../../bootstrap/bootstrapSingleImageUploadAndPreview";
+import { BootstrapSingleFileUploadAndPreview } from "../../bootstrap/bootstrapSingleFileUploadAndPreview";
 import {
     LINK_RESOURCE_TYPE_OF,
     YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
@@ -20,7 +21,9 @@ export default class ResourceCreateComponent extends Component {
         const {
             category, categoryOptions, typeOf, typeOfOptions, name, url, description, youTubeEmbedCode, errors,
             imageFile, file,
-            onTextChange, onSelectChange, isLoading, onClick, onDrop, onRemoveUploadClick
+            onTextChange, onSelectChange, isLoading, onClick,
+            onImageDrop, onRemoveImageUploadClick,
+            onFileDrop, onRemoveFileUploadClick
         } = this.props;
         const isLinkTypeOf = typeOf === LINK_RESOURCE_TYPE_OF;
         const isYouTubeVideoTypeOf = typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF;
@@ -100,8 +103,8 @@ export default class ResourceCreateComponent extends Component {
                                     description={description}
                                     errors={errors}
                                     onTextChange={onTextChange}
-                                    onDrop={onDrop}
-                                    onRemoveUploadClick={onRemoveUploadClick}
+                                    onImageDrop={onImageDrop}
+                                    onRemoveImageUploadClick={onRemoveImageUploadClick}
                                 />
                             }
                             {isFileTypeOf &&
@@ -111,8 +114,8 @@ export default class ResourceCreateComponent extends Component {
                                     description={description}
                                     errors={errors}
                                     onTextChange={onTextChange}
-                                    onDrop={onDrop}
-                                    onRemoveUploadClick={onRemoveUploadClick}
+                                    onFileDrop={onFileDrop}
+                                    onRemoveFileUploadClick={onRemoveFileUploadClick}
                                 />
                             }
 
@@ -222,7 +225,9 @@ class YouTubeVideoFormComponent extends Component {
 
 class ImageFormComponent extends Component {
     render() {
-        const { name, imageFile, description, errors, onTextChange, onDrop, onRemoveUploadClick } = this.props;
+        const {
+            name, imageFile, description, errors, onTextChange, onImageDrop, onRemoveImageUploadClick
+        } = this.props;
         return (
             <div>
                 <BootstrapInput
@@ -238,10 +243,10 @@ class ImageFormComponent extends Component {
                 <BootstrapSingleImageUploadAndPreview
                     error={errors.imageFile}
                     label="Image File"
-                    onDrop={onDrop}
+                    onDrop={onImageDrop}
                     name="imageFile"
                     fileObj={imageFile}
-                    onRemoveUploadClick={onRemoveUploadClick}
+                    onRemoveUploadClick={onRemoveImageUploadClick}
                 />
                 <BootstrapTextarea
                     name="description"
@@ -262,7 +267,10 @@ class ImageFormComponent extends Component {
 
 class FileFormComponent extends Component {
     render() {
-        const { name, file, description, errors, onTextChange, onDrop, onRemoveUploadClick } = this.props;
+        const {
+            name, file, description, errors, onTextChange,
+            onFileDrop, onRemoveFileUploadClick
+        } = this.props;
         return (
             <div>
                 <BootstrapInput
@@ -275,13 +283,13 @@ class FileFormComponent extends Component {
                     name="name"
                     type="text"
                 />
-                <BootstrapSingleImageUploadAndPreview
+                <BootstrapSingleFileUploadAndPreview
                     error={errors.file}
                     label="File"
-                    onDrop={onDrop}
+                    onDrop={onFileDrop}
                     name="file"
                     fileObj={file}
-                    onRemoveUploadClick={onRemoveUploadClick}
+                    onRemoveUploadClick={onRemoveFileUploadClick}
                 />
                 <BootstrapTextarea
                     name="description"
