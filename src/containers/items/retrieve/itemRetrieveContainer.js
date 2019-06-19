@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemRetrieveComponent from "../../components/items/itemRetrieveComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import ItemRetrieveComponent from "../../../components/items/retrieve/itemRetrieveComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class ItemRetrieveContainer extends Component {

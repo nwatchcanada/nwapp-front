@@ -89,14 +89,14 @@ import MemberCreateStep6Container from "./members/create/memberCreateStep6Contai
 import MemberUpdateContainer from "./members/memberUpdateContainer";
 
 import ItemListContainer from "./items/list/itemListContainer";
-import ItemRetrieveContainer from "./items/itemRetrieveContainer";
+import ItemRetrieveContainer from "./items/retrieve/itemRetrieveContainer";
 import ItemCreateStep1Container from "./items/create/itemCreateStep1Container";
 import ItemCreateStep2ConcernContainer from "./items/create/itemCreateStep2ConcernContainer";
 import ItemCreateStep2EventContainer from "./items/create/itemCreateStep2EventContainer";
 import ItemCreateStep2IncidentContainer from "./items/create/itemCreateStep2IncidentContainer";
 import ItemCreateStep2InformationContainer from "./items/create/itemCreateStep2InformationContainer";
 import ItemCreateStep3Container from "./items/create/itemCreateStep3Container";
-import ItemUpdateContainer from "./items/itemUpdateContainer";
+import ItemUpdateContainer from "./items/update/itemUpdateContainer";
 
 import AssociateListActiveContainer from "./associates/associateListActiveContainer";
 import AssociateListInactiveContainer from "./associates/associateListInactiveContainer";
