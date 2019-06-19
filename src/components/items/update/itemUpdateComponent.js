@@ -3,13 +3,40 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
+import {
+   INCIDENT_ITEM_TYPE_OF,
+   EVENT_ITEM_TYPE_OF,
+   CONCERN_ITEM_TYPE_OF,
+   INFORMATION_ITEM_TYPE_OF
+} from "../../../constants/api";
 
 
 class ItemUpdateComponent extends Component {
     render() {
-        const { name, errors, onTextChange, isLoading, onClick } = this.props;
+        const {
+            slug,
+            typeOf,
+            title,
+            description,
+            location,
+            eventTypeOf,
+            eventTypeOfOption,
+            eventTypeOfOptions,
+            eventTypeOfOther,
+            date,
+            photos,
+            errors,
+            isLoading,
+            onTextChange, onDateTimeChange, onSelectChange, onClick
+        } = this.props;
+
+        const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -40,11 +67,69 @@ class ItemUpdateComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
+                                error={errors.title}
+                                label="Title (*)"
                                 onChange={onTextChange}
-                                value={name}
-                                name="name"
+                                value={title}
+                                name="title"
+                                type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please describe your event"
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            {typeOf === EVENT_ITEM_TYPE_OF &&
+                                <BootstrapSingleSelect
+                                    borderColour="border-primary"
+                                    label="Event Type (*)"
+                                    name="eventTypeOf"
+                                    defaultOptionLabel="Please select the event type."
+                                    options={eventTypeOfOptions}
+                                    value={eventTypeOf}
+                                    error={errors.eventTypeOf}
+                                    onSelectChange={onSelectChange}
+                                />
+                            }
+                            {isOtherEventTypeOf &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.eventTypeOfOther}
+                                    label="Event Type - Other (*)"
+                                    onChange={onTextChange}
+                                    value={eventTypeOfOther}
+                                    name="eventTypeOfOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapDatePicker
+                                label="Date (*)"
+                                name="date"
+                                dateObj={date}
+                                onTimeChange={onDateTimeChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.date}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.location}
+                                label="Location (*)"
+                                onChange={onTextChange}
+                                value={location}
+                                name="location"
                                 type="text"
                             />
 

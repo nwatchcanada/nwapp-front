@@ -1,20 +1,31 @@
 import validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
+import {
+   INCIDENT_ITEM_TYPE_OF,
+   EVENT_ITEM_TYPE_OF,
+   CONCERN_ITEM_TYPE_OF,
+   INFORMATION_ITEM_TYPE_OF
+} from "../constants/api";
+
 
 /**
- *  Validator will validate the register form.
+ *  Validator will validate item.
  */
 export function validateInput(data) {
-    let errors = {};
-
-    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
-        errors.name = 'This field is required';
-    }
-
-    return {
-        errors,
-        isValid: isEmpty(errors)
+    if (data.typeOf === INCIDENT_ITEM_TYPE_OF) {
+        return validateIncidentInput(data);
+    } else if (data.typeOf === CONCERN_ITEM_TYPE_OF) {
+        return validateConcernInput(data);
+    } else if (data.typeOf === EVENT_ITEM_TYPE_OF) {
+        return validateEventInput(data);
+    } else if (data.typeOf === INFORMATION_ITEM_TYPE_OF) {
+        return validateInformationInput(data);
+    } else {
+        return {
+            location: 'This field is required',
+            isValid: false
+        }
     }
 }
 

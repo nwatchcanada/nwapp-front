@@ -5,6 +5,12 @@ import Scroll from 'react-scroll';
 import ItemUpdateComponent from "../../../components/items/update/itemUpdateComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateInput } from "../../../validators/itemValidator";
+import {
+   INCIDENT_ITEM_TYPE_OF,
+   EVENT_ITEM_TYPE_OF,
+   CONCERN_ITEM_TYPE_OF,
+   INFORMATION_ITEM_TYPE_OF
+} from "../../../constants/api";
 
 
 class ItemUpdateContainer extends Component {
@@ -21,13 +27,22 @@ class ItemUpdateContainer extends Component {
         const { slug } = this.props.match.params;
 
         this.state = {
-            name: null,
+            slug: slug,
+            title: "",
+            description: "",
+            location: "",
+            eventTypeOf: "",
+            eventTypeOfOption: {},
+            eventTypeOfOther: "",
+            date: new Date(),
+            photos: [],
             errors: {},
             isLoading: false,
-            slug: slug
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
+        this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -40,6 +55,79 @@ class ItemUpdateContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        //TODO: REPLACE THIS CODE WITH API FETCHING CODE.
+        const itemsArray = [{
+            'typeOf': INCIDENT_ITEM_TYPE_OF,
+            'icon': 'fire',
+            'slug': 'argyle',
+            'number': 1,
+            'title': 'Argyle',
+            'description': 'This is the description for argyle.',
+            'location': 'London',
+            'photos': [
+                {
+                    'path': 'Test File #1',
+                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
+                },{
+                    'path': 'Test File #2',
+                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
+                }
+            ],
+            'absoluteUrl': '/item/argyle'
+        },{
+            'typeOf': EVENT_ITEM_TYPE_OF,
+            'icon': 'glass-cheers',
+            'slug': 'byron',
+            'number': 2,
+            'title': 'Byron',
+            'description': 'This is the description for byron.',
+            'eventPrettyEventTypeOf': "Garage Sale",
+            'absoluteUrl': '/item/byron'
+        },{
+            'typeOf': CONCERN_ITEM_TYPE_OF,
+            'icon': 'exclamation-circle',
+            'slug': 'carling',
+            'number': 3,
+            'title': 'Carling',
+            'description': 'This is the description for carling.',
+            'location': 'London',
+            'photos': [
+                {
+                    'path': 'Test File #1',
+                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
+                },{
+                    'path': 'Test File #2',
+                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
+                }
+            ],
+            'absoluteUrl': '/item/carling'
+        },{
+            'typeOf': INFORMATION_ITEM_TYPE_OF,
+            'icon': 'info-circle',
+            'slug': 'darlyn',
+            'number': 4,
+            'title': null,
+            'description': 'What is the contact information for my area coordinator, I need to speak with her, this is in regards to a private matter.',
+            'absoluteUrl': '/item/darlyn'
+        }];
+        for (let i = 0; i < itemsArray.length; i++) {
+            const itemData = itemsArray[i];
+            if (itemData['slug'] === this.state.slug) {
+                this.setState({
+                    'typeOf': itemData.typeOf,
+                    'title': itemData.title,
+                    'slug': itemData.slug,
+                    'number': itemData.number,
+                    'name': itemData.name,
+                    'description': itemData.description,
+                    'location': itemData.location,
+                    'eventPrettyEventTypeOf': itemData.eventPrettyEventTypeOf,
+                    'photos': itemData.photos,
+                    'absoluteUrl': itemData.absoluteUrl,
+                });
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -85,6 +173,20 @@ class ItemUpdateContainer extends Component {
         })
     }
 
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+    }
+
+    onDateTimeChange(dateObj) {
+        this.setState({
+            date: dateObj,
+        })
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -109,12 +211,35 @@ class ItemUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
+        const {
+            slug,
+            title,
+            description,
+            location,
+            eventTypeOf,
+            eventTypeOfOption,
+            eventTypeOfOther,
+            date,
+            photos,
+            errors,
+            isLoading
+        } = this.state;
         return (
             <ItemUpdateComponent
-                name={name}
+                slug={slug}
+                title={title}
+                description={description}
+                location={location}
+                eventTypeOf={eventTypeOf}
+                eventTypeOfOption={eventTypeOfOption}
+                eventTypeOfOther={eventTypeOfOther}
+                date={date}
+                photos={photos}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
+                onDateTimeChange={this.onDateTimeChange}
                 onClick={this.onClick}
             />
         );
