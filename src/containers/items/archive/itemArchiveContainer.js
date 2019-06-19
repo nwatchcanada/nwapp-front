@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemRetrieveComponent from "../../../components/items/retrieve/itemRetrieveComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import ItemArchiveComponent from "../../../components/items/archive/itemArchiveComponent";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
    INCIDENT_ITEM_TYPE_OF,
    EVENT_ITEM_TYPE_OF,
@@ -32,7 +32,6 @@ class ItemRetrieveContainer extends Component {
 
         this.onBack = this.onBack.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onArchiveClick = this.onArchiveClick.bind(this);
     }
 
     /**
@@ -116,9 +115,6 @@ class ItemRetrieveContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -142,19 +138,14 @@ class ItemRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/items/");
+        this.props.history.push("/item/"+this.state.slug);
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/item/"+this.state.slug+"/update");
-    }
-
-    onArchiveClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/item/"+this.state.slug+"/archive");
+        this.props.setFlashMessage("success", "Item has been successfully archived.");
+        this.props.history.push("/items");
     }
 
     /**
@@ -165,12 +156,10 @@ class ItemRetrieveContainer extends Component {
     render() {
 
         return (
-            <ItemRetrieveComponent
+            <ItemArchiveComponent
                 itemData={this.state.itemData}
                 onBack={this.onBack}
                 onClick={this.onClick}
-                onArchiveClick={this.onArchiveClick}
-                flashMessage={this.props.flashMessage}
             />
         );
     }
@@ -179,14 +168,13 @@ class ItemRetrieveContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        flashMessage: store.flashMessageState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         }
     }
 }
