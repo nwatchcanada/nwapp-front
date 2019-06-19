@@ -7,6 +7,7 @@ import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
 import {
    INCIDENT_ITEM_TYPE_OF,
@@ -32,10 +33,14 @@ class ItemUpdateComponent extends Component {
             photos,
             errors,
             isLoading,
-            onTextChange, onDateTimeChange, onSelectChange, onClick
+            onTextChange, onDateTimeChange, onSelectChange, onClick, onDrop, onRemoveUploadClick
         } = this.props;
 
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
+        const isIncidentItemOrConcernItemOrEventItem = typeOf === INCIDENT_ITEM_TYPE_OF || typeOf === CONCERN_ITEM_TYPE_OF || typeOf === EVENT_ITEM_TYPE_OF;
+        const isIncidentItemOrConcernItem = typeOf === INCIDENT_ITEM_TYPE_OF || typeOf === CONCERN_ITEM_TYPE_OF;
+        const isIncidentItemOrEventItem = typeOf === INCIDENT_ITEM_TYPE_OF || typeOf === EVENT_ITEM_TYPE_OF;
+        const isEventItem = typeOf === EVENT_ITEM_TYPE_OF;
 
         return (
             <main id="main" role="main">
@@ -59,21 +64,23 @@ class ItemUpdateComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Update Item</h1>
+                            <h1><i className="fas fa-edit"></i>&nbsp;Update Item</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.title}
-                                label="Title (*)"
-                                onChange={onTextChange}
-                                value={title}
-                                name="title"
-                                type="text"
-                            />
+                            {isIncidentItemOrConcernItemOrEventItem &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.title}
+                                    label="Title (*)"
+                                    onChange={onTextChange}
+                                    value={title}
+                                    name="title"
+                                    type="text"
+                                />
+                            }
 
                             <BootstrapTextarea
                                 name="description"
@@ -87,7 +94,7 @@ class ItemUpdateComponent extends Component {
                                 error={errors.description}
                             />
 
-                            {typeOf === EVENT_ITEM_TYPE_OF &&
+                            {isEventItem &&
                                 <BootstrapSingleSelect
                                     borderColour="border-primary"
                                     label="Event Type (*)"
@@ -112,26 +119,41 @@ class ItemUpdateComponent extends Component {
                                 />
                             }
 
-                            <BootstrapDatePicker
-                                label="Date (*)"
-                                name="date"
-                                dateObj={date}
-                                onTimeChange={onDateTimeChange}
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.date}
-                            />
+                            {isIncidentItemOrEventItem &&
+                                <BootstrapDatePicker
+                                    label="Date (*)"
+                                    name="date"
+                                    dateObj={date}
+                                    onTimeChange={onDateTimeChange}
+                                    datePickerClassName="form-control form-control-lg border"
+                                    divClassName="form-group p-0 col-md-7 mb-4"
+                                    error={errors.date}
+                                />
+                            }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.location}
-                                label="Location (*)"
-                                onChange={onTextChange}
-                                value={location}
-                                name="location"
-                                type="text"
-                            />
+                            {isIncidentItemOrConcernItemOrEventItem &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.location}
+                                    label="Location (*)"
+                                    onChange={onTextChange}
+                                    value={location}
+                                    name="location"
+                                    type="text"
+                                />
+                            }                            
+
+                            {isIncidentItemOrConcernItem &&
+                                <BootstrapMultipleImageUploadAndPreview
+                                    error={errors.photos}
+                                    label="Photos"
+                                    onDrop={onDrop}
+                                    name="photos"
+                                    filesArray={photos}
+                                    onRemoveUploadClick={onRemoveUploadClick}
+                                />
+                            }
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

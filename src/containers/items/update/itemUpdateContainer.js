@@ -9,7 +9,8 @@ import {
    INCIDENT_ITEM_TYPE_OF,
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
-   INFORMATION_ITEM_TYPE_OF
+   INFORMATION_ITEM_TYPE_OF,
+   EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF
 } from "../../../constants/api";
 
 
@@ -44,6 +45,8 @@ class ItemUpdateContainer extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -204,6 +207,70 @@ class ItemUpdateContainer extends Component {
         }
     }
 
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // // For debuging purposes only.
+        // console.log("DEBUG | onDrop | file", file);
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // Append our array.
+        let a = this.state.photos.slice(); //creates the clone of the state
+        a.push(fileWithPreview);
+
+        // // For debugging purposes.
+        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+        // console.log("DEBUG |", a, "\n");
+
+        // Update our local state to update the GUI.
+        this.setState({
+            photos: a
+        })
+    }
+
+    onRemoveUploadClick(e, name) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Iterate through all the photos.
+        const photos = this.state.photos;
+        for (let i = 0; i < photos.length; i++) {
+            let row = photos[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(photos);
+
+            if (row.name === name) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredPhotos = photos.slice(
+                    0, i
+                ).concat(
+                    photos.slice(
+                        i + 1, photos.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    photos: filteredPhotos
+                });
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
+    }
+
 
     /**
      *  Main render function
@@ -213,6 +280,7 @@ class ItemUpdateContainer extends Component {
     render() {
         const {
             slug,
+            typeOf,
             title,
             description,
             location,
@@ -227,10 +295,12 @@ class ItemUpdateContainer extends Component {
         return (
             <ItemUpdateComponent
                 slug={slug}
+                typeOf={typeOf}
                 title={title}
                 description={description}
                 location={location}
                 eventTypeOf={eventTypeOf}
+                eventTypeOfOptions={EVENT_TYPE_CHOICES}
                 eventTypeOfOption={eventTypeOfOption}
                 eventTypeOfOther={eventTypeOfOther}
                 date={date}
@@ -241,6 +311,8 @@ class ItemUpdateContainer extends Component {
                 onSelectChange={this.onSelectChange}
                 onDateTimeChange={this.onDateTimeChange}
                 onClick={this.onClick}
+                onDrop={this.onDrop}
+                onRemoveUploadClick={this.onRemoveUploadClick}
             />
         );
     }
