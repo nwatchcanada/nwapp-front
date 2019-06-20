@@ -47,7 +47,62 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
                     </div>
                 </div>
 
-                
+                <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
+            		<h5>Please select the member to promote.</h5>
+                </div>
+
+                <div className="card-group row">
+
+                    <div className="col-sm-3">
+                        <div className="card bg-light">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    <Link to="#">
+                                        <strong>Rodolfo Martinez</strong>
+                                    </Link>
+                                </h5>
+                                <p className="card-text">1848 Mickleborough Dr<br />
+                                    London, ON<br />
+                                    (519)521-3135
+                                </p>
+                                <button type="button" className="btn btn-primary btn-lg btn-block">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card bg-light">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    <Link to="#">
+                                        <strong>Frank Herbert</strong>
+                                    </Link>
+                                </h5>
+                                <p className="card-text">1234 Dune Street<br />
+                                    London, ON<br />
+                                    (123)123-1234
+                                </p>
+                                <button type="button" className="btn btn-primary btn-lg btn-block">Select</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
+            		<h5>Would you like to add a NEW member?</h5>
+                    <a href="/area-coordinators/add/step-1">
+            		    <button type="button" class="btn btn-lg btn-dark m-3">
+                            <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
+            		    </button>
+                    </a>
+            		<a href="/members/add" target="_blank">
+            		    <button type="button" class="btn btn-lg btn-success m-3">
+            		       <i class="fas fa-external-link-alt"></i>&nbsp;Yes - add a new member
+            		    </button>
+                    </a>
+                </div>
+
+
             </main>
         );
     }

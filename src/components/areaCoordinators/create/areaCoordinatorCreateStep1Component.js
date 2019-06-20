@@ -110,7 +110,7 @@ export default class AreaCoordinatorCreateStep1Component extends Component {
                 </div>
                 <div className="col-md-12 text-center">
                     <h3 className="p-2">- or -</h3>
-                    <a href="/members/add" role="button" target="_blank" className="btn btn-success btn-lg">
+                    <a href="/members/add" role="button" target="_blank">
                         Add New Member&nbsp;<i class="fas fa-external-link-alt"></i>
                     </a>
                 </div>
