@@ -112,7 +112,6 @@ import AreaCoordinatorListInactiveContainer from "./areaCoordinators/areaCoordin
 import AreaCoordinatorSearchContainer from "./areaCoordinators/areaCoordinatorSearchContainer";
 import AreaCoordinatorSearchResultContainer from "./areaCoordinators/areaCoordinatorSearchResultContainer";
 import AreaCoordinatorRetrieveContainer from "./areaCoordinators/areaCoordinatorRetrieveContainer";
-import AreaCoordinatorCreateContainer from "./areaCoordinators/areaCoordinatorCreateContainer";
 import AreaCoordinatorUpdateContainer from "./areaCoordinators/areaCoordinatorUpdateContainer";
 import AreaCoordinatorCreateStep1Container from "./areaCoordinators/create/areaCoordinatorCreateStep1Container";
 import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaCoordinatorCreateStep2Container";
@@ -229,7 +228,6 @@ class AppContainer extends React.Component {
                                 <Route path="/associates/:urlArgument/search-results" exact component={AssociateSearchResultContainer} />
                                 <Route path="/associates/:urlArgument/:slug" exact component={AssociateRetrieveContainer} />
                                 <Route path="/associates/:urlArgument/:slug/update" exact component={AssociateUpdateContainer} />
-                                <Route path="/area-coordinators/add" exact component={AreaCoordinatorCreateContainer} />
                                 <Route path="/area-coordinators/add/step-1" exact component={AreaCoordinatorCreateStep1Container} />
                                 <Route path="/area-coordinators/add/step-2" exact component={AreaCoordinatorCreateStep2Container} />
                                 <Route path="/area-coordinators/add/step-3" exact component={AreaCoordinatorCreateStep3Container} />
