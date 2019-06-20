@@ -116,6 +116,7 @@ import AreaCoordinatorCreateContainer from "./areaCoordinators/areaCoordinatorCr
 import AreaCoordinatorUpdateContainer from "./areaCoordinators/areaCoordinatorUpdateContainer";
 import AreaCoordinatorCreateStep1Container from "./areaCoordinators/create/areaCoordinatorCreateStep1Container";
 import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaCoordinatorCreateStep2Container";
+import AreaCoordinatorCreateStep3Container from "./areaCoordinators/create/areaCoordinatorCreateStep3Container";
 
 import StaffListActiveContainer from "./staff/staffListActiveContainer";
 import StaffListInactiveContainer from "./staff/staffListInactiveContainer";
@@ -231,6 +232,7 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinators/add" exact component={AreaCoordinatorCreateContainer} />
                                 <Route path="/area-coordinators/add/step-1" exact component={AreaCoordinatorCreateStep1Container} />
                                 <Route path="/area-coordinators/add/step-2" exact component={AreaCoordinatorCreateStep2Container} />
+                                <Route path="/area-coordinators/add/step-3" exact component={AreaCoordinatorCreateStep3Container} />
                                 <Route path="/area-coordinators/active" exact component={AreaCoordinatorListActiveContainer} />
                                 <Route path="/area-coordinators/inactive" exact component={AreaCoordinatorListInactiveContainer} />
                                 <Route path="/area-coordinators/:urlArgument/search" exact component={AreaCoordinatorSearchContainer} />

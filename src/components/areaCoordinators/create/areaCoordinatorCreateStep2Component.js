@@ -2,14 +2,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-
 
 export default class AreaCoordinatorCreateStep2Component extends Component {
     render() {
-        const { errors, onTextChange, isLoading, onClick } = this.props;
+        const { isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -39,10 +35,7 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
                             <span className="num">2.</span><span className="">Results</span>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Promote</span>
-                        </div>
-                        <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Review</span>
+                            <span className="num">3.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>
@@ -58,14 +51,14 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
                             <div className="card-body">
                                 <h5 className="card-title">
                                     <Link to="#">
-                                        <strong>Rodolfo Martinez</strong>
+                                        <strong><i className="fas fa-home"></i>&nbsp;Rodolfo Martinez</strong>
                                     </Link>
                                 </h5>
                                 <p className="card-text">1848 Mickleborough Dr<br />
                                     London, ON<br />
                                     (519)521-3135
                                 </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block">Select</button>
+                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "rodolfo-martinez") } } disabled={isLoading}>Select</button>
                             </div>
                         </div>
                     </div>
@@ -74,14 +67,30 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
                             <div className="card-body">
                                 <h5 className="card-title">
                                     <Link to="#">
-                                        <strong>Frank Herbert</strong>
+                                        <strong><i className="fas fa-building"></i>&nbsp;Frank Herbert</strong>
                                     </Link>
                                 </h5>
                                 <p className="card-text">1234 Dune Street<br />
                                     London, ON<br />
                                     (123)123-1234
                                 </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block">Select</button>
+                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "frank-herbert") } } disabled={isLoading}>Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card bg-light">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    <Link to="#">
+                                        <strong><i className="fas fa-university"></i>&nbsp;Robert A. Heinlein</strong>
+                                    </Link>
+                                </h5>
+                                <p className="card-text">4567 Startship Trooper Avenue<br />
+                                    Toronto, ON<br />
+                                    (321)123-1234
+                                </p>
+                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "robert-a-heinlein") } } disabled={isLoading}>Select</button>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,6 @@ import Scroll from 'react-scroll';
 
 import AreaCoordinatorCreateStep2Component from "../../../components/areaCoordinators/create/areaCoordinatorCreateStep2Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/areaCoordinatorValidator";
 
 
 class AreaCoordinatorCreateStep2Container extends Component {
@@ -53,7 +52,7 @@ class AreaCoordinatorCreateStep2Container extends Component {
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "AreaCoordinator has been successfully created.");
-        this.props.history.push("/area-coordinators/add/step-2");
+        this.props.history.push("/area-coordinators/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -79,13 +78,15 @@ class AreaCoordinatorCreateStep2Container extends Component {
         })
     }
 
-    onClick(e) {
+    onClick(e, slug) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
+        // Save the slug
+        localStorage.setItem('temp-create-area-coordinator-slug', slug);
+
         this.onSuccessfulSubmissionCallback();
     }
-
 
     /**
      *  Main render function

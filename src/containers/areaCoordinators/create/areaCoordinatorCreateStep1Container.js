@@ -4,7 +4,6 @@ import Scroll from 'react-scroll';
 
 import AreaCoordinatorCreateStep1Component from "../../../components/areaCoordinators/create/areaCoordinatorCreateStep1Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/areaCoordinatorValidator";
 
 
 class AreaCoordinatorCreateStep1Container extends Component {
