@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AreaCoordinatorCreateStep1Component from "../../../components/areaCoordinators/create/areaCoordinatorCreateStep1Component";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class AreaCoordinatorCreateStep1Container extends Component {
@@ -110,11 +109,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AreaCoordinatorCreateStep2Component from "../../../components/areaCoordinators/create/areaCoordinatorCreateStep2Component";
+import AssociateCreateStep2Component from "../../../components/associates/create/associateCreateStep2Component";
 
 
-class AreaCoordinatorCreateStep2Container extends Component {
+class AssociateCreateStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -48,10 +48,9 @@ class AreaCoordinatorCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(areaCoordinator) {
+    onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "AreaCoordinator has been successfully created.");
-        this.props.history.push("/area-coordinators/add/step-3");
+        this.props.history.push("/associates/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -82,7 +81,7 @@ class AreaCoordinatorCreateStep2Container extends Component {
         e.preventDefault();
 
         // Save the slug
-        localStorage.setItem('temp-create-area-coordinator-slug', slug);
+        localStorage.setItem('temp-create-associate-slug', slug);
 
         this.onSuccessfulSubmissionCallback();
     }
@@ -95,7 +94,7 @@ class AreaCoordinatorCreateStep2Container extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <AreaCoordinatorCreateStep2Component
+            <AssociateCreateStep2Component
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -112,11 +111,12 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AreaCoordinatorCreateStep2Container);
+)(AssociateCreateStep2Container);

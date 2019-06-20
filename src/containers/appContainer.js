@@ -104,8 +104,10 @@ import AssociateListInactiveContainer from "./associates/associateListInactiveCo
 import AssociateSearchContainer from "./associates/associateSearchContainer";
 import AssociateSearchResultContainer from "./associates/associateSearchResultContainer";
 import AssociateRetrieveContainer from "./associates/associateRetrieveContainer";
-import AssociateCreateContainer from "./associates/associateCreateContainer";
 import AssociateUpdateContainer from "./associates/associateUpdateContainer";
+import AssociateCreateStep1Container from "./associates/create/associateCreateStep1Container";
+import AssociateCreateStep2Container from "./associates/create/associateCreateStep2Container";
+import AssociateCreateStep3Container from "./associates/create/associateCreateStep3Container";
 
 import AreaCoordinatorListActiveContainer from "./areaCoordinators/areaCoordinatorListActiveContainer";
 import AreaCoordinatorListInactiveContainer from "./areaCoordinators/areaCoordinatorListInactiveContainer";
@@ -221,7 +223,9 @@ class AppContainer extends React.Component {
                                 <Route path="/item/:slug" exact component={ItemRetrieveContainer} />
                                 <Route path="/item/:slug/update" exact component={ItemUpdateContainer} />
                                 <Route path="/item/:slug/archive" exact component={ItemArchiveContainer} />
-                                <Route path="/associates/add" exact component={AssociateCreateContainer} />
+                                <Route path="/associates/add/step-1" exact component={AssociateCreateStep1Container} />
+                                <Route path="/associates/add/step-2" exact component={AssociateCreateStep2Container} />
+                                <Route path="/associates/add/step-3" exact component={AssociateCreateStep3Container} />
                                 <Route path="/associates/active" exact component={AssociateListActiveContainer} />
                                 <Route path="/associates/inactive" exact component={AssociateListInactiveContainer} />
                                 <Route path="/associates/:urlArgument/search" exact component={AssociateSearchContainer} />

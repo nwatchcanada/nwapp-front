@@ -103,7 +103,7 @@ class AssociateActiveListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/associates/add" className="d-block link-ndecor" title="Clients">
+                                    <Link to="/associates/add/step-1" className="d-block link-ndecor" title="Clients">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
@@ -144,7 +144,7 @@ class AssociateActiveListComponent extends Component {
                     <div className="col-md-12">
 
                         <h2>
-                            <i className="fas fa-user-check"></i>&nbsp;Active Associates 
+                            <i className="fas fa-user-check"></i>&nbsp;Active Associates
                         </h2>
 
                         <div className="table-responsive">

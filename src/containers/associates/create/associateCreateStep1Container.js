@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AssociateCreateComponent from "../../components/associates/associateCreateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import validateInput from "../../validators/associateValidator";
+import AssociateCreateStep1Component from "../../../components/associates/create/associateCreateStep1Component";
 
 
-class AssociateCreateContainer extends Component {
+class AssociateCreateStep1Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -52,8 +50,7 @@ class AssociateCreateContainer extends Component {
 
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Associate has been successfully created.");
-        this.props.history.push("/associates/active");
+        this.props.history.push("/associates/add/step-2");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -83,17 +80,7 @@ class AssociateCreateContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        this.onSuccessfulSubmissionCallback();
     }
 
 
@@ -105,7 +92,7 @@ class AssociateCreateContainer extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <AssociateCreateComponent
+            <AssociateCreateStep1Component
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -123,9 +110,6 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
     }
 }
 
@@ -133,4 +117,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AssociateCreateContainer);
+)(AssociateCreateStep1Container);
