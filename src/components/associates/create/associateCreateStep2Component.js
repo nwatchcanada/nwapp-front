@@ -41,7 +41,7 @@ export default class AssociateCreateStep2Component extends Component {
                 </div>
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Please select the member to promote.</h5>
+            		<h5>Please select the area coordinator to promote.</h5>
                 </div>
 
                 <div className="card-group row">
@@ -98,15 +98,15 @@ export default class AssociateCreateStep2Component extends Component {
                 </div>
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Would you like to add a NEW member?</h5>
+            		<h5>Would you like to add a NEW area coordinator?</h5>
                     <a href="/associates/add/step-1">
             		    <button type="button" class="btn btn-lg btn-dark m-3">
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
             		    </button>
                     </a>
-            		<a href="/members/add" target="_blank">
+            		<a href="/area-coordinators/add/step-1" target="_blank">
             		    <button type="button" class="btn btn-lg btn-success m-3">
-            		       <i class="fas fa-external-link-alt"></i>&nbsp;Yes - add a new member
+            		       <i class="fas fa-external-link-alt"></i>&nbsp;Yes - add a new area coordinator
             		    </button>
                     </a>
                 </div>

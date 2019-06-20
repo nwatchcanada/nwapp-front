@@ -81,7 +81,7 @@ export default class AssociateCreateStep3Component extends Component {
                         </h2>
 
                         <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before promoting the member to become an associate:</strong></p>
+                        <p><strong>Please confirm these details before promoting the area coordinator to become an associate:</strong></p>
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
