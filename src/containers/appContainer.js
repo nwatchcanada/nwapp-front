@@ -110,6 +110,7 @@ import AssociateUpdateContainer from "./associates/associateUpdateContainer";
 import AssociateCreateStep1Container from "./associates/create/associateCreateStep1Container";
 import AssociateCreateStep2Container from "./associates/create/associateCreateStep2Container";
 import AssociateCreateStep3Container from "./associates/create/associateCreateStep3Container";
+import AssociateDemoteContainer from "./associates/demote/associateDemoteContainer";
 
 import AreaCoordinatorListActiveContainer from "./areaCoordinators/areaCoordinatorListActiveContainer";
 import AreaCoordinatorListInactiveContainer from "./areaCoordinators/areaCoordinatorListInactiveContainer";
@@ -238,6 +239,7 @@ class AppContainer extends React.Component {
                                 <Route path="/associates/:urlArgument/search-results" exact component={AssociateSearchResultContainer} />
                                 <Route path="/associates/:urlArgument/:slug" exact component={AssociateRetrieveContainer} />
                                 <Route path="/associates/:urlArgument/:slug/update" exact component={AssociateUpdateContainer} />
+                                <Route path="/associates/:urlArgument/:slug/demote" exact component={AssociateDemoteContainer} />
                                 <Route path="/area-coordinators/add/step-1" exact component={AreaCoordinatorCreateStep1Container} />
                                 <Route path="/area-coordinators/add/step-2" exact component={AreaCoordinatorCreateStep2Container} />
                                 <Route path="/area-coordinators/add/step-3" exact component={AreaCoordinatorCreateStep3Container} />

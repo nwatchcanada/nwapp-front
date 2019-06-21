@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../flashMessageComponent";
 
 class AssociateRetrieveComponent extends Component {
     render() {
-        const { urlArgument, onClick, onBack, flashMessage } = this.props;
+        const { urlArgument, slug, onClick, onBack, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -117,6 +117,18 @@ class AssociateRetrieveComponent extends Component {
                                             className="badge badge-info badge-lg">ASP.net</span> <span
                                             className="badge badge-info badge-lg">Android</span> <span
                                             className="badge badge-info badge-lg">jQuery</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" className="bg-light">Available choices</th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <Link to={`/associates/${urlArgument}/${slug}/demote`}>
+                                                Demote&nbsp;<i className="fas fa-chevron-right"></i>
+                                            </Link>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                             </tbody>
