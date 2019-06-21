@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../flashMessageComponent";
 
 class MemberRetrieveComponent extends Component {
     render() {
-        const { urlArgument, onClick, onBack, flashMessage } = this.props;
+        const { urlArgument, slug, onClick, onBack, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@ class MemberRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Member</Link>
+                            <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-users"></i>&nbsp;Argyle
@@ -117,6 +117,21 @@ class MemberRetrieveComponent extends Component {
                                             className="badge badge-info badge-lg">ASP.net</span> <span
                                             className="badge badge-info badge-lg">Android</span> <span
                                             className="badge badge-info badge-lg">jQuery</span>
+                                </td>
+                            </tr>
+                            <tr className="bg-dark">
+                                <th scope="row" colSpan="2" className="text-light">Functionality</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" className="bg-light">Available choices</th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <Link to={`/members/${urlArgument}/${slug}/promote/step-1`}>
+                                                Promote&nbsp;<i className="fas fa-chevron-right"></i>
+                                            </Link>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                             </tbody>

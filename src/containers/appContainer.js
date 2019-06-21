@@ -87,6 +87,8 @@ import MemberCreateStep4Container from "./members/create/memberCreateStep4Contai
 import MemberCreateStep5Container from "./members/create/memberCreateStep5Container";
 import MemberCreateStep6Container from "./members/create/memberCreateStep6Container";
 import MemberUpdateContainer from "./members/memberUpdateContainer";
+import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Container";
+import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
 
 import ItemListContainer from "./items/list/itemListContainer";
 import ItemRetrieveContainer from "./items/retrieve/itemRetrieveContainer";
@@ -213,6 +215,8 @@ class AppContainer extends React.Component {
                                 <Route path="/members/:urlArgument/search-results" exact component={MemberSearchResultContainer} />
                                 <Route path="/members/:urlArgument/:slug" exact component={MemberRetrieveContainer} />
                                 <Route path="/members/:urlArgument/:slug/update" exact component={MemberUpdateContainer} />
+                                <Route path="/members/:urlArgument/:slug/promote/step-1" exact component={MemberPromoteStep1Container} />
+                                <Route path="/members/:urlArgument/:slug/promote/step-2" exact component={MemberPromoteStep2Container} />
                                 <Route path="/items" exact component={ItemListContainer} />
                                 <Route path="/item/add/step-1" exact component={ItemCreateStep1Container} />
                                 <Route path="/item/add/step-2-concern" exact component={ItemCreateStep2ConcernContainer} />
