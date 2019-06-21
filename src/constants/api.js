@@ -276,3 +276,27 @@ export const RESOURCE_TYPE_OF_CHOICES = [
         label: "File"
     }
 ];
+
+
+
+/**
+ *  The reason why a user got demote
+ */
+export const OTHER_DEMOTION_REASON = 1;
+export const SOME_REASON_DEMOTION_REASON = 2;
+export const ANOTHER_REASON_DEMOTION_REASON = 3;
+export const DEMOTION_REASON_CHOICES = [
+    {
+        selectName: "reason",
+        value: SOME_REASON_DEMOTION_REASON,
+        label: "Some reason"
+    },{
+        selectName: "reason",
+        value: ANOTHER_REASON_DEMOTION_REASON,
+        label: "Another reason"
+    },{
+        selectName: "reason",
+        value: OTHER_DEMOTION_REASON,
+        label: "Other"
+    }
+];

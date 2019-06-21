@@ -131,6 +131,11 @@ class AreaCoordinatorRetrieveComponent extends Component {
                                                 Promote&nbsp;<i className="fas fa-chevron-right"></i>
                                             </Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/area-coordinators/${urlArgument}/${slug}/demote`}>
+                                                Demote&nbsp;<i className="fas fa-chevron-right"></i>
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>

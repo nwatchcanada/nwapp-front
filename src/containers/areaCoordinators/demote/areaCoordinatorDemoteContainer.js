@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AreaCoordinatorUpdateComponent from "../../components/areaCoordinators/areaCoordinatorUpdateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import { validateInput } from "../../validators/areaCoordinatorValidator";
+import AreaCoordinatorDemoteComponent from "../../../components/areaCoordinators/demote/areaCoordinatorDemoteComponent";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { DEMOTION_REASON_CHOICES } from "../../../constants/api";
+import { validateDemotionInput } from "../../../validators/areaCoordinatorValidator";
 
 
-class AreaCoordinatorUpdateContainer extends Component {
+class AreaCoordinatorPromoteContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -20,15 +21,18 @@ class AreaCoordinatorUpdateContainer extends Component {
         // fetch the URL argument as follows.
         const { urlArgument, slug } = this.props.match.params;
 
+        // Update state.
         this.state = {
-            name: null,
-            errors: {},
-            isLoading: false,
             urlArgument: urlArgument,
-            slug: slug
+            slug: slug,
+            errors: {},
+            reason: "",
+            reasonOptions: DEMOTION_REASON_CHOICES,
+            reasonOther: "",
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -57,10 +61,13 @@ class AreaCoordinatorUpdateContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(areaCoordinator) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "AreaCoordinator has been successfully updated.");
-        this.props.history.push("/area-coordinators/"+this.state.urlArgument+"/"+this.state.slug);
+    onSuccessfulSubmissionCallback(member) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        this.setState({
+            isLoading: true,
+        })
+        this.props.setFlashMessage("success", "Area coordinator has been successfully demoted.");
+        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -86,12 +93,21 @@ class AreaCoordinatorUpdateContainer extends Component {
         })
     }
 
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateDemotionInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -110,15 +126,25 @@ class AreaCoordinatorUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors, urlArgument, slug, } = this.state;
+        const memberData = {
+            'slug': 'Argyle',
+            'number': 1,
+            'name': 'Argyle',
+            'absoluteUrl': '/member/argyle'
+        };
         return (
-            <AreaCoordinatorUpdateComponent
-                urlArgument={urlArgument}
-                slug={slug}
-                name={name}
-                errors={errors}
-                onTextChange={this.onTextChange}
+            <AreaCoordinatorDemoteComponent
+                urlArgument={this.state.urlArgument}
+                slug={this.state.slug}
+                reason={this.state.reason}
+                reasonOptions={this.state.reasonOptions}
+                reasonOther={this.state.reasonOther}
+                memberData={memberData}
+                onBack={this.onBack}
                 onClick={this.onClick}
+                errors={this.state.errors}
+                onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
             />
         );
     }
@@ -142,4 +168,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AreaCoordinatorUpdateContainer);
+)(AreaCoordinatorPromoteContainer);
