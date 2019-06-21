@@ -14,13 +14,16 @@ import { GENDER_CHOICES } from "../../../constants/api";
 export default class StaffCreateStep1Component extends Component {
     render() {
         const {
-            firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetDirection, city, province, country, postal, emergencyFullName,
+            firstName, lastName, dateOfBirth, gender, description, howHear, howHearOptions, phone, mobile, workEmail, personalEmail,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, city, province, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalInformation, accountType,
             password, repeatPassword, isActive,
             errors, isLoading,
             onTextChange, onClick, onDateOfBirthChange, onSelectChange
         } = this.props;
+
+        const isOtherStreetTypeSelected = streetType === 'Other';
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -114,6 +117,157 @@ export default class StaffCreateStep1Component extends Component {
                                 onChange={onTextChange}
                                 error={errors.description}
                             />
+
+                            <BootstrapSingleSelect
+                                label="How did you hear about us? (*)"
+                                name="howHear"
+                                defaultOptionLabel="Please select how you hear about us."
+                                options={howHearOptions}
+                                value={howHear}
+                                error={errors.howHear}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <h4>Contact Information</h4>
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.phone}
+                                label="Phone (*)"
+                                onChange={onTextChange}
+                                value={phone}
+                                name="phone"
+                                type="text"
+                                placeholder="(xxx) xxx-xxxx"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.mobile}
+                                label="Mobile (*)"
+                                onChange={onTextChange}
+                                value={mobile}
+                                name="mobile"
+                                type="text"
+                                placeholder="(xxx) xxx-xxxx"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.workEmail}
+                                label="Work Email (*)"
+                                onChange={onTextChange}
+                                value={workEmail}
+                                name="workEmail"
+                                type="text"
+                                placeholder="Email Address"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.personalEmail}
+                                label="Personal Email (*)"
+                                onChange={onTextChange}
+                                value={personalEmail}
+                                name="personalEmail"
+                                type="text"
+                                placeholder="Email Address"
+                            />
+
+                            <h4>Street Address</h4>
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetNumber}
+                                label="Street Number (*)"
+                                onChange={onTextChange}
+                                value={streetNumber}
+                                name="streetNumber"
+                                type="text"
+                                placeholder=""
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetName}
+                                label="Street Number (*)"
+                                onChange={onTextChange}
+                                value={streetName}
+                                name="streetName"
+                                type="text"
+                                placeholder=""
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Street Type (*)"
+                                name="streetType"
+                                defaultOptionLabel="Please select a street type."
+                                options={streetTypeOptions}
+                                value={streetType}
+                                error={errors.streetType}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {isOtherStreetTypeSelected &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.streetTypeOther}
+                                    label="Street Type Other (*)"
+                                    onChange={onTextChange}
+                                    value={streetTypeOther}
+                                    name="streetTypeOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
+                                borderColour="border-successs"
+                                label="Street Direction"
+                                name="streetDirection"
+                                defaultOptionLabel="Please select a street direction."
+                                options={streetDirectionOptions}
+                                value={streetDirection}
+                                error={errors.streetDirection}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.city}
+                                label="City (*)"
+                                onChange={onTextChange}
+                                value={streetName}
+                                name="city"
+                                type="text"
+                                placeholder=""
+                            />
+
+                            { /* TODO: PROVINCE + COUNTRY */ }
+
+
+
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.postal}
+                                label="Postal (*)"
+                                onChange={onTextChange}
+                                value={postal}
+                                name="postal"
+                                type="text"
+                                placeholder=""
+                            />
+
 
 
                             <div className="form-group">

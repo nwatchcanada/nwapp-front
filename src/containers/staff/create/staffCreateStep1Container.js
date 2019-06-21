@@ -9,6 +9,8 @@ import {
     // localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
+import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 
 class StaffCreateStep1Container extends Component {
@@ -26,7 +28,7 @@ class StaffCreateStep1Container extends Component {
             gender: "",
             description: "",
             tags: [], // IMPLEMENT
-            howHear: [],
+            howHear: "",
             phone: "",
             mobile: "",
             workEmail: "",
@@ -34,7 +36,10 @@ class StaffCreateStep1Container extends Component {
             streetNumber: "",
             streetName: "",
             streetType: "",
+            streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
+            streetTypeOther: "",
             streetDirection: "",
+            streetDirectionOptions: STREET_DIRECTION_CHOICES,
             city: "",
             province: "",
             country: "",
@@ -159,11 +164,24 @@ class StaffCreateStep1Container extends Component {
     render() {
         const {
             firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetDirection, city, province, country, postal, emergencyFullName,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, city, province, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalInformation, accountType,
             password, repeatPassword, isActive,
             errors, isLoading
         } = this.state;
+
+        const howHearData = {
+            results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                name: 'Word of mouth',
+                slug: 'word-of-mouth'
+            },{
+                name: 'Internet',
+                slug: 'internet'
+            }]
+        };
+
+        const howHearOptions = getHowHearReactSelectOptions(howHearData, "howHear");
+
         return (
             <StaffCreateStep1Component
                 firstName={firstName}
@@ -172,6 +190,7 @@ class StaffCreateStep1Container extends Component {
                 gender={gender}
                 description={description}
                 howHear={howHear}
+                howHearOptions={howHearOptions}
                 phone={phone}
                 mobile={mobile}
                 workEmail={workEmail}
@@ -179,7 +198,10 @@ class StaffCreateStep1Container extends Component {
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
+                streetTypeOptions={streetTypeOptions}
+                streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
+                streetDirectionOptions={streetDirectionOptions}
                 city={city}
                 province={province}
                 country={country}
