@@ -300,3 +300,21 @@ export const DEMOTION_REASON_CHOICES = [
         label: "Other"
     }
 ];
+
+
+/**
+ *  The associate demotion roles.
+ */
+export const ASSOCIATE_TO_AREA_COORDINATOR_DEMOTION_ROLE = 1;
+export const ASSOCIATE_TO_MEMBER_DEMOTION_ROLE = 2;
+export const ASSOCIATE_DEMOTION_ROLE_CHOICES = [
+    {
+        selectName: "role",
+        value: ASSOCIATE_TO_AREA_COORDINATOR_DEMOTION_ROLE,
+        label: "Area Coordinator"
+    },{
+        selectName: "role",
+        value: ASSOCIATE_TO_MEMBER_DEMOTION_ROLE,
+        label: "Member"
+    }
+];

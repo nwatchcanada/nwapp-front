@@ -4,8 +4,10 @@ import Scroll from 'react-scroll';
 
 import AssociateDemoteComponent from "../../../components/associates/demote/associateDemoteComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { DEMOTION_REASON_CHOICES } from "../../../constants/api";
-import { validateDemotionInput } from "../../../validators/areaCoordinatorValidator";
+import {
+    DEMOTION_REASON_CHOICES, ASSOCIATE_DEMOTION_ROLE_CHOICES
+} from "../../../constants/api";
+import { validateDemotionInput } from "../../../validators/associateValidator";
 
 
 class AssociatePromoteContainer extends Component {
@@ -26,6 +28,8 @@ class AssociatePromoteContainer extends Component {
             urlArgument: urlArgument,
             slug: slug,
             errors: {},
+            role: "",
+            roleOptions: ASSOCIATE_DEMOTION_ROLE_CHOICES,
             reason: "",
             reasonOptions: DEMOTION_REASON_CHOICES,
             reasonOther: "",
@@ -136,6 +140,8 @@ class AssociatePromoteContainer extends Component {
             <AssociateDemoteComponent
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
+                role={this.state.role}
+                roleOptions={this.state.roleOptions}
                 reason={this.state.reason}
                 reasonOptions={this.state.reasonOptions}
                 reasonOther={this.state.reasonOther}

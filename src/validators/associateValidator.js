@@ -26,6 +26,9 @@ export default function validateInput(data) {
 export function validateDemotionInput(data) {
     let errors = {};
 
+    if (data.role === undefined || data.role === null || data.role === "") {
+        errors.role = 'This field is required';
+    }
     if (data.reason === undefined || data.reason === null || data.reason === "") {
         errors.reason = 'This field is required';
     } else {

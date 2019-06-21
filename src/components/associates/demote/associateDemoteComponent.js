@@ -13,7 +13,7 @@ export default class AssociateDemoteComponent extends Component {
     render() {
         const {
             urlArgument, slug, onClick, isLoading, errors, onTextChange,
-            reason, reasonOptions, reasonOther, onSelectChange
+            role, roleOptions, reason, reasonOptions, reasonOther, onSelectChange
         } = this.props;
         const isOtherReason = reason === OTHER_DEMOTION_REASON;
         return (
@@ -45,6 +45,16 @@ export default class AssociateDemoteComponent extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapSingleSelect
+                                label="Demotion Role (*)"
+                                name="role"
+                                defaultOptionLabel="Please select the role."
+                                options={roleOptions}
+                                value={role}
+                                error={errors.role}
+                                onSelectChange={onSelectChange}
+                            />
 
                             <BootstrapSingleSelect
                                 label="Reason (*)"
