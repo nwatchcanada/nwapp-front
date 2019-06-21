@@ -69,6 +69,12 @@ export default function validateInput(data) {
     if (data.accountType === undefined || data.accountType === null || data.accountType === "") {
         errors.accountType = 'This field is required';
     }
+    if (data.password === undefined || data.password === null || data.password === "") {
+        errors.password = 'This field is required';
+    }
+    if (data.repeatPassword === undefined || data.repeatPassword === null || data.repeatPassword === "") {
+        errors.repeatPassword = 'This field is required';
+    }
 
     return {
         errors,

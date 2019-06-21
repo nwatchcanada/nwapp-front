@@ -360,6 +360,30 @@ export default class StaffCreateStep1Component extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.password}
+                                label="Password"
+                                onChange={onTextChange}
+                                value={password}
+                                name="password"
+                                type="password"
+                                placeholder=""
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.repeatPassword}
+                                label="Repeat Password"
+                                onChange={onTextChange}
+                                value={repeatPassword}
+                                name="repeatPassword"
+                                type="repeatPassword"
+                                placeholder=""
+                            />
+
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check"></i>&nbsp;Submit
