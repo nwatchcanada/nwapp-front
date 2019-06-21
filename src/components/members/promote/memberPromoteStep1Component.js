@@ -26,6 +26,18 @@ export default class MemberPromoteStep1Component extends Component {
                 </nav>
 
                 <h1><i className="fas fa-star"></i>&nbsp;Promote Member</h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey active">
+                            <span className="num">1.</span><span className="">Selection</span>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <span className="num">2.</span><span className="">Review</span>
+                        </div>
+                    </div>
+                </div>
+
                 <h5>Please select what the promotion is.</h5>
 
                 <div className="card-group row">

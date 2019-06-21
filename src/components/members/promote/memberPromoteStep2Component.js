@@ -26,6 +26,20 @@ export default class MemberPromoteStep2Component extends Component {
                 </nav>
 
                 <h1><i className="fas fa-star"></i>&nbsp;Promote Member</h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <span className="num">1.</span><span className="">
+                                <Link to={`/members/${urlArgument}/${slug}/promote/step-1`}>Selection</Link>
+                            </span>
+                        </div>
+                        <div id="step-2" className="st-grey active">
+                            <span className="num">2.</span><span className="">Review</span>
+                        </div>
+                    </div>
+                </div>
+
                 <h5>Please confirm before submitting the promotion.</h5>
 
                 <div className="jumbotron">
