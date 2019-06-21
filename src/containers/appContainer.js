@@ -130,8 +130,9 @@ import StaffListInactiveContainer from "./staff/staffListInactiveContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
 import StaffSearchResultContainer from "./staff/staffSearchResultContainer";
 import StaffRetrieveContainer from "./staff/staffRetrieveContainer";
-import StaffCreateContainer from "./staff/staffCreateContainer";
 import StaffUpdateContainer from "./staff/staffUpdateContainer";
+import StaffCreateStep1Container from "./staff/create/staffCreateStep1Container";
+import StaffCreateStep2Container from "./staff/create/staffCreateStep2Container";
 
 import TaskListActiveContainer from "./tasks/taskListActiveContainer";
 import TaskListInactiveContainer from "./tasks/taskListInactiveContainer";
@@ -253,7 +254,8 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinators/:urlArgument/:slug/update" exact component={AreaCoordinatorUpdateContainer} />
                                 <Route path="/area-coordinators/:urlArgument/:slug/promote" exact component={AreaCoordinatorPromoteContainer} />
                                 <Route path="/area-coordinators/:urlArgument/:slug/demote" exact component={AreaCoordinatorDemoteContainer} />
-                                <Route path="/staff/add" exact component={StaffCreateContainer} />
+                                <Route path="/staff/add/step-1" exact component={StaffCreateStep1Container} />
+                                <Route path="/staff/add/step-2" exact component={StaffCreateStep2Container} />
                                 <Route path="/staff/active" exact component={StaffListActiveContainer} />
                                 <Route path="/staff/inactive" exact component={StaffListInactiveContainer} />
                                 <Route path="/staff/:urlArgument/search" exact component={StaffSearchContainer} />

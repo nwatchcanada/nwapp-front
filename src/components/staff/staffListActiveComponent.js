@@ -104,7 +104,7 @@ class StaffActiveListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/staff/add" className="d-block link-ndecor" title="Clients">
+                                    <Link to="/staff/add/step-1" className="d-block link-ndecor" title="Clients">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
@@ -144,7 +144,7 @@ class StaffActiveListComponent extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h2>
-                            <i className="fas fa-user-check"></i>&nbsp;Active Staff 
+                            <i className="fas fa-user-check"></i>&nbsp;Active Staff
                         </h2>
                         <div className="table-responsive">
                             <table className="table table-striped">

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import StaffCreateComponent from "../../components/staff/staffCreateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import validateInput from "../../validators/staffValidator";
+import StaffCreateStep2Component from "../../../components/staff/create/staffCreateStep2Component";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import validateInput from "../../../validators/staffValidator";
 
 
-class StaffCreateContainer extends Component {
+class StaffCreateStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -105,7 +105,7 @@ class StaffCreateContainer extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <StaffCreateComponent
+            <StaffCreateStep2Component
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -133,4 +133,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(StaffCreateContainer);
+)(StaffCreateStep2Container);
