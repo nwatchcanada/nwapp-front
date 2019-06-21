@@ -8,18 +8,20 @@ import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
-import { GENDER_CHOICES } from "../../../constants/api";
+import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect'
+import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect'
+import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../constants/api";
 
 
 export default class StaffCreateStep1Component extends Component {
     render() {
         const {
             firstName, lastName, dateOfBirth, gender, description, howHear, howHearOptions, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, city, province, country, postal, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalInformation, accountType,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, country, region, postal, emergencyFullName,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive,
             errors, isLoading,
-            onTextChange, onClick, onDateOfBirthChange, onSelectChange
+            onTextChange, onClick, onDateOfBirthChange, onSelectChange, onCountryChange, onRegionChange,
         } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
@@ -146,7 +148,7 @@ export default class StaffCreateStep1Component extends Component {
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-success"
                                 error={errors.mobile}
-                                label="Mobile (*)"
+                                label="Mobile"
                                 onChange={onTextChange}
                                 value={mobile}
                                 name="mobile"
@@ -242,19 +244,35 @@ export default class StaffCreateStep1Component extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.city}
-                                label="City (*)"
+                                error={errors.locality}
+                                label="Locality (*)"
                                 onChange={onTextChange}
-                                value={streetName}
-                                name="city"
+                                value={locality}
+                                name="locality"
                                 type="text"
                                 placeholder=""
                             />
 
-                            { /* TODO: PROVINCE + COUNTRY */ }
-
-
-
+                            <BootstrapCountrySelect
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.country}
+                                label="Country (*)"
+                                value={country}
+                                onChange={onCountryChange}
+                                priorityOptions={["CA", "US", "MX"]}
+                                name="country"
+                            />
+                            <BootstrapRegionSelect
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.region}
+                                label="Province / state (*)"
+                                country={country}
+                                value={region}
+                                onChange={onRegionChange}
+                                name="region"
+                            />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
@@ -268,7 +286,79 @@ export default class StaffCreateStep1Component extends Component {
                                 placeholder=""
                             />
 
+                            <h4>Emergency Contact</h4>
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.emergencyFullName}
+                                label="Emergency Full Name"
+                                onChange={onTextChange}
+                                value={emergencyFullName}
+                                name="emergencyFullName"
+                                type="text"
+                                placeholder=""
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.emergencyRelationship}
+                                label="Emergency Relationship"
+                                onChange={onTextChange}
+                                value={emergencyRelationship}
+                                name="emergencyRelationship"
+                                type="text"
+                                placeholder=""
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.emergencyTelephone}
+                                label="Emergency Telephone"
+                                onChange={onTextChange}
+                                value={emergencyTelephone}
+                                name="emergencyTelephone"
+                                type="text"
+                                placeholder=""
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.emergencyAlternativeTelephone}
+                                label="Emergency Alternative Telephone"
+                                onChange={onTextChange}
+                                value={emergencyAlternativeTelephone}
+                                name="emergencyAlternativeTelephone"
+                                type="text"
+                                placeholder=""
+                            />
+
+                            <h4>Account</h4>
+
+                            <BootstrapTextarea
+                                name="additionalComments"
+                                borderColour="border-success"
+                                label="Additional Comment(s)"
+                                placeholder="Please add any additional comments"
+                                rows="5"
+                                value={additionalComments}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.additionalComments}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Account Type (*)"
+                                name="accountType"
+                                defaultOptionLabel="Please select the account type."
+                                options={TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES}
+                                value={accountType}
+                                error={errors.accountType}
+                                onSelectChange={onSelectChange}
+                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

@@ -52,12 +52,22 @@ export default function validateInput(data) {
             }
         }
     }
-    if (data.city === undefined || data.city === null || validator.isEmpty(data.city) || data.city === "") {
-        errors.city = 'This field is required';
+    if (data.locality === undefined || data.locality === null || validator.isEmpty(data.locality) || data.locality === "") {
+        errors.locality = 'This field is required';
     }
-    //TODO: COUNTRY + PROVINCE
+    if (data.region === undefined || data.region === null || validator.isEmpty(data.region) || data.region === "") {
+        errors.region = 'This field is required';
+    }
+    if (data.country === undefined || data.country === null || validator.isEmpty(data.country) || data.country === "") {
+        errors.country = 'This field is required';
+    }
     if (data.postal === undefined || data.postal === null || validator.isEmpty(data.postal) || data.postal === "") {
         errors.postal = 'This field is required';
+    }
+
+    // Account
+    if (data.accountType === undefined || data.accountType === null || data.accountType === "") {
+        errors.accountType = 'This field is required';
     }
 
     return {

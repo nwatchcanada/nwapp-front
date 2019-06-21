@@ -35,27 +35,27 @@ export const GROUP_MEMBERSHIP_CHOICES = [
     {
         selectName: "group",
         value: EXECUTIVE_GROUP_ID,
-        label: "Aquaponics"
+        label: "Executive"
     },{
         selectName: "group",
         value: MANAGEMENT_GROUP_ID,
-        label: "Hydroponics"
+        label: "Manager"
     },{
         selectName: "group",
         value: FRONTLINE_STAFF_GROUP_ID,
-        label: "Aquaculture"
+        label: "Frontline Staff"
     },{
         selectName: "group",
         value: ASSOCIATE_GROUP_ID,
-        label: "Aquaculture"
+        label: "Associate"
     },{
         selectName: "group",
         value: AREA_COORDINATOR_GROUP_ID,
-        label: "Aquaculture"
+        label: "Area Coordinator"
     },{
         selectName: "group",
         value: MEMBER_GROUP_ID,
-        label: "Aquaculture"
+        label: "Member"
     }
 ];
 
@@ -340,5 +340,21 @@ export const GENDER_CHOICES = [
         selectName: "gender",
         value: PREFER_NOT_TO_SAY_GENDER,
         label: "Prefer not to say"
+    }
+];
+
+
+/**
+ *  The tenant account roles.
+ */
+export const TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES = [
+    {
+        selectName: "accountType",
+        value: MANAGEMENT_GROUP_ID,
+        label: "Management"
+    },{
+        selectName: "accountType",
+        value: FRONTLINE_STAFF_GROUP_ID,
+        label: "Frontline Staff"
     }
 ];

@@ -40,16 +40,16 @@ class StaffCreateStep1Container extends Component {
             streetTypeOther: "",
             streetDirection: "",
             streetDirectionOptions: STREET_DIRECTION_CHOICES,
-            city: "",
-            province: "",
+            locality: "",
+            region: "",
             country: "",
             postal: "",
             emergencyFullName: "",
             emergencyRelationship: "",
             emergencyTelephone: "",
             emergencyAlternativeTelephone: "",
-            additionalInformation: "",
-            accountType: [],
+            additionalComments: "",
+            accountType: "",
             password: "",
             repeatPassword: "",
             isActive: true,
@@ -61,6 +61,8 @@ class StaffCreateStep1Container extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onDateOfBirthChange = this.onDateOfBirthChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onCountryChange = this.onCountryChange.bind(this);
+        this.onRegionChange = this.onRegionChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -138,6 +140,18 @@ class StaffCreateStep1Container extends Component {
         localStorageSetObjectOrArrayItem('temp-staff-create-dateOfBirth', dateObj);
     }
 
+    onCountryChange(value) {
+        if (value === null || value === undefined || value === '') {
+            this.setState({ country: null, region: null })
+        } else {
+            this.setState({ country: value, region: null })
+        }
+    }
+
+    onRegionChange(value) {
+        this.setState({ region: value })
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -155,7 +169,6 @@ class StaffCreateStep1Container extends Component {
         }
     }
 
-
     /**
      *  Main render function
      *------------------------------------------------------------
@@ -164,8 +177,8 @@ class StaffCreateStep1Container extends Component {
     render() {
         const {
             firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, city, province, country, postal, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalInformation, accountType,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive,
             errors, isLoading
         } = this.state;
@@ -202,15 +215,15 @@ class StaffCreateStep1Container extends Component {
                 streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
                 streetDirectionOptions={streetDirectionOptions}
-                city={city}
-                province={province}
+                locality={locality}
+                region={region}
                 country={country}
                 postal={postal}
                 emergencyFullName={emergencyFullName}
                 emergencyRelationship={emergencyRelationship}
                 emergencyTelephone={emergencyTelephone}
                 emergencyAlternativeTelephone={emergencyAlternativeTelephone}
-                additionalInformation={additionalInformation}
+                additionalComments={additionalComments}
                 accountType={accountType}
                 password={password}
                 repeatPassword={repeatPassword}
@@ -220,6 +233,8 @@ class StaffCreateStep1Container extends Component {
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onDateOfBirthChange={this.onDateOfBirthChange}
+                onCountryChange={this.onCountryChange}
+                onRegionChange={this.onRegionChange}
                 onClick={this.onClick}
             />
         );
