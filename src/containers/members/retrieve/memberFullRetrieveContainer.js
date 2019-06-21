@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberRetrieveComponent from "../../components/members/memberRetrieveComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import MemberFullRetrieveComponent from "../../../components/members/retrieve/memberFullRetrieveComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class MemberRetrieveContainer extends Component {
+class MemberFullRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -92,7 +92,7 @@ class MemberRetrieveContainer extends Component {
             'absoluteUrl': '/member/argyle'
         };
         return (
-            <MemberRetrieveComponent
+            <MemberFullRetrieveComponent
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 memberData={memberData}
@@ -123,4 +123,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberRetrieveContainer);
+)(MemberFullRetrieveContainer);

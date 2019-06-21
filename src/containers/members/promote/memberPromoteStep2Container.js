@@ -89,7 +89,7 @@ class MemberPromoteStep2Container extends Component {
             isLoading: true,
         })
         this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/full");
     }
 
 

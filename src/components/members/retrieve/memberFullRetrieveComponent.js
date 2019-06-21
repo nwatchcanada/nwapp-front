@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../flashMessageComponent";
+import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
-class MemberRetrieveComponent extends Component {
+export default class MemberFullRetrieveComponent extends Component {
     render() {
         const { urlArgument, slug, onClick, onBack, flashMessage } = this.props;
         return (
@@ -18,14 +18,28 @@ class MemberRetrieveComponent extends Component {
                             <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-users"></i>&nbsp;Argyle
+                            <i className="fas fa-user"></i>&nbsp;Argyle
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-users"></i>&nbsp;Argyle</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;View Member</h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <Link to={`/members/${urlArgument}/${slug}`}>
+                                <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
+                            </Link>
+                        </div>
+                        <div id="step-2" className="st-grey active">
+                            <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <p><strong>Please confirm these details before adding the residential client:</strong></p>
@@ -155,5 +169,3 @@ class MemberRetrieveComponent extends Component {
         );
     }
 }
-
-export default MemberRetrieveComponent;

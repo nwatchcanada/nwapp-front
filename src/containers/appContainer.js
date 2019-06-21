@@ -77,7 +77,8 @@ import MemberListActiveContainer from "./members/memberListActiveContainer";
 import MemberListInactiveContainer from "./members/memberListInactiveContainer";
 import MemberSearchContainer from "./members/memberSearchContainer";
 import MemberSearchResultContainer from "./members/memberSearchResultContainer";
-import MemberRetrieveContainer from "./members/memberRetrieveContainer";
+import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
+import MemberFullRetrieveContainer from "./members/retrieve/memberFullRetrieveContainer";
 import MemberCreateContainer from "./members/memberCreateContainer";
 import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
 import MemberCreateStep2BizContainer from "./members/create/memberCreateStep2BizContainer";
@@ -216,7 +217,8 @@ class AppContainer extends React.Component {
                                 <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
                                 <Route path="/members/:urlArgument/search" exact component={MemberSearchContainer} />
                                 <Route path="/members/:urlArgument/search-results" exact component={MemberSearchResultContainer} />
-                                <Route path="/members/:urlArgument/:slug" exact component={MemberRetrieveContainer} />
+                                <Route path="/members/:urlArgument/:slug" exact component={MemberLiteRetrieveContainer} />
+                                <Route path="/members/:urlArgument/:slug/full" exact component={MemberFullRetrieveContainer} />
                                 <Route path="/members/:urlArgument/:slug/update" exact component={MemberUpdateContainer} />
                                 <Route path="/members/:urlArgument/:slug/promote/step-1" exact component={MemberPromoteStep1Container} />
                                 <Route path="/members/:urlArgument/:slug/promote/step-2" exact component={MemberPromoteStep2Container} />
