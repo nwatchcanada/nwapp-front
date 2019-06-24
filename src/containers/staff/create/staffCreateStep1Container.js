@@ -106,7 +106,7 @@ class StaffCreateStep1Container extends Component {
     onSuccessfulSubmissionCallback(staff) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Staff has been successfully created.");
-        this.props.history.push("/staff/active");
+        this.props.history.push("/staff/add/step-2");
     }
 
     onFailedSubmissionCallback(errors) {
