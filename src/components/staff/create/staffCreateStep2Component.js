@@ -10,10 +10,11 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 export default class StaffCreateStep2Component extends Component {
     render() {
         const {
-            firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOther, streetDirection, locality, country, region, postal, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive,
+            firstName, lastName, dateOfBirth, description, phone, mobile, workEmail, personalEmail,
+            streetNumber, streetName, streetDirection, locality, country, region, postal, emergencyFullName,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments,
             errors, isLoading, onClick,
+            genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
         } = this.props;
         return (
             <main id="main" role="main">
@@ -79,7 +80,7 @@ export default class StaffCreateStep2Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Gender</th>
-                                    <td>{gender} (TODO)</td>
+                                    <td>{genderLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
@@ -87,7 +88,7 @@ export default class StaffCreateStep2Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">How did you hear about us?</th>
-                                    <td>{howHear} (TODO)</td>
+                                    <td>{howHearLabel}</td>
                                 </tr>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
@@ -125,11 +126,7 @@ export default class StaffCreateStep2Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Street Type</th>
-                                    <td>{streetType}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type (Other)</th>
-                                    <td>{streetTypeOther}</td>
+                                    <td>{streetTypeLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Street Direction</th>
@@ -183,11 +180,11 @@ export default class StaffCreateStep2Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Account Type</th>
-                                    <td>{accountType}</td>
+                                    <td>{accountTypeLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Is active?</th>
-                                    <td>{isActive}</td>
+                                    <td>{isActiveLabel}</td>
                                 </tr>
                             </tbody>
                         </table>

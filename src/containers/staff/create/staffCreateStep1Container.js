@@ -11,6 +11,7 @@ import {
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
+import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../constants/api";
 
 
 class StaffCreateStep1Container extends Component {
@@ -87,6 +88,19 @@ class StaffCreateStep1Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            howHearData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Word of mouth',
+                    slug: 'word-of-mouth'
+                },{
+                    name: 'Internet',
+                    slug: 'internet'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -104,8 +118,51 @@ class StaffCreateStep1Container extends Component {
      */
 
     onSuccessfulSubmissionCallback(staff) {
+        // --- Update the GUI ---
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Staff has been successfully created.");
+
+        // --- Update our STORAGE ---
+        // Gender.
+        for (let i = 0; i < GENDER_CHOICES.length; i++) {
+            let option = GENDER_CHOICES[i];
+            if (this.state.gender === option.value) {
+                localStorage.setItem('temp-staff-create-genderLabel', option.label);
+            }
+        }
+
+        // How did you hear about us?
+        for (let i = 0; i < this.state.howHearData.results.length; i++) {
+            let option = this.state.howHearData.results[i];
+            if (this.state.howHear === option.slug) {
+                localStorage.setItem('temp-staff-create-howHearLabel', option.name);
+            }
+        }
+
+        // Street Type
+        if (this.state.streetType === "Other") {
+            localStorage.setItem('temp-staff-create-streetTypeLabel', this.state.streetTypeOther);
+        } else {
+            localStorage.setItem('temp-staff-create-streetTypeLabel', this.state.streetType);
+        }
+
+        // Account Types
+        for (let i = 0; i < TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES.length; i++) {
+            let option = TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES[i];
+            if (this.state.accountType === option.value) {
+                localStorage.setItem('temp-staff-create-accountTypeLabel', option.label);
+            }
+        }
+
+        // isActive
+        for (let i = 0; i < this.state.isActiveOptions.length; i++) {
+            let option = this.state.isActiveOptions[i];
+            let isSelected = this.state.isActive.toString() === option.value.toString();
+            if (isSelected) {
+                localStorage.setItem('temp-staff-create-isActiveLabel', option.label);
+            }
+        }
+
+        // --- Move to our next page ---
         this.props.history.push("/staff/add/step-2");
     }
 
@@ -221,17 +278,7 @@ class StaffCreateStep1Container extends Component {
             errors, isLoading
         } = this.state;
 
-        const howHearData = {
-            results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                name: 'Word of mouth',
-                slug: 'word-of-mouth'
-            },{
-                name: 'Internet',
-                slug: 'internet'
-            }]
-        };
-
-        const howHearOptions = getHowHearReactSelectOptions(howHearData, "howHear");
+        const howHearOptions = getHowHearReactSelectOptions(this.state.howHearData, "howHear");
 
         return (
             <StaffCreateStep1Component

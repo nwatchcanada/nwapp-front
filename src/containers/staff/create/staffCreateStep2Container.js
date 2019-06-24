@@ -7,7 +7,7 @@ import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/staffValidator";
 import {
     // localStorageGetObjectItem,
-    localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageSetObjectOrArrayItem, localStorageGetDateItem
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
@@ -26,9 +26,11 @@ class StaffCreateStep2Container extends Component {
             lastName: localStorage.getItem("temp-staff-create-lastName"),
             dateOfBirth: localStorageGetDateItem("temp-staff-create-dateOfBirth"),
             gender: parseInt(localStorage.getItem("temp-staff-create-gender")),
+            genderLabel: localStorage.getItem("temp-staff-create-genderLabel"),
             description: localStorage.getItem("temp-staff-create-description"),
             tags: [], // IMPLEMENT
             howHear: localStorage.getItem("temp-staff-create-howHear"),
+            howHearLabel: localStorage.getItem("temp-staff-create-howHearLabel"),
             phone: localStorage.getItem("temp-staff-create-phone"),
             mobile: localStorage.getItem("temp-staff-create-mobile"),
             workEmail: localStorage.getItem("temp-staff-create-workEmail"),
@@ -36,6 +38,7 @@ class StaffCreateStep2Container extends Component {
             streetNumber: localStorage.getItem("temp-staff-create-streetNumber"),
             streetName: localStorage.getItem("temp-staff-create-streetName"),
             streetType: localStorage.getItem("temp-staff-create-streetType"),
+            streetTypeLabel: localStorage.getItem("temp-staff-create-streetTypeLabel"),
             streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
             streetTypeOther: localStorage.getItem("temp-staff-create-streetTypeOther"),
             streetDirection: localStorage.getItem("temp-staff-create-streetDirection"),
@@ -50,9 +53,11 @@ class StaffCreateStep2Container extends Component {
             emergencyAlternativeTelephone: localStorage.getItem("temp-staff-create-emergencyAlternativeTelephone"),
             additionalComments: localStorage.getItem("temp-staff-create-additionalComments"),
             accountType: parseInt(localStorage.getItem("temp-staff-create-accountType")),
+            accountTypeLabel: localStorage.getItem("temp-staff-create-accountTypeLabel"),
             password: localStorage.getItem("temp-staff-create-password"),
             repeatPassword: localStorage.getItem("temp-staff-create-repeatPassword"),
             isActive: localStorage.getItem("temp-staff-create-isActive"),
+            isActiveLabel: localStorage.getItem("temp-staff-create-isActiveLabel"),
             isActiveOption: {},
             isActiveOptions: [{
                 id: 'isActive-true-choice',
@@ -149,6 +154,7 @@ class StaffCreateStep2Container extends Component {
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
+            genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
             errors, isLoading
         } = this.state;
 
@@ -170,8 +176,10 @@ class StaffCreateStep2Container extends Component {
                 lastName={lastName}
                 dateOfBirth={dateOfBirth}
                 gender={gender}
+                genderLabel={genderLabel}
                 description={description}
                 howHear={howHear}
+                howHearLabel={howHearLabel}
                 howHearOptions={howHearOptions}
                 phone={phone}
                 mobile={mobile}
@@ -180,6 +188,7 @@ class StaffCreateStep2Container extends Component {
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
+                streetTypeLabel={streetTypeLabel}
                 streetTypeOptions={streetTypeOptions}
                 streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
@@ -194,9 +203,11 @@ class StaffCreateStep2Container extends Component {
                 emergencyAlternativeTelephone={emergencyAlternativeTelephone}
                 additionalComments={additionalComments}
                 accountType={accountType}
+                accountTypeLabel={accountTypeLabel}
                 password={password}
                 repeatPassword={repeatPassword}
                 isActive={isActive}
+                isActiveLabel={isActiveLabel}
                 isActiveOptions={isActiveOptions}
                 isLoading={isLoading}
                 errors={errors}
