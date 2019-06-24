@@ -15,7 +15,7 @@ export default function validateInput(data) {
     if (data.lastName === undefined || data.lastName === null || validator.isEmpty(data.lastName) || data.lastName === "") {
         errors.lastName = 'This field is required';
     }
-    if (data.dateOfBirth === undefined || data.dateOfBirth === null || validator.isEmpty(data.dateOfBirth) || data.dateOfBirth === "") {
+    if (data.dateOfBirth === undefined || data.dateOfBirth === null || data.dateOfBirth === "") {
         errors.dateOfBirth = 'This field is required';
     }
     if (data.gender === undefined || data.gender === null || data.gender === "") {

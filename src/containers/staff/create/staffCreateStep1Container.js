@@ -22,37 +22,37 @@ class StaffCreateStep1Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: "",
-            lastName: "",
-            dateOfBirth: "",
-            gender: "",
-            description: "",
+            firstName: localStorage.getItem("temp-staff-create-firstName"),
+            lastName: localStorage.getItem("temp-staff-create-lastName"),
+            dateOfBirth: localStorageGetDateItem("temp-staff-create-dateOfBirth"),
+            gender: parseInt(localStorage.getItem("temp-staff-create-gender")),
+            description: localStorage.getItem("temp-staff-create-description"),
             tags: [], // IMPLEMENT
-            howHear: "",
-            phone: "",
-            mobile: "",
-            workEmail: "",
-            personalEmail: "",
-            streetNumber: "",
-            streetName: "",
-            streetType: "",
+            howHear: localStorage.getItem("temp-staff-create-howHear"),
+            phone: localStorage.getItem("temp-staff-create-phone"),
+            mobile: localStorage.getItem("temp-staff-create-mobile"),
+            workEmail: localStorage.getItem("temp-staff-create-workEmail"),
+            personalEmail: localStorage.getItem("temp-staff-create-personalEmail"),
+            streetNumber: localStorage.getItem("temp-staff-create-streetNumber"),
+            streetName: localStorage.getItem("temp-staff-create-streetName"),
+            streetType: localStorage.getItem("temp-staff-create-streetType"),
             streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
-            streetTypeOther: "",
-            streetDirection: "",
+            streetTypeOther: localStorage.getItem("temp-staff-create-streetTypeOther"),
+            streetDirection: localStorage.getItem("temp-staff-create-streetDirection"),
             streetDirectionOptions: STREET_DIRECTION_CHOICES,
-            locality: "",
-            region: "",
-            country: "",
-            postal: "",
-            emergencyFullName: "",
-            emergencyRelationship: "",
-            emergencyTelephone: "",
-            emergencyAlternativeTelephone: "",
-            additionalComments: "",
-            accountType: "",
-            password: "",
-            repeatPassword: "",
-            isActive: "",
+            locality: localStorage.getItem("temp-staff-create-locality"),
+            region: localStorage.getItem("temp-staff-create-region"),
+            country: localStorage.getItem("temp-staff-create-country"),
+            postal: localStorage.getItem("temp-staff-create-postal"),
+            emergencyFullName: localStorage.getItem("temp-staff-create-emergencyFullName"),
+            emergencyRelationship: localStorage.getItem("temp-staff-create-emergencyRelationship"),
+            emergencyTelephone: localStorage.getItem("temp-staff-create-emergencyTelephone"),
+            emergencyAlternativeTelephone: localStorage.getItem("temp-staff-create-emergencyAlternativeTelephone"),
+            additionalComments: localStorage.getItem("temp-staff-create-additionalComments"),
+            accountType: parseInt(localStorage.getItem("temp-staff-create-accountType")),
+            password: localStorage.getItem("temp-staff-create-password"),
+            repeatPassword: localStorage.getItem("temp-staff-create-repeatPassword"),
+            isActive: localStorage.getItem("temp-staff-create-isActive"),
             isActiveOption: {},
             isActiveOptions: [{
                 id: 'isActive-true-choice',
@@ -159,10 +159,12 @@ class StaffCreateStep1Container extends Component {
         } else {
             this.setState({ country: value, region: null })
         }
+        localStorage.setItem('temp-staff-create-country', value);
     }
 
     onRegionChange(value) {
         this.setState({ region: value })
+        localStorage.setItem('temp-staff-create-region', value);
     }
 
     onClick(e) {
