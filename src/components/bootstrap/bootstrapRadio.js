@@ -34,6 +34,10 @@ export const RadioChoiceOption = ({
     name, selectedValue, choiceOption
 }) => {
     const defaultChecked = selectedValue.toString() === choiceOption.value.toString();
+    // DEVELOPERS NOTE:
+    // - We can use the 'data-' attribute for our custom attributes in our JSX code.
+    // - We can call these custom attributes in our container using `dataset`,
+    //   for more details see this link via // Note: https://stackoverflow.com/a/20383295.
     return (
         <div className="form-radio custom-control custom-radio custom-control-inline">
             <input data-label={choiceOption.label} defaultChecked={defaultChecked} type="radio" id={choiceOption.id} name={name} value={choiceOption.value} className="custom-control-input form-check-input" required />

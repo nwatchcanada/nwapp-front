@@ -186,7 +186,7 @@ class StaffCreateStep1Container extends Component {
         // Get the values.
         const storageValueKey = "temp-staff-create-"+[e.target.name];
         const value = e.target.value;
-        const label = e.target.dataset.label; // Note: https://stackoverflow.com/a/20383295
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
         const storeLabelKey = [e.target.name].toString()+"-label";
 
