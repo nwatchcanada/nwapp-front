@@ -64,7 +64,7 @@ export default class StaffCreateStep1Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <h4>Personal Information</h4>
+                            <h4><i className="fas fa-id-card"></i>&nbsp;Personal Information</h4>
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
@@ -130,7 +130,7 @@ export default class StaffCreateStep1Component extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
-                            <h4>Contact Information</h4>
+                            <h4><i className="fas fa-tty"></i>&nbsp;Contact Information</h4>
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
@@ -180,7 +180,7 @@ export default class StaffCreateStep1Component extends Component {
                                 placeholder="Email Address"
                             />
 
-                            <h4>Street Address</h4>
+                            <h4><i className="fas fa-map-marker"></i>&nbsp;Street Address</h4>
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
@@ -286,7 +286,7 @@ export default class StaffCreateStep1Component extends Component {
                                 placeholder=""
                             />
 
-                            <h4>Emergency Contact</h4>
+                            <h4><i className="fas fa-clinic-medical"></i>&nbsp;Emergency Contact</h4>
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
@@ -336,7 +336,7 @@ export default class StaffCreateStep1Component extends Component {
                                 placeholder=""
                             />
 
-                            <h4>Account</h4>
+                            <h4><i className="fas fa-user-circle"></i>&nbsp;Account</h4>
 
                             <BootstrapTextarea
                                 name="additionalComments"

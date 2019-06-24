@@ -1,18 +1,18 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
+// import 'moment-timezone';
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 
 
 export default class StaffCreateStep2Component extends Component {
     render() {
         const {
-            firstName, lastName, dateOfBirth, gender, description, howHear, howHearOptions, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, country, region, postal, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive, isActiveOptions,
+            firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
+            streetNumber, streetName, streetType, streetTypeOther, streetDirection, locality, country, region, postal, emergencyFullName,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive,
             password, repeatPassword,
             errors, isLoading, onClick,
         } = this.props;
@@ -65,8 +65,30 @@ export default class StaffCreateStep2Component extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">TODO</th>
-                                    <td></td>
+                                    <th scope="row" className="bg-light">First Name</th>
+                                    <td>{firstName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Last Name</th>
+                                    <td>{lastName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Date of Birth</th>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{dateOfBirth}</Moment>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Gender</th>
+                                    <td>{gender} (TODO)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{description}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">How did you hear about us?</th>
+                                    <td>{howHear} (TODO)</td>
                                 </tr>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
@@ -74,8 +96,20 @@ export default class StaffCreateStep2Component extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">TODO</th>
-                                    <td></td>
+                                    <th scope="row" className="bg-light">Phone</th>
+                                    <td>{phone}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Mobile</th>
+                                    <td>{mobile}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Work Email</th>
+                                    <td>{workEmail}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Personal Email</th>
+                                    <td>{personalEmail}</td>
                                 </tr>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
@@ -83,8 +117,40 @@ export default class StaffCreateStep2Component extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">TODO</th>
-                                    <td></td>
+                                    <th scope="row" className="bg-light">Street Number</th>
+                                    <td>{streetNumber}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Name</th>
+                                    <td>{streetName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Type</th>
+                                    <td>{streetType}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Type (Other)</th>
+                                    <td>{streetTypeOther}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Direction</th>
+                                    <td>{streetDirection}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Locality</th>
+                                    <td>{locality}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Region</th>
+                                    <td>{region}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Country</th>
+                                    <td>{country}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Postal</th>
+                                    <td>{postal}</td>
                                 </tr>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
@@ -92,8 +158,20 @@ export default class StaffCreateStep2Component extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">TODO</th>
-                                    <td></td>
+                                    <th scope="row" className="bg-light">Full Name</th>
+                                    <td>{emergencyFullName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Relationship</th>
+                                    <td>{emergencyRelationship}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Telephone</th>
+                                    <td>{emergencyTelephone}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Alternative Telephone</th>
+                                    <td>{emergencyAlternativeTelephone}</td>
                                 </tr>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
@@ -101,8 +179,16 @@ export default class StaffCreateStep2Component extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">TODO</th>
-                                    <td></td>
+                                    <th scope="row" className="bg-light">Additional Comments</th>
+                                    <td>{additionalComments}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Account Type</th>
+                                    <td>{accountType}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Is active?</th>
+                                    <td>{isActive}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -9,6 +9,7 @@ import {
     // localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
+import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 
@@ -143,9 +144,61 @@ class StaffCreateStep2Container extends Component {
      */
 
     render() {
-        const { errors } = this.state;
+        const {
+            firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
+            password, repeatPassword, isActive, isActiveOptions,
+            errors, isLoading
+        } = this.state;
+
+        const howHearData = {
+            results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                name: 'Word of mouth',
+                slug: 'word-of-mouth'
+            },{
+                name: 'Internet',
+                slug: 'internet'
+            }]
+        };
+
+        const howHearOptions = getHowHearReactSelectOptions(howHearData, "howHear");
+
         return (
             <StaffCreateStep2Component
+                firstName={firstName}
+                lastName={lastName}
+                dateOfBirth={dateOfBirth}
+                gender={gender}
+                description={description}
+                howHear={howHear}
+                howHearOptions={howHearOptions}
+                phone={phone}
+                mobile={mobile}
+                workEmail={workEmail}
+                personalEmail={personalEmail}
+                streetNumber={streetNumber}
+                streetName={streetName}
+                streetType={streetType}
+                streetTypeOptions={streetTypeOptions}
+                streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOptions={streetDirectionOptions}
+                locality={locality}
+                region={region}
+                country={country}
+                postal={postal}
+                emergencyFullName={emergencyFullName}
+                emergencyRelationship={emergencyRelationship}
+                emergencyTelephone={emergencyTelephone}
+                emergencyAlternativeTelephone={emergencyAlternativeTelephone}
+                additionalComments={additionalComments}
+                accountType={accountType}
+                password={password}
+                repeatPassword={repeatPassword}
+                isActive={isActive}
+                isActiveOptions={isActiveOptions}
+                isLoading={isLoading}
                 errors={errors}
                 onClick={this.onClick}
             />
