@@ -13,7 +13,6 @@ export default class StaffCreateStep2Component extends Component {
             firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOther, streetDirection, locality, country, region, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive,
-            password, repeatPassword,
             errors, isLoading, onClick,
         } = this.props;
         return (
