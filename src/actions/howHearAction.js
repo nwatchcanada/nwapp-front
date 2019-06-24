@@ -19,7 +19,7 @@ export function getHowHearReactSelectOptions(howHearList=[], selectName="howHear
                     value: howHear.slug,
                     label: howHear.name
                 });
-                console.log(howHear);
+                // console.log(howHear);
             }
         }
     }

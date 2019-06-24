@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapCheckbox } from "../../bootstrap/bootstrapCheckbox";
 import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
@@ -18,10 +18,10 @@ export default class StaffCreateStep1Component extends Component {
         const {
             firstName, lastName, dateOfBirth, gender, description, howHear, howHearOptions, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, country, region, postal, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive, isActiveOptions,
             password, repeatPassword,
             errors, isLoading,
-            onTextChange, onClick, onDateOfBirthChange, onSelectChange, onCountryChange, onRegionChange, onCheckboxChange,
+            onTextChange, onClick, onDateOfBirthChange, onSelectChange, onCountryChange, onRegionChange, onRadioChange
         } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
@@ -384,14 +384,15 @@ export default class StaffCreateStep1Component extends Component {
                                 placeholder=""
                             />
 
-                            <BootstrapCheckbox
+                            <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
                                 error={errors.isActive}
-                                label="I agree to the terms of service (*)"
-                                onChange={onCheckboxChange}
-                                checked={isActive}
+                                label="Is the user account active? (*)"
                                 name="isActive"
+                                onChange={onRadioChange}
+                                selectedValue={isActive}
+                                options={isActiveOptions}
                             />
 
                             <div className="form-group">

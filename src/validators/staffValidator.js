@@ -75,6 +75,9 @@ export default function validateInput(data) {
     if (data.repeatPassword === undefined || data.repeatPassword === null || data.repeatPassword === "") {
         errors.repeatPassword = 'This field is required';
     }
+    if (data.isActive === undefined || data.isActive === null || data.isActive === "") {
+        errors.isActive = 'This field is required';
+    }
 
     return {
         errors,

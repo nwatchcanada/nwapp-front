@@ -52,7 +52,19 @@ class StaffCreateStep1Container extends Component {
             accountType: "",
             password: "",
             repeatPassword: "",
-            isActive: true,
+            isActive: "",
+            isActiveOption: {},
+            isActiveOptions: [{
+                id: 'isActive-true-choice',
+                name: 'isActive',
+                value: true,
+                label: 'Yes',
+            },{
+                id: 'isActive-false-choice',
+                name: 'isActive',
+                value: false,
+                label: 'No',
+            }],
             errors: {},
             isLoading: false
         }
@@ -61,6 +73,7 @@ class StaffCreateStep1Container extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onDateOfBirthChange = this.onDateOfBirthChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
         this.onRegionChange = this.onRegionChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
@@ -169,6 +182,29 @@ class StaffCreateStep1Container extends Component {
         }
     }
 
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "temp-staff-create-"+[e.target.name];
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"-label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
+    }
+
     /**
      *  Main render function
      *------------------------------------------------------------
@@ -179,7 +215,7 @@ class StaffCreateStep1Container extends Component {
             firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
-            password, repeatPassword, isActive,
+            password, repeatPassword, isActive, isActiveOptions,
             errors, isLoading
         } = this.state;
 
@@ -228,6 +264,7 @@ class StaffCreateStep1Container extends Component {
                 password={password}
                 repeatPassword={repeatPassword}
                 isActive={isActive}
+                isActiveOptions={isActiveOptions}
                 isLoading={isLoading}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -235,6 +272,7 @@ class StaffCreateStep1Container extends Component {
                 onDateOfBirthChange={this.onDateOfBirthChange}
                 onCountryChange={this.onCountryChange}
                 onRegionChange={this.onRegionChange}
+                onRadioChange={this.onRadioChange}
                 onClick={this.onClick}
             />
         );
