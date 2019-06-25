@@ -10,6 +10,7 @@ import {
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../constants/api";
 
@@ -28,7 +29,7 @@ class StaffCreateStep1Container extends Component {
             dateOfBirth: localStorageGetDateItem("temp-staff-create-dateOfBirth"),
             gender: parseInt(localStorage.getItem("temp-staff-create-gender")),
             description: localStorage.getItem("temp-staff-create-description"),
-            tags: [], // IMPLEMENT
+            tags: localStorageGetArrayItem("temp-staff-create-tags"),
             howHear: localStorage.getItem("temp-staff-create-howHear"),
             phone: localStorage.getItem("temp-staff-create-phone"),
             mobile: localStorage.getItem("temp-staff-create-mobile"),
@@ -72,6 +73,7 @@ class StaffCreateStep1Container extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
         this.onDateOfBirthChange = this.onDateOfBirthChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
@@ -98,6 +100,18 @@ class StaffCreateStep1Container extends Component {
                 },{
                     name: 'Internet',
                     slug: 'internet'
+                }]
+            },
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
                 }]
             }
         });
@@ -201,6 +215,21 @@ class StaffCreateStep1Container extends Component {
         localStorageSetObjectOrArrayItem('temp-staff-create-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
         // console.log(this.state);
+        console.log(option);
+    }
+
+    onMultiChange(...args) {
+        // Extract the select options from the parameter.
+        const selectedOptions = args[0];
+
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+
+        // // Set all the tags we have selected to the STORAGE.
+        const key = 'temp-staff-create-' + args[1].name;
+        localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
     onDateOfBirthChange(dateObj) {
@@ -271,7 +300,7 @@ class StaffCreateStep1Container extends Component {
 
     render() {
         const {
-            firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
+            firstName, lastName, dateOfBirth, gender, description, howHear, tags, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
@@ -279,6 +308,7 @@ class StaffCreateStep1Container extends Component {
         } = this.state;
 
         const howHearOptions = getHowHearReactSelectOptions(this.state.howHearData, "howHear");
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
             <StaffCreateStep1Component
@@ -289,6 +319,8 @@ class StaffCreateStep1Container extends Component {
                 description={description}
                 howHear={howHear}
                 howHearOptions={howHearOptions}
+                tags={tags}
+                tagOptions={tagOptions}
                 phone={phone}
                 mobile={mobile}
                 workEmail={workEmail}
@@ -318,6 +350,7 @@ class StaffCreateStep1Container extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onMultiChange={this.onMultiChange}
                 onDateOfBirthChange={this.onDateOfBirthChange}
                 onCountryChange={this.onCountryChange}
                 onRegionChange={this.onRegionChange}

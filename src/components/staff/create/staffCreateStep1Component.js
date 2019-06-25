@@ -7,6 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect'
 import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect'
@@ -16,12 +17,12 @@ import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../
 export default class StaffCreateStep1Component extends Component {
     render() {
         const {
-            firstName, lastName, dateOfBirth, gender, description, howHear, howHearOptions, phone, mobile, workEmail, personalEmail,
+            firstName, lastName, dateOfBirth, gender, description, howHear, tags, tagOptions, howHearOptions, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, country, region, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive, isActiveOptions,
             password, repeatPassword,
             errors, isLoading,
-            onTextChange, onClick, onDateOfBirthChange, onSelectChange, onCountryChange, onRegionChange, onRadioChange
+            onTextChange, onClick, onDateOfBirthChange, onSelectChange, onMultiChange, onCountryChange, onRegionChange, onRadioChange
         } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
@@ -118,6 +119,16 @@ export default class StaffCreateStep1Component extends Component {
                                 helpText=""
                                 onChange={onTextChange}
                                 error={errors.description}
+                            />
+
+                            <BootstrapMultipleSelect
+                                label="Tags (*)"
+                                name="tags"
+                                defaultOptionLabel="Please select the tag."
+                                options={tagOptions}
+                                selectedOptions={tags}
+                                error={errors.tags}
+                                onMultiChange={onMultiChange}
                             />
 
                             <BootstrapSingleSelect

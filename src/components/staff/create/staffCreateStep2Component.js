@@ -10,7 +10,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 export default class StaffCreateStep2Component extends Component {
     render() {
         const {
-            firstName, lastName, dateOfBirth, description, phone, mobile, workEmail, personalEmail,
+            firstName, lastName, dateOfBirth, description, tags, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetDirection, locality, country, region, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments,
             errors, isLoading, onClick,
@@ -85,6 +85,16 @@ export default class StaffCreateStep2Component extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
                                     <td>{description}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Tags</th>
+                                    <td>
+                                        <ul>
+                                            {tags && tags.map(
+                                                (tag, i) => <UnorderedBulletItem tag={tag} key={i} />)
+                                            }
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">How did you hear about us?</th>
@@ -205,4 +215,16 @@ export default class StaffCreateStep2Component extends Component {
             </main>
         );
     }
+}
+
+
+class UnorderedBulletItem extends Component {
+    render() {
+        const { label, value } = this.props.tag;
+        return (
+            <li value={value}>
+                {label}
+            </li>
+        );
+    };
 }

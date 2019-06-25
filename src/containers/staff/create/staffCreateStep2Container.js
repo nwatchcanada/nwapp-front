@@ -5,10 +5,7 @@ import Scroll from 'react-scroll';
 import StaffCreateStep2Component from "../../../components/staff/create/staffCreateStep2Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/staffValidator";
-import {
-    // localStorageGetObjectItem,
-    localStorageSetObjectOrArrayItem, localStorageGetDateItem
-} from '../../../helpers/localStorageUtility';
+import { localStorageGetDateItem, localStorageGetArrayItem } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
@@ -28,7 +25,7 @@ class StaffCreateStep2Container extends Component {
             gender: parseInt(localStorage.getItem("temp-staff-create-gender")),
             genderLabel: localStorage.getItem("temp-staff-create-genderLabel"),
             description: localStorage.getItem("temp-staff-create-description"),
-            tags: [], // IMPLEMENT
+            tags: localStorageGetArrayItem("temp-staff-create-tags"),
             howHear: localStorage.getItem("temp-staff-create-howHear"),
             howHearLabel: localStorage.getItem("temp-staff-create-howHearLabel"),
             phone: localStorage.getItem("temp-staff-create-phone"),
@@ -150,7 +147,7 @@ class StaffCreateStep2Container extends Component {
 
     render() {
         const {
-            firstName, lastName, dateOfBirth, gender, description, howHear, phone, mobile, workEmail, personalEmail,
+            firstName, lastName, dateOfBirth, gender, description, tags, howHear, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
@@ -178,6 +175,7 @@ class StaffCreateStep2Container extends Component {
                 gender={gender}
                 genderLabel={genderLabel}
                 description={description}
+                tags={tags}
                 howHear={howHear}
                 howHearLabel={howHearLabel}
                 howHearOptions={howHearOptions}
