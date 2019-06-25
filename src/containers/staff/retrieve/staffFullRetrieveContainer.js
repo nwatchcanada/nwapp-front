@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import StaffRetrieveComponent from "../../components/staff/staffRetrieveComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import StaffFullRetrieveComponent from "../../../components/staff/retrieve/staffFullRetrieveComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class StaffRetrieveContainer extends Component {
+class StaffFullRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -92,7 +92,7 @@ class StaffRetrieveContainer extends Component {
             'absoluteUrl': '/staff/argyle'
         };
         return (
-            <StaffRetrieveComponent
+            <StaffFullRetrieveComponent
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 staffData={staffData}
@@ -123,4 +123,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(StaffRetrieveContainer);
+)(StaffFullRetrieveContainer);

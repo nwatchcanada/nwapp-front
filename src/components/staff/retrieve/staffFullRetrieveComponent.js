@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../flashMessageComponent";
+import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
-class StaffRetrieveComponent extends Component {
+export default class StaffFullRetrieveComponent extends Component {
     render() {
-        const { urlArgument, onClick, onBack, flashMessage } = this.props;
+        const { urlArgument, slug, onClick, onBack, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -15,17 +15,31 @@ class StaffRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/staff/${urlArgument}`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
+                            <Link to={`/staff/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user-tie"></i>&nbsp;Argyle
+                            <i className="fas fa-user"></i>&nbsp;Argyle
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user-tie"></i>&nbsp;Argyle</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;View Staff</h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <Link to={`/staff/${urlArgument}/${slug}`}>
+                                <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
+                            </Link>
+                        </div>
+                        <div id="step-2" className="st-grey active">
+                            <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <p><strong>Please confirm these details before adding the residential client:</strong></p>
@@ -119,6 +133,21 @@ class StaffRetrieveComponent extends Component {
                                             className="badge badge-info badge-lg">jQuery</span>
                                 </td>
                             </tr>
+                            <tr className="bg-dark">
+                                <th scope="row" colSpan="2" className="text-light">Functionality</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" className="bg-light">Available choices</th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <Link to={`/staff/${urlArgument}/${slug}/promote/step-1`}>
+                                                Promote&nbsp;<i className="fas fa-chevron-right"></i>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
 
@@ -140,5 +169,3 @@ class StaffRetrieveComponent extends Component {
         );
     }
 }
-
-export default StaffRetrieveComponent;

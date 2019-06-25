@@ -129,10 +129,11 @@ import StaffListActiveContainer from "./staff/staffListActiveContainer";
 import StaffListInactiveContainer from "./staff/staffListInactiveContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
 import StaffSearchResultContainer from "./staff/staffSearchResultContainer";
-import StaffRetrieveContainer from "./staff/staffRetrieveContainer";
 import StaffUpdateContainer from "./staff/staffUpdateContainer";
 import StaffCreateStep1Container from "./staff/create/staffCreateStep1Container";
 import StaffCreateStep2Container from "./staff/create/staffCreateStep2Container";
+import StaffFullRetrieveContainer from "./staff/retrieve/staffFullRetrieveContainer";
+import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContainer";
 
 import TaskListActiveContainer from "./tasks/taskListActiveContainer";
 import TaskListInactiveContainer from "./tasks/taskListInactiveContainer";
@@ -260,7 +261,8 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/inactive" exact component={StaffListInactiveContainer} />
                                 <Route path="/staff/:urlArgument/search" exact component={StaffSearchContainer} />
                                 <Route path="/staff/:urlArgument/search-results" exact component={StaffSearchResultContainer} />
-                                <Route path="/staff/:urlArgument/:slug" exact component={StaffRetrieveContainer} />
+                                <Route path="/staff/:urlArgument/:slug" exact component={StaffLiteRetrieveContainer} />
+                                <Route path="/staff/:urlArgument/:slug/full" exact component={StaffFullRetrieveContainer} />
                                 <Route path="/staff/:urlArgument/:slug/update" exact component={StaffUpdateContainer} />
                                 <Route path="/tasks/unassigned" exact component={TaskListUnassignedContainer} />
                                 <Route path="/tasks/pending" exact component={TaskListActiveContainer} />
