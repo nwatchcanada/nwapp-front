@@ -6,24 +6,6 @@ import shortid from "shortid";
 
 
 /**
- *  Utility function used to find the "option" for the inputted parameter "value".
- */
-export function getSelectedOption(options, value) {
-    if (options !== null && options !== undefined) {
-        const optionsLength = options.length;
-        console.log(value);
-        for (let i = 0; i < optionsLength; i++ ) {
-            let option = options[i];
-            if (option.value === value) {
-                return option
-            }
-        }
-    }
-    return null;
-}
-
-
-/**
  *  Primitive boostrap select element.
  */
 export const BootstrapMultipleSelect = ({
