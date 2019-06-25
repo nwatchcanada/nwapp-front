@@ -122,7 +122,8 @@ export default class StaffCreateStep1Component extends Component {
                             />
 
                             <BootstrapMultipleSelect
-                                label="Tags (*)"
+                                borderColour="border-success"
+                                label="Tags"
                                 name="tags"
                                 defaultOptionLabel="Please select the tag."
                                 options={tagOptions}

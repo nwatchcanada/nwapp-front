@@ -33,7 +33,13 @@ export const BootstrapRadio = ({
 export const RadioChoiceOption = ({
     name, selectedValue, choiceOption
 }) => {
-    const defaultChecked = selectedValue.toString() === choiceOption.value.toString();
+
+    // Select the selected value.
+    let defaultChecked = false;
+    if (selectedValue !== null && selectedValue !== undefined) {
+        defaultChecked = selectedValue.toString() === choiceOption.value.toString();
+    }
+
     // DEVELOPERS NOTE:
     // - We can use the 'data-' attribute for our custom attributes in our JSX code.
     // - We can call these custom attributes in our container using `dataset`,
