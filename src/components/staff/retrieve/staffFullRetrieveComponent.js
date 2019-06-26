@@ -202,8 +202,8 @@ export default class StaffFullRetrieveComponent extends Component {
                         </table>
 
                         <div className="form-group">
-                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                <i className="fas fa-check"></i>&nbsp;Submit
+                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                <i className="fas fa-edit"></i>&nbsp;Update
                             </button>
                             <Link to={`/staff/${urlArgument}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back

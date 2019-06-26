@@ -245,6 +245,7 @@ class StaffFullRetrieveContainer extends Component {
                 isLoading={isLoading}
                 errors={errors}
                 onClick={this.onClick}
+                flashMessage={this.props.flashMessage}
             />
         );
     }
