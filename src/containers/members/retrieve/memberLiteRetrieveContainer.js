@@ -23,9 +23,6 @@ class MemberLiteRetrieveContainer extends Component {
             urlArgument: urlArgument,
             slug: slug,
         }
-
-        this.onBack = this.onBack.bind(this);
-        this.onClick = this.onClick.bind(this);
     }
 
     /**
@@ -67,17 +64,6 @@ class MemberLiteRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onBack(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/members/"+this.state.urlArgument);
-    }
-
-    onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/update");
-    }
 
     /**
      *  Main render function
@@ -96,8 +82,6 @@ class MemberLiteRetrieveContainer extends Component {
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 memberData={memberData}
-                onBack={this.onBack}
-                onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
             />
         );

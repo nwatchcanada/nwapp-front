@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 export default class MemberLiteRetrieveComponent extends Component {
     render() {
-        const { urlArgument, slug, onClick, onBack, flashMessage } = this.props;
+        const { urlArgument, slug, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -75,21 +75,6 @@ export default class MemberLiteRetrieveComponent extends Component {
                         </div>
                     </div>
                 </div>
-
-                <div className="row mt-4 pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto p-2">
-                        <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
-                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
-                                <i className="fas fa-edit"></i>&nbsp;Update
-                            </button>
-
-                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onBack}>
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
 
 
             </div>
