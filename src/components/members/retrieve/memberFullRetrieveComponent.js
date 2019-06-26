@@ -73,11 +73,11 @@ export default class MemberFullRetrieveComponent extends Component {
                     <div className="col-md-10 mx-auto p-2">
 
                         <h2>
-                            <i className="fas fa-table"></i>&nbsp;Review
+                            <i className="fas fa-table"></i>&nbsp;Details
                         </h2>
 
                         <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before adding the member:</strong></p>
+
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
@@ -242,7 +242,7 @@ export default class MemberFullRetrieveComponent extends Component {
                                 <Link to={`/members/${urlArgument}/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
                                     <i className="fas fa-edit"></i>&nbsp;Update
                                 </Link>
-                                <Link to="/members/add/step-5" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/members/${urlArgument}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
