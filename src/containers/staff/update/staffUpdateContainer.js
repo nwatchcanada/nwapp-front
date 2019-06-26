@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import StaffUpdateComponent from "../../components/staff/staffUpdateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import validateInput from "../../validators/staffValidator";
+import StaffUpdateComponent from "../../../components/staff/update/staffUpdateComponent";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import validateInput from "../../../validators/staffValidator";
 
 
 class StaffUpdateContainer extends Component {

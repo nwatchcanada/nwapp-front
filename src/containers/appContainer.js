@@ -129,7 +129,7 @@ import StaffListActiveContainer from "./staff/staffListActiveContainer";
 import StaffListInactiveContainer from "./staff/staffListInactiveContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
 import StaffSearchResultContainer from "./staff/staffSearchResultContainer";
-import StaffUpdateContainer from "./staff/staffUpdateContainer";
+import StaffUpdateContainer from "./staff/update/staffUpdateContainer";
 import StaffCreateStep1Container from "./staff/create/staffCreateStep1Container";
 import StaffCreateStep2Container from "./staff/create/staffCreateStep2Container";
 import StaffFullRetrieveContainer from "./staff/retrieve/staffFullRetrieveContainer";
