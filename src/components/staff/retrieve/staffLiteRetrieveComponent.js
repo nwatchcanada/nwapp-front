@@ -15,7 +15,7 @@ export default class StaffLiteRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/staff/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Staff</Link>
+                            <Link to={`/staff/${urlArgument}`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;Argyle
