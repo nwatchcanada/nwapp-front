@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 
 import MemberFullRetrieveComponent from "../../../components/members/retrieve/memberFullRetrieveComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../constants/api';
 
 
 class MemberFullRetrieveContainer extends Component {
@@ -22,10 +27,10 @@ class MemberFullRetrieveContainer extends Component {
         this.state = {
             urlArgument: urlArgument,
             slug: slug,
+            memberData: {},
+            errors: {},
+            isLoading: false
         }
-
-        this.onBack = this.onBack.bind(this);
-        this.onClick = this.onClick.bind(this);
     }
 
     /**
@@ -33,21 +38,129 @@ class MemberFullRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-     componentDidMount() {
-         window.scrollTo(0, 0);  // Start the page at the top of the page.
-     }
+    componentDidMount() {
+        window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-     componentWillUnmount() {
-         // This code will fix the "ReactJS & Redux: Can't perform a React state
-         // update on an unmounted component" issue as explained in:
-         // https://stackoverflow.com/a/53829700
-         this.setState = (state,callback)=>{
-             return;
-         };
+        //TODO: REPLACE THIS CODE WITH API DATA.
+        if (this.state.slug === 'argyle') {
+            this.setState({
+                memberData: {
+                    slug: 'argyle',
+                    number: 1,
+                    name: 'Argyle',
+                    absoluteUrl: '/member/argyle',
+                    typeOf: RESIDENCE_TYPE_OF,
+                    bizCompanyName: "",
+                    bizContactFirstName: "",
+                    bizContactLastName: "",
+                    bizPrimaryPhone: "",
+                    bizSecondaryPhone: "",
+                    bizEmail: "",
+                    rezFirstName: "Shinji",
+                    rezLastName: "Ikari",
+                    rezPrimaryPhone:  "(111) 111-1111",
+                    rezSecondaryPhone: "(222) 222-2222",
+                    rezEmail: "shinji.ikari@nerv.worldgov",
+                    streetNumber: 123,
+                    streetName: "Somewhere",
+                    streetType: "Street",
+                    streetTypeOption: "",
+                    streetTypeOther: "",
+                    streetDirection: "North",
+                    streetDirectionOption: "",
+                    watchSlug: "argyle",
+                    watchIcon: "home",
+                    watchName: "Argyle",
+                    dobObj: new Date(),
+                    howDidYouHear: "Internet",
+                    howDidYouHearOption: "",
+                    howDidYouHearOther: "",
+                }
+            });
+        } else if (this.state.slug === 'byron') {
+            this.setState({
+                memberData: {
+                    slug: 'byron',
+                    number: 1,
+                    name: 'Byron',
+                    absoluteUrl: '/member/byron',
+                    typeOf: BUSINESS_TYPE_OF,
+                    bizCompanyName: "City Pop Music",
+                    bizContactFirstName: "Mariya",
+                    bizContactLastName: "Takeuchi",
+                    bizPrimaryPhone: "(321) 321-3210",
+                    bizSecondaryPhone: "",
+                    bizEmail: "plastic_lover@gmail.com",
+                    rezFirstName: "",
+                    rezLastName: "",
+                    rezPrimaryPhone:  "",
+                    rezSecondaryPhone: "",
+                    rezEmail: "",
+                    streetNumber: 666999,
+                    streetName: "Shinjuku",
+                    streetType: "Street",
+                    streetTypeOption: "",
+                    streetTypeOther: "",
+                    streetDirection: "",
+                    streetDirectionOption: "",
+                    watchSlug: "byron",
+                    watchIcon: "building",
+                    watchName: "Byron",
+                    dobObj: new Date(),
+                    howDidYouHear: "Internet",
+                    howDidYouHearOption: "",
+                    howDidYouHearOther: "",
+                }
+            });
+        } else if (this.state.slug === 'carling') {
+            this.setState({
+                memberData: {
+                    slug: 'carling',
+                    number: 1,
+                    name: 'Carling',
+                    absoluteUrl: '/member/carling',
+                    typeOf: COMMUNITY_CARES_TYPE_OF,
+                    bizCompanyName: "",
+                    bizContactFirstName: "",
+                    bizContactLastName: "",
+                    bizPrimaryPhone: "",
+                    bizSecondaryPhone: "",
+                    bizEmail: "",
+                    rezFirstName: "",
+                    rezLastName: "",
+                    rezPrimaryPhone:  "",
+                    rezSecondaryPhone: "",
+                    rezEmail: "",
+                    streetNumber: "",
+                    streetName: "",
+                    streetType: "",
+                    streetTypeOption: "",
+                    streetTypeOther: "",
+                    streetDirection: "",
+                    streetDirectionOption: "",
+                    watchSlug: "",
+                    watchIcon: "",
+                    watchName: "",
+                    dobObj: "",
+                    howDidYouHear: "",
+                    howDidYouHearOption: "",
+                    howDidYouHearOther: "",
+                }
+            });
+        }
+    }
 
-         // Clear any and all flash messages in our queue to be rendered.
-         this.props.clearFlashMessage();
-     }
+    componentWillUnmount() {
+        // This code will fix the "ReactJS & Redux: Can't perform a React state
+        // update on an unmounted component" issue as explained in:
+        // https://stackoverflow.com/a/53829700
+        this.setState = (state,callback)=>{
+            return;
+        };
+
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
+    }
 
     /**
      *  API callback functions
@@ -67,17 +180,6 @@ class MemberFullRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onBack(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/members/"+this.state.urlArgument);
-    }
-
-    onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/update");
-    }
 
     /**
      *  Main render function
@@ -85,19 +187,11 @@ class MemberFullRetrieveContainer extends Component {
      */
 
     render() {
-        const memberData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/member/argyle'
-        };
         return (
             <MemberFullRetrieveComponent
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
-                memberData={memberData}
-                onBack={this.onBack}
-                onClick={this.onClick}
+                memberData={this.state.memberData}
                 flashMessage={this.props.flashMessage}
             />
         );
