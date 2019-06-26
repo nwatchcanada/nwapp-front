@@ -23,9 +23,6 @@ class StaffLiteRetrieveContainer extends Component {
             urlArgument: urlArgument,
             slug: slug,
         }
-
-        this.onBack = this.onBack.bind(this);
-        this.onClick = this.onClick.bind(this);
     }
 
     /**
@@ -67,17 +64,6 @@ class StaffLiteRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onBack(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/staff/"+this.state.urlArgument);
-    }
-
-    onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/staff/"+this.state.urlArgument+"/"+this.state.slug+"/update");
-    }
 
     /**
      *  Main render function
@@ -96,8 +82,6 @@ class StaffLiteRetrieveContainer extends Component {
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 staffData={staffData}
-                onBack={this.onBack}
-                onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
             />
         );

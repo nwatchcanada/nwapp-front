@@ -12,7 +12,6 @@ import {
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
-import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../constants/api";
 
 
 class StaffUpdateContainer extends Component {
@@ -23,7 +22,14 @@ class StaffUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { urlArgument, slug } = this.props.match.params;
+
         this.state = {
+            urlArgument: urlArgument,
+            slug: slug,
             firstName: localStorage.getItem("temp-staff-create-firstName"),
             lastName: localStorage.getItem("temp-staff-create-lastName"),
             dateOfBirth: localStorageGetDateItem("temp-staff-create-dateOfBirth"),
@@ -262,6 +268,7 @@ class StaffUpdateContainer extends Component {
 
     render() {
         const {
+            urlArgument, slug,
             firstName, lastName, dateOfBirth, gender, description, howHear, tags, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
@@ -274,6 +281,8 @@ class StaffUpdateContainer extends Component {
 
         return (
             <StaffUpdateComponent
+                urlArgument={urlArgument}
+                slug={slug}
                 firstName={firstName}
                 lastName={lastName}
                 dateOfBirth={dateOfBirth}
