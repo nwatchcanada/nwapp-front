@@ -91,11 +91,9 @@ export default class StaffFullRetrieveComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Tags</th>
                                     <td>
-                                        <ul>
-                                            {tags && tags.map(
-                                                (tag, i) => <UnorderedBulletItem tag={tag} key={i} />)
-                                            }
-                                        </ul>
+                                        {tags && tags.map(
+                                            (tag, i) => <TagItem tag={tag} key={i} />)
+                                        }
                                     </td>
                                 </tr>
                                 <tr>
@@ -221,13 +219,11 @@ export default class StaffFullRetrieveComponent extends Component {
 }
 
 
-class UnorderedBulletItem extends Component {
+class TagItem extends Component {
     render() {
         const { label, value } = this.props.tag;
         return (
-            <li value={value}>
-                {label}
-            </li>
+            <span className="badge badge-info badge-lg" value={value}>{label}</span>
         );
     };
 }
