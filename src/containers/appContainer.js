@@ -79,7 +79,6 @@ import MemberSearchContainer from "./members/memberSearchContainer";
 import MemberSearchResultContainer from "./members/memberSearchResultContainer";
 import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
 import MemberFullRetrieveContainer from "./members/retrieve/memberFullRetrieveContainer";
-import MemberCreateContainer from "./members/memberCreateContainer";
 import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
 import MemberCreateStep2BizContainer from "./members/create/memberCreateStep2BizContainer";
 import MemberCreateStep2RezOrComContainer from "./members/create/memberCreateStep2RezOrComContainer";
@@ -87,7 +86,7 @@ import MemberCreateStep3Container from "./members/create/memberCreateStep3Contai
 import MemberCreateStep4Container from "./members/create/memberCreateStep4Container";
 import MemberCreateStep5Container from "./members/create/memberCreateStep5Container";
 import MemberCreateStep6Container from "./members/create/memberCreateStep6Container";
-import MemberUpdateContainer from "./members/memberUpdateContainer";
+import MemberUpdateContainer from "./members/update/memberUpdateContainer";
 import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Container";
 import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
 
@@ -207,7 +206,6 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/resource/add" exact component={ResourceCreateContainer} />
                                 <Route path="/settings/resource/:slug/delete" exact component={ResourceDeleteContainer} />
                                 <Route path="/settings/resource/:slug/update" exact component={ResourceUpdateContainer} />
-                                <Route path="/members/add" exact component={MemberCreateContainer} />
                                 <Route path="/members/add/step-1" exact component={MemberCreateStep1Container} />
                                 <Route path="/members/add/step-2-biz" exact component={MemberCreateStep2BizContainer} />
                                 <Route path="/members/add/step-2-rez-or-cc" exact component={MemberCreateStep2RezOrComContainer} />

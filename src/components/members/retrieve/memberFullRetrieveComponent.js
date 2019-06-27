@@ -10,12 +10,13 @@ import {
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../constants/api';
+import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
 export default class MemberFullRetrieveComponent extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
-        const { urlArgument, slug } = this.props;
+        const { urlArgument, slug, flashMessage } = this.props;
         const {
             typeOf, errors,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
@@ -53,6 +54,8 @@ export default class MemberFullRetrieveComponent extends Component {
                         </li>
                     </ol>
                 </nav>
+
+                <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-user"></i>&nbsp;View Member</h1>
 
