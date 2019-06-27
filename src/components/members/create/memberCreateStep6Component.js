@@ -261,7 +261,7 @@ class MemberCreateStep6Component extends Component {
                         <form>
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check"></i>&nbsp;Submit
+                                    <i className="fas fa-check-circle"></i>&nbsp;Submit
                                 </button>
                                 <Link to="/members/add/step-5" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back

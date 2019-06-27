@@ -21,7 +21,7 @@ class RegisterSuccessComponent extends React.Component {
 
                     <div className="jumbotron">
                         <h1 className="display-4">
-                           <i className="fas fa-check"></i>&nbsp;Registered
+                           <i className="fas fa-check-circle"></i>&nbsp;Registered
                         </h1>
                         <p className="lead">Thank you for registration, an activation email has been sent to your inbox. Please follow the instructions provided to activate your account.</p>
                         <hr className="my-4" />

@@ -128,7 +128,7 @@ export default class WatchUpdateRezComponent extends Component {
                             />
 
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                <i className="fas fa-check"></i>&nbsp;Submit
+                                <i className="fas fa-check-circle"></i>&nbsp;Submit
                             </button>
                             <Link to={`/watch-rez/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
@@ -347,7 +347,7 @@ class AddModalComponent extends Component {
                                     onClick={onSaveClick}
                                     type="button"
                                     className="btn btn-lg btn-success float-right">
-                                    <i className="fas fa-check"></i>&nbsp;Save
+                                    <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
 
                             </form>
