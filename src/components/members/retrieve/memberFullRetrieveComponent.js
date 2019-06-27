@@ -23,7 +23,7 @@ export default class MemberFullRetrieveComponent extends Component {
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOther, streetDirection,
             watchSlug, watchIcon, watchName,
-            dobObj, howDidYouHear, howDidYouHearOther,
+            dateOfBirth, howDidYouHear, howDidYouHearOther,
         } = this.props.memberData;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -220,11 +220,11 @@ export default class MemberFullRetrieveComponent extends Component {
                                         <i className="fas fa-chart-pie"></i>&nbsp;Metrics
                                     </th>
                                 </tr>
-                                {dobObj &&
+                                {dateOfBirth &&
                                     <tr>
                                         <th scope="row" className="bg-light">Date of Birth</th>
                                         <td>
-                                            <Moment format="YYYY/MM/DD">{dobObj}</Moment>
+                                            <Moment format="YYYY/MM/DD">{dateOfBirth}</Moment>
                                         </td>
                                     </tr>
                                 }

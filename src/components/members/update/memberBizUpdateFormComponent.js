@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 
 
 export default class MemberBizUpdateFormComponent extends Component {
@@ -11,14 +12,15 @@ export default class MemberBizUpdateFormComponent extends Component {
         const { errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
         const { contactFirstName, contactLastName, primaryPhone, secondaryPhone, email } = this.props;
         const { companyName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
-        const { dobObj, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
+        const { dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
 
         return (
             <div>
-                { /* ###################################################### */ }
+                <h4><i className="fas fa-id-card"></i>&nbsp;Personal Information</h4>
+
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
@@ -52,6 +54,8 @@ export default class MemberBizUpdateFormComponent extends Component {
                     type="text"
                 />
 
+                <h4><i className="fas fa-tty"></i>&nbsp;Contact Information</h4>
+
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
@@ -84,7 +88,9 @@ export default class MemberBizUpdateFormComponent extends Component {
                     name="email"
                     type="text"
                 />
-                { /* ###################################################### */ }
+
+                <h4><i className="fas fa-map-marker"></i>&nbsp;Street Address</h4>
+
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
@@ -142,21 +148,23 @@ export default class MemberBizUpdateFormComponent extends Component {
                     onSelectChange={onSelectChange}
                 />
 
-                { /* ###################################################### */ }
+                <h4><i className="fas fa-chart-pie"></i>&nbsp;Metrics</h4>
 
-                <p>Please pick the date of birth</p>
-                <DatePicker
-                    selected={dobObj}
-                    onChange={onDOBDateTimeChange}
+                <BootstrapDatePicker
+                    label="Date of Birth (*)"
+                    name="dateOfBirth"
+                    dateObj={dateOfBirth}
+                    onTimeChange={onDOBDateTimeChange}
+                    datePickerClassName="form-control form-control-lg border"
+                    divClassName="form-group p-0 col-md-7 mb-4"
+                    error={errors.dateOfBirth}
                 />
-
-                <br />
 
                 <BootstrapSingleSelect
                     borderColour="border-primary"
                     label="How did you hear about us? (*)"
                     name="howDidYouHear"
-                    defaultOptionLabel="Please select how the member heard about us."
+                    defaultOptionLabel="Please select a street type."
                     options={howDidYouHearOptions}
                     value={howDidYouHear}
                     error={errors.howDidYouHear}

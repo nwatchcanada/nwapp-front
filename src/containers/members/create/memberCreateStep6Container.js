@@ -54,7 +54,7 @@ class MemberCreateStep6Container extends Component {
             watchSlug: localStorage.getItem('temp-create-member-watch-slug'),
             watchIcon: localStorage.getItem('temp-create-member-watch-icon'),
             watchName: localStorage.getItem('temp-create-member-watch-name'),
-            dobObj: localStorageGetDateItem("temp-create-member-dobObj"),
+            dateOfBirth: localStorageGetDateItem("temp-create-member-dateOfBirth"),
             howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-create-member-howDidYouHearOther"),
@@ -114,7 +114,7 @@ class MemberCreateStep6Container extends Component {
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, dobObj,
+            watchSlug, watchIcon, watchName, dateOfBirth,
             howDidYouHear, howDidYouHearOption, howDidYouHearOther
         } = this.state;
 
@@ -143,7 +143,7 @@ class MemberCreateStep6Container extends Component {
                 watchSlug={watchSlug}
                 watchIcon={watchIcon}
                 watchName={watchName}
-                dobObj={dobObj}
+                dateOfBirth={dateOfBirth}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOption={howDidYouHearOption}
                 howDidYouHearOther={howDidYouHearOther}

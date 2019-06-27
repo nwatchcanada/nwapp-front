@@ -84,6 +84,9 @@ export function validateInput(data) {
 
     // --- EXTRA --- //
 
+    if (data.dateOfBirth === undefined || data.dateOfBirth === null || data.dateOfBirth === "") {
+        errors.dateOfBirth = 'This field is required';
+    }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
         errors.howDidYouHear = 'This field is required';
     } else {
@@ -206,6 +209,9 @@ export function validateStep4CreateInput(data) {
 export function validateStep5CreateInput(data) {
     let errors = {};
 
+    if (data.dateOfBirth === undefined || data.dateOfBirth === null || data.dateOfBirth === "") {
+        errors.dateOfBirth = 'This field is required';
+    }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
         errors.howDidYouHear = 'This field is required';
     } else {

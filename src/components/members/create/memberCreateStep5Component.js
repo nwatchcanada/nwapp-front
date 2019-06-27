@@ -1,17 +1,16 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 
 
 class MemberCreateStep5Component extends Component {
     render() {
-        const { returnURL, dobObj, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
+        const { returnURL, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
         return (
             <main id="main" role="main">
@@ -74,13 +73,15 @@ class MemberCreateStep5Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <p>Please pick the date of birth</p>
-                            <DatePicker
-                                selected={dobObj}
-                                onChange={onDOBDateTimeChange}
+                            <BootstrapDatePicker
+                                label="Date of Birth (*)"
+                                name="dateOfBirth"
+                                dateObj={dateOfBirth}
+                                onTimeChange={onDOBDateTimeChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.dateOfBirth}
                             />
-
-                            <br />
 
                             <BootstrapSingleSelect
                                 borderColour="border-primary"

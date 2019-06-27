@@ -28,7 +28,7 @@ class MemberUpdateComponent extends Component {
         const { streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
 
         // Extra
-        const { dobObj, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
+        const { dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
 
         // Check the type of member this is.
         const isBiz = typeOf === BUSINESS_TYPE_OF;
@@ -88,7 +88,7 @@ class MemberUpdateComponent extends Component {
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
 
-                                    dobObj={dobObj}
+                                    dateOfBirth={dateOfBirth}
                                     howDidYouHear={howDidYouHear}
                                     howDidYouHearOptions={howDidYouHearOptions}
                                     howDidYouHearOther={howDidYouHearOther}
@@ -122,7 +122,7 @@ class MemberUpdateComponent extends Component {
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
 
-                                    dobObj={dobObj}
+                                    dateOfBirth={dateOfBirth}
                                     howDidYouHear={howDidYouHear}
                                     howDidYouHearOptions={howDidYouHearOptions}
                                     howDidYouHearOther={howDidYouHearOther}
@@ -155,7 +155,7 @@ class MemberUpdateComponent extends Component {
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
 
-                                    dobObj={dobObj}
+                                    dateOfBirth={dateOfBirth}
                                     howDidYouHear={howDidYouHear}
                                     howDidYouHearOptions={howDidYouHearOptions}
                                     howDidYouHearOther={howDidYouHearOther}

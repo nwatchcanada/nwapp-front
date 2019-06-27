@@ -83,7 +83,7 @@ class MemberListInactiveContainer extends Component {
             'absoluteUrl': '/members/inactive/argyle'
         },{
             'slug': 'byron',
-            'icon': 'home',
+            'icon': 'building',
             'number': 2,
             'firstName': 'Mariya',
             'lastName': 'Takeuchi',

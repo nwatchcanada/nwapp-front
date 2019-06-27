@@ -36,7 +36,7 @@ class MemberCreateStep5Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            dobObj: localStorageGetDateItem("temp-create-member-dobObj"),
+            dateOfBirth: localStorageGetDateItem("temp-create-member-dateOfBirth"),
             howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-create-member-howDidYouHearOther"),
@@ -106,9 +106,9 @@ class MemberCreateStep5Container extends Component {
 
     onDOBDateTimeChange(dateObj) {
         this.setState({
-            dobObj: dateObj,
+            dateOfBirth: dateObj,
         })
-        localStorageSetObjectOrArrayItem('temp-create-member-dobObj', dateObj);
+        localStorageSetObjectOrArrayItem('temp-create-member-dateOfBirth', dateObj);
     }
 
     onSelectChange(option) {
@@ -145,7 +145,7 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, dobObj, howDidYouHear, howDidYouHearOther, errors } = this.state;
+        const { returnURL, dateOfBirth, howDidYouHear, howDidYouHearOther, errors } = this.state;
         const howDidYouHearOptions = [
             {
                 selectName: "howDidYouHear",
@@ -176,7 +176,7 @@ class MemberCreateStep5Container extends Component {
         return (
             <MemberCreateStep5Component
                 returnURL={returnURL}
-                dobObj={dobObj}
+                dateOfBirth={dateOfBirth}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onDOBDateTimeChange={this.onDOBDateTimeChange}

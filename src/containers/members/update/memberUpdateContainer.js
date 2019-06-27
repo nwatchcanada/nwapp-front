@@ -34,6 +34,7 @@ class MemberUpdateContainer extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -70,7 +71,7 @@ class MemberUpdateContainer extends Component {
                 watchSlug: "argyle",
                 watchIcon: "home",
                 watchName: "Argyle",
-                dobObj: new Date(),
+                dateOfBirth: new Date(),
                 howDidYouHear: "Internet",
                 howDidYouHearOption: "",
                 howDidYouHearOther: "",
@@ -98,7 +99,7 @@ class MemberUpdateContainer extends Component {
                 watchSlug: "byron",
                 watchIcon: "building",
                 watchName: "Byron",
-                dobObj: new Date(),
+                dateOfBirth: new Date(),
                 howDidYouHear: "Internet",
                 howDidYouHearOption: "",
                 howDidYouHearOther: "",
@@ -125,7 +126,7 @@ class MemberUpdateContainer extends Component {
                 watchSlug: "carling",
                 watchIcon: "university",
                 watchName: "Carling",
-                dobObj: new Date(),
+                dateOfBirth: new Date(),
                 howDidYouHear: "Internet",
                 howDidYouHearOption: "",
                 howDidYouHearOther: "",
@@ -202,6 +203,11 @@ class MemberUpdateContainer extends Component {
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
+    onDOBDateTimeChange(dateOfBirth) {
+        this.setState({
+            dateOfBirth: dateOfBirth,
+        });
+    }
 
     /**
      *  Main render function
@@ -213,7 +219,7 @@ class MemberUpdateContainer extends Component {
         const {
             name, companyName, email, firstName, contactFirstName, lastName, contactLastName, primaryPhone, secondaryPhone, streetNumber,
             streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, dobObj, howDidYouHear, howDidYouHearOption, howDidYouHearOther
+            watchSlug, watchIcon, watchName, dateOfBirth, howDidYouHear, howDidYouHearOption, howDidYouHearOther
         } = this.state;
 
         const howDidYouHearOptions = [
@@ -271,7 +277,7 @@ class MemberUpdateContainer extends Component {
                 watchSlug={watchSlug}
                 watchIcon={watchIcon}
                 watchName={watchName}
-                dobObj={dobObj}
+                dateOfBirth={dateOfBirth}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOption={howDidYouHearOption}
                 howDidYouHearOptions={howDidYouHearOptions}
@@ -280,6 +286,7 @@ class MemberUpdateContainer extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onDOBDateTimeChange={this.onDOBDateTimeChange}
                 onClick={this.onClick}
             />
         );
