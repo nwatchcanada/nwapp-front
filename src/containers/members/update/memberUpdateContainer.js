@@ -195,12 +195,12 @@ class MemberUpdateContainer extends Component {
     }
 
     onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
+        const optionKey = [option.selectName].toString()+"Option";
         this.setState({
             [option.selectName]: option.value,
             optionKey: option,
         });
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+        console.log([option.selectName], optionKey, "|",option); // For debugging purposes only.
     }
 
     onDOBDateTimeChange(dateOfBirth) {
@@ -241,7 +241,7 @@ class MemberUpdateContainer extends Component {
                 label: "Family"
             },{
                 selectName: "howDidYouHear",
-                value: "Internt",
+                value: "Internet",
                 label: "Internet"
             },{
                 selectName: "howDidYouHear",

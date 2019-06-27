@@ -7,7 +7,7 @@ import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 
 export default class MemberBizUpdateFormComponent extends Component {
     render() {
-        const { errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
+        const { errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading } = this.props;
         const { contactFirstName, contactLastName, primaryPhone, secondaryPhone, email } = this.props;
         const { companyName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
         const { dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
@@ -28,6 +28,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={companyName}
                     name="companyName"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <BootstrapInput
@@ -39,6 +40,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={contactFirstName}
                     name="contactFirstName"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <BootstrapInput
@@ -50,6 +52,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={contactLastName}
                     name="contactLastName"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <h4><i className="fas fa-tty"></i>&nbsp;Contact Information</h4>
@@ -63,6 +66,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={primaryPhone}
                     name="primaryPhone"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <BootstrapInput
@@ -74,6 +78,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={secondaryPhone}
                     name="secondaryPhone"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <BootstrapInput
@@ -85,6 +90,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={email}
                     name="email"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <h4><i className="fas fa-map-marker"></i>&nbsp;Street Address</h4>
@@ -98,6 +104,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={streetNumber}
                     name="streetNumber"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <BootstrapInput
@@ -109,6 +116,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={streetName}
                     name="streetName"
                     type="text"
+                    disabled={isLoading}
                 />
 
                 <BootstrapSingleSelect
@@ -120,6 +128,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={streetType}
                     error={errors.streetType}
                     onSelectChange={onSelectChange}
+                    disabled={isLoading}
                 />
 
                 {isOtherStreetTypeSelected &&
@@ -132,6 +141,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                         value={streetTypeOther}
                         name="streetTypeOther"
                         type="text"
+                        disabled={isLoading}
                     />
                 }
 
@@ -144,6 +154,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={streetDirection}
                     error={errors.streetDirection}
                     onSelectChange={onSelectChange}
+                    disabled={isLoading}
                 />
 
                 <h4><i className="fas fa-chart-pie"></i>&nbsp;Metrics</h4>
@@ -156,6 +167,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     datePickerClassName="form-control form-control-lg border"
                     divClassName="form-group p-0 col-md-7 mb-4"
                     error={errors.dateOfBirth}
+                    disabled={isLoading}
                 />
 
                 <BootstrapSingleSelect
@@ -167,6 +179,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={howDidYouHear}
                     error={errors.howDidYouHear}
                     onSelectChange={onSelectChange}
+                    disabled={isLoading}
                 />
 
                 {isOtherHowDidYouHearSelected &&
@@ -179,6 +192,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                         value={howDidYouHearOther}
                         name="howDidYouHearOther"
                         type="text"
+                        disabled={isLoading}
                     />
                 }
             </div>
