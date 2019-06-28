@@ -68,9 +68,10 @@ class MemberUpdateContainer extends Component {
                 streetTypeOther: "",
                 streetDirection: "North",
                 streetDirectionOption: "",
-                watchSlug: "argyle",
+                watchSlug: "argyle-watch",
                 watchIcon: "home",
                 watchName: "Argyle",
+                watch: "argyle-watch",
                 dateOfBirth: new Date(),
                 howDidYouHear: "Internet",
                 howDidYouHearOption: "",
@@ -96,9 +97,10 @@ class MemberUpdateContainer extends Component {
                 streetTypeOther: "",
                 streetDirection: "",
                 streetDirectionOption: "",
-                watchSlug: "byron",
+                watchSlug: "byron-watch",
                 watchIcon: "building",
                 watchName: "Byron",
+                watch: "byron-watch",
                 dateOfBirth: new Date(),
                 howDidYouHear: "Internet",
                 howDidYouHearOption: "",
@@ -123,9 +125,10 @@ class MemberUpdateContainer extends Component {
                 streetTypeOther: "",
                 streetDirection: "",
                 streetDirectionOption: "",
-                watchSlug: "carling",
+                watchSlug: "carling-watch",
                 watchIcon: "university",
                 watchName: "Carling",
+                watch: "carling-watch",
                 dateOfBirth: new Date(),
                 howDidYouHear: "Internet",
                 howDidYouHearOption: "",
@@ -219,7 +222,7 @@ class MemberUpdateContainer extends Component {
         const {
             name, companyName, email, firstName, contactFirstName, lastName, contactLastName, primaryPhone, secondaryPhone, streetNumber,
             streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, dateOfBirth, howDidYouHear, howDidYouHearOption, howDidYouHearOther
+            watchSlug, watchIcon, watchName, watch, dateOfBirth, howDidYouHear, howDidYouHearOption, howDidYouHearOther
         } = this.state;
 
         const howDidYouHearOptions = [
@@ -250,6 +253,23 @@ class MemberUpdateContainer extends Component {
             }
         ];
 
+        // REPLACE THIS CODE WITH API CODE.
+        const watchOptions = [
+            {
+                selectName: 'watch',
+                value: "argyle-watch",
+                label: "Argyle Community Watch"
+            },{
+                selectName: 'watch',
+                value: "byron-watch",
+                label: "Byron Business Watch"
+            },{
+                selectName: 'watch',
+                value: "carling-watch",
+                label: "Carling Retirement Centre Watch"
+            }
+        ];
+
         return (
             <MemberUpdateComponent
                 urlArgument={urlArgument}
@@ -277,6 +297,8 @@ class MemberUpdateContainer extends Component {
                 watchSlug={watchSlug}
                 watchIcon={watchIcon}
                 watchName={watchName}
+                watchOptions={watchOptions}
+                watch={watch}
                 dateOfBirth={dateOfBirth}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOption={howDidYouHearOption}

@@ -10,6 +10,7 @@ export default class MemberComUpdateFormComponent extends Component {
         const { errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading } = this.props;
         const { firstName, lastName, primaryPhone, secondaryPhone, email } = this.props;
         const { streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
+        const { watch, watchOptions } = this.props;
         const { dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
@@ -141,6 +142,20 @@ export default class MemberComUpdateFormComponent extends Component {
                     options={streetDirectionOptions}
                     value={streetDirection}
                     error={errors.streetDirection}
+                    onSelectChange={onSelectChange}
+                    disabled={isLoading}
+                />
+
+                <h4><i className="fas fa-shield-alt"></i>&nbsp;Watch</h4>
+
+                <BootstrapSingleSelect
+                    borderColour="border-primary"
+                    label="Watch (*)"
+                    name="watch"
+                    defaultOptionLabel="Please select a watch."
+                    options={watchOptions}
+                    value={watch}
+                    error={errors.watch}
                     onSelectChange={onSelectChange}
                     disabled={isLoading}
                 />

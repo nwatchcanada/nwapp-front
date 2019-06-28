@@ -27,6 +27,9 @@ class MemberUpdateComponent extends Component {
         // Address
         const { streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
 
+        // Watches
+        const { watch, watchOptions } = this.props;
+
         // Extra
         const { dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
 
@@ -88,6 +91,9 @@ class MemberUpdateComponent extends Component {
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
 
+                                    watch={watch}
+                                    watchOptions={watchOptions}
+
                                     dateOfBirth={dateOfBirth}
                                     howDidYouHear={howDidYouHear}
                                     howDidYouHearOptions={howDidYouHearOptions}
@@ -122,6 +128,9 @@ class MemberUpdateComponent extends Component {
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
 
+                                    watch={watch}
+                                    watchOptions={watchOptions}
+
                                     dateOfBirth={dateOfBirth}
                                     howDidYouHear={howDidYouHear}
                                     howDidYouHearOptions={howDidYouHearOptions}
@@ -154,6 +163,9 @@ class MemberUpdateComponent extends Component {
                                     streetTypeOther={streetTypeOther}
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
+
+                                    watch={watch}
+                                    watchOptions={watchOptions}
 
                                     dateOfBirth={dateOfBirth}
                                     howDidYouHear={howDidYouHear}
