@@ -146,6 +146,10 @@ import ReportListContainer from "./reports/reportListContainer";
 
 import SettingListContainer from "./settings/settingListContainer";
 
+import UnpaidFinancialListContainer from "./financials/list/unpaidFinancialListContainer";
+import PaidFinancialListContainer from "./financials/list/paidFinancialListContainer";
+import AllFinancialListContainer from "./financials/list/allFinancialListContainer";
+
 
 class AppContainer extends React.Component {
     render() {
@@ -285,6 +289,9 @@ class AppContainer extends React.Component {
                                 <Route path="/watch-biz/:slug/update" exact component={WatchUpdateBizContainer} />
                                 <Route path="/watch-cc/:slug/update" exact component={WatchUpdateComContainer} />
                                 <Route path="/watch-rez/:slug/update" exact component={WatchUpdateRezContainer} />
+                                <Route path="/financials/unpaid" exact component={UnpaidFinancialListContainer} />
+                                <Route path="/financials/paid" exact component={PaidFinancialListContainer} />
+                                <Route path="/financials/all" exact component={AllFinancialListContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>

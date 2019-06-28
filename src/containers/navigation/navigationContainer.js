@@ -58,6 +58,11 @@ const authenticatedFullMenuData = [
         title: "Tasks",
         url: "/tasks/pending"
     },{
+        id: "full-financials",
+        icon: "credit-card",
+        title: "Financials",
+        url: "/financials/unpaid"
+    },{
         id: "full-reports",
         icon: "book",
         title: "Reports",
