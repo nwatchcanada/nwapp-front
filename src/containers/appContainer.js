@@ -195,38 +195,38 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/district-biz/:slug" exact component={requiresAuth(DistrictRetrieveBizContainer)} />
                                 <Route path="/settings/district-cc/:slug" exact component={requiresAuth(DistrictRetrieveComContainer)} />
                                 <Route path="/settings/district-rez/:slug" exact component={requiresAuth(DistrictRetrieveRezContainer)} />
-                                <Route path="/settings/district-biz/:slug/update" exact component={DistrictUpdateBizContainer} />
-                                <Route path="/settings/district-cc/:slug/update" exact component={DistrictUpdateComContainer} />
-                                <Route path="/settings/district-rez/:slug/update" exact component={DistrictUpdateRezContainer} />
-                                <Route path="/settings/tags" exact component={TagsListContainer} />
-                                <Route path="/settings/tag/add" exact component={TagCreateContainer} />
-                                <Route path="/settings/tag/:slug/delete" exact component={TagDeleteContainer} />
-                                <Route path="/settings/tag/:slug/update" exact component={TagUpdateContainer} />
-                                <Route path="/settings/how-hears" exact component={HowHearsListContainer} />
-                                <Route path="/settings/how-hears/add" exact component={HowHearCreateContainer} />
-                                <Route path="/settings/how-hear/:slug/delete" exact component={HowHearDeleteContainer} />
-                                <Route path="/settings/how-hear/:slug/update" exact component={HowHearUpdateContainer} />
-                                <Route path="/settings/announcements" exact component={AnnouncementListContainer} />
-                                <Route path="/settings/announcements/add" exact component={AnnouncementCreateContainer} />
-                                <Route path="/settings/announcement/:slug/delete" exact component={AnnouncementDeleteContainer} />
-                                <Route path="/settings/announcement/:slug/update" exact component={AnnouncementUpdateContainer} />
-                                <Route path="/settings/resources" exact component={ResourcesListContainer} />
-                                <Route path="/settings/resource/add" exact component={ResourceCreateContainer} />
-                                <Route path="/settings/resource/:slug/delete" exact component={ResourceDeleteContainer} />
-                                <Route path="/settings/resource/:slug/update" exact component={ResourceUpdateContainer} />
-                                <Route path="/members/add/step-1" exact component={MemberCreateStep1Container} />
-                                <Route path="/members/add/step-2-biz" exact component={MemberCreateStep2BizContainer} />
-                                <Route path="/members/add/step-2-rez-or-cc" exact component={MemberCreateStep2RezOrComContainer} />
-                                <Route path="/members/add/step-3" exact component={MemberCreateStep3Container} />
-                                <Route path="/members/add/step-4" exact component={MemberCreateStep4Container} />
-                                <Route path="/members/add/step-5" exact component={MemberCreateStep5Container} />
-                                <Route path="/members/add/step-6" exact component={MemberCreateStep6Container} />
-                                <Route path="/members/active" exact component={MemberListActiveContainer} />
-                                <Route path="/members/inactive" exact component={MemberListInactiveContainer} />
-                                <Route path="/members/:urlArgument/search" exact component={MemberSearchContainer} />
-                                <Route path="/members/:urlArgument/search-results" exact component={MemberSearchResultContainer} />
-                                <Route path="/members/:urlArgument/:slug" exact component={MemberLiteRetrieveContainer} />
-                                <Route path="/members/:urlArgument/:slug/full" exact component={MemberFullRetrieveContainer} />
+                                <Route path="/settings/district-biz/:slug/update" exact component={requiresAuth(DistrictUpdateBizContainer)} />
+                                <Route path="/settings/district-cc/:slug/update" exact component={requiresAuth(DistrictUpdateComContainer)} />
+                                <Route path="/settings/district-rez/:slug/update" exact component={requiresAuth(DistrictUpdateRezContainer)} />
+                                <Route path="/settings/tags" exact component={requiresAuth(TagsListContainer)} />
+                                <Route path="/settings/tag/add" exact component={requiresAuth(TagCreateContainer)} />
+                                <Route path="/settings/tag/:slug/delete" exact component={requiresAuth(TagDeleteContainer)} />
+                                <Route path="/settings/tag/:slug/update" exact component={requiresAuth(TagUpdateContainer)} />
+                                <Route path="/settings/how-hears" exact component={requiresAuth(HowHearsListContainer)} />
+                                <Route path="/settings/how-hears/add" exact component={requiresAuth(HowHearCreateContainer)} />
+                                <Route path="/settings/how-hear/:slug/delete" exact component={requiresAuth(HowHearDeleteContainer)} />
+                                <Route path="/settings/how-hear/:slug/update" exact component={requiresAuth(HowHearUpdateContainer)} />
+                                <Route path="/settings/announcements" exact component={requiresAuth(AnnouncementListContainer)} />
+                                <Route path="/settings/announcements/add" exact component={requiresAuth(AnnouncementCreateContainer)} />
+                                <Route path="/settings/announcement/:slug/delete" exact component={requiresAuth(AnnouncementDeleteContainer)} />
+                                <Route path="/settings/announcement/:slug/update" exact component={requiresAuth(AnnouncementUpdateContainer)} />
+                                <Route path="/settings/resources" exact component={requiresAuth(ResourcesListContainer)} />
+                                <Route path="/settings/resource/add" exact component={requiresAuth(ResourceCreateContainer)} />
+                                <Route path="/settings/resource/:slug/delete" exact component={requiresAuth(ResourceDeleteContainer)} />
+                                <Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
+                                <Route path="/members/add/step-1" exact component={requiresAuth(MemberCreateStep1Container)} />
+                                <Route path="/members/add/step-2-biz" exact component={requiresAuth(MemberCreateStep2BizContainer)} />
+                                <Route path="/members/add/step-2-rez-or-cc" exact component={requiresAuth(MemberCreateStep2RezOrComContainer)} />
+                                <Route path="/members/add/step-3" exact component={requiresAuth(MemberCreateStep3Container)} />
+                                <Route path="/members/add/step-4" exact component={requiresAuth(MemberCreateStep4Container)} />
+                                <Route path="/members/add/step-5" exact component={requiresAuth(MemberCreateStep5Container)} />
+                                <Route path="/members/add/step-6" exact component={requiresAuth(MemberCreateStep6Container)} />
+                                <Route path="/members/active" exact component={requiresAuth(MemberListActiveContainer)} />
+                                <Route path="/members/inactive" exact component={requiresAuth(MemberListInactiveContainer)} />
+                                <Route path="/members/:urlArgument/search" exact component={requiresAuth(MemberSearchContainer)} />
+                                <Route path="/members/:urlArgument/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
+                                <Route path="/members/:urlArgument/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />
+                                <Route path="/members/:urlArgument/:slug/full" exact component={requiresAuth(MemberFullRetrieveContainer)} />
                                 <Route path="/members/:urlArgument/:slug/update" exact component={MemberUpdateContainer} />
                                 <Route path="/members/:urlArgument/:slug/promote/step-1" exact component={MemberPromoteStep1Container} />
                                 <Route path="/members/:urlArgument/:slug/promote/step-2" exact component={MemberPromoteStep2Container} />
