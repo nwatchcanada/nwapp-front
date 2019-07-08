@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import FinancialUpdateComponent from "../../../components/financials/update/financialUpdateComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { validateInput } from "../../../validators/financialValidator";
 
 
-class FinanciaRetrieveContainer extends Component {
+class FinanciaUpdateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,7 +17,10 @@ class FinanciaRetrieveContainer extends Component {
         const { slug } = this.props.match.params;
         this.state = {
             slug: slug,
+            errors: {},
         }
+        this.onSubmitClick = this.onSubmitClick.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
     }
 
     /**
@@ -35,9 +39,6 @@ class FinanciaRetrieveContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -46,11 +47,13 @@ class FinanciaRetrieveContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Financial details has been successfully updated.");
+        this.props.history.push("/financial/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
-        console.log(errors);
+        this.setState({ errors: errors, isLoading: false });
     }
 
     /**
@@ -58,7 +61,30 @@ class FinanciaRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSubmitClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
 
+        this.setState({ errors: {}, isLoading: true });
+
+        // Perform client-side validation.
+        const { errors, isValid } = validateInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
+    }
+
+    onTextChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+    }
 
     /**
      *  Main render function
@@ -66,11 +92,14 @@ class FinanciaRetrieveContainer extends Component {
      */
 
     render() {
-        const { slug } = this.state;
+        const { slug, errors, isLoading } = this.state;
         return (
             <FinancialUpdateComponent
                 slug={slug}
-                flashMessage={this.props.flashMessage}
+                errors={errors}
+                isLoading={isLoading}
+                onSubmitClick={this.onSubmitClick}
+                onTextChange={this.onTextChange}
             />
         );
     }
@@ -78,15 +107,14 @@ class FinanciaRetrieveContainer extends Component {
 
 const mapStateToProps = function(store) {
     return {
-        user: store.userState,
-        flashMessage: store.flashMessageState,
+        user: store.userState
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         }
     }
 }
@@ -95,4 +123,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(FinanciaRetrieveContainer);
+)(FinanciaUpdateContainer);
