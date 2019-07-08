@@ -58,7 +58,7 @@ class TableSortableCol extends Component {
  */
 class TableRow extends Component {
     render() {
-        const { slug, icon, firstName, lastName, phone, email, absoluteUrl } = this.props.datum;
+        const { slug, icon, firstName, lastName, phone, email, financialUrl, absoluteUrl } = this.props.datum;
 
         return (
             <tr slug={slug}>
@@ -67,6 +67,11 @@ class TableRow extends Component {
                 <td>{lastName}</td>
                 <td>{phone}</td>
                 <td>{email}</td>
+                <td>
+                    <a href={financialUrl} target="_blank" rel="noopener noreferrer">
+                        View&nbsp;<i className="fas fa-external-link-alt"></i>
+                    </a>
+                </td>
                 <td>
                     <a href={absoluteUrl}>
                         View&nbsp;<i className="fas fa-chevron-right"></i>
@@ -179,7 +184,8 @@ class MemberListComponent extends Component {
                                             text="Email"
                                             columnKey="email"
                                         />
-                                        <th></th>
+                                        <th>Financials</th>
+                                        <th>Details</th>
                                     </tr>
                                     </thead>
                                     <tbody>

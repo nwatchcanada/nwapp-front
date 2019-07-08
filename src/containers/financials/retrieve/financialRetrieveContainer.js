@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import UnpaidFinancialListComponent from "../../../components/financials/list/unpaidFinancialListComponent";
+import FinancialRetrieveComponent from "../../../components/financials/retrieve/financialRetrieveComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class UnpaidFinancialListContainer extends Component {
+class FinanciaRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -14,10 +14,7 @@ class UnpaidFinancialListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedColumnKey: null,
-            selectedColumnOrder: null
         }
-        this.onTableColumnClick = this.onTableColumnClick.bind(this);
     }
 
     /**
@@ -81,7 +78,7 @@ class UnpaidFinancialListContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/financial/argyle'
+            'absoluteUrl': '/financials/active/argyle'
         },{
             'slug': 'byron',
             'icon': 'building',
@@ -90,7 +87,7 @@ class UnpaidFinancialListContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/financial/byron'
+            'absoluteUrl': '/financials/active/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -99,10 +96,10 @@ class UnpaidFinancialListContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/financial/carling'
+            'absoluteUrl': '/financials/active/carling'
         }];
         return (
-            <UnpaidFinancialListComponent
+            <FinancialRetrieveComponent
                 selectedColumnKey={this.state.selectedColumnKey}
                 selectedColumnOrder={this.state.selectedColumnOrder}
                 onTableColumnClick={this.onTableColumnClick}
@@ -132,4 +129,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(UnpaidFinancialListContainer);
+)(FinanciaRetrieveContainer);

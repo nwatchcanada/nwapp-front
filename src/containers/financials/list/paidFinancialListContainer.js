@@ -81,7 +81,7 @@ class PaidFinancialListContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/financials/active/argyle'
+            'absoluteUrl': '/financial/argyle'
         },{
             'slug': 'byron',
             'icon': 'building',
@@ -90,7 +90,7 @@ class PaidFinancialListContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/financials/active/byron'
+            'absoluteUrl': '/financial/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -99,7 +99,7 @@ class PaidFinancialListContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/financials/active/carling'
+            'absoluteUrl': '/financial/carling'
         }];
         return (
             <PaidFinancialListComponent
