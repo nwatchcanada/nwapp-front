@@ -116,7 +116,6 @@ import AreaCoordinatorListActiveContainer from "./areaCoordinators/areaCoordinat
 import AreaCoordinatorListInactiveContainer from "./areaCoordinators/areaCoordinatorListInactiveContainer";
 import AreaCoordinatorSearchContainer from "./areaCoordinators/areaCoordinatorSearchContainer";
 import AreaCoordinatorSearchResultContainer from "./areaCoordinators/areaCoordinatorSearchResultContainer";
-import AreaCoordinatorRetrieveContainer from "./areaCoordinators/areaCoordinatorRetrieveContainer";
 import AreaCoordinatorUpdateContainer from "./areaCoordinators/areaCoordinatorUpdateContainer";
 import AreaCoordinatorCreateStep1Container from "./areaCoordinators/create/areaCoordinatorCreateStep1Container";
 import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaCoordinatorCreateStep2Container";

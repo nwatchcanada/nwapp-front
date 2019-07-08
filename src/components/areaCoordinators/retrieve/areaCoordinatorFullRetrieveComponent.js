@@ -47,17 +47,17 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/area-coordinators/active"><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                            <Link to="/area-coordinators/active"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;Argyle
+                            <i className="fas fa-horse-head"></i>&nbsp;Argyle
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;View AreaCoordinator</h1>
+                <h1><i className="fas fa-horse-head"></i>&nbsp;View Area Coordinator</h1>
 
                 <div className="row">
                     <div className="step-navigation">
