@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import FinancialRetrieveComponent from "../../../components/financials/retrieve/financialRetrieveComponent";
+import FinancialUpdateComponent from "../../../components/financials/update/financialUpdateComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -68,7 +68,7 @@ class FinanciaRetrieveContainer extends Component {
     render() {
         const { slug } = this.state;
         return (
-            <FinancialRetrieveComponent
+            <FinancialUpdateComponent
                 slug={slug}
                 flashMessage={this.props.flashMessage}
             />

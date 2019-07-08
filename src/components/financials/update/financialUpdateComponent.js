@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
-export default class FinancialRetrieveComponent extends Component {
+export default class FinancialUpdateComponent extends Component {
     render() {
         const { flashMessage, slug } = this.props;
         return (
@@ -117,7 +117,7 @@ export default class FinancialRetrieveComponent extends Component {
                         </table>
 
                         <div className="form-group">
-                            <Link to={`/financial/${slug}/update`} className="btn btn-warning btn-lg mt-4 float-right pl-4 pr-4">
+                            <Link to={`/financial/${slug}/edit`} className="btn btn-warning btn-lg mt-4 float-right pl-4 pr-4">
                                 <i className="fas fa-edit"></i>&nbsp;Edit
                             </Link>
                             <Link to="/financials/all" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">

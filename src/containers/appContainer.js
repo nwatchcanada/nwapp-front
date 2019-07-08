@@ -150,6 +150,7 @@ import UnpaidFinancialListContainer from "./financials/list/unpaidFinancialListC
 import PaidFinancialListContainer from "./financials/list/paidFinancialListContainer";
 import AllFinancialListContainer from "./financials/list/allFinancialListContainer";
 import FinanciaRetrieveContainer from "./financials/retrieve/financialRetrieveContainer";
+import FinanciaUpdateContainer from "./financials/update/financialUpdateContainer";
 
 
 class AppContainer extends React.Component {
@@ -294,6 +295,7 @@ class AppContainer extends React.Component {
                                 <Route path="/financials/paid" exact component={PaidFinancialListContainer} />
                                 <Route path="/financials/all" exact component={AllFinancialListContainer} />
                                 <Route path="/financial/:slug" exact component={FinanciaRetrieveContainer} />
+                                <Route path="/financial/:slug/update" exact component={FinanciaUpdateContainer} />
                                 <Route component={NotFound404Container} />
                             </Switch>
                         </main>
