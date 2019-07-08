@@ -60,7 +60,7 @@ class AssociateUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Associate has been successfully updated.");
-        this.props.history.push("/associates/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/associates/"+this.state.urlArgument+"/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {

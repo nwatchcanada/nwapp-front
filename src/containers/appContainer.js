@@ -105,7 +105,8 @@ import AssociateListActiveContainer from "./associates/associateListActiveContai
 import AssociateListInactiveContainer from "./associates/associateListInactiveContainer";
 import AssociateSearchContainer from "./associates/associateSearchContainer";
 import AssociateSearchResultContainer from "./associates/associateSearchResultContainer";
-import AssociateRetrieveContainer from "./associates/associateRetrieveContainer";
+import AssociateLiteRetrieveContainer from "./associates/retrieve/associateLiteRetrieveContainer";
+import AssociateFullRetrieveContainer from "./associates/retrieve/associateFullRetrieveContainer";
 import AssociateUpdateContainer from "./associates/associateUpdateContainer";
 import AssociateCreateStep1Container from "./associates/create/associateCreateStep1Container";
 import AssociateCreateStep2Container from "./associates/create/associateCreateStep2Container";
@@ -246,7 +247,8 @@ class AppContainer extends React.Component {
                                 <Route path="/associates/inactive" exact component={AssociateListInactiveContainer} />
                                 <Route path="/associates/:urlArgument/search" exact component={AssociateSearchContainer} />
                                 <Route path="/associates/:urlArgument/search-results" exact component={AssociateSearchResultContainer} />
-                                <Route path="/associates/:urlArgument/:slug" exact component={AssociateRetrieveContainer} />
+                                <Route path="/associates/:urlArgument/:slug" exact component={AssociateLiteRetrieveContainer} />
+                                <Route path="/associates/:urlArgument/:slug/full" exact component={AssociateFullRetrieveContainer} />
                                 <Route path="/associates/:urlArgument/:slug/update" exact component={AssociateUpdateContainer} />
                                 <Route path="/associates/:urlArgument/:slug/demote" exact component={AssociateDemoteContainer} />
                                 <Route path="/area-coordinators/add/step-1" exact component={AreaCoordinatorCreateStep1Container} />

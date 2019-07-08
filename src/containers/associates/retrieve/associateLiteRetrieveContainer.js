@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AssociateRetrieveComponent from "../../components/associates/associateRetrieveComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import AssociateLiteRetrieveComponent from "../../../components/associates/retrieve/associateLiteRetrieveComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class AssociateRetrieveContainer extends Component {
+class AssociateLiteRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -23,9 +23,6 @@ class AssociateRetrieveContainer extends Component {
             urlArgument: urlArgument,
             slug: slug,
         }
-
-        this.onBack = this.onBack.bind(this);
-        this.onClick = this.onClick.bind(this);
     }
 
     /**
@@ -67,17 +64,6 @@ class AssociateRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onBack(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/associates/"+this.state.urlArgument);
-    }
-
-    onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/associates/"+this.state.urlArgument+"/"+this.state.slug+"/update");
-    }
 
     /**
      *  Main render function
@@ -92,12 +78,10 @@ class AssociateRetrieveContainer extends Component {
             'absoluteUrl': '/associate/argyle'
         };
         return (
-            <AssociateRetrieveComponent
+            <AssociateLiteRetrieveComponent
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 associateData={associateData}
-                onBack={this.onBack}
-                onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
             />
         );
@@ -123,4 +107,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AssociateRetrieveContainer);
+)(AssociateLiteRetrieveContainer);
