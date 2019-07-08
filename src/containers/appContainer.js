@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, withRouter, Switch } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 
-// import requiresAuth from '../helpers/requiresAuth';
+import requiresAuth from '../helpers/requiresAuth';
 import NavigationContainer from './navigation/navigationContainer';
 import NotFound404Container from './navigation/notFound404Container';
 import PrivacyContainer from './general/privacyContainer';
@@ -180,21 +180,21 @@ class AppContainer extends React.Component {
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
                                 <Route path="/help" exact component={HelpContainer} />
-                                <Route path="/organizations" exact component={SharedOrganizationListContainer} />
-                                <Route path="/organization/add" exact component={SharedOrganizationCreateContainer} />
-                                <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={TenantDashboardRedirectContainer} />
-                                <Route path="/dashboard" exact component={DashboardContainer} />
-                                <Route path="/settings/districts" exact component={DistrictsListContainer} />
-                                <Route path="/settings/district/step-1-create" exact component={DistrictCreateStepContainer} />
-                                <Route path="/settings/district/step-2-create-rez" exact component={DistrictCreateStep2ResidentialContainer} />
-                                <Route path="/settings/district/step-3-create-rez" exact component={DistrictCreateStep3ResidentialContainer} />
-                                <Route path="/settings/district/step-2-create-biz" exact component={DistrictCreateStep2BusinessContainer} />
-                                <Route path="/settings/district/step-3-create-biz" exact component={DistrictCreateStep3BusinessContainer} />
-                                <Route path="/settings/district/step-2-create-cc" exact component={DistrictCreateStep2CommunityCareContainer} />
-                                <Route path="/settings/district/step-3-create-cc" exact component={DistrictCreateStep3CommunityCareContainer} />
-                                <Route path="/settings/district-biz/:slug" exact component={DistrictRetrieveBizContainer} />
-                                <Route path="/settings/district-cc/:slug" exact component={DistrictRetrieveComContainer} />
-                                <Route path="/settings/district-rez/:slug" exact component={DistrictRetrieveRezContainer} />
+                                <Route path="/organizations" exact component={requiresAuth(SharedOrganizationListContainer)} />
+                                <Route path="/organization/add" exact component={requiresAuth(SharedOrganizationCreateContainer)} />
+                                <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={requiresAuth(TenantDashboardRedirectContainer)} />
+                                <Route path="/dashboard" exact component={requiresAuth(DashboardContainer)} />
+                                <Route path="/settings/districts" exact component={requiresAuth(DistrictsListContainer)} />
+                                <Route path="/settings/district/step-1-create" exact component={requiresAuth(DistrictCreateStepContainer)} />
+                                <Route path="/settings/district/step-2-create-rez" exact component={requiresAuth(DistrictCreateStep2ResidentialContainer)} />
+                                <Route path="/settings/district/step-3-create-rez" exact component={requiresAuth(DistrictCreateStep3ResidentialContainer)} />
+                                <Route path="/settings/district/step-2-create-biz" exact component={requiresAuth(DistrictCreateStep2BusinessContainer)} />
+                                <Route path="/settings/district/step-3-create-biz" exact component={requiresAuth(DistrictCreateStep3BusinessContainer)} />
+                                <Route path="/settings/district/step-2-create-cc" exact component={requiresAuth(DistrictCreateStep2CommunityCareContainer)} />
+                                <Route path="/settings/district/step-3-create-cc" exact component={requiresAuth(DistrictCreateStep3CommunityCareContainer)} />
+                                <Route path="/settings/district-biz/:slug" exact component={requiresAuth(DistrictRetrieveBizContainer)} />
+                                <Route path="/settings/district-cc/:slug" exact component={requiresAuth(DistrictRetrieveComContainer)} />
+                                <Route path="/settings/district-rez/:slug" exact component={requiresAuth(DistrictRetrieveRezContainer)} />
                                 <Route path="/settings/district-biz/:slug/update" exact component={DistrictUpdateBizContainer} />
                                 <Route path="/settings/district-cc/:slug/update" exact component={DistrictUpdateComContainer} />
                                 <Route path="/settings/district-rez/:slug/update" exact component={DistrictUpdateRezContainer} />
