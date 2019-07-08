@@ -123,6 +123,8 @@ import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaC
 import AreaCoordinatorCreateStep3Container from "./areaCoordinators/create/areaCoordinatorCreateStep3Container";
 import AreaCoordinatorPromoteContainer from "./areaCoordinators/promote/areaCoordinatorPromoteContainer";
 import AreaCoordinatorDemoteContainer from "./areaCoordinators/demote/areaCoordinatorDemoteContainer";
+import AreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorLiteRetrieveContainer";
+import AreaCoordinatorFullRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorFullRetrieveContainer";
 
 import StaffListActiveContainer from "./staff/staffListActiveContainer";
 import StaffListInactiveContainer from "./staff/staffListInactiveContainer";
@@ -255,7 +257,8 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinators/inactive" exact component={AreaCoordinatorListInactiveContainer} />
                                 <Route path="/area-coordinators/:urlArgument/search" exact component={AreaCoordinatorSearchContainer} />
                                 <Route path="/area-coordinators/:urlArgument/search-results" exact component={AreaCoordinatorSearchResultContainer} />
-                                <Route path="/area-coordinators/:urlArgument/:slug" exact component={AreaCoordinatorRetrieveContainer} />
+                                <Route path="/area-coordinators/:urlArgument/:slug" exact component={AreaCoordinatorLiteRetrieveContainer} />
+                                <Route path="/area-coordinators/:urlArgument/:slug/full" exact component={AreaCoordinatorFullRetrieveContainer} />
                                 <Route path="/area-coordinators/:urlArgument/:slug/update" exact component={AreaCoordinatorUpdateContainer} />
                                 <Route path="/area-coordinators/:urlArgument/:slug/promote" exact component={AreaCoordinatorPromoteContainer} />
                                 <Route path="/area-coordinators/:urlArgument/:slug/demote" exact component={AreaCoordinatorDemoteContainer} />
