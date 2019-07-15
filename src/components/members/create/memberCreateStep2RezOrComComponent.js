@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 
 
 class MemberCreateStep2RezOrComComponent extends Component {
@@ -87,7 +88,7 @@ class MemberCreateStep2RezOrComComponent extends Component {
                                 type="text"
                             />
 
-                            <BootstrapInput
+                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
                                 error={errors.primaryPhone}
@@ -96,17 +97,19 @@ class MemberCreateStep2RezOrComComponent extends Component {
                                 value={primaryPhone}
                                 name="primaryPhone"
                                 type="text"
+                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
-                            <BootstrapInput
+                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-success"
                                 error={errors.secondaryPhone}
-                                label="Secondary Phone (*)"
+                                label="Secondary Phone"
                                 onChange={onTextChange}
                                 value={secondaryPhone}
                                 name="secondaryPhone"
                                 type="text"
+                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapInput
