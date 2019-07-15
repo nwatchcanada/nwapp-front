@@ -1,4 +1,6 @@
 # Neighbourhood Watch Frontend
+[![Documentation Status](https://readthedocs.org/projects/nwapp-docs/badge/?version=latest)](https://nwapp-docs.readthedocs.io/en/latest/?badge=latest)
+
 TODO: Add description.
 
 ## Installation
