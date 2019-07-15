@@ -36,6 +36,7 @@ npm install --save react-modal
 npm install --save react-spinners
 npm install --save msgpack-lite
 npm install --save react-dropzone
+npm install --save react-number-format
 ```
 
 Upgrade doing the following:
