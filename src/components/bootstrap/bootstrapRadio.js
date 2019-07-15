@@ -24,7 +24,7 @@ export const BootstrapRadio = ({
         <div className="form-group mt-2 mb-4" id={id} onChange={ (event)=>{ onChange(event) }  }>
             <p className="mb-1">{label}</p>
             {options && options.map(
-                (optionDatum, i) => <RadioChoiceOption name={name} selectedValue={selectedValue} choiceOption={optionDatum} key={i} />)
+                (optionDatum, i) => <RadioChoiceOption name={name} selectedValue={selectedValue} choiceOption={optionDatum} key={i+shortid.generate()} />)
             }
         </div>
     );

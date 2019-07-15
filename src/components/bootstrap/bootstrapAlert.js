@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { startCase } from 'lodash';
+import shortid from "shortid";
+
 
 /**
  * Primitive bootstrap alert wnich can be populated with any text. Primarly used
  * as a banner in our application.
  */
 export const BootstrapAlert = ({ value, type }) => {
+    const id = shortid.generate();
     const theClassName = "alert alert-" + type;
     return (
-        <div className={theClassName} role="alert">
+        <div className={theClassName} role="alert" key={id}>
             {value}
         </div>
     )
