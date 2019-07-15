@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
+import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 
 
 export default class MemberBizUpdateFormComponent extends Component {
@@ -58,7 +59,7 @@ export default class MemberBizUpdateFormComponent extends Component {
 
                 <h4><i className="fas fa-tty"></i>&nbsp;Contact Information</h4>
 
-                <BootstrapInput
+                <BootstrapTelephoneInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
                     error={errors.primaryPhone}
@@ -67,19 +68,19 @@ export default class MemberBizUpdateFormComponent extends Component {
                     value={primaryPhone}
                     name="primaryPhone"
                     type="text"
-                    disabled={isLoading}
+                    placeholder="+1 (xxx) xxx-xxxx"
                 />
 
-                <BootstrapInput
+                <BootstrapTelephoneInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-success"
                     error={errors.secondaryPhone}
-                    label="Secondary Phone (*)"
+                    label="Secondary Phone"
                     onChange={onTextChange}
                     value={secondaryPhone}
                     name="secondaryPhone"
                     type="text"
-                    disabled={isLoading}
+                    placeholder="+1 (xxx) xxx-xxxx"
                 />
 
                 <BootstrapInput
