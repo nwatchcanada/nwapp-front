@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 
 
 export default class AreaCoordinatorCreateStep1Component extends Component {
@@ -71,7 +72,7 @@ export default class AreaCoordinatorCreateStep1Component extends Component {
                                 type="text"
                             />
 
-                            <BootstrapInput
+                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
                                 error={errors.phone}
@@ -80,6 +81,7 @@ export default class AreaCoordinatorCreateStep1Component extends Component {
                                 value={phone}
                                 name="phone"
                                 type="text"
+                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapInput
