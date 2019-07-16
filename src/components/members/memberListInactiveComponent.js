@@ -138,7 +138,9 @@ class MemberListComponent extends Component {
                                 </Link>
                             </div>
                             <div id="step-2" className="st-grey active">
-                                <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (8)</span>
+                                <strong>
+                                    <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (8)</span>
+                                </strong>
                             </div>
                         </div>
                     </div>

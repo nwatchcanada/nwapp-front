@@ -42,7 +42,9 @@ export default class StaffCreateStep2Component extends Component {
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey active">
-                            <span className="num">2.</span><span className="">Contact</span>
+                            <strong>
+                                <span className="num">2.</span><span className="">Contact</span>
+                            </strong>
                         </div>
                     </div>
                 </div>

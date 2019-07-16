@@ -52,7 +52,9 @@ class DistrictCreateStep3ComComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey active">
-                            <span className="num">3.</span><span className="">Review</span>
+                            <strong>
+                                <span className="num">3.</span><span className="">Review</span>
+                            </strong>
                         </div>
                     </div>
                 </div>

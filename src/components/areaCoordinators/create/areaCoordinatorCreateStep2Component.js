@@ -32,7 +32,9 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey active">
-                            <span className="num">2.</span><span className="">Results</span>
+                            <strong>
+                                <span className="num">2.</span><span className="">Results</span>
+                            </strong>
                         </div>
                         <div id="step-3" className="st-grey">
                             <span className="num">3.</span><span className="">Review</span>

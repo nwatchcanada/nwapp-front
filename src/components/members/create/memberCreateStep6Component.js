@@ -85,7 +85,9 @@ class MemberCreateStep6Component extends Component {
                             </Link>
                         </div>
                         <div id="step-6" className="st-grey active">
-                            <span className="num">6.</span><span className="">Review</span>
+                            <strong>
+                                <span className="num">6.</span><span className="">Review</span>
+                            </strong>
                         </div>
                     </div>
                 </div>

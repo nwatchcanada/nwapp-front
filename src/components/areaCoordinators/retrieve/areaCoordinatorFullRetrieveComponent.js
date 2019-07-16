@@ -67,7 +67,9 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey active">
-                            <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
+                            <strong>
+                                <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
+                            </strong>
                         </div>
                     </div>
                 </div>

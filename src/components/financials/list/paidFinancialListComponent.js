@@ -135,7 +135,9 @@ class PaidFinancialListComponent extends Component {
                                 </Link>
                             </div>
                             <div id="step-2" className="st-grey active">
-                                <i className="fas fa-check-circle"></i>&nbsp;<span className="">Paid (3)</span>
+                                <strong>
+                                    <i className="fas fa-check-circle"></i>&nbsp;<span className="">Paid (3)</span>
+                                </strong>
                             </div>
                             <div id="step-2" className="st-grey">
                                 <Link to="/financials/all">

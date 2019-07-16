@@ -44,7 +44,9 @@ export default class MemberCreateStep4Component extends Component {
                             </Link>
                         </div>
                         <div id="step-4" className="st-grey active">
-                            <span className="num">4.</span><span className="">Watch</span>
+                            <strong>
+                                <span className="num">4.</span><span className="">Watch</span>
+                            </strong>
                         </div>
                          <div id="step-5" className="st-grey">
                             <span className="num">5.</span><span className="">Metrics</span>

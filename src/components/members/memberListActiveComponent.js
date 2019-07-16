@@ -133,7 +133,9 @@ class MemberActiveListComponent extends Component {
                     <div className="col-md-8">
                         <div className="step-navigation float-right">
                             <div id="step-1" className="st-grey active">
-                                <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
+                                <strong>
+                                    <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
+                                </strong>
                             </div>
                             <div id="step-2" className="st-grey">
                                 <Link to="/members/inactive">

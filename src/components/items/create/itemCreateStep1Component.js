@@ -32,7 +32,9 @@ class ItemCreateStep1Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey active">
-                            <span className="num">1.</span><span className="">Type</span>
+                            <strong>
+                                <span className="num">1.</span><span className="">Type</span>
+                            </strong>
                         </div>
                         <div id="step-2" className="st-grey">
                             <span className="num">2.</span><span className="">Details</span>

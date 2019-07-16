@@ -129,7 +129,9 @@ class TaskListComponent extends Component {
                                 </Link>
                             </div>
                             <div id="step-3" className="st-grey active">
-                                <i className="fas fa-check-circle"></i>&nbsp;<span className="">Closed (8)</span>
+                                <strong>
+                                    <i className="fas fa-check-circle"></i>&nbsp;<span className="">Closed (8)</span>
+                                </strong>
                             </div>
                         </div>
 

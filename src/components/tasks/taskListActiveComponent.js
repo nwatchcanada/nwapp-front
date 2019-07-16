@@ -123,7 +123,9 @@ class TaskActiveListComponent extends Component {
                                 </Link>
                             </div>
                             <div id="step-2" className="st-grey active">
-                                <i className="fas fa-clock"></i>&nbsp;<span className="">Pending (3)</span>
+                                <strong>
+                                    <i className="fas fa-clock"></i>&nbsp;<span className="">Pending (3)</span>
+                                </strong>
                             </div>
                             <div id="step-3" className="st-grey">
                                 <Link to="/tasks/closed">

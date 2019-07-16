@@ -140,7 +140,9 @@ class AllFinancialListComponent extends Component {
                                 </Link>
                             </div>
                             <div id="step-2" className="st-grey active">
-                                <i className="fas fa-list"></i>&nbsp;<span className="">All (6)</span>
+                                <strong>
+                                    <i className="fas fa-list"></i>&nbsp;<span className="">All (6)</span>
+                                </strong>
                             </div>
                         </div>
                     </div>
