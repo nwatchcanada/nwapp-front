@@ -358,3 +358,26 @@ export const TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES = [
         label: "Frontline Staff"
     }
 ];
+
+
+/**
+ *  Choices we have for the `willing_to_volunteer` field.
+ */
+export const WILLING_TO_VOLUNTEER_CHOICES = [
+    {
+        id: 'willingToVolunteer-yes-choice',
+        name: 'willingToVolunteer',
+        value: 2,
+        label: 'Yes',
+    },{
+        id: 'willingToVolunteer-maybe-choice',
+        name: 'willingToVolunteer',
+        value: 1,
+        label: 'Maybe',
+    },{
+        id: 'willingToVolunteer-no-choice',
+        name: 'willingToVolunteer',
+        value: 0,
+        label: 'No',
+    }
+];

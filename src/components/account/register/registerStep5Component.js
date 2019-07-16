@@ -6,13 +6,15 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
-import { GENDER_CHOICES } from "../../../constants/api";
+import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
+import { GENDER_CHOICES, WILLING_TO_VOLUNTEER_CHOICES } from "../../../constants/api";
 
 
 class MemberCreateStep5Component extends Component {
     render() {
         const {
-            returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, onMultiChange,
+            returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            meaning, expectations, willingToVolunteer, onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
@@ -123,6 +125,41 @@ class MemberCreateStep5Component extends Component {
                                     type="text"
                                 />
                             }
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.meaning}
+                                label="What does NW mean to you (*)"
+                                onChange={onTextChange}
+                                value={meaning}
+                                name="meaning"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.expectations}
+                                label="What do you expect from NW? (*)"
+                                onChange={onTextChange}
+                                value={expectations}
+                                name="expectations"
+                                type="text"
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.willingToVolunteer}
+                                label="Are you willing to volunteer as a area coordinator / associate ? (*)"
+                                name="willingToVolunteer"
+                                onChange={onRadioChange}
+                                selectedValue={willingToVolunteer}
+                                options={WILLING_TO_VOLUNTEER_CHOICES}
+                            />
+
+
 
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

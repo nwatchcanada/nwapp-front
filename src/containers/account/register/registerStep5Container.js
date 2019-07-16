@@ -44,6 +44,9 @@ class MemberCreateStep5Container extends Component {
             howDidYouHear: localStorage.getItem("temp-register-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-register-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-register-howDidYouHearOther"),
+            meaning: localStorage.getItem("temp-register-meaning"),
+            expectations: localStorage.getItem("temp-register-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("temp-register-willingToVolunteer")),
             errors: {},
             isLoading: false
         }
@@ -51,6 +54,7 @@ class MemberCreateStep5Container extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -144,6 +148,29 @@ class MemberCreateStep5Container extends Component {
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "temp-register-"+[e.target.name];
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"-label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
+    }
+
     onMultiChange(...args) {
         // Extract the select options from the parameter.
         const selectedOptions = args[0];
@@ -181,7 +208,7 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, errors } = this.state;
+        const { returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations, willingToVolunteer, errors } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
@@ -198,7 +225,11 @@ class MemberCreateStep5Container extends Component {
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
+                meaning={meaning}
+                expectations={expectations}
+                willingToVolunteer={willingToVolunteer}
                 onSelectChange={this.onSelectChange}
+                onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
             />
