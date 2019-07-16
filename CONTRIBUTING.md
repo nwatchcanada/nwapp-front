@@ -10,6 +10,8 @@
 * Do not open an issue on GitHub until you have collected positive feedback about the change. GitHub issues are primarily intended for bug reports and fixes.
 
 ## What libraries does this project use?
+Here are the libraries that this project utilizes, please update this list as
+new libraries get added.
 
 ```bash
 npm install --save prop-types
@@ -57,70 +59,70 @@ npm install --save react-number-format
 
 2. In the container, please add the following comments to help organization. The following is an example of how it should be organized:
 
-```javascript
-import React from 'react';
-import { connect } from 'react-redux';
+  ```javascript
+  import React from 'react';
+  import { connect } from 'react-redux';
 
-import RegisterSuccessComponent from '../../../components/account/register/registerSuccessComponent';
+  import RegisterSuccessComponent from '../../../components/account/register/registerSuccessComponent';
 
 
-class RegisterSuccessContainer extends React.Component {
+  class RegisterSuccessContainer extends React.Component {
 
-    /**
-     *  Initializer
-     *------------------------------------------------------------
-     */
-     
-    /**
-     *  Utility
-     *------------------------------------------------------------
-     */
+      /**
+       *  Initializer
+       *------------------------------------------------------------
+       */
 
-    /**
-     *  Component Life-cycle Management
-     *------------------------------------------------------------
-     */
+      /**
+       *  Utility
+       *------------------------------------------------------------
+       */
 
-    /**
-     *  API callback functions
-     *------------------------------------------------------------
-     */
+      /**
+       *  Component Life-cycle Management
+       *------------------------------------------------------------
+       */
 
-    /**
-     *  Event handling functions
-     *------------------------------------------------------------
-     */
+      /**
+       *  API callback functions
+       *------------------------------------------------------------
+       */
 
-    /**
-     *  Main render function
-     *------------------------------------------------------------
-     */
+      /**
+       *  Event handling functions
+       *------------------------------------------------------------
+       */
 
-    componentDidMount() {
-        window.scrollTo(0, 0);  // Start the page at the top of the page.
-    }
+      /**
+       *  Main render function
+       *------------------------------------------------------------
+       */
 
-    render () {
-        return (
-            <RegisterSuccessComponent />
-        )
-    }
-}
+      componentDidMount() {
+          window.scrollTo(0, 0);  // Start the page at the top of the page.
+      }
 
-const mapStateToProps = function(store) {
-    return {
-        user: store.userState
-    };
-}
+      render () {
+          return (
+              <RegisterSuccessComponent />
+          )
+      }
+  }
 
-const mapDispatchToProps = dispatch => {
-    return {
+  const mapStateToProps = function(store) {
+      return {
+          user: store.userState
+      };
+  }
 
-    }
-}
+  const mapDispatchToProps = dispatch => {
+      return {
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(RegisterSuccessContainer);
-```
+      }
+  }
+
+  export default connect(
+      mapStateToProps,
+      mapDispatchToProps
+  )(RegisterSuccessContainer);
+  ```
