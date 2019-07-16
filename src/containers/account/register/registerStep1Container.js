@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import RegisterStep1Component from "../../../components/account/register/registerStep1Component";
+import { getSubdomain } from '../../../helpers/urlUtility';
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class RegisterStep1Container extends Component {
@@ -17,6 +19,16 @@ class RegisterStep1Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Check if we are in a tenant or not.
+        const subdomain = getSubdomain();
+        const isTenant = subdomain !== null && subdomain !== undefined;
+
+        // If we are not tenant then redirect out.
+        if (isTenant === false) {
+            this.props.setFlashMessage("danger", "Please register under an organization subdomain.");
+            this.props.history.push("/");
+        }
     }
 
     componentWillUnmount() {
@@ -58,7 +70,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
