@@ -35,7 +35,12 @@ class RegisterStep4Container extends Component {
             watchIcon: localStorage.getItem('temp-register-watch-icon'),
             watchName: localStorage.getItem('temp-register-watch-name'),
             typeOf: typeOf,
+            showModal: false,
         }
+
+        this.onShowModalClick = this.onShowModalClick.bind(this);
+        this.onCloseModalClick = this.onCloseModalClick.bind(this);
+        this.onAgreeModalClick = this.onAgreeModalClick.bind(this);
     }
 
     /**
@@ -103,6 +108,25 @@ class RegisterStep4Container extends Component {
         this.props.history.push("/register/step-5");
     }
 
+    onShowModalClick(e) {
+        e.preventDefault();
+        this.setState({
+            showModal: true,
+        })
+    }
+
+    onCloseModalClick(e) {
+        e.preventDefault();
+        this.setState({
+            showModal: false
+        })
+    }
+
+    onAgreeModalClick(e) {
+        e.preventDefault();
+        this.props.history.push("/register/step-5");
+    }
+
 
     /**
      *  Main render function
@@ -110,13 +134,18 @@ class RegisterStep4Container extends Component {
      */
 
     render() {
-        const { returnURL, tableData, isLoading } = this.state;
+        const { returnURL, tableData, isLoading, showModal } = this.state;
         return (
             <RegisterStep4Component
                 tableData={tableData}
                 returnURL={returnURL}
                 isLoading={isLoading}
                 onTableRowClick={this.onTableRowClick}
+                showModal={showModal}
+                onShowModalClick={this.onShowModalClick}
+                onCloseModalClick={this.onCloseModalClick}
+                onAgreeModalClick={this.onAgreeModalClick}
+                showModal={showModal}
             />
         );
     }

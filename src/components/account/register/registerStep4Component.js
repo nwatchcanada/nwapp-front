@@ -1,11 +1,25 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import ReactModal from 'react-modal';
 
 
 export default class RegisterStep4Component extends Component {
     render() {
-        const { returnURL, tableData, isLoading, onTableRowClick } = this.props;
+        const { returnURL, tableData, isLoading, onTableRowClick, onShowModalClick, onCloseModalClick, showModal, onAgreeModalClick } = this.props;
+
+        // Apply our styling for our modal component.
+        const customStyles = {
+            content : {
+                top                   : '50%',
+                left                  : '50%',
+                right                 : 'auto',
+                bottom                : 'auto',
+                marginRight           : '-50%',
+                transform             : 'translate(-50%, -50%)'
+            }
+        };
+
         return (
             <main id="main" role="main">
                 <h1>
@@ -46,6 +60,45 @@ export default class RegisterStep4Component extends Component {
                     </div>
                 </div>
 
+                <ReactModal
+                   isOpen={showModal}
+                    style={customStyles}
+             contentLabel="Minimal Modal Example"
+           onRequestClose={onCloseModalClick}>
+                   <div>
+
+                        <h1>
+                            <i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation Required
+                           <button type="button" className="btn btn-secondary btn-lg float-right" onClick={onCloseModalClick}>
+                               <span className="fa fa-times"></span>
+                           </button>
+                        </h1>
+
+                        <div className="row">
+                            <div className="col-md-8 mx-auto mt-2">
+
+                                <form className="needs-validation" noValidate>
+
+                                   <p>NWL Staff will check your details, and will place you in the appropriate ward and watch. Please keep an eye on your email inbox.</p>
+
+                                   <button
+                                       onClick={onCloseModalClick}
+                                       type="button"
+                                       className="btn btn-lg btn-secondary float-left">
+                                       <i className="fas fa-times"></i>&nbsp;Close
+                                   </button>
+                                   <button
+                                       onClick={onAgreeModalClick}
+                                       type="button"
+                                       className="btn btn-lg btn-success float-right">
+                                       I understand and procced to metrics&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                   </button>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+                </ReactModal>
+
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
@@ -72,6 +125,9 @@ export default class RegisterStep4Component extends Component {
                             </div>
 
                             <div className="form-group">
+                                <button className="btn btn-warning btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onShowModalClick}>
+                                    I don't know and proceed to metrics&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
                                 <Link to="/register/step-3" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
