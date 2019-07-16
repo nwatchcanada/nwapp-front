@@ -16,14 +16,14 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 export default class MemberFullRetrieveComponent extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
-        const { urlArgument, slug, flashMessage } = this.props;
+        const { urlArgument, slug, flashMessage, tagOptions, howDidYouHearOptions } = this.props;
         const {
             typeOf, errors,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOther, streetDirection,
             watchSlug, watchIcon, watchName,
-            dateOfBirth, howDidYouHear, howDidYouHearOther,
+            tags, dateOfBirth, howDidYouHear, howDidYouHearOther,
         } = this.props.memberData;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -222,6 +222,14 @@ export default class MemberFullRetrieveComponent extends Component {
                                         <i className="fas fa-chart-pie"></i>&nbsp;Metrics
                                     </th>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Tags</th>
+                                    <td>
+                                        {tags && tags.map(
+                                            (tag, i) => <TagItem tag={tag} tagOptions={tagOptions} key={i} />)
+                                        }
+                                    </td>
+                                </tr>
                                 {dateOfBirth &&
                                     <tr>
                                         <th scope="row" className="bg-light">Date of Birth</th>
@@ -232,14 +240,14 @@ export default class MemberFullRetrieveComponent extends Component {
                                 }
                                 <tr>
                                     <th scope="row" className="bg-light">How did you hear about us?</th>
-                                    <td>{howDidYouHear}</td>
+                                    <td>
+                                        <HowDidYouHearText
+                                            howDidYouHear={howDidYouHear}
+                                            howDidYouHearOther={howDidYouHearOther}
+                                            howDidYouHearOptions={howDidYouHearOptions}
+                                        />
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">How did you hear about us? (Other)</th>
-                                    <td>{howDidYouHearOther}</td>
-                                </tr>
-
-
                             </tbody>
                         </table>
                         <form>
@@ -258,4 +266,47 @@ export default class MemberFullRetrieveComponent extends Component {
             </main>
         );
     }
+}
+
+
+/**
+ *  Function will take the tag value which was selected and find print it with
+ *  the label from the tagOptions data.
+ */
+class TagItem extends Component {
+    render() {
+        const { tag, tagOptions } = this.props;
+        for (let i = 0; i < tagOptions.length; i++) {
+            let tagOption = tagOptions[i];
+            if (tagOption.value === tag) {
+                return (
+                    <span className="badge badge-info badge-lg" value={tag}>{tagOption.label}</span>
+                );
+            }
+        }
+        return (null);
+    };
+}
+
+
+/**
+ *  Function will take the howDidYouHear value which was selected and find
+ * print it with the label from the howDidYouHearOptions data.
+ */
+class HowDidYouHearText extends Component {
+    render() {
+        const { howDidYouHear, howDidYouHearOther, howDidYouHearOptions } = this.props;
+        if (howDidYouHearOther !== null && howDidYouHearOther !== undefined && howDidYouHearOther !== "") {
+            return howDidYouHearOther;
+        }
+        for (let i = 0; i < howDidYouHearOptions.length; i++) {
+            let howDidYouHearOption = howDidYouHearOptions[i];
+            if (howDidYouHearOption.value === howDidYouHear) {
+                return (
+                    <span value={howDidYouHear}>{howDidYouHearOption.label}</span>
+                );
+            }
+        }
+        return (null);
+    };
 }

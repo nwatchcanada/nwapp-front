@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import MemberFullRetrieveComponent from "../../../components/members/retrieve/memberFullRetrieveComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -71,8 +73,15 @@ class MemberFullRetrieveContainer extends Component {
                     watchSlug: "argyle",
                     watchIcon: "home",
                     watchName: "Argyle",
+                    tags:[
+                        "security", "fitness"
+                    ],
+                    // tags:[
+                    //     {selectName: "tags", value: "security", label: "Security"},
+                    //     {selectName: "tags", value: "fitness", label: "Fitness"}
+                    // ],
                     dateOfBirth: new Date(),
-                    howDidYouHear: "Internet",
+                    howDidYouHear: "internet",
                     howDidYouHearOption: "",
                     howDidYouHearOther: "",
                 }
@@ -106,8 +115,11 @@ class MemberFullRetrieveContainer extends Component {
                     watchSlug: "byron",
                     watchIcon: "building",
                     watchName: "Byron",
+                    tags:[
+                        "security", "fitness"
+                    ],
                     dateOfBirth: new Date(),
-                    howDidYouHear: "Internet",
+                    howDidYouHear: "internet",
                     howDidYouHearOption: "",
                     howDidYouHearOther: "",
                 }
@@ -141,13 +153,41 @@ class MemberFullRetrieveContainer extends Component {
                     watchSlug: "carling",
                     watchIcon: "university",
                     watchName: "Carling",
+                    tags:[
+                        "security", "fitness"
+                    ],
                     dateOfBirth: new Date(),
-                    howDidYouHear: "Internet",
+                    howDidYouHear: "internet",
                     howDidYouHearOption: "",
                     howDidYouHearOther: "",
                 }
             });
         }
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            howDidYouHearData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Word of mouth',
+                    slug: 'word-of-mouth'
+                },{
+                    name: 'Internet',
+                    slug: 'internet'
+                }]
+            },
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -187,12 +227,16 @@ class MemberFullRetrieveContainer extends Component {
      */
 
     render() {
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
         return (
             <MemberFullRetrieveComponent
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 memberData={this.state.memberData}
                 flashMessage={this.props.flashMessage}
+                tagOptions={tagOptions}
+                howDidYouHearOptions={howDidYouHearOptions}
             />
         );
     }
