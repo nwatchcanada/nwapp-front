@@ -77,6 +77,7 @@ export const BootstrapSingleSelect = ({
                 options={options}
                 styles={customStyles}
             />
+            {helpText && <small id={shortid.generate()} className="form-text text-muted">{helpText}</small>}
             {error && <div className="invalid-feedback" style={{display: 'block'}}>{error}</div>}
         </div>
     )

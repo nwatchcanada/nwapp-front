@@ -157,6 +157,7 @@ export default class MemberBizUpdateFormComponent extends Component {
                     error={errors.streetDirection}
                     onSelectChange={onSelectChange}
                     disabled={isLoading}
+                    helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
                 />
 
                 <h4><i className="fas fa-shield-alt"></i>&nbsp;Watch</h4>

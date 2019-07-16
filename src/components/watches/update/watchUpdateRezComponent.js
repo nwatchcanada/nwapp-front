@@ -335,6 +335,7 @@ class AddModalComponent extends Component {
                                     value={streetDirection}
                                     error={errors.streetDirection}
                                     onSelectChange={onSelectChange}
+                                    helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
                                 />
 
                                 <button
