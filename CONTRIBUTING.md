@@ -59,70 +59,70 @@ npm install --save react-number-format
 
 2. In the container, please add the following comments to help organization. The following is an example of how it should be organized:
 
-  ```javascript
-  import React from 'react';
-  import { connect } from 'react-redux';
+    ```javascript
+    import React from 'react';
+    import { connect } from 'react-redux';
 
-  import RegisterSuccessComponent from '../../../components/account/register/registerSuccessComponent';
+    import RegisterSuccessComponent from '../../../components/account/register/registerSuccessComponent';
 
 
-  class RegisterSuccessContainer extends React.Component {
+    class RegisterSuccessContainer extends React.Component {
 
-      /**
-       *  Initializer
-       *------------------------------------------------------------
-       */
+        /**
+         *  Initializer
+         *------------------------------------------------------------
+         */
 
-      /**
-       *  Utility
-       *------------------------------------------------------------
-       */
+        /**
+         *  Utility
+         *------------------------------------------------------------
+         */
 
-      /**
-       *  Component Life-cycle Management
-       *------------------------------------------------------------
-       */
+        /**
+         *  Component Life-cycle Management
+         *------------------------------------------------------------
+         */
 
-      /**
-       *  API callback functions
-       *------------------------------------------------------------
-       */
+        /**
+         *  API callback functions
+         *------------------------------------------------------------
+         */
 
-      /**
-       *  Event handling functions
-       *------------------------------------------------------------
-       */
+        /**
+         *  Event handling functions
+         *------------------------------------------------------------
+         */
 
-      /**
-       *  Main render function
-       *------------------------------------------------------------
-       */
+        /**
+         *  Main render function
+         *------------------------------------------------------------
+         */
 
-      componentDidMount() {
-          window.scrollTo(0, 0);  // Start the page at the top of the page.
-      }
+        componentDidMount() {
+            window.scrollTo(0, 0);  // Start the page at the top of the page.
+        }
 
-      render () {
-          return (
-              <RegisterSuccessComponent />
-          )
-      }
-  }
+        render () {
+            return (
+                <RegisterSuccessComponent />
+            )
+        }
+    }
 
-  const mapStateToProps = function(store) {
-      return {
-          user: store.userState
-      };
-  }
+    const mapStateToProps = function(store) {
+        return {
+            user: store.userState
+        };
+    }
 
-  const mapDispatchToProps = dispatch => {
-      return {
+    const mapDispatchToProps = dispatch => {
+        return {
 
-      }
-  }
+        }
+    }
 
-  export default connect(
-      mapStateToProps,
-      mapDispatchToProps
-  )(RegisterSuccessContainer);
-  ```
+    export default connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(RegisterSuccessContainer);
+    ```
