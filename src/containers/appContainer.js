@@ -10,7 +10,6 @@ import TermsContainer from './general/termsContainer';
 import HelpContainer from './general/helpContainer';
 import LoginContainer from "./account/loginContainer";
 import LogoutContainer from "./account/logoutContainer";
-import RegisterContainer from "./account/registerContainer";
 
 import RegisterStep1Container from "./account/register/registerStep1Container";
 import RegisterStep2BizContainer from "./account/register/registerStep2BizContainer";
@@ -184,7 +183,7 @@ class AppContainer extends React.Component {
                                 <Route path="/" exact component={LoginContainer} />
                                 <Route path="/login" exact component={LoginContainer} />
                                 <Route path="/logout" exact component={LogoutContainer} />
-                                <Route path="/register" exact component={RegisterContainer} />
+                                <Route path="/register" exact component={RegisterStep1Container} />
                                 <Route path="/register/step-1" exact component={RegisterStep1Container} />
                                 <Route path="/register/step-2-biz" exact component={RegisterStep2BizContainer} />
                                 <Route path="/register/step-2-rez-or-cc" exact component={RegisterStep2RezOrComContainer} />
