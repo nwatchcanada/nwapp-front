@@ -4,15 +4,16 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
+import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 
 
 export default class MemberComUpdateFormComponent extends Component {
     render() {
-        const { errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading } = this.props;
+        const { errors, onTextChange, onSelectChange, onMultiChange, onDOBDateTimeChange, isLoading } = this.props;
         const { firstName, lastName, primaryPhone, secondaryPhone, email } = this.props;
         const { streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
         const { watch, watchOptions } = this.props;
-        const { dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
+        const { tags, tagOptions, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
@@ -149,6 +150,17 @@ export default class MemberComUpdateFormComponent extends Component {
                 />
 
                 <h4><i className="fas fa-shield-alt"></i>&nbsp;Watch</h4>
+
+                <BootstrapMultipleSelect
+                    borderColour="border-success"
+                    label="Tags"
+                    name="tags"
+                    defaultOptionLabel="Please select the tag."
+                    options={tagOptions}
+                    selectedOptions={tags}
+                    error={errors.tags}
+                    onMultiChange={onMultiChange}
+                />
 
                 <BootstrapSingleSelect
                     borderColour="border-primary"

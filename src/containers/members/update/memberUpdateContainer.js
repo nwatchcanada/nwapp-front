@@ -8,6 +8,8 @@ import { validateInput } from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF, BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES
 } from '../../../constants/api';
+import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getTagReactSelectOptions } from "../../../actions/tagAction";
 
 
 class MemberUpdateContainer extends Component {
@@ -34,6 +36,7 @@ class MemberUpdateContainer extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
         this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
@@ -72,6 +75,7 @@ class MemberUpdateContainer extends Component {
                 watchIcon: "home",
                 watchName: "Argyle",
                 watch: "argyle-watch",
+                tags: [],
                 dateOfBirth: new Date(),
                 howDidYouHear: "Internet",
                 howDidYouHearOption: "",
@@ -135,6 +139,31 @@ class MemberUpdateContainer extends Component {
                 howDidYouHearOther: "",
             });
         }
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            howDidYouHearData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Word of mouth',
+                    slug: 'word-of-mouth'
+                },{
+                    name: 'Internet',
+                    slug: 'internet'
+                }]
+            },
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -206,6 +235,16 @@ class MemberUpdateContainer extends Component {
         console.log([option.selectName], optionKey, "|",option); // For debugging purposes only.
     }
 
+    onMultiChange(...args) {
+        // Extract the select options from the parameter.
+        const selectedOptions = args[0];
+
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+    }
+
     onDOBDateTimeChange(dateOfBirth) {
         this.setState({
             dateOfBirth: dateOfBirth,
@@ -222,36 +261,36 @@ class MemberUpdateContainer extends Component {
         const {
             name, companyName, email, firstName, contactFirstName, lastName, contactLastName, primaryPhone, secondaryPhone, streetNumber,
             streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, watch, dateOfBirth, howDidYouHear, howDidYouHearOption, howDidYouHearOther
+            watchSlug, watchIcon, watchName, watch, tags, dateOfBirth, howDidYouHear, howDidYouHearOption, howDidYouHearOther
         } = this.state;
 
-        const howDidYouHearOptions = [
-            {
-                selectName: "howDidYouHear",
-                value: "Friend",
-                label: "Friend"
-            },{
-                selectName: "howDidYouHear",
-                value: "Workplace",
-                label: "Workplace"
-            },{
-                selectName: "howDidYouHear",
-                value: "Social Media",
-                label: "Social Media"
-            },{
-                selectName: "howDidYouHear",
-                value: "Family",
-                label: "Family"
-            },{
-                selectName: "howDidYouHear",
-                value: "Internet",
-                label: "Internet"
-            },{
-                selectName: "howDidYouHear",
-                value: "Other",
-                label: "Other"
-            }
-        ];
+        // const howDidYouHearOptions = [
+        //     {
+        //         selectName: "howDidYouHear",
+        //         value: "Friend",
+        //         label: "Friend"
+        //     },{
+        //         selectName: "howDidYouHear",
+        //         value: "Workplace",
+        //         label: "Workplace"
+        //     },{
+        //         selectName: "howDidYouHear",
+        //         value: "Social Media",
+        //         label: "Social Media"
+        //     },{
+        //         selectName: "howDidYouHear",
+        //         value: "Family",
+        //         label: "Family"
+        //     },{
+        //         selectName: "howDidYouHear",
+        //         value: "Internet",
+        //         label: "Internet"
+        //     },{
+        //         selectName: "howDidYouHear",
+        //         value: "Other",
+        //         label: "Other"
+        //     }
+        // ];
 
         // REPLACE THIS CODE WITH API CODE.
         const watchOptions = [
@@ -269,6 +308,9 @@ class MemberUpdateContainer extends Component {
                 label: "Carling Retirement Centre Watch"
             }
         ];
+
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
             <MemberUpdateComponent
@@ -299,6 +341,8 @@ class MemberUpdateContainer extends Component {
                 watchName={watchName}
                 watchOptions={watchOptions}
                 watch={watch}
+                tags={tags}
+                tagOptions={tagOptions}
                 dateOfBirth={dateOfBirth}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOption={howDidYouHearOption}
@@ -308,6 +352,7 @@ class MemberUpdateContainer extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onMultiChange={this.onMultiChange}
                 onDOBDateTimeChange={this.onDOBDateTimeChange}
                 onClick={this.onClick}
             />
