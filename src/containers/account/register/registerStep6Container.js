@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import RegisterStep6Component from "../../../components/account/register/registerStep6Component";
-import { validateStep5CreateInput } from "../../../validators/registerValidator";
+import { validateStep6CreateInput } from "../../../validators/registerValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
@@ -170,7 +170,7 @@ class RegisterStep6Container extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateStep5CreateInput(this.state);
+        const { errors, isValid } = validateStep6CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

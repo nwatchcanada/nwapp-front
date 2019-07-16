@@ -227,3 +227,20 @@ export function validateStep5CreateInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+/**
+ *  Validator will validate step 6 in the member creation form.
+ */
+export function validateStep6CreateInput(data) {
+    let errors = {};
+
+    if (data.agreement === undefined || data.agreement === null || data.agreement === "") {
+        errors.agreement = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
