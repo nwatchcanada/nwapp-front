@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { BootstrapTelephoneInput } from "../bootstrap/bootstrapTelephoneInput";
 
 
 class MemberSearchComponent extends Component {
     render() {
         const { urlArgument, onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
+        const { errors, onTextChange, phone } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -84,6 +86,17 @@ class MemberSearchComponent extends Component {
                                     maxLength="14" />
                                 <div id="phonenumber-error" className="invalid-feedback"></div>
                             </div>
+                            <BootstrapTelephoneInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.phone}
+                                label="Phone"
+                                onChange={onTextChange}
+                                value={phone}
+                                name="phone"
+                                type="text"
+                                placeholder="+1 (xxx) xxx-xxxx"
+                            />
                         </div>
                         <div className="form-row">
                             <div className="form-group col-md-7 mb-4">

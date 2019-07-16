@@ -11,6 +11,7 @@ import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect'
 import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect'
+import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../constants/api";
 
 
@@ -144,7 +145,7 @@ export default class StaffCreateStep1Component extends Component {
 
                             <h4><i className="fas fa-tty"></i>&nbsp;Contact Information</h4>
 
-                            <BootstrapInput
+                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
                                 error={errors.phone}
@@ -153,19 +154,19 @@ export default class StaffCreateStep1Component extends Component {
                                 value={phone}
                                 name="phone"
                                 type="text"
-                                placeholder="(xxx) xxx-xxxx"
+                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
-                            <BootstrapInput
+                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
+                                borderColour="border-primary"
                                 error={errors.mobile}
-                                label="Mobile"
+                                label="Mobile (*)"
                                 onChange={onTextChange}
                                 value={mobile}
                                 name="mobile"
                                 type="text"
-                                placeholder="(xxx) xxx-xxxx"
+                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapInput
@@ -324,7 +325,7 @@ export default class StaffCreateStep1Component extends Component {
                                 placeholder=""
                             />
 
-                            <BootstrapInput
+                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-success"
                                 error={errors.emergencyTelephone}
@@ -333,10 +334,10 @@ export default class StaffCreateStep1Component extends Component {
                                 value={emergencyTelephone}
                                 name="emergencyTelephone"
                                 type="text"
-                                placeholder=""
+                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
-                            <BootstrapInput
+                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-success"
                                 error={errors.emergencyAlternativeTelephone}
@@ -345,7 +346,7 @@ export default class StaffCreateStep1Component extends Component {
                                 value={emergencyAlternativeTelephone}
                                 name="emergencyAlternativeTelephone"
                                 type="text"
-                                placeholder=""
+                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <h4><i className="fas fa-user-circle"></i>&nbsp;Account</h4>

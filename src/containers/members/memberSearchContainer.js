@@ -19,7 +19,8 @@ class MemberListContainer extends Component {
 
         this.state = {
             urlArgument: urlArgument,
-            advancedSearchActive: false
+            advancedSearchActive: false,
+            errors: {},
         }
         this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
         this.onSearchClick = this.onSearchClick.bind(this);
@@ -89,6 +90,7 @@ class MemberListContainer extends Component {
                 onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
                 onSearchClick={this.onSearchClick}
                 onAdvancedSearchClick={this.onAdvancedSearchClick}
+                errors={this.state.errors}
             />
         );
     }
