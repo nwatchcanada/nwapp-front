@@ -141,7 +141,6 @@ class RegisterStep4Container extends Component {
                 returnURL={returnURL}
                 isLoading={isLoading}
                 onTableRowClick={this.onTableRowClick}
-                showModal={showModal}
                 onShowModalClick={this.onShowModalClick}
                 onCloseModalClick={this.onCloseModalClick}
                 onAgreeModalClick={this.onAgreeModalClick}

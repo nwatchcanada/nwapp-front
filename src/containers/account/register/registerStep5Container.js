@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import MemberCreateStep5Component from "../../../components/account/register/registerStep5Component";
 import { validateStep5CreateInput } from "../../../validators/registerValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { getTagReactSelectOptions } from "../../../actions/tagAction";
@@ -39,7 +39,7 @@ class MemberCreateStep5Container extends Component {
             returnURL: returnURL,
             typeOf: typeOf,
             tags: localStorageGetArrayItem("temp-register-tags"),
-            dateOfBirth: localStorageGetDateItem("temp-register-dateOfBirth"),
+            birthYear: localStorage.getItem("temp-register-birthYear"),
             howDidYouHear: localStorage.getItem("temp-register-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-register-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-register-howDidYouHearOther"),
@@ -48,7 +48,6 @@ class MemberCreateStep5Container extends Component {
         }
 
         this.onTextChange = this.onTextChange.bind(this);
-        this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -133,13 +132,6 @@ class MemberCreateStep5Container extends Component {
         localStorage.setItem('temp-register-'+[e.target.name], e.target.value);
     }
 
-    onDOBDateTimeChange(dateObj) {
-        this.setState({
-            dateOfBirth: dateObj,
-        })
-        localStorageSetObjectOrArrayItem('temp-register-dateOfBirth', dateObj);
-    }
-
     onSelectChange(option) {
         const optionKey = [option.selectName]+"Option";
         this.setState({
@@ -188,7 +180,7 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, tags, dateOfBirth, howDidYouHear, howDidYouHearOther, errors } = this.state;
+        const { returnURL, tags, birthYear, howDidYouHear, howDidYouHearOther, errors } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
@@ -198,10 +190,9 @@ class MemberCreateStep5Container extends Component {
                 returnURL={returnURL}
                 tags={tags}
                 tagOptions={tagOptions}
-                dateOfBirth={dateOfBirth}
+                birthYear={birthYear}
                 errors={errors}
                 onTextChange={this.onTextChange}
-                onDOBDateTimeChange={this.onDOBDateTimeChange}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}

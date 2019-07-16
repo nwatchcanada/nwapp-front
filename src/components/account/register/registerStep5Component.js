@@ -5,15 +5,14 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
-import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 
 
 class MemberCreateStep5Component extends Component {
     render() {
         const {
-            returnURL, tags, tagOptions, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, onMultiChange,
-            errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick
+            returnURL, tags, tagOptions, birthYear, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, onMultiChange,
+            errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
         return (
@@ -79,14 +78,15 @@ class MemberCreateStep5Component extends Component {
                                 onMultiChange={onMultiChange}
                             />
 
-                            <BootstrapDatePicker
-                                label="Date of Birth (*)"
-                                name="dateOfBirth"
-                                dateObj={dateOfBirth}
-                                onTimeChange={onDOBDateTimeChange}
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.dateOfBirth}
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.birthYear}
+                                label="Year of Birth (*)"
+                                onChange={onTextChange}
+                                value={birthYear}
+                                name="birthYear"
+                                type="number"
                             />
 
                             <BootstrapSingleSelect

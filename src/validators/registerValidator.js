@@ -209,8 +209,16 @@ export function validateStep4CreateInput(data) {
 export function validateStep5CreateInput(data) {
     let errors = {};
 
-    if (data.dateOfBirth === undefined || data.dateOfBirth === null || data.dateOfBirth === "") {
-        errors.dateOfBirth = 'This field is required';
+    if (data.birthYear === undefined || data.birthYear === null || data.birthYear === "") {
+        errors.birthYear = 'This field is required';
+    } else {
+        try {
+            if (parseInt(data.birthYear) < 1900) {
+                errors.birthYear = 'Needs to be greater then 1900.';
+            }
+        } catch(err) {
+            errors.birthYear = 'This field needs to be a number';
+        }
     }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
         errors.howDidYouHear = 'This field is required';
