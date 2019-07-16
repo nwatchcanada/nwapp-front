@@ -107,7 +107,7 @@ class SharedOrganizationCreateComponent extends Component {
                                     <i className="fas fa-times"></i>&nbsp;Cancel
                                 </button>
                                 <button type="button" className="btn btn-lg float-right pl-4 pr-4 btn-success" onClick={onClick} disabled={isLoading}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Submit
+                                    <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
                             </div>
 

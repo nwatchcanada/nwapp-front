@@ -118,7 +118,7 @@ class DistrictCreateStep3BizComponent extends Component {
                         <form>
                         <div className="form-group">
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                <i className="fas fa-check-circle"></i>&nbsp;Submit
+                                <i className="fas fa-check-circle"></i>&nbsp;Save
                             </button>
                             <Link to="/settings/district/step-2-create-biz" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back

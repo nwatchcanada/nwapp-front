@@ -39,7 +39,7 @@ export default class ItemArchiveComponent extends Component {
                         </button>
                         &nbsp;&nbsp;&nbsp;
                         <button className="btn btn-success btn-lg" onClick={onClick}>
-                            <i className="fas fa-check-circle"></i>&nbsp;Submit
+                            <i className="fas fa-check-circle"></i>&nbsp;Save
                         </button>
                     </p>
                 </div>
