@@ -5,8 +5,10 @@ import Scroll from 'react-scroll';
 import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
 import { validateStep5CreateInput } from "../../../validators/memberValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
+import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -36,6 +38,7 @@ class MemberCreateStep5Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
+            tags: localStorageGetArrayItem("temp-create-member-tags"),
             dateOfBirth: localStorageGetDateItem("temp-create-member-dateOfBirth"),
             howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
@@ -47,6 +50,7 @@ class MemberCreateStep5Container extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -59,6 +63,31 @@ class MemberCreateStep5Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            howDidYouHearData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Word of mouth',
+                    slug: 'word-of-mouth'
+                },{
+                    name: 'Internet',
+                    slug: 'internet'
+                }]
+            },
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -122,6 +151,20 @@ class MemberCreateStep5Container extends Component {
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
+    onMultiChange(...args) {
+        // Extract the select options from the parameter.
+        const selectedOptions = args[0];
+
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+
+        // // Set all the tags we have selected to the STORAGE.
+        const key = 'temp-create-member-' + args[1].name;
+        localStorageSetObjectOrArrayItem(key, selectedOptions);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -145,37 +188,16 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, dateOfBirth, howDidYouHear, howDidYouHearOther, errors } = this.state;
-        const howDidYouHearOptions = [
-            {
-                selectName: "howDidYouHear",
-                value: "Friend",
-                label: "Friend"
-            },{
-                selectName: "howDidYouHear",
-                value: "Workplace",
-                label: "Workplace"
-            },{
-                selectName: "howDidYouHear",
-                value: "Social Media",
-                label: "Social Media"
-            },{
-                selectName: "howDidYouHear",
-                value: "Family",
-                label: "Family"
-            },{
-                selectName: "howDidYouHear",
-                value: "Internt",
-                label: "Internet"
-            },{
-                selectName: "howDidYouHear",
-                value: "Other",
-                label: "Other"
-            }
-        ];
+        const { returnURL, tags, dateOfBirth, howDidYouHear, howDidYouHearOther, errors } = this.state;
+
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+
         return (
             <MemberCreateStep5Component
                 returnURL={returnURL}
+                tags={tags}
+                tagOptions={tagOptions}
                 dateOfBirth={dateOfBirth}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -184,6 +206,7 @@ class MemberCreateStep5Container extends Component {
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
                 onSelectChange={this.onSelectChange}
+                onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
             />
         );

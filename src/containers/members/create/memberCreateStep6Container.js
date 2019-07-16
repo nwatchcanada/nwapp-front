@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 
 import MemberCreateStep6Component from "../../../components/members/create/memberCreateStep6Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { localStorageGetObjectItem, localStorageGetDateItem } from '../../../helpers/localStorageUtility';
+import {
+    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
+} from '../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -54,6 +56,7 @@ class MemberCreateStep6Container extends Component {
             watchSlug: localStorage.getItem('temp-create-member-watch-slug'),
             watchIcon: localStorage.getItem('temp-create-member-watch-icon'),
             watchName: localStorage.getItem('temp-create-member-watch-name'),
+            tags: localStorageGetArrayItem("temp-create-member-tags"),
             dateOfBirth: localStorageGetDateItem("temp-create-member-dateOfBirth"),
             howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
@@ -114,7 +117,7 @@ class MemberCreateStep6Container extends Component {
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, dateOfBirth,
+            watchSlug, watchIcon, watchName, dateOfBirth, tags,
             howDidYouHear, howDidYouHearOption, howDidYouHearOther
         } = this.state;
 
@@ -143,6 +146,7 @@ class MemberCreateStep6Container extends Component {
                 watchSlug={watchSlug}
                 watchIcon={watchIcon}
                 watchName={watchName}
+                tags={tags}
                 dateOfBirth={dateOfBirth}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOption={howDidYouHearOption}

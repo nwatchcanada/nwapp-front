@@ -6,11 +6,15 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
+import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 
 
 class MemberCreateStep5Component extends Component {
     render() {
-        const { returnURL, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
+        const {
+            returnURL, tags, tagOptions, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, onMultiChange,
+            errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick
+        } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
         return (
             <main id="main" role="main">
@@ -74,6 +78,17 @@ class MemberCreateStep5Component extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapMultipleSelect
+                                borderColour="border-success"
+                                label="Tags"
+                                name="tags"
+                                defaultOptionLabel="Please select the tag."
+                                options={tagOptions}
+                                selectedOptions={tags}
+                                error={errors.tags}
+                                onMultiChange={onMultiChange}
+                            />
 
                             <BootstrapDatePicker
                                 label="Date of Birth (*)"

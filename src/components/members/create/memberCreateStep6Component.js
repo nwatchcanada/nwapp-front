@@ -12,7 +12,7 @@ import {
 } from '../../../constants/api';
 
 
-class MemberCreateStep6Component extends Component {
+export default class MemberCreateStep6Component extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
         const {
@@ -21,7 +21,7 @@ class MemberCreateStep6Component extends Component {
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOther, streetDirection,
             watchSlug, watchIcon, watchName,
-            dateOfBirth, howDidYouHear, howDidYouHearOther
+            tags, dateOfBirth, howDidYouHear, howDidYouHearOther
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -240,6 +240,14 @@ class MemberCreateStep6Component extends Component {
                                         <i className="fas fa-chart-pie"></i>&nbsp;Metrics
                                     </th>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Tags</th>
+                                    <td>
+                                        {tags && tags.map(
+                                            (tag, i) => <TagItem tag={tag} key={i} />)
+                                        }
+                                    </td>
+                                </tr>
                                 {dateOfBirth &&
                                     <tr>
                                         <th scope="row" className="bg-light">Date of Birth</th>
@@ -278,4 +286,12 @@ class MemberCreateStep6Component extends Component {
     }
 }
 
-export default MemberCreateStep6Component;
+
+class TagItem extends Component {
+    render() {
+        const { label, value } = this.props.tag;
+        return (
+            <span className="badge badge-info badge-lg" value={value}>{label}</span>
+        );
+    };
+}
