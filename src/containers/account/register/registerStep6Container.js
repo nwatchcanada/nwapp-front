@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Scroll from 'react-scroll';
 
 import RegisterStep6Component from "../../../components/account/register/registerStep6Component";
+import { validateStep5CreateInput } from "../../../validators/memberValidator";
 import {
-    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
+import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -34,27 +38,6 @@ class RegisterStep6Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            bizCompanyName: localStorage.getItem("temp-register-biz-companyName"),
-            bizContactFirstName: localStorage.getItem("temp-register-biz-contactFirstName"),
-            bizContactLastName: localStorage.getItem("temp-register-biz-contactLastName"),
-            bizPrimaryPhone: localStorage.getItem("temp-register-biz-primaryPhone"),
-            bizSecondaryPhone: localStorage.getItem("temp-register-biz-secondaryPhone"),
-            bizEmail: localStorage.getItem("temp-register-biz-email"),
-            rezFirstName: localStorage.getItem("temp-register-rez-or-com-firstName"),
-            rezLastName: localStorage.getItem("temp-register-rez-or-com-lastName"),
-            rezPrimaryPhone: localStorage.getItem("temp-register-rez-or-com-primaryPhone"),
-            rezSecondaryPhone: localStorage.getItem("temp-register-rez-or-com-secondaryPhone"),
-            rezEmail: localStorage.getItem("temp-register-rez-or-com-email"),
-            streetNumber: localStorage.getItem("temp-register-streetNumber"),
-            streetName: localStorage.getItem("temp-register-streetName"),
-            streetType: localStorage.getItem("temp-register-streetType"),
-            streetTypeOption: localStorageGetObjectItem('temp-register-streetTypeOption'),
-            streetTypeOther: localStorage.getItem("temp-register-streetTypeOther"),
-            streetDirection: localStorage.getItem("temp-register-streetDirection"),
-            streetDirectionOption: localStorageGetObjectItem('temp-register-streetDirectionOption'),
-            watchSlug: localStorage.getItem('temp-register-watch-slug'),
-            watchIcon: localStorage.getItem('temp-register-watch-icon'),
-            watchName: localStorage.getItem('temp-register-watch-name'),
             tags: localStorageGetArrayItem("temp-register-tags"),
             dateOfBirth: localStorageGetDateItem("temp-register-dateOfBirth"),
             howDidYouHear: localStorage.getItem("temp-register-howDidYouHear"),
@@ -64,7 +47,13 @@ class RegisterStep6Container extends Component {
             isLoading: false
         }
 
+        this.onTextChange = this.onTextChange.bind(this);
+        this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -74,6 +63,31 @@ class RegisterStep6Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            howDidYouHearData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Word of mouth',
+                    slug: 'word-of-mouth'
+                },{
+                    name: 'Internet',
+                    slug: 'internet'
+                }]
+            },
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -90,19 +104,83 @@ class RegisterStep6Container extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback(member) {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.history.push("/register/step-7");
+    }
+
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
+    onTextChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+        localStorage.setItem('temp-register-'+[e.target.name], e.target.value);
+    }
+
+    onDOBDateTimeChange(dateObj) {
+        this.setState({
+            dateOfBirth: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('temp-register-dateOfBirth', dateObj);
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('temp-register-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('temp-register-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
+    onMultiChange(...args) {
+        // Extract the select options from the parameter.
+        const selectedOptions = args[0];
+
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+
+        // // Set all the tags we have selected to the STORAGE.
+        const key = 'temp-register-' + args[1].name;
+        localStorageSetObjectOrArrayItem(key, selectedOptions);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/register-success");
-    }
+        // Perform client-side validation.
+        const { errors, isValid } = validateStep5CreateInput(this.state);
 
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
+    }
 
     /**
      *  Main render function
@@ -110,46 +188,25 @@ class RegisterStep6Container extends Component {
      */
 
     render() {
-        const {
-            returnURL, typeOf, errors,
-            bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
-            rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
-            streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, dateOfBirth, tags,
-            howDidYouHear, howDidYouHearOption, howDidYouHearOther
-        } = this.state;
+        const { returnURL, tags, dateOfBirth, howDidYouHear, howDidYouHearOther, errors } = this.state;
+
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
             <RegisterStep6Component
                 returnURL={returnURL}
-                typeOf={typeOf}
-                bizCompanyName={bizCompanyName}
-                bizContactFirstName={bizContactFirstName}
-                bizContactLastName={bizContactLastName}
-                bizPrimaryPhone={bizPrimaryPhone}
-                bizSecondaryPhone={bizSecondaryPhone}
-                bizEmail={bizEmail}
-                rezFirstName={rezFirstName}
-                rezLastName={rezLastName}
-                rezPrimaryPhone={rezPrimaryPhone}
-                rezSecondaryPhone={rezSecondaryPhone}
-                rezEmail={rezEmail}
-                streetNumber={streetNumber}
-                streetName={streetName}
-                streetType={streetType}
-                streetTypeOption={streetTypeOption}
-                streetTypeOther={streetTypeOther}
-                streetDirection={streetDirection}
-                streetDirectionOption={streetDirectionOption}
-                watchSlug={watchSlug}
-                watchIcon={watchIcon}
-                watchName={watchName}
                 tags={tags}
+                tagOptions={tagOptions}
                 dateOfBirth={dateOfBirth}
-                howDidYouHear={howDidYouHear}
-                howDidYouHearOption={howDidYouHearOption}
-                howDidYouHearOther={howDidYouHearOther}
                 errors={errors}
+                onTextChange={this.onTextChange}
+                onDOBDateTimeChange={this.onDOBDateTimeChange}
+                howDidYouHear={howDidYouHear}
+                howDidYouHearOptions={howDidYouHearOptions}
+                howDidYouHearOther={howDidYouHearOther}
+                onSelectChange={this.onSelectChange}
+                onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
             />
         );

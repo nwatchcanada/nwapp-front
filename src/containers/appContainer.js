@@ -18,6 +18,7 @@ import RegisterStep3Container from "./account/register/registerStep3Container";
 import RegisterStep4Container from "./account/register/registerStep4Container";
 import RegisterStep5Container from "./account/register/registerStep5Container";
 import RegisterStep6Container from "./account/register/registerStep6Container";
+import RegisterStep7Container from "./account/register/registerStep7Container";
 import RegisterSuccessContainer from "./account/register/registerSuccessContainer";
 
 // import ActivateContainer from "./account/activateContainer";
@@ -191,6 +192,7 @@ class AppContainer extends React.Component {
                                 <Route path="/register/step-4" exact component={RegisterStep4Container} />
                                 <Route path="/register/step-5" exact component={RegisterStep5Container} />
                                 <Route path="/register/step-6" exact component={RegisterStep6Container} />
+                                <Route path="/register/step-7" exact component={RegisterStep7Container} />
                                 <Route path="/register-success" exact component={RegisterSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
