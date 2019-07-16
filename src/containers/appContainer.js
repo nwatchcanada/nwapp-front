@@ -11,7 +11,16 @@ import HelpContainer from './general/helpContainer';
 import LoginContainer from "./account/loginContainer";
 import LogoutContainer from "./account/logoutContainer";
 import RegisterContainer from "./account/registerContainer";
+
+import RegisterStep1Container from "./account/register/registerStep1Container";
+import RegisterStep2BizContainer from "./account/register/registerStep2BizContainer";
+import RegisterStep2RezOrComContainer from "./account/register/registerStep2RezOrComContainer";
+import RegisterStep3Container from "./account/register/registerStep3Container";
+import RegisterStep4Container from "./account/register/registerStep4Container";
+import RegisterStep5Container from "./account/register/registerStep5Container";
+import RegisterStep6Container from "./account/register/registerStep6Container";
 import RegisterSuccessContainer from "./account/registerSuccessContainer";
+
 // import ActivateContainer from "./account/activateContainer";
 // import SendResetPasswordContainer from "./account/sendResetPasswordContainer";
 // import SendResetPasswordSuccessContainer from "./account/sendResetPasswordSuccessContainer";
@@ -176,6 +185,13 @@ class AppContainer extends React.Component {
                                 <Route path="/login" exact component={LoginContainer} />
                                 <Route path="/logout" exact component={LogoutContainer} />
                                 <Route path="/register" exact component={RegisterContainer} />
+                                <Route path="/register/step-1" exact component={RegisterStep1Container} />
+                                <Route path="/register/step-2-biz" exact component={RegisterStep2BizContainer} />
+                                <Route path="/register/step-2-rez-or-cc" exact component={RegisterStep2RezOrComContainer} />
+                                <Route path="/register/step-3" exact component={RegisterStep3Container} />
+                                <Route path="/register/step-4" exact component={RegisterStep4Container} />
+                                <Route path="/register/step-5" exact component={RegisterStep5Container} />
+                                <Route path="/register/step-6" exact component={RegisterStep6Container} />
                                 <Route path="/register-success" exact component={RegisterSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
@@ -227,7 +243,6 @@ class AppContainer extends React.Component {
                                 <Route path="/members/:urlArgument/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
                                 <Route path="/members/:urlArgument/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />
                                 <Route path="/members/:urlArgument/:slug/full" exact component={requiresAuth(MemberFullRetrieveContainer)} />
-
                                 <Route path="/members/:urlArgument/:slug/update" exact component={requiresAuth(MemberUpdateContainer)} />
                                 <Route path="/members/:urlArgument/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
                                 <Route path="/members/:urlArgument/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
