@@ -399,3 +399,20 @@ export const WILLING_TO_VOLUNTEER_CHOICES = [
         label: 'No',
     }
 ];
+
+/**
+ *  Choices we have for the `ho`
+ */
+export const ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES = [
+    {
+        id: 'anotherHouseholdMemberRegistered-y-choice',
+        name: "anotherHouseholdMemberRegistered",
+        value: 1,
+        label: "Yes"
+    },{
+        id: 'anotherHouseholdMemberRegistered-n-choice',
+        name: "anotherHouseholdMemberRegistered",
+        value: 0,
+        label: "No"
+    }
+];

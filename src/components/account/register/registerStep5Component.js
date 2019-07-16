@@ -7,17 +7,27 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
-import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES } from "../../../constants/api";
+import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../constants/api";
 
 
 class MemberCreateStep5Component extends Component {
     render() {
         const {
             returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, expectations, willingToVolunteer, onRadioChange,  onMultiChange,
+            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, householdCount,
+            onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
+
+        // This code checks to see if we need to display the `householdCount` field.
+        let showHouseholdCount = false;
+        try {
+            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
+        } catch (error) {
+            // Do nothing.
+        }
+
         return (
             <main id="main" role="main">
                 <h1>
@@ -160,6 +170,29 @@ class MemberCreateStep5Component extends Component {
                                 options={WILLING_TO_VOLUNTEER_CHOICES}
                             />
 
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.anotherHouseholdMemberRegistered}
+                                label="Is there another member of your household which is registered with us? (*)"
+                                name="anotherHouseholdMemberRegistered"
+                                onChange={onRadioChange}
+                                selectedValue={anotherHouseholdMemberRegistered}
+                                options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
+                            />
+
+                            {showHouseholdCount &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.householdCount}
+                                    label="How many people are in your household? (*)"
+                                    onChange={onTextChange}
+                                    value={householdCount}
+                                    name="householdCount"
+                                    type="number"
+                                />
+                            }
 
 
                             <div className="form-group">

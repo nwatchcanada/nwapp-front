@@ -242,6 +242,14 @@ export function validateStep5CreateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
+    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
+        errors.anotherHouseholdMemberRegistered = 'This field is required';
+    } else {
+        if (data.householdCount === undefined || data.householdCount === null || data.householdCount === "" || isNaN(data.householdCount) ) {
+            errors.householdCount = 'This field is required';
+        }
+    }
+
 
     return {
         errors,

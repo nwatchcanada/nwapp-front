@@ -47,6 +47,8 @@ class MemberCreateStep5Container extends Component {
             meaning: localStorage.getItem("temp-register-meaning"),
             expectations: localStorage.getItem("temp-register-expectations"),
             willingToVolunteer: parseInt(localStorage.getItem("temp-register-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-register-anotherHouseholdMemberRegistered")),
+            householdCount: parseInt(localStorage.getItem("temp-register-householdCount")),
             errors: {},
             isLoading: false
         }
@@ -208,7 +210,9 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations, willingToVolunteer, errors } = this.state;
+        const {
+            returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
+            willingToVolunteer, anotherHouseholdMemberRegistered, householdCount, errors } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
@@ -228,6 +232,8 @@ class MemberCreateStep5Container extends Component {
                 meaning={meaning}
                 expectations={expectations}
                 willingToVolunteer={willingToVolunteer}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                householdCount={householdCount}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}
