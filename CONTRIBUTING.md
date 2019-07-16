@@ -46,14 +46,14 @@ npm install --save react-dropzone
 npm install --save react-number-format
 ```
 
-## What Chrome Plugins does this project us?
+## What ``Chrome Plugins`` should I use?
 
 1. [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
 2. [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
 
 
-## What conventions should I use?
+## What coding conventions should I use?
 
 1. Please use [container-component pattern](https://medium.com/@learnreact/container-components-c0e67432e005)
 
