@@ -220,7 +220,7 @@ export function validateStep5CreateInput(data) {
             errors.birthYear = 'This field needs to be a number';
         }
     }
-    if (data.gender === undefined || data.gender === null || data.gender === "") {
+    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.willingToVolunteer) ) {
         errors.gender = 'This field is required';
     }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
@@ -242,7 +242,6 @@ export function validateStep5CreateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
-    console.log(data.willingToVolunteer);
 
     return {
         errors,

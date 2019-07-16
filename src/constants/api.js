@@ -342,6 +342,24 @@ export const GENDER_CHOICES = [
         label: "Prefer not to say"
     }
 ];
+export const GENDER_RADIO_CHOICES = [
+    {
+        id: 'willingToVolunteer-m-choice',
+        name: "gender",
+        value: MALE_GENDER,
+        label: "Male"
+    },{
+        id: 'willingToVolunteer-f-choice',
+        name: "gender",
+        value: FEMALE_GENDER,
+        label: "Female"
+    },{
+        id: 'willingToVolunteer-pnts-choice',
+        name: "gender",
+        value: PREFER_NOT_TO_SAY_GENDER,
+        label: "Prefer not to say"
+    }
+];
 
 
 /**

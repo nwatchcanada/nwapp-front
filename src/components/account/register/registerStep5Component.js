@@ -7,7 +7,7 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
-import { GENDER_CHOICES, WILLING_TO_VOLUNTEER_CHOICES } from "../../../constants/api";
+import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES } from "../../../constants/api";
 
 
 class MemberCreateStep5Component extends Component {
@@ -81,14 +81,15 @@ class MemberCreateStep5Component extends Component {
                                 onMultiChange={onMultiChange}
                             />
 
-                            <BootstrapSingleSelect
-                                label="Gender (*)"
-                                name="gender"
-                                defaultOptionLabel="Please select the gender."
-                                options={GENDER_CHOICES}
-                                value={gender}
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
                                 error={errors.gender}
-                                onSelectChange={onSelectChange}
+                                label="Please select your gender (*)"
+                                name="gender"
+                                onChange={onRadioChange}
+                                selectedValue={gender}
+                                options={GENDER_RADIO_CHOICES}
                             />
 
                             <BootstrapInput
