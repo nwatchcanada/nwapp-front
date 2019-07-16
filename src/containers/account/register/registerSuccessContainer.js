@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import RegisterSuccessComponent from '../../components/account/registerSuccessComponent';
+import RegisterSuccessComponent from '../../../components/account/register/registerSuccessComponent';
 
 
 class RegisterSuccessContainer extends React.Component {

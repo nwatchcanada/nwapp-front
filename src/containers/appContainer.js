@@ -18,7 +18,7 @@ import RegisterStep3Container from "./account/register/registerStep3Container";
 import RegisterStep4Container from "./account/register/registerStep4Container";
 import RegisterStep5Container from "./account/register/registerStep5Container";
 import RegisterStep6Container from "./account/register/registerStep6Container";
-import RegisterSuccessContainer from "./account/registerSuccessContainer";
+import RegisterSuccessContainer from "./account/register/registerSuccessContainer";
 
 // import ActivateContainer from "./account/activateContainer";
 // import SendResetPasswordContainer from "./account/sendResetPasswordContainer";

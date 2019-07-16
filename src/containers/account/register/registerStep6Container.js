@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import RegisterStep6Component from "../../../components/account/register/registerStep6Component";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
     localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
@@ -101,8 +100,7 @@ class RegisterStep6Container extends Component {
         e.preventDefault();
 
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/register/success");
+        this.props.history.push("/register-success");
     }
 
 
@@ -165,11 +163,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 
