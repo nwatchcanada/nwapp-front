@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import RegisterStep2RezOrComComponent from "../../../components/account/register/registerStep2RezOrComComponent";
-import { validateStep2RezOrComCreateInput } from "../../../validators/memberValidator";
+import { validateStep2RezOrComCreateInput } from "../../../validators/registerValidator";
 import { RESIDENCE_TYPE_OF } from '../../../constants/api';
 
 

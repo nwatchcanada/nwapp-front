@@ -6,7 +6,7 @@ import RegisterStep3Component from "../../../components/account/register/registe
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../helpers/localStorageUtility';
-import { validateStep3CreateInput } from "../../../validators/memberValidator";
+import { validateStep3CreateInput } from "../../../validators/registerValidator";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,

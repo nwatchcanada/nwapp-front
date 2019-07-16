@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import RegisterStep6Component from "../../../components/account/register/registerStep6Component";
-import { validateStep5CreateInput } from "../../../validators/memberValidator";
+import { validateStep5CreateInput } from "../../../validators/registerValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
