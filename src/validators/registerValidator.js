@@ -220,6 +220,9 @@ export function validateStep5CreateInput(data) {
             errors.birthYear = 'This field needs to be a number';
         }
     }
+    if (data.gender === undefined || data.gender === null || data.gender === "") {
+        errors.gender = 'This field is required';
+    }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
         errors.howDidYouHear = 'This field is required';
     } else {

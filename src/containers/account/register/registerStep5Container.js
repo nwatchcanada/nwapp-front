@@ -40,6 +40,7 @@ class MemberCreateStep5Container extends Component {
             typeOf: typeOf,
             tags: localStorageGetArrayItem("temp-register-tags"),
             birthYear: localStorage.getItem("temp-register-birthYear"),
+            gender: parseInt(localStorage.getItem("temp-register-gender")),
             howDidYouHear: localStorage.getItem("temp-register-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-register-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-register-howDidYouHearOther"),
@@ -180,7 +181,7 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, tags, birthYear, howDidYouHear, howDidYouHearOther, errors } = this.state;
+        const { returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, errors } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
@@ -191,6 +192,7 @@ class MemberCreateStep5Container extends Component {
                 tags={tags}
                 tagOptions={tagOptions}
                 birthYear={birthYear}
+                gender={gender}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 howDidYouHear={howDidYouHear}

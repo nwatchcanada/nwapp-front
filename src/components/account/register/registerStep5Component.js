@@ -6,12 +6,13 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
+import { GENDER_CHOICES } from "../../../constants/api";
 
 
 class MemberCreateStep5Component extends Component {
     render() {
         const {
-            returnURL, tags, tagOptions, birthYear, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, onMultiChange,
+            returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
@@ -76,6 +77,16 @@ class MemberCreateStep5Component extends Component {
                                 selectedOptions={tags}
                                 error={errors.tags}
                                 onMultiChange={onMultiChange}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="Gender (*)"
+                                name="gender"
+                                defaultOptionLabel="Please select the gender."
+                                options={GENDER_CHOICES}
+                                value={gender}
+                                error={errors.gender}
+                                onSelectChange={onSelectChange}
                             />
 
                             <BootstrapInput
