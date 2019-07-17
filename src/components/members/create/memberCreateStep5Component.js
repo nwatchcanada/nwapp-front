@@ -7,14 +7,15 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
-import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../constants/api";
+import { BUSINESS_TYPE_OF, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../constants/api";
 
 
 export default class MemberCreateStep5Component extends Component {
     render() {
         const {
-            returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            typeOf, returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
@@ -27,6 +28,8 @@ export default class MemberCreateStep5Component extends Component {
         } catch (error) {
             // Do nothing.
         }
+
+        const isBizTypeOf = typeOf === BUSINESS_TYPE_OF || typeOf === toString(BUSINESS_TYPE_OF);
 
         return (
             <main id="main" role="main">
@@ -91,7 +94,9 @@ export default class MemberCreateStep5Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <p className="border-bottom mb-3 pb-1 text-secondary">Personal Information</p>
+                            <p className="border-bottom mb-3 pb-1 text-secondary">
+                                <i className="fas fa-user-shield"></i>&nbsp;Personal Information
+                            </p>
 
                             <BootstrapMultipleSelect
                                 borderColour="border-success"
@@ -219,6 +224,43 @@ export default class MemberCreateStep5Component extends Component {
                                 </div>
                             }
 
+                            {isBizTypeOf &&
+                                <div>
+                                    <p className="border-bottom mb-3 pb-1 text-secondary">
+                                        <i className="fas fa-building"></i>&nbsp;Business Information
+                                    </p>
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.companyEmployeeCount}
+                                        label="How many employees does your business have (*)"
+                                        onChange={onTextChange}
+                                        value={companyEmployeeCount}
+                                        name="companyEmployeeCount"
+                                        type="number"
+                                    />
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.companyYearsInOperation}
+                                        label="How many years has your company been in operation (*)"
+                                        onChange={onTextChange}
+                                        value={companyYearsInOperation}
+                                        name="companyYearsInOperation"
+                                        type="number"
+                                    />
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.companyType}
+                                        label="What type of business is this? (*)"
+                                        onChange={onTextChange}
+                                        value={companyType}
+                                        name="companyType"
+                                        type="text"
+                                    />
+                                </div>
+                            }
 
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

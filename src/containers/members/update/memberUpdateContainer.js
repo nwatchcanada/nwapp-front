@@ -284,7 +284,7 @@ class MemberUpdateContainer extends Component {
             name, companyName, email, firstName, contactFirstName, lastName, contactLastName, primaryPhone, secondaryPhone, streetNumber,
             streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
             watchSlug, watchIcon, watchName, watch,
-            tags, birthYear, gender, howDidYouHear, howDidYouHearOption, howDidYouHearOther, meaning, expectations,
+            tags, birthYear, gender, howDidYouHear, howDidYouHearOption, howDidYouHearOther, meaning, expectations, companyEmployeeCount, companyYearsInOperation, companyType,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
         } = this.state;
 
@@ -351,6 +351,9 @@ class MemberUpdateContainer extends Component {
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
+                companyEmployeeCount={companyEmployeeCount}
+                companyYearsInOperation={companyYearsInOperation}
+                companyType={companyType}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

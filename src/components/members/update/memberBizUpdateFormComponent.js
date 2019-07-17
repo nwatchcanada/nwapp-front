@@ -15,7 +15,7 @@ export default class MemberBizUpdateFormComponent extends Component {
         const { contactFirstName, contactLastName, primaryPhone, secondaryPhone, email } = this.props;
         const { companyName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
         const { watch, watchOptions } = this.props;
-        const { tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, } = this.props;
+        const { tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, companyEmployeeCount, companyYearsInOperation, companyType } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
@@ -312,6 +312,38 @@ export default class MemberBizUpdateFormComponent extends Component {
                         />
                     </div>
                 }
+
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.companyEmployeeCount}
+                    label="How many employees does your business have (*)"
+                    onChange={onTextChange}
+                    value={companyEmployeeCount}
+                    name="companyEmployeeCount"
+                    type="number"
+                />
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.companyYearsInOperation}
+                    label="How many years has your company been in operation (*)"
+                    onChange={onTextChange}
+                    value={companyYearsInOperation}
+                    name="companyYearsInOperation"
+                    type="number"
+                />
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.companyType}
+                    label="What type of business is this? (*)"
+                    onChange={onTextChange}
+                    value={companyType}
+                    name="companyType"
+                    type="text"
+                />
+                
             </div>
         );
     };

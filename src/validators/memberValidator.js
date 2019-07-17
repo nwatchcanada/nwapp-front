@@ -126,6 +126,17 @@ export function validateInput(data) {
             }
         }
     }
+    if (data.typeOf === BUSINESS_TYPE_OF) {
+        if (data.companyEmployeeCount === undefined || data.companyEmployeeCount === null || data.companyEmployeeCount === "" || isNaN(data.companyEmployeeCount) ) {
+            errors.companyEmployeeCount = 'This field is required';
+        }
+        if (data.companyYearsInOperation === undefined || data.companyYearsInOperation === null || data.companyYearsInOperation === "" || isNaN(data.companyYearsInOperation) ) {
+            errors.companyYearsInOperation = 'This field is required';
+        }
+        if (data.companyType === undefined || data.companyType === null || data.companyType === "") {
+            errors.companyType = 'This field is required';
+        }
+    }
 
     return {
         errors,
@@ -281,6 +292,17 @@ export function validateStep5CreateInput(data) {
             if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
                 errors.under18YearsHouseholdCount = 'This field is required';
             }
+        }
+    }
+    if (data.typeOf === BUSINESS_TYPE_OF) {
+        if (data.companyEmployeeCount === undefined || data.companyEmployeeCount === null || data.companyEmployeeCount === "" || isNaN(data.companyEmployeeCount) ) {
+            errors.companyEmployeeCount = 'This field is required';
+        }
+        if (data.companyYearsInOperation === undefined || data.companyYearsInOperation === null || data.companyYearsInOperation === "" || isNaN(data.companyYearsInOperation) ) {
+            errors.companyYearsInOperation = 'This field is required';
+        }
+        if (data.companyType === undefined || data.companyType === null || data.companyType === "") {
+            errors.companyType = 'This field is required';
         }
     }
 

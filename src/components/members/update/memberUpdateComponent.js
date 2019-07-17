@@ -34,6 +34,7 @@ class MemberUpdateComponent extends Component {
         const {
             tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.props;
 
         // Check the type of member this is.
@@ -162,6 +163,9 @@ class MemberUpdateComponent extends Component {
                                     anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                                     totalHouseholdCount={totalHouseholdCount}
                                     under18YearsHouseholdCount={under18YearsHouseholdCount}
+                                    companyEmployeeCount={companyEmployeeCount}
+                                    companyYearsInOperation={companyYearsInOperation}
+                                    companyType={companyType}
                                 />
                             }
 

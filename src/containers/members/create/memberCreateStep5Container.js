@@ -50,6 +50,9 @@ class MemberCreateStep5Container extends Component {
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-create-member-anotherHouseholdMemberRegistered")),
             totalHouseholdCount: parseInt(localStorage.getItem("temp-create-member-totalHouseholdCount")),
             under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-create-member-under18YearsHouseholdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("temp-create-member-under18YearsHouseholdCount")),
+            companyYearsInOperation: parseInt(localStorage.getItem("temp-create-member-companyYearsInOperation")),
+            companyType: localStorage.getItem("temp-create-member-companyType"),
             errors: {},
             isLoading: false
         }
@@ -214,14 +217,18 @@ class MemberCreateStep5Container extends Component {
 
     render() {
         const {
-            returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, errors } = this.state;
+            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
+            errors
+        } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
             <MemberCreateStep5Component
+                typeOf={typeOf}
                 returnURL={returnURL}
                 tags={tags}
                 tagOptions={tagOptions}
@@ -238,6 +245,9 @@ class MemberCreateStep5Container extends Component {
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
+                companyEmployeeCount={companyEmployeeCount}
+                companyYearsInOperation={companyYearsInOperation}
+                companyType={companyType}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}
