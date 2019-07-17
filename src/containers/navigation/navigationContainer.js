@@ -7,7 +7,18 @@ import { setFlashMessage } from "../../actions/flashMessageActions";
 import { getSubdomain } from '../../helpers/urlUtility';
 
 
-const anonymousMenuData = [
+import {
+    EXECUTIVE_GROUP_ID,
+    MANAGEMENT_GROUP_ID,
+    FRONTLINE_STAFF_GROUP_ID,
+    ASSOCIATE_GROUP_ID,
+    AREA_COORDINATOR_GROUP_ID,
+    MEMBER_GROUP_ID,
+    ANONYMOUS_GROUP_ID,
+} from '../../constants/api';
+
+
+const ANON_MENU_DATA = [
     {
         id: "anon-login",
         icon: "sign-in-alt",
@@ -21,7 +32,7 @@ const anonymousMenuData = [
     }
 ]
 
-const authenticatedFullMenuData = [
+const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
     {
         id: "full-dashboard",
         icon: "tachometer-alt",
@@ -91,19 +102,82 @@ const authenticatedFullMenuData = [
 ]
 
 
-// const authenticatedLiteMenuData = [
-//     {
-//         id: "lite-dashboard",
-//         icon: "tachometer-alt",
-//         title: "Dashboard",
-//         url: "/onboard"
-//     },{
-//         id: "lite-logout",
-//         icon: "sign-out-alt",
-//         title: "Logout",
-//         url: "/logout"
-//     }
-// ]
+const AUTH_FRONTLINE_STAFF_MENU_DATA = [
+    {
+        id: "full-dashboard",
+        icon: "tachometer-alt",
+        title: "Dashboard",
+        url: "/dashboard"
+    },{
+        id: "full-members",
+        icon: "users",
+        title: "Members",
+        url: "/members/active"
+    },{
+        id: "full-area-coordinator",
+        icon: "horse-head",
+        title: "Area Coordinators",
+        url: "/area-coordinators/active"
+    },{
+        id: "full-associates",
+        icon: "crown",
+        title: "Associates",
+        url: "/associates/active"
+    },{
+        id: "full-watches",
+        icon: "shield-alt",
+        title: "Watches",
+        url: "/watches"
+    },{
+        id: "full-items",
+        icon: "map-pin",
+        title: "Items",
+        url: "/items"
+    },{
+        id: "full-tasks",
+        icon: "tasks",
+        title: "Tasks",
+        url: "/tasks/pending"
+    },{
+        id: "full-reports",
+        icon: "book",
+        title: "Reports",
+        url: "/reports"
+    },{
+        id: "full-staff",
+        icon: "user-tie",
+        title: "Staff",
+        url: "/staff/active"
+    },{
+        id: "full-settings",
+        icon: "cogs",
+        title: "Settings",
+        url: "/settings"
+    },{
+        id: "full-help",
+        icon: "question-circle",
+        title: "Help",
+        url: "/help"
+    },{
+        id: "full-logout",
+        icon: "sign-out-alt",
+        title: "Logout",
+        url: "/logout"
+    }
+]
+
+
+export const NAVIGATION_TREE = {
+    [EXECUTIVE_GROUP_ID]: AUTH_MANAGEMENT_STAFF_MENU_DATA,
+    [MANAGEMENT_GROUP_ID]: AUTH_MANAGEMENT_STAFF_MENU_DATA,
+    [FRONTLINE_STAFF_GROUP_ID]: AUTH_FRONTLINE_STAFF_MENU_DATA,
+    [ASSOCIATE_GROUP_ID]: ANON_MENU_DATA,
+    [AREA_COORDINATOR_GROUP_ID]: ANON_MENU_DATA,
+    [MEMBER_GROUP_ID]: ANON_MENU_DATA,
+    [ANONYMOUS_GROUP_ID]: ANON_MENU_DATA,
+}
+
+
 
 class ItemNode extends React.Component {
     constructor(props)
@@ -177,22 +251,18 @@ class NavigationContainer extends React.Component {
         const keysArr = Object.keys(user);
         const count = keysArr.length;
         if (count > 0) {
+            // Get our permission handling fields from the user object which
+            // we received from the API endpoint.
+            const { groupMembershipId } = user;
+
             // Indicate we are authenticated.
             isAuthenticated = true;
 
             // Generate a friendly message in the menu for authenitcatd users.
             menuTitle = "Hi, "+user.firstName;
 
-            // console.log(user); // For debugging purposes only.
-            menuData = authenticatedFullMenuData;
-
-            // // Generate our menu based on whether the user was "onboarded" or not.
-            // const { groupMembershipId } = user;
-            // if (groupMembershipId === 1) {
-            //     menuData = authenticatedFullMenuData;
-            // } else {
-            //     menuData = authenticatedLiteMenuData;
-            // }
+            // Lookup the user group membership and get the navigation tree.
+            menuData = NAVIGATION_TREE[parseInt(groupMembershipId)];
         }
     }
 
@@ -200,7 +270,7 @@ class NavigationContainer extends React.Component {
     if (menuData === null || menuData === undefined) {
         isAuthenticated = false;
         menuTitle = "Menu"
-        menuData = anonymousMenuData;
+        menuData = NAVIGATION_TREE[ANONYMOUS_GROUP_ID];
     }
 
     // Check if we are in a tenant or not.

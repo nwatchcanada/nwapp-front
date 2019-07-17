@@ -31,6 +31,7 @@ export const FRONTLINE_STAFF_GROUP_ID = 3
 export const ASSOCIATE_GROUP_ID = 4
 export const AREA_COORDINATOR_GROUP_ID = 5
 export const MEMBER_GROUP_ID = 6
+export const ANONYMOUS_GROUP_ID = 0
 export const GROUP_MEMBERSHIP_CHOICES = [
     {
         selectName: "group",
@@ -57,6 +58,11 @@ export const GROUP_MEMBERSHIP_CHOICES = [
         value: MEMBER_GROUP_ID,
         label: "Member"
     }
+];
+export const STAFF_GROUP_MEMBERSHIP_IDS_ARRAY = [
+    EXECUTIVE_GROUP_ID,
+    MANAGEMENT_GROUP_ID,
+    FRONTLINE_STAFF_GROUP_ID,
 ];
 
 

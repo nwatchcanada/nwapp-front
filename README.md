@@ -80,4 +80,4 @@ This library is licensed under the **BSD** license. See [LICENSE](LICENSE) for m
 
 ## Contact
 
-Do you have any questions? Join our [nwl-app mailing list](https://groups.google.com/forum/#!forum/nwl-app) and ask your questions there.
+Do you have any questions? Join our [mailing list](https://groups.google.com/forum/#!forum/nwl-app) and ask your questions there.
