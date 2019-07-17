@@ -32,6 +32,7 @@ const ANON_MENU_DATA = [
     }
 ]
 
+
 const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
     {
         id: "full-dashboard",
@@ -99,7 +100,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         title: "Logout",
         url: "/logout"
     }
-]
+];
 
 
 const AUTH_FRONTLINE_STAFF_MENU_DATA = [
@@ -164,16 +165,77 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         title: "Logout",
         url: "/logout"
     }
-]
+];
+
+
+const AUTH_ASSOCIATE_MENU_DATA = [
+    {
+        id: "full-dashboard",
+        icon: "tachometer-alt",
+        title: "Dashboard",
+        url: "/dashboard"
+    },{
+        id: "full-help",
+        icon: "question-circle",
+        title: "Help",
+        url: "/help"
+    },{
+        id: "full-logout",
+        icon: "sign-out-alt",
+        title: "Logout",
+        url: "/logout"
+    }
+];
+
+
+const AUTH_AREA_COORDINATOR_MENU_DATA = [
+    {
+        id: "full-dashboard",
+        icon: "tachometer-alt",
+        title: "Dashboard",
+        url: "/dashboard"
+    },{
+        id: "full-help",
+        icon: "question-circle",
+        title: "Help",
+        url: "/help"
+    },{
+        id: "full-logout",
+        icon: "sign-out-alt",
+        title: "Logout",
+        url: "/logout"
+    }
+];
+
+
+const AUTH_MEMBER_MENU_DATA = [
+    {
+        id: "full-dashboard",
+        icon: "tachometer-alt",
+        title: "Dashboard",
+        url: "/dashboard"
+    },{
+        id: "full-help",
+        icon: "question-circle",
+        title: "Help",
+        url: "/help"
+    },{
+        id: "full-logout",
+        icon: "sign-out-alt",
+        title: "Logout",
+        url: "/logout"
+    }
+];
+
 
 
 export const NAVIGATION_TREE = {
     [EXECUTIVE_GROUP_ID]: AUTH_MANAGEMENT_STAFF_MENU_DATA,
     [MANAGEMENT_GROUP_ID]: AUTH_MANAGEMENT_STAFF_MENU_DATA,
     [FRONTLINE_STAFF_GROUP_ID]: AUTH_FRONTLINE_STAFF_MENU_DATA,
-    [ASSOCIATE_GROUP_ID]: ANON_MENU_DATA,
-    [AREA_COORDINATOR_GROUP_ID]: ANON_MENU_DATA,
-    [MEMBER_GROUP_ID]: ANON_MENU_DATA,
+    [ASSOCIATE_GROUP_ID]: AUTH_ASSOCIATE_MENU_DATA,
+    [AREA_COORDINATOR_GROUP_ID]: AUTH_AREA_COORDINATOR_MENU_DATA,
+    [MEMBER_GROUP_ID]: AUTH_MEMBER_MENU_DATA,
     [ANONYMOUS_GROUP_ID]: ANON_MENU_DATA,
 }
 
