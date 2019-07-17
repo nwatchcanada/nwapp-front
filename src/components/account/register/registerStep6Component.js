@@ -66,6 +66,9 @@ export default class MemberCreateStep6Component extends Component {
                             <h2>
                                 <i className="fas fa-balance-scale"></i>&nbsp;Legality
                             </h2>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
                             <p>To become a member of Neighbourhood Watch, the following terms must be agreed upon:</p>
                             <p>
                                 <ul>
@@ -81,9 +84,6 @@ export default class MemberCreateStep6Component extends Component {
                                     </li>
                                 </ul>
                             </p>
-
-                            <BootstrapErrorsProcessingAlert errors={errors} />
-
                             <BootstrapCheckbox
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
