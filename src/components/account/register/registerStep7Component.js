@@ -19,8 +19,8 @@ export default class RegisterStep7Component extends Component {
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOther, streetDirection,
             watchSlug, watchIcon, watchName,
-            tags, tagOptions, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            tags, tagOptions, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
+            meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             agreement,
         } = this.props;
@@ -37,6 +37,11 @@ export default class RegisterStep7Component extends Component {
         }
         else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
             membershipClass = "Community Cares";
+        }
+
+        let howDidYouHearFinalLabel = howDidYouHearLabel;
+        if (howDidYouHear === "other") {
+            howDidYouHearFinalLabel = howDidYouHearOther;
         }
 
         return (
@@ -254,15 +259,26 @@ export default class RegisterStep7Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">How did you hear about us?</th>
-                                    <td>{howDidYouHear}</td>
+                                    <td>{howDidYouHearFinalLabel}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">How did you hear about us? (Other)</th>
-                                    <td>{howDidYouHearOther}</td>
+                                    <th scope="row" className="bg-light">What does NW mean to you?</th>
+                                    <td>{meaning}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">What do you expect from NW?</th>
+                                    <td>{expectations}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Are you willing to volunteer as a area coordinator / associate?</th>
+                                    <td>{willingToVolunteerLabel}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Is there another member of your household which is registered with?</th>
+                                    <td>{anotherHouseholdMemberRegisteredLabel}</td>
                                 </tr>
                                 { /*
-                                    , howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-                                    meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+                                    willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
                                     companyEmployeeCount, companyYearsInOperation, companyType,
                                     agreement,
                                 */}

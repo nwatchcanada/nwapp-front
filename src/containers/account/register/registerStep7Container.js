@@ -60,14 +60,17 @@ class RegisterStep7Container extends Component {
             tags: localStorageGetArrayItem("temp-register-tags"),
             birthYear: localStorage.getItem("temp-register-birthYear"),
             gender: parseInt(localStorage.getItem("temp-register-gender")),
-            genderLabel: localStorage.getItem("temp-staff-create-genderLabel"),
+            genderLabel: localStorage.getItem("temp-register-gender-label"),
             howDidYouHear: localStorage.getItem("temp-register-howDidYouHear"),
+            howDidYouHearLabel: localStorage.getItem("temp-register-howDidYouHearLabel"),
             howDidYouHearOption: localStorageGetObjectItem('temp-register-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-register-howDidYouHearOther"),
             meaning: localStorage.getItem("temp-register-meaning"),
             expectations: localStorage.getItem("temp-register-expectations"),
             willingToVolunteer: parseInt(localStorage.getItem("temp-register-willingToVolunteer")),
+            willingToVolunteerLabel: localStorage.getItem("temp-register-willingToVolunteer-label"),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-register-anotherHouseholdMemberRegistered")),
+            anotherHouseholdMemberRegisteredLabel: localStorage.getItem("temp-register-anotherHouseholdMemberRegistered-label"),
             totalHouseholdCount: parseInt(localStorage.getItem("temp-register-totalHouseholdCount")),
             under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-register-householdCount")),
             companyEmployeeCount: parseInt(localStorage.getItem("temp-register-companyEmployeeCount")),
@@ -130,8 +133,8 @@ class RegisterStep7Container extends Component {
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
             watchSlug, watchIcon, watchName,
-            tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, meaning, expectations,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, expectations,
+            willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.state;
 
@@ -169,12 +172,15 @@ class RegisterStep7Container extends Component {
                 gender={gender}
                 genderLabel={genderLabel}
                 howDidYouHear={howDidYouHear}
+                howDidYouHearLabel={howDidYouHearLabel}
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
                 meaning={meaning}
                 expectations={expectations}
                 willingToVolunteer={willingToVolunteer}
+                willingToVolunteerLabel={willingToVolunteerLabel}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 companyEmployeeCount={companyEmployeeCount}

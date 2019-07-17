@@ -48,6 +48,7 @@ class RegisterStep5Container extends Component {
             expectations: localStorage.getItem("temp-register-expectations"),
             willingToVolunteer: parseInt(localStorage.getItem("temp-register-willingToVolunteer")),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-register-anotherHouseholdMemberRegistered")),
+            anotherHouseholdMemberRegisteredLabel: localStorage.getItem("temp-register-anotherHouseholdMemberRegistered-label"),
             totalHouseholdCount: parseInt(localStorage.getItem("temp-register-totalHouseholdCount")),
             under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-register-householdCount")),
             companyEmployeeCount: parseInt(localStorage.getItem("temp-register-companyEmployeeCount")),
@@ -149,7 +150,8 @@ class RegisterStep5Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-register-'+[option.selectName], option.value);
+        localStorage.setItem('temp-register-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('temp-register-'+[option.selectName].toString()+"Label", option.label);
         localStorageSetObjectOrArrayItem('temp-register-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
@@ -157,14 +159,17 @@ class RegisterStep5Container extends Component {
     onRadioChange(e) {
         // Get the values.
         const storageValueKey = "temp-register-"+[e.target.name];
+        const storageLabelKey =  "temp-register-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
-        const storeLabelKey = [e.target.name].toString()+"-label";
+        const storeLabelKey = [e.target.name].toString()+"Label";
 
         // Save the data.
         this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
         localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
 
         // For the debugging purposes only.
         console.log({
@@ -216,7 +221,7 @@ class RegisterStep5Container extends Component {
     render() {
         const {
             typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             errors
         } = this.state;
@@ -241,6 +246,7 @@ class RegisterStep5Container extends Component {
                 expectations={expectations}
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 companyEmployeeCount={companyEmployeeCount}
