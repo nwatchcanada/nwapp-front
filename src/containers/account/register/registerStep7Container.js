@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import RegisterStep7Component from "../../../components/account/register/registerStep7Component";
 import {
-    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem, localStorageGetBooleanItem
+    localStorageGetObjectItem, localStorageGetArrayItem, localStorageGetBooleanItem
 } from '../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
@@ -138,9 +138,6 @@ class RegisterStep7Container extends Component {
             companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.state;
 
-        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
-        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
-
         return (
             <RegisterStep7Component
                 returnURL={returnURL}
@@ -167,13 +164,11 @@ class RegisterStep7Container extends Component {
                 watchIcon={watchIcon}
                 watchName={watchName}
                 tags={tags}
-                tagOptions={tagOptions}
                 birthYear={birthYear}
                 gender={gender}
                 genderLabel={genderLabel}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearLabel={howDidYouHearLabel}
-                howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
                 meaning={meaning}
                 expectations={expectations}

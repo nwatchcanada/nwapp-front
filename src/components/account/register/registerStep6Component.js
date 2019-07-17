@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 
 import { BootstrapCheckbox } from "../../bootstrap/bootstrapCheckbox";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
-import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
-import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 
 
 export default class MemberCreateStep6Component extends Component {

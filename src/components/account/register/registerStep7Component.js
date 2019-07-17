@@ -39,6 +39,7 @@ export default class RegisterStep7Component extends Component {
             membershipClass = "Community Cares";
         }
 
+        // Set the how did you hear.
         let howDidYouHearFinalLabel = howDidYouHearLabel;
         if (howDidYouHear === "other") {
             howDidYouHearFinalLabel = howDidYouHearOther;
@@ -297,13 +298,28 @@ export default class RegisterStep7Component extends Component {
                                         <td>{under18YearsHouseholdCount}</td>
                                     </tr>
                                 }
-                                { /*
-                                    totalHouseholdCount, under18YearsHouseholdCount,
-                                    companyEmployeeCount, companyYearsInOperation, companyType,
-                                    agreement,
-                                */}
-
-
+                                {isBizTypeOf &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many employees does your business have?</th>
+                                        <td>{companyEmployeeCount}</td>
+                                    </tr>
+                                }
+                                {isBizTypeOf &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many years has your company been in operation?</th>
+                                        <td>{companyYearsInOperation}</td>
+                                    </tr>
+                                }
+                                {isBizTypeOf &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">What type of business is this?</th>
+                                        <td>{companyType}</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <th scope="row" className="bg-light">I agreed to conditions</th>
+                                    <td>Yes</td>
+                                </tr>
                             </tbody>
                         </table>
                         <form>

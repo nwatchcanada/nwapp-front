@@ -5,8 +5,6 @@ import Scroll from 'react-scroll';
 import RegisterStep6Component from "../../../components/account/register/registerStep6Component";
 import { validateStep6CreateInput } from "../../../validators/registerValidator";
 import { localStorageGetBooleanItem } from '../../../helpers/localStorageUtility';
-import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
-import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -32,7 +30,7 @@ class RegisterStep6Container extends Component {
         else if (typeOf === BUSINESS_TYPE_OF) {
             returnURL = "/register/step-2-biz";
         }
-        
+
         const agreement = localStorageGetBooleanItem("temp-register-agreement");
 
         this.state = {
