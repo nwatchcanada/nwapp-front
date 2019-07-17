@@ -80,6 +80,8 @@ export default class RegisterStep5Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
+                            <p className="border-bottom mb-3 pb-1 text-secondary">Personal Information</p>
+
                             <BootstrapMultipleSelect
                                 borderColour="border-success"
                                 label="Tags"
