@@ -6,9 +6,7 @@ import Moment from 'react-moment';
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
+    RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF,
 } from '../../../constants/api';
 
 
@@ -21,11 +19,15 @@ export default class RegisterStep7Component extends Component {
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOther, streetDirection,
             watchSlug, watchIcon, watchName,
-            tags, dateOfBirth, howDidYouHear, howDidYouHearOther
+            tags, tagOptions, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
+            agreement,
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
 
+        // Set our user type label.
         let membershipClass;
         if (typeOf === BUSINESS_TYPE_OF) {
             membershipClass = "Business";
@@ -225,7 +227,6 @@ export default class RegisterStep7Component extends Component {
                                 </tr>
 
 
-
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-chart-pie"></i>&nbsp;Metrics
@@ -239,14 +240,18 @@ export default class RegisterStep7Component extends Component {
                                         }
                                     </td>
                                 </tr>
-                                {dateOfBirth &&
+                                {birthYear &&
                                     <tr>
-                                        <th scope="row" className="bg-light">Date of Birth</th>
+                                        <th scope="row" className="bg-light">Year of Birth</th>
                                         <td>
-                                            <Moment format="YYYY/MM/DD">{dateOfBirth}</Moment>
+                                            {birthYear}
                                         </td>
                                     </tr>
                                 }
+                                <tr>
+                                    <th scope="row" className="bg-light">Gender</th>
+                                    <td>{genderLabel}</td>
+                                </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">How did you hear about us?</th>
                                     <td>{howDidYouHear}</td>
@@ -255,6 +260,12 @@ export default class RegisterStep7Component extends Component {
                                     <th scope="row" className="bg-light">How did you hear about us? (Other)</th>
                                     <td>{howDidYouHearOther}</td>
                                 </tr>
+                                { /*
+                                    , howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+                                    meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+                                    companyEmployeeCount, companyYearsInOperation, companyType,
+                                    agreement,
+                                */}
 
 
                             </tbody>

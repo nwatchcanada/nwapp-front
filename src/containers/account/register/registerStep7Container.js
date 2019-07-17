@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 
 import RegisterStep7Component from "../../../components/account/register/registerStep7Component";
 import {
-    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem, localStorageGetBooleanItem
 } from '../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../constants/api';
+import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getTagReactSelectOptions } from "../../../actions/tagAction";
 
 
 class RegisterStep7Container extends Component {
@@ -56,10 +58,22 @@ class RegisterStep7Container extends Component {
             watchIcon: localStorage.getItem('temp-register-watch-icon'),
             watchName: localStorage.getItem('temp-register-watch-name'),
             tags: localStorageGetArrayItem("temp-register-tags"),
-            dateOfBirth: localStorageGetDateItem("temp-register-dateOfBirth"),
+            birthYear: localStorage.getItem("temp-register-birthYear"),
+            gender: parseInt(localStorage.getItem("temp-register-gender")),
+            genderLabel: localStorage.getItem("temp-staff-create-genderLabel"),
             howDidYouHear: localStorage.getItem("temp-register-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-register-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-register-howDidYouHearOther"),
+            meaning: localStorage.getItem("temp-register-meaning"),
+            expectations: localStorage.getItem("temp-register-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("temp-register-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-register-anotherHouseholdMemberRegistered")),
+            totalHouseholdCount: parseInt(localStorage.getItem("temp-register-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-register-householdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("temp-register-companyEmployeeCount")),
+            companyYearsInOperation: parseInt(localStorage.getItem("temp-register-companyYearsInOperation")),
+            companyType: localStorage.getItem("temp-register-companyType"),
+            agreement: localStorageGetBooleanItem("temp-register-agreement"),
             errors: {},
             isLoading: false
         }
@@ -115,9 +129,14 @@ class RegisterStep7Container extends Component {
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, dateOfBirth, tags,
-            howDidYouHear, howDidYouHearOption, howDidYouHearOther
+            watchSlug, watchIcon, watchName,
+            tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, meaning, expectations,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.state;
+
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
             <RegisterStep7Component
@@ -145,10 +164,22 @@ class RegisterStep7Container extends Component {
                 watchIcon={watchIcon}
                 watchName={watchName}
                 tags={tags}
-                dateOfBirth={dateOfBirth}
+                tagOptions={tagOptions}
+                birthYear={birthYear}
+                gender={gender}
+                genderLabel={genderLabel}
                 howDidYouHear={howDidYouHear}
-                howDidYouHearOption={howDidYouHearOption}
+                howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
+                meaning={meaning}
+                expectations={expectations}
+                willingToVolunteer={willingToVolunteer}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                totalHouseholdCount={totalHouseholdCount}
+                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                companyEmployeeCount={companyEmployeeCount}
+                companyYearsInOperation={companyYearsInOperation}
+                companyType={companyType}
                 errors={errors}
                 onClick={this.onClick}
             />
