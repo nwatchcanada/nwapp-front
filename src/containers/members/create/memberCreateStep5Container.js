@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
 import { validateStep5CreateInput } from "../../../validators/memberValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { getTagReactSelectOptions } from "../../../actions/tagAction";
@@ -39,18 +39,25 @@ class MemberCreateStep5Container extends Component {
             returnURL: returnURL,
             typeOf: typeOf,
             tags: localStorageGetArrayItem("temp-create-member-tags"),
-            dateOfBirth: localStorageGetDateItem("temp-create-member-dateOfBirth"),
+            birthYear: localStorage.getItem("temp-create-member-birthYear"),
+            gender: parseInt(localStorage.getItem("temp-create-member-gender")),
             howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("temp-create-member-howDidYouHearOther"),
+            meaning: localStorage.getItem("temp-create-member-meaning"),
+            expectations: localStorage.getItem("temp-create-member-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("temp-create-member-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-create-member-anotherHouseholdMemberRegistered")),
+            totalHouseholdCount: parseInt(localStorage.getItem("temp-create-member-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-create-member-under18YearsHouseholdCount")),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
-        this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -112,7 +119,7 @@ class MemberCreateStep5Container extends Component {
     onFailedSubmissionCallback(errors) {
         this.setState({
             errors: errors
-        })
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -133,13 +140,6 @@ class MemberCreateStep5Container extends Component {
         localStorage.setItem('temp-create-member-'+[e.target.name], e.target.value);
     }
 
-    onDOBDateTimeChange(dateObj) {
-        this.setState({
-            dateOfBirth: dateObj,
-        })
-        localStorageSetObjectOrArrayItem('temp-create-member-dateOfBirth', dateObj);
-    }
-
     onSelectChange(option) {
         const optionKey = [option.selectName]+"Option";
         this.setState({
@@ -149,6 +149,29 @@ class MemberCreateStep5Container extends Component {
         localStorage.setItem('temp-create-member-'+[option.selectName], option.value);
         localStorageSetObjectOrArrayItem('temp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "temp-create-member-"+[e.target.name];
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"-label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
     }
 
     onMultiChange(...args) {
@@ -169,6 +192,8 @@ class MemberCreateStep5Container extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
+        // console.log(this.state); // For debugging purposes only.
+
         // Perform client-side validation.
         const { errors, isValid } = validateStep5CreateInput(this.state);
 
@@ -188,7 +213,9 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, tags, dateOfBirth, howDidYouHear, howDidYouHearOther, errors } = this.state;
+        const {
+            returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, errors } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
@@ -198,14 +225,21 @@ class MemberCreateStep5Container extends Component {
                 returnURL={returnURL}
                 tags={tags}
                 tagOptions={tagOptions}
-                dateOfBirth={dateOfBirth}
+                birthYear={birthYear}
+                gender={gender}
                 errors={errors}
                 onTextChange={this.onTextChange}
-                onDOBDateTimeChange={this.onDOBDateTimeChange}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
+                meaning={meaning}
+                expectations={expectations}
+                willingToVolunteer={willingToVolunteer}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                totalHouseholdCount={totalHouseholdCount}
+                under18YearsHouseholdCount={under18YearsHouseholdCount}
                 onSelectChange={this.onSelectChange}
+                onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
             />

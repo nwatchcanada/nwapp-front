@@ -5,17 +5,29 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
-import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
+import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
+import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../constants/api";
 
 
-class MemberCreateStep5Component extends Component {
+export default class MemberCreateStep5Component extends Component {
     render() {
         const {
-            returnURL, tags, tagOptions, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, onMultiChange,
-            errors, onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick
+            returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            onRadioChange,  onMultiChange,
+            errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
+
+        // This code checks to see if we need to display the household count fields.
+        let showHouseholdCount = false;
+        try {
+            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
+        } catch (error) {
+            // Do nothing.
+        }
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -90,21 +102,33 @@ class MemberCreateStep5Component extends Component {
                                 onMultiChange={onMultiChange}
                             />
 
-                            <BootstrapDatePicker
-                                label="Date of Birth (*)"
-                                name="dateOfBirth"
-                                dateObj={dateOfBirth}
-                                onTimeChange={onDOBDateTimeChange}
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.dateOfBirth}
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.gender}
+                                label="Please select your gender (*)"
+                                name="gender"
+                                onChange={onRadioChange}
+                                selectedValue={gender}
+                                options={GENDER_RADIO_CHOICES}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.birthYear}
+                                label="Year of Birth (*)"
+                                onChange={onTextChange}
+                                value={birthYear}
+                                name="birthYear"
+                                type="number"
                             />
 
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
                                 label="How did you hear about us? (*)"
                                 name="howDidYouHear"
-                                defaultOptionLabel="Please select how the member heard about us."
+                                defaultOptionLabel="Please select how you heard about us."
                                 options={howDidYouHearOptions}
                                 value={howDidYouHear}
                                 error={errors.howDidYouHear}
@@ -124,9 +148,79 @@ class MemberCreateStep5Component extends Component {
                                 />
                             }
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.meaning}
+                                label="What does NW mean to you (*)"
+                                onChange={onTextChange}
+                                value={meaning}
+                                name="meaning"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.expectations}
+                                label="What do you expect from NW? (*)"
+                                onChange={onTextChange}
+                                value={expectations}
+                                name="expectations"
+                                type="text"
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.willingToVolunteer}
+                                label="Are you willing to volunteer as a area coordinator / associate ? (*)"
+                                name="willingToVolunteer"
+                                onChange={onRadioChange}
+                                selectedValue={willingToVolunteer}
+                                options={WILLING_TO_VOLUNTEER_CHOICES}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.anotherHouseholdMemberRegistered}
+                                label="Is there another member of your household which is registered with us? (*)"
+                                name="anotherHouseholdMemberRegistered"
+                                onChange={onRadioChange}
+                                selectedValue={anotherHouseholdMemberRegistered}
+                                options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
+                            />
+
+                            {showHouseholdCount &&
+                                <div>
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.totalHouseholdCount}
+                                        label="How many people are in your household? (*)"
+                                        onChange={onTextChange}
+                                        value={totalHouseholdCount}
+                                        name="totalHouseholdCount"
+                                        type="number"
+                                    />
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.under18YearsHouseholdCount}
+                                        label="How many people in your household are under the age of 18? (*)"
+                                        onChange={onTextChange}
+                                        value={under18YearsHouseholdCount}
+                                        name="under18YearsHouseholdCount"
+                                        type="number"
+                                    />
+                                </div>
+                            }
+
+
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Proceed to Legality&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to="/members/add/step-4" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
@@ -141,5 +235,3 @@ class MemberCreateStep5Component extends Component {
         );
     }
 }
-
-export default MemberCreateStep5Component;

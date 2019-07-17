@@ -252,8 +252,7 @@ export function validateStep5CreateInput(data) {
             errors.under18YearsHouseholdCount = 'This field is required';
         }
     }
-
-
+    
     return {
         errors,
         isValid: isEmpty(errors)
