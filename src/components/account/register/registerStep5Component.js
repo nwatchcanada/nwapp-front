@@ -14,13 +14,13 @@ class MemberCreateStep5Component extends Component {
     render() {
         const {
             returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, householdCount,
+            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
 
-        // This code checks to see if we need to display the `householdCount` field.
+        // This code checks to see if we need to display the household count fields.
         let showHouseholdCount = false;
         try {
             showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
@@ -182,16 +182,28 @@ class MemberCreateStep5Component extends Component {
                             />
 
                             {showHouseholdCount &&
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.householdCount}
-                                    label="How many people are in your household? (*)"
-                                    onChange={onTextChange}
-                                    value={householdCount}
-                                    name="householdCount"
-                                    type="number"
-                                />
+                                <div>
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.totalHouseholdCount}
+                                        label="How many people are in your household? (*)"
+                                        onChange={onTextChange}
+                                        value={totalHouseholdCount}
+                                        name="totalHouseholdCount"
+                                        type="number"
+                                    />
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.under18YearsHouseholdCount}
+                                        label="How many people in your household are under the age of 18? (*)"
+                                        onChange={onTextChange}
+                                        value={under18YearsHouseholdCount}
+                                        name="under18YearsHouseholdCount"
+                                        type="number"
+                                    />
+                                </div>
                             }
 
 

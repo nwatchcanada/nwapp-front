@@ -245,8 +245,11 @@ export function validateStep5CreateInput(data) {
     if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
         errors.anotherHouseholdMemberRegistered = 'This field is required';
     } else {
-        if (data.householdCount === undefined || data.householdCount === null || data.householdCount === "" || isNaN(data.householdCount) ) {
-            errors.householdCount = 'This field is required';
+        if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
+            errors.totalHouseholdCount = 'This field is required';
+        }
+        if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
+            errors.under18YearsHouseholdCount = 'This field is required';
         }
     }
 
