@@ -22,7 +22,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
 
         // Extract our plants array (which is used to populate the table) from
         // the users's local storage.
-        const stringStreetsArr = localStorage.getItem("temp-district-com-streets");
+        const stringStreetsArr = localStorage.getItem("nwapp-district-com-streets");
         let streetsArr = JSON.parse(stringStreetsArr);
         if (streetsArr  === undefined || streetsArr === null) {
             streetsArr = [];
@@ -43,8 +43,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             isShowingModal: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            name: localStorage.getItem('temp-district-com-name'),
-            description: localStorage.getItem('temp-district-com-description'),
+            name: localStorage.getItem('nwapp-district-com-name'),
+            description: localStorage.getItem('nwapp-district-com-description'),
 
             // ALL OUR OBJECTS ARE STORED HERE.
             streetsArray: streetsArr,
@@ -54,10 +54,10 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             streetNumber: "",
             streetName: "",
             streetType: "",
-            streetTypeOption: localStorageGetObjectItem('temp-district-com-streetTypeOption'),
+            streetTypeOption: localStorageGetObjectItem('nwapp-district-com-streetTypeOption'),
             streetTypeOther: "",
             streetDirection: "",
-            streetDirectionOption: localStorageGetObjectItem('temp-district-com-streetDirectionOption'),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-district-com-streetDirectionOption'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -121,7 +121,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('temp-district-com-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-district-com-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -130,8 +130,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-district-com-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-district-com-'+optionKey, option);
+        localStorage.setItem('nwapp-district-com-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-district-com-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -200,7 +200,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             });
 
             // Save our table data.
-            localStorage.setItem("temp-district-com-streets", JSON.stringify(a))
+            localStorage.setItem("nwapp-district-com-streets", JSON.stringify(a))
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -260,7 +260,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
                 });
 
                 // Save our table data.
-                localStorage.setItem("temp-district-com-streets", JSON.stringify(filteredItems))
+                localStorage.setItem("nwapp-district-com-streets", JSON.stringify(filteredItems))
 
                 // Terminate our for-loop.
                 return;

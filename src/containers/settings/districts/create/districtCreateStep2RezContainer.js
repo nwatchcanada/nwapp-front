@@ -16,13 +16,13 @@ class DistrictCreateStep2ResidentialContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-district-rez-name'),
-            description: localStorage.getItem('temp-district-rez-description'),
-            counselorName: localStorage.getItem('temp-district-rez-counselorName'),
-            counselorEmail: localStorage.getItem('temp-district-rez-counselorEmail'),
-            counselorPhone: localStorage.getItem('temp-district-rez-counselorPhone'),
-            image: localStorage.getItem('temp-district-rez-image'),
-            program: localStorage.getItem('temp-district-program'),
+            name: localStorage.getItem('nwapp-district-rez-name'),
+            description: localStorage.getItem('nwapp-district-rez-description'),
+            counselorName: localStorage.getItem('nwapp-district-rez-counselorName'),
+            counselorEmail: localStorage.getItem('nwapp-district-rez-counselorEmail'),
+            counselorPhone: localStorage.getItem('nwapp-district-rez-counselorPhone'),
+            image: localStorage.getItem('nwapp-district-rez-image'),
+            program: localStorage.getItem('nwapp-district-program'),
             errors: {},
             isLoading: false
         }
@@ -83,7 +83,7 @@ class DistrictCreateStep2ResidentialContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('temp-district-rez-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-district-rez-'+[e.target.name], e.target.value);
     }
 
     onClick(e) {

@@ -89,7 +89,7 @@ class ItemCreateStep1Container extends Component {
         e.preventDefault();
 
         // Save our data.
-        localStorage.setItem("temp-item-create-typeOf", typeOf)
+        localStorage.setItem("nwapp-item-create-typeOf", typeOf)
 
         // Redirect to the type of item it is.
         if (typeOf === INCIDENT_ITEM_TYPE_OF) {

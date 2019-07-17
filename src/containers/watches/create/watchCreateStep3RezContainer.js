@@ -19,16 +19,16 @@ class WatchCreateStep3RezContainer extends Component {
         super(props);
         this.state = {
             program: RESIDENCE_TYPE_OF,
-            name: localStorage.getItem('temp-watch-rez-name'),
-            associate: localStorage.getItem('temp-watch-rez-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-rez-associateOption'),
-            district: localStorage.getItem('temp-watch-rez-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-rez-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
-            streetMembership: localStorageGetArrayItem('temp-watch-rez-streetMembership'),
+            name: localStorage.getItem('nwapp-watch-rez-name'),
+            associate: localStorage.getItem('nwapp-watch-rez-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-watch-rez-associateOption'),
+            district: localStorage.getItem('nwapp-watch-rez-district'),
+            districtOption: localStorageGetObjectItem('nwapp-watch-rez-districtOption'),
+            primaryAreaCoordinator: localStorage.getItem('nwapp-watch-rez-primaryAreaCoordinator'),
+            primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-rez-primaryAreaCoordinatorOption'),
+            secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-rez-secondaryAreaCoordinator'),
+            secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-rez-secondaryAreaCoordinatorOption'),
+            streetMembership: localStorageGetArrayItem('nwapp-watch-rez-streetMembership'),
             errors: {},
         }
 

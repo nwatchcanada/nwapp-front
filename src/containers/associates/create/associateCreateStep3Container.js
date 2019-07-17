@@ -19,7 +19,7 @@ class AssociateCreateStep3Container extends Component {
 
     constructor(props) {
         super(props);
-        const slug = localStorage.getItem("temp-create-associate-slug");
+        const slug = localStorage.getItem("nwapp-create-associate-slug");
         this.state = {
             slug: slug,
             typeOf: 0,

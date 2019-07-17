@@ -81,7 +81,7 @@ class AssociateCreateStep2Container extends Component {
         e.preventDefault();
 
         // Save the slug
-        localStorage.setItem('temp-create-associate-slug', slug);
+        localStorage.setItem('nwapp-create-associate-slug', slug);
 
         this.onSuccessfulSubmissionCallback();
     }

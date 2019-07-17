@@ -26,7 +26,7 @@ class RegisterStep3Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("temp-register-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-register-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/register/step-2-rez-or-cc";
@@ -38,13 +38,13 @@ class RegisterStep3Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            streetNumber: localStorage.getItem("temp-register-streetNumber"),
-            streetName: localStorage.getItem("temp-register-streetName"),
-            streetType: localStorage.getItem("temp-register-streetType"),
-            streetTypeOption: localStorageGetObjectItem('temp-register-streetTypeOption'),
-            streetTypeOther: localStorage.getItem("temp-register-streetTypeOther"),
-            streetDirection: localStorage.getItem("temp-register-streetDirection"),
-            streetDirectionOption: localStorageGetObjectItem('temp-register-streetDirectionOption'),
+            streetNumber: localStorage.getItem("nwapp-register-streetNumber"),
+            streetName: localStorage.getItem("nwapp-register-streetName"),
+            streetType: localStorage.getItem("nwapp-register-streetType"),
+            streetTypeOption: localStorageGetObjectItem('nwapp-register-streetTypeOption'),
+            streetTypeOther: localStorage.getItem("nwapp-register-streetTypeOther"),
+            streetDirection: localStorage.getItem("nwapp-register-streetDirection"),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-register-streetDirectionOption'),
             errors: {},
             isLoading: false
         }
@@ -105,7 +105,7 @@ class RegisterStep3Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('temp-register-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-register-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -114,8 +114,8 @@ class RegisterStep3Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-register-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-register-'+optionKey, option);
+        localStorage.setItem('nwapp-register-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-register-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 

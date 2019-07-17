@@ -26,7 +26,7 @@ class MemberCreateStep3Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("temp-create-member-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/members/add/step-2-rez-or-cc";
@@ -38,13 +38,13 @@ class MemberCreateStep3Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            streetNumber: localStorage.getItem("temp-create-member-streetNumber"),
-            streetName: localStorage.getItem("temp-create-member-streetName"),
-            streetType: localStorage.getItem("temp-create-member-streetType"),
-            streetTypeOption: localStorageGetObjectItem('temp-create-member-streetTypeOption'),
-            streetTypeOther: localStorage.getItem("temp-create-member-streetTypeOther"),
-            streetDirection: localStorage.getItem("temp-create-member-streetDirection"),
-            streetDirectionOption: localStorageGetObjectItem('temp-create-member-streetDirectionOption'),
+            streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
+            streetName: localStorage.getItem("nwapp-create-member-streetName"),
+            streetType: localStorage.getItem("nwapp-create-member-streetType"),
+            streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
+            streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
+            streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
             errors: {},
             isLoading: false
         }
@@ -105,7 +105,7 @@ class MemberCreateStep3Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('temp-create-member-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -114,8 +114,8 @@ class MemberCreateStep3Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-create-member-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-create-member-'+optionKey, option);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 

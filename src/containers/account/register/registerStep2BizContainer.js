@@ -16,12 +16,12 @@ class RegisterStep2BizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            companyName: localStorage.getItem("temp-register-biz-companyName"),
-            contactFirstName: localStorage.getItem("temp-register-biz-contactFirstName"),
-            contactLastName: localStorage.getItem("temp-register-biz-contactLastName"),
-            primaryPhone: localStorage.getItem("temp-register-biz-primaryPhone"),
-            secondaryPhone: localStorage.getItem("temp-register-biz-secondaryPhone"),
-            email: localStorage.getItem("temp-register-biz-email"),
+            companyName: localStorage.getItem("nwapp-register-biz-companyName"),
+            contactFirstName: localStorage.getItem("nwapp-register-biz-contactFirstName"),
+            contactLastName: localStorage.getItem("nwapp-register-biz-contactLastName"),
+            primaryPhone: localStorage.getItem("nwapp-register-biz-primaryPhone"),
+            secondaryPhone: localStorage.getItem("nwapp-register-biz-secondaryPhone"),
+            email: localStorage.getItem("nwapp-register-biz-email"),
             errors: {},
             isLoading: false
         }
@@ -43,7 +43,7 @@ class RegisterStep2BizContainer extends Component {
         // DEVELOPERS NOTE:
         // Since we are in this page, we need to assign the user to be
         // a business type user.
-        localStorage.setItem("temp-register-typeOf", BUSINESS_TYPE_OF);
+        localStorage.setItem("nwapp-register-typeOf", BUSINESS_TYPE_OF);
     }
 
     componentWillUnmount() {
@@ -85,7 +85,7 @@ class RegisterStep2BizContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        const key = "temp-register-biz-"+[e.target.name];
+        const key = "nwapp-register-biz-"+[e.target.name];
         localStorage.setItem(key, e.target.value);
     }
 

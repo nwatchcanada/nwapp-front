@@ -16,11 +16,11 @@ class MemberCreateStep2RezOrComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: localStorage.getItem("temp-create-member-rez-or-com-firstName"),
-            lastName: localStorage.getItem("temp-create-member-rez-or-com-lastName"),
-            primaryPhone: localStorage.getItem("temp-create-member-rez-or-com-primaryPhone"),
-            secondaryPhone: localStorage.getItem("temp-create-member-rez-or-com-secondaryPhone"),
-            email: localStorage.getItem("temp-create-member-rez-or-com-email"),
+            firstName: localStorage.getItem("nwapp-create-member-rez-or-com-firstName"),
+            lastName: localStorage.getItem("nwapp-create-member-rez-or-com-lastName"),
+            primaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-primaryPhone"),
+            secondaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-secondaryPhone"),
+            email: localStorage.getItem("nwapp-create-member-rez-or-com-email"),
             errors: {},
             isLoading: false
         }
@@ -43,7 +43,7 @@ class MemberCreateStep2RezOrComContainer extends Component {
         // Since we are in this page, we need to assign the user to be
         // a residential type user. If the user is community cares type
         // then this variable will be set then in page 4.
-        localStorage.setItem("temp-create-member-typeOf", RESIDENCE_TYPE_OF);
+        localStorage.setItem("nwapp-create-member-typeOf", RESIDENCE_TYPE_OF);
     }
 
     componentWillUnmount() {
@@ -85,7 +85,7 @@ class MemberCreateStep2RezOrComContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        const key = "temp-create-member-rez-or-com-"+[e.target.name];
+        const key = "nwapp-create-member-rez-or-com-"+[e.target.name];
         localStorage.setItem(key, e.target.value);
     }
 

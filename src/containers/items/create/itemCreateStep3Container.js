@@ -28,7 +28,7 @@ class ItemCreateStep3Container extends Component {
         super(props);
 
         // Extract the type of container.
-        const typeOf = parseInt(localStorage.getItem("temp-item-create-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-item-create-typeOf"));
         let returnURL;
         if (typeOf === INCIDENT_ITEM_TYPE_OF) {
             returnURL = "/item/add/step-2-incident";
@@ -46,29 +46,29 @@ class ItemCreateStep3Container extends Component {
             returnURL: returnURL,
 
             // Concern Type
-            concernTitle: localStorage.getItem("temp-item-create-concern-title"),
-            concernDescription: localStorage.getItem("temp-item-create-concern-description"),
-            concernLocation: localStorage.getItem("temp-item-create-concern-location"),
-            concernPhotos: localStorageGetArrayItem("temp-item-create-concern-photos"),
+            concernTitle: localStorage.getItem("nwapp-item-create-concern-title"),
+            concernDescription: localStorage.getItem("nwapp-item-create-concern-description"),
+            concernLocation: localStorage.getItem("nwapp-item-create-concern-location"),
+            concernPhotos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
 
             // Event
-            eventTitle: localStorage.getItem("temp-item-create-event-title"),
-            eventTypeOf: parseInt(localStorage.getItem("temp-item-create-event-eventTypeOf")),
-            eventTypeOfOption: localStorageGetObjectItem('temp-item-create-event-eventTypeOfOption'),
-            eventTypeOfOther: localStorage.getItem("temp-item-create-event-eventTypeOfOther"),
-            eventPrettyEventTypeOf: localStorage.getItem('temp-item-create-event-pretty-event-type'),
-            eventDate: localStorageGetDateItem("temp-item-create-event-date"),
-            eventDescription: localStorage.getItem("temp-item-create-event-description"),
+            eventTitle: localStorage.getItem("nwapp-item-create-event-title"),
+            eventTypeOf: parseInt(localStorage.getItem("nwapp-item-create-event-eventTypeOf")),
+            eventTypeOfOption: localStorageGetObjectItem('nwapp-item-create-event-eventTypeOfOption'),
+            eventTypeOfOther: localStorage.getItem("nwapp-item-create-event-eventTypeOfOther"),
+            eventPrettyEventTypeOf: localStorage.getItem('nwapp-item-create-event-pretty-event-type'),
+            eventDate: localStorageGetDateItem("nwapp-item-create-event-date"),
+            eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
 
             // Incident
-            incidentTitle: localStorage.getItem("temp-item-create-incident-title"),
-            incidentDate: localStorageGetDateItem("temp-item-create-incident-date"),
-            incidentDescription: localStorage.getItem("temp-item-create-incident-description"),
-            incidentLocation: localStorage.getItem("temp-item-create-incident-location"),
-            incidentPhotos: localStorageGetArrayItem("temp-item-create-incident-photos"),
+            incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
+            incidentDate: localStorageGetDateItem("nwapp-item-create-incident-date"),
+            incidentDescription: localStorage.getItem("nwapp-item-create-incident-description"),
+            incidentLocation: localStorage.getItem("nwapp-item-create-incident-location"),
+            incidentPhotos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
 
             // Information
-            informationDescription: localStorage.getItem("temp-item-create-information-description"),
+            informationDescription: localStorage.getItem("nwapp-item-create-information-description"),
 
             errors: {},
             isLoading: false

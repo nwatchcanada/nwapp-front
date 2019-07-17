@@ -22,7 +22,7 @@ class RegisterStep6Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("temp-register-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-register-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/register/step-2-rez-or-cc";
@@ -31,7 +31,7 @@ class RegisterStep6Container extends Component {
             returnURL = "/register/step-2-biz";
         }
 
-        const agreement = localStorageGetBooleanItem("temp-register-agreement");
+        const agreement = localStorageGetBooleanItem("nwapp-register-agreement");
 
         this.state = {
             returnURL: returnURL,
@@ -96,7 +96,7 @@ class RegisterStep6Container extends Component {
         this.setState({
             [e.target.name]: e.target.checked,
         });
-        localStorage.setItem('temp-register-'+[e.target.name], e.target.checked);
+        localStorage.setItem('nwapp-register-'+[e.target.name], e.target.checked);
     }
 
     onClick(e) {

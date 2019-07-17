@@ -30,37 +30,37 @@ class StaffUpdateContainer extends Component {
         this.state = {
             urlArgument: urlArgument,
             slug: slug,
-            firstName: localStorage.getItem("temp-staff-create-firstName"),
-            lastName: localStorage.getItem("temp-staff-create-lastName"),
-            dateOfBirth: localStorageGetDateItem("temp-staff-create-dateOfBirth"),
-            gender: parseInt(localStorage.getItem("temp-staff-create-gender")),
-            description: localStorage.getItem("temp-staff-create-description"),
-            tags: localStorageGetArrayItem("temp-staff-create-tags"),
-            howHear: localStorage.getItem("temp-staff-create-howHear"),
-            phone: localStorage.getItem("temp-staff-create-phone"),
-            mobile: localStorage.getItem("temp-staff-create-mobile"),
-            workEmail: localStorage.getItem("temp-staff-create-workEmail"),
-            personalEmail: localStorage.getItem("temp-staff-create-personalEmail"),
-            streetNumber: localStorage.getItem("temp-staff-create-streetNumber"),
-            streetName: localStorage.getItem("temp-staff-create-streetName"),
-            streetType: localStorage.getItem("temp-staff-create-streetType"),
+            firstName: localStorage.getItem("nwapp-staff-create-firstName"),
+            lastName: localStorage.getItem("nwapp-staff-create-lastName"),
+            dateOfBirth: localStorageGetDateItem("nwapp-staff-create-dateOfBirth"),
+            gender: parseInt(localStorage.getItem("nwapp-staff-create-gender")),
+            description: localStorage.getItem("nwapp-staff-create-description"),
+            tags: localStorageGetArrayItem("nwapp-staff-create-tags"),
+            howHear: localStorage.getItem("nwapp-staff-create-howHear"),
+            phone: localStorage.getItem("nwapp-staff-create-phone"),
+            mobile: localStorage.getItem("nwapp-staff-create-mobile"),
+            workEmail: localStorage.getItem("nwapp-staff-create-workEmail"),
+            personalEmail: localStorage.getItem("nwapp-staff-create-personalEmail"),
+            streetNumber: localStorage.getItem("nwapp-staff-create-streetNumber"),
+            streetName: localStorage.getItem("nwapp-staff-create-streetName"),
+            streetType: localStorage.getItem("nwapp-staff-create-streetType"),
             streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
-            streetTypeOther: localStorage.getItem("temp-staff-create-streetTypeOther"),
-            streetDirection: localStorage.getItem("temp-staff-create-streetDirection"),
+            streetTypeOther: localStorage.getItem("nwapp-staff-create-streetTypeOther"),
+            streetDirection: localStorage.getItem("nwapp-staff-create-streetDirection"),
             streetDirectionOptions: STREET_DIRECTION_CHOICES,
-            locality: localStorage.getItem("temp-staff-create-locality"),
-            region: localStorage.getItem("temp-staff-create-region"),
-            country: localStorage.getItem("temp-staff-create-country"),
-            postal: localStorage.getItem("temp-staff-create-postal"),
-            emergencyFullName: localStorage.getItem("temp-staff-create-emergencyFullName"),
-            emergencyRelationship: localStorage.getItem("temp-staff-create-emergencyRelationship"),
-            emergencyTelephone: localStorage.getItem("temp-staff-create-emergencyTelephone"),
-            emergencyAlternativeTelephone: localStorage.getItem("temp-staff-create-emergencyAlternativeTelephone"),
-            additionalComments: localStorage.getItem("temp-staff-create-additionalComments"),
-            accountType: parseInt(localStorage.getItem("temp-staff-create-accountType")),
-            password: localStorage.getItem("temp-staff-create-password"),
-            repeatPassword: localStorage.getItem("temp-staff-create-repeatPassword"),
-            isActive: localStorage.getItem("temp-staff-create-isActive"),
+            locality: localStorage.getItem("nwapp-staff-create-locality"),
+            region: localStorage.getItem("nwapp-staff-create-region"),
+            country: localStorage.getItem("nwapp-staff-create-country"),
+            postal: localStorage.getItem("nwapp-staff-create-postal"),
+            emergencyFullName: localStorage.getItem("nwapp-staff-create-emergencyFullName"),
+            emergencyRelationship: localStorage.getItem("nwapp-staff-create-emergencyRelationship"),
+            emergencyTelephone: localStorage.getItem("nwapp-staff-create-emergencyTelephone"),
+            emergencyAlternativeTelephone: localStorage.getItem("nwapp-staff-create-emergencyAlternativeTelephone"),
+            additionalComments: localStorage.getItem("nwapp-staff-create-additionalComments"),
+            accountType: parseInt(localStorage.getItem("nwapp-staff-create-accountType")),
+            password: localStorage.getItem("nwapp-staff-create-password"),
+            repeatPassword: localStorage.getItem("nwapp-staff-create-repeatPassword"),
+            isActive: localStorage.getItem("nwapp-staff-create-isActive"),
             isActiveOption: {},
             isActiveOptions: [{
                 id: 'isActive-true-choice',
@@ -169,7 +169,7 @@ class StaffUpdateContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "temp-staff-create-"+[e.target.name];
+        const key = "nwapp-staff-create-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
     }
 
@@ -179,8 +179,8 @@ class StaffUpdateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-staff-create-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-staff-create-'+optionKey, option);
+        localStorage.setItem('nwapp-staff-create-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-staff-create-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
         // console.log(this.state);
         console.log(option);
@@ -196,7 +196,7 @@ class StaffUpdateContainer extends Component {
         });
 
         // // Set all the tags we have selected to the STORAGE.
-        const key = 'temp-staff-create-' + args[1].name;
+        const key = 'nwapp-staff-create-' + args[1].name;
         localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
@@ -204,7 +204,7 @@ class StaffUpdateContainer extends Component {
         this.setState({
             dateOfBirth: dateObj,
         })
-        localStorageSetObjectOrArrayItem('temp-staff-create-dateOfBirth', dateObj);
+        localStorageSetObjectOrArrayItem('nwapp-staff-create-dateOfBirth', dateObj);
     }
 
     onCountryChange(value) {
@@ -213,12 +213,12 @@ class StaffUpdateContainer extends Component {
         } else {
             this.setState({ country: value, region: null })
         }
-        localStorage.setItem('temp-staff-create-country', value);
+        localStorage.setItem('nwapp-staff-create-country', value);
     }
 
     onRegionChange(value) {
         this.setState({ region: value })
-        localStorage.setItem('temp-staff-create-region', value);
+        localStorage.setItem('nwapp-staff-create-region', value);
     }
 
     onClick(e) {
@@ -240,7 +240,7 @@ class StaffUpdateContainer extends Component {
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "temp-staff-create-"+[e.target.name];
+        const storageValueKey = "nwapp-staff-create-"+[e.target.name];
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();

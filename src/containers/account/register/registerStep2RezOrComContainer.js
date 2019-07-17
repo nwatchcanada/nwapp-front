@@ -16,11 +16,11 @@ class RegisterStep2RezOrComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: localStorage.getItem("temp-register-rez-or-com-firstName"),
-            lastName: localStorage.getItem("temp-register-rez-or-com-lastName"),
-            primaryPhone: localStorage.getItem("temp-register-rez-or-com-primaryPhone"),
-            secondaryPhone: localStorage.getItem("temp-register-rez-or-com-secondaryPhone"),
-            email: localStorage.getItem("temp-register-rez-or-com-email"),
+            firstName: localStorage.getItem("nwapp-register-rez-or-com-firstName"),
+            lastName: localStorage.getItem("nwapp-register-rez-or-com-lastName"),
+            primaryPhone: localStorage.getItem("nwapp-register-rez-or-com-primaryPhone"),
+            secondaryPhone: localStorage.getItem("nwapp-register-rez-or-com-secondaryPhone"),
+            email: localStorage.getItem("nwapp-register-rez-or-com-email"),
             errors: {},
             isLoading: false
         }
@@ -43,7 +43,7 @@ class RegisterStep2RezOrComContainer extends Component {
         // Since we are in this page, we need to assign the user to be
         // a residential type user. If the user is community cares type
         // then this variable will be set then in page 4.
-        localStorage.setItem("temp-register-typeOf", RESIDENCE_TYPE_OF);
+        localStorage.setItem("nwapp-register-typeOf", RESIDENCE_TYPE_OF);
     }
 
     componentWillUnmount() {
@@ -85,7 +85,7 @@ class RegisterStep2RezOrComContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        const key = "temp-register-rez-or-com-"+[e.target.name];
+        const key = "nwapp-register-rez-or-com-"+[e.target.name];
         localStorage.setItem(key, e.target.value);
     }
 

@@ -20,7 +20,7 @@ class MemberCreateStep4Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("temp-create-member-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/members/add/step-2-rez-or-cc";
@@ -31,9 +31,9 @@ class MemberCreateStep4Container extends Component {
 
         this.state = {
             returnURL: returnURL,
-            watchSlug: localStorage.getItem('temp-create-member-watch-slug'),
-            watchIcon: localStorage.getItem('temp-create-member-watch-icon'),
-            watchName: localStorage.getItem('temp-create-member-watch-name'),
+            watchSlug: localStorage.getItem('nwapp-create-member-watch-slug'),
+            watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
+            watchName: localStorage.getItem('nwapp-create-member-watch-name'),
             typeOf: typeOf,
         }
     }
@@ -97,9 +97,9 @@ class MemberCreateStep4Container extends Component {
         this.setState({
             isLoading: true
         })
-        localStorage.setItem('temp-create-member-watch-slug', slug);
-        localStorage.setItem('temp-create-member-watch-icon', icon);
-        localStorage.setItem('temp-create-member-watch-name', name);
+        localStorage.setItem('nwapp-create-member-watch-slug', slug);
+        localStorage.setItem('nwapp-create-member-watch-icon', icon);
+        localStorage.setItem('nwapp-create-member-watch-name', name);
         this.props.history.push("/members/add/step-5");
     }
 

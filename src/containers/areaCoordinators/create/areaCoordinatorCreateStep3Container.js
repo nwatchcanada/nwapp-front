@@ -19,7 +19,7 @@ class AreaCoordinatorCreateStep3Container extends Component {
 
     constructor(props) {
         super(props);
-        const slug = localStorage.getItem("temp-create-area-coordinator-slug");
+        const slug = localStorage.getItem("nwapp-create-area-coordinator-slug");
         this.state = {
             slug: slug,
             typeOf: 0,

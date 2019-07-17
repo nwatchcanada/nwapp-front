@@ -19,10 +19,10 @@ class ItemCreateStep2ConcernContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: localStorage.getItem("temp-item-create-concern-title"),
-            description: localStorage.getItem("temp-item-create-concern-description"),
-            location: localStorage.getItem("temp-item-create-concern-location"),
-            photos: localStorageGetArrayItem("temp-item-create-concern-photos"),
+            title: localStorage.getItem("nwapp-item-create-concern-title"),
+            description: localStorage.getItem("nwapp-item-create-concern-description"),
+            location: localStorage.getItem("nwapp-item-create-concern-location"),
+            photos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
             errors: {},
             isLoading: false
         }
@@ -85,7 +85,7 @@ class ItemCreateStep2ConcernContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "temp-item-create-concern-"+[e.target.name];
+        const key = "nwapp-item-create-concern-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
     }
 
@@ -133,7 +133,7 @@ class ItemCreateStep2ConcernContainer extends Component {
         });
 
         // Save our photos data.
-        localStorageSetObjectOrArrayItem("temp-item-create-concern-photos", a);
+        localStorageSetObjectOrArrayItem("nwapp-item-create-concern-photos", a);
     }
 
     onRemoveUploadClick(e, name) {
@@ -168,7 +168,7 @@ class ItemCreateStep2ConcernContainer extends Component {
                 });
 
                 // Save our photos data.
-                localStorageSetObjectOrArrayItem("temp-item-create-concern-photos", filteredPhotos);
+                localStorageSetObjectOrArrayItem("nwapp-item-create-concern-photos", filteredPhotos);
 
                 // Terminate our for-loop.
                 return;

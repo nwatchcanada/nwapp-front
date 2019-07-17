@@ -15,10 +15,10 @@ class DistrictCreateStep3BusinessContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-district-biz-name'),
-            description: localStorage.getItem('temp-district-biz-description'),
-            websiteURL: localStorage.getItem('temp-district-biz-websiteURL'),
-            logo: JSON.parse(localStorage.getItem('temp-district-biz-logo')),
+            name: localStorage.getItem('nwapp-district-biz-name'),
+            description: localStorage.getItem('nwapp-district-biz-description'),
+            websiteURL: localStorage.getItem('nwapp-district-biz-websiteURL'),
+            logo: JSON.parse(localStorage.getItem('nwapp-district-biz-logo')),
             errors: {},
             isLoading: false
         }

@@ -20,12 +20,12 @@ class ItemCreateStep2EventContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: localStorage.getItem("temp-item-create-event-title"),
-            eventTypeOf: parseInt(localStorage.getItem("temp-item-create-event-eventTypeOf")),
-            eventTypeOfOption: localStorageGetObjectItem('temp-item-create-event-eventTypeOfOption'),
-            eventTypeOfOther: localStorage.getItem("temp-item-create-event-eventTypeOfOther"),
-            date: localStorageGetDateItem("temp-item-create-event-date"),
-            description: localStorage.getItem("temp-item-create-event-description"),
+            title: localStorage.getItem("nwapp-item-create-event-title"),
+            eventTypeOf: parseInt(localStorage.getItem("nwapp-item-create-event-eventTypeOf")),
+            eventTypeOfOption: localStorageGetObjectItem('nwapp-item-create-event-eventTypeOfOption'),
+            eventTypeOfOther: localStorage.getItem("nwapp-item-create-event-eventTypeOfOther"),
+            date: localStorageGetDateItem("nwapp-item-create-event-date"),
+            description: localStorage.getItem("nwapp-item-create-event-description"),
             errors: {},
             isLoading: false
         }
@@ -88,7 +88,7 @@ class ItemCreateStep2EventContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "temp-item-create-event-"+[e.target.name];
+        const key = "nwapp-item-create-event-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
     }
 
@@ -98,8 +98,8 @@ class ItemCreateStep2EventContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-item-create-event-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-item-create-event-'+optionKey, option);
+        localStorage.setItem('nwapp-item-create-event-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-event-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
         // console.log(this.state);
     }
@@ -108,7 +108,7 @@ class ItemCreateStep2EventContainer extends Component {
         this.setState({
             date: dateObj,
         })
-        localStorageSetObjectOrArrayItem('temp-item-create-event-date', dateObj);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-event-date', dateObj);
     }
 
     onClick(e) {
@@ -124,9 +124,9 @@ class ItemCreateStep2EventContainer extends Component {
             // Save for convinence the event type depending on if the user
             // chose a standard option or the `other` option.
             if (this.state.eventTypeOf.value === OTHER_EVENT_TYPE_OF) {
-                localStorage.setItem('temp-item-create-event-pretty-event-type', this.state.eventTypeOfOther);
+                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.eventTypeOfOther);
             } else {
-                localStorage.setItem('temp-item-create-event-pretty-event-type', this.state.eventTypeOfOption.label);
+                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.eventTypeOfOption.label);
             }            
 
             this.onSuccessfulSubmissionCallback();

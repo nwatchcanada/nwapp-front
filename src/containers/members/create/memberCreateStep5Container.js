@@ -26,7 +26,7 @@ class MemberCreateStep5Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("temp-create-member-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/members/add/step-2-rez-or-cc";
@@ -38,21 +38,21 @@ class MemberCreateStep5Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            tags: localStorageGetArrayItem("temp-create-member-tags"),
-            birthYear: localStorage.getItem("temp-create-member-birthYear"),
-            gender: parseInt(localStorage.getItem("temp-create-member-gender")),
-            howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
-            howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
-            howDidYouHearOther: localStorage.getItem("temp-create-member-howDidYouHearOther"),
-            meaning: localStorage.getItem("temp-create-member-meaning"),
-            expectations: localStorage.getItem("temp-create-member-expectations"),
-            willingToVolunteer: parseInt(localStorage.getItem("temp-create-member-willingToVolunteer")),
-            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-create-member-anotherHouseholdMemberRegistered")),
-            totalHouseholdCount: parseInt(localStorage.getItem("temp-create-member-totalHouseholdCount")),
-            under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-create-member-under18YearsHouseholdCount")),
-            companyEmployeeCount: parseInt(localStorage.getItem("temp-create-member-under18YearsHouseholdCount")),
-            companyYearsInOperation: parseInt(localStorage.getItem("temp-create-member-companyYearsInOperation")),
-            companyType: localStorage.getItem("temp-create-member-companyType"),
+            tags: localStorageGetArrayItem("nwapp-create-member-tags"),
+            birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
+            gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
+            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            meaning: localStorage.getItem("nwapp-create-member-meaning"),
+            expectations: localStorage.getItem("nwapp-create-member-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
+            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-companyYearsInOperation")),
+            companyType: localStorage.getItem("nwapp-create-member-companyType"),
             errors: {},
             isLoading: false
         }
@@ -140,7 +140,7 @@ class MemberCreateStep5Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('temp-create-member-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -149,14 +149,14 @@ class MemberCreateStep5Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-create-member-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-create-member-'+optionKey, option);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "temp-create-member-"+[e.target.name];
+        const storageValueKey = "nwapp-create-member-"+[e.target.name];
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
@@ -187,7 +187,7 @@ class MemberCreateStep5Container extends Component {
         });
 
         // // Set all the tags we have selected to the STORAGE.
-        const key = 'temp-create-member-' + args[1].name;
+        const key = 'nwapp-create-member-' + args[1].name;
         localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 

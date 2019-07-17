@@ -16,7 +16,7 @@ class ItemCreateStep2InformationContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            description: localStorage.getItem("temp-item-create-information-description"),
+            description: localStorage.getItem("nwapp-item-create-information-description"),
             errors: {},
             isLoading: false
         }
@@ -76,7 +76,7 @@ class ItemCreateStep2InformationContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "temp-item-create-information-"+[e.target.name];
+        const key = "nwapp-item-create-information-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
     }
 

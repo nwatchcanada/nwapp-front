@@ -21,16 +21,16 @@ class WatchCreateStep2ComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-watch-com-name'),
-            description: localStorage.getItem('temp-watch-com-description'),
-            associate: localStorage.getItem('temp-watch-com-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-com-associateOption'),
-            district: localStorage.getItem('temp-watch-com-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-com-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-com-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-com-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-com-secondaryAreaCoordinatorOption'),
+            name: localStorage.getItem('nwapp-watch-com-name'),
+            description: localStorage.getItem('nwapp-watch-com-description'),
+            associate: localStorage.getItem('nwapp-watch-com-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-watch-com-associateOption'),
+            district: localStorage.getItem('nwapp-watch-com-district'),
+            districtOption: localStorageGetObjectItem('nwapp-watch-com-districtOption'),
+            primaryAreaCoordinator: localStorage.getItem('nwapp-watch-com-primaryAreaCoordinator'),
+            primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-primaryAreaCoordinatorOption'),
+            secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-com-secondaryAreaCoordinator'),
+            secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-secondaryAreaCoordinatorOption'),
             errors: {},
         }
 
@@ -88,7 +88,7 @@ class WatchCreateStep2ComContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('temp-watch-com-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-watch-com-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -97,8 +97,8 @@ class WatchCreateStep2ComContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-watch-com-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-watch-com-'+optionKey, option);
+        localStorage.setItem('nwapp-watch-com-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-watch-com-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 

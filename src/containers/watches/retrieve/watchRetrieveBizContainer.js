@@ -15,15 +15,15 @@ class WatchRetrieveBizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-watch-biz-name'),
-            associate: localStorage.getItem('temp-watch-biz-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-biz-associateOption'),
-            district: localStorage.getItem('temp-watch-biz-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-biz-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-biz-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-biz-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-biz-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-biz-secondaryAreaCoordinatorOption'),
+            name: localStorage.getItem('nwapp-watch-biz-name'),
+            associate: localStorage.getItem('nwapp-watch-biz-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-watch-biz-associateOption'),
+            district: localStorage.getItem('nwapp-watch-biz-district'),
+            districtOption: localStorageGetObjectItem('nwapp-watch-biz-districtOption'),
+            primaryAreaCoordinator: localStorage.getItem('nwapp-watch-biz-primaryAreaCoordinator'),
+            primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-primaryAreaCoordinatorOption'),
+            secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-biz-secondaryAreaCoordinator'),
+            secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-secondaryAreaCoordinatorOption'),
             errors: {},
         }
 

@@ -57,7 +57,7 @@ class WatchCreateStep1Container extends Component {
         e.preventDefault();
 
         // Save to our browsers memory.
-        localStorage.setItem('temp-district-program', typeOf);
+        localStorage.setItem('nwapp-district-program', typeOf);
 
         // Redirect to the next page.
         if (typeOf === RESIDENCE_TYPE_OF) {

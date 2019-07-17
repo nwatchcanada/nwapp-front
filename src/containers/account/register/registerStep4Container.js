@@ -20,7 +20,7 @@ class RegisterStep4Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("temp-register-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-register-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/register/step-2-rez-or-cc";
@@ -31,9 +31,9 @@ class RegisterStep4Container extends Component {
 
         this.state = {
             returnURL: returnURL,
-            watchSlug: localStorage.getItem('temp-register-watch-slug'),
-            watchIcon: localStorage.getItem('temp-register-watch-icon'),
-            watchName: localStorage.getItem('temp-register-watch-name'),
+            watchSlug: localStorage.getItem('nwapp-register-watch-slug'),
+            watchIcon: localStorage.getItem('nwapp-register-watch-icon'),
+            watchName: localStorage.getItem('nwapp-register-watch-name'),
             typeOf: typeOf,
             showModal: false,
         }
@@ -102,9 +102,9 @@ class RegisterStep4Container extends Component {
         this.setState({
             isLoading: true
         })
-        localStorage.setItem('temp-register-watch-slug', slug);
-        localStorage.setItem('temp-register-watch-icon', icon);
-        localStorage.setItem('temp-register-watch-name', name);
+        localStorage.setItem('nwapp-register-watch-slug', slug);
+        localStorage.setItem('nwapp-register-watch-icon', icon);
+        localStorage.setItem('nwapp-register-watch-name', name);
         this.props.history.push("/register/step-5");
     }
 

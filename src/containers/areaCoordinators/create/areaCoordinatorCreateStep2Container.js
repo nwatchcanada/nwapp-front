@@ -83,7 +83,7 @@ class AreaCoordinatorCreateStep2Container extends Component {
         e.preventDefault();
 
         // Save the slug
-        localStorage.setItem('temp-create-area-coordinator-slug', slug);
+        localStorage.setItem('nwapp-create-area-coordinator-slug', slug);
 
         this.onSuccessfulSubmissionCallback();
     }

@@ -14,7 +14,7 @@ import { NWAPP_LOGIN_API_URL } from "../constants/api"
  *  Saves our access token to persistent storage.
  */
 export function setAccessTokenInLocalStorage(accessToken) {
-    localStorage.setItem("TOKEN_UTILITY_ACCESS_TOKEN_DATA", JSON.stringify(accessToken));
+    localStorage.setItem("NWAPP_TOKEN_UTILITY_ACCESS_TOKEN_DATA", JSON.stringify(accessToken));
 }
 
 
@@ -22,7 +22,7 @@ export function setAccessTokenInLocalStorage(accessToken) {
  *  Saves our refresh token to our persistent storage.
  */
 export function setRefreshTokenInLocalStorage(accessToken) {
-    localStorage.setItem("TOKEN_UTILITY_REFRESH_TOKEN_DATA", JSON.stringify(accessToken));
+    localStorage.setItem("NWAPP_TOKEN_UTILITY_REFRESH_TOKEN_DATA", JSON.stringify(accessToken));
 }
 
 
@@ -30,7 +30,7 @@ export function setRefreshTokenInLocalStorage(accessToken) {
  *  Gets our access token from persistent storage.
  */
 export function getAccessTokenFromLocalStorage() {
-    return JSON.parse(localStorage.getItem("TOKEN_UTILITY_ACCESS_TOKEN_DATA"));
+    return JSON.parse(localStorage.getItem("NWAPP_TOKEN_UTILITY_ACCESS_TOKEN_DATA"));
 }
 
 
@@ -38,7 +38,7 @@ export function getAccessTokenFromLocalStorage() {
  *  Gets our refresh token from persisten storage.
  */
 export function getRefreshTokenFromLocalStorage() {
-    return JSON.parse(localStorage.getItem("TOKEN_UTILITY_REFRESH_TOKEN_DATA"));
+    return JSON.parse(localStorage.getItem("NWAPP_TOKEN_UTILITY_REFRESH_TOKEN_DATA"));
 }
 
 

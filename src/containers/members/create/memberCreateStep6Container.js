@@ -23,7 +23,7 @@ class MemberCreateStep6Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("temp-create-member-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/members/add/step-2-rez-or-cc";
@@ -35,32 +35,32 @@ class MemberCreateStep6Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            bizCompanyName: localStorage.getItem("temp-create-member-biz-companyName"),
-            bizContactFirstName: localStorage.getItem("temp-create-member-biz-contactFirstName"),
-            bizContactLastName: localStorage.getItem("temp-create-member-biz-contactLastName"),
-            bizPrimaryPhone: localStorage.getItem("temp-create-member-biz-primaryPhone"),
-            bizSecondaryPhone: localStorage.getItem("temp-create-member-biz-secondaryPhone"),
-            bizEmail: localStorage.getItem("temp-create-member-biz-email"),
-            rezFirstName: localStorage.getItem("temp-create-member-rez-or-com-firstName"),
-            rezLastName: localStorage.getItem("temp-create-member-rez-or-com-lastName"),
-            rezPrimaryPhone: localStorage.getItem("temp-create-member-rez-or-com-primaryPhone"),
-            rezSecondaryPhone: localStorage.getItem("temp-create-member-rez-or-com-secondaryPhone"),
-            rezEmail: localStorage.getItem("temp-create-member-rez-or-com-email"),
-            streetNumber: localStorage.getItem("temp-create-member-streetNumber"),
-            streetName: localStorage.getItem("temp-create-member-streetName"),
-            streetType: localStorage.getItem("temp-create-member-streetType"),
-            streetTypeOption: localStorageGetObjectItem('temp-create-member-streetTypeOption'),
-            streetTypeOther: localStorage.getItem("temp-create-member-streetTypeOther"),
-            streetDirection: localStorage.getItem("temp-create-member-streetDirection"),
-            streetDirectionOption: localStorageGetObjectItem('temp-create-member-streetDirectionOption'),
-            watchSlug: localStorage.getItem('temp-create-member-watch-slug'),
-            watchIcon: localStorage.getItem('temp-create-member-watch-icon'),
-            watchName: localStorage.getItem('temp-create-member-watch-name'),
-            tags: localStorageGetArrayItem("temp-create-member-tags"),
-            dateOfBirth: localStorageGetDateItem("temp-create-member-dateOfBirth"),
-            howDidYouHear: localStorage.getItem("temp-create-member-howDidYouHear"),
-            howDidYouHearOption: localStorageGetObjectItem('temp-create-member-howDidYouHearOption'),
-            howDidYouHearOther: localStorage.getItem("temp-create-member-howDidYouHearOther"),
+            bizCompanyName: localStorage.getItem("nwapp-create-member-biz-companyName"),
+            bizContactFirstName: localStorage.getItem("nwapp-create-member-biz-contactFirstName"),
+            bizContactLastName: localStorage.getItem("nwapp-create-member-biz-contactLastName"),
+            bizPrimaryPhone: localStorage.getItem("nwapp-create-member-biz-primaryPhone"),
+            bizSecondaryPhone: localStorage.getItem("nwapp-create-member-biz-secondaryPhone"),
+            bizEmail: localStorage.getItem("nwapp-create-member-biz-email"),
+            rezFirstName: localStorage.getItem("nwapp-create-member-rez-or-com-firstName"),
+            rezLastName: localStorage.getItem("nwapp-create-member-rez-or-com-lastName"),
+            rezPrimaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-primaryPhone"),
+            rezSecondaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-secondaryPhone"),
+            rezEmail: localStorage.getItem("nwapp-create-member-rez-or-com-email"),
+            streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
+            streetName: localStorage.getItem("nwapp-create-member-streetName"),
+            streetType: localStorage.getItem("nwapp-create-member-streetType"),
+            streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
+            streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
+            streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
+            watchSlug: localStorage.getItem('nwapp-create-member-watch-slug'),
+            watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
+            watchName: localStorage.getItem('nwapp-create-member-watch-name'),
+            tags: localStorageGetArrayItem("nwapp-create-member-tags"),
+            dateOfBirth: localStorageGetDateItem("nwapp-create-member-dateOfBirth"),
+            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
             errors: {},
             isLoading: false
         }

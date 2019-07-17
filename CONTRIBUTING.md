@@ -129,3 +129,5 @@ npm install --save react-number-format
 3. Please use ``camelCase`` text for all javascript code and use ``snake_case`` text when dealing with our API.
 
 4. Please ue 4 line white characters for a 1 single tab.
+
+5. When using ``localStorage`` please add the ``nwapp`` namespace to every key name.

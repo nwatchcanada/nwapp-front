@@ -20,13 +20,13 @@ class ItemCreateStep2IncidentContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: localStorage.getItem("temp-item-create-incident-title"),
-            date: localStorageGetDateItem("temp-item-create-incident-date"),
-            description: localStorage.getItem("temp-item-create-incident-description"),
-            location: localStorage.getItem("temp-item-create-incident-location"),
+            title: localStorage.getItem("nwapp-item-create-incident-title"),
+            date: localStorageGetDateItem("nwapp-item-create-incident-date"),
+            description: localStorage.getItem("nwapp-item-create-incident-description"),
+            location: localStorage.getItem("nwapp-item-create-incident-location"),
             errors: {},
             isLoading: false,
-            photos: localStorageGetArrayItem("temp-item-create-incident-photos"),
+            photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -88,7 +88,7 @@ class ItemCreateStep2IncidentContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "temp-item-create-incident-"+[e.target.name];
+        const key = "nwapp-item-create-incident-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
     }
 
@@ -98,8 +98,8 @@ class ItemCreateStep2IncidentContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-item-create-incident-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-item-create-incident-'+optionKey, option);
+        localStorage.setItem('nwapp-item-create-incident-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-incident-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
         // console.log(this.state);
     }
@@ -108,7 +108,7 @@ class ItemCreateStep2IncidentContainer extends Component {
         this.setState({
             date: dateObj,
         })
-        localStorageSetObjectOrArrayItem('temp-item-create-incident-date', dateObj);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-incident-date', dateObj);
     }
 
     onClick(e) {
@@ -155,7 +155,7 @@ class ItemCreateStep2IncidentContainer extends Component {
         })
 
         // Save our photos data.
-        localStorageSetObjectOrArrayItem("temp-item-create-incident-photos", a);
+        localStorageSetObjectOrArrayItem("nwapp-item-create-incident-photos", a);
     }
 
     onRemoveUploadClick(e, name) {
@@ -190,7 +190,7 @@ class ItemCreateStep2IncidentContainer extends Component {
                 });
 
                 // Save our table data.
-                localStorageSetObjectOrArrayItem("temp-item-create-incident-photos", filteredPhotos);
+                localStorageSetObjectOrArrayItem("nwapp-item-create-incident-photos", filteredPhotos);
 
                 // Terminate our for-loop.
                 return;

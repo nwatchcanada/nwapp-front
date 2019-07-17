@@ -25,16 +25,16 @@ class WatchCreateStep2RezContainer extends Component {
         super(props);
         this.state = {
             // Page related.
-            name: localStorage.getItem('temp-watch-rez-name'),
-            associate: localStorage.getItem('temp-watch-rez-associate'),
-            associateOption: localStorageGetObjectItem('temp-watch-rez-associateOption'),
-            district: localStorage.getItem('temp-watch-rez-district'),
-            districtOption: localStorageGetObjectItem('temp-watch-rez-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('temp-watch-rez-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('temp-watch-rez-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('temp-watch-rez-secondaryAreaCoordinatorOption'),
-            streetMembership: localStorageGetArrayItem('temp-watch-rez-streetMembership'),
+            name: localStorage.getItem('nwapp-watch-rez-name'),
+            associate: localStorage.getItem('nwapp-watch-rez-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-watch-rez-associateOption'),
+            district: localStorage.getItem('nwapp-watch-rez-district'),
+            districtOption: localStorageGetObjectItem('nwapp-watch-rez-districtOption'),
+            primaryAreaCoordinator: localStorage.getItem('nwapp-watch-rez-primaryAreaCoordinator'),
+            primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-rez-primaryAreaCoordinatorOption'),
+            secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-rez-secondaryAreaCoordinator'),
+            secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-rez-secondaryAreaCoordinatorOption'),
+            streetMembership: localStorageGetArrayItem('nwapp-watch-rez-streetMembership'),
             errors: {},
 
             // Modal related.
@@ -42,10 +42,10 @@ class WatchCreateStep2RezContainer extends Component {
             streetNumberFinish: "",
             streetName: "",
             streetType: "",
-            streetTypeOption: localStorageGetObjectItem('temp-watch-rez-streetTypeOption'),
+            streetTypeOption: localStorageGetObjectItem('nwapp-watch-rez-streetTypeOption'),
             streetTypeOther: "",
             streetDirection: "",
-            streetDirectionOption: localStorageGetObjectItem('temp-watch-rez-streetDirectionOption'),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-watch-rez-streetDirectionOption'),
             showModal: false, // Variable used to indicate if the modal should appear.
         }
 
@@ -110,7 +110,7 @@ class WatchCreateStep2RezContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('temp-watch-rez-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-watch-rez-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -119,8 +119,8 @@ class WatchCreateStep2RezContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('temp-watch-rez-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-watch-rez-'+optionKey, option);
+        localStorage.setItem('nwapp-watch-rez-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-watch-rez-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -177,7 +177,7 @@ class WatchCreateStep2RezContainer extends Component {
                 });
 
                 // Save our table data.
-                localStorageSetObjectOrArrayItem("temp-watch-rez-streetMembership", filteredItems);
+                localStorageSetObjectOrArrayItem("nwapp-watch-rez-streetMembership", filteredItems);
 
                 // Terminate our for-loop.
                 return;
@@ -228,7 +228,7 @@ class WatchCreateStep2RezContainer extends Component {
             })
 
             // Save our table data.
-            localStorageSetObjectOrArrayItem("temp-watch-rez-streetMembership", a);
+            localStorageSetObjectOrArrayItem("nwapp-watch-rez-streetMembership", a);
 
         // CASE 2 OF 2: Validation was a failure.
         } else {

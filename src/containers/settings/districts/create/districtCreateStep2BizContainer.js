@@ -16,10 +16,10 @@ class DistrictCreateStep2BusinessContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('temp-district-biz-name'),
-            description: localStorage.getItem('temp-district-biz-description'),
-            websiteURL: localStorage.getItem('temp-district-biz-websiteURL'),
-            logo: JSON.parse(localStorage.getItem('temp-district-biz-logo')),
+            name: localStorage.getItem('nwapp-district-biz-name'),
+            description: localStorage.getItem('nwapp-district-biz-description'),
+            websiteURL: localStorage.getItem('nwapp-district-biz-websiteURL'),
+            logo: JSON.parse(localStorage.getItem('nwapp-district-biz-logo')),
             errors: {},
             isLoading: false
         }
@@ -82,7 +82,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('temp-district-biz-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-district-biz-'+[e.target.name], e.target.value);
     }
 
     onClick(e) {
@@ -120,7 +120,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
             console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
 
             // Save to local storage our OBJECT.
-            localStorage.setItem('temp-district-biz-logo', JSON.stringify(fileWithPreview));
+            localStorage.setItem('nwapp-district-biz-logo', JSON.stringify(fileWithPreview));
 
             // Update our local state to update the GUI.
             this.setState({

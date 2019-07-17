@@ -16,12 +16,12 @@ class MemberCreateStep2BizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            companyName: localStorage.getItem("temp-create-member-biz-companyName"),
-            contactFirstName: localStorage.getItem("temp-create-member-biz-contactFirstName"),
-            contactLastName: localStorage.getItem("temp-create-member-biz-contactLastName"),
-            primaryPhone: localStorage.getItem("temp-create-member-biz-primaryPhone"),
-            secondaryPhone: localStorage.getItem("temp-create-member-biz-secondaryPhone"),
-            email: localStorage.getItem("temp-create-member-biz-email"),
+            companyName: localStorage.getItem("nwapp-create-member-biz-companyName"),
+            contactFirstName: localStorage.getItem("nwapp-create-member-biz-contactFirstName"),
+            contactLastName: localStorage.getItem("nwapp-create-member-biz-contactLastName"),
+            primaryPhone: localStorage.getItem("nwapp-create-member-biz-primaryPhone"),
+            secondaryPhone: localStorage.getItem("nwapp-create-member-biz-secondaryPhone"),
+            email: localStorage.getItem("nwapp-create-member-biz-email"),
             errors: {},
             isLoading: false
         }
@@ -43,7 +43,7 @@ class MemberCreateStep2BizContainer extends Component {
         // DEVELOPERS NOTE:
         // Since we are in this page, we need to assign the user to be
         // a business type user.
-        localStorage.setItem("temp-create-member-typeOf", BUSINESS_TYPE_OF);
+        localStorage.setItem("nwapp-create-member-typeOf", BUSINESS_TYPE_OF);
     }
 
     componentWillUnmount() {
@@ -85,7 +85,7 @@ class MemberCreateStep2BizContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        const key = "temp-create-member-biz-"+[e.target.name];
+        const key = "nwapp-create-member-biz-"+[e.target.name];
         localStorage.setItem(key, e.target.value);
     }
 

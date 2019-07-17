@@ -17,7 +17,7 @@ class DistrictCreateStep3BusinessContainer extends Component {
 
         // Extract our plants array (which is used to populate the table) from
         // the users's local storage.
-        const stringStreetsArr = localStorage.getItem("temp-district-com-streets");
+        const stringStreetsArr = localStorage.getItem("nwapp-district-com-streets");
         let streetsArr = JSON.parse(stringStreetsArr);
         if (streetsArr  === undefined || streetsArr === null) {
             streetsArr = [];
@@ -35,8 +35,8 @@ class DistrictCreateStep3BusinessContainer extends Component {
             isLoading: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            name: localStorage.getItem('temp-district-com-name'),
-            description: localStorage.getItem('temp-district-com-description'),
+            name: localStorage.getItem('nwapp-district-com-name'),
+            description: localStorage.getItem('nwapp-district-com-description'),
 
             // ALL OUR OBJECTS ARE STORED HERE.
             streetsArray: streetsArr,
