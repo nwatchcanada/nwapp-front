@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep5Component from "../../../components/account/register/registerStep5Component";
+import RegisterStep5Component from "../../../components/account/register/registerStep5Component";
 import { validateStep5CreateInput } from "../../../validators/registerValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
@@ -16,7 +16,7 @@ import {
 } from '../../../constants/api';
 
 
-class MemberCreateStep5Container extends Component {
+class RegisterStep5Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -219,7 +219,7 @@ class MemberCreateStep5Container extends Component {
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
-            <MemberCreateStep5Component
+            <RegisterStep5Component
                 returnURL={returnURL}
                 tags={tags}
                 tagOptions={tagOptions}
@@ -259,4 +259,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep5Container);
+)(RegisterStep5Container);

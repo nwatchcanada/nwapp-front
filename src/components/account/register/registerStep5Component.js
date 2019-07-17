@@ -10,7 +10,7 @@ import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
 import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../constants/api";
 
 
-class MemberCreateStep5Component extends Component {
+export default class RegisterStep5Component extends Component {
     render() {
         const {
             returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
@@ -224,5 +224,3 @@ class MemberCreateStep5Component extends Component {
         );
     }
 }
-
-export default MemberCreateStep5Component;
