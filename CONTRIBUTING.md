@@ -20,7 +20,6 @@ npm install --save validator
 npm install --save react-router-dom
 npm install --save lodash
 npm install --save axios
-npm install --save axios-jsonp
 npm install --save redux
 npm install --save react-redux
 npm install --save redux-devtools-extension
@@ -55,7 +54,7 @@ npm install --save react-number-format
 
 ## What coding conventions should I use?
 
-1. Please use [container-component pattern](https://medium.com/@learnreact/container-components-c0e67432e005)
+1. Please use [container-component pattern](https://medium.com/@learnreact/container-components-c0e67432e005) when creating new pages / views / etc.
 
 2. In the container, please add the following comments to help organization. The following is an example of how it should be organized:
 
@@ -126,3 +125,7 @@ npm install --save react-number-format
         mapDispatchToProps
     )(RegisterSuccessContainer);
     ```
+
+3. Please use ``camelCase`` text for all javascript code and use ``snake_case`` text when dealing with our API.
+
+4. Please ue 4 line white characters for a 1 single tab.
