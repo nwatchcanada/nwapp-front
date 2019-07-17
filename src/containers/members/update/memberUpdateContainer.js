@@ -30,12 +30,11 @@ class MemberUpdateContainer extends Component {
             isLoading: false,
             urlArgument: urlArgument,
             slug: slug,
-
-
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
         this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -235,6 +234,29 @@ class MemberUpdateContainer extends Component {
         console.log([option.selectName], optionKey, "|",option); // For debugging purposes only.
     }
 
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "temp-create-member-"+[e.target.name];
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"-label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
+    }
+
     onMultiChange(...args) {
         // Extract the select options from the parameter.
         const selectedOptions = args[0];
@@ -261,36 +283,10 @@ class MemberUpdateContainer extends Component {
         const {
             name, companyName, email, firstName, contactFirstName, lastName, contactLastName, primaryPhone, secondaryPhone, streetNumber,
             streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, watch, tags, dateOfBirth, howDidYouHear, howDidYouHearOption, howDidYouHearOther
+            watchSlug, watchIcon, watchName, watch,
+            tags, birthYear, gender, howDidYouHear, howDidYouHearOption, howDidYouHearOther, meaning, expectations,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
         } = this.state;
-
-        // const howDidYouHearOptions = [
-        //     {
-        //         selectName: "howDidYouHear",
-        //         value: "Friend",
-        //         label: "Friend"
-        //     },{
-        //         selectName: "howDidYouHear",
-        //         value: "Workplace",
-        //         label: "Workplace"
-        //     },{
-        //         selectName: "howDidYouHear",
-        //         value: "Social Media",
-        //         label: "Social Media"
-        //     },{
-        //         selectName: "howDidYouHear",
-        //         value: "Family",
-        //         label: "Family"
-        //     },{
-        //         selectName: "howDidYouHear",
-        //         value: "Internet",
-        //         label: "Internet"
-        //     },{
-        //         selectName: "howDidYouHear",
-        //         value: "Other",
-        //         label: "Other"
-        //     }
-        // ];
 
         // REPLACE THIS CODE WITH API CODE.
         const watchOptions = [
@@ -343,15 +339,22 @@ class MemberUpdateContainer extends Component {
                 watch={watch}
                 tags={tags}
                 tagOptions={tagOptions}
-                dateOfBirth={dateOfBirth}
+                birthYear={birthYear}
+                gender={gender}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOption={howDidYouHearOption}
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
-
+                meaning={meaning}
+                expectations={expectations}
+                willingToVolunteer={willingToVolunteer}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                totalHouseholdCount={totalHouseholdCount}
+                under18YearsHouseholdCount={under18YearsHouseholdCount}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}
                 onDOBDateTimeChange={this.onDOBDateTimeChange}
                 onClick={this.onClick}

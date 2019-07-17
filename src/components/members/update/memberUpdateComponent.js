@@ -16,7 +16,7 @@ import MemberRezUpdateFormComponent from "./memberRezUpdateFormComponent";
 class MemberUpdateComponent extends Component {
     render() {
         // Common
-        const { urlArgument, slug, typeOf, errors, onTextChange, onSelectChange, onMultiChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
+        const { urlArgument, slug, typeOf, errors, onTextChange, onSelectChange, onRadioChange, onMultiChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
 
         // Biz - Contact
         const { companyName, contactFirstName, contactLastName } = this.props;
@@ -31,7 +31,10 @@ class MemberUpdateComponent extends Component {
         const { watch, watchOptions } = this.props;
 
         // Extra
-        const { tags, tagOptions, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
+        const {
+            tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+        } = this.props;
 
         // Check the type of member this is.
         const isBiz = typeOf === BUSINESS_TYPE_OF;
@@ -72,6 +75,7 @@ class MemberUpdateComponent extends Component {
                                     typeOf={typeOf}
                                     errors={errors}
                                     onTextChange={onTextChange}
+                                    onRadioChange={onRadioChange}
                                     onSelectChange={onSelectChange}
                                     onMultiChange={onMultiChange}
                                     onDOBDateTimeChange={onDOBDateTimeChange}
@@ -97,10 +101,18 @@ class MemberUpdateComponent extends Component {
 
                                     tags={tags}
                                     tagOptions={tagOptions}
-                                    dateOfBirth={dateOfBirth}
+                                    birthYear={birthYear}
+                                    gender={gender}
                                     howDidYouHear={howDidYouHear}
+                                    // howDidYouHearOption={howDidYouHearOption}
                                     howDidYouHearOptions={howDidYouHearOptions}
                                     howDidYouHearOther={howDidYouHearOther}
+                                    meaning={meaning}
+                                    expectations={expectations}
+                                    willingToVolunteer={willingToVolunteer}
+                                    anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                                    totalHouseholdCount={totalHouseholdCount}
+                                    under18YearsHouseholdCount={under18YearsHouseholdCount}
                                 />
                             }
 
@@ -111,6 +123,7 @@ class MemberUpdateComponent extends Component {
                                     typeOf={typeOf}
                                     errors={errors}
                                     onTextChange={onTextChange}
+                                    onRadioChange={onRadioChange}
                                     onSelectChange={onSelectChange}
                                     onMultiChange={onMultiChange}
                                     onDOBDateTimeChange={onDOBDateTimeChange}
@@ -137,10 +150,18 @@ class MemberUpdateComponent extends Component {
 
                                     tags={tags}
                                     tagOptions={tagOptions}
-                                    dateOfBirth={dateOfBirth}
+                                    birthYear={birthYear}
+                                    gender={gender}
                                     howDidYouHear={howDidYouHear}
+                                    // howDidYouHearOption={howDidYouHearOption}
                                     howDidYouHearOptions={howDidYouHearOptions}
                                     howDidYouHearOther={howDidYouHearOther}
+                                    meaning={meaning}
+                                    expectations={expectations}
+                                    willingToVolunteer={willingToVolunteer}
+                                    anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                                    totalHouseholdCount={totalHouseholdCount}
+                                    under18YearsHouseholdCount={under18YearsHouseholdCount}
                                 />
                             }
 
@@ -151,6 +172,7 @@ class MemberUpdateComponent extends Component {
                                     typeOf={typeOf}
                                     errors={errors}
                                     onTextChange={onTextChange}
+                                    onRadioChange={onRadioChange}
                                     onSelectChange={onSelectChange}
                                     onMultiChange={onMultiChange}
                                     onDOBDateTimeChange={onDOBDateTimeChange}
@@ -176,10 +198,18 @@ class MemberUpdateComponent extends Component {
 
                                     tags={tags}
                                     tagOptions={tagOptions}
-                                    dateOfBirth={dateOfBirth}
+                                    birthYear={birthYear}
+                                    gender={gender}
                                     howDidYouHear={howDidYouHear}
+                                    // howDidYouHearOption={howDidYouHearOption}
                                     howDidYouHearOptions={howDidYouHearOptions}
                                     howDidYouHearOther={howDidYouHearOther}
+                                    meaning={meaning}
+                                    expectations={expectations}
+                                    willingToVolunteer={willingToVolunteer}
+                                    anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                                    totalHouseholdCount={totalHouseholdCount}
+                                    under18YearsHouseholdCount={under18YearsHouseholdCount}
                                 />
                             }
 

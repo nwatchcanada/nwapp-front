@@ -220,7 +220,7 @@ export function validateStep5CreateInput(data) {
             errors.birthYear = 'This field needs to be a number';
         }
     }
-    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.willingToVolunteer) ) {
+    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
         errors.gender = 'This field is required';
     }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
@@ -245,14 +245,16 @@ export function validateStep5CreateInput(data) {
     if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
         errors.anotherHouseholdMemberRegistered = 'This field is required';
     } else {
-        if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
-            errors.totalHouseholdCount = 'This field is required';
-        }
-        if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
-            errors.under18YearsHouseholdCount = 'This field is required';
+        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
+            if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
+                errors.totalHouseholdCount = 'This field is required';
+            }
+            if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
+                errors.under18YearsHouseholdCount = 'This field is required';
+            }
         }
     }
-    
+
     return {
         errors,
         isValid: isEmpty(errors)

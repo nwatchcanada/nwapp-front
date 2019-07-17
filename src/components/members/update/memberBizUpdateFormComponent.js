@@ -5,18 +5,28 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
+import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
+import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../constants/api";
 
 
 export default class MemberBizUpdateFormComponent extends Component {
     render() {
-        const { errors, onTextChange, onSelectChange, onMultiChange, onDOBDateTimeChange, isLoading } = this.props;
+        const { errors, onTextChange, onSelectChange, onRadioChange, onMultiChange, onDOBDateTimeChange, isLoading } = this.props;
         const { contactFirstName, contactLastName, primaryPhone, secondaryPhone, email } = this.props;
         const { companyName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
         const { watch, watchOptions } = this.props;
-        const { tags, tagOptions, dateOfBirth, howDidYouHear, howDidYouHearOptions, howDidYouHearOther } = this.props;
+        const { tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
+
+        // This code checks to see if we need to display the household count fields.
+        let showHouseholdCount = false;
+        try {
+            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
+        } catch (error) {
+            // Do nothing.
+        }
 
         return (
             <div>
@@ -188,27 +198,37 @@ export default class MemberBizUpdateFormComponent extends Component {
                     onMultiChange={onMultiChange}
                 />
 
-                <BootstrapDatePicker
-                    label="Date of Birth (*)"
-                    name="dateOfBirth"
-                    dateObj={dateOfBirth}
-                    onTimeChange={onDOBDateTimeChange}
-                    datePickerClassName="form-control form-control-lg border"
-                    divClassName="form-group p-0 col-md-7 mb-4"
-                    error={errors.dateOfBirth}
-                    disabled={isLoading}
+                <BootstrapRadio
+                    inputClassName="form-check-input form-check-input-lg"
+                    borderColour="border-primary"
+                    error={errors.gender}
+                    label="Please select your gender (*)"
+                    name="gender"
+                    onChange={onRadioChange}
+                    selectedValue={gender}
+                    options={GENDER_RADIO_CHOICES}
+                />
+
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.birthYear}
+                    label="Year of Birth (*)"
+                    onChange={onTextChange}
+                    value={birthYear}
+                    name="birthYear"
+                    type="number"
                 />
 
                 <BootstrapSingleSelect
                     borderColour="border-primary"
                     label="How did you hear about us? (*)"
                     name="howDidYouHear"
-                    defaultOptionLabel="Please select a street type."
+                    defaultOptionLabel="Please select how you heard about us."
                     options={howDidYouHearOptions}
                     value={howDidYouHear}
                     error={errors.howDidYouHear}
                     onSelectChange={onSelectChange}
-                    disabled={isLoading}
                 />
 
                 {isOtherHowDidYouHearSelected &&
@@ -221,8 +241,76 @@ export default class MemberBizUpdateFormComponent extends Component {
                         value={howDidYouHearOther}
                         name="howDidYouHearOther"
                         type="text"
-                        disabled={isLoading}
                     />
+                }
+
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.meaning}
+                    label="What does NW mean to you (*)"
+                    onChange={onTextChange}
+                    value={meaning}
+                    name="meaning"
+                    type="text"
+                />
+
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-primary"
+                    error={errors.expectations}
+                    label="What do you expect from NW? (*)"
+                    onChange={onTextChange}
+                    value={expectations}
+                    name="expectations"
+                    type="text"
+                />
+
+                <BootstrapRadio
+                    inputClassName="form-check-input form-check-input-lg"
+                    borderColour="border-primary"
+                    error={errors.willingToVolunteer}
+                    label="Are you willing to volunteer as a area coordinator / associate ? (*)"
+                    name="willingToVolunteer"
+                    onChange={onRadioChange}
+                    selectedValue={willingToVolunteer}
+                    options={WILLING_TO_VOLUNTEER_CHOICES}
+                />
+
+                <BootstrapRadio
+                    inputClassName="form-check-input form-check-input-lg"
+                    borderColour="border-primary"
+                    error={errors.anotherHouseholdMemberRegistered}
+                    label="Is there another member of your household which is registered with us? (*)"
+                    name="anotherHouseholdMemberRegistered"
+                    onChange={onRadioChange}
+                    selectedValue={anotherHouseholdMemberRegistered}
+                    options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
+                />
+
+                {showHouseholdCount &&
+                    <div>
+                        <BootstrapInput
+                            inputClassName="form-control form-control-lg"
+                            borderColour="border-primary"
+                            error={errors.totalHouseholdCount}
+                            label="How many people are in your household? (*)"
+                            onChange={onTextChange}
+                            value={totalHouseholdCount}
+                            name="totalHouseholdCount"
+                            type="number"
+                        />
+                        <BootstrapInput
+                            inputClassName="form-control form-control-lg"
+                            borderColour="border-primary"
+                            error={errors.under18YearsHouseholdCount}
+                            label="How many people in your household are under the age of 18? (*)"
+                            onChange={onTextChange}
+                            value={under18YearsHouseholdCount}
+                            name="under18YearsHouseholdCount"
+                            type="number"
+                        />
+                    </div>
                 }
             </div>
         );

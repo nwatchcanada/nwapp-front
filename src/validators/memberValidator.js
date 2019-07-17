@@ -10,8 +10,6 @@ import {
 export function validateInput(data) {
     let errors = {};
 
-    console.log(data);
-
     // --- CONTACT --- //
 
     if (data.typeOf === RESIDENCE_TYPE_OF) {
@@ -84,8 +82,19 @@ export function validateInput(data) {
 
     // --- EXTRA --- //
 
-    if (data.dateOfBirth === undefined || data.dateOfBirth === null || data.dateOfBirth === "") {
-        errors.dateOfBirth = 'This field is required';
+    if (data.birthYear === undefined || data.birthYear === null || data.birthYear === "") {
+        errors.birthYear = 'This field is required';
+    } else {
+        try {
+            if (parseInt(data.birthYear) < 1900) {
+                errors.birthYear = 'Needs to be greater then 1900.';
+            }
+        } catch(err) {
+            errors.birthYear = 'This field needs to be a number';
+        }
+    }
+    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
+        errors.gender = 'This field is required';
     }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
         errors.howDidYouHear = 'This field is required';
@@ -93,6 +102,27 @@ export function validateInput(data) {
         if (data.howDidYouHear === "Other") {
             if (data.howDidYouHearOther === undefined || data.howDidYouHearOther === null || validator.isEmpty(data.howDidYouHearOther) || data.howDidYouHearOther === "") {
                 errors.howDidYouHearOther = 'This field is required';
+            }
+        }
+    }
+    if (data.meaning === undefined || data.meaning === null || data.meaning === "") {
+        errors.meaning = 'This field is required';
+    }
+    if (data.expectations === undefined || data.expectations === null || data.expectations === "") {
+        errors.expectations = 'This field is required';
+    }
+    if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
+        errors.willingToVolunteer = 'This field is required';
+    }
+    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
+        errors.anotherHouseholdMemberRegistered = 'This field is required';
+    } else {
+        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
+            if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
+                errors.totalHouseholdCount = 'This field is required';
+            }
+            if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
+                errors.under18YearsHouseholdCount = 'This field is required';
             }
         }
     }
@@ -220,7 +250,7 @@ export function validateStep5CreateInput(data) {
             errors.birthYear = 'This field needs to be a number';
         }
     }
-    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.willingToVolunteer) ) {
+    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
         errors.gender = 'This field is required';
     }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
@@ -232,7 +262,6 @@ export function validateStep5CreateInput(data) {
             }
         }
     }
-
     if (data.meaning === undefined || data.meaning === null || data.meaning === "") {
         errors.meaning = 'This field is required';
     }
@@ -245,11 +274,13 @@ export function validateStep5CreateInput(data) {
     if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
         errors.anotherHouseholdMemberRegistered = 'This field is required';
     } else {
-        if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
-            errors.totalHouseholdCount = 'This field is required';
-        }
-        if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
-            errors.under18YearsHouseholdCount = 'This field is required';
+        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
+            if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
+                errors.totalHouseholdCount = 'This field is required';
+            }
+            if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
+                errors.under18YearsHouseholdCount = 'This field is required';
+            }
         }
     }
 
