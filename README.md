@@ -73,5 +73,11 @@ Start up the web-server:
   npm start
   ```
 
+
 ## License
 This library is licensed under the **BSD** license. See [LICENSE](LICENSE) for more information.
+
+
+## Contact
+
+Do you have any questions? Join our [nwl-app mailing list](https://groups.google.com/forum/#!forum/nwl-app) and ask your questions there.

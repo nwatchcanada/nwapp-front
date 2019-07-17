@@ -2,10 +2,10 @@
 
 ## Do you have questions about the source code?
 
-* Ask any question about how to use Neigbhourhood Watch App in the [nwapp-talk mailing list](https://groups.google.com/forum/#!overview).
+* Ask any question about how to use Neigbhourhood Watch App in the [nwl-app mailing list](https://groups.google.com/forum/#!forum/nwl-app).
 
 ## Do you intend to add a new feature or change an existing one?
-* Suggest your change in the [nwapp-talk mailing list](https://groups.google.com/forum/#!overview). and start writing code.
+* Suggest your change in the [nwl-app mailing list](https://groups.google.com/forum/#!forum/nwl-app). and start writing code.
 
 * Do not open an issue on GitHub until you have collected positive feedback about the change. GitHub issues are primarily intended for bug reports and fixes.
 
