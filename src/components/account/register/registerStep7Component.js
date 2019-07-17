@@ -44,6 +44,14 @@ export default class RegisterStep7Component extends Component {
             howDidYouHearFinalLabel = howDidYouHearOther;
         }
 
+        // This code checks to see if we need to display the household count fields.
+        let showHouseholdCount = false;
+        try {
+            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
+        } catch (error) {
+            // Do nothing.
+        }
+
         return (
             <main id="main" role="main">
                 <h1>
@@ -277,8 +285,20 @@ export default class RegisterStep7Component extends Component {
                                     <th scope="row" className="bg-light">Is there another member of your household which is registered with?</th>
                                     <td>{anotherHouseholdMemberRegisteredLabel}</td>
                                 </tr>
+                                {showHouseholdCount &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many people are in your household?</th>
+                                        <td>{totalHouseholdCount}</td>
+                                    </tr>
+                                }
+                                {showHouseholdCount &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
+                                        <td>{under18YearsHouseholdCount}</td>
+                                    </tr>
+                                }
                                 { /*
-                                    willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+                                    totalHouseholdCount, under18YearsHouseholdCount,
                                     companyEmployeeCount, companyYearsInOperation, companyType,
                                     agreement,
                                 */}

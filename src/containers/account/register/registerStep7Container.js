@@ -72,7 +72,7 @@ class RegisterStep7Container extends Component {
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("temp-register-anotherHouseholdMemberRegistered")),
             anotherHouseholdMemberRegisteredLabel: localStorage.getItem("temp-register-anotherHouseholdMemberRegistered-label"),
             totalHouseholdCount: parseInt(localStorage.getItem("temp-register-totalHouseholdCount")),
-            under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-register-householdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("temp-register-under18YearsHouseholdCount")),
             companyEmployeeCount: parseInt(localStorage.getItem("temp-register-companyEmployeeCount")),
             companyYearsInOperation: parseInt(localStorage.getItem("temp-register-companyYearsInOperation")),
             companyType: localStorage.getItem("temp-register-companyType"),
