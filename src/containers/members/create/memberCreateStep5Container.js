@@ -149,22 +149,26 @@ class MemberCreateStep5Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-create-member-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-create-member-'+optionKey, option);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onRadioChange(e) {
         // Get the values.
         const storageValueKey = "nwapp-create-member-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
-        const storeLabelKey = [e.target.name].toString()+"-label";
+        const storeLabelKey = [e.target.name].toString()+"Label";
 
         // Save the data.
         this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
         localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
 
         // For the debugging purposes only.
         console.log({

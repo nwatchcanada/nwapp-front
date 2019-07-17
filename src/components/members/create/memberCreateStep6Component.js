@@ -21,7 +21,9 @@ export default class MemberCreateStep6Component extends Component {
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOther, streetDirection,
             watchSlug, watchIcon, watchName,
-            tags, dateOfBirth, howDidYouHear, howDidYouHearOther
+            tags, tagOptions, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
+            meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -35,6 +37,20 @@ export default class MemberCreateStep6Component extends Component {
         }
         else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
             membershipClass = "Community Cares";
+        }
+
+        // Set the how did you hear.
+        let howDidYouHearFinalLabel = howDidYouHearLabel;
+        if (howDidYouHear === "other") {
+            howDidYouHearFinalLabel = howDidYouHearOther;
+        }
+
+        // This code checks to see if we need to display the household count fields.
+        let showHouseholdCount = false;
+        try {
+            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
+        } catch (error) {
+            // Do nothing.
         }
 
         return (
@@ -248,21 +264,71 @@ export default class MemberCreateStep6Component extends Component {
                                         }
                                     </td>
                                 </tr>
-                                {dateOfBirth &&
+                                {birthYear &&
                                     <tr>
-                                        <th scope="row" className="bg-light">Date of Birth</th>
+                                        <th scope="row" className="bg-light">Year of Birth</th>
                                         <td>
-                                            <Moment format="YYYY/MM/DD">{dateOfBirth}</Moment>
+                                            {birthYear}
                                         </td>
                                     </tr>
                                 }
                                 <tr>
-                                    <th scope="row" className="bg-light">How did you hear about us?</th>
-                                    <td>{howDidYouHear}</td>
+                                    <th scope="row" className="bg-light">Gender</th>
+                                    <td>{genderLabel}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">How did you hear about us? (Other)</th>
-                                    <td>{howDidYouHearOther}</td>
+                                    <th scope="row" className="bg-light">How did you hear about us?</th>
+                                    <td>{howDidYouHearFinalLabel}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">What does NW mean to you?</th>
+                                    <td>{meaning}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">What do you expect from NW?</th>
+                                    <td>{expectations}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Are you willing to volunteer as a area coordinator / associate?</th>
+                                    <td>{willingToVolunteerLabel}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Is there another member of your household which is registered with?</th>
+                                    <td>{anotherHouseholdMemberRegisteredLabel}</td>
+                                </tr>
+                                {showHouseholdCount &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many people are in your household?</th>
+                                        <td>{totalHouseholdCount}</td>
+                                    </tr>
+                                }
+                                {showHouseholdCount &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
+                                        <td>{under18YearsHouseholdCount}</td>
+                                    </tr>
+                                }
+                                {isBizTypeOf &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many employees does your business have?</th>
+                                        <td>{companyEmployeeCount}</td>
+                                    </tr>
+                                }
+                                {isBizTypeOf &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many years has your company been in operation?</th>
+                                        <td>{companyYearsInOperation}</td>
+                                    </tr>
+                                }
+                                {isBizTypeOf &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">What type of business is this?</th>
+                                        <td>{companyType}</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <th scope="row" className="bg-light">User agrees to conditions</th>
+                                    <td>Yes</td>
                                 </tr>
 
 

@@ -57,10 +57,24 @@ class MemberCreateStep6Container extends Component {
             watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
             watchName: localStorage.getItem('nwapp-create-member-watch-name'),
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
-            dateOfBirth: localStorageGetDateItem("nwapp-create-member-dateOfBirth"),
+            birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
+            gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
+            genderLabel: localStorage.getItem("nwapp-create-member-gender-label"),
             howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHearLabel: localStorage.getItem("nwapp-create-member-howDidYouHearLabel"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            meaning: localStorage.getItem("nwapp-create-member-meaning"),
+            expectations: localStorage.getItem("nwapp-create-member-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
+            willingToVolunteerLabel: localStorage.getItem("nwapp-create-member-willingToVolunteer-label"),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
+            anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered-label"),
+            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-companyEmployeeCount")),
+            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-companyYearsInOperation")),
+            companyType: localStorage.getItem("nwapp-create-member-companyType"),
             errors: {},
             isLoading: false
         }
@@ -117,8 +131,10 @@ class MemberCreateStep6Container extends Component {
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
-            watchSlug, watchIcon, watchName, dateOfBirth, tags,
-            howDidYouHear, howDidYouHearOption, howDidYouHearOther
+            watchSlug, watchIcon, watchName,
+            tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, expectations,
+            willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.state;
 
         return (
@@ -147,10 +163,24 @@ class MemberCreateStep6Container extends Component {
                 watchIcon={watchIcon}
                 watchName={watchName}
                 tags={tags}
-                dateOfBirth={dateOfBirth}
+                birthYear={birthYear}
+                gender={gender}
+                genderLabel={genderLabel}
                 howDidYouHear={howDidYouHear}
-                howDidYouHearOption={howDidYouHearOption}
+                howDidYouHearLabel={howDidYouHearLabel}
                 howDidYouHearOther={howDidYouHearOther}
+                meaning={meaning}
+                expectations={expectations}
+                willingToVolunteer={willingToVolunteer}
+                willingToVolunteerLabel={willingToVolunteerLabel}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
+                totalHouseholdCount={totalHouseholdCount}
+                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                companyEmployeeCount={companyEmployeeCount}
+                companyYearsInOperation={companyYearsInOperation}
+                companyType={companyType}
+                errors={errors}
                 errors={errors}
                 onClick={this.onClick}
             />
