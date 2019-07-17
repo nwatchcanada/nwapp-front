@@ -41,8 +41,8 @@ class LoginContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // For debugging purposes only.
-        console.log("REACT_APP_PROTOCOL:", process.env.REACT_APP_PROTOCOL);
-        console.log("REACT_APP_DOMAIN:", process.env.REACT_APP_DOMAIN);
+        console.log("REACT_APP_WWW_PROTOCOL:", process.env.REACT_APP_WWW_PROTOCOL);
+        console.log("REACT_APP_WWW_DOMAIN:", process.env.REACT_APP_WWW_DOMAIN);
         console.log("REACT_APP_API_PROTOCOL:", process.env.REACT_APP_API_PROTOCOL);
         console.log("REACT_APP_API_DOMAIN:", process.env.REACT_APP_API_DOMAIN);
     }
@@ -72,12 +72,12 @@ class LoginContainer extends Component {
         this.setState({ errors: {}, });
         const { schema, groupMembershipId } = profile;
         if (groupMembershipId === EXECUTIVE_GROUP_ID) {
-            const location = process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_DOMAIN + "/organizations";
+            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + process.env.REACT_APP_WWW_DOMAIN + "/organizations";
             window.location = location; // Do not use `react-router-dom` library.
         } else {
             const accessToken = getAccessTokenFromLocalStorage();
             const refreshToken = getRefreshTokenFromLocalStorage();
-            const location = process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_DOMAIN + "/dashboard-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
+            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
             window.location = location; // Do not use `react-router-dom` library.
         }
     }

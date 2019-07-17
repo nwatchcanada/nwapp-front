@@ -70,11 +70,11 @@ class SharedOrganizationListContainer extends Component {
             {
                 "schema": "london",
                 "name": "City of London Neigbhourhood Watch",
-                "absoluteUrl": "http://london."+process.env.REACT_APP_DOMAIN+"/dashboard"
+                "absoluteUrl": "http://london."+process.env.REACT_APP_WWW_DOMAIN+"/dashboard"
             },{
                 "schema": "toronto",
                 "name": "City of Toronto Neigbhourhood Watch",
-                "absoluteUrl": "http://toronto."+process.env.REACT_APP_DOMAIN+"/dashboard"
+                "absoluteUrl": "http://toronto."+process.env.REACT_APP_WWW_DOMAIN+"/dashboard"
             }
         ];
         return (

@@ -40,9 +40,9 @@ export function getSubdomain() {
 export function getAPIBaseURL() {
     const schema = getSubdomain();
     if (schema !== null && schema !== undefined && schema !== "www") {
-        return process.env.REACT_APP_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + '/api';
+        return process.env.REACT_APP_WWW_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + '/api';
     } else {
-        return process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_API_DOMAIN + '/api';
+        return process.env.REACT_APP_WWW_PROTOCOL + "://" + process.env.REACT_APP_API_DOMAIN + '/api';
     }
 }
 
