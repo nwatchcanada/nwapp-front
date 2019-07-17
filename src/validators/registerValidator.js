@@ -283,6 +283,10 @@ export function validateStep6CreateInput(data) {
 
     if (data.agreement === undefined || data.agreement === null || data.agreement === "") {
         errors.agreement = 'This field is required';
+    } else {
+        if (data.agreement === false) {
+            errors.agreement = 'You must agree to the terms before proceeding.'
+        }
     }
 
     return {

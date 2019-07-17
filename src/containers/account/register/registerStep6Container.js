@@ -4,9 +4,7 @@ import Scroll from 'react-scroll';
 
 import RegisterStep6Component from "../../../components/account/register/registerStep6Component";
 import { validateStep6CreateInput } from "../../../validators/registerValidator";
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
-} from '../../../helpers/localStorageUtility';
+import { localStorageGetBooleanItem } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import {
@@ -34,23 +32,18 @@ class RegisterStep6Container extends Component {
         else if (typeOf === BUSINESS_TYPE_OF) {
             returnURL = "/register/step-2-biz";
         }
+        
+        const agreement = localStorageGetBooleanItem("temp-register-agreement");
 
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            tags: localStorageGetArrayItem("temp-register-tags"),
-            dateOfBirth: localStorageGetDateItem("temp-register-dateOfBirth"),
-            howDidYouHear: localStorage.getItem("temp-register-howDidYouHear"),
-            howDidYouHearOption: localStorageGetObjectItem('temp-register-howDidYouHearOption'),
-            howDidYouHearOther: localStorage.getItem("temp-register-howDidYouHearOther"),
+            agreement: agreement,
             errors: {},
             isLoading: false
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onDOBDateTimeChange = this.onDOBDateTimeChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
-        this.onMultiChange = this.onMultiChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -63,31 +56,6 @@ class RegisterStep6Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
-        this.setState({
-            howDidYouHearData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Word of mouth',
-                    slug: 'word-of-mouth'
-                },{
-                    name: 'Internet',
-                    slug: 'internet'
-                }]
-            },
-            tagsData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Health',
-                    slug: 'health'
-                },{
-                    name: 'Security',
-                    slug: 'security'
-                },{
-                    name: 'Fitness',
-                    slug: 'fitness'
-                }]
-            }
-        });
     }
 
     componentWillUnmount() {
@@ -126,43 +94,11 @@ class RegisterStep6Container extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
+    onCheckboxChange(e) {
         this.setState({
-            [e.target.name]: e.target.value,
-        })
-        localStorage.setItem('temp-register-'+[e.target.name], e.target.value);
-    }
-
-    onDOBDateTimeChange(dateObj) {
-        this.setState({
-            dateOfBirth: dateObj,
-        })
-        localStorageSetObjectOrArrayItem('temp-register-dateOfBirth', dateObj);
-    }
-
-    onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            optionKey: option,
+            [e.target.name]: e.target.checked,
         });
-        localStorage.setItem('temp-register-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('temp-register-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
-    }
-
-    onMultiChange(...args) {
-        // Extract the select options from the parameter.
-        const selectedOptions = args[0];
-
-        // Set all the tags we have selected to the STORE.
-        this.setState({
-            tags: selectedOptions,
-        });
-
-        // // Set all the tags we have selected to the STORAGE.
-        const key = 'temp-register-' + args[1].name;
-        localStorageSetObjectOrArrayItem(key, selectedOptions);
+        localStorage.setItem('temp-register-'+[e.target.name], e.target.checked);
     }
 
     onClick(e) {
@@ -188,25 +124,14 @@ class RegisterStep6Container extends Component {
      */
 
     render() {
-        const { returnURL, tags, dateOfBirth, howDidYouHear, howDidYouHearOther, errors } = this.state;
-
-        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
-        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+        const { returnURL, errors, agreement } = this.state;
 
         return (
             <RegisterStep6Component
+                agreement={agreement}
                 returnURL={returnURL}
-                tags={tags}
-                tagOptions={tagOptions}
-                dateOfBirth={dateOfBirth}
                 errors={errors}
-                onTextChange={this.onTextChange}
-                onDOBDateTimeChange={this.onDOBDateTimeChange}
-                howDidYouHear={howDidYouHear}
-                howDidYouHearOptions={howDidYouHearOptions}
-                howDidYouHearOther={howDidYouHearOther}
-                onSelectChange={this.onSelectChange}
-                onMultiChange={this.onMultiChange}
+                onCheckboxChange={this.onCheckboxChange}
                 onClick={this.onClick}
             />
         );

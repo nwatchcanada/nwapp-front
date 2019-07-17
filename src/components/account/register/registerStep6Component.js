@@ -13,8 +13,7 @@ import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect
 export default class MemberCreateStep6Component extends Component {
     render() {
         const {
-            returnURL, agreement, onCheckboxChange, errors,
-            onTextChange, onSelectChange, onDOBDateTimeChange, isLoading, onClick
+            returnURL, agreement, onCheckboxChange, errors, isLoading, onClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -90,7 +89,7 @@ export default class MemberCreateStep6Component extends Component {
                                 error={errors.agreement}
                                 label="I agree to the terms"
                                 onChange={onCheckboxChange}
-                                checked={agreement}
+                                value={agreement}
                                 name="agreement"
                             />
 
