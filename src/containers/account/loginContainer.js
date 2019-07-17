@@ -39,6 +39,12 @@ class LoginContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // For debugging purposes only.
+        console.log("REACT_APP_PROTOCOL:", process.env.REACT_APP_PROTOCOL);
+        console.log("REACT_APP_DOMAIN:", process.env.REACT_APP_DOMAIN);
+        console.log("REACT_APP_API_PROTOCOL:", process.env.REACT_APP_API_PROTOCOL);
+        console.log("REACT_APP_API_DOMAIN:", process.env.REACT_APP_API_DOMAIN);
     }
 
     componentWillUnmount() {
