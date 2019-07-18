@@ -12,6 +12,8 @@ import LoginContainer from "./account/loginContainer";
 import LogoutContainer from "./account/logoutContainer";
 import SendResetPasswordContainer from "./account/auth/sendResetPasswordContainer";
 import SendResetPasswordSuccessContainer from "./account/auth/sendResetPasswordSuccessContainer";
+import ResetPasswordContainer from "./account/auth/resetPasswordContainer";
+import ResetPasswordSuccessContainer from "./account/auth/resetPasswordSuccessContainer";
 
 import RegisterStep1Container from "./account/register/registerStep1Container";
 import RegisterStep2BizContainer from "./account/register/registerStep2BizContainer";
@@ -24,10 +26,6 @@ import RegisterStep7Container from "./account/register/registerStep7Container";
 import RegisterSuccessContainer from "./account/register/registerSuccessContainer";
 
 // import ActivateContainer from "./account/activateContainer";
-// import SendResetPasswordContainer from "./account/sendResetPasswordContainer";
-// import SendResetPasswordSuccessContainer from "./account/sendResetPasswordSuccessContainer";
-// import ResetPasswordContainer from "./account/resetPasswordContainer";
-// import ResetPasswordSuccessContainer from "./account/resetPasswordSuccessContainer";
 // import ReferralContainer from "./account/referralContainer";
 import SharedOrganizationListContainer from "./organization/shared/sharedOrganizationListContainer";
 import SharedOrganizationCreateContainer from "./organization/shared/sharedOrganizationCreateContainer";
@@ -197,6 +195,8 @@ class AppContainer extends React.Component {
                                 <Route path="/register/step-7" exact component={RegisterStep7Container} />
                                 <Route path="/send-password-reset" exact component={SendResetPasswordContainer} />
                                 <Route path="/send-password-reset-success" exact component={SendResetPasswordSuccessContainer} />
+                                <Route path="/reset-password/:code" exact component={ResetPasswordContainer} />
+                                <Route path="/reset-password-success" exact component={ResetPasswordSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
                                 <Route path="/help" exact component={HelpContainer} />
