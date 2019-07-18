@@ -28,6 +28,7 @@ class WatchCreateStep2ComContainer extends Component {
             // Page related.
             tags: localStorageGetArrayItem("nwapp-watch-com-tags"),
             name: localStorage.getItem('nwapp-watch-com-name'),
+            description: localStorage.getItem('nwapp-watch-com-description'),
             associate: localStorage.getItem('nwapp-watch-com-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-com-associateOption'),
             district: localStorage.getItem('nwapp-watch-com-district'),
@@ -298,7 +299,7 @@ class WatchCreateStep2ComContainer extends Component {
     render() {
         const {
             // Page related.
-            tags, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
             streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
@@ -337,6 +338,7 @@ class WatchCreateStep2ComContainer extends Component {
                 tags={tags}
                 tagOptions={tagOptions}
                 name={name}
+                description={description}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}

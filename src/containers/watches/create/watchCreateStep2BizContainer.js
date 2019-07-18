@@ -28,6 +28,7 @@ class WatchCreateStep2BizContainer extends Component {
             // Page related.
             tags: localStorageGetArrayItem("nwapp-watch-biz-tags"),
             name: localStorage.getItem('nwapp-watch-biz-name'),
+            description: localStorage.getItem('nwapp-watch-biz-description'),
             associate: localStorage.getItem('nwapp-watch-biz-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-biz-associateOption'),
             district: localStorage.getItem('nwapp-watch-biz-district'),
@@ -298,7 +299,7 @@ class WatchCreateStep2BizContainer extends Component {
     render() {
         const {
             // Page related.
-            tags, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
             streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
@@ -337,6 +338,7 @@ class WatchCreateStep2BizContainer extends Component {
                 tags={tags}
                 tagOptions={tagOptions}
                 name={name}
+                description={description}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}

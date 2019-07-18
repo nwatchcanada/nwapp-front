@@ -7,13 +7,14 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 
 
 export default class WatchUpdateBizComponent extends Component {
     render() {
         const {
             // Page related.
-            slug, name, associate, associateOptions, district, districtOptions,
+            slug, name, description, associate, associateOptions, district, districtOptions,
             primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions, streetMembership,
             errors, isLoading, onClick, onTextChange, onSelectChange,
 
@@ -62,6 +63,18 @@ export default class WatchUpdateBizComponent extends Component {
                                 value={name}
                                 name="name"
                                 type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please describe your concern"
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
                             />
 
                             <BootstrapSingleSelect
