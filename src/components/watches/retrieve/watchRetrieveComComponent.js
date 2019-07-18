@@ -8,7 +8,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 export default class WatchRetrieveComComponent extends Component {
     render() {
         const {
-            name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, isLoading, onClick, flashMessage, streetsArray
+            tags, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, flashMessage
         } = this.props;
         return (
             <main id="main" role="main">
@@ -29,11 +29,16 @@ export default class WatchRetrieveComComponent extends Component {
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1>
-                   <i className="fas fa-university"></i>&nbsp;{name}
+                    <i className="fas fa-university"></i>&nbsp;{name}
                 </h1>
 
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
+
+                        <h2>
+                            <i className="fas fa-table"></i>&nbsp;Watch Details
+                        </h2>
+
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
@@ -45,42 +50,63 @@ export default class WatchRetrieveComComponent extends Component {
                                     <th scope="row" className="bg-light">Name</th>
                                     <td>{name}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Description</th>
-                                    <td>{description}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">District</th>
-                                    <td>{district.label}</td>
-                                </tr>
+                                {district &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">District</th>
+                                        <td>{district.label}</td>
+                                    </tr>
+                                }
                                 <tr>
                                     <th scope="row" className="bg-light">Program</th>
                                     <td>Community Cares</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Associate</th>
-                                    <td>{associate.label}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Primary Area Coordinator</th>
-                                    <td>{primaryAreaCoordinator.label}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Secondary Area Coordinator</th>
-                                    <td>{secondaryAreaCoordinator.label}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Addresses</th>
-                                    <td>
-                                        <ul>
-                                            {streetsArray && streetsArray.map(
-                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
+                                {associate &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Associate</th>
+                                        <td>{associate.label}</td>
+                                    </tr>
+                                }
+                                {primaryAreaCoordinator &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Primary Area Coordinator</th>
+                                        <td>{primaryAreaCoordinator.label}</td>
+                                    </tr>
+                                }
+                                {secondaryAreaCoordinator &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Secondary Area Coordinator</th>
+                                        <td>{secondaryAreaCoordinator.label}</td>
+                                    </tr>
+                                }
+                                {tags &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Tags</th>
+                                        <td>
+                                            {tags && tags.map(
+                                                (tag, i) => <TagItem tag={tag} key={i} />)
                                             }
-                                        </ul>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                {streetMembership &&
+                    <div className="row">
+                        <div className="col-md-10 mx-auto">
+                            <h2>
+                                <i className="fas fa-road"></i>&nbsp;Street Membership
+                            </h2>
+
+                            <StreetMembershipTable streetMembership={streetMembership} />
+                        </div>
+                    </div>
+                }
+
+                <div className="row">
+                    <div className="col-md-10 mx-auto">
                         <form>
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
@@ -100,11 +126,85 @@ export default class WatchRetrieveComComponent extends Component {
 }
 
 
-class StreetAddressBulletItem extends Component {
+class StreetMembershipRow extends Component {
     render() {
-        const { streetAddress } = this.props.datum;
+        const { streetAddress, streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection } = this.props;
         return (
-            <li>{streetAddress}</li>
+            <tr key={streetAddress}>
+                <td>
+                    {streetNumberStart}
+                </td>
+                <td>
+                    {streetNumberFinish}
+                </td>
+                <td>
+                    {streetName}
+                </td>
+                <td>
+                    {streetType}
+                </td>
+                <td>
+                    {streetDirection}
+                </td>
+            </tr>
         );
     }
+}
+
+
+class StreetMembershipTable extends Component {
+    render() {
+        const { streetMembership } = this.props;
+
+        let elements = [];
+        if (streetMembership !== undefined && streetMembership !== null) {
+            for (let i = 0; i < streetMembership.length; i++) {
+                let rowData = streetMembership[i];
+                if (rowData !== null && rowData !== undefined) {
+                    elements.push(
+                        <StreetMembershipRow
+                            key={rowData.streetAddress}
+                            streetAddress={rowData.streetAddress}
+                            streetNumberStart={rowData.streetNumberStart}
+                            streetNumberFinish={rowData.streetNumberFinish}
+                            streetName={rowData.streetName}
+                            streetType={rowData.streetType}
+                            streetDirection={rowData.streetDirection}
+                        />
+                    );
+                }
+            }
+        }
+
+        return (
+            <div>
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Street # (Start)</th>
+                                <th>Street # (Finish)</th>
+                                <th>Street Name</th>
+                                <th>Street Type</th>
+                                <th>Direction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {elements}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+}
+
+
+class TagItem extends Component {
+    render() {
+        const { label, value } = this.props.tag;
+        return (
+            <span className="badge badge-info badge-lg" value={value}>{label}</span>
+        );
+    };
 }

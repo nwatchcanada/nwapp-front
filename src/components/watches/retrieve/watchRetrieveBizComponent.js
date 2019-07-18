@@ -93,15 +93,17 @@ export default class WatchRetrieveBizComponent extends Component {
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-md-10 mx-auto">
-                        <h2>
-                            <i className="fas fa-road"></i>&nbsp;Street Membership
-                        </h2>
+                {streetMembership &&
+                    <div className="row">
+                        <div className="col-md-10 mx-auto">
+                            <h2>
+                                <i className="fas fa-road"></i>&nbsp;Street Membership
+                            </h2>
 
-                        <StreetMembershipTable streetMembership={streetMembership} />
+                            <StreetMembershipTable streetMembership={streetMembership} />
+                        </div>
                     </div>
-                </div>
+                }
 
                 <div className="row">
                     <div className="col-md-10 mx-auto">

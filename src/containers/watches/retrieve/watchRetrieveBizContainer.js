@@ -42,7 +42,6 @@ class WatchRetrieveBizContainer extends Component {
             primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
             secondaryAreaCoordinator: "icarus",
             secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
-            prettyTags: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
             streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
         })
     }

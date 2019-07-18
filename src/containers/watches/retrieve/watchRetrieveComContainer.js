@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WatchRetrieveComComponent from "../../../components/watches/retrieve/watchRetrieveComComponent";
+import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -14,16 +15,6 @@ class WatchRetrieveComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            slug: "byron",
-            name: "",
-            associate: "",
-            associateOption: "",
-            district: "",
-            districtOption: "",
-            primaryAreaCoordinator: "",
-            primaryAreaCoordinatorOption: "",
-            secondaryAreaCoordinator: "",
-            secondaryAreaCoordinatorOption: "",
             errors: {},
         }
 
@@ -38,41 +29,24 @@ class WatchRetrieveComContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // REPLACE THIS WITH API ENDPOINT.
+        //TODO: REPLACE WITH API.
         this.setState({
-            name: "Hells Kitchen",
-            description: "This is a test watch",
+            tags: ["fitness", "security"],
+            tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}, {"selectName":"tags","value":"security","label":"Security"}],
+            name: "Byron",
             associate: "jc-denton",
-            associateOption: {
-                selectName: "associate", value: "jc-denton", label: "JC Denton"
-            },
-            district: "new-york",
-            districtOption: {
-                selectName: "district", value: "new-york", label: "New York"
-            },
-            primaryAreaCoordinator: "walter-simons",
-            primaryAreaCoordinatorOption: {
-                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
-            },
-            secondaryAreaCoordinator: "joseph-manderly",
-            secondaryAreaCoordinatorOption: {
-                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
-            },
-            streetsArray: [
-                {
-                    'streetAddress': '240 First Street',
-                    'streetNumber': '240',
-                    'streetName': 'First',
-                    'streetType': 'Street',
-                },{
-                    'streetAddress': '51 Downtown Avenue',
-                    'streetNumber': '51',
-                    'streetName': 'Downtown',
-                    'streetType': 'Avenue',
-                }
+            associateOption: {"selectName":"associate","value":"jc-denton","label":"JC Denton"},
+            district: "wanchai",
+            districtOption: {"selectName":"district","value":"hells-kitchen","label":"Hells Kitchen"},
+            primaryAreaCoordinator: "tracer-tong",
+            primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"paul-denton","label":"Paul Denton"},
+            secondaryAreaCoordinator: "icarus",
+            secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+            streetMembership: [
+                {"streetAddress":"Centre Street from 100 to 200","streetNumberStart":"100","streetNumberFinish":"200","streetName":"Centre","streetType":"Street","streetDirection":""},
+                {"streetAddress":"Baseline Road from 1 to 5","streetNumberStart":"1","streetNumberFinish":"5","streetName":"Baseline","streetType":"Road","streetDirection":""}
             ],
-            errors: {},
-        });
+        })
     }
 
     componentWillUnmount() {
@@ -92,7 +66,6 @@ class WatchRetrieveComContainer extends Component {
      *------------------------------------------------------------
      */
 
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -101,7 +74,7 @@ class WatchRetrieveComContainer extends Component {
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/watch-cc/byron/update");
+        this.props.history.push("/watch-com/argyle/update");
     }
 
     /**
@@ -111,18 +84,18 @@ class WatchRetrieveComContainer extends Component {
 
     render() {
         const {
-            slug, name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetsArray, errors,
+            tagsOptions, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
+
         return (
             <WatchRetrieveComComponent
-                slug={slug}
+                tags={tagsOptions}
                 name={name}
-                description={description}
                 associate={associateOption}
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}
                 secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
-                streetsArray={streetsArray}
+                streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}
                 flashMessage={this.props.flashMessage}

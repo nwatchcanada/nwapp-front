@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WatchRetrieveRezComponent from "../../../components/watches/retrieve/watchRetrieveRezComponent";
-import { RESIDENCE_TYPE_OF } from '../../../constants/api';
+import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -15,18 +15,6 @@ class WatchRetrieveRezContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            program: RESIDENCE_TYPE_OF,
-            slug: "carling",
-            name: "",
-            associate: "",
-            associateOption: "",
-            district: "",
-            districtOption: "",
-            primaryAreaCoordinator: "",
-            primaryAreaCoordinatorOption: "",
-            secondaryAreaCoordinator: "",
-            secondaryAreaCoordinatorOption: "",
-            streetMembership: [],
             errors: {},
         }
 
@@ -41,38 +29,21 @@ class WatchRetrieveRezContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // REPLACE THIS WITH API ENDPOINT.
+        //TODO: REPLACE WITH API.
         this.setState({
-            name: "Hells Kitchen",
-            description: "This is a test watch",
-            associate: "jc-denton",
-            associateOption: {
-                selectName: "associate", value: "jc-denton", label: "JC Denton"
-            },
-            district: "new-york",
-            districtOption: {
-                selectName: "district", value: "new-york", label: "New York"
-            },
-            primaryAreaCoordinator: "walter-simons",
-            primaryAreaCoordinatorOption: {
-                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
-            },
-            secondaryAreaCoordinator: "joseph-manderly",
-            secondaryAreaCoordinatorOption: {
-                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
-            },
-            streetMembership: [
-                {
-                    streetAddress: "Singleton Avenue N from 1 to 1000",
-                    streetDirection: "N",
-                    streetName: "Singleton",
-                    streetNumberFinish: "1000",
-                    streetNumberStart: "1",
-                    streetType: "Avenue"
-                }
-            ],
-            errors: {},
-        });
+            tags: ["rentals",],
+            tagsOptions: [{"selectName":"tags","value":"rentals","label":"Rentals"}],
+            name: "Carling",
+            associate: "walter-simons",
+            associateOption: {"selectName":"associate","value":"walter-simons","label":"Walter Simons"},
+            district: "vandenburg",
+            districtOption: {"selectName":"district","value":"vandenburg","label":"Vandenburg Airforce Base"},
+            primaryAreaCoordinator: "tracer-tong",
+            primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
+            secondaryAreaCoordinator: "icarus",
+            secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+            streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
+        })
     }
 
     componentWillUnmount() {
@@ -98,7 +69,9 @@ class WatchRetrieveRezContainer extends Component {
      */
 
     onClick(e, typeOf) {
-        this.props.history.push("/watch-rez/carling/update");
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+        this.props.history.push("/watch-com/argyle/update");
     }
 
     /**
@@ -108,10 +81,12 @@ class WatchRetrieveRezContainer extends Component {
 
     render() {
         const {
-            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            tagsOptions, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
+
         return (
             <WatchRetrieveRezComponent
+                tags={tagsOptions}
                 name={name}
                 associate={associateOption}
                 district={districtOption}
