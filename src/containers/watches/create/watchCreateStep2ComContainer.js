@@ -12,6 +12,7 @@ import {
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
+import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 
@@ -25,6 +26,7 @@ class WatchCreateStep2ComContainer extends Component {
         super(props);
         this.state = {
             // Page related.
+            tags: localStorageGetArrayItem("nwapp-watch-com-tags"),
             name: localStorage.getItem('nwapp-watch-com-name'),
             associate: localStorage.getItem('nwapp-watch-com-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-com-associateOption'),
@@ -53,6 +55,7 @@ class WatchCreateStep2ComContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
 
         // Modal related.
         this.onAddClick = this.onAddClick.bind(this);
@@ -68,6 +71,22 @@ class WatchCreateStep2ComContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -122,6 +141,20 @@ class WatchCreateStep2ComContainer extends Component {
         localStorage.setItem('nwapp-watch-com-'+[option.selectName], option.value);
         localStorageSetObjectOrArrayItem('nwapp-watch-com-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
+    onMultiChange(...args) {
+        // Extract the select options from the parameter.
+        const selectedOptions = args[0];
+
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+
+        // // Set all the tags we have selected to the STORAGE.
+        const key = 'nwapp-watch-com-' + args[1].name;
+        localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
     onClick(e) {
@@ -265,7 +298,7 @@ class WatchCreateStep2ComContainer extends Component {
     render() {
         const {
             // Page related.
-            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            tags, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
             streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
@@ -297,8 +330,12 @@ class WatchCreateStep2ComContainer extends Component {
             ]
         }; // TODO: REPLACTE WITH API DATA.
 
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+
         return (
             <WatchCreateStep2ComComponent
+                tags={tags}
+                tagOptions={tagOptions}
                 name={name}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
@@ -313,6 +350,7 @@ class WatchCreateStep2ComContainer extends Component {
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onMultiChange={this.onMultiChange}
                 showModal={showModal}
                 streetNumberStart={streetNumberStart}
                 streetNumberFinish={streetNumberFinish}

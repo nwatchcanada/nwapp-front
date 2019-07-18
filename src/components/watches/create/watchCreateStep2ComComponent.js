@@ -7,15 +7,16 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 
 
 export default class WatchCreateStep2ComComponent extends Component {
     render() {
         const {
             // Page related.
-            name, associate, associateOptions, district, districtOptions,
+            tags, tagOptions, name, associate, associateOptions, district, districtOptions,
             primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions, streetMembership,
-            errors, isLoading, onClick, onTextChange, onSelectChange,
+            errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange,
 
             // Modal related.
             streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
@@ -74,6 +75,17 @@ export default class WatchCreateStep2ComComponent extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapMultipleSelect
+                                borderColour="border-success"
+                                label="Tags"
+                                name="tags"
+                                defaultOptionLabel="Please select the tag."
+                                options={tagOptions}
+                                selectedOptions={tags}
+                                error={errors.tags}
+                                onMultiChange={onMultiChange}
+                            />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
