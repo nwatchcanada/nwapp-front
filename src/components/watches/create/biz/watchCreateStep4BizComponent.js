@@ -61,12 +61,12 @@ export default class WatchCreateStep4BizComponent extends Component {
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before adding the residential watch.</strong></p>
+                        <p><strong>Please confirm these details before adding the business watch.</strong></p>
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-table"></i>&nbsp;District details
+                                        <i className="fas fa-table"></i>&nbsp;Watch details
                                     </th>
                                 </tr>
                                 <tr>

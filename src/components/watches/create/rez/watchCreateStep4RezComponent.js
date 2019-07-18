@@ -66,7 +66,7 @@ export default class WatchCreateStep4RezComponent extends Component {
                             <tbody>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-table"></i>&nbsp;District details
+                                        <i className="fas fa-table"></i>&nbsp;Watch details
                                     </th>
                                 </tr>
                                 <tr>

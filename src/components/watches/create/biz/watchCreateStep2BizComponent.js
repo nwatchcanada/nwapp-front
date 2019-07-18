@@ -66,7 +66,7 @@ export default class WatchCreateStep2BizComponent extends Component {
                 </div>
 
                 <div className="col-md-5 mx-auto mt-2">
-                    <h3 className="pt-4 pb-2 text-center">Details</h3>
+                    <h3 className="pt-4 pb-2 text-center"><i className="fas fa-table"></i>&nbsp;Details</h3>
                     <form id="residential-form" method="post" className="needs-validation" action="" noValidate>
                         <div className="form-group">
 
