@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import WatchCreateStep3ComComponent from "../../../components/watches/create/watchCreateStep3ComComponent";
-import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
+import { localStorageGetObjectItem, localStorageGetArrayItem } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -16,6 +16,7 @@ class WatchCreateStep3ComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: localStorage.getItem('nwapp-watch-com-name'),
             description: localStorage.getItem('nwapp-watch-com-description'),
             associate: localStorage.getItem('nwapp-watch-com-associate'),
@@ -26,7 +27,19 @@ class WatchCreateStep3ComContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-com-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-secondaryAreaCoordinatorOption'),
+
+            // Variable used to lock buttons when makig submissions.
+            isLoading: false,
+
+            // DEVELOPERS NOTE: This variable is used as the main way to add
+            // GUI modification to the fields. Simply adding a key and the
+            // message will result in an error message displaying for that
+            // field. Please make sure the `name` in the HTML field equals
+            // the `name` dictonary key in this dictionary.
             errors: {},
+
+            // ALL OUR OBJECTS ARE STORED HERE.
+            streetsArray : localStorageGetArrayItem('nwapp-district-com-streets'),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -91,7 +104,7 @@ class WatchCreateStep3ComContainer extends Component {
 
     render() {
         const {
-            name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
+            name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetsArray, errors,
         } = this.state;
         return (
             <WatchCreateStep3ComComponent
@@ -101,6 +114,7 @@ class WatchCreateStep3ComContainer extends Component {
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}
                 secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
+                streetsArray={streetsArray}
                 errors={errors}
                 onClick={this.onClick}
             />

@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
-class WatchCreateStep3ComComponent extends Component {
+export default class WatchCreateStep3ComComponent extends Component {
     render() {
-        const { name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, isLoading, onClick, errors } = this.props;
+        const { name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetsArray, isLoading, onClick, errors } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -92,6 +92,16 @@ class WatchCreateStep3ComComponent extends Component {
                                     <th scope="row" className="bg-light">Secondary Area Coordinator</th>
                                     <td>{secondaryAreaCoordinator.label}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Addresses</th>
+                                    <td>
+                                        <ul>
+                                            {streetsArray && streetsArray.map(
+                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <form>
@@ -112,4 +122,12 @@ class WatchCreateStep3ComComponent extends Component {
     }
 }
 
-export default WatchCreateStep3ComComponent;
+
+class StreetAddressBulletItem extends Component {
+    render() {
+        const { streetAddress } = this.props.datum;
+        return (
+            <li>{streetAddress}</li>
+        );
+    }
+}
