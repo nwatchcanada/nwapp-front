@@ -57,8 +57,8 @@ export default class WatchCreateStep2RezComponent extends Component {
                                 <span className="num">3.</span><span className="">Street Membership</span>
                             </strong>
                         </div>
-                        <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Review</span>
+                        <div id="step-4" className="st-grey">
+                            <span className="num">4.</span><span className="">Review</span>
                         </div>
                         { /* <div id="step-4" className="st-grey">
                             <span className="num">4.</span><span className="">Skills Required</span>

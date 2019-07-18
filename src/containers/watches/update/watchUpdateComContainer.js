@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import {
-    validateResidentialInput, validateResidentialModalSaveInput
+    validateResidentialUpdateInput, validateResidentialModalSaveInput
 } from "../../../validators/watchValidator";
 import WatchUpdateComComponent from "../../../components/watches/update/watchUpdateComComponent";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
@@ -153,7 +153,7 @@ class WatchUpdateComContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialInput(this.state);
+        const { errors, isValid } = validateResidentialUpdateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import {
-    validateResidentialInput, validateResidentialModalSaveInput
+    validateResidentialStep3Input, validateResidentialModalSaveInput
 } from "../../../../validators/watchValidator";
 import WatchCreateStep3RezComponent from "../../../../components/watches/create/rez/watchCreateStep3RezComponent";
 import {
@@ -92,7 +92,7 @@ class WatchCreateStep2RezContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-3-create-rez");
+        this.props.history.push("/watches/step-4-create-rez");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -149,7 +149,7 @@ class WatchCreateStep2RezContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialInput(this.state);
+        const { errors, isValid } = validateResidentialStep3Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

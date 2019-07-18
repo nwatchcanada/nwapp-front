@@ -50,6 +50,7 @@ import WatchListContainer from "./watches/list/watchListContainer";
 import WatchCreateStepContainer from "./watches/create/watchCreateStep1Container";
 import WatchCreateStep2RezContainer from "./watches/create/rez/watchCreateStep2RezContainer";
 import WatchCreateStep3RezContainer from "./watches/create/rez/watchCreateStep3RezContainer";
+import WatchCreateStep4RezContainer from "./watches/create/rez/watchCreateStep4RezContainer";
 import WatchCreateStep2BizContainer from "./watches/create/watchCreateStep2BizContainer";
 import WatchCreateStep2ComContainer from "./watches/create/watchCreateStep2ComContainer";
 import WatchCreateStep3BizContainer from "./watches/create/watchCreateStep3BizContainer";
@@ -308,6 +309,7 @@ class AppContainer extends React.Component {
                                 <Route path="/watches/step-3-create-rez" exact component={requiresAuth(WatchCreateStep3RezContainer)} />
                                 <Route path="/watches/step-3-create-biz" exact component={requiresAuth(WatchCreateStep3BizContainer)} />
                                 <Route path="/watches/step-3-create-cc" exact component={requiresAuth(WatchCreateStep3ComContainer)} />
+                                <Route path="/watches/step-4-create-rez" exact component={requiresAuth(WatchCreateStep4RezContainer)} />
                                 <Route path="/watch-biz/:slug" exact component={requiresAuth(WatchRetrieveBizContainer)} />
                                 <Route path="/watch-cc/:slug" exact component={requiresAuth(WatchRetrieveComContainer)} />
                                 <Route path="/watch-rez/:slug" exact component={requiresAuth(WatchRetrieveRezContainer)} />

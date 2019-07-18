@@ -1,11 +1,14 @@
 import validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
+////////////////////////////////////////////////////////////////////////////////
+//                                 RESIDENTIAL                                //
+////////////////////////////////////////////////////////////////////////////////
 
 /**
  *  Validator will validate the residential district create / update page form.
  */
-export function validateResidentialInput(data) {
+export function validateResidentialStep2Input(data) {
     let errors = {};
 
     if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "" || data.name === "null") {
@@ -17,15 +20,55 @@ export function validateResidentialInput(data) {
     if (data.district === undefined || data.district === null || validator.isEmpty(data.district) || data.district === "" || data.district === "null") {
         errors.district = 'This field is required';
     }
-    // if (data.streetMembership.length === 0) {
-    //     errors.streetMembership = 'Please add at minimum one entry';
-    // }
 
     return {
         errors,
         isValid: isEmpty(errors)
     }
 }
+
+/**
+ *  Validator will validate the residential district create / update page form.
+ */
+export function validateResidentialStep3Input(data) {
+    let errors = {};
+
+    if (data.streetMembership.length === 0) {
+        errors.streetMembership = 'Please add at minimum one entry';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+/**
+ *  Validator will validate the residential district create / update page form.
+ */
+export function validateResidentialUpdateInput(data) {
+    let errors = {};
+
+    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "" || data.name === "null") {
+        errors.name = 'This field is required';
+    }
+    if (data.associate === undefined || data.associate === null || validator.isEmpty(data.associate) || data.associate === "" || data.associate === "null") {
+        errors.associate = 'This field is required';
+    }
+    if (data.district === undefined || data.district === null || validator.isEmpty(data.district) || data.district === "" || data.district === "null") {
+        errors.district = 'This field is required';
+    }
+    if (data.streetMembership.length === 0) {
+        errors.streetMembership = 'Please add at minimum one entry';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 
 
 /**
@@ -60,6 +103,9 @@ export function validateResidentialModalSaveInput(data) {
 }
 
 
+////////////////////////////////////////////////////////////////////////////////
+//                                 BUSINESS                                   //
+////////////////////////////////////////////////////////////////////////////////
 
 /**
  *  Validator will validate the business district create / update form.
@@ -88,6 +134,11 @@ export function validateBusinessInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+//                               COMMUNITY CARES                              //
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**

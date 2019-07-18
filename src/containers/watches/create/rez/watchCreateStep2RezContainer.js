@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import {
-    validateResidentialInput, validateResidentialModalSaveInput
+    validateResidentialStep2Input
 } from "../../../../validators/watchValidator";
 import WatchCreateStep2RezComponent from "../../../../components/watches/create/rez/watchCreateStep2RezComponent";
 import {
@@ -140,7 +140,7 @@ class WatchCreateStep2RezContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialInput(this.state);
+        const { errors, isValid } = validateResidentialStep2Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
