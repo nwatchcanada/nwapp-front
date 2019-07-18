@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import {
-    validateResidentialInput, validateResidentialModalSaveInput
-} from "../../../validators/watchValidator";
 import WatchCreateStep2BizComponent from "../../../components/watches/create/watchCreateStep2BizComponent";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
-import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
+import { validateBusinessInput } from "../../../validators/watchValidator";
 
 
 class WatchCreateStep2BizContainer extends Component {
@@ -24,7 +21,6 @@ class WatchCreateStep2BizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // Page related.
             name: localStorage.getItem('nwapp-watch-biz-name'),
             associate: localStorage.getItem('nwapp-watch-biz-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-biz-associateOption'),
@@ -34,31 +30,12 @@ class WatchCreateStep2BizContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-biz-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-secondaryAreaCoordinatorOption'),
-            streetMembership: localStorageGetArrayItem('nwapp-watch-biz-streetMembership'),
             errors: {},
-
-            // Modal related.
-            streetNumberStart: "",
-            streetNumberFinish: "",
-            streetName: "",
-            streetType: "",
-            streetTypeOption: localStorageGetObjectItem('nwapp-watch-biz-streetTypeOption'),
-            streetTypeOther: "",
-            streetDirection: "",
-            streetDirectionOption: localStorageGetObjectItem('nwapp-watch-biz-streetDirectionOption'),
-            showModal: false, // Variable used to indicate if the modal should appear.
         }
 
-        // Page related.
         this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-
-        // Modal related.
-        this.onAddClick = this.onAddClick.bind(this);
-        this.onRemoveClick = this.onRemoveClick.bind(this);
-        this.onSaveClick = this.onSaveClick.bind(this);
-        this.onCloseClick = this.onCloseClick.bind(this);
     }
 
     /**
@@ -129,7 +106,7 @@ class WatchCreateStep2BizContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialInput(this.state);
+        const { errors, isValid } = validateBusinessInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -141,122 +118,6 @@ class WatchCreateStep2BizContainer extends Component {
         }
     }
 
-    onAddClick(e) {
-        e.preventDefault();  // Prevent the default HTML form submit code to run on the browser side.
-        this.setState({
-            showModal: true,
-            errors: {},
-        });  // Load the modal.
-    }
-
-    onRemoveClick(streetAddress) {
-        const streetMembership = this.state.streetMembership;
-        for (let i = 0; i < streetMembership.length; i++) {
-            let row = streetMembership[i];
-
-            // // For debugging purposes only.
-            // console.log(row);
-            // console.log(streetAddress);
-
-            if (row.streetAddress === streetAddress) {
-                //
-                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
-                //
-                const filteredItems = streetMembership.slice(
-                    0, i
-                ).concat(
-                    streetMembership.slice(
-                        i + 1, streetMembership.length
-                    )
-                )
-
-                // Update our state with our NEW ARRAY which no longer has
-                // the item we deleted.
-                this.setState({
-                    streetMembership: filteredItems
-                });
-
-                // Save our table data.
-                localStorageSetObjectOrArrayItem("nwapp-watch-biz-streetMembership", filteredItems);
-
-                // Terminate our for-loop.
-                return;
-            }
-        }
-    }
-
-    onSaveClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Perform client-side validation.
-        const { errors, isValid } = validateResidentialModalSaveInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-
-            // Generate our new address.
-            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
-            let streetAddress = this.state.streetName+" "+actualStreetType;
-            if (this.state.streetDirection) {
-                streetAddress += " " + this.state.streetDirection;
-            }
-            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
-
-            // Append our array.
-            let a = this.state.streetMembership.slice(); //creates the clone of the state
-            a.push({
-                streetAddress: streetAddress,
-                streetNumberStart: this.state.streetNumberStart,
-                streetNumberFinish: this.state.streetNumberFinish,
-                streetName: this.state.streetName,
-                streetType: actualStreetType,
-                streetDirection: this.state.streetDirection,
-            });
-
-            // Update the state.
-            this.setState({
-                showModal: false,
-                errors: {},
-                streetMembership: a,
-                streetNumberStart: "", // Clear fields.
-                streetNumberFinish: "",
-                streetName: "",
-                streetType: "",
-                streetTypeOther: "",
-                streetDirection: "",
-            })
-
-            // Save our table data.
-            localStorageSetObjectOrArrayItem("nwapp-watch-biz-streetMembership", a);
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.setState({
-                errors: errors
-            })
-
-            // The following code will cause the screen to scroll to the top of
-            // the page. Please see ``react-scroll`` for more information:
-            // https://github.com/fisshy/react-scroll
-            var scroll = Scroll.animateScroll;
-            scroll.scrollToTop();
-        }
-    }
-
-    onCloseClick() {
-        this.setState({
-            showModal: false,
-            errors: {},
-            streetNumberStart: "", // Clear fields.
-            streetNumberFinish: "",
-            streetName: "",
-            streetType: "",
-            streetTypeOther: "",
-            streetDirection: ""
-        })
-    }
-
     /**
      *  Main render function
      *------------------------------------------------------------
@@ -264,11 +125,7 @@ class WatchCreateStep2BizContainer extends Component {
 
     render() {
         const {
-            // Page related.
-            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
-
-            // Modal relate.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
+            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
         } = this.state;
 
         const associateListObject = {
@@ -308,24 +165,10 @@ class WatchCreateStep2BizContainer extends Component {
                 primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
                 secondaryAreaCoordinator={secondaryAreaCoordinator}
                 secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
-                streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                showModal={showModal}
-                streetNumberStart={streetNumberStart}
-                streetNumberFinish={streetNumberFinish}
-                streetName={streetName}
-                streetType={streetType}
-                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
-                streetTypeOther={streetTypeOther}
-                streetDirection={streetDirection}
-                streetDirectionOptions={STREET_DIRECTION_CHOICES}
-                onAddClick={this.onAddClick}
-                onRemoveClick={this.onRemoveClick}
-                onSaveClick={this.onSaveClick}
-                onCloseClick={this.onCloseClick}
             />
         );
     }
