@@ -15,15 +15,6 @@ class WatchRetrieveBizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('nwapp-watch-biz-name'),
-            associate: localStorage.getItem('nwapp-watch-biz-associate'),
-            associateOption: localStorageGetObjectItem('nwapp-watch-biz-associateOption'),
-            district: localStorage.getItem('nwapp-watch-biz-district'),
-            districtOption: localStorageGetObjectItem('nwapp-watch-biz-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('nwapp-watch-biz-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-biz-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-secondaryAreaCoordinatorOption'),
             errors: {},
         }
 
@@ -37,6 +28,23 @@ class WatchRetrieveBizContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        //TODO: REPLACE WITH API.
+        this.setState({
+            tags: ["fitness",],
+            tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
+            name: "Argyle",
+            associate: "bob-page",
+            associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
+            district: "wanchai",
+            districtOption: {"selectName":"district","value":"wanchai","label":"Wanchai Market"},
+            primaryAreaCoordinator: "tracer-tong",
+            primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
+            secondaryAreaCoordinator: "icarus",
+            secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+            prettyTags: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
+            streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
+        })
     }
 
     componentWillUnmount() {
@@ -74,16 +82,18 @@ class WatchRetrieveBizContainer extends Component {
 
     render() {
         const {
-            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
+            tagsOptions, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
 
         return (
             <WatchRetrieveBizComponent
+                tags={tagsOptions}
                 name={name}
                 associate={associateOption}
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}
                 secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
+                streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
