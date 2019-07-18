@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ReactModal from 'react-modal';
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
@@ -12,14 +12,12 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 export default class WatchCreateStep2ComComponent extends Component {
     render() {
         const {
-            // Page related.
-            name, associate, associateOptions, district, districtOptions,
-            primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions, streetMembership,
+            name, description, associate, associateOptions, district, districtOptions,
+            primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions,
             errors, isLoading, onClick, onTextChange, onSelectChange,
 
-            // Modal related.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
-            showModal, onAddClick, onRemoveClick, onSaveClick, onCloseClick
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
+            streetsArray, isShowingModal, onAddClick, onSaveClick, onCloseClick, onRemoveClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -68,9 +66,8 @@ export default class WatchCreateStep2ComComponent extends Component {
 
                 <div className="col-md-5 mx-auto mt-2">
                     <h3 className="pt-4 pb-2 text-center">Details</h3>
-                    <form id="residential-form" method="post" className="needs-validation" action="" noValidate>
+                    <form id="business-form" method="post" className="needs-validation" action="" noValidate>
                         <div className="form-group">
-
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -94,6 +91,18 @@ export default class WatchCreateStep2ComComponent extends Component {
                                 value={district}
                                 error={errors.district}
                                 onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please set the watch description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the watch."
+                                onChange={onTextChange}
+                                error={errors.description}
                             />
 
                             <BootstrapSingleSelect
@@ -127,8 +136,7 @@ export default class WatchCreateStep2ComComponent extends Component {
                             />
 
                             <AddModalComponent
-                                streetNumberStart={streetNumberStart}
-                                streetNumberFinish={streetNumberFinish}
+                                streetNumber={streetNumber}
                                 streetName={streetName}
                                 streetType={streetType}
                                 streetTypeOptions={streetTypeOptions}
@@ -138,26 +146,28 @@ export default class WatchCreateStep2ComComponent extends Component {
                                 onTextChange={onTextChange}
                                 onSelectChange={onSelectChange}
                                 errors={errors}
-                                showModal={showModal}
+                                isShowingModal={isShowingModal}
                                 onSaveClick={onSaveClick}
                                 onCloseClick={onCloseClick}
                             />
 
-                            <StreetMembershipTable
-                               streetMembership={streetMembership}
+                            <StreetsTable
+                               streetsArray={streetsArray}
                                onAddClick={onAddClick}
                                onRemoveClick={onRemoveClick}
                             />
-
-                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                            </button>
-                            <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </Link>
                         </div>
-
                     </form>
+
+                    <div className="form-group">
+                        <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                            Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                        </button>
+                        <Link to="/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                        </Link>
+                    </div>
+
                 </div>
 
             </main>
@@ -166,102 +176,11 @@ export default class WatchCreateStep2ComComponent extends Component {
 }
 
 
-
-class StreetMembershipRow extends Component {
-    render() {
-        const { streetAddress, streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, onRemoveClick } = this.props;
-        return (
-            <tr key={streetAddress}>
-                <td>
-                    {streetNumberStart}
-                </td>
-                <td>
-                    {streetNumberFinish}
-                </td>
-                <td>
-                    {streetName}
-                </td>
-                <td>
-                    {streetType}
-                </td>
-                <td>
-                    {streetDirection}
-                </td>
-                <td>
-                    <button type="button" className="btn btn-danger float-right" aria-label="prev" onClick={() => onRemoveClick(streetAddress)}>
-                        <span className="fa fa-minus"></span>
-                    </button>
-                </td>
-            </tr>
-        );
-    }
-}
-
-
-class StreetMembershipTable extends Component {
-    render() {
-        const { streetMembership, onAddClick, onRemoveClick } = this.props;
-
-        let elements = [];
-        if (streetMembership !== undefined && streetMembership !== null) {
-            for (let i = 0; i < streetMembership.length; i++) {
-                let rowData = streetMembership[i];
-                if (rowData !== null && rowData !== undefined) {
-                    elements.push(
-                        <StreetMembershipRow
-                            key={rowData.streetAddress}
-                            streetAddress={rowData.streetAddress}
-                            streetNumberStart={rowData.streetNumberStart}
-                            streetNumberFinish={rowData.streetNumberFinish}
-                            streetName={rowData.streetName}
-                            streetType={rowData.streetType}
-                            streetDirection={rowData.streetDirection}
-                            onRemoveClick={onRemoveClick}
-                        />
-                    );
-                }
-            }
-        }
-
-        return (
-            <div>
-
-                <div className="row">
-                    <div className="col-md-12 mx-auto mt-2">
-                        <button type="button" className="btn btn-success float-right" onClick={onAddClick}>
-                            <span className="fa fa-plus">&nbsp;Add Address Info</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div className="table-responsive">
-                    <table className="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Street # (Start)</th>
-                                <th>Street # (Finish)</th>
-                                <th>Street Name</th>
-                                <th>Street Type</th>
-                                <th>Direction</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {elements}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        );
-    }
-}
-
-
 class AddModalComponent extends Component {
     render() {
         const {
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
-            showModal, onSaveClick, onCloseClick, onSelectChange } = this.props;
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
+            isShowingModal, onSaveClick, onCloseClick, onSelectChange } = this.props;
 
         // Apply our styling for our modal component.
         const customStyles = {
@@ -279,7 +198,7 @@ class AddModalComponent extends Component {
             <div>
                 <ReactModal
                     style={customStyles}
-                    isOpen={showModal}
+                    isOpen={isShowingModal}
                     contentLabel="Minimal Modal Example"
                 >
                     <h1>
@@ -300,22 +219,11 @@ class AddModalComponent extends Component {
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.streetNumberStart}
-                                    label="Street Number Start (*)"
+                                    error={errors.streetNumber}
+                                    label="Street Number (*)"
                                     onChange={onTextChange}
-                                    value={streetNumberStart}
-                                    name="streetNumberStart"
-                                    type="text"
-                                />
-
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.streetNumberFinish}
-                                    label="Street Number Finish (*)"
-                                    onChange={onTextChange}
-                                    value={streetNumberFinish}
-                                    name="streetNumberFinish"
+                                    value={streetNumber}
+                                    name="streetNumber"
                                     type="text"
                                 />
 
@@ -363,6 +271,7 @@ class AddModalComponent extends Component {
                                     value={streetDirection}
                                     error={errors.streetDirection}
                                     onSelectChange={onSelectChange}
+                                    helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
                                 />
 
                                 <button
@@ -383,6 +292,90 @@ class AddModalComponent extends Component {
                     </div>
 
                 </ReactModal>
+            </div>
+        );
+    }
+}
+
+
+class StreetTableRow extends Component {
+    render() {
+        const { streetAddress, streetNumber, streetName, streetType, streetDirection, onRemoveClick } = this.props;
+        return (
+            <tr key={streetAddress}>
+                <td>
+                    {streetNumber}
+                </td>
+                <td>
+                    {streetName}
+                </td>
+                <td>
+                    {streetType}
+                </td>
+                <td>
+                    {streetDirection}
+                </td>
+                <td>
+                    <button type="button" className="btn btn-danger float-right" aria-label="prev" onClick={() => onRemoveClick(streetAddress)}>
+                        <span className="fa fa-minus"></span>
+                    </button>
+                </td>
+            </tr>
+        );
+    }
+}
+
+
+class StreetsTable extends Component {
+    render() {
+        const { streetsArray, onAddClick, onRemoveClick } = this.props;
+
+        let elements = [];
+        if (streetsArray !== undefined && streetsArray !== null) {
+            for (let i = 0; i < streetsArray.length; i++) {
+                let rowData = streetsArray[i];
+                if (rowData !== null && rowData !== undefined) {
+                    elements.push(
+                        <StreetTableRow
+                            key={rowData.streetAddress}
+                            streetAddress={rowData.streetAddress}
+                            streetNumber={rowData.streetNumber}
+                            streetName={rowData.streetName}
+                            streetType={rowData.streetType}
+                            streetDirection={rowData.streetDirection}
+                            onRemoveClick={onRemoveClick}
+                        />
+                    );
+                }
+            }
+        }
+
+        return (
+            <div>
+                <div className="row">
+                    <div className="col-md-12 mx-auto mt-2">
+                        <button type="button" className="btn btn-success float-right" onClick={onAddClick}>
+                            <span className="fa fa-plus">&nbsp;Add Address Info</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Street #</th>
+                        <th>Street Name</th>
+                        <th>Street Type</th>
+                        <th>Direction</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                            {elements}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

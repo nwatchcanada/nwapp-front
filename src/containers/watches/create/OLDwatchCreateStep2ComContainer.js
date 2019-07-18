@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import {
-    validateResidentialInput, validateResidentialModalSaveInput
-} from "../../../validators/watchValidator";
 import WatchCreateStep2ComComponent from "../../../components/watches/create/watchCreateStep2ComComponent";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
@@ -12,6 +9,7 @@ import {
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
+import { validateCommunityCaresInput, validateCommunityCaresModalSaveInput } from "../../../validators/watchValidator";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 
@@ -24,8 +22,9 @@ class WatchCreateStep2ComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // Page related.
+            // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: localStorage.getItem('nwapp-watch-com-name'),
+            description: localStorage.getItem('nwapp-watch-com-description'),
             associate: localStorage.getItem('nwapp-watch-com-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-com-associateOption'),
             district: localStorage.getItem('nwapp-watch-com-district'),
@@ -34,31 +33,43 @@ class WatchCreateStep2ComContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-com-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-secondaryAreaCoordinatorOption'),
-            streetMembership: localStorageGetArrayItem('nwapp-watch-com-streetMembership'),
-            errors: {},
 
-            // Modal related.
-            streetNumberStart: "",
-            streetNumberFinish: "",
+            // DEVELOPERS NOTE: The following state objects are used to store
+            // the data from the modal.
+            streetNumber: "",
             streetName: "",
             streetType: "",
-            streetTypeOption: localStorageGetObjectItem('nwapp-watch-com-streetTypeOption'),
+            streetTypeOption: localStorageGetObjectItem('nwapp-district-com-streetTypeOption'),
             streetTypeOther: "",
             streetDirection: "",
-            streetDirectionOption: localStorageGetObjectItem('nwapp-watch-com-streetDirectionOption'),
-            showModal: false, // Variable used to indicate if the modal should appear.
+            streetDirectionOption: localStorageGetObjectItem('nwapp-district-com-streetDirectionOption'),
+
+            // ALL OUR OBJECTS ARE STORED HERE.
+            streetsArray : localStorageGetArrayItem('nwapp-district-com-streets'),
+
+            // Variable used to lock buttons when makig submissions.
+            isLoading: false,
+
+            // Variable used to indicate if the modal should appear.
+            isShowingModal: false,
+
+            // DEVELOPERS NOTE: This variable is used as the main way to add
+            // GUI modification to the fields. Simply adding a key and the
+            // message will result in an error message displaying for that
+            // field. Please make sure the `name` in the HTML field equals
+            // the `name` dictonary key in this dictionary.
+            errors: {},
         }
 
-        // Page related.
-        this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-
-        // Modal related.
+        this.onClick = this.onClick.bind(this);
         this.onAddClick = this.onAddClick.bind(this);
-        this.onRemoveClick = this.onRemoveClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
         this.onCloseClick = this.onCloseClick.bind(this);
+        this.onRemoveClick = this.onRemoveClick.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -86,7 +97,7 @@ class WatchCreateStep2ComContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-3-create-com");
+        this.props.history.push("/watches/step-3-create-cc");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -129,7 +140,7 @@ class WatchCreateStep2ComContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialInput(this.state);
+        const { errors, isValid } = validateCommunityCaresInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -142,47 +153,11 @@ class WatchCreateStep2ComContainer extends Component {
     }
 
     onAddClick(e) {
-        e.preventDefault();  // Prevent the default HTML form submit code to run on the browser side.
-        this.setState({
-            showModal: true,
-            errors: {},
-        });  // Load the modal.
-    }
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
 
-    onRemoveClick(streetAddress) {
-        const streetMembership = this.state.streetMembership;
-        for (let i = 0; i < streetMembership.length; i++) {
-            let row = streetMembership[i];
-
-            // // For debugging purposes only.
-            // console.log(row);
-            // console.log(streetAddress);
-
-            if (row.streetAddress === streetAddress) {
-                //
-                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
-                //
-                const filteredItems = streetMembership.slice(
-                    0, i
-                ).concat(
-                    streetMembership.slice(
-                        i + 1, streetMembership.length
-                    )
-                )
-
-                // Update our state with our NEW ARRAY which no longer has
-                // the item we deleted.
-                this.setState({
-                    streetMembership: filteredItems
-                });
-
-                // Save our table data.
-                localStorageSetObjectOrArrayItem("nwapp-watch-com-streetMembership", filteredItems);
-
-                // Terminate our for-loop.
-                return;
-            }
-        }
+        // Load the modal.
+        this.setState({isShowingModal: true});
     }
 
     onSaveClick(e) {
@@ -190,45 +165,42 @@ class WatchCreateStep2ComContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialModalSaveInput(this.state);
+        const { errors, isValid } = validateCommunityCaresModalSaveInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
 
             // Generate our new address.
             const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
-            let streetAddress = this.state.streetName+" "+actualStreetType;
+            let streetAddress = this.state.streetNumber+" "+this.state.streetName+" "+actualStreetType;
             if (this.state.streetDirection) {
                 streetAddress += " " + this.state.streetDirection;
             }
-            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
 
             // Append our array.
-            let a = this.state.streetMembership.slice(); //creates the clone of the state
+            let a = this.state.streetsArray.slice(); //creates the clone of the state
             a.push({
                 streetAddress: streetAddress,
-                streetNumberStart: this.state.streetNumberStart,
-                streetNumberFinish: this.state.streetNumberFinish,
+                streetNumber: this.state.streetNumber,
                 streetName: this.state.streetName,
                 streetType: actualStreetType,
                 streetDirection: this.state.streetDirection,
             });
 
-            // Update the state.
+            // Update our state.
             this.setState({
-                showModal: false,
+                isShowingModal: false,
                 errors: {},
-                streetMembership: a,
-                streetNumberStart: "", // Clear fields.
-                streetNumberFinish: "",
+                streetsArray: a,
+                streetNumber: "", // Clear fields.
                 streetName: "",
                 streetType: "",
                 streetTypeOther: "",
                 streetDirection: "",
-            })
+            });
 
             // Save our table data.
-            localStorageSetObjectOrArrayItem("nwapp-watch-com-streetMembership", a);
+            localStorage.setItem("nwapp-district-com-streets", JSON.stringify(a))
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -244,17 +216,56 @@ class WatchCreateStep2ComContainer extends Component {
         }
     }
 
-    onCloseClick() {
+    onCloseClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Load the modal.
         this.setState({
-            showModal: false,
-            errors: {},
-            streetNumberStart: "", // Clear fields.
-            streetNumberFinish: "",
+            isShowingModal: false,
+            errors:{},
+            streetNumber: "",  // Clear fields.
             streetName: "",
             streetType: "",
             streetTypeOther: "",
             streetDirection: ""
-        })
+        });
+    }
+
+    onRemoveClick(streetAddress) {
+        const streetsArray = this.state.streetsArray;
+        for (let i = 0; i < streetsArray.length; i++) {
+            let row = streetsArray[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(streetAddress);
+
+            if (row.streetAddress === streetAddress) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredItems = streetsArray.slice(
+                    0, i
+                ).concat(
+                    streetsArray.slice(
+                        i + 1, streetsArray.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    streetsArray: filteredItems
+                });
+
+                // Save our table data.
+                localStorage.setItem("nwapp-district-com-streets", JSON.stringify(filteredItems))
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
     }
 
     /**
@@ -264,12 +275,9 @@ class WatchCreateStep2ComContainer extends Component {
 
     render() {
         const {
-            // Page related.
-            name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
-
-            // Modal relate.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
+            name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
         } = this.state;
+        const { streetNumber, streetName, streetType, streetTypeOther, streetDirection, isShowingModal, streetsArray } = this.state;
 
         const associateListObject = {
             results: [
@@ -299,7 +307,9 @@ class WatchCreateStep2ComContainer extends Component {
 
         return (
             <WatchCreateStep2ComComponent
+                // General Informaion
                 name={name}
+                description={description}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}
@@ -308,14 +318,10 @@ class WatchCreateStep2ComContainer extends Component {
                 primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
                 secondaryAreaCoordinator={secondaryAreaCoordinator}
                 secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
-                streetMembership={streetMembership}
-                errors={errors}
-                onClick={this.onClick}
-                onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
-                showModal={showModal}
-                streetNumberStart={streetNumberStart}
-                streetNumberFinish={streetNumberFinish}
+
+                // Modals
+                isShowingModal={isShowingModal}
+                streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
@@ -323,9 +329,16 @@ class WatchCreateStep2ComContainer extends Component {
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 onAddClick={this.onAddClick}
-                onRemoveClick={this.onRemoveClick}
                 onSaveClick={this.onSaveClick}
                 onCloseClick={this.onCloseClick}
+                onRemoveClick={this.onRemoveClick}
+                streetsArray={streetsArray}
+
+                // Core
+                errors={errors}
+                onClick={this.onClick}
+                onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
             />
         );
     }
