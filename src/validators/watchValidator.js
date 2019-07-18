@@ -17,15 +17,9 @@ export function validateResidentialInput(data) {
     if (data.district === undefined || data.district === null || validator.isEmpty(data.district) || data.district === "" || data.district === "null") {
         errors.district = 'This field is required';
     }
-    if (data.primaryAreaCoordinator === undefined || data.primaryAreaCoordinator === null || validator.isEmpty(data.primaryAreaCoordinator) || data.primaryAreaCoordinator === "" || data.primaryAreaCoordinator === "null") {
-        errors.primaryAreaCoordinator = 'This field is required';
-    }
-    if (data.secondaryAreaCoordinator === undefined || data.secondaryAreaCoordinator === null || validator.isEmpty(data.secondaryAreaCoordinator) || data.secondaryAreaCoordinator === "" || data.secondaryAreaCoordinator === "null") {
-        errors.secondaryAreaCoordinator = 'This field is required';
-    }
-    if (data.streetMembership.length === 0) {
-        errors.streetMembership = 'Please add at minimum one entry';
-    }
+    // if (data.streetMembership.length === 0) {
+    //     errors.streetMembership = 'Please add at minimum one entry';
+    // }
 
     return {
         errors,

@@ -48,10 +48,10 @@ import DistrictUpdateRezContainer from "./settings/districts/update/districtUpda
 
 import WatchListContainer from "./watches/list/watchListContainer";
 import WatchCreateStepContainer from "./watches/create/watchCreateStep1Container";
-import WatchCreateStep2RezContainer from "./watches/create/watchCreateStep2RezContainer";
+import WatchCreateStep2RezContainer from "./watches/create/rez/watchCreateStep2RezContainer";
+import WatchCreateStep3RezContainer from "./watches/create/rez/watchCreateStep3RezContainer";
 import WatchCreateStep2BizContainer from "./watches/create/watchCreateStep2BizContainer";
 import WatchCreateStep2ComContainer from "./watches/create/watchCreateStep2ComContainer";
-import WatchCreateStep3RezContainer from "./watches/create/watchCreateStep3RezContainer";
 import WatchCreateStep3BizContainer from "./watches/create/watchCreateStep3BizContainer";
 import WatchCreateStep3ComContainer from "./watches/create/watchCreateStep3ComContainer";
 import WatchRetrieveRezContainer from "./watches/retrieve/watchRetrieveRezContainer";
