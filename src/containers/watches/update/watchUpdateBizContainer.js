@@ -21,9 +21,14 @@ class WatchUpdateBizContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
         this.state = {
             // Page related.
-            slug: "carling",
+            slug: slug,
             name: "",
             associate: "",
             associateOption: "",
@@ -103,7 +108,7 @@ class WatchUpdateBizContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Residential watch has been successfully updated.");
+        this.props.setFlashMessage("success", "Business watch has been successfully updated.");
         this.props.history.push("/watch-biz/"+this.state.slug);
     }
 

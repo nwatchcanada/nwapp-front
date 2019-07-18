@@ -14,7 +14,13 @@ class WatchRetrieveRezContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
         this.state = {
+            slug: slug,
             errors: {},
         }
 
@@ -71,7 +77,7 @@ class WatchRetrieveRezContainer extends Component {
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/watch-rez/argyle/update");
+        this.props.history.push("/watch-rez/"+this.state.slug+"/update");
     }
 
     /**

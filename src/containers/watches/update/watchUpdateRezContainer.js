@@ -21,9 +21,14 @@ class WatchUpdateRezContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
         this.state = {
             // Page related.
-            slug: "carling",
+            slug: slug,
             name: "",
             associate: "",
             associateOption: "",
