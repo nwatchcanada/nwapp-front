@@ -70,35 +70,18 @@ class WatchUpdateRezContainer extends Component {
 
         // REPLACE THIS WITH API ENDPOINT.
         this.setState({
-            name: "Hells Kitchen",
-            description: "This is a test watch",
-            associate: "jc-denton",
-            associateOption: {
-                selectName: "associate", value: "jc-denton", label: "JC Denton"
-            },
-            district: "new-york",
-            districtOption: {
-                selectName: "district", value: "new-york", label: "New York"
-            },
-            primaryAreaCoordinator: "walter-simons",
-            primaryAreaCoordinatorOption: {
-                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
-            },
-            secondaryAreaCoordinator: "joseph-manderly",
-            secondaryAreaCoordinatorOption: {
-                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
-            },
-            streetMembership: [
-                {
-                    streetAddress: "Singleton Avenue N from 1 to 1000",
-                    streetDirection: "N",
-                    streetName: "Singleton",
-                    streetNumberFinish: "1000",
-                    streetNumberStart: "1",
-                    streetType: "Avenue",
-                }
-            ],
-            errors: {},
+            tags: ["rentals",],
+            tagsOptions: [{"selectName":"tags","value":"rentals","label":"Rentals"}],
+            name: "Carling",
+            associate: "walter-simons",
+            associateOption: {"selectName":"associate","value":"walter-simons","label":"Walter Simons"},
+            district: "vandenburg",
+            districtOption: {"selectName":"district","value":"vandenburg","label":"Vandenburg Airforce Base"},
+            primaryAreaCoordinator: "tracer-tong",
+            primaryAreaCoordinatorOption: {"selectName": "secondaryAreaCoordinator", "value": "joseph-manderly", "label": "Joseph Manderly"},
+            secondaryAreaCoordinator: "icarus",
+            secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+            streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
         });
     }
 
@@ -301,7 +284,8 @@ class WatchUpdateRezContainer extends Component {
                 {'slug': 'bob-page', 'name': 'Bob Page'},
                 {'slug': 'jc-denton', 'name': 'JC Denton'},
                 {'slug': 'paul-denton', 'name': 'Paul Denton'},
-                {'slug': 'gunter-herman', 'name': 'Gunter Herman'}
+                {'slug': 'gunter-herman', 'name': 'Gunter Herman'},
+                {"slug": "walter-simons","name":"Walter Simons"},
             ]
         }; // TODO: REPLACTE WITH API DATA.
 
@@ -311,7 +295,8 @@ class WatchUpdateRezContainer extends Component {
                 {'slug': 'versalife', 'name': 'VersaLife'},
                 {'slug': 'battery-park', 'name': 'Battery Park'},
                 {'slug': 'area-51', 'name': 'Area 51'},
-                {'slug': 'new-york', 'name': 'New York'}
+                {'slug': 'new-york', 'name': 'New York'},
+                {"slug": "vandenburg","name":"Vandenburg Airforce Base"}
             ]
         }; // TODO: REPLACTE WITH API DATA.
 

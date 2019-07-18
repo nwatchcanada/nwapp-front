@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
+import {
+    validateResidentialInput, validateResidentialModalSaveInput
+} from "../../../validators/watchValidator";
 import WatchUpdateBizComponent from "../../../components/watches/update/watchUpdateBizComponent";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
-import { validateBusinessInput } from "../../../validators/watchValidator";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 
 class WatchUpdateBizContainer extends Component {
@@ -19,13 +22,42 @@ class WatchUpdateBizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            slug: "argyle",
+            // Page related.
+            slug: "carling",
+            name: "",
+            associate: "",
+            associateOption: "",
+            district: "",
+            districtOption: "",
+            primaryAreaCoordinator: "",
+            primaryAreaCoordinatorOption: "",
+            secondaryAreaCoordinator: "",
+            secondaryAreaCoordinatorOption: "",
+            streetMembership: [],
             errors: {},
+
+            // Modal related.
+            streetNumberStart: "",
+            streetNumberFinish: "",
+            streetName: "",
+            streetType: "",
+            streetTypeOption: {},
+            streetTypeOther: "",
+            streetDirection: "",
+            streetDirectionOption: {},
+            showModal: false, // Variable used to indicate if the modal should appear.
         }
 
+        // Page related.
         this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+
+        // Modal related.
+        this.onAddClick = this.onAddClick.bind(this);
+        this.onRemoveClick = this.onRemoveClick.bind(this);
+        this.onSaveClick = this.onSaveClick.bind(this);
+        this.onCloseClick = this.onCloseClick.bind(this);
     }
 
     /**
@@ -37,11 +69,11 @@ class WatchUpdateBizContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // REPLACE THIS WITH API ENDPOINT.
-        //TODO: REPLACE WITH API.
         this.setState({
             tags: ["fitness",],
             tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
             name: "Argyle",
+            description: "This is a test description",
             associate: "bob-page",
             associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
             district: "wanchai",
@@ -51,7 +83,8 @@ class WatchUpdateBizContainer extends Component {
             secondaryAreaCoordinator: "icarus",
             secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
             streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
-        })
+            errors: {},
+        });
     }
 
     componentWillUnmount() {
@@ -70,7 +103,7 @@ class WatchUpdateBizContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Business watch has been successfully updated.");
+        this.props.setFlashMessage("success", "Residential watch has been successfully updated.");
         this.props.history.push("/watch-biz/"+this.state.slug);
     }
 
@@ -98,7 +131,7 @@ class WatchUpdateBizContainer extends Component {
     }
 
     onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
+        const optionKey = [option.selectName].toString().concat("Option");
         this.setState({
             [option.selectName]: option.value,
             optionKey: option,
@@ -113,7 +146,7 @@ class WatchUpdateBizContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateBusinessInput(this.state);
+        const { errors, isValid } = validateResidentialInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -125,6 +158,115 @@ class WatchUpdateBizContainer extends Component {
         }
     }
 
+    onAddClick(e) {
+        e.preventDefault();  // Prevent the default HTML form submit code to run on the browser side.
+        this.setState({
+            showModal: true,
+            errors: {},
+        });  // Load the modal.
+    }
+
+    onRemoveClick(streetAddress) {
+        const streetMembership = this.state.streetMembership;
+        for (let i = 0; i < streetMembership.length; i++) {
+            let row = streetMembership[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(streetAddress);
+
+            if (row.streetAddress === streetAddress) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredItems = streetMembership.slice(
+                    0, i
+                ).concat(
+                    streetMembership.slice(
+                        i + 1, streetMembership.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    streetMembership: filteredItems
+                });
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
+    }
+
+    onSaveClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Perform client-side validation.
+        const { errors, isValid } = validateResidentialModalSaveInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            // Generate our new address.
+            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
+            let streetAddress = this.state.streetName+" "+actualStreetType;
+            if (this.state.streetDirection) {
+                streetAddress += " " + this.state.streetDirection;
+            }
+            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
+
+            // Append our array.
+            let a = this.state.streetMembership.slice(); //creates the clone of the state
+            a.push({
+                streetAddress: streetAddress,
+                streetNumberStart: this.state.streetNumberStart,
+                streetNumberFinish: this.state.streetNumberFinish,
+                streetName: this.state.streetName,
+                streetType: actualStreetType,
+                streetDirection: this.state.streetDirection,
+            });
+
+            // Update the state.
+            this.setState({
+                showModal: false,
+                errors: {},
+                streetMembership: a,
+                streetNumberStart: "", // Clear fields.
+                streetNumberFinish: "",
+                streetName: "",
+                streetType: "",
+                streetTypeOther: "",
+                streetDirection: "",
+            })
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.setState({
+                errors: errors
+            })
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
+        }
+    }
+
+    onCloseClick() {
+        this.setState({
+            showModal: false,
+            errors: {},
+            streetNumberStart: "", // Clear fields.
+            streetNumberFinish: "",
+            streetName: "",
+            streetType: "",
+            streetTypeOther: "",
+            streetDirection: ""
+        });
+    }
+
     /**
      *  Main render function
      *------------------------------------------------------------
@@ -132,7 +274,11 @@ class WatchUpdateBizContainer extends Component {
 
     render() {
         const {
-            slug, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, errors,
+            // Page related.
+            slug, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+
+            // Modal relate.
+            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
         } = this.state;
 
         const associateListObject = {
@@ -176,10 +322,24 @@ class WatchUpdateBizContainer extends Component {
                 primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
                 secondaryAreaCoordinator={secondaryAreaCoordinator}
                 secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
+                streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                showModal={showModal}
+                streetNumberStart={streetNumberStart}
+                streetNumberFinish={streetNumberFinish}
+                streetName={streetName}
+                streetType={streetType}
+                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
+                streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                onAddClick={this.onAddClick}
+                onRemoveClick={this.onRemoveClick}
+                onSaveClick={this.onSaveClick}
+                onCloseClick={this.onCloseClick}
             />
         );
     }

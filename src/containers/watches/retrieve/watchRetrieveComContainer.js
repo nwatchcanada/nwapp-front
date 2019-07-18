@@ -46,7 +46,7 @@ class WatchRetrieveComContainer extends Component {
                 {"streetAddress":"Centre Street from 100 to 200","streetNumberStart":"100","streetNumberFinish":"200","streetName":"Centre","streetType":"Street","streetDirection":""},
                 {"streetAddress":"Baseline Road from 1 to 5","streetNumberStart":"1","streetNumberFinish":"5","streetName":"Baseline","streetType":"Road","streetDirection":""}
             ],
-        })
+        });
     }
 
     componentWillUnmount() {
