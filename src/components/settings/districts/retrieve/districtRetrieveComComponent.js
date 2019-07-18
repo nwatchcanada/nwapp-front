@@ -4,17 +4,7 @@ import { Link } from "react-router-dom";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 
 
-class StreetAddressBulletItem extends Component {
-    render() {
-        const { streetAddress } = this.props.datum;
-        return (
-            <li>{streetAddress}</li>
-        );
-    }
-}
-
-
-class DistrictRetrieveComComponent extends Component {
+export default class DistrictRetrieveComComponent extends Component {
     render() {
         const { districtData, onClick, onBack, flashMessage } = this.props;
         return (
@@ -59,16 +49,6 @@ class DistrictRetrieveComComponent extends Component {
                                     <th scope="row" className="bg-light">Type</th>
                                     <td>Community Cares District</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Addresses</th>
-                                    <td>
-                                        <ul>
-                                            {districtData.streetsArray && districtData.streetsArray.map(
-                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
-                                            }
-                                        </ul>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
 
@@ -90,5 +70,3 @@ class DistrictRetrieveComComponent extends Component {
         );
     }
 }
-
-export default DistrictRetrieveComComponent;
