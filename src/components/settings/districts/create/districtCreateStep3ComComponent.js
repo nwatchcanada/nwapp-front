@@ -5,19 +5,9 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
 
-class StreetAddressBulletItem extends Component {
+export default class DistrictCreateStep3ComComponent extends Component {
     render() {
-        const { streetAddress } = this.props.datum;
-        return (
-            <li>{streetAddress}</li>
-        );
-    }
-}
-
-
-class DistrictCreateStep3ComComponent extends Component {
-    render() {
-        const { name, description, errors, isLoading, onClick, streetsArray } = this.props;
+        const { name, description, errors, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -76,16 +66,6 @@ class DistrictCreateStep3ComComponent extends Component {
                                     <th scope="row" className="bg-light">Description</th>
                                     <td>{description}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Addresses</th>
-                                    <td>
-                                        <ul>
-                                            {streetsArray && streetsArray.map(
-                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
-                                            }
-                                        </ul>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <form>
@@ -105,5 +85,3 @@ class DistrictCreateStep3ComComponent extends Component {
         );
     }
 }
-
-export default DistrictCreateStep3ComComponent;

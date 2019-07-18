@@ -15,14 +15,6 @@ class DistrictCreateStep3BusinessContainer extends Component {
     constructor(props) {
         super(props);
 
-        // Extract our plants array (which is used to populate the table) from
-        // the users's local storage.
-        const stringStreetsArr = localStorage.getItem("nwapp-district-com-streets");
-        let streetsArr = JSON.parse(stringStreetsArr);
-        if (streetsArr  === undefined || streetsArr === null) {
-            streetsArr = [];
-        }
-
         this.state = {
             // DEVELOPERS NOTE: This variable is used as the main way to add
             // GUI modification to the fields. Simply adding a key and the
@@ -37,12 +29,8 @@ class DistrictCreateStep3BusinessContainer extends Component {
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: localStorage.getItem('nwapp-district-com-name'),
             description: localStorage.getItem('nwapp-district-com-description'),
-
-            // ALL OUR OBJECTS ARE STORED HERE.
-            streetsArray: streetsArr,
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -94,12 +82,6 @@ class DistrictCreateStep3BusinessContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -115,7 +97,7 @@ class DistrictCreateStep3BusinessContainer extends Component {
      */
 
     render() {
-        const { name, description, streetsArray, errors } = this.state;
+        const { name, description, errors } = this.state;
         return (
             <DistrictCreateStep3ComComponent
                 name={name}
@@ -123,7 +105,6 @@ class DistrictCreateStep3BusinessContainer extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
-                streetsArray={streetsArray}
             />
         );
     }
