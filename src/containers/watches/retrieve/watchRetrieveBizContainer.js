@@ -40,6 +40,7 @@ class WatchRetrieveBizContainer extends Component {
             tags: ["fitness",],
             tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
             name: "Argyle",
+            description: "This is a test description for `Argyle`.",
             associate: "bob-page",
             associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
             district: "wanchai",
@@ -87,13 +88,14 @@ class WatchRetrieveBizContainer extends Component {
 
     render() {
         const {
-            tagsOptions, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            tagsOptions, name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
 
         return (
             <WatchRetrieveBizComponent
                 tags={tagsOptions}
                 name={name}
+                description={description}
                 associate={associateOption}
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}

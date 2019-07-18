@@ -78,7 +78,7 @@ class WatchUpdateBizContainer extends Component {
             tags: ["fitness",],
             tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
             name: "Argyle",
-            description: "This is a test description",
+            description: "This is a test description for `Argyle`.",
             associate: "bob-page",
             associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
             district: "wanchai",
@@ -280,7 +280,7 @@ class WatchUpdateBizContainer extends Component {
     render() {
         const {
             // Page related.
-            slug, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            slug, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
             streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
@@ -319,6 +319,7 @@ class WatchUpdateBizContainer extends Component {
             <WatchUpdateBizComponent
                 slug={slug}
                 name={name}
+                description={description}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}

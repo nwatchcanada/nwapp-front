@@ -40,6 +40,7 @@ class WatchRetrieveComContainer extends Component {
             tags: ["fitness", "security"],
             tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}, {"selectName":"tags","value":"security","label":"Security"}],
             name: "Byron",
+            description: "This is a test description for `Byron`.",
             associate: "jc-denton",
             associateOption: {"selectName":"associate","value":"jc-denton","label":"JC Denton"},
             district: "wanchai",
@@ -90,13 +91,14 @@ class WatchRetrieveComContainer extends Component {
 
     render() {
         const {
-            tagsOptions, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            tagsOptions, name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
 
         return (
             <WatchRetrieveComComponent
                 tags={tagsOptions}
                 name={name}
+                description={description}
                 associate={associateOption}
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}

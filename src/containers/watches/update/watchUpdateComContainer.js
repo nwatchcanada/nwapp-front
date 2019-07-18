@@ -78,6 +78,7 @@ class WatchUpdateComContainer extends Component {
             tags: ["fitness", "security"],
             tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}, {"selectName":"tags","value":"security","label":"Security"}],
             name: "Byron",
+            description: "This is a test description for `Byron`.",
             associate: "jc-denton",
             associateOption: {"selectName":"associate","value":"jc-denton","label":"JC Denton"},
             district: "wanchai",
@@ -281,7 +282,7 @@ class WatchUpdateComContainer extends Component {
     render() {
         const {
             // Page related.
-            slug, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            slug, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
             streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
@@ -320,6 +321,7 @@ class WatchUpdateComContainer extends Component {
             <WatchUpdateComComponent
                 slug={slug}
                 name={name}
+                description={description}
                 associate={associate}
                 associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}
