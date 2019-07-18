@@ -43,7 +43,7 @@ class WatchRetrieveBizContainer extends Component {
             secondaryAreaCoordinator: "icarus",
             secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
             streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
-        })
+        });
     }
 
     componentWillUnmount() {

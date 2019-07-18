@@ -74,7 +74,7 @@ class WatchRetrieveComContainer extends Component {
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/watch-com/argyle/update");
+        this.props.history.push("/watch-cc/argyle/update");
     }
 
     /**

@@ -39,7 +39,7 @@ class WatchRetrieveRezContainer extends Component {
             district: "vandenburg",
             districtOption: {"selectName":"district","value":"vandenburg","label":"Vandenburg Airforce Base"},
             primaryAreaCoordinator: "tracer-tong",
-            primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
+            primaryAreaCoordinatorOption: {"selectName": "secondaryAreaCoordinator", "value": "joseph-manderly", "label": "Joseph Manderly"},
             secondaryAreaCoordinator: "icarus",
             secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
             streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
@@ -71,7 +71,7 @@ class WatchRetrieveRezContainer extends Component {
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/watch-com/argyle/update");
+        this.props.history.push("/watch-rez/argyle/update");
     }
 
     /**

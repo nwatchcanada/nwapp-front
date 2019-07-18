@@ -20,15 +20,6 @@ class WatchUpdateBizContainer extends Component {
         super(props);
         this.state = {
             slug: "argyle",
-            name: "",
-            associate: "",
-            associateOption: "",
-            district: "",
-            districtOption: "",
-            primaryAreaCoordinator: "",
-            primaryAreaCoordinatorOption: "",
-            secondaryAreaCoordinator: "",
-            secondaryAreaCoordinatorOption: "",
             errors: {},
         }
 
@@ -46,26 +37,21 @@ class WatchUpdateBizContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // REPLACE THIS WITH API ENDPOINT.
+        //TODO: REPLACE WITH API.
         this.setState({
-            name: "Hells Kitchen",
-            associate: "jc-denton",
-            associateOption: {
-                selectName: "associate", value: "jc-denton", label: "JC Denton"
-            },
-            district: "new-york",
-            districtOption: {
-                selectName: "district", value: "new-york", label: "New York"
-            },
-            primaryAreaCoordinator: "walter-simons",
-            primaryAreaCoordinatorOption: {
-                selectName: "primaryAreaCoordinator", value: "walter-simons", label: "Walter Simons"
-            },
-            secondaryAreaCoordinator: "joseph-manderly",
-            secondaryAreaCoordinatorOption: {
-                selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
-            },
-            errors: {},
-        });
+            tags: ["fitness",],
+            tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
+            name: "Argyle",
+            associate: "bob-page",
+            associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
+            district: "wanchai",
+            districtOption: {"selectName":"district","value":"wanchai","label":"Wanchai Market"},
+            primaryAreaCoordinator: "tracer-tong",
+            primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
+            secondaryAreaCoordinator: "icarus",
+            secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+            streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
+        })
     }
 
     componentWillUnmount() {
@@ -117,7 +103,7 @@ class WatchUpdateBizContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        
+
         // For debugging purposes only.
         console.log("SELECTED\noptionKey", optionKey, "\noption", option, "\n");
     }
