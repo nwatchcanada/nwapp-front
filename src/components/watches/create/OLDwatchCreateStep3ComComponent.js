@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 export default class WatchCreateStep3ComComponent extends Component {
     render() {
-        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, errors } = this.props;
+        const { name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetsArray, isLoading, onClick, errors } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -34,7 +34,7 @@ export default class WatchCreateStep3ComComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to="/watches/step-2-create-com">
+                            <Link to="/watches/step-2-create-cc">
                                 <span className="num">2.</span><span className="">Details</span>
                             </Link>
                         </div>
@@ -69,12 +69,16 @@ export default class WatchCreateStep3ComComponent extends Component {
                                     <td>{name}</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{description}</td>
+                                </tr>
+                                <tr>
                                     <th scope="row" className="bg-light">District</th>
                                     <td>{district.label}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Program</th>
-                                    <td>Community Cares</td>
+                                    <td>Business</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Associate</th>
@@ -92,7 +96,7 @@ export default class WatchCreateStep3ComComponent extends Component {
                                     <th scope="row" className="bg-light">Addresses</th>
                                     <td>
                                         <ul>
-                                            {streetMembership && streetMembership.map(
+                                            {streetsArray && streetsArray.map(
                                                 (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
                                             }
                                         </ul>
@@ -105,13 +109,14 @@ export default class WatchCreateStep3ComComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to="/watches/step-2-create-com" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/watches/step-2-create-cc" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
                         </form>
                     </div>
                 </div>
+
             </main>
         );
     }

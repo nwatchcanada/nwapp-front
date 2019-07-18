@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Scroll from 'react-scroll';
 
 import WatchCreateStep3ComComponent from "../../../components/watches/create/watchCreateStep3ComComponent";
-import {
-    localStorageGetObjectItem, localStorageGetArrayItem
-} from '../../../helpers/localStorageUtility';
-import { COMMUNITY_CARES_TYPE_OF } from '../../../constants/api';
+import { localStorageGetObjectItem, localStorageGetArrayItem } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -18,8 +16,9 @@ class WatchCreateStep3ComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            program: COMMUNITY_CARES_TYPE_OF,
+            // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: localStorage.getItem('nwapp-watch-com-name'),
+            description: localStorage.getItem('nwapp-watch-com-description'),
             associate: localStorage.getItem('nwapp-watch-com-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-com-associateOption'),
             district: localStorage.getItem('nwapp-watch-com-district'),
@@ -28,8 +27,19 @@ class WatchCreateStep3ComContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-com-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-com-secondaryAreaCoordinatorOption'),
-            streetMembership: localStorageGetArrayItem('nwapp-watch-com-streetMembership'),
+
+            // Variable used to lock buttons when makig submissions.
+            isLoading: false,
+
+            // DEVELOPERS NOTE: This variable is used as the main way to add
+            // GUI modification to the fields. Simply adding a key and the
+            // message will result in an error message displaying for that
+            // field. Please make sure the `name` in the HTML field equals
+            // the `name` dictonary key in this dictionary.
             errors: {},
+
+            // ALL OUR OBJECTS ARE STORED HERE.
+            streetsArray : localStorageGetArrayItem('nwapp-district-com-streets'),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -58,15 +68,33 @@ class WatchCreateStep3ComContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback() {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Community cares watch has been successfully created.");
+        this.props.history.push("/watches");
+    }
+
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
     onClick(e, typeOf) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Residential watch has been successfully created.");
-        this.props.history.push("/watches");
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+        this.onSuccessfulSubmissionCallback();
     }
 
     /**
@@ -76,16 +104,17 @@ class WatchCreateStep3ComContainer extends Component {
 
     render() {
         const {
-            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetsArray, errors,
         } = this.state;
         return (
             <WatchCreateStep3ComComponent
                 name={name}
+                description={description}
                 associate={associateOption}
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}
                 secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
-                streetMembership={streetMembership}
+                streetsArray={streetsArray}
                 errors={errors}
                 onClick={this.onClick}
             />

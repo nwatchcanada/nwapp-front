@@ -86,7 +86,7 @@ class WatchCreateStep2ComContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-3-create-com");
+        this.props.history.push("/watches/step-3-create-cc");
     }
 
     onFailedSubmissionCallback(errors) {
