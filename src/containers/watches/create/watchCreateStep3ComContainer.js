@@ -65,7 +65,7 @@ class WatchCreateStep3ComContainer extends Component {
 
     onClick(e, typeOf) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Residential watch has been successfully created.");
+        this.props.setFlashMessage("success", "Community cares watch has been successfully created.");
         this.props.history.push("/watches");
     }
 
