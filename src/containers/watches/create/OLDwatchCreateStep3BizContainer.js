@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Scroll from 'react-scroll';
 
 import WatchCreateStep3BizComponent from "../../../components/watches/create/watchCreateStep3BizComponent";
-import {
-    localStorageGetObjectItem, localStorageGetArrayItem
-} from '../../../helpers/localStorageUtility';
-import { BUSINESS_TYPE_OF } from '../../../constants/api';
+import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -18,7 +16,6 @@ class WatchCreateStep3BizContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            program: BUSINESS_TYPE_OF,
             name: localStorage.getItem('nwapp-watch-biz-name'),
             associate: localStorage.getItem('nwapp-watch-biz-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-biz-associateOption'),
@@ -28,7 +25,6 @@ class WatchCreateStep3BizContainer extends Component {
             primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-primaryAreaCoordinatorOption'),
             secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-biz-secondaryAreaCoordinator'),
             secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-biz-secondaryAreaCoordinatorOption'),
-            streetMembership: localStorageGetArrayItem('nwapp-watch-biz-streetMembership'),
             errors: {},
         }
 
@@ -58,15 +54,33 @@ class WatchCreateStep3BizContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback() {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Business watch has been successfully created.");
+        this.props.history.push("/watches");
+    }
+
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
     onClick(e, typeOf) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Business watch has been successfully created.");
-        this.props.history.push("/watches");
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+        this.onSuccessfulSubmissionCallback();
     }
 
     /**
@@ -76,8 +90,9 @@ class WatchCreateStep3BizContainer extends Component {
 
     render() {
         const {
-            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
         } = this.state;
+
         return (
             <WatchCreateStep3BizComponent
                 name={name}
@@ -85,7 +100,6 @@ class WatchCreateStep3BizContainer extends Component {
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}
                 secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
-                streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}
             />

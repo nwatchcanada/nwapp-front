@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
-export default class WatchCreateStep3BizComponent extends Component {
+class WatchCreateStep3BizComponent extends Component {
     render() {
-        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, errors } = this.props;
+        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, isLoading, onClick, errors } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -88,16 +88,6 @@ export default class WatchCreateStep3BizComponent extends Component {
                                     <th scope="row" className="bg-light">Secondary Area Coordinator</th>
                                     <td>{secondaryAreaCoordinator.label}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Addresses</th>
-                                    <td>
-                                        <ul>
-                                            {streetMembership && streetMembership.map(
-                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
-                                            }
-                                        </ul>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <form>
@@ -112,17 +102,10 @@ export default class WatchCreateStep3BizComponent extends Component {
                         </form>
                     </div>
                 </div>
+
             </main>
         );
     }
 }
 
-
-class StreetAddressBulletItem extends Component {
-    render() {
-        const { streetAddress } = this.props.datum;
-        return (
-            <li>{streetAddress}</li>
-        );
-    }
-}
+export default WatchCreateStep3BizComponent;
