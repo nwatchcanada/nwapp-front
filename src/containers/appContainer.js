@@ -54,8 +54,9 @@ import WatchCreateStep4RezContainer from "./watches/create/rez/watchCreateStep4R
 import WatchCreateStep2BizContainer from "./watches/create/biz/watchCreateStep2BizContainer";
 import WatchCreateStep3BizContainer from "./watches/create/biz/watchCreateStep3BizContainer";
 import WatchCreateStep4BizContainer from "./watches/create/biz/watchCreateStep4BizContainer";
-import WatchCreateStep2ComContainer from "./watches/create/watchCreateStep2ComContainer";
-import WatchCreateStep3ComContainer from "./watches/create/watchCreateStep3ComContainer";
+import WatchCreateStep2ComContainer from "./watches/create/com/watchCreateStep2ComContainer";
+import WatchCreateStep3ComContainer from "./watches/create/com/watchCreateStep3ComContainer";
+import WatchCreateStep4ComContainer from "./watches/create/com/watchCreateStep4ComContainer";
 import WatchRetrieveRezContainer from "./watches/retrieve/watchRetrieveRezContainer";
 import WatchRetrieveBizContainer from "./watches/retrieve/watchRetrieveBizContainer";
 import WatchRetrieveComContainer from "./watches/retrieve/watchRetrieveComContainer";
@@ -312,6 +313,7 @@ class AppContainer extends React.Component {
                                 <Route path="/watches/step-3-create-cc" exact component={requiresAuth(WatchCreateStep3ComContainer)} />
                                 <Route path="/watches/step-4-create-rez" exact component={requiresAuth(WatchCreateStep4RezContainer)} />
                                 <Route path="/watches/step-4-create-biz" exact component={requiresAuth(WatchCreateStep4BizContainer)} />
+                                <Route path="/watches/step-4-create-cc" exact component={requiresAuth(WatchCreateStep4ComContainer)} />
                                 <Route path="/watch-biz/:slug" exact component={requiresAuth(WatchRetrieveBizContainer)} />
                                 <Route path="/watch-cc/:slug" exact component={requiresAuth(WatchRetrieveComContainer)} />
                                 <Route path="/watch-rez/:slug" exact component={requiresAuth(WatchRetrieveRezContainer)} />
