@@ -10,6 +10,8 @@ import TermsContainer from './general/termsContainer';
 import HelpContainer from './general/helpContainer';
 import LoginContainer from "./account/loginContainer";
 import LogoutContainer from "./account/logoutContainer";
+import SendResetPasswordContainer from "./account/auth/sendResetPasswordContainer";
+import SendResetPasswordSuccessContainer from "./account/auth/sendResetPasswordSuccessContainer";
 
 import RegisterStep1Container from "./account/register/registerStep1Container";
 import RegisterStep2BizContainer from "./account/register/registerStep2BizContainer";
@@ -193,7 +195,8 @@ class AppContainer extends React.Component {
                                 <Route path="/register/step-5" exact component={RegisterStep5Container} />
                                 <Route path="/register/step-6" exact component={RegisterStep6Container} />
                                 <Route path="/register/step-7" exact component={RegisterStep7Container} />
-                                <Route path="/register-success" exact component={RegisterSuccessContainer} />
+                                <Route path="/send-password-reset" exact component={SendResetPasswordContainer} />
+                                <Route path="/send-password-reset-success" exact component={SendResetPasswordSuccessContainer} />
                                 <Route path="/privacy" exact component={PrivacyContainer} />
                                 <Route path="/terms" exact component={TermsContainer} />
                                 <Route path="/help" exact component={HelpContainer} />
