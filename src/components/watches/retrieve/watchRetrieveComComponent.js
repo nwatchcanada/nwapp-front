@@ -7,7 +7,9 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 export default class WatchRetrieveComComponent extends Component {
     render() {
-        const { name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, isLoading, onClick, flashMessage } = this.props;
+        const {
+            name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, isLoading, onClick, flashMessage, streetsArray
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -67,6 +69,16 @@ export default class WatchRetrieveComComponent extends Component {
                                     <th scope="row" className="bg-light">Secondary Area Coordinator</th>
                                     <td>{secondaryAreaCoordinator.label}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Addresses</th>
+                                    <td>
+                                        <ul>
+                                            {streetsArray && streetsArray.map(
+                                                (tableDatum, i) => <StreetAddressBulletItem datum={tableDatum} key={i} />)
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <form>
@@ -83,6 +95,16 @@ export default class WatchRetrieveComComponent extends Component {
                 </div>
 
             </main>
+        );
+    }
+}
+
+
+class StreetAddressBulletItem extends Component {
+    render() {
+        const { streetAddress } = this.props.datum;
+        return (
+            <li>{streetAddress}</li>
         );
     }
 }

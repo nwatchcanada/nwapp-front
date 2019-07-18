@@ -58,6 +58,19 @@ class WatchRetrieveComContainer extends Component {
             secondaryAreaCoordinatorOption: {
                 selectName: "secondaryAreaCoordinator", value: "joseph-manderly", label: "Joseph Manderly"
             },
+            streetsArray: [
+                {
+                    'streetAddress': '240 First Street',
+                    'streetNumber': '240',
+                    'streetName': 'First',
+                    'streetType': 'Street',
+                },{
+                    'streetAddress': '51 Downtown Avenue',
+                    'streetNumber': '51',
+                    'streetName': 'Downtown',
+                    'streetType': 'Avenue',
+                }
+            ],
             errors: {},
         });
     }
@@ -98,7 +111,7 @@ class WatchRetrieveComContainer extends Component {
 
     render() {
         const {
-            slug, name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, errors,
+            slug, name, description, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetsArray, errors,
         } = this.state;
         return (
             <WatchRetrieveComComponent
@@ -109,6 +122,7 @@ class WatchRetrieveComContainer extends Component {
                 district={districtOption}
                 primaryAreaCoordinator={primaryAreaCoordinatorOption}
                 secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
+                streetsArray={streetsArray}
                 errors={errors}
                 onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
