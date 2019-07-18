@@ -19,6 +19,7 @@ class WatchCreateStep3BizContainer extends Component {
         super(props);
         this.state = {
             program: BUSINESS_TYPE_OF,
+            tags: localStorageGetArrayItem("nwapp-watch-biz-tags"),
             name: localStorage.getItem('nwapp-watch-biz-name'),
             associate: localStorage.getItem('nwapp-watch-biz-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-biz-associateOption'),
@@ -76,10 +77,11 @@ class WatchCreateStep3BizContainer extends Component {
 
     render() {
         const {
-            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            tags, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
         return (
             <WatchCreateStep3BizComponent
+                tags={tags}
                 name={name}
                 associate={associateOption}
                 district={districtOption}

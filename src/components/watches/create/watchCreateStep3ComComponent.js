@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 export default class WatchCreateStep3ComComponent extends Component {
     render() {
-        const { name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, errors } = this.props;
+        const { tags, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, errors } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -98,6 +98,14 @@ export default class WatchCreateStep3ComComponent extends Component {
                                         </ul>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Tags</th>
+                                    <td>
+                                        {tags && tags.map(
+                                            (tag, i) => <TagItem tag={tag} key={i} />)
+                                        }
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <form>
@@ -125,4 +133,14 @@ class StreetAddressBulletItem extends Component {
             <li>{streetAddress}</li>
         );
     }
+}
+
+
+class TagItem extends Component {
+    render() {
+        const { label, value } = this.props.tag;
+        return (
+            <span className="badge badge-info badge-lg" value={value}>{label}</span>
+        );
+    };
 }

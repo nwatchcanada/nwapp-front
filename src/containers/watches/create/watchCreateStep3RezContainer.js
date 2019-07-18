@@ -19,6 +19,7 @@ class WatchCreateStep3RezContainer extends Component {
         super(props);
         this.state = {
             program: RESIDENCE_TYPE_OF,
+            tags: localStorageGetArrayItem("nwapp-watch-rez-tags"),
             name: localStorage.getItem('nwapp-watch-rez-name'),
             associate: localStorage.getItem('nwapp-watch-rez-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-rez-associateOption'),
@@ -76,10 +77,11 @@ class WatchCreateStep3RezContainer extends Component {
 
     render() {
         const {
-            name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            tags, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
         return (
             <WatchCreateStep3RezComponent
+                tags={tags}
                 name={name}
                 associate={associateOption}
                 district={districtOption}
