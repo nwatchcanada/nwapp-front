@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import DistrictCreateStep2ComComponent from "../../../../components/settings/districts/create/districtCreateStep2ComComponent";
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
-} from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateCommunityCaresInput } from "../../../../validators/districtValidator";
 

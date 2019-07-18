@@ -6,7 +6,6 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
-import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 
 
 export default class DistrictCreateStep2ComComponent extends Component {

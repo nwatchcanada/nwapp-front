@@ -10,8 +10,6 @@ import {
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../constants/api';
-import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
-import { getTagReactSelectOptions } from "../../../actions/tagAction";
 
 
 class RegisterStep7Container extends Component {

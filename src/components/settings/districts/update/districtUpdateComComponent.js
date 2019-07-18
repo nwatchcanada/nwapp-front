@@ -1,13 +1,11 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import ReactModal from 'react-modal';
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
-import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 
 
 export default class DistrictUpdateComComponent extends Component {

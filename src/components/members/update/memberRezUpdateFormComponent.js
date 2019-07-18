@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
-import { BootstrapDatePicker } from "../../bootstrap/bootstrapDatePicker";
 import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
@@ -11,7 +10,7 @@ import { GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_M
 
 export default class MemberRezUpdateFormComponent extends Component {
     render() {
-        const { errors, onTextChange, onSelectChange, onRadioChange, onMultiChange, onDOBDateTimeChange, isLoading } = this.props;
+        const { errors, onTextChange, onSelectChange, onRadioChange, onMultiChange, isLoading } = this.props;
         const { firstName, lastName, primaryPhone, secondaryPhone, email } = this.props;
         const { streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
         const { watch, watchOptions } = this.props;

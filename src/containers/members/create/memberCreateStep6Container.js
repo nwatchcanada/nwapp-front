@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MemberCreateStep6Component from "../../../components/members/create/memberCreateStep6Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
-    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
@@ -180,7 +180,6 @@ class MemberCreateStep6Container extends Component {
                 companyEmployeeCount={companyEmployeeCount}
                 companyYearsInOperation={companyYearsInOperation}
                 companyType={companyType}
-                errors={errors}
                 errors={errors}
                 onClick={this.onClick}
             />
