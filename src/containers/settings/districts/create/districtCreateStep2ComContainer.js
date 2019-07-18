@@ -7,7 +7,7 @@ import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateCommunityCaresInput, validateCommunityCaresModalSaveInput } from "../../../../validators/districtValidator";
+import { validateCommunityCaresInput } from "../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2CommunityCareContainer extends Component {
