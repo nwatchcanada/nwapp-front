@@ -80,10 +80,17 @@ class MemberFullRetrieveContainer extends Component {
                     //     {selectName: "tags", value: "security", label: "Security"},
                     //     {selectName: "tags", value: "fitness", label: "Fitness"}
                     // ],
-                    dateOfBirth: new Date(),
+                    birthYear: 1980,
+                    gender: 2,
+                    genderLabel: "Female",
                     howDidYouHear: "internet",
                     howDidYouHearOption: "",
                     howDidYouHearOther: "",
+                    howDidYouHearLabel: "Internet",
+                    meaning: "Insert meaning here",
+                    expectations: "Insert expectations here",
+                    willingToVolunteerLabel: "Yes",
+                    anotherHouseholdMemberRegisteredLabel: "Yes",
                 }
             });
         } else if (this.state.slug === 'byron') {
@@ -118,10 +125,20 @@ class MemberFullRetrieveContainer extends Component {
                     tags:[
                         "security", "fitness"
                     ],
-                    dateOfBirth: new Date(),
+                    birthYear: 1975,
+                    gender: 1,
+                    genderLabel: "Male",
                     howDidYouHear: "internet",
                     howDidYouHearOption: "",
                     howDidYouHearOther: "",
+                    howDidYouHearLabel: "Internet",
+                    meaning: "Insert meaning here",
+                    expectations: "Insert expectations here",
+                    willingToVolunteerLabel: "No",
+                    anotherHouseholdMemberRegisteredLabel: "No",
+                    companyEmployeeCount: 4,
+                    companyYearsInOperation: 1,
+                    companyType: "Construction Company",
                 }
             });
         } else if (this.state.slug === 'carling') {
@@ -156,10 +173,17 @@ class MemberFullRetrieveContainer extends Component {
                     tags:[
                         "security", "fitness"
                     ],
-                    dateOfBirth: new Date(),
+                    birthYear: 1985,
+                    gender: 0,
+                    genderLabel: "Prefer not to say",
                     howDidYouHear: "internet",
                     howDidYouHearOption: "",
                     howDidYouHearOther: "",
+                    howDidYouHearLabel: "Internet",
+                    meaning: "Insert meaning here",
+                    expectations: "Insert expectations here",
+                    willingToVolunteerLabel: "Maybe",
+                    anotherHouseholdMemberRegisteredLabel: "Yes",
                 }
             });
         }
