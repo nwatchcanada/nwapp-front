@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 
-export default class MemberCreateStep4Component extends Component {
+export default class MemberCreateStep6Component extends Component {
     render() {
         const { returnURL, tableData, isLoading, onTableRowClick } = this.props;
         return (
@@ -30,29 +30,39 @@ export default class MemberCreateStep4Component extends Component {
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
                             <Link to="/members/add/step-1">
-                                <span className="num">1.</span><span className="">Type</span>
+                                <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={returnURL}>
-                                <span className="num">2.</span><span className="">Contact</span>
+                            <Link to="/members/add/step-2">
+                                <span className="num">2.</span><span className="">Results</span>
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey">
                             <Link to="/members/add/step-3">
-                                <span className="num">3.</span><span className="">Address</span>
+                                <span className="num">3.</span><span className="">Type</span>
                             </Link>
                         </div>
-                        <div id="step-4" className="st-grey active">
+                        <div id="step-4" className="st-grey">
+                            <Link to={returnURL}>
+                                <span className="num">4.</span><span className="">Contact</span>
+                            </Link>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <Link to="/members/add/step-5">
+                                <span className="num">5.</span><span className="">Address</span>
+                            </Link>
+                        </div>
+                        <div id="step-6" className="st-grey active">
                             <strong>
-                                <span className="num">4.</span><span className="">Watch</span>
+                                <span className="num">6.</span><span className="">Watch</span>
                             </strong>
                         </div>
-                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Metrics</span>
+                         <div id="step-7" className="st-grey">
+                            <span className="num">7.</span><span className="">Metrics</span>
                         </div>
-                        <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Review</span>
+                        <div id="step-8" className="st-grey">
+                            <span className="num">8.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>
@@ -83,7 +93,7 @@ export default class MemberCreateStep4Component extends Component {
                             </div>
 
                             <div className="form-group">
-                                <Link to="/members/add/step-3" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/members/add/step-5" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

@@ -49,7 +49,7 @@ class MemberCreateStep5Component extends Component {
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <Link to="/members/add/step-1">
+                            <Link to="/members/add/step-3">
                                 <span className="num">3.</span><span className="">Type</span>
                             </Link>
                         </div>
