@@ -98,6 +98,7 @@ import MemberCreateStep4RezOrComContainer from "./members/create/memberCreateSte
 import MemberCreateStep5Container from "./members/create/memberCreateStep5Container";
 import MemberCreateStep6Container from "./members/create/memberCreateStep6Container";
 import MemberCreateStep7Container from "./members/create/memberCreateStep7Container";
+import MemberCreateStep8Container from "./members/create/memberCreateStep8Container";
 import MemberUpdateContainer from "./members/update/memberUpdateContainer";
 import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Container";
 import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
@@ -245,6 +246,7 @@ class AppContainer extends React.Component {
                                 <Route path="/members/add/step-5" exact component={requiresAuth(MemberCreateStep5Container)} />
                                 <Route path="/members/add/step-6" exact component={requiresAuth(MemberCreateStep6Container)} />
                                 <Route path="/members/add/step-7" exact component={requiresAuth(MemberCreateStep7Container)} />
+                                <Route path="/members/add/step-8" exact component={requiresAuth(MemberCreateStep8Container)} />
                                 <Route path="/members/active" exact component={requiresAuth(MemberListActiveContainer)} />
                                 <Route path="/members/inactive" exact component={requiresAuth(MemberListInactiveContainer)} />
                                 <Route path="/members/:urlArgument/search" exact component={requiresAuth(MemberSearchContainer)} />

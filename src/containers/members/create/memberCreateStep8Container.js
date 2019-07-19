@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberCreateStep6Component from "../../../components/members/create/memberCreateStep6Component";
+import MemberCreateStep8Component from "../../../components/members/create/memberCreateStep8Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
     localStorageGetObjectItem, localStorageGetArrayItem
@@ -13,7 +13,7 @@ import {
 } from '../../../constants/api';
 
 
-class MemberCreateStep6Container extends Component {
+class MemberCreateStep8Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -26,10 +26,10 @@ class MemberCreateStep6Container extends Component {
         const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-2-rez-or-cc";
+            returnURL = "/members/add/step-4-rez-or-cc";
         }
         else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-2-biz";
+            returnURL = "/members/add/step-4-biz";
         }
 
         this.state = {
@@ -138,7 +138,7 @@ class MemberCreateStep6Container extends Component {
         } = this.state;
 
         return (
-            <MemberCreateStep6Component
+            <MemberCreateStep8Component
                 returnURL={returnURL}
                 typeOf={typeOf}
                 bizCompanyName={bizCompanyName}
@@ -205,4 +205,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep6Container);
+)(MemberCreateStep8Container);
