@@ -61,7 +61,7 @@ class MemberCreateStep4BizContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(member) {
-        this.props.history.push("/members/add/step-3");
+        this.props.history.push("/members/add/step-5");
     }
 
     onFailedSubmissionCallback(errors) {

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep3Component from "../../../components/members/create/memberCreateStep3Component";
+import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../helpers/localStorageUtility';
-import { validateStep3CreateInput } from "../../../validators/memberValidator";
+import { validateStep5CreateInput } from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -16,7 +16,7 @@ import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../co
 
 
 
-class MemberCreateStep3Container extends Component {
+class MemberCreateStep5Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -29,10 +29,10 @@ class MemberCreateStep3Container extends Component {
         const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-2-rez-or-cc";
+            returnURL = "/members/add/step-4-rez-or-cc";
         }
         else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-2-biz";
+            returnURL = "/members/add/step-4-biz";
         }
 
         this.state = {
@@ -81,7 +81,7 @@ class MemberCreateStep3Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-4");
+        this.props.history.push("/members/add/step-6");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -124,7 +124,7 @@ class MemberCreateStep3Container extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateStep3CreateInput(this.state);
+        const { errors, isValid } = validateStep5CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -145,7 +145,7 @@ class MemberCreateStep3Container extends Component {
     render() {
         const { returnURL, streetNumber, streetName, streetType, streetTypeOther, streetDirection, errors } = this.state;
         return (
-            <MemberCreateStep3Component
+            <MemberCreateStep5Component
                 returnURL={returnURL}
                 streetNumber={streetNumber}
                 streetName={streetName}
@@ -177,4 +177,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep3Container);
+)(MemberCreateStep5Container);

@@ -7,7 +7,7 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 
-class MemberCreateStep3Component extends Component {
+class MemberCreateStep5Component extends Component {
     render() {
         const {
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
@@ -40,27 +40,37 @@ class MemberCreateStep3Component extends Component {
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
                             <Link to="/members/add/step-1">
-                                <span className="num">1.</span><span className="">Type</span>
+                                <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={returnURL}>
-                                <span className="num">2.</span><span className="">Contact</span>
+                            <Link to="/members/add/step-2">
+                                <span className="num">2.</span><span className="">Results</span>
                             </Link>
                         </div>
-                        <div id="step-3" className="st-grey active">
-                            <strong>
-                                <span className="num">3.</span><span className="">Address</span>
-                            </strong>
+                        <div id="step-3" className="st-grey">
+                            <Link to="/members/add/step-1">
+                                <span className="num">3.</span><span className="">Type</span>
+                            </Link>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Watch</span>
+                            <Link to={returnURL}>
+                                <span className="num">4.</span><span className="">Contact</span>
+                            </Link>
                         </div>
-                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Metrics</span>
+                        <div id="step-5" className="st-grey active">
+                            <strong>
+                                <span className="num">5.</span><span className="">Address</span>
+                            </strong>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Review</span>
+                            <span className="num">6.</span><span className="">Watch</span>
+                        </div>
+                         <div id="step-7" className="st-grey">
+                            <span className="num">7.</span><span className="">Metrics</span>
+                        </div>
+                        <div id="step-8" className="st-grey">
+                            <span className="num">8.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>
@@ -151,4 +161,4 @@ class MemberCreateStep3Component extends Component {
     }
 }
 
-export default MemberCreateStep3Component;
+export default MemberCreateStep5Component;
