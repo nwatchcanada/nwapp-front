@@ -75,31 +75,7 @@ export function validateResidentialUpdateInput(data) {
  *  Validator will validate the residential district create / update modal form.
  */
 export function validateResidentialModalSaveInput(data) {
-    let errors = {};
-
-    if (data.streetNumberStart === undefined || data.streetNumberStart === null || validator.isEmpty(data.streetNumberStart) || data.streetNumberStart === "" || data.streetNumberStart === "null") {
-        errors.streetNumberStart = 'This field is required';
-    }
-    if (data.streetNumberFinish === undefined || data.streetNumberFinish === null || validator.isEmpty(data.streetNumberFinish) || data.streetNumberFinish === "" || data.streetNumberFinish === "null") {
-        errors.streetNumberFinish = 'This field is required';
-    }
-    if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "" || data.streetName === "null") {
-        errors.streetName = 'This field is required';
-    }
-    if (data.streetType === undefined || data.streetType === null || validator.isEmpty(data.streetType) || data.streetType === "" || data.streetType === "null") {
-        errors.streetType = 'This field is required';
-    } else {
-        if (data.streetType === "Other") {
-            if (data.streetTypeOther === undefined || data.streetTypeOther === null || validator.isEmpty(data.streetTypeOther) || data.streetTypeOther === "" || data.streetTypeOther === "null") {
-                errors.streetTypeOther = 'This field is required';
-            }
-        }
-    }
-
-    return {
-        errors,
-        isValid: isEmpty(errors)
-    }
+    return validateModalSaveInput(data);
 }
 
 
@@ -177,10 +153,23 @@ export function validateCommunityCaresInput(data) {
  *  Validator will validate the business district create / update form.
  */
 export function validateCommunityCaresModalSaveInput(data) {
+    return validateModalSaveInput(data)
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+//                              COMMON FUNCTIONS                              //
+////////////////////////////////////////////////////////////////////////////////
+
+
+function validateModalSaveInput(data) {
     let errors = {};
 
-    if (data.streetNumber === undefined || data.streetNumber === null || validator.isEmpty(data.streetNumber) || data.streetNumber === "" || data.streetNumber === "null") {
-        errors.streetNumber = 'This field is required';
+    if (data.streetNumberStart === undefined || data.streetNumberStart === null || validator.isEmpty(data.streetNumberStart) || data.streetNumberStart === "" || data.streetNumberStart === "null") {
+        errors.streetNumberStart = 'This field is required';
+    }
+    if (data.streetNumberFinish === undefined || data.streetNumberFinish === null || validator.isEmpty(data.streetNumberFinish) || data.streetNumberFinish === "" || data.streetNumberFinish === "null") {
+        errors.streetNumberFinish = 'This field is required';
     }
     if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "" || data.streetName === "null") {
         errors.streetName = 'This field is required';
@@ -194,9 +183,35 @@ export function validateCommunityCaresModalSaveInput(data) {
             }
         }
     }
+    if (hasDuplicateStreetAddress(data)) {
+        errors.nonFieldError = "You already entered this street address!";
+    }
 
     return {
         errors,
         isValid: isEmpty(errors)
     }
+}
+
+
+/**
+ *  Function will iterate through the existing `streetMembership` array and see
+ *  if the inputted fields from the modal already exist in the array. If so then
+ *  return error, else return true.
+ */
+function hasDuplicateStreetAddress(data) {
+    if (data.streetMembership !== undefined && data.streetMembership !== null) {
+        for (let i = 0; i < data.streetMembership.length; i++) {
+            let address = data.streetMembership[i];
+            let isEqual = data.streetDirection === address.streetDirection;
+            isEqual &= data.streetType === address.streetType;
+            isEqual &= data.streetName === address.streetName;
+            isEqual &= data.streetNumberFinish === address.streetNumberFinish;
+            isEqual &= data.streetNumberStart === address.streetNumberStart;
+            if (isEqual) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
