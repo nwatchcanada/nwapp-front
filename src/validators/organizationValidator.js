@@ -26,6 +26,9 @@ export default function validateInput(data) {
     if (data.locality === undefined || data.locality === null || validator.isEmpty(data.locality) || data.locality === "") {
         errors.locality = 'This field is required';
     }
+    if (data.timezone === undefined || data.timezone === null || validator.isEmpty(data.timezone) || data.timezone === "") {
+        errors.timezone = 'This field is required';
+    }
     return {
         errors,
         isValid: isEmpty(errors)

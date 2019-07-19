@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect'
-import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect'
+import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect';
+import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect';
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+
 
 class SharedOrganizationCreateComponent extends Component {
     render() {
         const {
-            schema, name, description, country, region, errors={}, isLoading, onTextChange, onCountryChange, onRegionChange, locality, onClick, onCancelClick
+            schema, name, description, country, region, timezone, timezoneOptions, errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, locality, onClick, onCancelClick
         } = this.props;
         return (
             <div>
@@ -100,7 +102,16 @@ class SharedOrganizationCreateComponent extends Component {
                                 type="text"
                             />
 
-
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Timezone (*)"
+                                name="timezone"
+                                defaultOptionLabel="Please select a timezone."
+                                options={timezoneOptions}
+                                value={timezone}
+                                error={errors.timezone}
+                                onSelectChange={onSelectChange}
+                            />
 
                             <div className="form-group">
                                 <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-secondary" onClick={onCancelClick}>

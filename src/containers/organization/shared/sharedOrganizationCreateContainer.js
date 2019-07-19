@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import SharedOrganizationCreateComponent from "../../../components/organizations/shared/sharedOrganizationCreateComponent";
 import validateInput from '../../../validators/organizationValidator';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-
+import { getTimezoneReactSelectOptions } from "../../../helpers/timezoneUtlity";
 
 class SharedOrganizationCreateContainer extends Component {
 
@@ -24,11 +24,13 @@ class SharedOrganizationCreateContainer extends Component {
             country: '',
             region: '',
             locality: '',
+            timezone: '',
             errors: {},
             isLoading: false,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onCancelClick = this.onCancelClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
@@ -59,9 +61,7 @@ class SharedOrganizationCreateContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback() {
-        this.setState({
-            errors: {},
-        });
+        this.props.setFlashMessage("success", "Organization has been successfully created.");
         this.props.history.push("/organizations");
     }
 
@@ -86,6 +86,14 @@ class SharedOrganizationCreateContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
     }
 
     onCancelClick() {
@@ -144,7 +152,8 @@ class SharedOrganizationCreateContainer extends Component {
      */
 
     render() {
-        const { schema, name, description, country, region, locality, errors, isLoading } = this.state;
+        const { schema, name, description, country, region, locality, timezone, errors, isLoading } = this.state;
+        const timezoneOptions = getTimezoneReactSelectOptions();
         return (
             <SharedOrganizationCreateComponent
                 schema={schema}
@@ -153,9 +162,12 @@ class SharedOrganizationCreateContainer extends Component {
                 country={country}
                 region={region}
                 locality={locality}
+                timezone={timezone}
+                timezoneOptions={timezoneOptions}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onCancelClick={this.onCancelClick}
                 onCountryChange={this.onCountryChange}
                 onRegionChange={this.onRegionChange}
