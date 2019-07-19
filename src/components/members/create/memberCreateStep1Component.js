@@ -39,6 +39,24 @@ export default class MemberCreateStep1Component extends Component {
                         <div id="step-2" className="st-grey">
                             <span className="num">2.</span><span className="">Results</span>
                         </div>
+                        <div id="step-3" className="st-grey">
+                            <span className="num">3.</span><span className="">Type</span>
+                        </div>
+                        <div id="step-4" className="st-grey">
+                            <span className="num">4.</span><span className="">Contact</span>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Address</span>
+                        </div>
+                        <div id="step-6" className="st-grey">
+                            <span className="num">6.</span><span className="">Watch</span>
+                        </div>
+                         <div id="step-7" className="st-grey">
+                            <span className="num">7.</span><span className="">Metrics</span>
+                        </div>
+                        <div id="step-8" className="st-grey">
+                            <span className="num">8.</span><span className="">Review</span>
+                        </div>
                     </div>
                 </div>
 

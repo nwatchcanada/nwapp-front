@@ -36,6 +36,24 @@ export default class MemberCreateStep2Component extends Component {
                                 <span className="num">2.</span><span className="">Results</span>
                             </strong>
                         </div>
+                        <div id="step-3" className="st-grey">
+                            <span className="num">3.</span><span className="">Type</span>
+                        </div>
+                        <div id="step-4" className="st-grey">
+                            <span className="num">4.</span><span className="">Contact</span>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Address</span>
+                        </div>
+                        <div id="step-6" className="st-grey">
+                            <span className="num">6.</span><span className="">Watch</span>
+                        </div>
+                         <div id="step-7" className="st-grey">
+                            <span className="num">7.</span><span className="">Metrics</span>
+                        </div>
+                        <div id="step-8" className="st-grey">
+                            <span className="num">8.</span><span className="">Review</span>
+                        </div>
                     </div>
                 </div>
 
@@ -57,7 +75,7 @@ export default class MemberCreateStep2Component extends Component {
                                     London, ON<br />
                                     (519)521-3135
                                 </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "rodolfo-martinez") } } disabled={isLoading}>Select</button>
+                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "rodolfo-martinez") } } disabled={isLoading}>Select&nbsp;<i class="fas fa-chevron-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -73,7 +91,7 @@ export default class MemberCreateStep2Component extends Component {
                                     London, ON<br />
                                     (123)123-1234
                                 </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "frank-herbert") } } disabled={isLoading}>Select</button>
+                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "frank-herbert") } } disabled={isLoading}>Select&nbsp;<i class="fas fa-chevron-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -89,7 +107,7 @@ export default class MemberCreateStep2Component extends Component {
                                     Toronto, ON<br />
                                     (321)123-1234
                                 </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "robert-a-heinlein") } } disabled={isLoading}>Select</button>
+                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "robert-a-heinlein") } } disabled={isLoading}>Select&nbsp;<i class="fas fa-chevron-right"></i></button>
                             </div>
                         </div>
                     </div>
