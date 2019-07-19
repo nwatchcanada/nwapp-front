@@ -319,6 +319,26 @@ export default class MemberFullRetrieveComponent extends Component {
                                     </tr>
                                 }
 
+
+
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-project-diagram"></i>&nbsp;Functions
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Available Choices</th>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                <Link to={`/members/${urlArgument}/${slug}/promote/step-1`}>
+                                                    Promote&nbsp;<i className="fas fa-chevron-right"></i>
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
                             </tbody>
                         </table>
                         <form>

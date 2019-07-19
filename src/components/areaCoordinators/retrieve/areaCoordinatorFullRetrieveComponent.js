@@ -240,6 +240,30 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                 </tr>
 
 
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-project-diagram"></i>&nbsp;Functions
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Available Choices</th>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                <Link to={`/area-coordinators/${urlArgument}/${slug}/promote`}>
+                                                    Promote&nbsp;<i className="fas fa-chevron-right"></i>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={`/area-coordinators/${urlArgument}/${slug}/demote`}>
+                                                    Demote&nbsp;<i className="fas fa-chevron-right"></i>
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+
                             </tbody>
                         </table>
                         <form>
