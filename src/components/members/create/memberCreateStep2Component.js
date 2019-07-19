@@ -22,7 +22,7 @@ export default class MemberCreateStep2Component extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-plus"></i>&nbsp;Add Form</h1>
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Member</h1>
 
                 <div className="row">
                     <div className="step-navigation">

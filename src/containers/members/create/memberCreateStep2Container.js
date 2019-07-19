@@ -48,9 +48,9 @@ class MemberCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(associate) {
+    onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/associates/add/step-3");
+        this.props.history.push("/members/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -81,7 +81,7 @@ class MemberCreateStep2Container extends Component {
         e.preventDefault();
 
         // Save the slug
-        localStorage.setItem('nwapp-create-associate-slug', slug);
+        localStorage.setItem('nwapp-create-member-slug', slug);
 
         this.onSuccessfulSubmissionCallback();
     }

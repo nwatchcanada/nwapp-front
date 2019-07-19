@@ -48,7 +48,7 @@ class MemberCreateStep1Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(associate) {
+    onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.history.push("/members/add/step-2");
     }
