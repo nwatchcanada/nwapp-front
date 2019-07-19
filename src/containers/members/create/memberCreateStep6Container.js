@@ -100,7 +100,7 @@ class MemberCreateStep6Container extends Component {
         localStorage.setItem('nwapp-create-member-watch-slug', slug);
         localStorage.setItem('nwapp-create-member-watch-icon', icon);
         localStorage.setItem('nwapp-create-member-watch-name', name);
-        this.props.history.push("/members/add/step-5");
+        this.props.history.push("/members/add/step-7");
     }
 
 

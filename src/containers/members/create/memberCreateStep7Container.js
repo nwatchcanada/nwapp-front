@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
-import { validateStep5CreateInput } from "../../../validators/memberValidator";
+import MemberCreateStep7Component from "../../../components/members/create/memberCreateStep7Component";
+import { validateStep7CreateInput } from "../../../validators/memberValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
@@ -16,7 +16,7 @@ import {
 } from '../../../constants/api';
 
 
-class MemberCreateStep5Container extends Component {
+class MemberCreateStep7Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -29,10 +29,10 @@ class MemberCreateStep5Container extends Component {
         const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-2-rez-or-cc";
+            returnURL = "/members/add/step-4-rez-or-cc";
         }
         else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-2-biz";
+            returnURL = "/members/add/step-4-biz";
         }
 
         this.state = {
@@ -116,7 +116,7 @@ class MemberCreateStep5Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-6");
+        this.props.history.push("/members/add/step-8");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -202,7 +202,7 @@ class MemberCreateStep5Container extends Component {
         // console.log(this.state); // For debugging purposes only.
 
         // Perform client-side validation.
-        const { errors, isValid } = validateStep5CreateInput(this.state);
+        const { errors, isValid } = validateStep7CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -231,7 +231,7 @@ class MemberCreateStep5Container extends Component {
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
-            <MemberCreateStep5Component
+            <MemberCreateStep7Component
                 typeOf={typeOf}
                 returnURL={returnURL}
                 tags={tags}
@@ -275,4 +275,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep5Container);
+)(MemberCreateStep7Container);
