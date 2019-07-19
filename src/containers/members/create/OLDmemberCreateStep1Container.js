@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Scroll from 'react-scroll';
 
 import MemberCreateStep1Component from "../../../components/members/create/memberCreateStep1Component";
 
@@ -10,20 +9,6 @@ class MemberCreateStep1Container extends Component {
      *  Initializer & Utility
      *------------------------------------------------------------
      */
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: null,
-            errors: {},
-            isLoading: false
-        }
-
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
-    }
 
     /**
      *  Component Life-cycle Management
@@ -48,40 +33,10 @@ class MemberCreateStep1Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(associate) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-2");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
-
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        this.onSuccessfulSubmissionCallback();
-    }
 
 
     /**
@@ -90,13 +45,8 @@ class MemberCreateStep1Container extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
         return (
             <MemberCreateStep1Component
-                name={name}
-                errors={errors}
-                onTextChange={this.onTextChange}
-                onClick={this.onClick}
             />
         );
     }
@@ -109,8 +59,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-    }
+    return {}
 }
 
 

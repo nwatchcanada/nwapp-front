@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep1Component from "../../../components/members/create/memberCreateStep1Component";
+import MemberCreateStep2Component from "../../../components/members/create/memberCreateStep2Component";
 
 
-class MemberCreateStep1Container extends Component {
+class MemberCreateStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -50,7 +50,7 @@ class MemberCreateStep1Container extends Component {
 
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-2");
+        this.props.history.push("/associates/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -76,13 +76,15 @@ class MemberCreateStep1Container extends Component {
         })
     }
 
-    onClick(e) {
+    onClick(e, slug) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
+        // Save the slug
+        localStorage.setItem('nwapp-create-associate-slug', slug);
+
         this.onSuccessfulSubmissionCallback();
     }
-
 
     /**
      *  Main render function
@@ -92,7 +94,7 @@ class MemberCreateStep1Container extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <MemberCreateStep1Component
+            <MemberCreateStep2Component
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -117,4 +119,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep1Container);
+)(MemberCreateStep2Container);

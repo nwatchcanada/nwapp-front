@@ -91,6 +91,7 @@ import MemberSearchResultContainer from "./members/memberSearchResultContainer";
 import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
 import MemberFullRetrieveContainer from "./members/retrieve/memberFullRetrieveContainer";
 import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
+import MemberCreateStep2Container from "./members/create/memberCreateStep2Container";
 import MemberCreateStep2BizContainer from "./members/create/memberCreateStep2BizContainer";
 import MemberCreateStep2RezOrComContainer from "./members/create/memberCreateStep2RezOrComContainer";
 import MemberCreateStep3Container from "./members/create/memberCreateStep3Container";
@@ -237,6 +238,7 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/resource/:slug/delete" exact component={requiresAuth(ResourceDeleteContainer)} />
                                 <Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
                                 <Route path="/members/add/step-1" exact component={requiresAuth(MemberCreateStep1Container)} />
+                                <Route path="/members/add/step-2" exact component={requiresAuth(MemberCreateStep2Container)} />
                                 <Route path="/members/add/step-2-biz" exact component={requiresAuth(MemberCreateStep2BizContainer)} />
                                 <Route path="/members/add/step-2-rez-or-cc" exact component={requiresAuth(MemberCreateStep2RezOrComContainer)} />
                                 <Route path="/members/add/step-3" exact component={requiresAuth(MemberCreateStep3Container)} />
