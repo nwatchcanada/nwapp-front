@@ -25,7 +25,7 @@ class MemberUpdateComponent extends Component {
         const { firstName, lastName, primaryPhone, secondaryPhone, email } = this.props;
 
         // Address
-        const { streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
+        const { streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, postalCode } = this.props;
 
         // Watches
         const { watch, watchOptions } = this.props;
@@ -94,8 +94,10 @@ class MemberUpdateComponent extends Component {
                                     streetType={streetType}
                                     streetTypeOptions={streetTypeOptions}
                                     streetTypeOther={streetTypeOther}
+                                    apartmentUnit={apartmentUnit}
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
+                                    postalCode={postalCode}
 
                                     watch={watch}
                                     watchOptions={watchOptions}
@@ -143,8 +145,10 @@ class MemberUpdateComponent extends Component {
                                     streetType={streetType}
                                     streetTypeOptions={streetTypeOptions}
                                     streetTypeOther={streetTypeOther}
+                                    apartmentUnit={apartmentUnit}
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
+                                    postalCode={postalCode}
 
                                     watch={watch}
                                     watchOptions={watchOptions}
@@ -194,8 +198,10 @@ class MemberUpdateComponent extends Component {
                                     streetType={streetType}
                                     streetTypeOptions={streetTypeOptions}
                                     streetTypeOther={streetTypeOther}
+                                    apartmentUnit={apartmentUnit}
                                     streetDirection={streetDirection}
                                     streetDirectionOptions={streetDirectionOptions}
+                                    postalCode={postalCode}
 
                                     watch={watch}
                                     watchOptions={watchOptions}

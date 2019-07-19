@@ -68,8 +68,10 @@ class MemberUpdateContainer extends Component {
                 streetType: "Street",
                 streetTypeOption: "",
                 streetTypeOther: "",
+                apartmentUnit: "Upper",
                 streetDirection: "North",
                 streetDirectionOption: "",
+                postalCode: "N6J4X4",
                 watchSlug: "argyle-watch",
                 watchIcon: "home",
                 watchName: "Argyle",
@@ -98,6 +100,8 @@ class MemberUpdateContainer extends Component {
                 streetType: "Street",
                 streetTypeOption: "",
                 streetTypeOther: "",
+                postalCode: "N6J4X4",
+                apartmentUnit: null,
                 streetDirection: "",
                 streetDirectionOption: "",
                 watchSlug: "byron-watch",
@@ -126,8 +130,10 @@ class MemberUpdateContainer extends Component {
                 streetType: "Street",
                 streetTypeOption: "",
                 streetTypeOther: "",
+                apartmentUnit: null,
                 streetDirection: "",
                 streetDirectionOption: "",
+                postalCode: "N6J4X4",
                 watchSlug: "carling-watch",
                 watchIcon: "university",
                 watchName: "Carling",
@@ -282,7 +288,7 @@ class MemberUpdateContainer extends Component {
         const { typeOf, errors, urlArgument, slug } = this.state;
         const {
             name, companyName, email, firstName, contactFirstName, lastName, contactLastName, primaryPhone, secondaryPhone, streetNumber,
-            streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
+            streetName, streetType, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName, watch,
             tags, birthYear, gender, howDidYouHear, howDidYouHearOption, howDidYouHearOther, meaning, expectations, companyEmployeeCount, companyYearsInOperation, companyType,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
@@ -329,9 +335,11 @@ class MemberUpdateContainer extends Component {
                 streetTypeOption={streetTypeOption}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
                 streetTypeOther={streetTypeOther}
+                apartmentUnit={apartmentUnit}
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 streetDirectionOption={streetDirectionOption}
+                postalCode={postalCode}
                 watchSlug={watchSlug}
                 watchIcon={watchIcon}
                 watchName={watchName}

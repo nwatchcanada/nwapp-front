@@ -44,12 +44,13 @@ class StaffFullRetrieveContainer extends Component {
             streetTypeLabel: "",
             streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
             streetTypeOther: "",
+            apartmentUnit: "",
             streetDirection: "",
             streetDirectionOptions: STREET_DIRECTION_CHOICES,
+            postalCode: "",
             locality: "",
             region: "",
             country: "",
-            postal: "",
             emergencyFullName: "",
             emergencyRelationship: "",
             emergencyTelephone: "",
@@ -110,12 +111,13 @@ class StaffFullRetrieveContainer extends Component {
            streetTypeLabel: "Way",
            streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
            streetTypeOther: "",
+           apartmentUnit: "LOWER",
            streetDirection: "",
            streetDirectionOptions: STREET_DIRECTION_CHOICES,
+           postal: "N6J4X4",
            locality: "London",
            region: "Ontario",
            country: "Canada",
-           postal: "N6J4X4",
            emergencyFullName: "Paul A.",
            emergencyRelationship: "Friend",
            emergencyTelephone: "(777) 777-7777",
@@ -181,7 +183,7 @@ class StaffFullRetrieveContainer extends Component {
     render() {
         const {
             firstName, lastName, dateOfBirth, gender, description, tags, howHear, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, postalCode, locality, region, country, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
             genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
@@ -224,12 +226,13 @@ class StaffFullRetrieveContainer extends Component {
                 streetTypeLabel={streetTypeLabel}
                 streetTypeOptions={streetTypeOptions}
                 streetTypeOther={streetTypeOther}
+                apartmentUnit={apartmentUnit}
                 streetDirection={streetDirection}
                 streetDirectionOptions={streetDirectionOptions}
+                postalCode={postalCode}
                 locality={locality}
                 region={region}
                 country={country}
-                postal={postal}
                 emergencyFullName={emergencyFullName}
                 emergencyRelationship={emergencyRelationship}
                 emergencyTelephone={emergencyTelephone}

@@ -46,12 +46,13 @@ class StaffUpdateContainer extends Component {
             streetType: localStorage.getItem("nwapp-staff-create-streetType"),
             streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
             streetTypeOther: localStorage.getItem("nwapp-staff-create-streetTypeOther"),
+            apartmentUnit: localStorage.getItem("nwapp-staff-create-apartmentUnit"),
             streetDirection: localStorage.getItem("nwapp-staff-create-streetDirection"),
             streetDirectionOptions: STREET_DIRECTION_CHOICES,
+            postalCode: localStorage.getItem("nwapp-staff-create-postalCode"),
             locality: localStorage.getItem("nwapp-staff-create-locality"),
             region: localStorage.getItem("nwapp-staff-create-region"),
             country: localStorage.getItem("nwapp-staff-create-country"),
-            postal: localStorage.getItem("nwapp-staff-create-postal"),
             emergencyFullName: localStorage.getItem("nwapp-staff-create-emergencyFullName"),
             emergencyRelationship: localStorage.getItem("nwapp-staff-create-emergencyRelationship"),
             emergencyTelephone: localStorage.getItem("nwapp-staff-create-emergencyTelephone"),
@@ -270,7 +271,7 @@ class StaffUpdateContainer extends Component {
         const {
             urlArgument, slug,
             firstName, lastName, dateOfBirth, gender, description, howHear, tags, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
             errors, isLoading

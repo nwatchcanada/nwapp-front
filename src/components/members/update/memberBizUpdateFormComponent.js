@@ -12,7 +12,7 @@ export default class MemberBizUpdateFormComponent extends Component {
     render() {
         const { errors, onTextChange, onSelectChange, onRadioChange, onMultiChange, isLoading } = this.props;
         const { contactFirstName, contactLastName, primaryPhone, secondaryPhone, email } = this.props;
-        const { companyName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions } = this.props;
+        const { companyName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions } = this.props;
         const { watch, watchOptions } = this.props;
         const { tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, companyEmployeeCount, companyYearsInOperation, companyType } = this.props;
 
@@ -156,6 +156,17 @@ export default class MemberBizUpdateFormComponent extends Component {
                         disabled={isLoading}
                     />
                 }
+
+                <BootstrapInput
+                    inputClassName="form-control form-control-lg"
+                    borderColour="border-success"
+                    error={errors.apartmentUnit}
+                    label="Apt. Unit"
+                    onChange={onTextChange}
+                    value={apartmentUnit}
+                    name="apartmentUnit"
+                    type="text"
+                />
 
                 <BootstrapSingleSelect
                     borderColour="border-successs"

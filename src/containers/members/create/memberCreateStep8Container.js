@@ -51,8 +51,10 @@ class MemberCreateStep8Container extends Component {
             streetType: localStorage.getItem("nwapp-create-member-streetType"),
             streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
+            apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
             streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
+            postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
             watchSlug: localStorage.getItem('nwapp-create-member-watch-slug'),
             watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
             watchName: localStorage.getItem('nwapp-create-member-watch-name'),
@@ -130,7 +132,7 @@ class MemberCreateStep8Container extends Component {
             returnURL, typeOf, errors,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
-            streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
+            streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
             tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, expectations,
             willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
@@ -157,8 +159,10 @@ class MemberCreateStep8Container extends Component {
                 streetType={streetType}
                 streetTypeOption={streetTypeOption}
                 streetTypeOther={streetTypeOther}
+                apartmentUnit={apartmentUnit}
                 streetDirection={streetDirection}
                 streetDirectionOption={streetDirectionOption}
+                postalCode={postalCode}
                 watchSlug={watchSlug}
                 watchIcon={watchIcon}
                 watchName={watchName}

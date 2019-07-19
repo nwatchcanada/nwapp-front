@@ -10,7 +10,7 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 class MemberCreateStep5Component extends Component {
     render() {
         const {
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
             returnURL, errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
 
@@ -118,6 +118,17 @@ class MemberCreateStep5Component extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
+                                onChange={onTextChange}
+                                value={apartmentUnit}
+                                name="apartmentUnit"
+                                type="text"
+                            />
+
                             {isOtherStreetTypeSelected &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
@@ -141,6 +152,17 @@ class MemberCreateStep5Component extends Component {
                                 error={errors.streetDirection}
                                 onSelectChange={onSelectChange}
                                 helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.postalCode}
+                                label="Postal Code (*)"
+                                onChange={onTextChange}
+                                value={postalCode}
+                                name="postalCode"
+                                type="text"
                             />
 
                             <div className="form-group">

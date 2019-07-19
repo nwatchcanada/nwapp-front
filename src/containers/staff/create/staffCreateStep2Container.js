@@ -38,6 +38,7 @@ class StaffCreateStep2Container extends Component {
             streetTypeLabel: localStorage.getItem("nwapp-staff-create-streetTypeLabel"),
             streetTypeOptions: BASIC_STREET_TYPE_CHOICES,
             streetTypeOther: localStorage.getItem("nwapp-staff-create-streetTypeOther"),
+            apartmentUnit: localStorage.getItem("nwapp-staff-create-apartmentUnit"),
             streetDirection: localStorage.getItem("nwapp-staff-create-streetDirection"),
             streetDirectionOptions: STREET_DIRECTION_CHOICES,
             locality: localStorage.getItem("nwapp-staff-create-locality"),
@@ -148,7 +149,7 @@ class StaffCreateStep2Container extends Component {
     render() {
         const {
             firstName, lastName, dateOfBirth, gender, description, tags, howHear, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
             genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
@@ -189,6 +190,7 @@ class StaffCreateStep2Container extends Component {
                 streetTypeLabel={streetTypeLabel}
                 streetTypeOptions={streetTypeOptions}
                 streetTypeOther={streetTypeOther}
+                apartmentUnit={apartmentUnit}
                 streetDirection={streetDirection}
                 streetDirectionOptions={streetDirectionOptions}
                 locality={locality}

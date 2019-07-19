@@ -19,7 +19,7 @@ export default class MemberFullRetrieveComponent extends Component {
             typeOf, errors,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
-            streetNumber, streetName, streetType, streetTypeOther, streetDirection,
+            streetNumber, streetName, streetType, streetTypeOther, apartmentUnit, streetDirection, postalCode,
             watchSlug, watchIcon, watchName,
             tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
@@ -210,9 +210,19 @@ export default class MemberFullRetrieveComponent extends Component {
                                     <th scope="row" className="bg-light">Street Type (Other)</th>
                                     <td>{streetTypeOther}</td>
                                 </tr>
+                                {apartmentUnit &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Apartment Unit</th>
+                                        <td>{apartmentUnit}</td>
+                                    </tr>
+                                }
                                 <tr>
                                     <th scope="row" className="bg-light">Street Direction</th>
                                     <td>{streetDirection}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Postal Code</th>
+                                    <td>{postalCode}</td>
                                 </tr>
 
 

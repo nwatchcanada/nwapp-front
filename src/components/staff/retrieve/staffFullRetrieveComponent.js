@@ -13,7 +13,7 @@ export default class StaffFullRetrieveComponent extends Component {
         const { urlArgument, slug, flashMessage } = this.props;
         const {
             firstName, lastName, dateOfBirth, description, tags, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetDirection, locality, country, region, postal, emergencyFullName,
+            streetNumber, streetName, apartmentUnit, streetDirection, postalCode, locality, country, region, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments,
             errors, isLoading, onClick,
             genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
@@ -140,9 +140,19 @@ export default class StaffFullRetrieveComponent extends Component {
                                     <th scope="row" className="bg-light">Street Type</th>
                                     <td>{streetTypeLabel}</td>
                                 </tr>
+                                {apartmentUnit &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Apartment Unit</th>
+                                        <td>{apartmentUnit}</td>
+                                    </tr>
+                                }
                                 <tr>
                                     <th scope="row" className="bg-light">Street Direction</th>
                                     <td>{streetDirection}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Postal Code</th>
+                                    <td>{postalCode}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Locality</th>
@@ -155,10 +165,6 @@ export default class StaffFullRetrieveComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Country</th>
                                     <td>{country}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Postal</th>
-                                    <td>{postal}</td>
                                 </tr>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">

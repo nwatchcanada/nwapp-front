@@ -43,8 +43,10 @@ class RegisterStep3Container extends Component {
             streetType: localStorage.getItem("nwapp-register-streetType"),
             streetTypeOption: localStorageGetObjectItem('nwapp-register-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-register-streetTypeOther"),
+            apartmentUnit: localStorage.getItem("nwapp-register-apartmentUnit"),
             streetDirection: localStorage.getItem("nwapp-register-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-register-streetDirectionOption'),
+            postalCode: localStorage.getItem("nwapp-register-postalCode"),
             errors: {},
             isLoading: false
         }
@@ -143,17 +145,19 @@ class RegisterStep3Container extends Component {
      */
 
     render() {
-        const { returnURL, streetNumber, streetName, streetType, streetTypeOther, streetDirection, errors } = this.state;
+        const { returnURL, streetNumber, streetName, apartmentUnit, streetType, streetTypeOther, streetDirection, postalCode, errors } = this.state;
         return (
             <RegisterStep3Component
                 returnURL={returnURL}
                 streetNumber={streetNumber}
                 streetName={streetName}
+                apartmentUnit={apartmentUnit}
                 streetType={streetType}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
                 streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                postalCode={postalCode}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

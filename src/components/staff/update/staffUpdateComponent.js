@@ -20,7 +20,7 @@ export default class StaffUpdateComponent extends Component {
         const {
             urlArgument, slug,
             firstName, lastName, dateOfBirth, gender, description, howHear, tags, tagOptions, howHearOptions, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, country, region, postal, emergencyFullName,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, postalCode, locality, country, region, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive, isActiveOptions,
             password, repeatPassword,
             errors, isLoading,
@@ -40,7 +40,7 @@ export default class StaffUpdateComponent extends Component {
                             <Link to={`/staff/${urlArgument}`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/staff/${urlArgument}/${slug}`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
+                            <Link to={`/staff/${urlArgument}/${slug}/full`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -236,6 +236,17 @@ export default class StaffUpdateComponent extends Component {
                                 />
                             }
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
+                                onChange={onTextChange}
+                                value={apartmentUnit}
+                                name="apartmentUnit"
+                                type="text"
+                            />
+
                             <BootstrapSingleSelect
                                 borderColour="border-successs"
                                 label="Street Direction"
@@ -246,6 +257,18 @@ export default class StaffUpdateComponent extends Component {
                                 error={errors.streetDirection}
                                 onSelectChange={onSelectChange}
                                 helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.postalCode}
+                                label="Postal Code (*)"
+                                onChange={onTextChange}
+                                value={postalCode}
+                                name="postalCode"
+                                type="text"
+                                placeholder=""
                             />
 
                             <BootstrapInput
@@ -279,18 +302,6 @@ export default class StaffUpdateComponent extends Component {
                                 value={region}
                                 onChange={onRegionChange}
                                 name="region"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.postal}
-                                label="Postal (*)"
-                                onChange={onTextChange}
-                                value={postal}
-                                name="postal"
-                                type="text"
-                                placeholder=""
                             />
 
                             <h4><i className="fas fa-clinic-medical"></i>&nbsp;Emergency Contact</h4>

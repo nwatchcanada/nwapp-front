@@ -41,10 +41,12 @@ class MemberCreateStep5Container extends Component {
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
             streetType: localStorage.getItem("nwapp-create-member-streetType"),
+            apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
             streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
             streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
+            postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
             errors: {},
             isLoading: false
         }
@@ -143,17 +145,19 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { returnURL, streetNumber, streetName, streetType, streetTypeOther, streetDirection, errors } = this.state;
+        const { returnURL, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode, errors } = this.state;
         return (
             <MemberCreateStep5Component
                 returnURL={returnURL}
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
+                apartmentUnit={apartmentUnit}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
                 streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                postalCode={postalCode}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

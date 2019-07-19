@@ -81,6 +81,9 @@ export function validateInput(data) {
             }
         }
     }
+    if (data.postalCode === undefined || data.postalCode === null || validator.isEmpty(data.postalCode) || data.postalCode === "") {
+        errors.postalCode = 'This field is required';
+    }
 
     // --- EXTRA --- //
 
@@ -179,6 +182,9 @@ export function validateStep3CreateInput(data) {
                 errors.streetTypeOther = 'This field is required';
             }
         }
+    }
+    if (data.postalCode === undefined || data.postalCode === null || validator.isEmpty(data.postalCode) || data.postalCode === "") {
+        errors.postalCode = 'This field is required';
     }
 
     return {
