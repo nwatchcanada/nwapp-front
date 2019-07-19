@@ -115,17 +115,17 @@ export default class MemberCreateStep2Component extends Component {
                 </div>
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Would you like to add a NEW area coordinator?</h5>
-                    <a href="/members/add/step-1">
+            		<h5>Would you like to add a NEW member?</h5>
+                    <Link to="/members/add/step-1">
             		    <button type="button" class="btn btn-lg btn-dark m-3">
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
             		    </button>
-                    </a>
-            		<a href="/area-coordinators/add/step-1" target="_blank">
+                    </Link>
+            		<Link to="/members/add/step-3">
             		    <button type="button" class="btn btn-lg btn-success m-3">
-            		       <i class="fas fa-external-link-alt"></i>&nbsp;Yes - add a new area coordinator
+            		       <i class="fas fa-user"></i>&nbsp;Yes - add a new member
             		    </button>
-                    </a>
+                    </Link>
                 </div>
 
 
