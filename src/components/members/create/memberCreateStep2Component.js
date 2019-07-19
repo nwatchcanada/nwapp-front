@@ -58,7 +58,7 @@ export default class MemberCreateStep2Component extends Component {
                 </div>
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Please select the area coordinator to promote.</h5>
+            		<h5>Please select the member.</h5>
                 </div>
 
                 <div className="card-group row">

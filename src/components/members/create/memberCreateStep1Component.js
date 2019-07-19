@@ -63,7 +63,7 @@ export default class MemberCreateStep1Component extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h3>Search for existing area coordinator:</h3>
+                            <h3>Search for existing member:</h3>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
