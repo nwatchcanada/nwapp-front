@@ -146,9 +146,9 @@ export function validateInput(data) {
 
 
 /**
- *  Validator will validate step 2 in the member creation form.
+ *  Validator will validate step 4 in the member creation form.
  */
-export function validateStep2RezOrComCreateInput(data) {
+export function validateStep4RezOrComCreateInput(data) {
     let errors = {};
 
     if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
@@ -172,9 +172,9 @@ export function validateStep2RezOrComCreateInput(data) {
 
 
 /**
- *  Validator will validate step 2 in the member creation form.
+ *  Validator will validate step 4 in the member creation form.
  */
-export function validateStep2BizCreateInput(data) {
+export function validateStep4BizCreateInput(data) {
     let errors = {};
 
     if (data.companyName === undefined || data.companyName === null || validator.isEmpty(data.companyName) || data.companyName === "") {
@@ -201,9 +201,9 @@ export function validateStep2BizCreateInput(data) {
 
 
 /**
- *  Validator will validate step 3 in the member creation form.
+ *  Validator will validate step 5 in the member creation form.
  */
-export function validateStep3CreateInput(data) {
+export function validateStep5CreateInput(data) {
     let errors = {};
 
     if (data.streetNumber === undefined || data.streetNumber === null || validator.isEmpty(data.streetNumber) || data.streetNumber === "") {
@@ -230,9 +230,9 @@ export function validateStep3CreateInput(data) {
 
 
 /**
- *  Validator will validate step 4 in the member creation form.
+ *  Validator will validate step 6 in the member creation form.
  */
-export function validateStep4CreateInput(data) {
+export function validateStep6CreateInput(data) {
     let errors = {};
 
     // Do nothing.
@@ -245,9 +245,9 @@ export function validateStep4CreateInput(data) {
 
 
 /**
- *  Validator will validate step 5 in the member creation form.
+ *  Validator will validate step 7 in the member creation form.
  */
-export function validateStep5CreateInput(data) {
+export function validateStep7CreateInput(data) {
     let errors = {};
 
     if (data.birthYear === undefined || data.birthYear === null || data.birthYear === "") {

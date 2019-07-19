@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep2RezOrComComponent from "../../../components/members/create/memberCreateStep2RezOrComComponent";
-import { validateStep2RezOrComCreateInput } from "../../../validators/memberValidator";
-import { RESIDENCE_TYPE_OF } from '../../../constants/api';
+import MemberCreateStep4BizComponent from "../../../components/members/create/memberCreateStep4BizComponent";
+import { validateStep4BizCreateInput } from "../../../validators/memberValidator";
+import { BUSINESS_TYPE_OF } from '../../../constants/api';
 
 
-class MemberCreateStep2RezOrComContainer extends Component {
+class MemberCreateStep4BizContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,11 +16,12 @@ class MemberCreateStep2RezOrComContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: localStorage.getItem("nwapp-create-member-rez-or-com-firstName"),
-            lastName: localStorage.getItem("nwapp-create-member-rez-or-com-lastName"),
-            primaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-primaryPhone"),
-            secondaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-secondaryPhone"),
-            email: localStorage.getItem("nwapp-create-member-rez-or-com-email"),
+            companyName: localStorage.getItem("nwapp-create-member-biz-companyName"),
+            contactFirstName: localStorage.getItem("nwapp-create-member-biz-contactFirstName"),
+            contactLastName: localStorage.getItem("nwapp-create-member-biz-contactLastName"),
+            primaryPhone: localStorage.getItem("nwapp-create-member-biz-primaryPhone"),
+            secondaryPhone: localStorage.getItem("nwapp-create-member-biz-secondaryPhone"),
+            email: localStorage.getItem("nwapp-create-member-biz-email"),
             errors: {},
             isLoading: false
         }
@@ -41,9 +42,8 @@ class MemberCreateStep2RezOrComContainer extends Component {
 
         // DEVELOPERS NOTE:
         // Since we are in this page, we need to assign the user to be
-        // a residential type user. If the user is community cares type
-        // then this variable will be set then in page 4.
-        localStorage.setItem("nwapp-create-member-typeOf", RESIDENCE_TYPE_OF);
+        // a business type user.
+        localStorage.setItem("nwapp-create-member-typeOf", BUSINESS_TYPE_OF);
     }
 
     componentWillUnmount() {
@@ -85,7 +85,7 @@ class MemberCreateStep2RezOrComContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        const key = "nwapp-create-member-rez-or-com-"+[e.target.name];
+        const key = "nwapp-create-member-biz-"+[e.target.name];
         localStorage.setItem(key, e.target.value);
     }
 
@@ -94,7 +94,7 @@ class MemberCreateStep2RezOrComContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateStep2RezOrComCreateInput(this.state);
+        const { errors, isValid } = validateStep4BizCreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -113,11 +113,12 @@ class MemberCreateStep2RezOrComContainer extends Component {
      */
 
     render() {
-        const { firstName, lastName, primaryPhone, secondaryPhone, email, errors } = this.state;
+        const { companyName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors } = this.state;
         return (
-            <MemberCreateStep2RezOrComComponent
-                firstName={firstName}
-                lastName={lastName}
+            <MemberCreateStep4BizComponent
+                companyName={companyName}
+                contactFirstName={contactFirstName}
+                contactLastName={contactLastName}
                 primaryPhone={primaryPhone}
                 secondaryPhone={secondaryPhone}
                 email={email}
@@ -143,4 +144,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep2RezOrComContainer);
+)(MemberCreateStep4BizContainer);

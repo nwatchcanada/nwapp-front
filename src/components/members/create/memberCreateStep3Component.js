@@ -73,7 +73,7 @@ export default class MemberCreateStep3Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Residential / Community Cares</h3>
                                 <p className="card-text">Add a residential or community cares member</p>
-                                <Link to="/members/add/step-2-rez-or-cc" className="btn btn-success btn-lg">
+                                <Link to="/members/add/step-4-rez-or-cc" className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>
@@ -87,7 +87,7 @@ export default class MemberCreateStep3Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Business</h3>
                                 <p className="card-text">Add a business member</p>
-                                <Link to="/members/add/step-2-biz" className="btn btn-success btn-lg">
+                                <Link to="/members/add/step-4-biz" className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>

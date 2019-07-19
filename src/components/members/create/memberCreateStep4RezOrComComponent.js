@@ -8,9 +8,9 @@ import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 
 
-class MemberCreateStep2BizComponent extends Component {
+class MemberCreateStep4RezOrComComponent extends Component {
     render() {
-        const { companyName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick } = this.props;
+        const { firstName, lastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -35,25 +35,35 @@ class MemberCreateStep2BizComponent extends Component {
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
                             <Link to="/members/add/step-1">
-                                <span className="num">1.</span><span className="">Type</span>
+                                <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
-                        <div id="step-2" className="st-grey active">
-                            <strong>
-                                <span className="num">2.</span><span className="">Contact</span>
-                            </strong>
+                        <div id="step-2" className="st-grey">
+                            <Link to="/members/add/step-2">
+                                <span className="num">2.</span><span className="">Results</span>
+                            </Link>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Address</span>
+                            <Link to="/members/add/step-3">
+                                <span className="num">3.</span><span className="">Type</span>
+                            </Link>
                         </div>
-                        <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Watch</span>
+                        <div id="step-4" className="st-grey active">
+                            <strong>
+                                <span className="num">4.</span><span className="">Contact</span>
+                            </strong>
                         </div>
-                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Metrics</span>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Address</span>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Review</span>
+                            <span className="num">6.</span><span className="">Watch</span>
+                        </div>
+                         <div id="step-7" className="st-grey">
+                            <span className="num">7.</span><span className="">Metrics</span>
+                        </div>
+                        <div id="step-8" className="st-grey">
+                            <span className="num">8.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>
@@ -62,7 +72,7 @@ class MemberCreateStep2BizComponent extends Component {
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
                             <h2>
-                               <i className="fas fa-id-card"></i>&nbsp;Contact
+                                <i className="fas fa-id-card"></i>&nbsp;Contact
                             </h2>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
@@ -71,33 +81,22 @@ class MemberCreateStep2BizComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.companyName}
-                                label="Company Name (*)"
+                                error={errors.firstName}
+                                label="First Name (*)"
                                 onChange={onTextChange}
-                                value={companyName}
-                                name="companyName"
+                                value={firstName}
+                                name="firstName"
                                 type="text"
                             />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.contactFirstName}
-                                label="Contact First Name (*)"
+                                error={errors.lastName}
+                                label="Last Name (*)"
                                 onChange={onTextChange}
-                                value={contactFirstName}
-                                name="contactFirstName"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.contactLastName}
-                                label="Contact Last Name (*)"
-                                onChange={onTextChange}
-                                value={contactLastName}
-                                name="contactLastName"
+                                value={lastName}
+                                name="lastName"
                                 type="text"
                             />
 
@@ -140,8 +139,8 @@ class MemberCreateStep2BizComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/members/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                <Link to="/members/add/step-3" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
 
@@ -154,4 +153,4 @@ class MemberCreateStep2BizComponent extends Component {
     }
 }
 
-export default MemberCreateStep2BizComponent;
+export default MemberCreateStep4RezOrComComponent;
