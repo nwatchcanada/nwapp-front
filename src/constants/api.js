@@ -11,6 +11,7 @@ export const NWAPP_LOGIN_API_ENDPOINT = '/v1/login';
 export const NWAPP_REFRESH_TOKEN_API_ENDPOINT = '/v1/refresh-token';
 export const NWAPP_PROFILE_API_ENDPOINT = '/v1/profile';
 export const NWAPP_TENANT_LIST_API_ENDPOINT = '/v1/tenants';
+export const NWAPP_DASHBOARD_API_ENDPOINT = '/v1/dashboard';
 
 
 // OLD - PLEASE DO SOMETHING WITH THESE.
@@ -23,7 +24,7 @@ export const NWAPP_PASSWORD_RESET_API_URL = process.env.REACT_APP_API_HOST+'/api
 export const NWAPP_ONBOARDING_API_URL = process.env.REACT_APP_API_HOST+'/api/onboarding';
 export const NWAPP_PURCHASE_DEVICE_API_URL = process.env.REACT_APP_API_HOST+'/api/purchase-device';
 export const NWAPP_PROFILE_API_URL = process.env.REACT_APP_API_HOST+'/api/profile';
-export const NWAPP_DASHBOARD_API_ENDPOINT = '/dashboard';
+
 
 
 /**
