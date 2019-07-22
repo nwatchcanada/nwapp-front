@@ -3,17 +3,17 @@ import store from '../store';
 import { camelizeKeys } from 'humps';
 import msgpack from 'msgpack-lite';
 
-import { DASHBOARD_REQUEST, DASHBOARD_FAILURE, DASHBOARD_SUCCESS } from '../constants/actionTypes';
-// import { NWAPP_DASHBOARD_API_URL } from '../constants/api';
+import { TENANT_LIST_REQUEST, TENANT_LIST_FAILURE, TENANT_LIST_SUCCESS } from '../constants/actionTypes';
+// import { NWAPP_TENANT_LIST_API_URL } from '../constants/api';
 import {
     getAccessTokenFromLocalStorage, attachAxiosRefreshTokenHandler
 } from '../helpers/jwtUtility';
 import { getAPIBaseURL } from '../helpers/urlUtility';
-import { NWAPP_DASHBOARD_API_ENDPOINT } from "../constants/api"
+import { NWAPP_TENANT_LIST_API_ENDPOINT } from "../constants/api"
 
 
-export const setDashboardRequest = () => ({
-    type: DASHBOARD_REQUEST,
+export const setTenantListRequest = () => ({
+    type: TENANT_LIST_REQUEST,
     payload: {
         isAPIRequestRunning: true,
         errors: {}
@@ -21,27 +21,27 @@ export const setDashboardRequest = () => ({
 });
 
 
-export const setDashboardFailure = (info) => ({
-    type: DASHBOARD_FAILURE,
+export const setTenantListFailure = (info) => ({
+    type: TENANT_LIST_FAILURE,
     payload: info,
 });
 
 
-export const setDashboardSuccess = (info) => ({
-    type: DASHBOARD_SUCCESS,
+export const setTenantListSuccess = (info) => ({
+    type: TENANT_LIST_SUCCESS,
     payload: info,
 });
 
 
 /**
- *  Function will pull the ``dashboard`` API endpoint and override our
- *  global application state for the 'dashboard'.
+ *  Function will pull the ``tenantList`` API endpoint and override our
+ *  global application state for the 'tenantList'.
  */
-export function pullDashboard(schema, successCallback=null, failedCallback=null) {
+export function pullTenantList(schema, successCallback=null, failedCallback=null) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setDashboardRequest()
+            setTenantListRequest()
         );
 
         // IMPORTANT: THIS IS THE ONLY WAY WE CAN GET THE ACCESS TOKEN.
@@ -62,26 +62,26 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
         attachAxiosRefreshTokenHandler(customAxios);
 
         // Make the call to the web-service.
-        customAxios.get(NWAPP_DASHBOARD_API_ENDPOINT).then( (successResponse) => { // SUCCESS
+        customAxios.get(NWAPP_TENANT_LIST_API_ENDPOINT).then( (successResponse) => { // SUCCESS
             const responseData = successResponse.data
 
-            let dashboard = camelizeKeys(responseData);
+            let tenantList = camelizeKeys(responseData);
 
             // Extra.
-            dashboard['isAPIRequestRunning'] = false;
-            dashboard['errors'] = {};
+            tenantList['isAPIRequestRunning'] = false;
+            tenantList['errors'] = {};
 
             // Update the global state of the application to store our
-            // user dashboard for the application.
+            // user tenantList for the application.
             store.dispatch(
-                setDashboardSuccess(dashboard)
+                setTenantListSuccess(tenantList)
             );
 
             // DEVELOPERS NOTE:
             // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
             // OBJECT WE GOT FROM THE API.
             if (successCallback) {
-                successCallback(dashboard);
+                successCallback(tenantList);
             }
 
         }).catch( (exception) => {
@@ -92,7 +92,7 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setDashboardFailure({
+                    setTenantListFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
