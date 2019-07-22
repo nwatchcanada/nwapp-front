@@ -14,7 +14,11 @@ import { NWAPP_LOGIN_API_URL } from "../constants/api"
  *  Saves our access token to persistent storage.
  */
 export function setAccessTokenInLocalStorage(accessToken) {
-    localStorage.setItem("NWAPP_TOKEN_UTILITY_ACCESS_TOKEN_DATA", JSON.stringify(accessToken));
+    if (accessToken != undefined && accessToken != null) {
+        localStorage.setItem("NWAPP_TOKEN_UTILITY_ACCESS_TOKEN_DATA", accessToken);
+    } else {
+        console.error("Setting undefined access token");
+    }
 }
 
 
@@ -22,9 +26,12 @@ export function setAccessTokenInLocalStorage(accessToken) {
  *  Saves our refresh token to our persistent storage.
  */
 export function setRefreshTokenInLocalStorage(accessToken) {
-    localStorage.setItem("NWAPP_TOKEN_UTILITY_REFRESH_TOKEN_DATA", JSON.stringify(accessToken));
+    if (accessToken != undefined && accessToken != null)  {
+        localStorage.setItem("NWAPP_TOKEN_UTILITY_REFRESH_TOKEN_DATA", accessToken);
+    } else {
+        console.error("Setting undefined resfresh token");
+    }
 }
-
 
 /**
  *  Gets our access token from persistent storage.
@@ -40,6 +47,8 @@ export function getAccessTokenFromLocalStorage() {
 export function getRefreshTokenFromLocalStorage() {
     return localStorage.getItem("NWAPP_TOKEN_UTILITY_REFRESH_TOKEN_DATA");
 }
+
+
 
 
 /**
@@ -66,7 +75,7 @@ export async function fetchTokenCredentials(email, password) {
 
         // Save our tokens.
         setAccessTokenInLocalStorage(accessToken);
-        setRefreshTokenInLocalStorage(accessToken);
+        setRefreshTokenInLocalStorage(refreshToken);
 
         // Return our result.
         return {
@@ -83,7 +92,7 @@ export async function fetchTokenCredentials(email, password) {
  *  Function makes a call to our login API endpoint.
  */
 function atteptRefresh(refreshTokenString) {
-    return axios.post(process.env.REACT_APP_API_HOST+'/api/profile-with-token-refresh', {
+    return axios.post(process.env.REACT_APP_API_HOST+'/api/v1/refresh-token', {
         'refresh_token': refreshTokenString,
     })
 }
@@ -102,7 +111,7 @@ export async function fetchRefreshCredentials(refreshTokenString) {
 
         // Save our tokens.
         setAccessTokenInLocalStorage(accessToken);
-        setRefreshTokenInLocalStorage(accessToken);
+        setRefreshTokenInLocalStorage(refreshToken);
 
         // Return our result.
         return {
@@ -181,8 +190,7 @@ async function resetTokenAndReattemptRequest(error) {
 
         if (!isAlreadyFetchingAccessToken) {
             isAlreadyFetchingAccessToken = true;
-            const refreshToken = getRefreshTokenFromLocalStorage();
-            const refreshTokenString = refreshToken.token;
+            const refreshTokenString = getRefreshTokenFromLocalStorage();
 
             // Attempt to get our credentials from our server.
             const credentials = await fetchRefreshCredentials(refreshTokenString)
@@ -193,7 +201,7 @@ async function resetTokenAndReattemptRequest(error) {
                 return Promise.reject(error);
             }
 
-            const accessTokenString = credentials.accessToken.token;
+            const accessTokenString = credentials.accessToken;
 
             isAlreadyFetchingAccessToken = false;
             onAccessTokenFetched(accessTokenString);

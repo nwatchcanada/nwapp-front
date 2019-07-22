@@ -5,7 +5,7 @@ import msgpack from 'msgpack-lite';
 
 import { LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../constants/actionTypes"
 import { NWAPP_LOGIN_API_ENDPOINT } from "../constants/api"
-import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../helpers/tokenUtility';
+import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../helpers/jwtUtility';
 import { getAPIBaseURL } from '../helpers/urlUtility';
 
 
@@ -42,10 +42,10 @@ export function postLogin(email, password, successCallback=null, failedCallback=
         const customAxios = axios.create({
             baseURL: getAPIBaseURL(),
             headers: {
-                'Content-Type': 'application/msgpack;',
-                'Accept': 'application/msgpack',
+                'Content-Type': 'application/json;',
+                'Accept': 'application/json',
             },
-            responseType: 'arraybuffer'
+            // responseType: 'arraybuffer'
         })
 
         // Encode from JS Object to MessagePack (Buffer)
@@ -54,12 +54,21 @@ export function postLogin(email, password, successCallback=null, failedCallback=
             'password': password,
         });
 
-        customAxios.post(NWAPP_LOGIN_API_ENDPOINT, buffer).then( (successResponse) => {
+        var data = {
+            'email': email,
+            'password': password,
+        };
+
+        customAxios.post(NWAPP_LOGIN_API_ENDPOINT, data).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
-            const responseData = msgpack.decode(Buffer(successResponse.data));
+            // const responseData = msgpack.decode(Buffer(successResponse.data));
+            const responseData = successResponse.data;
 
             // Snake-case from API to camel-case for React.
             let profile = camelizeKeys(responseData);
+
+            // For debugging purposes only.
+            console.log(profile);
 
             // Extra.
             profile['isAPIRequestRunning'] = false;
@@ -85,10 +94,11 @@ export function postLogin(email, password, successCallback=null, failedCallback=
 
         }).catch( (exception) => {
             if (exception.response) {
-                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
+                // const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
                 // Decode our MessagePack (Buffer) into JS Object.
-                const responseData = msgpack.decode(Buffer(responseBinaryData));
+                // const responseData = msgpack.decode(Buffer(responseBinaryData));
+                const responseData = exception.response.data
 
                 let errors = camelizeKeys(responseData);
 

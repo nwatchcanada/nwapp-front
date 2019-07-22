@@ -13,7 +13,7 @@ import {
     setAccessTokenInLocalStorage,
     setRefreshTokenInLocalStorage,
     attachAxiosRefreshTokenHandler
-} from '../helpers/tokenUtility';
+} from '../helpers/jwtUtility';
 import { getAPIBaseURL } from '../helpers/urlUtility';
 
 
@@ -53,11 +53,11 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         const customAxios = axios.create({
             baseURL: getAPIBaseURL(),
             headers: {
-                'Authorization': "Bearer " + accessToken.token,
-                'Content-Type': 'application/msgpack;',
-                'Accept': 'application/msgpack',
+                'Authorization': "Bearer " + accessToken,
+                'Content-Type': 'application/json;',
+                'Accept': 'application/json',
             },
-            responseType: 'arraybuffer'
+            // responseType: 'arraybuffer'
         })
 
         // Attach our Axios "refesh token" interceptor.
@@ -66,7 +66,9 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         // Run our Axios post.
         customAxios.get(NWAPP_PROFILE_API_ENDPOINT).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
-            const responseData = msgpack.decode(Buffer(successResponse.data));
+            // const responseData = msgpack.decode(Buffer(successResponse.data));
+
+            const responseData = successResponse.data;
 
             let profile = camelizeKeys(responseData);
 
@@ -82,11 +84,6 @@ export function pullProfile(successCallback=null, failedCallback=null) {
                 setProfileSuccess(profile)
             );
 
-            // SAVE OUR CREDENTIALS IN PERSISTENT STORAGE. THIS IS AN IMPORTANT
-            // STEP BECAUSE OUR TOKEN UTILITY HELPER NEEDS THIS.
-            setAccessTokenInLocalStorage(profile.accessToken);
-            setRefreshTokenInLocalStorage(profile.refreshToken);
-
             // DEVELOPERS NOTE:
             // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
             // OBJECT WE GOT FROM THE API.
@@ -96,10 +93,12 @@ export function pullProfile(successCallback=null, failedCallback=null) {
 
         }).catch( (exception) => { // ERROR
             if (exception.response) {
-                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
+                // const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
                 // Decode our MessagePack (Buffer) into JS Object.
-                const responseData = msgpack.decode(Buffer(responseBinaryData));
+                // const responseData = msgpack.decode(Buffer(responseBinaryData));
+
+                const responseData = exception.response.data
 
                 let errors = camelizeKeys(responseData);
 
@@ -140,15 +139,15 @@ export function postProfile(data, successCallback, failedCallback) {
         const customAxios = axios.create({
             baseURL: getAPIBaseURL(),
             headers: {
-                'Authorization': "Bearer " + accessToken.token,
+                'Authorization': "Bearer " + accessToken,
                 'Content-Type': 'application/msgpack;',
                 'Accept': 'application/msgpack',
             },
             responseType: 'arraybuffer'
         })
 
-        // Attach our Axios "refesh token" interceptor.
-        attachAxiosRefreshTokenHandler(customAxios);
+        // // Attach our Axios "refesh token" interceptor.
+        // attachAxiosRefreshTokenHandler(customAxios);
 
         // The following code will convert the `camelized` data into `snake case`
         // data so our API endpoint will be able to read it.

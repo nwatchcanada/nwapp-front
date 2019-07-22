@@ -6,8 +6,8 @@ export const APP_STATE = 'APP_STATE';
 /**
  *  The API web-services endpoints.
  */
-export const NWAPP_LOGIN_API_URL = process.env.REACT_APP_API_HOST+'/api/login';
-export const NWAPP_LOGIN_API_ENDPOINT = '/login';
+export const NWAPP_LOGIN_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/login';
+export const NWAPP_LOGIN_API_ENDPOINT = '/v1/login';
 export const NWAPP_LOGOUT_API_ENDPOINT ='/logout';
 export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/register';
 export const NWAPP_ACTIVATE_API_URL = process.env.REACT_APP_API_HOST+'/api/activate';
@@ -17,7 +17,7 @@ export const NWAPP_PASSWORD_RESET_API_URL = process.env.REACT_APP_API_HOST+'/api
 export const NWAPP_ONBOARDING_API_URL = process.env.REACT_APP_API_HOST+'/api/onboarding';
 export const NWAPP_PURCHASE_DEVICE_API_URL = process.env.REACT_APP_API_HOST+'/api/purchase-device';
 export const NWAPP_PROFILE_API_URL = process.env.REACT_APP_API_HOST+'/api/profile';
-export const NWAPP_PROFILE_API_ENDPOINT = '/profile';
+export const NWAPP_PROFILE_API_ENDPOINT = '/v1/profile';
 export const NWAPP_DASHBOARD_API_ENDPOINT = '/dashboard';
 
 

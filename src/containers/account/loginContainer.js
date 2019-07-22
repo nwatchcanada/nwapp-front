@@ -70,14 +70,14 @@ class LoginContainer extends Component {
      */
     onSuccessfulSubmissionCallback(profile) {
         this.setState({ errors: {}, });
-        const { schema, groupMembershipId } = profile;
-        if (groupMembershipId === EXECUTIVE_GROUP_ID) {
+        const { tenantSchema, groupId } = profile;
+        if (groupId === EXECUTIVE_GROUP_ID) {
             const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + process.env.REACT_APP_WWW_DOMAIN + "/organizations";
             window.location = location; // Do not use `react-router-dom` library.
         } else {
             const accessToken = getAccessTokenFromLocalStorage();
             const refreshToken = getRefreshTokenFromLocalStorage();
-            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
+            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + tenantSchema + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
             window.location = location; // Do not use `react-router-dom` library.
         }
     }
