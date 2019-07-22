@@ -206,7 +206,7 @@ class AppContainer extends React.Component {
                                 <Route path="/help" exact component={HelpContainer} />
                                 <Route path="/organizations" exact component={requiresAuth(SharedOrganizationListContainer)} />
                                 <Route path="/organization/add" exact component={requiresAuth(SharedOrganizationCreateContainer)} />
-                                <Route path="/dashboard-redirect/:accessToken/:expires/:refreshToken" exact component={requiresAuth(TenantDashboardRedirectContainer)} />
+                                <Route path="/dashboard-redirect/:accessToken/:refreshToken" exact component={requiresAuth(TenantDashboardRedirectContainer)} />
                                 <Route path="/dashboard" exact component={requiresAuth(DashboardContainer)} />
                                 <Route path="/settings/districts" exact component={requiresAuth(DistrictsListContainer)} />
                                 <Route path="/settings/district/step-1-create" exact component={requiresAuth(DistrictCreateStepContainer)} />

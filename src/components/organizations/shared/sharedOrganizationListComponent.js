@@ -7,18 +7,19 @@ import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from 
 
 class TableRow extends Component {
     render() {
-        const { schema, name, absoluteUrl } = this.props.datum;
+        const { schema, name } = this.props.row;
         const accessToken = getAccessTokenFromLocalStorage();
         const refreshToken = getRefreshTokenFromLocalStorage();
 
         // Generate our redirect address.
-        const modifiedAbsoluteUrl = absoluteUrl +"-redirect/"+accessToken+"/"+refreshToken;
+        const absoluteUrl =  process.env.REACT_APP_WWW_PROTOCOL + "://" + schema + "." +process.env.REACT_APP_WWW_DOMAIN+"/dashboard"+"-redirect/"+accessToken+"/"+refreshToken;
+        
         return (
             <tr>
                 <td>{schema}</td>
                 <td>{name}</td>
                 <td>
-                    <a href={modifiedAbsoluteUrl}>
+                    <a href={absoluteUrl}>
                         View&nbsp;<i className="fas fa-chevron-right"></i>
                     </a>
                 </td>
@@ -30,7 +31,7 @@ class TableRow extends Component {
 
 class SharedOrganizationListComponent extends Component {
     render() {
-        const { tableData, flashMessage } = this.props;
+        const { tenantList, flashMessage } = this.props;
         return (
             <div className="container-fluid">
 
@@ -93,8 +94,8 @@ class SharedOrganizationListComponent extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {tableData && tableData.map(
-                                (tableDatum, i) => <TableRow datum={tableDatum} key={i} />)
+                            {tenantList && tenantList.results.map(
+                                (row, i) => <TableRow row={row} key={i} />)
                             }
                             </tbody>
                         </table>

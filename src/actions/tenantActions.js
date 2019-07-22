@@ -47,6 +47,8 @@ export function pullTenantList(successCallback=null, failedCallback=null) {
         // IMPORTANT: THIS IS THE ONLY WAY WE CAN GET THE ACCESS TOKEN.
         const accessToken = getAccessTokenFromLocalStorage();
 
+        const aURL = NWAPP_TENANT_LIST_API_ENDPOINT+"?page=1"
+
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
@@ -62,7 +64,7 @@ export function pullTenantList(successCallback=null, failedCallback=null) {
         attachAxiosRefreshTokenHandler(customAxios);
 
         // Make the call to the web-service.
-        customAxios.get(NWAPP_TENANT_LIST_API_ENDPOINT).then( (successResponse) => { // SUCCESS
+        customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             const responseData = successResponse.data
 
             let tenantList = camelizeKeys(responseData);
