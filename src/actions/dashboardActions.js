@@ -7,7 +7,7 @@ import { DASHBOARD_REQUEST, DASHBOARD_FAILURE, DASHBOARD_SUCCESS } from '../cons
 // import { NWAPP_DASHBOARD_API_URL } from '../constants/api';
 import {
     getAccessTokenFromLocalStorage, attachAxiosRefreshTokenHandler
-} from '../helpers/tokenUtility';
+} from '../helpers/jwtUtility';
 import { getAPIBaseURL } from '../helpers/urlUtility';
 import { NWAPP_DASHBOARD_API_ENDPOINT } from "../constants/api"
 
@@ -52,7 +52,7 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
         const customAxios = axios.create({
             baseURL: getAPIBaseURL(),
             headers: {
-                'Authorization': "Bearer " + accessToken.token,
+                'Authorization': "Bearer " + accessToken,
                 'Content-Type': 'application/msgpack;',
                 'Accept': 'application/msgpack',
             },

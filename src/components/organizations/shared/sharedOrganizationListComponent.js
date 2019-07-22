@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { FlashMessageComponent } from "../../flashMessageComponent";
-import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../../helpers/tokenUtility';
+import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../../helpers/jwtUtility';
 
 
 class TableRow extends Component {
@@ -12,7 +12,7 @@ class TableRow extends Component {
         const refreshToken = getRefreshTokenFromLocalStorage();
 
         // Generate our redirect address.
-        const modifiedAbsoluteUrl = absoluteUrl +"-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
+        const modifiedAbsoluteUrl = absoluteUrl +"-redirect/"+accessToken+"/"+refreshToken;
         return (
             <tr>
                 <td>{schema}</td>

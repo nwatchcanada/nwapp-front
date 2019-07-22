@@ -7,7 +7,7 @@ import LoginComponent from '../../components/account/loginComponent';
 import validateInput from "../../validators/loginValidator";
 import { postLogin } from "../../actions/loginAction";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
-import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../helpers/tokenUtility';
+import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../helpers/jwtUtility';
 
 
 class LoginContainer extends Component {
@@ -77,7 +77,7 @@ class LoginContainer extends Component {
         } else {
             const accessToken = getAccessTokenFromLocalStorage();
             const refreshToken = getRefreshTokenFromLocalStorage();
-            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + tenantSchema + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken.token+"/"+accessToken.expires+"/"+refreshToken.token;
+            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + tenantSchema + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken+"/"+refreshToken;
             window.location = location; // Do not use `react-router-dom` library.
         }
     }

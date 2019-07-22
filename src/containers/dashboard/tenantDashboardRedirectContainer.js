@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { pullProfile } from "../../actions/profileAction";
 import TenantRedirectComponent from "../../components/dashboard/tenantRedirectComponent";
-import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../../helpers/tokenUtility';
+import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../../helpers/jwtUtility';
 
 
 class TenantDashboardRedirectContainer extends Component {
@@ -18,13 +18,12 @@ class TenantDashboardRedirectContainer extends Component {
         super(props);
 
         // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { accessToken, expires, refreshToken } = this.props.match.params;
+        // fetch the arguments as follows.
+        const { accessToken, refreshToken } = this.props.match.params;
 
         this.state = {
             referrer: '',
             accessTokenString: accessToken,
-            expires: parseInt(expires),
             refreshTokenString: refreshToken
         }
 
@@ -42,7 +41,7 @@ class TenantDashboardRedirectContainer extends Component {
 
         // Defensive code: If we don't have the details then don't run this
         // function in our code.
-        const { accessTokenString, expires, refreshTokenString } = this.state;
+        const { accessTokenString, refreshTokenString } = this.state;
         if (accessTokenString === undefined || accessTokenString === null) {
             alert("NULL TOKEN DETECTED.");
             return;
@@ -51,15 +50,10 @@ class TenantDashboardRedirectContainer extends Component {
         // IMPORTANT: WE ARE TAKING THE ACCESS TOKEN FOUND AS A URL ARGUMENT
         // AND INSERTING IT INTO OUR TOKEN-UTILITY LIBRARY SO ALL OUR API
         // NOW CAN USE IT AND WE HAVE ACCESS TO THE TENANTED API DATA.
-        setAccessTokenInLocalStorage({
-            'token': accessTokenString,
-            'expires': expires
-        });
+        setAccessTokenInLocalStorage(accessTokenString);
 
         // IMPORTANT: WE NEED TO SAVE THE REFRESH TOKEN AS WELL!
-        setRefreshTokenInLocalStorage({
-            'token': refreshTokenString
-        });
+        setRefreshTokenInLocalStorage(refreshTokenString);
 
         // IMPORTANT: NOW THAT WE HAVE ATTACHED OUR ACCESS TOKEN TO OUR LOCAL
         // STORAGE, WE CAN NOW MAKE API CALLS.
