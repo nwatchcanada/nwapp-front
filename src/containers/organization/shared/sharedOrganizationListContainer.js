@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import SharedOrganizationListComponent from "../../../components/organizations/shared/sharedOrganizationListComponent";
 import { pullProfile } from "../../../actions/profileAction";
+import { pullTenantList } from "../../../actions/tenantActions";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -12,6 +13,14 @@ class SharedOrganizationListContainer extends Component {
      *  Initializer & Utility
      *------------------------------------------------------------
      */
+    constructor(props) {
+        super(props);
+
+        this.state = {}
+
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
 
     /**
      *  Component Life-cycle Management
@@ -20,6 +29,7 @@ class SharedOrganizationListContainer extends Component {
 
     componentDidMount() {
         this.props.pullProfile();
+        this.props.pullTenantList(this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
         window.scrollTo(0, 0);  // Start the page at the top of the page.
     }
 
@@ -98,6 +108,9 @@ const mapDispatchToProps = dispatch => {
     return {
         pullProfile: (successCallback, failureCallback) => {
             dispatch(pullProfile(successCallback, failureCallback))
+        },
+        pullTenantList: (successCallback, failureCallback) => {
+            dispatch(pullTenantList(successCallback, failureCallback))
         },
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())

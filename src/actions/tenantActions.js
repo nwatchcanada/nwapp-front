@@ -37,7 +37,7 @@ export const setTenantListSuccess = (info) => ({
  *  Function will pull the ``tenantList`` API endpoint and override our
  *  global application state for the 'tenantList'.
  */
-export function pullTenantList(schema, successCallback=null, failedCallback=null) {
+export function pullTenantList(successCallback=null, failedCallback=null) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
