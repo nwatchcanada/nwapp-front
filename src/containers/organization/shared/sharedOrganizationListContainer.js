@@ -73,11 +73,11 @@ class SharedOrganizationListContainer extends Component {
         // const sampleData = [ //TODO: REPLACE WITH REAL CODE AS FOUND IN THE `LOGIN CONTAINER`.
         //     {
         //         "schema": "london",
-        //         "name": "City of London Neigbhourhood Watch",
+        //         "name": "City of London Neighbourhood Watch",
         //         "absoluteUrl": process.env.REACT_APP_WWW_PROTOCOL + "://london."+process.env.REACT_APP_WWW_DOMAIN+"/dashboard"
         //     },{
         //         "schema": "toronto",
-        //         "name": "City of Toronto Neigbhourhood Watch",
+        //         "name": "City of Toronto Neighbourhood Watch",
         //         "absoluteUrl": process.env.REACT_APP_WWW_PROTOCOL +"://toronto."+process.env.REACT_APP_WWW_DOMAIN+"/dashboard"
         //     }
         // ];
