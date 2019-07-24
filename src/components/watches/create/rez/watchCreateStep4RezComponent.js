@@ -43,9 +43,9 @@ export default class WatchCreateStep4RezComponent extends Component {
                                 <span className="num">3.</span><span className="">Street Membership</span>
                             </Link>
                         </div>
-                        <div id="step-3" className="st-grey active">
+                        <div id="step-4" className="st-grey active">
                             <strong>
-                                <span className="num">3.</span><span className="">Review</span>
+                                <span className="num">4.</span><span className="">Review</span>
                             </strong>
                         </div>
                         { /* <div id="step-4" className="st-grey">
