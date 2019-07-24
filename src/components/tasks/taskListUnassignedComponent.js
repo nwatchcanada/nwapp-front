@@ -1,86 +1,42 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import { FlashMessageComponent } from "../flashMessageComponent";
 
 
-/**
- *  Component is responsible for rendering a single column header and the
- *  following functionality:
- *
- *  1. Make headers clickable.
- *  2. If clicked for the first time then let the container know of the user
- *     click event and add an ascending sort icon to this header.
- *  3. If clicked again then let the container know of the click event and add
- *     a descending sort icon to this header.
- *  4. If clicked again then reset the table to no longer have sorting. Also
- *     let the container know of the click event.
- */
-class TableSortableCol extends Component {
-    render() {
-        const { onTableColumnClick, text, columnKey, selectedColumnKey, selectedColumnOrder } = this.props
 
-        if (selectedColumnKey === columnKey && selectedColumnOrder === "asc") {
-            return (
-                <th>
-                    <Link onClick={()=>{ onTableColumnClick(columnKey, "desc"); }}>
-                    {text}&nbsp;<i className="fas fa-sort-up"></i>
-                    </Link>
-                </th>
-            );
-        }
-        else if (selectedColumnKey === columnKey && selectedColumnOrder === "desc") {
-            return (
-                <th>
-                    <Link onClick={()=>{ onTableColumnClick(null, null); }}>
-                    {text}&nbsp;<i className="fas fa-sort-down"></i>
-                    </Link>
-                </th>
-            );
-
-        // CASE 3 OF 3:
-        // Column was never selected before.
-        } else {
-            return (
-                <th>
-                    <Link onClick={()=>{ onTableColumnClick(columnKey, "asc"); }}>
-                    {text}
-                    </Link>
-                </th>
-            );
-        }
-    };
+// It's a data format example.
+function priceFormatter(cell, row){
+  return '<i class="glyphicon glyphicon-usd"></i> ' + cell;
 }
 
-
-/**
- *  Component is responsible for rendering a single table row.
- */
-class TableRow extends Component {
-    render() {
-        const { slug, icon, firstName, lastName, phone, email, absoluteUrl } = this.props.datum;
-
-        return (
-            <tr slug={slug}>
-                <td><i className={`fas fa-${icon}`}></i></td>
-                <td>{firstName}</td>
-                <td>{lastName}</td>
-                <td>{phone}</td>
-                <td>{email}</td>
-                <td>
-                    <a href={absoluteUrl}>
-                        View&nbsp;<i className="fas fa-chevron-right"></i>
-                    </a>
-                </td>
-            </tr>
-        );
-    }
+function buttonFormatter(cell, row){
+    return (
+        <a href="">
+            View&nbsp;<i className="fas fa-chevron-right"></i>
+        </a>
+    )
+  // return '<BootstrapButton type="submit"></BootstrapButton>';
 }
-
 
 class TaskUnassignedListComponent extends Component {
     render() {
         const { selectedColumnKey, selectedColumnOrder, onTableColumnClick, tableData, flashMessage } = this.props;
+
+
+
+
+var products = [{
+      id: 1,
+      name: "Product1",
+      price: 120,
+  }, {
+      id: 2,
+      name: "Product2",
+      price: 80,
+  }];
+
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -143,49 +99,12 @@ class TaskUnassignedListComponent extends Component {
                         <h2>
                             <i className="fas fa-clock"></i>&nbsp;Unassigned List
                         </h2>
-                        <div className="table-responsive">
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <TableSortableCol
-                                            onTableColumnClick={onTableColumnClick}
-                                            selectedColumnKey={selectedColumnKey}
-                                            selectedColumnOrder={selectedColumnOrder}
-                                            text="First Name"
-                                            columnKey="first_name"
-                                        />
-                                        <TableSortableCol
-                                            onTableColumnClick={onTableColumnClick}
-                                            selectedColumnKey={selectedColumnKey}
-                                            selectedColumnOrder={selectedColumnOrder}
-                                            text="Last Name"
-                                            columnKey="last_name"
-                                        />
-                                        <TableSortableCol
-                                            onTableColumnClick={onTableColumnClick}
-                                            selectedColumnKey={selectedColumnKey}
-                                            selectedColumnOrder={selectedColumnOrder}
-                                            text="Phone"
-                                            columnKey="phone"
-                                        />
-                                        <TableSortableCol
-                                            onTableColumnClick={onTableColumnClick}
-                                            selectedColumnKey={selectedColumnKey}
-                                            selectedColumnOrder={selectedColumnOrder}
-                                            text="Email"
-                                            columnKey="email"
-                                        />
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {tableData && tableData.map(
-                                        (tableDatum, i) => <TableRow datum={tableDatum} key={i} />)
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                        <BootstrapTable data={products} striped={true} hover={true} bordered={false}>
+                            <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Product ID</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name" dataSort={true}>Product Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>Product Price</TableHeaderColumn>
+      <TableHeaderColumn dataField="button" dataFormat={buttonFormatter}>Buttons</TableHeaderColumn>
+  </BootstrapTable>,
 
                     </div>
                 </div>
