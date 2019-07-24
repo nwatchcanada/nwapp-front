@@ -29,8 +29,12 @@ class HelpComponent extends Component {
                                 <h3 class="card-title">Contact</h3>
                             </div>
                             <ul class="list-group list-group-flush text-left">
-                                <li class="list-group-item"><i class="fas fa-envelope"></i> support@workery.ca</li>
-                                <li class="list-group-item"><i class="fas fa-phone"></i> +1(519)438-1111</li>
+                                <li class="list-group-item">
+                                    <a href="mailto:info@nwlondon.ca"><i class="fas fa-envelope"></i> support@workery.ca</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="tel:5196614553"><i class="fas fa-phone"></i> +1(519)438-1111</a>
+                                </li>
                                 <li class="list-group-item"><i class="fas fa-map-marker-alt"></i> London, ON Canada</li>
                             </ul>
                         </div>
