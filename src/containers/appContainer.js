@@ -149,9 +149,7 @@ import StaffCreateStep2Container from "./staff/create/staffCreateStep2Container"
 import StaffFullRetrieveContainer from "./staff/retrieve/staffFullRetrieveContainer";
 import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContainer";
 
-import TaskListActiveContainer from "./tasks/taskListActiveContainer";
-import TaskListInactiveContainer from "./tasks/taskListInactiveContainer";
-import TaskListUnassignedContainer from "./tasks/taskListUnassignedContainer";
+import TaskListContainer from "./tasks/taskListContainer";
 import TaskSearchContainer from "./tasks/taskSearchContainer";
 import TaskSearchResultContainer from "./tasks/taskSearchResultContainer";
 import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
@@ -298,11 +296,11 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/:urlArgument/:slug" exact component={requiresAuth(StaffLiteRetrieveContainer)} />
                                 <Route path="/staff/:urlArgument/:slug/full" exact component={requiresAuth(StaffFullRetrieveContainer)} />
                                 <Route path="/staff/:urlArgument/:slug/update" exact component={requiresAuth(StaffUpdateContainer)} />
-                                <Route path="/tasks/unassigned" exact component={requiresAuth(TaskListUnassignedContainer)} />
-                                <Route path="/tasks/pending" exact component={requiresAuth(TaskListActiveContainer)} />
-                                <Route path="/tasks/closed" exact component={requiresAuth(TaskListInactiveContainer)} />
+
+                                <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
                                 <Route path="/tasks/:urlArgument/search" exact component={requiresAuth(TaskSearchContainer)} />
                                 <Route path="/tasks/:urlArgument/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
+
                                 <Route path="/tasks/:urlArgument/:slug" exact component={requiresAuth(TaskRetrieveContainer)} />
                                 <Route path="/tasks/:urlArgument/:slug/update" exact component={requiresAuth(TaskUpdateContainer)} />
                                 <Route path="/reports" exact component={requiresAuth(ReportListContainer)} />

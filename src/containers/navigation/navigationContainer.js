@@ -68,7 +68,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-tasks",
         icon: "tasks",
         title: "Tasks",
-        url: "/tasks/pending"
+        url: "/tasks"
     },{
         id: "full-financials",
         icon: "credit-card",
@@ -138,7 +138,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-tasks",
         icon: "tasks",
         title: "Tasks",
-        url: "/tasks/pending"
+        url: "/tasks"
     },{
         id: "full-reports",
         icon: "book",
@@ -349,7 +349,7 @@ class NavigationContainer extends React.Component {
                 <ul className="navbar-nav flex-row">
                     {isAuthenticated && isTenant &&
                         <li className="dropdown-list dropdown nav-item">
-                            <Link aria-haspopup="true" to="/tasks/pending" className="dropdown-toggle-nocaret nav-link" aria-expanded="false">
+                            <Link aria-haspopup="true" to="/tasks" className="dropdown-toggle-nocaret nav-link" aria-expanded="false">
                                 <i className="fa fa-bell"></i>
                                 <span className="badge badge-danger">11</span>
                             </Link>
