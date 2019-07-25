@@ -152,6 +152,7 @@ import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContai
 import TaskListContainer from "./tasks/taskListContainer";
 import AssignWatchAssociateTaskStep1Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Container";
 import AssignWatchAssociateTaskStep2Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Container";
+import AssignWatchAssociateTaskStep3Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep3Container";
 // import TaskSearchContainer from "./tasks/taskSearchContainer";
 // import TaskSearchResultContainer from "./tasks/taskSearchResultContainer";
 // import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
@@ -302,13 +303,8 @@ class AppContainer extends React.Component {
                                 <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
                                 <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
                                 <Route path="/task/1/:slug/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />
+                                <Route path="/task/1/:slug/step-3" exact component={requiresAuth(AssignWatchAssociateTaskStep3Container)} />
 
-                                {/*
-                                <Route path="/tasks/:urlArgument/search" exact component={requiresAuth(TaskSearchContainer)} />
-                                <Route path="/tasks/:urlArgument/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
-                                <Route path="/tasks/:urlArgument/:slug" exact component={requiresAuth(TaskRetrieveContainer)} />
-                                <Route path="/tasks/:urlArgument/:slug/update" exact component={requiresAuth(TaskUpdateContainer)} />
-                                */}
                                 <Route path="/reports" exact component={requiresAuth(ReportListContainer)} />
                                 <Route path="/settings" exact component={requiresAuth(SettingListContainer)} />
                                 <Route path="/watches" exact component={requiresAuth(WatchListContainer)} />

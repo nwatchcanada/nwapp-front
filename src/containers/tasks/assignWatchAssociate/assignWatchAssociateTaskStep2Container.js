@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AssignWatchAssociateTaskStep2Component from "../../../components/tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Component";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/taskValidator";
+import { validateTask1Step2Input } from "../../../validators/taskValidator";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
@@ -76,8 +75,7 @@ class TaskUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(task) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Task has been successfully updated.");
-        this.props.history.push("/tasks/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/task/1/"+this.state.slug+"/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -119,7 +117,7 @@ class TaskUpdateContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateTask1Step2Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -160,11 +158,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 

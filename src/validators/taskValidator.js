@@ -3,13 +3,13 @@ import isEmpty from 'lodash/isEmpty';
 
 
 /**
- *  Validator will validate the register form.
+ *  Validator will validate step 2 of `Assign Watch Associate` (#1) task.
  */
-export default function validateInput(data) {
+export function validateTask1Step2Input(data) {
     let errors = {};
 
-    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
-        errors.name = 'This field is required';
+    if (data.associate === undefined || data.associate === null || validator.isEmpty(data.associate) || data.associate === "") {
+        errors.associate = 'This field is required';
     }
 
     return {

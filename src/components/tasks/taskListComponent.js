@@ -46,7 +46,7 @@ class UnassignedListComponent extends Component {
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="Table is Empty"
+                        noDataIndication="There are no unassigned tasks at the moment"
                     />
 
                 </div>
@@ -94,7 +94,7 @@ class PendingListComponent extends Component {
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="Table is Empty"
+                        noDataIndication="There are no pending tasks at the moment"
                     />
 
                 </div>
@@ -144,7 +144,7 @@ class ClosedListComponent extends Component {
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="Table is Empty"
+                        noDataIndication="There are no closed tasks at the moment"
                     />
 
                 </div>

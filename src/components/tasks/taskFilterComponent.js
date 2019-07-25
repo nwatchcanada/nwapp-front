@@ -17,7 +17,7 @@ export default class TaskFilterComponent extends Component {
                         {isUnassigned
                             ?<div id="step-1" className="st-grey active">
                                 <strong>
-                                    <i className="fas fa-question-circle"></i>&nbsp;<span className="">Unassigned (1)</span>
+                                    <i className="fas fa-question-circle"></i>&nbsp;<span className="">Unassigned (3)</span>
                                 </strong>
                             </div>
                             :<div id="step-1" className="st-grey">
