@@ -14,9 +14,11 @@ class TaskListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: "pending"
+            filter: "unassigned",
+            tasks: [],
         }
         this.onFilterClick = this.onFilterClick.bind(this);
+        this.filterTasks = this.filterTasks.bind(this);
     }
 
     /**
@@ -26,6 +28,30 @@ class TaskListContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Load from API...
+        const tasks = [{
+            'slug': 'argyle-task-1',
+            'dueDate': "July 20, 2019",
+            'taskName': "Assign Associate to Watch",
+            "watchName": "Argyle",
+            "typeOf": "unassigned",
+        },{
+            'slug': 'byron-task-1',
+            'dueDate': "April 10, 2019",
+            'taskName': "Assign Area Coordinator to Watch",
+            "watchName": "Byron",
+            "typeOf": "unassigned",
+        },{
+            'slug': 'carling-task-1',
+            'dueDate': "January 2, 2019",
+            'taskName': "Assign Area Coordinator to Watch",
+            "watchName": "Carling",
+            "typeOf": "unassigned",
+        }];
+        this.setState({
+            tasks: tasks,
+        });
     }
 
     componentWillUnmount() {
@@ -65,6 +91,20 @@ class TaskListContainer extends Component {
         })
     }
 
+    filterTasks() {
+        let filteredTasks = [];
+        if (this.state.tasks === undefined || this.state.tasks === null) {
+            return [];
+        }
+        for (let i = 0; i < this.state.tasks.length; i++) {
+            let task = this.state.tasks[i];
+            if (task.typeOf === this.state.filter) {
+                filteredTasks.push(task);
+            }
+        }
+        return filteredTasks;
+    }
+
 
     /**
      *  Main render function
@@ -72,27 +112,12 @@ class TaskListContainer extends Component {
      */
 
     render() {
-        const tasks = [{
-            'slug': 'argyle-task-1',
-            'dueDate': "July 20, 2019",
-            'taskName': "Assign Associate to Watch",
-            "watchName": "Argyle"
-        },{
-            'slug': 'byron-task-1',
-            'dueDate': "April 10, 2019",
-            'taskName': "Assign Area Coordinator to Watch",
-            "watchName": "Byron"
-        },{
-            'slug': 'carling-task-1',
-            'dueDate': "January 2, 2019",
-            'taskName': "Assign Area Coordinator to Watch",
-            "watchName": "Carling"
-        }];
+
         return (
             <TaskListComponent
                 filter={this.state.filter}
                 onFilterClick={this.onFilterClick}
-                tasks={tasks}
+                tasks={this.filterTasks()}
                 flashMessage={this.props.flashMessage}
             />
         );
