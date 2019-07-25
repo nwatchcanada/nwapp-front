@@ -151,6 +151,7 @@ import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContai
 
 import TaskListContainer from "./tasks/taskListContainer";
 import AssignWatchAssociateTaskStep1Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Container";
+import AssignWatchAssociateTaskStep2Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Container";
 // import TaskSearchContainer from "./tasks/taskSearchContainer";
 // import TaskSearchResultContainer from "./tasks/taskSearchResultContainer";
 // import TaskRetrieveContainer from "./tasks/taskRetrieveContainer";
@@ -300,6 +301,7 @@ class AppContainer extends React.Component {
 
                                 <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
                                 <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
+                                <Route path="/task/1/:slug/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />
 
                                 {/*
                                 <Route path="/tasks/:urlArgument/search" exact component={requiresAuth(TaskSearchContainer)} />

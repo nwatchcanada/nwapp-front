@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import TaskUpdateComponent from "../../components/tasks/taskUpdateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import validateInput from "../../validators/taskValidator";
+import AssignWatchAssociateTaskStep2Component from "../../../components/tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Component";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import validateInput from "../../../validators/taskValidator";
 
 
 class TaskUpdateContainer extends Component {
@@ -112,7 +112,7 @@ class TaskUpdateContainer extends Component {
     render() {
         const { name, errors, urlArgument, slug, } = this.state;
         return (
-            <TaskUpdateComponent
+            <AssignWatchAssociateTaskStep2Component
                 urlArgument={urlArgument}
                 slug={slug}
                 name={name}

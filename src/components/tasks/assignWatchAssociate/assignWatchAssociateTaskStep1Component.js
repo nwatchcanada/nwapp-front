@@ -26,7 +26,24 @@ class AssignWatchAssociateTaskStep1Component extends Component {
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-thumbtack"></i>&nbsp;Argyle</h1>
-                <div className="row mt-4 pt-3 mb-4 pb-2">
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey active">
+                            <strong>
+                                <span className="num">1.</span><span className="">Info</span>
+                            </strong>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <span className="num">2.</span><span className="">Pick</span>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <span className="num">3.</span><span className="">Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="ow">
                     <div className="col-md-10 mx-auto p-2">
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
