@@ -155,8 +155,23 @@ class ClosedListComponent extends Component {
 
 
 function linkFormatter(cell, row){
+    // DEVELOPERS NOTE:
+    // WE ARE ASSIGNING AN ID TO THE URL. THIS IS WHERE WE NEED TO ADD MORE IDS
+    // IF HAVE MORE DIFFERENT TYPES.
+    let typeOfID = 0;
+    switch(row.typeOf) {
+        case "unassigned-watch-associate":
+            typeOfID = 1;
+            break;
+        case "unassigned-watch-area-coordinator":
+            typeOfID = 2;
+            break;
+        default:
+           typeOfID = 0;
+           break;
+    }
     return (
-        <Link to={`/tasks/${row.slug}`}>
+        <Link to={`/task/${typeOfID}/${row.slug}/step-1`}>
             View&nbsp;<i className="fas fa-chevron-right"></i>
         </Link>
     )
@@ -188,6 +203,7 @@ class TaskListComponent extends Component {
 
                 <h1><i className="fas fa-tasks"></i>&nbsp;Tasks</h1>
 
+{ /*
                 <div className="row">
                     <div className="col-md-12">
                         <section className="row text-center placeholders">
@@ -203,7 +219,7 @@ class TaskListComponent extends Component {
                         </section>
                     </div>
                 </div>
-
+*/}
                 <TaskFilterComponent filter={filter} onFilterClick={onFilterClick} />
 
                 {isUnassigned &&

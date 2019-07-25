@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TaskRetrieveComponent from "../../components/tasks/taskRetrieveComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import AssignWatchAssociateTaskStep1Component from "../../../components/tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Component";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class TaskRetrieveContainer extends Component {
+class AssignWatchAssociateTaskStep1Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,15 +16,13 @@ class TaskRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
         }
 
-        this.onBack = this.onBack.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -67,16 +65,10 @@ class TaskRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onBack(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/tasks/"+this.state.urlArgument);
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/tasks/"+this.state.urlArgument+"/"+this.state.slug+"/update");
+        this.props.history.push("/task/1/"+this.state.slug+"/step-2");
     }
 
     /**
@@ -92,7 +84,7 @@ class TaskRetrieveContainer extends Component {
             'absoluteUrl': '/task/argyle'
         };
         return (
-            <TaskRetrieveComponent
+            <AssignWatchAssociateTaskStep1Component
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 taskData={taskData}
@@ -123,4 +115,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TaskRetrieveContainer);
+)(AssignWatchAssociateTaskStep1Container);

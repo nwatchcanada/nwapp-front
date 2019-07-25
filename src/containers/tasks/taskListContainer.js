@@ -35,19 +35,22 @@ class TaskListContainer extends Component {
             'dueDate': "July 20, 2019",
             'taskName': "Assign Associate to Watch",
             "watchName": "Argyle",
-            "typeOf": "unassigned",
+            "category": "unassigned",
+            "typeOf": "unassigned-watch-associate",
         },{
             'slug': 'byron-task-1',
             'dueDate': "April 10, 2019",
             'taskName': "Assign Area Coordinator to Watch",
             "watchName": "Byron",
-            "typeOf": "unassigned",
+            "category": "unassigned",
+            "typeOf": "unassigned-watch-area-coordinator",
         },{
             'slug': 'carling-task-1',
             'dueDate': "January 2, 2019",
             'taskName': "Assign Area Coordinator to Watch",
             "watchName": "Carling",
-            "typeOf": "unassigned",
+            "category": "unassigned",
+            "typeOf": "unassigned-watch-associate",
         }];
         this.setState({
             tasks: tasks,
@@ -98,7 +101,7 @@ class TaskListContainer extends Component {
         }
         for (let i = 0; i < this.state.tasks.length; i++) {
             let task = this.state.tasks[i];
-            if (task.typeOf === this.state.filter) {
+            if (task.category === this.state.filter) {
                 filteredTasks.push(task);
             }
         }
