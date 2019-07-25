@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 
 class AssignWatchAssociateTaskStep1Component extends Component {
     render() {
-        const { urlArgument, slug, name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { associate, associateOptions, slug, errors, onSelectChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -37,7 +37,7 @@ class AssignWatchAssociateTaskStep1Component extends Component {
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Pick</span>
+                                <span className="num">2.</span><span className="">Selection</span>
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
@@ -49,28 +49,27 @@ class AssignWatchAssociateTaskStep1Component extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-vote-yea"></i>&nbsp;Form</h1>
+                            <h1><i className="fas fa-vote-yea"></i>&nbsp;Selection Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
-                                onChange={onTextChange}
-                                value={name}
-                                name="name"
-                                type="text"
+                            <BootstrapSingleSelect
+                                label="Associate (*)"
+                                name="associate"
+                                defaultOptionLabel="Please select the associate."
+                                options={associateOptions}
+                                value={associate}
+                                error={errors.associate}
+                                onSelectChange={onSelectChange}
                             />
 
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to={`/task/1/${slug}/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
 

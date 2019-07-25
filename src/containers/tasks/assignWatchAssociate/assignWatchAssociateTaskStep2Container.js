@@ -5,6 +5,10 @@ import Scroll from 'react-scroll';
 import AssignWatchAssociateTaskStep2Component from "../../../components/tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/taskValidator";
+import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+} from '../../../helpers/localStorageUtility';
 
 
 class TaskUpdateContainer extends Component {
@@ -18,17 +22,19 @@ class TaskUpdateContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         this.state = {
             name: null,
             errors: {},
             isLoading: false,
-            urlArgument: urlArgument,
-            slug: slug
+            slug: slug,
+            associate: localStorage.getItem('nwapp-task-1-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-task-1-associateOption'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -41,6 +47,17 @@ class TaskUpdateContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        this.setState({
+            associateData: {
+                results: [
+                    {'slug': 'bob-page', 'name': 'Bob Page'},
+                    {'slug': 'walter-simons', 'name': 'Walter Simons'},
+                    {'slug': 'jc-denton', 'name': 'JC Denton'},
+                    {'slug': 'paul-denton', 'name': 'Paul Denton'}
+                ]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -86,6 +103,17 @@ class TaskUpdateContainer extends Component {
         })
     }
 
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('nwapp-task-1-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-task-1-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -110,14 +138,15 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors, urlArgument, slug, } = this.state;
+        const { associate, associateData, errors, slug, } = this.state;
         return (
             <AssignWatchAssociateTaskStep2Component
-                urlArgument={urlArgument}
                 slug={slug}
-                name={name}
+                associate={associate}
+                associateOptions={getAssociateReactSelectOptions(associateData)}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );
