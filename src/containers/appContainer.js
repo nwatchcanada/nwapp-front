@@ -84,8 +84,7 @@ import ResourceDeleteContainer from "./settings/resources/resourceDeleteContaine
 import ResourceCreateContainer from "./settings/resources/resourceCreateContainer";
 import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
 
-import MemberListActiveContainer from "./members/memberListActiveContainer";
-import MemberListInactiveContainer from "./members/memberListInactiveContainer";
+import MemberListContainer from "./members/list/memberListContainer";
 import MemberSearchContainer from "./members/memberSearchContainer";
 import MemberSearchResultContainer from "./members/memberSearchResultContainer";
 import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
@@ -247,8 +246,7 @@ class AppContainer extends React.Component {
                                 <Route path="/members/add/step-6" exact component={requiresAuth(MemberCreateStep6Container)} />
                                 <Route path="/members/add/step-7" exact component={requiresAuth(MemberCreateStep7Container)} />
                                 <Route path="/members/add/step-8" exact component={requiresAuth(MemberCreateStep8Container)} />
-                                <Route path="/members/active" exact component={requiresAuth(MemberListActiveContainer)} />
-                                <Route path="/members/inactive" exact component={requiresAuth(MemberListInactiveContainer)} />
+                                <Route path="/members" exact component={requiresAuth(MemberListContainer)} />
                                 <Route path="/members/:urlArgument/search" exact component={requiresAuth(MemberSearchContainer)} />
                                 <Route path="/members/:urlArgument/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
                                 <Route path="/members/:urlArgument/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />

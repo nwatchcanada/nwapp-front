@@ -14,7 +14,7 @@ export default class MemberPromoteStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members/active"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/members/${urlArgument}/${slug}/full`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>

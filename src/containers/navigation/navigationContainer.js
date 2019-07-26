@@ -43,7 +43,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-members",
         icon: "users",
         title: "Members",
-        url: "/members/active"
+        url: "/members"
     },{
         id: "full-area-coordinator",
         icon: "horse-head",
@@ -113,7 +113,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-members",
         icon: "users",
         title: "Members",
-        url: "/members/active"
+        url: "/members"
     },{
         id: "full-area-coordinator",
         icon: "horse-head",

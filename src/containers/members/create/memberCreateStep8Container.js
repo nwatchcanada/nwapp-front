@@ -118,7 +118,7 @@ class MemberCreateStep8Container extends Component {
 
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members/active");
+        this.props.history.push("/members");
     }
 
 
