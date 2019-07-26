@@ -53,8 +53,8 @@ class MemberSearchResultContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
+        const results = [{
+            'slug': 'argyle',
             'icon': 'home',
             'number': 1,
             'firstName': 'Shinji',
@@ -83,7 +83,7 @@ class MemberSearchResultContainer extends Component {
         }];
         return (
             <MemberSearchResultComponent
-                tableData={tableData}
+                results={results}
             />
         );
     }
