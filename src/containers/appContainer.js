@@ -114,10 +114,8 @@ import ItemUpdateContainer from "./items/update/itemUpdateContainer";
 import ItemArchiveContainer from "./items/archive/itemArchiveContainer";
 
 import AssociateListContainer from "./associates/list/associateListContainer";
-// import AssociateListActiveContainer from "./associates/associateListActiveContainer";
-// import AssociateListInactiveContainer from "./associates/associateListInactiveContainer";
-import AssociateSearchContainer from "./associates/associateSearchContainer";
-import AssociateSearchResultContainer from "./associates/associateSearchResultContainer";
+import AssociateSearchContainer from "./associates/search/associateSearchContainer";
+import AssociateSearchResultContainer from "./associates/search/associateSearchResultContainer";
 import AssociateLiteRetrieveContainer from "./associates/retrieve/associateLiteRetrieveContainer";
 import AssociateFullRetrieveContainer from "./associates/retrieve/associateFullRetrieveContainer";
 import AssociateUpdateContainer from "./associates/associateUpdateContainer";

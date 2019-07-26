@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AssociateSearchComponent from "../../components/associates/associateSearchComponent";
+import AssociateSearchResultComponent from "../../../components/associates/search/associateSearchResultComponent";
 
 
-class AssociateListContainer extends Component {
+class AssociateSearchResultContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
      */
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            advancedSearchActive: false
-        }
-        this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
-        this.onSearchClick = this.onSearchClick.bind(this);
-        this.onAdvancedSearchClick = this.onAdvancedSearchClick.bind(this);
-    }
 
     /**
      *  Component Life-cycle Management
@@ -56,19 +46,6 @@ class AssociateListContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onAdvancedSearchPanelToggle() {
-        this.setState({
-            advancedSearchActive: !this.state.advancedSearchActive
-        });
-    }
-
-    onSearchClick() {
-        this.props.history.push("/associates/search-results");
-    }
-
-    onAdvancedSearchClick() {
-        this.props.history.push("/associates/search-results");
-    }
 
     /**
      *  Main render function
@@ -76,12 +53,37 @@ class AssociateListContainer extends Component {
      */
 
     render() {
+        const tableData = [{
+            'slug': 'Argyle',
+            'icon': 'home',
+            'number': 1,
+            'firstName': 'Shinji',
+            'lastName': 'Ikari',
+            'phone': '(789) 789-7890',
+            'email': 'shinji.ikari@nerv.worldgov',
+            'absoluteUrl': '/associates/argyle'
+        },{
+            'slug': 'byron',
+            'icon': 'home',
+            'number': 2,
+            'firstName': 'Mariya',
+            'lastName': 'Takeuchi',
+            'phone': '(321) 321-3210',
+            'email': 'plastic_lover@gmail.com',
+            'absoluteUrl': '/associates/byron'
+        },{
+            'slug': 'carling',
+            'icon': 'briefcase',
+            'number': 3,
+            'firstName': 'Rei',
+            'lastName': 'Ayanami',
+            'phone': '(123) 123-1234',
+            'email': 'rei.ayanami@nerv.worldgov',
+            'absoluteUrl': '/associates/carling'
+        }];
         return (
-            <AssociateSearchComponent
-                advancedSearchActive={this.state.advancedSearchActive}
-                onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
-                onSearchClick={this.onSearchClick}
-                onAdvancedSearchClick={this.onAdvancedSearchClick}
+            <AssociateSearchResultComponent
+                tableData={tableData}
             />
         );
     }
@@ -102,4 +104,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AssociateListContainer);
+)(AssociateSearchResultContainer);
