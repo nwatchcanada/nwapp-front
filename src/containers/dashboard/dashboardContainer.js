@@ -96,19 +96,19 @@ class DashboardContainer extends Component {
                     'number': 1,
                     'watchName': 'Argyle',
                     'prettyTypeOf': '48h follow up',
-                    'absoluteUrl': '/tasks/pending/argyle'
+                    'absoluteUrl': '/tasks/argyle'
                 },{
                     'slug': 'byron',
                     'number': 2,
                     'watchName': 'Byron',
                     'prettyTypeOf': 'Survey',
-                    'absoluteUrl': '/tasks/pending/byron'
+                    'absoluteUrl': '/tasks/byron'
                 },{
                     'slug': 'carling',
                     'number': 3,
                     'watchName': 'Carling',
                     'prettyTypeOf': 'Assign associate',
-                    'absoluteUrl': '/tasks/pending/carling'
+                    'absoluteUrl': '/tasks/carling'
                 }
             ]
         };
