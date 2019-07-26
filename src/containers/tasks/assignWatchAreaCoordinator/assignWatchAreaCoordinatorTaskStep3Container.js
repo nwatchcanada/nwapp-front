@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import AssignWatchAreaCoordinatorTaskStep3Component from "../../../components/tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep3Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
 
 
 class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
@@ -21,6 +22,8 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
         // Update state.
         this.state = {
             slug: slug,
+            areaCoordinator: localStorage.getItem('nwapp-task-2-areaCoordinator'),
+            areaCoordinatorLabel: localStorage.getItem('nwapp-task-2-areaCoordinator-label'),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -88,6 +91,7 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
                 taskData={taskData}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                areaCoordinatorLabel={this.state.areaCoordinatorLabel}
             />
         );
     }

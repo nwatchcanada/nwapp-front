@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AssignWatchAreaCoordinatorTaskStep2Component from "../../../components/tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep2Component";
-import { validateTask1Step2Input } from "../../../validators/taskValidator";
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 
 
-class TaskUpdateContainer extends Component {
+class AssignWatchAreaCoordinatorTaskStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -28,8 +27,8 @@ class TaskUpdateContainer extends Component {
             errors: {},
             isLoading: false,
             slug: slug,
-            associate: localStorage.getItem('nwapp-task-1-associate'),
-            associateOption: localStorageGetObjectItem('nwapp-task-1-associateOption'),
+            areaCoordinator: localStorage.getItem('nwapp-task-2-areaCoordinator'),
+            areaCoordinatorOption: localStorageGetObjectItem('nwapp-task-2-areaCoordinatorOption'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -48,7 +47,7 @@ class TaskUpdateContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         this.setState({
-            associateData: {
+            areaCoordinatorData: {
                 results: [
                     {'slug': 'bob-page', 'name': 'Bob Page'},
                     {'slug': 'walter-simons', 'name': 'Walter Simons'},
@@ -75,7 +74,7 @@ class TaskUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(task) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/task/1/"+this.state.slug+"/step-3");
+        this.props.history.push("/task/2/"+this.state.slug+"/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -107,26 +106,17 @@ class TaskUpdateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-task-1-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-task-1-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+        localStorage.setItem('nwapp-task-2-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-task-2-'+optionKey, option);
+        localStorage.setItem('nwapp-task-2-'+[option.selectName]+"-label", option.label);
+        // console.log(option); // For debugging purposes only.
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateTask1Step2Input(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        this.onSuccessfulSubmissionCallback();
     }
 
 
@@ -136,12 +126,12 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { associate, associateData, errors, slug, } = this.state;
+        const { areaCoordinator, areaCoordinatorData, errors, slug, } = this.state;
         return (
             <AssignWatchAreaCoordinatorTaskStep2Component
                 slug={slug}
-                associate={associate}
-                associateOptions={getAreaCoordinatorReactSelectOptions(associateData)}
+                areaCoordinator={areaCoordinator}
+                areaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorData)}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
@@ -165,4 +155,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TaskUpdateContainer);
+)(AssignWatchAreaCoordinatorTaskStep2Container);

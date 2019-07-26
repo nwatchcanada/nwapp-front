@@ -68,7 +68,7 @@ class AssignWatchAreaCoordinatorTaskStep1Container extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/task/1/"+this.state.slug+"/step-2");
+        this.props.history.push("/task/2/"+this.state.slug+"/step-2");
     }
 
     /**

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../../flashMessageComponent";
-
 
 class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
     render() {
-        const { urlArgument, onClick, onBack, flashMessage } = this.props;
+        const { onClick, onBack } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -23,9 +21,7 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                     </ol>
                 </nav>
 
-                <FlashMessageComponent object={flashMessage} />
-
-                <h1><i className="fas fa-thumbtack"></i>&nbsp;Argyle</h1>
+                <h1><i className="fas fa-thumbtack"></i>&nbsp;Byron</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -54,11 +50,11 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Description</th>
-                                <td>A new watch has been created and requires an associate to be assigned. Please assign an associate to the watch.</td>
+                                <td>A new watch has been created and has the option of assigning an area coordinator. Please assign an area coordinator to the watch if there is one.</td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Watch</th>
-                                <td>Argyle Community Watch</td>
+                                <td>Byron Watch</td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Tags</th>

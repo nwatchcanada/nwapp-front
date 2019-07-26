@@ -9,7 +9,7 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 
 class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
     render() {
-        const { associate, associateOptions, slug, errors, onSelectChange, isLoading, onClick } = this.props;
+        const { areaCoordinator, areaCoordinatorOptions, slug, errors, onSelectChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -26,12 +26,12 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-thumbtack"></i>&nbsp;Argyle</h1>
+                <h1><i className="fas fa-thumbtack"></i>&nbsp;Byron</h1>
 
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/task/1/${slug}/step-1`}>
+                            <Link to={`/task/2/${slug}/step-1`}>
                                 <span className="num">1.</span><span className="">Info</span>
                             </Link>
                         </div>
@@ -55,12 +55,13 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
                             <BootstrapSingleSelect
-                                label="AreaCoordinator (*)"
-                                name="associate"
-                                defaultOptionLabel="Please select the associate."
-                                options={associateOptions}
-                                value={associate}
-                                error={errors.associate}
+                                borderColour="border-success"
+                                label="Area Coordinator"
+                                name="areaCoordinator"
+                                defaultOptionLabel="Please select the areaCoordinator."
+                                options={areaCoordinatorOptions}
+                                value={areaCoordinator}
+                                error={errors.areaCoordinator}
                                 onSelectChange={onSelectChange}
                             />
 
@@ -68,7 +69,7 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to={`/task/1/${slug}/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/task/2/${slug}/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
