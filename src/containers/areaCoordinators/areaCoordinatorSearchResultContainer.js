@@ -10,18 +10,6 @@ class AreaCoordinatorSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
-    constructor(props) {
-        super(props)
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { urlArgument } = this.props.match.params;
-
-        this.state = {
-            urlArgument: urlArgument
-        }
-    }
-
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -73,7 +61,7 @@ class AreaCoordinatorSearchResultContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/area-coordinators/active/argyle'
+            'absoluteUrl': '/area-coordinators/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -82,7 +70,7 @@ class AreaCoordinatorSearchResultContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/area-coordinators/active/byron'
+            'absoluteUrl': '/area-coordinators/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -91,11 +79,10 @@ class AreaCoordinatorSearchResultContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/area-coordinators/active/carling'
+            'absoluteUrl': '/area-coordinators/carling'
         }];
         return (
             <AreaCoordinatorSearchResultComponent
-                urlArgument={this.state.urlArgument}
                 tableData={tableData}
             />
         );

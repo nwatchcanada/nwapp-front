@@ -132,7 +132,7 @@ class AreaCoordinatorListComponent extends Component {
                     <div className="col-md-8">
                         <div className="step-navigation float-right">
                             <div id="step-1" className="st-grey ">
-                                <Link to="/area-coordinators/active">
+                                <Link to="/area-coordinators">
                                     <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
                                 </Link>
                             </div>

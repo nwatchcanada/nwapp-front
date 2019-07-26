@@ -9,7 +9,7 @@ import { BootstrapInput } from "../bootstrap/bootstrapInput";
 
 class AreaCoordinatorUpdateComponent extends Component {
     render() {
-        const { urlArgument, slug, name, errors, onTextChange, isLoading, onClick } = this.props;
+        const { slug, name, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -18,10 +18,10 @@ class AreaCoordinatorUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/area-coordinators/${urlArgument}`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinator</Link>
+                            <Link to={`/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinator</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/area-coordinators/${urlArgument}/${slug}/full`}><i className="fas fa-horse-head"></i>&nbsp;Argyle</Link>
+                            <Link to={`/area-coordinators/${slug}/full`}><i className="fas fa-horse-head"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -52,7 +52,7 @@ class AreaCoordinatorUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/area-coordinators/${urlArgument}/${slug}/full`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/area-coordinators/${slug}/full`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

@@ -157,7 +157,7 @@ class AreaCoordinatorCreateStep3Container extends Component {
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Area coordinator has been successfully created.");
-        this.props.history.push("/area-coordinators/active");
+        this.props.history.push("/area-coordinators");
     }
 
     onFailedSubmissionCallback(errors) {

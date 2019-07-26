@@ -19,11 +19,10 @@ class AreaCoordinatorPromoteContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
             errors: {},
             reason: "",
@@ -67,7 +66,7 @@ class AreaCoordinatorPromoteContainer extends Component {
             isLoading: true,
         })
         this.props.setFlashMessage("success", "Area coordinator has been successfully demoted.");
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/member/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -134,7 +133,6 @@ class AreaCoordinatorPromoteContainer extends Component {
         };
         return (
             <AreaCoordinatorDemoteComponent
-                urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 reason={this.state.reason}
                 reasonOptions={this.state.reasonOptions}

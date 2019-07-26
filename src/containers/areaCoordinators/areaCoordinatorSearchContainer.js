@@ -12,13 +12,7 @@ class AreaCoordinatorListContainer extends Component {
 
     constructor(props) {
         super(props)
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { urlArgument } = this.props.match.params;
-
         this.state = {
-            urlArgument: urlArgument,
             advancedSearchActive: false
         }
         this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
@@ -69,11 +63,11 @@ class AreaCoordinatorListContainer extends Component {
     }
 
     onSearchClick() {
-        this.props.history.push("/area-coordinators/"+this.state.urlArgument+"/search-results");
+        this.props.history.push("/area-coordinators/search-results");
     }
 
     onAdvancedSearchClick() {
-        this.props.history.push("/area-coordinators/"+this.state.urlArgument+"/search-results");
+        this.props.history.push("/area-coordinators/search-results");
     }
 
     /**
@@ -84,7 +78,6 @@ class AreaCoordinatorListContainer extends Component {
     render() {
         return (
             <AreaCoordinatorSearchComponent
-                urlArgument={this.state.urlArgument}
                 advancedSearchActive={this.state.advancedSearchActive}
                 onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
                 onSearchClick={this.onSearchClick}

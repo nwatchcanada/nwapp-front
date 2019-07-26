@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 export default class AreaCoordinatorLiteRetrieveComponent extends Component {
     render() {
-        const { urlArgument, slug, flashMessage } = this.props;
+        const { slug, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@ export default class AreaCoordinatorLiteRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/area-coordinators/${urlArgument}`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to={`/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-horse-head"></i>&nbsp;Argyle
@@ -35,7 +35,7 @@ export default class AreaCoordinatorLiteRetrieveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/area-coordinators/${urlArgument}/${slug}/full`}>
+                            <Link to={`/area-coordinators/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>

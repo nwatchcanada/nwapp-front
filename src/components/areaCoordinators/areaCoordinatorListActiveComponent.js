@@ -117,7 +117,7 @@ class AreaCoordinatorActiveListComponent extends Component {
                             </div>
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="/area-coordinators/active/search" className="d-block link-ndecor" title="Search">
+                                    <Link to="/area-coordinators/search" className="d-block link-ndecor" title="Search">
                                         <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
                                     </Link>
                                 </div>

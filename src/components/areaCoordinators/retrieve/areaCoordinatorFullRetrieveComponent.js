@@ -16,7 +16,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 export default class AreaCoordinatorFullRetrieveComponent extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
-        const { urlArgument, slug, flashMessage } = this.props;
+        const { slug, flashMessage } = this.props;
         const {
             typeOf, errors,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
@@ -47,7 +47,7 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/area-coordinators/active"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to="/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-horse-head"></i>&nbsp;Argyle
@@ -62,7 +62,7 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/area-coordinators/${urlArgument}/${slug}`}>
+                            <Link to={`/area-coordinators/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
@@ -250,12 +250,12 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                     <td>
                                         <ul>
                                             <li>
-                                                <Link to={`/area-coordinators/${urlArgument}/${slug}/promote`}>
+                                                <Link to={`/area-coordinators/${slug}/promote`}>
                                                     Promote&nbsp;<i className="fas fa-chevron-right"></i>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to={`/area-coordinators/${urlArgument}/${slug}/demote`}>
+                                                <Link to={`/area-coordinators/${slug}/demote`}>
                                                     Demote&nbsp;<i className="fas fa-chevron-right"></i>
                                                 </Link>
                                             </li>
@@ -268,10 +268,10 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <Link to={`/area-coordinators/${urlArgument}/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
+                                <Link to={`/area-coordinators/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
                                     <i className="fas fa-edit"></i>&nbsp;Update
                                 </Link>
-                                <Link to={`/area-coordinators/${urlArgument}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/area-coordinators`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

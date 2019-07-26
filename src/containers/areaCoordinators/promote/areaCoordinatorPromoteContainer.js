@@ -17,11 +17,10 @@ class AreaCoordinatorPromoteContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
         }
 
@@ -89,7 +88,7 @@ class AreaCoordinatorPromoteContainer extends Component {
             isLoading: true,
         })
         this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/member/"+this.state.slug);
     }
 
 
@@ -107,7 +106,6 @@ class AreaCoordinatorPromoteContainer extends Component {
         };
         return (
             <AreaCoordinatorPromoteComponent
-                urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 memberData={memberData}
                 onBack={this.onBack}

@@ -28,7 +28,7 @@ class TableRow extends Component {
 
 class AreaCoordinatorSearchResultComponent extends Component {
     render() {
-        const { urlArgument, tableData, flashMessage } = this.props;
+        const { tableData, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -37,10 +37,10 @@ class AreaCoordinatorSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/area-coordinators/${urlArgument}`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                           <Link to={`/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/area-coordinators/${urlArgument}/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to={`/area-coordinators/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results

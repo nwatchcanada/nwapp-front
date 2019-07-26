@@ -18,13 +18,12 @@ class AreaCoordinatorUpdateContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         this.state = {
             name: null,
             errors: {},
             isLoading: false,
-            urlArgument: urlArgument,
             slug: slug
         }
 
@@ -60,7 +59,7 @@ class AreaCoordinatorUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "AreaCoordinator has been successfully updated.");
-        this.props.history.push("/area-coordinators/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/area-coordinator/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -110,10 +109,9 @@ class AreaCoordinatorUpdateContainer extends Component {
      */
 
     render() {
-        const { name, errors, urlArgument, slug, } = this.state;
+        const { name, errors, slug, } = this.state;
         return (
             <AreaCoordinatorUpdateComponent
-                urlArgument={urlArgument}
                 slug={slug}
                 name={name}
                 errors={errors}

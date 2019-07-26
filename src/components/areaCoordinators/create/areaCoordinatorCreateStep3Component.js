@@ -45,7 +45,7 @@ export default class AreaCoordinatorCreateStep3Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/area-coordinators/active"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to="/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
