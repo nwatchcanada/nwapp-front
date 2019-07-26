@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AreaCoordinatorSearchComponent from "../../components/areaCoordinators/areaCoordinatorSearchComponent";
+import AreaCoordinatorSearchComponent from "../../../components/areaCoordinators/search/areaCoordinatorSearchComponent";
 
 
 class AreaCoordinatorListContainer extends Component {

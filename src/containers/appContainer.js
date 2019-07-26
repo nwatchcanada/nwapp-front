@@ -125,8 +125,8 @@ import AssociateCreateStep3Container from "./associates/create/associateCreateSt
 import AssociateDemoteContainer from "./associates/demote/associateDemoteContainer";
 
 import AreaCoordinatorListContainer from "./areaCoordinators/list/areaCoordinatorListContainer";
-import AreaCoordinatorSearchContainer from "./areaCoordinators/areaCoordinatorSearchContainer";
-import AreaCoordinatorSearchResultContainer from "./areaCoordinators/areaCoordinatorSearchResultContainer";
+import AreaCoordinatorSearchContainer from "./areaCoordinators/search/areaCoordinatorSearchContainer";
+import AreaCoordinatorSearchResultContainer from "./areaCoordinators/search/areaCoordinatorSearchResultContainer";
 import AreaCoordinatorUpdateContainer from "./areaCoordinators/areaCoordinatorUpdateContainer";
 import AreaCoordinatorCreateStep1Container from "./areaCoordinators/create/areaCoordinatorCreateStep1Container";
 import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaCoordinatorCreateStep2Container";
