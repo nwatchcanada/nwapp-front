@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AreaCoordinatorUpdateComponent from "../../components/areaCoordinators/areaCoordinatorUpdateComponent";
-import { setFlashMessage } from "../../actions/flashMessageActions";
-import { validateInput } from "../../validators/areaCoordinatorValidator";
+import AreaCoordinatorUpdateComponent from "../../../components/areaCoordinators/update/areaCoordinatorUpdateComponent";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { validateInput } from "../../../validators/areaCoordinatorValidator";
 
 
 class AreaCoordinatorUpdateContainer extends Component {
