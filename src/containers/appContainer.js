@@ -85,8 +85,8 @@ import ResourceCreateContainer from "./settings/resources/resourceCreateContaine
 import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
 
 import MemberListContainer from "./members/list/memberListContainer";
-import MemberSearchContainer from "./members/memberSearchContainer";
-import MemberSearchResultContainer from "./members/memberSearchResultContainer";
+import MemberSearchContainer from "./members/search/memberSearchContainer";
+import MemberSearchResultContainer from "./members/search/memberSearchResultContainer";
 import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
 import MemberFullRetrieveContainer from "./members/retrieve/memberFullRetrieveContainer";
 import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
@@ -247,8 +247,8 @@ class AppContainer extends React.Component {
                                 <Route path="/members/add/step-7" exact component={requiresAuth(MemberCreateStep7Container)} />
                                 <Route path="/members/add/step-8" exact component={requiresAuth(MemberCreateStep8Container)} />
                                 <Route path="/members" exact component={requiresAuth(MemberListContainer)} />
-                                <Route path="/members/:urlArgument/search" exact component={requiresAuth(MemberSearchContainer)} />
-                                <Route path="/members/:urlArgument/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
+                                <Route path="/members/search" exact component={requiresAuth(MemberSearchContainer)} />
+                                <Route path="/members/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
                                 <Route path="/members/:urlArgument/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />
                                 <Route path="/members/:urlArgument/:slug/full" exact component={requiresAuth(MemberFullRetrieveContainer)} />
                                 <Route path="/members/:urlArgument/:slug/update" exact component={requiresAuth(MemberUpdateContainer)} />

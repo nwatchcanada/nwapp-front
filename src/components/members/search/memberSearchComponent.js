@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { BootstrapTelephoneInput } from "../bootstrap/bootstrapTelephoneInput";
+import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 
 
 class MemberSearchComponent extends Component {
     render() {
-        const { urlArgument, onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
+        const { onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
         const { errors, onTextChange, phone } = this.props;
         return (
             <div>
@@ -15,7 +15,7 @@ class MemberSearchComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to={`/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-search"></i>&nbsp;Search

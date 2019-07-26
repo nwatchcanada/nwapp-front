@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberSearchResultComponent from "../../components/members/memberSearchResultComponent";
+import MemberSearchComponent from "../../../components/members/search/memberSearchComponent";
 
 
-class MemberSearchResultContainer extends Component {
+class MemberListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -13,13 +13,13 @@ class MemberSearchResultContainer extends Component {
     constructor(props) {
         super(props)
 
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { urlArgument } = this.props.match.params;
-
         this.state = {
-            urlArgument: urlArgument
+            advancedSearchActive: false,
+            errors: {},
         }
+        this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
+        this.onSearchClick = this.onSearchClick.bind(this);
+        this.onAdvancedSearchClick = this.onAdvancedSearchClick.bind(this);
     }
 
     /**
@@ -58,6 +58,19 @@ class MemberSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onAdvancedSearchPanelToggle() {
+        this.setState({
+            advancedSearchActive: !this.state.advancedSearchActive
+        });
+    }
+
+    onSearchClick() {
+        this.props.history.push("/members/search-results");
+    }
+
+    onAdvancedSearchClick() {
+        this.props.history.push("/members/search-results");
+    }
 
     /**
      *  Main render function
@@ -65,38 +78,13 @@ class MemberSearchResultContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'icon': 'home',
-            'number': 1,
-            'firstName': 'Shinji',
-            'lastName': 'Ikari',
-            'phone': '(789) 789-7890',
-            'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/members/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'home',
-            'number': 2,
-            'firstName': 'Mariya',
-            'lastName': 'Takeuchi',
-            'phone': '(321) 321-3210',
-            'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/members/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'briefcase',
-            'number': 3,
-            'firstName': 'Rei',
-            'lastName': 'Ayanami',
-            'phone': '(123) 123-1234',
-            'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/members/carling'
-        }];
         return (
-            <MemberSearchResultComponent
-                urlArgument={this.state.urlArgument}
-                tableData={tableData}
+            <MemberSearchComponent
+                advancedSearchActive={this.state.advancedSearchActive}
+                onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
+                onSearchClick={this.onSearchClick}
+                onAdvancedSearchClick={this.onAdvancedSearchClick}
+                errors={this.state.errors}
             />
         );
     }
@@ -117,4 +105,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberSearchResultContainer);
+)(MemberListContainer);

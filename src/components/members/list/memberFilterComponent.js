@@ -16,24 +16,24 @@ export default class MemberFilterComponent extends Component {
                         {isActive
                             ?<div id="step-2" className="st-grey active">
                                 <strong>
-                                    <i className="fas fa-clock"></i>&nbsp;<span className="">Active (3)</span>
+                                    <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
                                 </strong>
                             </div>
                             :<div id="step-2" className="st-grey">
                                 <Link onClick={ (event)=>{ onFilterClick(event, "active") } }>
-                                    <i className="fas fa-clock"></i>&nbsp;<span className="">Active (3)</span>
+                                    <i className="fas fa-user-check"></i>&nbsp;<span className="">Active (3)</span>
                                 </Link>
                             </div>
                         }
                         {isInactive
                             ?<div id="step-1" className="st-grey active">
                                 <strong>
-                                    <i className="fas fa-question-circle"></i>&nbsp;<span className="">Inactive (0)</span>
+                                    <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (0)</span>
                                 </strong>
                             </div>
                             :<div id="step-1" className="st-grey">
                                 <Link onClick={ (event)=>{ onFilterClick(event, "inactive") } }>
-                                    <i className="fas fa-question-circle"></i>&nbsp;<span className="">Inactive (0)</span>
+                                    <i className="fas fa-user-times"></i>&nbsp;<span className="">Inactive (0)</span>
                                 </Link>
                             </div>
                         }

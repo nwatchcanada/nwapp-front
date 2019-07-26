@@ -49,7 +49,7 @@ class ActiveListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-clock"></i>&nbsp;Active Members
+                        <i className="fas fa-user-check"></i>&nbsp;Active Members
                     </h2>
 
                     <BootstrapTable
@@ -114,7 +114,7 @@ class InactiveListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-clock"></i>&nbsp;Inactive Members
+                        <i className="fas fa-user-times"></i>&nbsp;Inactive Members
                     </h2>
 
                     <BootstrapTable
@@ -144,9 +144,9 @@ function iconFormatter(cell, row){
 
 function financialExternalLinkFormatter(cell, row){
     return (
-        <Link to={`/member/${row.slug}`}>
+        <a target="_blank" href={`/financial/${row.slug}`}>
             View&nbsp;<i className="fas fa-external-link-alt"></i>
-        </Link>
+        </a>
     )
 }
 
@@ -175,14 +175,14 @@ class MemberListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-members"></i>&nbsp;Members
+                            <i className="fas fa-users"></i>&nbsp;Members
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-members"></i>&nbsp;Members</h1>
+                <h1><i className="fas fa-users"></i>&nbsp;Members</h1>
 
                 <div className="row">
                     <div className="col-md-12">

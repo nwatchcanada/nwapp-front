@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../flashMessageComponent";
+import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
 class TableRow extends Component {
@@ -28,7 +28,7 @@ class TableRow extends Component {
 
 class MemberSearchResultComponent extends Component {
     render() {
-        const { urlArgument, tableData, flashMessage } = this.props;
+        const { tableData, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -37,10 +37,10 @@ class MemberSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Members</Link>
+                           <Link to={`/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/members/${urlArgument}/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to={`/members/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results
