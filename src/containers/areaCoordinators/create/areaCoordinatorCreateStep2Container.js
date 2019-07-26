@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import { setFlashMessage } from "../../../actions/flashMessageActions";
 import AreaCoordinatorCreateStep2Component from "../../../components/areaCoordinators/create/areaCoordinatorCreateStep2Component";
 
 
@@ -51,7 +50,6 @@ class AreaCoordinatorCreateStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "AreaCoordinator has been successfully created.");
         this.props.history.push("/area-coordinators/add/step-3");
     }
 
@@ -113,11 +111,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 
