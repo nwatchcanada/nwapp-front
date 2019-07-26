@@ -1,34 +1,91 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
-class TableRow extends Component {
+class ListComponent extends Component {
     render() {
-        const { slug, icon, firstName, lastName, phone, email, absoluteUrl } = this.props.datum;
+        const { results } = this.props;
+
+        const columns = [{
+            dataField: 'icon',
+            text: '',
+            sort: false,
+            formatter: iconFormatter
+        },{
+            dataField: 'firstName',
+            text: 'First Name',
+            sort: true
+        },{
+            dataField: 'lastName',
+            text: 'Last Name',
+            sort: true
+        },{
+            dataField: 'phone',
+            text: 'Phone',
+            sort: true
+        },{
+            dataField: 'email',
+            text: 'Email',
+            sort: true
+        },{
+            dataField: 'slug',
+            text: '',
+            sort: false,
+            formatter: externalLinkFormatter
+        }];
 
         return (
-            <tr slug={slug}>
-                <td><i className={`fas fa-${icon}`}></i></td>
-                <td>{firstName}</td>
-                <td>{lastName}</td>
-                <td>{phone}</td>
-                <td>{email}</td>
-                <td>
-                    <Link to={absoluteUrl}  target="_blank">
-                        View&nbsp;<i className="fas fa-external-link-alt"></i>
-                    </Link>
-                </td>
-            </tr>
+            <div className="row">
+                <div className="col-md-12">
+                    <h2>
+                        <i className="fas fa-search"></i>&nbsp;Search Results
+                    </h2>
+
+                    <BootstrapTable
+                        bootstrap4
+                        keyField='slug'
+                        data={ results }
+                        columns={ columns }
+                        striped
+                        bordered={ false }
+                        pagination={ paginationFactory() }
+                        noDataIndication="There are results returned for this search."
+                    />
+
+                </div>
+            </div>
         );
     }
 }
 
 
+
+
+function iconFormatter(cell, row){
+    return (
+        <i className={`fas fa-${row.icon}`}></i>
+    )
+}
+
+
+function externalLinkFormatter(cell, row){
+    return (
+        <a target="_blank" href={`/associate/${row.slug}`}>
+            View&nbsp;<i className="fas fa-external-link-alt"></i>
+        </a>
+    )
+}
+
+
+
 class AssociateSearchResultComponent extends Component {
     render() {
-        const { tableData, flashMessage } = this.props;
+        const { results, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -37,7 +94,7 @@ class AssociateSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
+                           <Link to={`/associates`}><i className="fas fa-users"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/associates/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
@@ -50,32 +107,10 @@ class AssociateSearchResultComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-crown"></i>&nbsp;Associates</h1>
+                <h1><i className="fas fa-users"></i>&nbsp;Associates</h1>
                 <div className="row">
                     <div className="col-md-12">
-
-                        <h2>Search Results</h2>
-
-                        <div className="table-responsive">
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {tableData && tableData.map(
-                                        (tableDatum, i) => <TableRow datum={tableDatum} key={i} />)
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-
+                        <ListComponent results={results} />
                     </div>
                 </div>
             </div>
