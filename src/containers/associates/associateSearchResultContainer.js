@@ -10,18 +10,6 @@ class AssociateSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
-    constructor(props) {
-        super(props)
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { urlArgument } = this.props.match.params;
-
-        this.state = {
-            urlArgument: urlArgument
-        }
-    }
-
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -73,7 +61,7 @@ class AssociateSearchResultContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/associates/active/argyle'
+            'absoluteUrl': '/associates/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -82,7 +70,7 @@ class AssociateSearchResultContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/associates/active/byron'
+            'absoluteUrl': '/associates/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -91,11 +79,10 @@ class AssociateSearchResultContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/associates/active/carling'
+            'absoluteUrl': '/associates/carling'
         }];
         return (
             <AssociateSearchResultComponent
-                urlArgument={this.state.urlArgument}
                 tableData={tableData}
             />
         );

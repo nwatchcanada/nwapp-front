@@ -16,11 +16,10 @@ class AssociateLiteRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
         }
     }
@@ -79,7 +78,6 @@ class AssociateLiteRetrieveContainer extends Component {
         };
         return (
             <AssociateLiteRetrieveComponent
-                urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 associateData={associateData}
                 flashMessage={this.props.flashMessage}

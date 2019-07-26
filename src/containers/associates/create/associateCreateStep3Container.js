@@ -157,7 +157,7 @@ class AssociateCreateStep3Container extends Component {
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Associate has been successfully created.");
-        this.props.history.push("/associates/active");
+        this.props.history.push("/associates");
     }
 
     onFailedSubmissionCallback(errors) {

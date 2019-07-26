@@ -269,12 +269,12 @@ class AppContainer extends React.Component {
                                 <Route path="/associates/add/step-2" exact component={requiresAuth(AssociateCreateStep2Container)} />
                                 <Route path="/associates/add/step-3" exact component={requiresAuth(AssociateCreateStep3Container)} />
                                 <Route path="/associates" exact component={requiresAuth(AssociateListContainer)} />
-                                <Route path="/associates/:urlArgument/search" exact component={requiresAuth(AssociateSearchContainer)} />
-                                <Route path="/associates/:urlArgument/search-results" exact component={requiresAuth(AssociateSearchResultContainer)} />
-                                <Route path="/associates/:urlArgument/:slug" exact component={requiresAuth(AssociateLiteRetrieveContainer)} />
-                                <Route path="/associates/:urlArgument/:slug/full" exact component={requiresAuth(AssociateFullRetrieveContainer)} />
-                                <Route path="/associates/:urlArgument/:slug/update" exact component={requiresAuth(AssociateUpdateContainer)} />
-                                <Route path="/associates/:urlArgument/:slug/demote" exact component={requiresAuth(AssociateDemoteContainer)} />
+                                <Route path="/associates/search" exact component={requiresAuth(AssociateSearchContainer)} />
+                                <Route path="/associates/search-results" exact component={requiresAuth(AssociateSearchResultContainer)} />
+                                <Route path="/associate/:slug" exact component={requiresAuth(AssociateLiteRetrieveContainer)} />
+                                <Route path="/associate/:slug/full" exact component={requiresAuth(AssociateFullRetrieveContainer)} />
+                                <Route path="/associate/:slug/update" exact component={requiresAuth(AssociateUpdateContainer)} />
+                                <Route path="/associate/:slug/demote" exact component={requiresAuth(AssociateDemoteContainer)} />
                                 <Route path="/area-coordinators/add/step-1" exact component={requiresAuth(AreaCoordinatorCreateStep1Container)} />
                                 <Route path="/area-coordinators/add/step-2" exact component={requiresAuth(AreaCoordinatorCreateStep2Container)} />
                                 <Route path="/area-coordinators/add/step-3" exact component={requiresAuth(AreaCoordinatorCreateStep3Container)} />

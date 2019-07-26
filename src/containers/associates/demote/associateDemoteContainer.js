@@ -21,11 +21,10 @@ class AssociatePromoteContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
             errors: {},
             role: "",
@@ -71,7 +70,7 @@ class AssociatePromoteContainer extends Component {
             isLoading: true,
         })
         this.props.setFlashMessage("success", "Area coordinator has been successfully demoted.");
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug);
+        this.props.history.push("/member/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -138,7 +137,6 @@ class AssociatePromoteContainer extends Component {
         };
         return (
             <AssociateDemoteComponent
-                urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 role={this.state.role}
                 roleOptions={this.state.roleOptions}

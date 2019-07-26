@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class AssociateSearchComponent extends Component {
     render() {
-        const { urlArgument, onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
+        const { onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -13,7 +13,7 @@ class AssociateSearchComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/associates/${urlArgument}`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
+                            <Link to={`/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-search"></i>&nbsp;Search

@@ -21,11 +21,10 @@ class AssociateFullRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
             associateData: {},
             errors: {},
@@ -189,7 +188,6 @@ class AssociateFullRetrieveContainer extends Component {
     render() {
         return (
             <AssociateFullRetrieveComponent
-                urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 associateData={this.state.associateData}
                 flashMessage={this.props.flashMessage}

@@ -12,7 +12,7 @@ import { OTHER_DEMOTION_REASON } from "../../../constants/api";
 export default class AssociateDemoteComponent extends Component {
     render() {
         const {
-            urlArgument, slug, onClick, isLoading, errors, onTextChange,
+            slug, onClick, isLoading, errors, onTextChange,
             role, roleOptions, reason, reasonOptions, reasonOther, onSelectChange
         } = this.props;
         const isOtherReason = reason === OTHER_DEMOTION_REASON;
@@ -24,10 +24,10 @@ export default class AssociateDemoteComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/associates/${urlArgument}`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
+                            <Link to={`/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/associates/${urlArgument}/${slug}`}><i className="fas fa-crown"></i>&nbsp;Argyle</Link>
+                            <Link to={`/associate/${slug}`}><i className="fas fa-crown"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star-half"></i>&nbsp;Demote
@@ -83,7 +83,7 @@ export default class AssociateDemoteComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Confirm & Submit
                                 </button>
-                                <Link to={`/associates/${urlArgument}/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/associate/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
