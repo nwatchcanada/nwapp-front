@@ -53,7 +53,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-associates",
         icon: "crown",
         title: "Associates",
-        url: "/associates/active"
+        url: "/associates"
     },{
         id: "full-watches",
         icon: "shield-alt",

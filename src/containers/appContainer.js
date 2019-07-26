@@ -113,8 +113,9 @@ import ItemCreateStep3Container from "./items/create/itemCreateStep3Container";
 import ItemUpdateContainer from "./items/update/itemUpdateContainer";
 import ItemArchiveContainer from "./items/archive/itemArchiveContainer";
 
-import AssociateListActiveContainer from "./associates/associateListActiveContainer";
-import AssociateListInactiveContainer from "./associates/associateListInactiveContainer";
+import AssociateListContainer from "./associates/list/associateListContainer";
+// import AssociateListActiveContainer from "./associates/associateListActiveContainer";
+// import AssociateListInactiveContainer from "./associates/associateListInactiveContainer";
 import AssociateSearchContainer from "./associates/associateSearchContainer";
 import AssociateSearchResultContainer from "./associates/associateSearchResultContainer";
 import AssociateLiteRetrieveContainer from "./associates/retrieve/associateLiteRetrieveContainer";
@@ -267,8 +268,7 @@ class AppContainer extends React.Component {
                                 <Route path="/associates/add/step-1" exact component={requiresAuth(AssociateCreateStep1Container)} />
                                 <Route path="/associates/add/step-2" exact component={requiresAuth(AssociateCreateStep2Container)} />
                                 <Route path="/associates/add/step-3" exact component={requiresAuth(AssociateCreateStep3Container)} />
-                                <Route path="/associates/active" exact component={requiresAuth(AssociateListActiveContainer)} />
-                                <Route path="/associates/inactive" exact component={requiresAuth(AssociateListInactiveContainer)} />
+                                <Route path="/associates" exact component={requiresAuth(AssociateListContainer)} />
                                 <Route path="/associates/:urlArgument/search" exact component={requiresAuth(AssociateSearchContainer)} />
                                 <Route path="/associates/:urlArgument/search-results" exact component={requiresAuth(AssociateSearchResultContainer)} />
                                 <Route path="/associates/:urlArgument/:slug" exact component={requiresAuth(AssociateLiteRetrieveContainer)} />
