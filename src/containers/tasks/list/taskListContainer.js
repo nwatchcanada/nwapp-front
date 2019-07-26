@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TaskListComponent from "../../components/tasks/taskListComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import TaskListComponent from "../../../components/tasks/list/taskListComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
 class TaskListContainer extends Component {

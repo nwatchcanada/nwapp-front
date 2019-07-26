@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TaskSearchComponent from "../../components/tasks/taskSearchComponent";
+import TaskSearchResultComponent from "../../../components/tasks/list/taskSearchResultComponent";
 
 
-class TaskListContainer extends Component {
+class TaskSearchResultContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -18,12 +18,8 @@ class TaskListContainer extends Component {
         const { urlArgument } = this.props.match.params;
 
         this.state = {
-            urlArgument: urlArgument,
-            advancedSearchActive: false
+            urlArgument: urlArgument
         }
-        this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
-        this.onSearchClick = this.onSearchClick.bind(this);
-        this.onAdvancedSearchClick = this.onAdvancedSearchClick.bind(this);
     }
 
     /**
@@ -62,19 +58,6 @@ class TaskListContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onAdvancedSearchPanelToggle() {
-        this.setState({
-            advancedSearchActive: !this.state.advancedSearchActive
-        });
-    }
-
-    onSearchClick() {
-        this.props.history.push("/tasks/"+this.state.urlArgument+"/search-results");
-    }
-
-    onAdvancedSearchClick() {
-        this.props.history.push("/tasks/"+this.state.urlArgument+"/search-results");
-    }
 
     /**
      *  Main render function
@@ -82,13 +65,38 @@ class TaskListContainer extends Component {
      */
 
     render() {
+        const tableData = [{
+            'slug': 'Argyle',
+            'icon': 'home',
+            'number': 1,
+            'firstName': 'Shinji',
+            'lastName': 'Ikari',
+            'phone': '(789) 789-7890',
+            'email': 'shinji.ikari@nerv.worldgov',
+            'absoluteUrl': '/tasks/argyle'
+        },{
+            'slug': 'byron',
+            'icon': 'home',
+            'number': 2,
+            'firstName': 'Mariya',
+            'lastName': 'Takeuchi',
+            'phone': '(321) 321-3210',
+            'email': 'plastic_lover@gmail.com',
+            'absoluteUrl': '/tasks/byron'
+        },{
+            'slug': 'carling',
+            'icon': 'briefcase',
+            'number': 3,
+            'firstName': 'Rei',
+            'lastName': 'Ayanami',
+            'phone': '(123) 123-1234',
+            'email': 'rei.ayanami@nerv.worldgov',
+            'absoluteUrl': '/tasks/carling'
+        }];
         return (
-            <TaskSearchComponent
+            <TaskSearchResultComponent
                 urlArgument={this.state.urlArgument}
-                advancedSearchActive={this.state.advancedSearchActive}
-                onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
-                onSearchClick={this.onSearchClick}
-                onAdvancedSearchClick={this.onAdvancedSearchClick}
+                tableData={tableData}
             />
         );
     }
@@ -109,4 +117,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TaskListContainer);
+)(TaskSearchResultContainer);

@@ -149,7 +149,7 @@ import StaffCreateStep2Container from "./staff/create/staffCreateStep2Container"
 import StaffFullRetrieveContainer from "./staff/retrieve/staffFullRetrieveContainer";
 import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContainer";
 
-import TaskListContainer from "./tasks/taskListContainer";
+import TaskListContainer from "./tasks/list/taskListContainer";
 import AssignWatchAssociateTaskStep1Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Container";
 import AssignWatchAssociateTaskStep2Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Container";
 import AssignWatchAssociateTaskStep3Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep3Container";
