@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { FlashMessageComponent } from "../../flashMessageComponent";
 
-class AssignWatchAssociateTaskStep3Component extends Component {
+
+class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
     render() {
-        const { onClick, onBack, slug } = this.props;
+        const { urlArgument, onClick, onBack, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -21,24 +23,22 @@ class AssignWatchAssociateTaskStep3Component extends Component {
                     </ol>
                 </nav>
 
+                <FlashMessageComponent object={flashMessage} />
+
                 <h1><i className="fas fa-thumbtack"></i>&nbsp;Argyle</h1>
 
                 <div className="row">
                     <div className="step-navigation">
-                        <div id="step-1" className="st-grey">
-                            <Link to={`/task/1/${slug}/step-1`}>
+                        <div id="step-1" className="st-grey active">
+                            <strong>
                                 <span className="num">1.</span><span className="">Info</span>
-                            </Link>
+                            </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/task/1/${slug}/step-2`}>
-                                <span className="num">2.</span><span className="">Selection</span>
-                            </Link>
+                            <span className="num">2.</span><span className="">Selection</span>
                         </div>
-                        <div id="step-3" className="st-grey active">
-                            <strong>
-                                <span className="num">3.</span><span className="">Review</span>
-                            </strong>
+                        <div id="step-3" className="st-grey">
+                            <span className="num">3.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ class AssignWatchAssociateTaskStep3Component extends Component {
                             <tbody>
                             <tr className="bg-dark">
                                 <th scope="row" colSpan="2" className="text-light">
-                                    <i className="fas fa-table"></i>&nbsp;Submission Details
+                                    <i className="fas fa-table"></i>&nbsp;Task Details
                                 </th>
                             </tr>
                             <tr>
@@ -79,11 +79,11 @@ class AssignWatchAssociateTaskStep3Component extends Component {
                         </table>
 
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
-                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
-                                <i className="fas fa-check-circle"></i>&nbsp;Save
+                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
+                                Proceed to Selection&nbsp;<i className="fas fa-arrow-circle-right"></i>
                             </button>
 
-                            <Link className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" to={`/task/1/${slug}/step-2`}>
+                            <Link className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" to="/tasks">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>
@@ -97,4 +97,4 @@ class AssignWatchAssociateTaskStep3Component extends Component {
     }
 }
 
-export default AssignWatchAssociateTaskStep3Component;
+export default AssignWatchAreaCoordinatorTaskStep1Component;
