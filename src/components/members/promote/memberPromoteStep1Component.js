@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default class MemberPromoteStep1Component extends Component {
     render() {
-        const { urlArgument, slug, onClick, isLoading } = this.props;
+        const { slug, onClick, isLoading } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -17,7 +17,7 @@ export default class MemberPromoteStep1Component extends Component {
                             <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/members/${urlArgument}/${slug}/full`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
+                            <Link to={`/member/${slug}/full`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote
@@ -75,7 +75,7 @@ export default class MemberPromoteStep1Component extends Component {
 
                 <div className="row">
                     <div className="col-md-12">
-                        <Link to={`/members/${urlArgument}/${slug}/full`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                        <Link to={`/member/${slug}/full`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                             <i className="fas fa-arrow-circle-left"></i> Back
                         </Link>
                     </div>

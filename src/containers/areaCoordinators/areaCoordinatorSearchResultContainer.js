@@ -61,7 +61,7 @@ class AreaCoordinatorSearchResultContainer extends Component {
             'lastName': 'Ikari',
             'phone': '(789) 789-7890',
             'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/area-coordinators/argyle'
+            'absoluteUrl': '/area-coordinator/argyle'
         },{
             'slug': 'byron',
             'icon': 'home',
@@ -70,7 +70,7 @@ class AreaCoordinatorSearchResultContainer extends Component {
             'lastName': 'Takeuchi',
             'phone': '(321) 321-3210',
             'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/area-coordinators/byron'
+            'absoluteUrl': '/area-coordinator/byron'
         },{
             'slug': 'carling',
             'icon': 'briefcase',
@@ -79,7 +79,7 @@ class AreaCoordinatorSearchResultContainer extends Component {
             'lastName': 'Ayanami',
             'phone': '(123) 123-1234',
             'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/area-coordinators/carling'
+            'absoluteUrl': '/area-coordinator/carling'
         }];
         return (
             <AreaCoordinatorSearchResultComponent

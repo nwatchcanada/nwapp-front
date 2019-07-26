@@ -24,10 +24,10 @@ export default class AreaCoordinatorDemoteComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinator</Link>
+                            <Link to={`/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/area-coordinators/${slug}`}><i className="fas fa-horse-head"></i>&nbsp;Argyle</Link>
+                            <Link to={`/area-coordinator/${slug}`}><i className="fas fa-horse-head"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star-half"></i>&nbsp;Demote
@@ -73,7 +73,7 @@ export default class AreaCoordinatorDemoteComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Confirm & Submit
                                 </button>
-                                <Link to={`/area-coordinators/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/area-coordinator/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

@@ -250,12 +250,12 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                     <td>
                                         <ul>
                                             <li>
-                                                <Link to={`/area-coordinators/${slug}/promote`}>
+                                                <Link to={`/area-coordinator/${slug}/promote`}>
                                                     Promote&nbsp;<i className="fas fa-chevron-right"></i>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to={`/area-coordinators/${slug}/demote`}>
+                                                <Link to={`/area-coordinator/${slug}/demote`}>
                                                     Demote&nbsp;<i className="fas fa-chevron-right"></i>
                                                 </Link>
                                             </li>
@@ -268,7 +268,7 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <Link to={`/area-coordinators/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
+                                <Link to={`/area-coordinator/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
                                     <i className="fas fa-edit"></i>&nbsp;Update
                                 </Link>
                                 <Link to={`/area-coordinators`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
