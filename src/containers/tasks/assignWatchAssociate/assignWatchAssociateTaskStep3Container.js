@@ -21,6 +21,8 @@ class AssignWatchAssociateTaskStep3Container extends Component {
         // Update state.
         this.state = {
             slug: slug,
+            associate: localStorage.getItem('nwapp-task-1-associate'),
+            associateLabel: localStorage.getItem('nwapp-task-1-associate-label'),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -83,7 +85,7 @@ class AssignWatchAssociateTaskStep3Container extends Component {
         };
         return (
             <AssignWatchAssociateTaskStep3Component
-                urlArgument={this.state.urlArgument}
+                associateLabel={this.state.associateLabel}
                 slug={this.state.slug}
                 taskData={taskData}
                 onBack={this.onBack}

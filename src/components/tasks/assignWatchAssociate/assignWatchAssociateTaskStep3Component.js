@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class AssignWatchAssociateTaskStep3Component extends Component {
     render() {
-        const { onClick, onBack, slug } = this.props;
+        const { associateLabel, onClick, onBack, slug } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -60,20 +60,10 @@ class AssignWatchAssociateTaskStep3Component extends Component {
                                 <th scope="row" className="bg-light">Watch</th>
                                 <td>Argyle Community Watch</td>
                             </tr>
+
                             <tr>
-                                <th scope="row" className="bg-light">Tags</th>
-                                <td><span className="badge badge-info badge-lg">Skill 1</span> <span
-                                        className="badge badge-info badge-lg">Skill 2</span>
-                                    <span className="badge badge-info badge-lg">HTML</span> <span
-                                            className="badge badge-info badge-lg">PHP</span> <span
-                                            className="badge badge-info badge-lg">Bootstrap</span> <span
-                                            className="badge badge-info badge-lg">Django</span> <span
-                                            className="badge badge-info badge-lg">Photoshop</span> <span
-                                            className="badge badge-info badge-lg">Python</span> <span
-                                            className="badge badge-info badge-lg">ASP.net</span> <span
-                                            className="badge badge-info badge-lg">Android</span> <span
-                                            className="badge badge-info badge-lg">jQuery</span>
-                                </td>
+                                <th scope="row" className="bg-light">Associate</th>
+                                <td>{associateLabel}</td>
                             </tr>
                             </tbody>
                         </table>

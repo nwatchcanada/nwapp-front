@@ -108,6 +108,7 @@ class TaskUpdateContainer extends Component {
             optionKey: option,
         });
         localStorage.setItem('nwapp-task-1-'+[option.selectName], option.value);
+        localStorage.setItem('nwapp-task-1-'+[option.selectName]+"-label", option.label);
         localStorageSetObjectOrArrayItem('nwapp-task-1-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
