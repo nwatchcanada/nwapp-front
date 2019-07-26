@@ -118,7 +118,7 @@ import AssociateSearchContainer from "./associates/search/associateSearchContain
 import AssociateSearchResultContainer from "./associates/search/associateSearchResultContainer";
 import AssociateLiteRetrieveContainer from "./associates/retrieve/associateLiteRetrieveContainer";
 import AssociateFullRetrieveContainer from "./associates/retrieve/associateFullRetrieveContainer";
-import AssociateUpdateContainer from "./associates/associateUpdateContainer";
+import AssociateUpdateContainer from "./associates/update/associateUpdateContainer";
 import AssociateCreateStep1Container from "./associates/create/associateCreateStep1Container";
 import AssociateCreateStep2Container from "./associates/create/associateCreateStep2Container";
 import AssociateCreateStep3Container from "./associates/create/associateCreateStep3Container";
