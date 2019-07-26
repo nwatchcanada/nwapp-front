@@ -31,7 +31,7 @@ class MemberListContainer extends Component {
 
         // Load from API...
         const members = [{
-            'slug': 'argyle-member-1',
+            'slug': 'argyle',
             'icon': 'home',
             'firstName': "Bob",
             'lastName': "Page",
@@ -39,7 +39,7 @@ class MemberListContainer extends Component {
             'email': "1@1.com",
             "typeOf": "active",
         },{
-            'slug': 'byron-member-1',
+            'slug': 'byron',
             'icon': 'building',
             'firstName': "Walter",
             'lastName': "Simons",
@@ -47,7 +47,7 @@ class MemberListContainer extends Component {
             'email': "2@2.com",
             "typeOf": "active",
         },{
-            'slug': 'carling-member-1',
+            'slug': 'carling',
             'icon': 'university',
             'firstName': "JC",
             'lastName': "Denton",

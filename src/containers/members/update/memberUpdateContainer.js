@@ -188,7 +188,7 @@ class MemberUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Member has been successfully updated.");
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/full");
+        this.props.history.push("/member/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {
