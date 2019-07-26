@@ -35,7 +35,7 @@ export default class AreaCoordinatorLiteRetrieveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/area-coordinators/${slug}/full`}>
+                            <Link to={`/area-coordinator/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>

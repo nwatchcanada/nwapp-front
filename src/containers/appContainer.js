@@ -278,11 +278,11 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinators" exact component={requiresAuth(AreaCoordinatorListContainer)} />
                                 <Route path="/area-coordinators/search" exact component={requiresAuth(AreaCoordinatorSearchContainer)} />
                                 <Route path="/area-coordinators/search-results" exact component={requiresAuth(AreaCoordinatorSearchResultContainer)} />
-                                <Route path="/area-coordinators/:slug" exact component={requiresAuth(AreaCoordinatorLiteRetrieveContainer)} />
-                                <Route path="/area-coordinators/:slug/full" exact component={requiresAuth(AreaCoordinatorFullRetrieveContainer)} />
-                                <Route path="/area-coordinators/:slug/update" exact component={requiresAuth(AreaCoordinatorUpdateContainer)} />
-                                <Route path="/area-coordinators/:slug/promote" exact component={requiresAuth(AreaCoordinatorPromoteContainer)} />
-                                <Route path="/area-coordinators/:slug/demote" exact component={requiresAuth(AreaCoordinatorDemoteContainer)} />
+                                <Route path="/area-coordinator/:slug" exact component={requiresAuth(AreaCoordinatorLiteRetrieveContainer)} />
+                                <Route path="/area-coordinator/:slug/full" exact component={requiresAuth(AreaCoordinatorFullRetrieveContainer)} />
+                                <Route path="/area-coordinator/:slug/update" exact component={requiresAuth(AreaCoordinatorUpdateContainer)} />
+                                <Route path="/area-coordinator/:slug/promote" exact component={requiresAuth(AreaCoordinatorPromoteContainer)} />
+                                <Route path="/area-coordinator/:slug/demote" exact component={requiresAuth(AreaCoordinatorDemoteContainer)} />
                                 <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
                                 <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />
                                 <Route path="/staff/active" exact component={requiresAuth(StaffListActiveContainer)} />
