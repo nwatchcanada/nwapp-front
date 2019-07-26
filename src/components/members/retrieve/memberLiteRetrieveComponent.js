@@ -6,7 +6,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 export default class MemberLiteRetrieveComponent extends Component {
     render() {
-        const { urlArgument, slug, flashMessage } = this.props;
+        const { slug, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@ export default class MemberLiteRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/members/${urlArgument}`}><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to={`/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;Argyle
@@ -35,7 +35,7 @@ export default class MemberLiteRetrieveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/members/${urlArgument}/${slug}/full`}>
+                            <Link to={`/member/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>

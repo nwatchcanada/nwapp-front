@@ -14,7 +14,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 export default class MemberFullRetrieveComponent extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
-        const { urlArgument, slug, flashMessage, tagOptions, howDidYouHearOptions } = this.props;
+        const { slug, flashMessage, tagOptions, howDidYouHearOptions } = this.props;
         const {
             typeOf, errors,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
@@ -63,7 +63,7 @@ export default class MemberFullRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/member"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;Argyle
@@ -78,7 +78,7 @@ export default class MemberFullRetrieveComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/members/${urlArgument}/${slug}`}>
+                            <Link to={`/member/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
@@ -331,7 +331,7 @@ export default class MemberFullRetrieveComponent extends Component {
                                     <td>
                                         <ul>
                                             <li>
-                                                <Link to={`/members/${urlArgument}/${slug}/promote/step-1`}>
+                                                <Link to={`/member/${slug}/promote/step-1`}>
                                                     Promote&nbsp;<i className="fas fa-chevron-right"></i>
                                                 </Link>
                                             </li>
@@ -343,10 +343,10 @@ export default class MemberFullRetrieveComponent extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <Link to={`/members/${urlArgument}/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
+                                <Link to={`/member/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
                                     <i className="fas fa-edit"></i>&nbsp;Update
                                 </Link>
-                                <Link to={`/members/${urlArgument}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/members`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

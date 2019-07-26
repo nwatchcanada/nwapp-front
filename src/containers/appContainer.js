@@ -249,11 +249,11 @@ class AppContainer extends React.Component {
                                 <Route path="/members" exact component={requiresAuth(MemberListContainer)} />
                                 <Route path="/members/search" exact component={requiresAuth(MemberSearchContainer)} />
                                 <Route path="/members/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
-                                <Route path="/members/:urlArgument/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />
-                                <Route path="/members/:urlArgument/:slug/full" exact component={requiresAuth(MemberFullRetrieveContainer)} />
-                                <Route path="/members/:urlArgument/:slug/update" exact component={requiresAuth(MemberUpdateContainer)} />
-                                <Route path="/members/:urlArgument/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
-                                <Route path="/members/:urlArgument/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
+                                <Route path="/member/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />
+                                <Route path="/member/:slug/full" exact component={requiresAuth(MemberFullRetrieveContainer)} />
+                                <Route path="/member/:slug/update" exact component={requiresAuth(MemberUpdateContainer)} />
+                                <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
+                                <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/item/add/step-1" exact component={requiresAuth(ItemCreateStep1Container)} />
                                 <Route path="/item/add/step-2-concern" exact component={requiresAuth(ItemCreateStep2ConcernContainer)} />
