@@ -31,7 +31,7 @@ import SharedOrganizationCreateContainer from "./organization/shared/sharedOrgan
 import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
 
-import DistrictsListContainer from "./settings/districts/districtsListContainer";
+import DistrictsListContainer from "./settings/districts/list/districtListContainer";
 import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
 import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
 import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
