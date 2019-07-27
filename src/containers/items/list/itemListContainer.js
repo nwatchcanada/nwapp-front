@@ -17,6 +17,16 @@ class ItemListContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            filter: "active",
+            items: [],
+        }
+        this.onFilterClick = this.onFilterClick.bind(this);
+        this.filterItems = this.filterItems.bind(this);
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -24,6 +34,44 @@ class ItemListContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Load from API...
+        const items = [{
+            'slug': 'argyle',
+            'icon': 'fire',
+            'number': 1,
+            'name': 'Argyle',
+            'typeOf': INCIDENT_ITEM_TYPE_OF,
+            'state': 'active',
+            'absoluteUrl': '/item/argyle'
+        },{
+            'slug': 'byron',
+            'icon': 'glass-cheers',
+            'number': 2,
+            'name': 'Byron',
+            'typeOf': EVENT_ITEM_TYPE_OF,
+            'state': 'active',
+            'absoluteUrl': '/item/byron'
+        },{
+            'slug': 'carling',
+            'icon': 'exclamation-circle',
+            'number': 3,
+            'name': 'Carling',
+            'typeOf': CONCERN_ITEM_TYPE_OF,
+            'state': 'active',
+            'absoluteUrl': '/item/carling'
+        },{
+            'slug': 'darlyn',
+            'icon': 'info-circle',
+            'number': 4,
+            'name': 'Darlyn',
+            'typeOf': INFORMATION_ITEM_TYPE_OF,
+            'state': 'active',
+            'absoluteUrl': '/item/darlyn'
+        }];
+        this.setState({
+            items: items,
+        });
     }
 
     componentWillUnmount() {
@@ -56,6 +104,27 @@ class ItemListContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onFilterClick(e, filter) {
+        e.preventDefault();
+        this.setState({
+            filter: filter,
+        })
+    }
+
+    filterItems() {
+        let filteredItems = [];
+        if (this.state.items === undefined || this.state.items === null) {
+            return [];
+        }
+        for (let i = 0; i < this.state.items.length; i++) {
+            let item = this.state.items[i];
+            if (item.state === this.state.filter) {
+                filteredItems.push(item);
+            }
+        }
+        return filteredItems;
+    }
+
 
     /**
      *  Main render function
@@ -63,34 +132,12 @@ class ItemListContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'typeOf': INCIDENT_ITEM_TYPE_OF,
-            'absoluteUrl': '/item/argyle'
-        },{
-            'slug': 'byron',
-            'number': 2,
-            'name': 'Byron',
-            'typeOf': EVENT_ITEM_TYPE_OF,
-            'absoluteUrl': '/item/byron'
-        },{
-            'slug': 'carling',
-            'number': 3,
-            'name': 'Carling',
-            'typeOf': CONCERN_ITEM_TYPE_OF,
-            'absoluteUrl': '/item/carling'
-        },{
-            'slug': 'darlyn',
-            'number': 4,
-            'name': 'Darlyn',
-            'typeOf': INFORMATION_ITEM_TYPE_OF,
-            'absoluteUrl': '/item/darlyn'
-        }];
+
         return (
             <ItemListComponent
-                tableData={tableData}
+                filter={this.state.filter}
+                onFilterClick={this.onFilterClick}
+                items={this.filterItems()}
                 flashMessage={this.props.flashMessage}
             />
         );
