@@ -8,7 +8,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 export default class WatchRetrieveComponent extends Component {
     render() {
         const {
-            tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, flashMessage
+            tags, name, description, associate, district, programLabel, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, flashMessage
         } = this.props;
         return (
             <main id="main" role="main">
@@ -62,7 +62,7 @@ export default class WatchRetrieveComponent extends Component {
                                 }
                                 <tr>
                                     <th scope="row" className="bg-light">Program</th>
-                                    <td>Business</td>
+                                    <td>{programLabel}</td>
                                 </tr>
                                 {associate &&
                                     <tr>
