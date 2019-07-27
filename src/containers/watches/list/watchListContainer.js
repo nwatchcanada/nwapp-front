@@ -11,6 +11,16 @@ class WatchListContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            filter: "active",
+            watches: [],
+        }
+        this.onFilterClick = this.onFilterClick.bind(this);
+        this.filterWatches = this.filterWatches.bind(this);
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -18,6 +28,36 @@ class WatchListContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Load from API...
+        const watches = [{
+            'slug': 'argyle',
+            'icon': 'home',
+            'firstName': "Bob",
+            'lastName': "Page",
+            "phone": "(111) 222-3333",
+            'email': "1@1.com",
+            "typeOf": "active",
+        },{
+            'slug': 'byron',
+            'icon': 'building',
+            'firstName': "Walter",
+            'lastName': "Simons",
+            "phone": "(222) 333-4444",
+            'email': "2@2.com",
+            "typeOf": "active",
+        },{
+            'slug': 'carling',
+            'icon': 'university',
+            'firstName': "JC",
+            'lastName': "Denton",
+            "phone": "(333) 444-5555",
+            'email': "3@3.com",
+            "typeOf": "active",
+        }];
+        this.setState({
+            watches: watches,
+        });
     }
 
     componentWillUnmount() {
@@ -50,6 +90,27 @@ class WatchListContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onFilterClick(e, filter) {
+        e.preventDefault();
+        this.setState({
+            filter: filter,
+        })
+    }
+
+    filterWatches() {
+        let filteredWatches = [];
+        if (this.state.watches === undefined || this.state.watches === null) {
+            return [];
+        }
+        for (let i = 0; i < this.state.watches.length; i++) {
+            let watch = this.state.watches[i];
+            if (watch.typeOf === this.state.filter) {
+                filteredWatches.push(watch);
+            }
+        }
+        return filteredWatches;
+    }
+
 
     /**
      *  Main render function
@@ -57,28 +118,12 @@ class WatchListContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'icon': 'building',
-            'number': 1,
-            'name': 'Argyle (Biz)',
-            'absoluteUrl': '/watch-biz/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'university',
-            'number': 2,
-            'name': 'Byron (Com)',
-            'absoluteUrl': '/watch-cc/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'home',
-            'number': 3,
-            'name': 'Carling (Rez)',
-            'absoluteUrl': '/watch-rez/carling'
-        }];
+
         return (
             <WatchListComponent
-                tableData={tableData}
+                filter={this.state.filter}
+                onFilterClick={this.onFilterClick}
+                watches={this.filterWatches()}
                 flashMessage={this.props.flashMessage}
             />
         );

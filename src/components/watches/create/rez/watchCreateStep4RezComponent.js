@@ -7,7 +7,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 
 export default class WatchCreateStep4RezComponent extends Component {
     render() {
-        const { tags, name, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, errors } = this.props;
+        const { tags, name, district, streetMembership, isLoading, onClick, errors } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -80,18 +80,6 @@ export default class WatchCreateStep4RezComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Program</th>
                                     <td>Residential</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Associate</th>
-                                    <td>{associate.label}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Primary Area Coordinator</th>
-                                    <td>{primaryAreaCoordinator.label}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Secondary Area Coordinator</th>
-                                    <td>{secondaryAreaCoordinator.label}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Addresses</th>

@@ -1,32 +1,172 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 import { FlashMessageComponent } from "../../flashMessageComponent";
+import WatchFilterComponent from "./watchFilterComponent";
 
 
-class TableRow extends Component {
+class ActiveListComponent extends Component {
     render() {
-        const { slug, icon, number, name, absoluteUrl } = this.props.datum;
+        const { watches } = this.props;
+
+        const columns = [{
+            dataField: 'icon',
+            text: '',
+            sort: false,
+            formatter: iconFormatter
+        },{
+            dataField: 'firstName',
+            text: 'First Name',
+            sort: true
+        },{
+            dataField: 'lastName',
+            text: 'Last Name',
+            sort: true
+        },{
+            dataField: 'phone',
+            text: 'Phone',
+            sort: true
+        },{
+            dataField: 'email',
+            text: 'Email',
+            sort: true
+        },{
+            dataField: 'slug',
+            text: 'Financials',
+            sort: false,
+            formatter: financialExternalLinkFormatter
+        },{
+            dataField: 'slug',
+            text: 'Details',
+            sort: false,
+            formatter: detailLinkFormatter
+        }];
 
         return (
-            <tr slug={slug}>
-                <td><i className={`fas fa-${icon}`}></i></td>
-                <td>{number}</td>
-                <td>{name}</td>
-                <td>
-                    <a href={absoluteUrl}>
-                        View&nbsp;<i className="fas fa-chevron-right"></i>
-                    </a>
-                </td>
-            </tr>
+            <div className="row">
+                <div className="col-md-12">
+                    <h2>
+                        <i className="fas fa-user-check"></i>&nbsp;Active Watches
+                    </h2>
+
+                    <BootstrapTable
+                        bootstrap4
+                        keyField='slug'
+                        data={ watches }
+                        columns={ columns }
+                        striped
+                        bordered={ false }
+                        pagination={ paginationFactory() }
+                        noDataIndication="There are no active watches at the moment"
+                    />
+
+                </div>
+            </div>
         );
     }
 }
 
 
+class InactiveListComponent extends Component {
+    render() {
+        const { watches } = this.props;
+
+        const columns = [{
+            dataField: 'icon',
+            text: '',
+            sort: false,
+            formatter: iconFormatter,
+            style: {
+                width: 10,
+            }
+        },{
+            dataField: 'firstName',
+            text: 'First Name',
+            sort: true
+        },{
+            dataField: 'lastName',
+            text: 'Last Name',
+            sort: true
+        },{
+            dataField: 'phone',
+            text: 'Watch',
+            sort: true
+        },{
+            dataField: 'email',
+            text: 'Email',
+            sort: true
+        },{
+            dataField: 'slug',
+            text: 'Financials',
+            sort: false,
+            formatter: financialExternalLinkFormatter
+        },{
+            dataField: 'slug',
+            text: 'Details',
+            sort: false,
+            formatter: detailLinkFormatter
+        }];
+
+        return (
+            <div className="row">
+                <div className="col-md-12">
+                    <h2>
+                        <i className="fas fa-user-times"></i>&nbsp;Inactive Watches
+                    </h2>
+
+                    <BootstrapTable
+                        bootstrap4
+                        keyField='slug'
+                        data={ watches }
+                        columns={ columns }
+                        striped
+                        bordered={ false }
+                        pagination={ paginationFactory() }
+                        noDataIndication="There are no inactive watches at the moment"
+                    />
+
+                </div>
+            </div>
+        );
+    }
+}
+
+
+function iconFormatter(cell, row){
+    return (
+        <i className={`fas fa-${row.icon}`}></i>
+    )
+}
+
+
+function financialExternalLinkFormatter(cell, row){
+    return (
+        <a target="_blank" href={`/financial/${row.slug}`}>
+            View&nbsp;<i className="fas fa-external-link-alt"></i>
+        </a>
+    )
+}
+
+
+function detailLinkFormatter(cell, row){
+    return (
+        <Link to={`/watch/${row.slug}`}>
+            View&nbsp;<i className="fas fa-chevron-right"></i>
+        </Link>
+    )
+}
+
+
 class WatchListComponent extends Component {
     render() {
-        const { tableData, flashMessage } = this.props;
+        const { filter, onFilterClick, watches, flashMessage } = this.props;
+
+        const isActive = filter === "active";
+        const isInactive = filter === "inactive";
+
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -43,73 +183,42 @@ class WatchListComponent extends Component {
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-shield-alt"></i>&nbsp;Watches</h1>
+
                 <div className="row">
                     <div className="col-md-12">
-
                         <section className="row text-center placeholders">
-                            <div className="col-sm-3 placeholder">
+                            <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/watches/step-1-create" className="d-block link-ndecor" title="Watch">
+                                    <Link to="/watches/step-1-create" className="d-block link-ndecor" title="Clients">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
                                 <h4>Add</h4>
-                                <div className="text-muted">Add a watch</div>
+                                <div className="text-muted">Add Watches</div>
                             </div>
-                            { /*
-                            <div className="col-sm-3 placeholder">
+                            <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="#" className="d-block link-ndecor" title="Jobs">
+                                    <Link to="/watches/search" className="d-block link-ndecor" title="Search">
                                         <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
                                     </Link>
                                 </div>
                                 <h4>Search</h4>
-                                <span className="text-muted">Search your districts</span>
+                                <span className="text-muted">Search Watches</span>
                             </div>
-
-                            <div className="col-sm-3 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
-                                    <Link to="#" className="d-block link-ndecor" title="Members">
-                                        <h1 className="circle-title">2,200</h1>
-                                    </Link>
-                                </div>
-                                <h4>Associate Members</h4>
-                                <span className="text-muted">View Member Data</span>
-                            </div>
-                            <div className="col-sm-3 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
-                                    <Link to="#" className="d-block link-ndecor" title="Tasks">
-                                        <h1 className="circle-title">12</h1>
-                                    </Link>
-                                </div>
-                                <h4>Tasks</h4>
-                                <span className="text-muted">View your tasks</span>
-                            </div>
-                            */ }
                         </section>
-
-                        <h2>List</h2>
-
-                        <div className="table-responsive">
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Number</th>
-                                        <th>Name</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {tableData && tableData.map(
-                                        (tableDatum, i) => <TableRow datum={tableDatum} key={i} />)
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-
                     </div>
                 </div>
+
+                <WatchFilterComponent filter={filter} onFilterClick={onFilterClick} />
+
+                {isActive &&
+                    <ActiveListComponent watches={watches} />
+                }
+                {isInactive &&
+                    <InactiveListComponent watches={watches} />
+                }
+
+
             </div>
         );
     }

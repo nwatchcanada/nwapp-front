@@ -21,14 +21,8 @@ class WatchCreateStep4RezContainer extends Component {
             program: RESIDENCE_TYPE_OF,
             tags: localStorageGetArrayItem("nwapp-watch-rez-tags"),
             name: localStorage.getItem('nwapp-watch-rez-name'),
-            associate: localStorage.getItem('nwapp-watch-rez-associate'),
-            associateOption: localStorageGetObjectItem('nwapp-watch-rez-associateOption'),
             district: localStorage.getItem('nwapp-watch-rez-district'),
             districtOption: localStorageGetObjectItem('nwapp-watch-rez-districtOption'),
-            primaryAreaCoordinator: localStorage.getItem('nwapp-watch-rez-primaryAreaCoordinator'),
-            primaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-rez-primaryAreaCoordinatorOption'),
-            secondaryAreaCoordinator: localStorage.getItem('nwapp-watch-rez-secondaryAreaCoordinator'),
-            secondaryAreaCoordinatorOption: localStorageGetObjectItem('nwapp-watch-rez-secondaryAreaCoordinatorOption'),
             streetMembership: localStorageGetArrayItem('nwapp-watch-rez-streetMembership'),
             errors: {},
         }
@@ -77,16 +71,13 @@ class WatchCreateStep4RezContainer extends Component {
 
     render() {
         const {
-            tags, name, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            tags, name, districtOption, streetMembership, errors,
         } = this.state;
         return (
             <WatchCreateStep4RezComponent
                 tags={tags}
                 name={name}
-                associate={associateOption}
                 district={districtOption}
-                primaryAreaCoordinator={primaryAreaCoordinatorOption}
-                secondaryAreaCoordinator={secondaryAreaCoordinatorOption}
                 streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}

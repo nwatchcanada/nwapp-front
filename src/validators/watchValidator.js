@@ -14,8 +14,8 @@ export function validateResidentialStep2Input(data) {
     if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "" || data.name === "null") {
         errors.name = 'This field is required';
     }
-    if (data.associate === undefined || data.associate === null || validator.isEmpty(data.associate) || data.associate === "" || data.associate === "null") {
-        errors.associate = 'This field is required';
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "" || data.description === "null") {
+        errors.description = 'This field is required';
     }
     if (data.district === undefined || data.district === null || validator.isEmpty(data.district) || data.district === "" || data.district === "null") {
         errors.district = 'This field is required';
