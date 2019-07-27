@@ -10,6 +10,15 @@ class AreaCoordinatorSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            results: []
+        }
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -17,6 +26,37 @@ class AreaCoordinatorSearchResultContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        this.setState({
+            results: [{
+                'slug': 'Argyle',
+                'icon': 'home',
+                'number': 1,
+                'firstName': 'Shinji',
+                'lastName': 'Ikari',
+                'phone': '(789) 789-7890',
+                'email': 'shinji.ikari@nerv.worldgov',
+                'absoluteUrl': '/area-coordinator/argyle'
+            },{
+                'slug': 'byron',
+                'icon': 'home',
+                'number': 2,
+                'firstName': 'Mariya',
+                'lastName': 'Takeuchi',
+                'phone': '(321) 321-3210',
+                'email': 'plastic_lover@gmail.com',
+                'absoluteUrl': '/area-coordinator/byron'
+            },{
+                'slug': 'carling',
+                'icon': 'briefcase',
+                'number': 3,
+                'firstName': 'Rei',
+                'lastName': 'Ayanami',
+                'phone': '(123) 123-1234',
+                'email': 'rei.ayanami@nerv.worldgov',
+                'absoluteUrl': '/area-coordinator/carling'
+            }]
+        })
     }
 
     componentWillUnmount() {
@@ -53,37 +93,9 @@ class AreaCoordinatorSearchResultContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'icon': 'home',
-            'number': 1,
-            'firstName': 'Shinji',
-            'lastName': 'Ikari',
-            'phone': '(789) 789-7890',
-            'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/area-coordinator/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'home',
-            'number': 2,
-            'firstName': 'Mariya',
-            'lastName': 'Takeuchi',
-            'phone': '(321) 321-3210',
-            'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/area-coordinator/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'briefcase',
-            'number': 3,
-            'firstName': 'Rei',
-            'lastName': 'Ayanami',
-            'phone': '(123) 123-1234',
-            'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/area-coordinator/carling'
-        }];
         return (
             <AreaCoordinatorSearchResultComponent
-                tableData={tableData}
+                results={this.state.results}
             />
         );
     }
