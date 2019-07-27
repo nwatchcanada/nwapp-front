@@ -58,9 +58,7 @@ import WatchCreateStep2ComContainer from "./watches/create/com/watchCreateStep2C
 import WatchCreateStep3ComContainer from "./watches/create/com/watchCreateStep3ComContainer";
 import WatchCreateStep4ComContainer from "./watches/create/com/watchCreateStep4ComContainer";
 import WatchRetrieveContainer from "./watches/retrieve/watchRetrieveContainer";
-import WatchUpdateRezContainer from "./watches/update/watchUpdateRezContainer";
-import WatchUpdateBizContainer from "./watches/update/watchUpdateBizContainer";
-import WatchUpdateComContainer from "./watches/update/watchUpdateComContainer";
+import WatchUpdateContainer from "./watches/update/watchUpdateContainer";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagDeleteContainer from "./settings/tags/tagDeleteContainer";
@@ -311,9 +309,7 @@ class AppContainer extends React.Component {
                                 <Route path="/watches/step-4-create-biz" exact component={requiresAuth(WatchCreateStep4BizContainer)} />
                                 <Route path="/watches/step-4-create-cc" exact component={requiresAuth(WatchCreateStep4ComContainer)} />
                                 <Route path="/watch/:slug" exact component={requiresAuth(WatchRetrieveContainer)} />
-                                <Route path="/watch-biz/:slug/update" exact component={requiresAuth(WatchUpdateBizContainer)} />
-                                <Route path="/watch-cc/:slug/update" exact component={requiresAuth(WatchUpdateComContainer)} />
-                                <Route path="/watch-rez/:slug/update" exact component={requiresAuth(WatchUpdateRezContainer)} />
+                                <Route path="/watch/:slug/update" exact component={requiresAuth(WatchUpdateContainer)} />
                                 <Route path="/financials/unpaid" exact component={requiresAuth(UnpaidFinancialListContainer)} />
                                 <Route path="/financials/paid" exact component={requiresAuth(PaidFinancialListContainer)} />
                                 <Route path="/financials/all" exact component={requiresAuth(AllFinancialListContainer)} />

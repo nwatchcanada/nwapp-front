@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import {
     validateResidentialUpdateInput, validateResidentialModalSaveInput
 } from "../../../validators/watchValidator";
-import WatchUpdateBizComponent from "../../../components/watches/update/watchUpdateBizComponent";
+import WatchUpdateComponent from "../../../components/watches/update/watchUpdateComponent";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
 import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
@@ -109,7 +109,7 @@ class WatchUpdateBizContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Business watch has been successfully updated.");
-        this.props.history.push("/watch-biz/"+this.state.slug);
+        this.props.history.push("/watch/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -316,7 +316,7 @@ class WatchUpdateBizContainer extends Component {
         }; // TODO: REPLACTE WITH API DATA.
 
         return (
-            <WatchUpdateBizComponent
+            <WatchUpdateComponent
                 slug={slug}
                 name={name}
                 description={description}

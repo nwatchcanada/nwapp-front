@@ -10,7 +10,7 @@ import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 
 
-export default class WatchUpdateBizComponent extends Component {
+export default class WatchUpdateComponent extends Component {
     render() {
         const {
             // Page related.
@@ -33,7 +33,7 @@ export default class WatchUpdateBizComponent extends Component {
                             <Link to="/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/watch-cc/${slug}`}><i className="fas fa-university"></i>&nbsp;{name}</Link>
+                            <Link to={`/watch/${slug}`}><i className="fas fa-building"></i>&nbsp;{name}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -143,7 +143,7 @@ export default class WatchUpdateBizComponent extends Component {
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                 <i className="fas fa-check-circle"></i>&nbsp;Save
                             </button>
-                            <Link to={`/watch-cc/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <Link to={`/watch/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>
