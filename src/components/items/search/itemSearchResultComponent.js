@@ -17,24 +17,12 @@ class ListComponent extends Component {
             sort: false,
             formatter: iconFormatter
         },{
-            dataField: 'firstName',
-            text: 'First Name',
-            sort: true
-        },{
-            dataField: 'lastName',
-            text: 'Last Name',
-            sort: true
-        },{
-            dataField: 'phone',
-            text: 'Phone',
-            sort: true
-        },{
-            dataField: 'email',
-            text: 'Email',
+            dataField: 'name',
+            text: 'Name',
             sort: true
         },{
             dataField: 'slug',
-            text: '',
+            text: 'Details',
             sort: false,
             formatter: externalLinkFormatter
         }];
@@ -43,7 +31,7 @@ class ListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-list"></i>&nbsp;Search Results
+                        <i className="fas fa-check"></i>&nbsp;Active Items
                     </h2>
 
                     <BootstrapTable
@@ -54,7 +42,7 @@ class ListComponent extends Component {
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="There are results returned for this search."
+                        noDataIndication="There are no active items at the moment"
                     />
 
                 </div>
@@ -83,7 +71,7 @@ function externalLinkFormatter(cell, row){
 
 
 
-class ItemSearchResultComponent extends Component {
+export default class ItemSearchResultComponent extends Component {
     render() {
         const { results, flashMessage } = this.props;
         return (
@@ -123,5 +111,3 @@ class ItemSearchResultComponent extends Component {
         );
     }
 }
-
-export default ItemSearchResultComponent;

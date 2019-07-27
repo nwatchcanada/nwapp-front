@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ItemSearchResultComponent from "../../../components/items/search/itemSearchResultComponent";
+import {
+    INCIDENT_ITEM_TYPE_OF,
+    EVENT_ITEM_TYPE_OF,
+    CONCERN_ITEM_TYPE_OF,
+    INFORMATION_ITEM_TYPE_OF
+} from "../../../constants/api";
 
 
 class ItemSearchResultContainer extends Component {
@@ -9,6 +15,16 @@ class ItemSearchResultContainer extends Component {
      *  Initializer & Utility
      *------------------------------------------------------------
      */
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            results: [],
+            errors: {},
+        }
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
 
     /**
      *  Component Life-cycle Management
@@ -17,6 +33,42 @@ class ItemSearchResultContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        this.setState({
+            results: [{
+                'slug': 'argyle',
+                'icon': 'fire',
+                'number': 1,
+                'name': 'Argyle',
+                'typeOf': INCIDENT_ITEM_TYPE_OF,
+                'state': 'active',
+                'absoluteUrl': '/item/argyle'
+            },{
+                'slug': 'byron',
+                'icon': 'glass-cheers',
+                'number': 2,
+                'name': 'Byron',
+                'typeOf': EVENT_ITEM_TYPE_OF,
+                'state': 'active',
+                'absoluteUrl': '/item/byron'
+            },{
+                'slug': 'carling',
+                'icon': 'exclamation-circle',
+                'number': 3,
+                'name': 'Carling',
+                'typeOf': CONCERN_ITEM_TYPE_OF,
+                'state': 'active',
+                'absoluteUrl': '/item/carling'
+            },{
+                'slug': 'darlyn',
+                'icon': 'info-circle',
+                'number': 4,
+                'name': 'Darlyn',
+                'typeOf': INFORMATION_ITEM_TYPE_OF,
+                'state': 'active',
+                'absoluteUrl': '/item/darlyn'
+            }]
+        })
     }
 
     componentWillUnmount() {
@@ -53,37 +105,9 @@ class ItemSearchResultContainer extends Component {
      */
 
     render() {
-        const results = [{
-            'slug': 'argyle',
-            'icon': 'home',
-            'number': 1,
-            'firstName': 'Shinji',
-            'lastName': 'Ikari',
-            'phone': '(789) 789-7890',
-            'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/item/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'home',
-            'number': 2,
-            'firstName': 'Mariya',
-            'lastName': 'Takeuchi',
-            'phone': '(321) 321-3210',
-            'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/item/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'briefcase',
-            'number': 3,
-            'firstName': 'Rei',
-            'lastName': 'Ayanami',
-            'phone': '(123) 123-1234',
-            'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/item/carling'
-        }];
         return (
             <ItemSearchResultComponent
-                results={results}
+                results={this.state.results}
             />
         );
     }
