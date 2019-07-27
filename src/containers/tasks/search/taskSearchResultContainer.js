@@ -10,6 +10,15 @@ class TaskSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            results: [],
+        }
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -17,6 +26,33 @@ class TaskSearchResultContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Load from API...
+        const results = [{
+            'slug': 'argyle-task-1',
+            'dueDate': "July 20, 2019",
+            'taskName': "Assign Associate to Watch",
+            "watchName": "Argyle",
+            "category": "unassigned",
+            "typeOf": "unassigned-watch-associate",
+        },{
+            'slug': 'byron-task-1',
+            'dueDate': "April 10, 2019",
+            'taskName': "Assign Area Coordinator to Watch",
+            "watchName": "Byron",
+            "category": "unassigned",
+            "typeOf": "unassigned-watch-area-coordinator",
+        },{
+            'slug': 'carling-task-1',
+            'dueDate': "January 2, 2019",
+            'taskName': "Assign Area Coordinator to Watch",
+            "watchName": "Carling",
+            "category": "unassigned",
+            "typeOf": "unassigned-watch-associate",
+        }];
+        this.setState({
+            results: results,
+        });
     }
 
     componentWillUnmount() {
@@ -53,37 +89,9 @@ class TaskSearchResultContainer extends Component {
      */
 
     render() {
-        const results = [{
-            'slug': 'argyle',
-            'icon': 'home',
-            'number': 1,
-            'firstName': 'Shinji',
-            'lastName': 'Ikari',
-            'phone': '(789) 789-7890',
-            'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/task/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'home',
-            'number': 2,
-            'firstName': 'Mariya',
-            'lastName': 'Takeuchi',
-            'phone': '(321) 321-3210',
-            'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/task/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'briefcase',
-            'number': 3,
-            'firstName': 'Rei',
-            'lastName': 'Ayanami',
-            'phone': '(123) 123-1234',
-            'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/task/carling'
-        }];
         return (
             <TaskSearchResultComponent
-                results={results}
+                results={this.state.results}
             />
         );
     }

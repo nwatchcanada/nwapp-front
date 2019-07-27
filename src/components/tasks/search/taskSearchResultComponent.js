@@ -12,25 +12,16 @@ class ListComponent extends Component {
         const { results } = this.props;
 
         const columns = [{
-            dataField: 'icon',
-            text: '',
-            sort: false,
-            formatter: iconFormatter
-        },{
-            dataField: 'firstName',
-            text: 'First Name',
+            dataField: 'dueDate',
+            text: 'Due Date',
             sort: true
         },{
-            dataField: 'lastName',
-            text: 'Last Name',
+            dataField: 'taskName',
+            text: 'Task',
             sort: true
         },{
-            dataField: 'phone',
-            text: 'Phone',
-            sort: true
-        },{
-            dataField: 'email',
-            text: 'Email',
+            dataField: 'watchName',
+            text: 'Watch',
             sort: true
         },{
             dataField: 'slug',
@@ -43,7 +34,7 @@ class ListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-list"></i>&nbsp;Search Results
+                        <i className="fas fa-clock"></i>&nbsp;Unassigned Tasks
                     </h2>
 
                     <BootstrapTable
@@ -54,7 +45,7 @@ class ListComponent extends Component {
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="There are results returned for this search."
+                        noDataIndication="There are no results."
                     />
 
                 </div>
@@ -74,13 +65,27 @@ function iconFormatter(cell, row){
 
 
 function externalLinkFormatter(cell, row){
+    // DEVELOPERS NOTE:
+    // WE ARE ASSIGNING AN ID TO THE URL. THIS IS WHERE WE NEED TO ADD MORE IDS
+    // IF HAVE MORE DIFFERENT TYPES.
+    let typeOfID = 0;
+    switch(row.typeOf) {
+        case "unassigned-watch-associate":
+            typeOfID = 1;
+            break;
+        case "unassigned-watch-area-coordinator":
+            typeOfID = 2;
+            break;
+        default:
+           typeOfID = 0;
+           break;
+    }
     return (
-        <a target="_blank" href={`/task/${row.slug}`}>
+        <a target="_blank" href={`/task/${typeOfID}/${row.slug}/step-1`}>
             View&nbsp;<i className="fas fa-external-link-alt"></i>
         </a>
     )
 }
-
 
 
 class TaskSearchResultComponent extends Component {
