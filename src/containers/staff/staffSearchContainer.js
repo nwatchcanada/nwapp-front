@@ -13,12 +13,7 @@ class StaffListContainer extends Component {
     constructor(props) {
         super(props)
 
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { urlArgument } = this.props.match.params;
-
         this.state = {
-            urlArgument: urlArgument,
             advancedSearchActive: false
         }
         this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
@@ -69,11 +64,11 @@ class StaffListContainer extends Component {
     }
 
     onSearchClick() {
-        this.props.history.push("/staff/"+this.state.urlArgument+"/search-results");
+        this.props.history.push("/staff/search-results");
     }
 
     onAdvancedSearchClick() {
-        this.props.history.push("/staff/"+this.state.urlArgument+"/search-results");
+        this.props.history.push("/staff/search-results");
     }
 
     /**
@@ -84,7 +79,6 @@ class StaffListContainer extends Component {
     render() {
         return (
             <StaffSearchComponent
-                urlArgument={this.state.urlArgument}
                 advancedSearchActive={this.state.advancedSearchActive}
                 onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
                 onSearchClick={this.onSearchClick}

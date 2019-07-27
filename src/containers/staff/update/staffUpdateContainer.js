@@ -25,10 +25,9 @@ class StaffUpdateContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
             firstName: localStorage.getItem("nwapp-staff-create-firstName"),
             lastName: localStorage.getItem("nwapp-staff-create-lastName"),
@@ -146,7 +145,7 @@ class StaffUpdateContainer extends Component {
         this.props.setFlashMessage("success", "Staff has been successfully updated.");
 
         // --- Move to our next page ---
-        this.props.history.push("/staff/"+this.state.urlArgument+"/"+this.state.slug+"/full");
+        this.props.history.push("/staff/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -269,7 +268,7 @@ class StaffUpdateContainer extends Component {
 
     render() {
         const {
-            urlArgument, slug,
+            slug,
             firstName, lastName, dateOfBirth, gender, description, howHear, tags, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
@@ -282,7 +281,6 @@ class StaffUpdateContainer extends Component {
 
         return (
             <StaffUpdateComponent
-                urlArgument={urlArgument}
                 slug={slug}
                 firstName={firstName}
                 lastName={lastName}

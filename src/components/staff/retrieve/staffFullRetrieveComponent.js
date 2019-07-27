@@ -10,7 +10,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 export default class StaffFullRetrieveComponent extends Component {
     render() {
-        const { urlArgument, slug, flashMessage } = this.props;
+        const { slug, flashMessage } = this.props;
         const {
             firstName, lastName, dateOfBirth, description, tags, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, apartmentUnit, streetDirection, postalCode, locality, country, region, emergencyFullName,
@@ -26,7 +26,7 @@ export default class StaffFullRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/staff/${urlArgument}`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
+                            <Link to={`/staff`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;Argyle
@@ -41,7 +41,7 @@ export default class StaffFullRetrieveComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/staff/${urlArgument}/${slug}`}>
+                            <Link to={`/staff/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
@@ -211,7 +211,7 @@ export default class StaffFullRetrieveComponent extends Component {
                             <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                 <i className="fas fa-edit"></i>&nbsp;Update
                             </button>
-                            <Link to={`/staff/${urlArgument}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <Link to={`/staff`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>
