@@ -36,6 +36,7 @@ class DistrictListContainer extends Component {
             'number': 1,
             'name': 'Argyle (Biz)',
             'state': 'active',
+            'typeOf': 'residential',
             'absoluteUrl': '/settings/district-biz/argyle'
         },{
             'slug': 'byron',
@@ -43,6 +44,7 @@ class DistrictListContainer extends Component {
             'number': 2,
             'name': 'Byron (Com)',
             'state': 'active',
+            'typeOf': 'business',
             'absoluteUrl': '/settings/district-cc/byron'
         },{
             'slug': 'carling',
@@ -50,6 +52,7 @@ class DistrictListContainer extends Component {
             'number': 3,
             'name': 'Carling (Rez)',
             'state': 'active',
+            'typeOf': 'community-cares',
             'absoluteUrl': '/settings/district-rez/carling'
         }];
         this.setState({

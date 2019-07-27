@@ -125,8 +125,16 @@ function iconFormatter(cell, row){
 
 
 function detailLinkFormatter(cell, row){
+    let aURL = "";
+    if (row.typeOf === 'residential') {
+        aURL = "/settings/district-rez/"+row.slug
+    } else if (row.typeOf === 'business') {
+        aURL = "/settings/district-biz/"+row.slug
+    } else if (row.typeOf === 'community-cares') {
+        aURL = "/settings/district-cc/"+row.slug
+    }
     return (
-        <Link to={`/settings/district/${row.slug}`}>
+        <Link to={aURL}>
             View&nbsp;<i className="fas fa-chevron-right"></i>
         </Link>
     )
@@ -147,15 +155,18 @@ class DistrictListComponent extends Component {
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
+                        <li className="breadcrumb-item">
+                           <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
+                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-users"></i>&nbsp;Districts
+                            <i className="fas fa-map"></i>&nbsp;Districts
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-users"></i>&nbsp;Districts</h1>
+                <h1><i className="fas fa-map"></i>&nbsp;Districts</h1>
 
                 <div className="row">
                     <div className="col-md-12">
