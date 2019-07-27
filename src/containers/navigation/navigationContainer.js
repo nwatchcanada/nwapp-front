@@ -73,7 +73,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-financials",
         icon: "credit-card",
         title: "Financials",
-        url: "/financials/unpaid"
+        url: "/financials"
     },{
         id: "full-reports",
         icon: "book",
@@ -118,12 +118,12 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-area-coordinator",
         icon: "horse-head",
         title: "Area Coordinators",
-        url: "/area-coordinators/active"
+        url: "/area-coordinators"
     },{
         id: "full-associates",
         icon: "crown",
         title: "Associates",
-        url: "/associates/active"
+        url: "/associates"
     },{
         id: "full-watches",
         icon: "shield-alt",
@@ -148,7 +148,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-staff",
         icon: "user-tie",
         title: "Staff",
-        url: "/staff/active"
+        url: "/staff"
     },{
         id: "full-settings",
         icon: "cogs",

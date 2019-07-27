@@ -153,9 +153,7 @@ import ReportListContainer from "./reports/reportListContainer";
 
 import SettingListContainer from "./settings/settingListContainer";
 
-import UnpaidFinancialListContainer from "./financials/list/unpaidFinancialListContainer";
-import PaidFinancialListContainer from "./financials/list/paidFinancialListContainer";
-import AllFinancialListContainer from "./financials/list/allFinancialListContainer";
+import FinancialListContainer from "./financials/list/financialListContainer";
 import FinanciaRetrieveContainer from "./financials/retrieve/financialRetrieveContainer";
 import FinanciaUpdateContainer from "./financials/update/financialUpdateContainer";
 
@@ -308,9 +306,7 @@ class AppContainer extends React.Component {
                                 <Route path="/watches/step-4-create-cc" exact component={requiresAuth(WatchCreateStep4ComContainer)} />
                                 <Route path="/watch/:slug" exact component={requiresAuth(WatchRetrieveContainer)} />
                                 <Route path="/watch/:slug/update" exact component={requiresAuth(WatchUpdateContainer)} />
-                                <Route path="/financials/unpaid" exact component={requiresAuth(UnpaidFinancialListContainer)} />
-                                <Route path="/financials/paid" exact component={requiresAuth(PaidFinancialListContainer)} />
-                                <Route path="/financials/all" exact component={requiresAuth(AllFinancialListContainer)} />
+                                <Route path="/financials" exact component={requiresAuth(FinancialListContainer)} />
                                 <Route path="/financial/:slug" exact component={requiresAuth(FinanciaRetrieveContainer)} />
                                 <Route path="/financial/:slug/update" exact component={requiresAuth(FinanciaUpdateContainer)} />
                                 <Route component={NotFound404Container} />

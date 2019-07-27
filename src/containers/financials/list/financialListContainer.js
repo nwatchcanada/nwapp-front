@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import UnpaidFinancialListComponent from "../../../components/financials/list/unpaidFinancialListComponent";
+import FinancialListComponent from "../../../components/financials/list/financialListComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class UnpaidFinancialListContainer extends Component {
+class FinancialListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -14,10 +14,11 @@ class UnpaidFinancialListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedColumnKey: null,
-            selectedColumnOrder: null
+            filter: "active",
+            financials: [],
         }
-        this.onTableColumnClick = this.onTableColumnClick.bind(this);
+        this.onFilterClick = this.onFilterClick.bind(this);
+        this.filterFinancials = this.filterFinancials.bind(this);
     }
 
     /**
@@ -27,6 +28,36 @@ class UnpaidFinancialListContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Load from API...
+        const financials = [{
+            'slug': 'argyle',
+            'icon': 'home',
+            'firstName': "Bob",
+            'lastName': "Page",
+            "phone": "(111) 222-3333",
+            'email': "1@1.com",
+            "typeOf": "active",
+        },{
+            'slug': 'byron',
+            'icon': 'building',
+            'firstName': "Walter",
+            'lastName': "Simons",
+            "phone": "(222) 333-4444",
+            'email': "2@2.com",
+            "typeOf": "active",
+        },{
+            'slug': 'carling',
+            'icon': 'university',
+            'firstName': "JC",
+            'lastName': "Denton",
+            "phone": "(333) 444-5555",
+            'email': "3@3.com",
+            "typeOf": "active",
+        }];
+        this.setState({
+            financials: financials,
+        });
     }
 
     componentWillUnmount() {
@@ -59,11 +90,25 @@ class UnpaidFinancialListContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onTableColumnClick(columnKey, order) {
+    onFilterClick(e, filter) {
+        e.preventDefault();
         this.setState({
-            selectedColumnKey: columnKey,
-            selectedColumnOrder: order,
+            filter: filter,
         })
+    }
+
+    filterFinancials() {
+        let filteredFinancials = [];
+        if (this.state.financials === undefined || this.state.financials === null) {
+            return [];
+        }
+        for (let i = 0; i < this.state.financials.length; i++) {
+            let financial = this.state.financials[i];
+            if (financial.typeOf === this.state.filter) {
+                filteredFinancials.push(financial);
+            }
+        }
+        return filteredFinancials;
     }
 
 
@@ -73,40 +118,12 @@ class UnpaidFinancialListContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'icon': 'home',
-            'number': 1,
-            'firstName': 'Shinji',
-            'lastName': 'Ikari',
-            'phone': '(789) 789-7890',
-            'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/financial/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'building',
-            'number': 2,
-            'firstName': 'Mariya',
-            'lastName': 'Takeuchi',
-            'phone': '(321) 321-3210',
-            'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/financial/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'briefcase',
-            'number': 3,
-            'firstName': 'Rei',
-            'lastName': 'Ayanami',
-            'phone': '(123) 123-1234',
-            'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/financial/carling'
-        }];
+
         return (
-            <UnpaidFinancialListComponent
-                selectedColumnKey={this.state.selectedColumnKey}
-                selectedColumnOrder={this.state.selectedColumnOrder}
-                onTableColumnClick={this.onTableColumnClick}
-                tableData={tableData}
+            <FinancialListComponent
+                filter={this.state.filter}
+                onFilterClick={this.onFilterClick}
+                financials={this.filterFinancials()}
                 flashMessage={this.props.flashMessage}
             />
         );
@@ -132,4 +149,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(UnpaidFinancialListContainer);
+)(FinancialListContainer);
