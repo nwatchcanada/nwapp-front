@@ -101,6 +101,8 @@ import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Con
 import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
 
 import ItemListContainer from "./items/list/itemListContainer";
+import ItemSearchContainer from "./items/search/itemSearchContainer";
+import ItemSearchResultContainer from "./items/search/itemSearchResultContainer";
 import ItemRetrieveContainer from "./items/retrieve/itemRetrieveContainer";
 import ItemCreateStep1Container from "./items/create/itemCreateStep1Container";
 import ItemCreateStep2ConcernContainer from "./items/create/itemCreateStep2ConcernContainer";
@@ -248,6 +250,8 @@ class AppContainer extends React.Component {
                                 <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
                                 <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
+                                <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
+                                <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />
                                 <Route path="/item/add/step-1" exact component={requiresAuth(ItemCreateStep1Container)} />
                                 <Route path="/item/add/step-2-concern" exact component={requiresAuth(ItemCreateStep2ConcernContainer)} />
                                 <Route path="/item/add/step-2-event" exact component={requiresAuth(ItemCreateStep2EventContainer)} />

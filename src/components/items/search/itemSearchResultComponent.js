@@ -75,7 +75,7 @@ function iconFormatter(cell, row){
 
 function externalLinkFormatter(cell, row){
     return (
-        <a target="_blank" href={`/member/${row.slug}`}>
+        <a target="_blank" href={`/item/${row.slug}`}>
             View&nbsp;<i className="fas fa-external-link-alt"></i>
         </a>
     )
@@ -83,7 +83,7 @@ function externalLinkFormatter(cell, row){
 
 
 
-class MemberSearchResultComponent extends Component {
+class ItemSearchResultComponent extends Component {
     render() {
         const { results, flashMessage } = this.props;
         return (
@@ -94,10 +94,10 @@ class MemberSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
+                           <Link to={`/items`}><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/members/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to={`/items/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results
@@ -107,7 +107,7 @@ class MemberSearchResultComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-users"></i>&nbsp;Members</h1>
+                <h1><i className="fas fa-map-pin"></i>&nbsp;Items</h1>
                 <div className="row">
                     <div className="col-md-12">
                         <ListComponent results={results} />
@@ -115,7 +115,7 @@ class MemberSearchResultComponent extends Component {
                 </div>
 
                 <div className="form-group">
-                    <Link to="/members/search" className="btn btn-secondary btn-lg">
+                    <Link to="/items/search" className="btn btn-secondary btn-lg">
                         <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>
                 </div>
@@ -124,4 +124,4 @@ class MemberSearchResultComponent extends Component {
     }
 }
 
-export default MemberSearchResultComponent;
+export default ItemSearchResultComponent;
