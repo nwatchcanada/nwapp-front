@@ -59,6 +59,8 @@ import WatchCreateStep3ComContainer from "./watches/create/com/watchCreateStep3C
 import WatchCreateStep4ComContainer from "./watches/create/com/watchCreateStep4ComContainer";
 import WatchRetrieveContainer from "./watches/retrieve/watchRetrieveContainer";
 import WatchUpdateContainer from "./watches/update/watchUpdateContainer";
+import WatchSearchContainer from "./watches/search/watchSearchContainer";
+import WatchSearchResultContainer from "./watches/search/watchSearchResultContainer";
 
 import TagsListContainer from "./settings/tags/tagListContainer";
 import TagDeleteContainer from "./settings/tags/tagDeleteContainer";
@@ -294,6 +296,8 @@ class AppContainer extends React.Component {
                                 <Route path="/reports" exact component={requiresAuth(ReportListContainer)} />
                                 <Route path="/settings" exact component={requiresAuth(SettingListContainer)} />
                                 <Route path="/watches" exact component={requiresAuth(WatchListContainer)} />
+                                <Route path="/watches/search" exact component={requiresAuth(WatchSearchContainer)} />
+                                <Route path="/watches/search-results" exact component={requiresAuth(WatchSearchResultContainer)} />
                                 <Route path="/watches/step-1-create" exact component={requiresAuth(WatchCreateStepContainer)} />
                                 <Route path="/watches/step-2-create-rez" exact component={requiresAuth(WatchCreateStep2RezContainer)} />
                                 <Route path="/watches/step-2-create-biz" exact component={requiresAuth(WatchCreateStep2BizContainer)} />
