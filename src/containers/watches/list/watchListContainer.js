@@ -33,26 +33,20 @@ class WatchListContainer extends Component {
         const watches = [{
             'slug': 'argyle',
             'icon': 'home',
-            'firstName': "Bob",
-            'lastName': "Page",
-            "phone": "(111) 222-3333",
-            'email': "1@1.com",
+            'name': "Argyle",
+            'district': "Capital",
             "typeOf": "active",
         },{
             'slug': 'byron',
             'icon': 'building',
-            'firstName': "Walter",
-            'lastName': "Simons",
-            "phone": "(222) 333-4444",
-            'email': "2@2.com",
+            'name': "Byron",
+            'district': "District 13",
             "typeOf": "active",
         },{
             'slug': 'carling',
             'icon': 'university',
-            'firstName': "JC",
-            'lastName': "Denton",
-            "phone": "(333) 444-5555",
-            'email': "3@3.com",
+            'name': "Carling",
+            'district': "District 10",
             "typeOf": "active",
         }];
         this.setState({

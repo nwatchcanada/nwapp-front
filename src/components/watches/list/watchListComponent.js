@@ -18,26 +18,13 @@ class ActiveListComponent extends Component {
             sort: false,
             formatter: iconFormatter
         },{
-            dataField: 'firstName',
-            text: 'First Name',
+            dataField: 'name',
+            text: 'Name',
             sort: true
         },{
-            dataField: 'lastName',
-            text: 'Last Name',
+            dataField: 'district',
+            text: 'District',
             sort: true
-        },{
-            dataField: 'phone',
-            text: 'Phone',
-            sort: true
-        },{
-            dataField: 'email',
-            text: 'Email',
-            sort: true
-        },{
-            dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
         },{
             dataField: 'slug',
             text: 'Details',
@@ -78,31 +65,15 @@ class InactiveListComponent extends Component {
             dataField: 'icon',
             text: '',
             sort: false,
-            formatter: iconFormatter,
-            style: {
-                width: 10,
-            }
+            formatter: iconFormatter
         },{
-            dataField: 'firstName',
-            text: 'First Name',
+            dataField: 'name',
+            text: 'Name',
             sort: true
         },{
-            dataField: 'lastName',
-            text: 'Last Name',
+            dataField: 'district',
+            text: 'District',
             sort: true
-        },{
-            dataField: 'phone',
-            text: 'Watch',
-            sort: true
-        },{
-            dataField: 'email',
-            text: 'Email',
-            sort: true
-        },{
-            dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
         },{
             dataField: 'slug',
             text: 'Details',
