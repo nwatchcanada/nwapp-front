@@ -41,7 +41,7 @@ export default class ItemCreateStep3ConcernComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Item</Link>
+                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -77,7 +77,7 @@ export default class ItemCreateStep3ConcernComponent extends Component {
                             <tbody>
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-table"></i>&nbsp;Item details
+                                        <i className="fas fa-table"></i>&nbsp;Items details
                                     </th>
                                 </tr>
                                 <tr>
