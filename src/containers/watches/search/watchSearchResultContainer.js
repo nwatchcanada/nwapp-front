@@ -32,18 +32,21 @@ class WatchSearchResultContainer extends Component {
             watches: [{
                 'slug': 'argyle',
                 'icon': 'home',
+                'state': 'Active',
                 'name': "Argyle",
                 'district': "Capital",
                 "typeOf": "active",
             },{
                 'slug': 'byron',
                 'icon': 'building',
+                'state': 'Active',
                 'name': "Byron",
                 'district': "District 13",
                 "typeOf": "active",
             },{
                 'slug': 'carling',
                 'icon': 'university',
+                'state': 'Inactive',
                 'name': "Carling",
                 'district': "District 10",
                 "typeOf": "active",

@@ -25,6 +25,10 @@ class ListComponent extends Component {
             text: 'District',
             sort: true
         },{
+            dataField: 'state',
+            text: 'Status',
+            sort: true,
+        },{
             dataField: 'slug',
             text: 'Details',
             sort: false,
@@ -56,8 +60,6 @@ class ListComponent extends Component {
 }
 
 
-
-
 function iconFormatter(cell, row){
     return (
         <i className={`fas fa-${row.icon}`}></i>
@@ -72,7 +74,6 @@ function externalLinkFormatter(cell, row){
         </a>
     )
 }
-
 
 
 class WatchSearchResultComponent extends Component {
