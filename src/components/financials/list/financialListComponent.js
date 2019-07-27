@@ -35,11 +35,6 @@ class UnpaidListComponent extends Component {
             sort: true
         },{
             dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
-        },{
-            dataField: 'slug',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
@@ -100,11 +95,6 @@ class PaidListComponent extends Component {
             sort: true
         },{
             dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
-        },{
-            dataField: 'slug',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
@@ -135,18 +125,66 @@ class PaidListComponent extends Component {
 }
 
 
-function iconFormatter(cell, row){
-    return (
-        <i className={`fas fa-${row.icon}`}></i>
-    )
+class AlldListComponent extends Component {
+    render() {
+        const { financials } = this.props;
+
+        const columns = [{
+            dataField: 'icon',
+            text: '',
+            sort: false,
+            formatter: iconFormatter
+        },{
+            dataField: 'firstName',
+            text: 'First Name',
+            sort: true
+        },{
+            dataField: 'lastName',
+            text: 'Last Name',
+            sort: true
+        },{
+            dataField: 'phone',
+            text: 'Phone',
+            sort: true
+        },{
+            dataField: 'email',
+            text: 'Email',
+            sort: true
+        },{
+            dataField: 'slug',
+            text: 'Details',
+            sort: false,
+            formatter: detailLinkFormatter
+        }];
+
+        return (
+            <div className="row">
+                <div className="col-md-12">
+                    <h2>
+                        <i className="fas fa-list"></i>&nbsp;All Financials
+                    </h2>
+
+                    <BootstrapTable
+                        bootstrap4
+                        keyField='slug'
+                        data={ financials }
+                        columns={ columns }
+                        striped
+                        bordered={ false }
+                        pagination={ paginationFactory() }
+                        noDataIndication="There are no financials at the moment"
+                    />
+
+                </div>
+            </div>
+        );
+    }
 }
 
 
-function financialExternalLinkFormatter(cell, row){
+function iconFormatter(cell, row){
     return (
-        <a target="_blank" href={`/financial/${row.slug}`}>
-            View&nbsp;<i className="fas fa-external-link-alt"></i>
-        </a>
+        <i className={`fas fa-${row.icon}`}></i>
     )
 }
 
@@ -166,6 +204,7 @@ class FinancialListComponent extends Component {
 
         const isUnpaid = filter === "unpaid";
         const isPaid = filter === "paid";
+        const isAll = filter === "all";
 
         return (
             <div>
@@ -191,6 +230,9 @@ class FinancialListComponent extends Component {
                 }
                 {isPaid &&
                     <PaidListComponent financials={financials} />
+                }
+                {isAll &&
+                    <AlldListComponent financials={financials} />
                 }
 
 
