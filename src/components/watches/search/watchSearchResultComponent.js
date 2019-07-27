@@ -108,7 +108,6 @@ class WatchSearchResultComponent extends Component {
                 </div>
 
                 <div className="form-group">
-
                     <Link to="/watches/search" className="btn btn-secondary btn-lg">
                         <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>

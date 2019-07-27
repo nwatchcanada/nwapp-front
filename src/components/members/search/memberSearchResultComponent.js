@@ -113,6 +113,12 @@ class MemberSearchResultComponent extends Component {
                         <ListComponent results={results} />
                     </div>
                 </div>
+
+                <div className="form-group">
+                    <Link to="/members/search" className="btn btn-secondary btn-lg">
+                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                    </Link>
+                </div>
             </div>
         );
     }

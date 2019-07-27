@@ -94,7 +94,7 @@ class AssociateSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/associates`}><i className="fas fa-users"></i>&nbsp;Associates</Link>
+                           <Link to={`/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/associates/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
@@ -107,11 +107,17 @@ class AssociateSearchResultComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-users"></i>&nbsp;Associates</h1>
+                <h1><i className="fas fa-crown"></i>&nbsp;Associates</h1>
                 <div className="row">
                     <div className="col-md-12">
                         <ListComponent results={results} />
                     </div>
+                </div>
+
+                <div className="form-group">
+                    <Link to="/associates/search" className="btn btn-secondary btn-lg">
+                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                    </Link>
                 </div>
             </div>
         );

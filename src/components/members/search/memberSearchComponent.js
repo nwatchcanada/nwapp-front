@@ -58,6 +58,11 @@ class MemberSearchComponent extends Component {
                             onClick = { onAdvancedSearchPanelToggle }>
                             <i className="fas fa-times"></i> Advanced Search
                         </button>
+                        <div className="col-md-12 text-center">
+                            <Link to="/members" className="btn btn-secondary btn-lg mt-4 pl-4 pr-4">
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <div id="adv-search"
