@@ -30,27 +30,26 @@ class WatchListContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Load from API...
-        const watches = [{
-            'slug': 'argyle',
-            'icon': 'home',
-            'name': "Argyle",
-            'district': "Capital",
-            "typeOf": "active",
-        },{
-            'slug': 'byron',
-            'icon': 'building',
-            'name': "Byron",
-            'district': "District 13",
-            "typeOf": "active",
-        },{
-            'slug': 'carling',
-            'icon': 'university',
-            'name': "Carling",
-            'district': "District 10",
-            "typeOf": "active",
-        }];
         this.setState({
-            watches: watches,
+            watches: [{
+                'slug': 'argyle',
+                'icon': 'home',
+                'name': "Argyle",
+                'district': "Capital",
+                "typeOf": "active",
+            },{
+                'slug': 'byron',
+                'icon': 'building',
+                'name': "Byron",
+                'district': "District 13",
+                "typeOf": "active",
+            },{
+                'slug': 'carling',
+                'icon': 'university',
+                'name': "Carling",
+                'district': "District 10",
+                "typeOf": "active",
+            }],
         });
     }
 

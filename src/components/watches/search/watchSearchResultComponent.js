@@ -9,7 +9,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 
 class ListComponent extends Component {
     render() {
-        const { results } = this.props;
+        const { watches } = this.props;
 
         const columns = [{
             dataField: 'icon',
@@ -17,24 +17,16 @@ class ListComponent extends Component {
             sort: false,
             formatter: iconFormatter
         },{
-            dataField: 'firstName',
-            text: 'First Name',
+            dataField: 'name',
+            text: 'Name',
             sort: true
         },{
-            dataField: 'lastName',
-            text: 'Last Name',
-            sort: true
-        },{
-            dataField: 'phone',
-            text: 'Phone',
-            sort: true
-        },{
-            dataField: 'email',
-            text: 'Email',
+            dataField: 'district',
+            text: 'District',
             sort: true
         },{
             dataField: 'slug',
-            text: '',
+            text: 'Details',
             sort: false,
             formatter: externalLinkFormatter
         }];
@@ -43,18 +35,18 @@ class ListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-search"></i>&nbsp;Search Results
+                        <i className="fas fa-list"></i>&nbsp;Results
                     </h2>
 
                     <BootstrapTable
                         bootstrap4
                         keyField='slug'
-                        data={ results }
+                        data={ watches }
                         columns={ columns }
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="There are results returned for this search."
+                        noDataIndication="There are no active watches at the moment"
                     />
 
                 </div>
@@ -85,7 +77,7 @@ function externalLinkFormatter(cell, row){
 
 class WatchSearchResultComponent extends Component {
     render() {
-        const { results, flashMessage } = this.props;
+        const { watches, flashMessage } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -94,7 +86,7 @@ class WatchSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/watches`}><i className="fas fa-users"></i>&nbsp;Watches</Link>
+                           <Link to={`/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/watches/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
@@ -107,12 +99,20 @@ class WatchSearchResultComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-users"></i>&nbsp;Watches</h1>
+                <h1><i className="fas fa-shield-alt"></i>&nbsp;Watches</h1>
                 <div className="row">
                     <div className="col-md-12">
-                        <ListComponent results={results} />
+                        <ListComponent watches={watches} />
                     </div>
                 </div>
+
+                <div className="form-group">
+
+                    <Link to="/watches/search" className="btn btn-secondary btn-lg">
+                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                    </Link>
+                </div>
+
             </div>
         );
     }

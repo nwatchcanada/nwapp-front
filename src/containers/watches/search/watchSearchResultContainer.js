@@ -10,6 +10,15 @@ class WatchSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            watches: [],
+        }
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
     /**
      *  Component Life-cycle Management
      *------------------------------------------------------------
@@ -17,6 +26,29 @@ class WatchSearchResultContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Load from API...
+        this.setState({
+            watches: [{
+                'slug': 'argyle',
+                'icon': 'home',
+                'name': "Argyle",
+                'district': "Capital",
+                "typeOf": "active",
+            },{
+                'slug': 'byron',
+                'icon': 'building',
+                'name': "Byron",
+                'district': "District 13",
+                "typeOf": "active",
+            },{
+                'slug': 'carling',
+                'icon': 'university',
+                'name': "Carling",
+                'district': "District 10",
+                "typeOf": "active",
+            }],
+        });
     }
 
     componentWillUnmount() {
@@ -53,37 +85,13 @@ class WatchSearchResultContainer extends Component {
      */
 
     render() {
-        const results = [{
-            'slug': 'argyle',
-            'icon': 'home',
-            'number': 1,
-            'firstName': 'Shinji',
-            'lastName': 'Ikari',
-            'phone': '(789) 789-7890',
-            'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/watch/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'home',
-            'number': 2,
-            'firstName': 'Mariya',
-            'lastName': 'Takeuchi',
-            'phone': '(321) 321-3210',
-            'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/watch/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'briefcase',
-            'number': 3,
-            'firstName': 'Rei',
-            'lastName': 'Ayanami',
-            'phone': '(123) 123-1234',
-            'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/watch/carling'
-        }];
+        const { watches } = this.state;
+        if ( watches === null || watches === undefined ) {
+            return (null);
+        }
         return (
             <WatchSearchResultComponent
-                results={results}
+                watches={watches}
             />
         );
     }

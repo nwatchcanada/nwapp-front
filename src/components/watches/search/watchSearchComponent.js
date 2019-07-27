@@ -15,7 +15,7 @@ class WatchSearchComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/watches`}><i className="fas fa-users"></i>&nbsp;Watches</Link>
+                            <Link to={`/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-search"></i>&nbsp;Search
@@ -58,6 +58,11 @@ class WatchSearchComponent extends Component {
                             onClick = { onAdvancedSearchPanelToggle }>
                             <i className="fas fa-times"></i> Advanced Search
                         </button>
+                    </div>
+                    <div className="col-md-12 text-center">
+                        <Link to="/watches" className="btn btn-secondary btn-lg mt-4 pl-4 pr-4">
+                            <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                        </Link>
                     </div>
                 </div>
                 <div id="adv-search"
