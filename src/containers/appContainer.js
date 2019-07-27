@@ -132,8 +132,7 @@ import AreaCoordinatorDemoteContainer from "./areaCoordinators/demote/areaCoordi
 import AreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorLiteRetrieveContainer";
 import AreaCoordinatorFullRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorFullRetrieveContainer";
 
-import StaffListActiveContainer from "./staff/staffListActiveContainer";
-import StaffListInactiveContainer from "./staff/staffListInactiveContainer";
+import StaffListContainer from "./staff/list/staffListContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
 import StaffSearchResultContainer from "./staff/staffSearchResultContainer";
 import StaffUpdateContainer from "./staff/update/staffUpdateContainer";
@@ -281,8 +280,7 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinator/:slug/demote" exact component={requiresAuth(AreaCoordinatorDemoteContainer)} />
                                 <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
                                 <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />
-                                <Route path="/staff/active" exact component={requiresAuth(StaffListActiveContainer)} />
-                                <Route path="/staff/inactive" exact component={requiresAuth(StaffListInactiveContainer)} />
+                                <Route path="/staff" exact component={requiresAuth(StaffListContainer)} />
                                 <Route path="/staff/:urlArgument/search" exact component={requiresAuth(StaffSearchContainer)} />
                                 <Route path="/staff/:urlArgument/search-results" exact component={requiresAuth(StaffSearchResultContainer)} />
                                 <Route path="/staff/:urlArgument/:slug" exact component={requiresAuth(StaffLiteRetrieveContainer)} />

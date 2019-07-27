@@ -44,7 +44,7 @@ class StaffCreateStep2Container extends Component {
             locality: localStorage.getItem("nwapp-staff-create-locality"),
             region: localStorage.getItem("nwapp-staff-create-region"),
             country: localStorage.getItem("nwapp-staff-create-country"),
-            postal: localStorage.getItem("nwapp-staff-create-postal"),
+            postalCode: localStorage.getItem("nwapp-staff-create-postalCode"),
             emergencyFullName: localStorage.getItem("nwapp-staff-create-emergencyFullName"),
             emergencyRelationship: localStorage.getItem("nwapp-staff-create-emergencyRelationship"),
             emergencyTelephone: localStorage.getItem("nwapp-staff-create-emergencyTelephone"),
@@ -103,7 +103,7 @@ class StaffCreateStep2Container extends Component {
     onSuccessfulSubmissionCallback(staff) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Staff has been successfully created.");
-        this.props.history.push("/staff/active");
+        this.props.history.push("/staff");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -149,7 +149,7 @@ class StaffCreateStep2Container extends Component {
     render() {
         const {
             firstName, lastName, dateOfBirth, gender, description, tags, howHear, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, locality, region, country, postalCode, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
             genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
@@ -196,7 +196,7 @@ class StaffCreateStep2Container extends Component {
                 locality={locality}
                 region={region}
                 country={country}
-                postal={postal}
+                postalCode={postalCode}
                 emergencyFullName={emergencyFullName}
                 emergencyRelationship={emergencyRelationship}
                 emergencyTelephone={emergencyTelephone}

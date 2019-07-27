@@ -61,8 +61,8 @@ export default function validateInput(data) {
     if (data.country === undefined || data.country === null || validator.isEmpty(data.country) || data.country === "") {
         errors.country = 'This field is required';
     }
-    if (data.postal === undefined || data.postal === null || validator.isEmpty(data.postal) || data.postal === "") {
-        errors.postal = 'This field is required';
+    if (data.postalCode === undefined || data.postalCode === null || validator.isEmpty(data.postalCode) || data.postalCode === "") {
+        errors.postalCode = 'This field is required';
     }
 
     // Account

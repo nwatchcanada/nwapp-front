@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import StaffActiveListComponent from "../../components/staff/staffListActiveComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import StaffListComponent from "../../../components/staff/list/staffListComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class StaffListActiveContainer extends Component {
+class StaffListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -14,10 +14,11 @@ class StaffListActiveContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedColumnKey: null,
-            selectedColumnOrder: null
+            filter: "active",
+            staffs: [],
         }
-        this.onTableColumnClick = this.onTableColumnClick.bind(this);
+        this.onFilterClick = this.onFilterClick.bind(this);
+        this.filterStaffs = this.filterStaffs.bind(this);
     }
 
     /**
@@ -27,6 +28,36 @@ class StaffListActiveContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Load from API...
+        const staffs = [{
+            'slug': 'argyle',
+            'icon': 'home',
+            'firstName': "Bob",
+            'lastName': "Page",
+            "phone": "(111) 222-3333",
+            'email': "1@1.com",
+            "typeOf": "active",
+        },{
+            'slug': 'byron',
+            'icon': 'building',
+            'firstName': "Walter",
+            'lastName': "Simons",
+            "phone": "(222) 333-4444",
+            'email': "2@2.com",
+            "typeOf": "active",
+        },{
+            'slug': 'carling',
+            'icon': 'university',
+            'firstName': "JC",
+            'lastName': "Denton",
+            "phone": "(333) 444-5555",
+            'email': "3@3.com",
+            "typeOf": "active",
+        }];
+        this.setState({
+            staffs: staffs,
+        });
     }
 
     componentWillUnmount() {
@@ -59,11 +90,25 @@ class StaffListActiveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onTableColumnClick(columnKey, order) {
+    onFilterClick(e, filter) {
+        e.preventDefault();
         this.setState({
-            selectedColumnKey: columnKey,
-            selectedColumnOrder: order,
+            filter: filter,
         })
+    }
+
+    filterStaffs() {
+        let filteredStaffs = [];
+        if (this.state.staffs === undefined || this.state.staffs === null) {
+            return [];
+        }
+        for (let i = 0; i < this.state.staffs.length; i++) {
+            let staff = this.state.staffs[i];
+            if (staff.typeOf === this.state.filter) {
+                filteredStaffs.push(staff);
+            }
+        }
+        return filteredStaffs;
     }
 
 
@@ -73,40 +118,12 @@ class StaffListActiveContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'icon': 'home',
-            'number': 1,
-            'firstName': 'Shinji',
-            'lastName': 'Ikari',
-            'phone': '(789) 789-7890',
-            'email': 'shinji.ikari@nerv.worldgov',
-            'absoluteUrl': '/staff/active/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'home',
-            'number': 2,
-            'firstName': 'Mariya',
-            'lastName': 'Takeuchi',
-            'phone': '(321) 321-3210',
-            'email': 'plastic_lover@gmail.com',
-            'absoluteUrl': '/staff/active/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'briefcase',
-            'number': 3,
-            'firstName': 'Rei',
-            'lastName': 'Ayanami',
-            'phone': '(123) 123-1234',
-            'email': 'rei.ayanami@nerv.worldgov',
-            'absoluteUrl': '/staff/active/carling'
-        }];
+
         return (
-            <StaffActiveListComponent
-                selectedColumnKey={this.state.selectedColumnKey}
-                selectedColumnOrder={this.state.selectedColumnOrder}
-                onTableColumnClick={this.onTableColumnClick}
-                tableData={tableData}
+            <StaffListComponent
+                filter={this.state.filter}
+                onFilterClick={this.onFilterClick}
+                staffs={this.filterStaffs()}
                 flashMessage={this.props.flashMessage}
             />
         );
@@ -132,4 +149,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(StaffListActiveContainer);
+)(StaffListContainer);

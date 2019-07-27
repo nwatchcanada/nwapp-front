@@ -36,7 +36,7 @@ export default class StaffCreateStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/staff/active"><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
+                            <Link to="/staff"><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -426,7 +426,7 @@ export default class StaffCreateStep1Component extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/staff/active" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/staff" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

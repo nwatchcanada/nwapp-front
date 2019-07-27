@@ -83,7 +83,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-staff",
         icon: "user-tie",
         title: "Staff",
-        url: "/staff/active"
+        url: "/staff"
     },{
         id: "full-settings",
         icon: "cogs",

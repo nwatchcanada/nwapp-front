@@ -302,7 +302,7 @@ class StaffCreateStep1Container extends Component {
     render() {
         const {
             firstName, lastName, dateOfBirth, gender, description, howHear, tags, phone, mobile, workEmail, personalEmail,
-            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postal, emergencyFullName,
+            streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postalCode, emergencyFullName,
             emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
             password, repeatPassword, isActive, isActiveOptions,
             errors, isLoading
@@ -336,7 +336,7 @@ class StaffCreateStep1Container extends Component {
                 locality={locality}
                 region={region}
                 country={country}
-                postal={postal}
+                postalCode={postalCode}
                 emergencyFullName={emergencyFullName}
                 emergencyRelationship={emergencyRelationship}
                 emergencyTelephone={emergencyTelephone}
