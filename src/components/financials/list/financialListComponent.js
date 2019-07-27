@@ -8,7 +8,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 import FinancialFilterComponent from "./financialFilterComponent";
 
 
-class ActiveListComponent extends Component {
+class UnpaidListComponent extends Component {
     render() {
         const { financials } = this.props;
 
@@ -49,7 +49,7 @@ class ActiveListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-user-check"></i>&nbsp;Active Financials
+                        <i className="fas fa-clock"></i>&nbsp;Unpaid Financials
                     </h2>
 
                     <BootstrapTable
@@ -60,7 +60,7 @@ class ActiveListComponent extends Component {
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="There are no active financials at the moment"
+                        noDataIndication="There are no unpaid financials at the moment"
                     />
 
                 </div>
@@ -70,7 +70,7 @@ class ActiveListComponent extends Component {
 }
 
 
-class InactiveListComponent extends Component {
+class PaidListComponent extends Component {
     render() {
         const { financials } = this.props;
 
@@ -114,7 +114,7 @@ class InactiveListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-user-times"></i>&nbsp;Inactive Financials
+                        <i className="fas fa-check"></i>&nbsp;Paid Financials
                     </h2>
 
                     <BootstrapTable
@@ -125,7 +125,7 @@ class InactiveListComponent extends Component {
                         striped
                         bordered={ false }
                         pagination={ paginationFactory() }
-                        noDataIndication="There are no inactive financials at the moment"
+                        noDataIndication="There are no paid financials at the moment"
                     />
 
                 </div>
@@ -164,8 +164,8 @@ class FinancialListComponent extends Component {
     render() {
         const { filter, onFilterClick, financials, flashMessage } = this.props;
 
-        const isActive = filter === "active";
-        const isInactive = filter === "inactive";
+        const isUnpaid = filter === "unpaid";
+        const isPaid = filter === "paid";
 
         return (
             <div>
@@ -186,11 +186,11 @@ class FinancialListComponent extends Component {
 
                 <FinancialFilterComponent filter={filter} onFilterClick={onFilterClick} />
 
-                {isActive &&
-                    <ActiveListComponent financials={financials} />
+                {isUnpaid &&
+                    <UnpaidListComponent financials={financials} />
                 }
-                {isInactive &&
-                    <InactiveListComponent financials={financials} />
+                {isPaid &&
+                    <PaidListComponent financials={financials} />
                 }
 
 

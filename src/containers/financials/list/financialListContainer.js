@@ -14,7 +14,7 @@ class FinancialListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: "active",
+            filter: "unpaid",
             financials: [],
         }
         this.onFilterClick = this.onFilterClick.bind(this);
@@ -37,7 +37,7 @@ class FinancialListContainer extends Component {
             'lastName': "Page",
             "phone": "(111) 222-3333",
             'email': "1@1.com",
-            "typeOf": "active",
+            "typeOf": "unpaid",
         },{
             'slug': 'byron',
             'icon': 'building',
@@ -45,7 +45,7 @@ class FinancialListContainer extends Component {
             'lastName': "Simons",
             "phone": "(222) 333-4444",
             'email': "2@2.com",
-            "typeOf": "active",
+            "typeOf": "unpaid",
         },{
             'slug': 'carling',
             'icon': 'university',
@@ -53,7 +53,7 @@ class FinancialListContainer extends Component {
             'lastName': "Denton",
             "phone": "(333) 444-5555",
             'email': "3@3.com",
-            "typeOf": "active",
+            "typeOf": "unpaid",
         }];
         this.setState({
             financials: financials,
