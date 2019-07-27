@@ -36,7 +36,7 @@ class ActiveListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-user-check"></i>&nbsp;Active Districts
+                        <i className="fas fa-check-circle"></i>&nbsp;Active Districts
                     </h2>
 
                     <BootstrapTable
@@ -96,7 +96,7 @@ class InactiveListComponent extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <h2>
-                        <i className="fas fa-user-times"></i>&nbsp;Inactive Districts
+                        <i className="fas fa-times-circle"></i>&nbsp;Inactive Districts
                     </h2>
 
                     <BootstrapTable
