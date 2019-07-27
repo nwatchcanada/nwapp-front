@@ -281,11 +281,11 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
                                 <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />
                                 <Route path="/staff" exact component={requiresAuth(StaffListContainer)} />
-                                <Route path="/staff/:urlArgument/search" exact component={requiresAuth(StaffSearchContainer)} />
-                                <Route path="/staff/:urlArgument/search-results" exact component={requiresAuth(StaffSearchResultContainer)} />
-                                <Route path="/staff/:urlArgument/:slug" exact component={requiresAuth(StaffLiteRetrieveContainer)} />
-                                <Route path="/staff/:urlArgument/:slug/full" exact component={requiresAuth(StaffFullRetrieveContainer)} />
-                                <Route path="/staff/:urlArgument/:slug/update" exact component={requiresAuth(StaffUpdateContainer)} />
+                                <Route path="/staff/search" exact component={requiresAuth(StaffSearchContainer)} />
+                                <Route path="/staff/search-results" exact component={requiresAuth(StaffSearchResultContainer)} />
+                                <Route path="/staff/:slug" exact component={requiresAuth(StaffLiteRetrieveContainer)} />
+                                <Route path="/staff/:slug/full" exact component={requiresAuth(StaffFullRetrieveContainer)} />
+                                <Route path="/staff/:slug/update" exact component={requiresAuth(StaffUpdateContainer)} />
                                 <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
                                 <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
                                 <Route path="/task/1/:slug/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />

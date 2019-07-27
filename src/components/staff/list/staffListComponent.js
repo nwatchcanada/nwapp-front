@@ -35,11 +35,6 @@ class ActiveListComponent extends Component {
             sort: true
         },{
             dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
-        },{
-            dataField: 'slug',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
@@ -98,11 +93,6 @@ class InactiveListComponent extends Component {
             dataField: 'email',
             text: 'Email',
             sort: true
-        },{
-            dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
         },{
             dataField: 'slug',
             text: 'Details',
