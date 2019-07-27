@@ -14,7 +14,7 @@ export default class WatchUpdateComponent extends Component {
     render() {
         const {
             // Page related.
-            slug, name, description, associate, associateOptions, district, districtOptions,
+            slug, icon, name, description, associate, associateOptions, district, districtOptions,
             primaryAreaCoordinator, primaryAreaCoordinatorOptions, secondaryAreaCoordinator, secondaryAreaCoordinatorOptions, streetMembership,
             errors, isLoading, onClick, onTextChange, onSelectChange,
 
@@ -33,7 +33,7 @@ export default class WatchUpdateComponent extends Component {
                             <Link to="/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/watch/${slug}`}><i className="fas fa-building"></i>&nbsp;{name}</Link>
+                            <Link to={`/watch/${slug}`}><i className={`fas fa-${icon}`}></i>&nbsp;{name}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update

@@ -36,22 +36,61 @@ class WatchRetrieveContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         //TODO: REPLACE WITH API.
-        this.setState({
-            tags: ["fitness",],
-            tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
-            name: "Argyle",
-            description: "This is a test description for `Argyle`.",
-            associate: "bob-page",
-            associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
-            district: "wanchai",
-            programLabel: "Business",
-            districtOption: {"selectName":"district","value":"wanchai","label":"Wanchai Market"},
-            primaryAreaCoordinator: "tracer-tong",
-            primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
-            secondaryAreaCoordinator: "icarus",
-            secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
-            streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
-        });
+        if (this.state.slug === "argyle") {
+            this.setState({
+                icon: "home",
+                tags: ["fitness",],
+                tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
+                name: "Argyle",
+                description: "This is a test description for `Argyle`.",
+                associate: "bob-page",
+                associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
+                district: "wanchai",
+                programLabel: "Resident",
+                districtOption: {"selectName":"district","value":"wanchai","label":"Wanchai Market"},
+                primaryAreaCoordinator: "tracer-tong",
+                primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
+                secondaryAreaCoordinator: "icarus",
+                secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+                streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
+            });
+        } else if (this.state.slug === "byron") {
+            this.setState({
+                icon: "building",
+                tags: ["fitness",],
+                tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
+                name: "Byron",
+                description: "This is a test description for `Byron`.",
+                associate: "bob-page",
+                associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
+                district: "wanchai",
+                programLabel: "Business",
+                districtOption: {"selectName":"district","value":"wanchai","label":"Wanchai Market"},
+                primaryAreaCoordinator: "tracer-tong",
+                primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
+                secondaryAreaCoordinator: "icarus",
+                secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+                streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
+            });
+        } else if (this.state.slug === "carling") {
+            this.setState({
+                icon: "university",
+                tags: ["fitness",],
+                tagsOptions: [{"selectName":"tags","value":"fitness","label":"Fitness"}],
+                name: "Carling",
+                description: "This is a test description for `Byron`.",
+                associate: "bob-page",
+                associateOption: {"selectName":"associate","value":"bob-page","label":"Bob Page"},
+                district: "wanchai",
+                programLabel: "Community Cares",
+                districtOption: {"selectName":"district","value":"wanchai","label":"Wanchai Market"},
+                primaryAreaCoordinator: "tracer-tong",
+                primaryAreaCoordinatorOption: {"selectName":"primaryAreaCoordinator","value":"tracer-tong","label":"Tracer Tong"},
+                secondaryAreaCoordinator: "icarus",
+                secondaryAreaCoordinatorOption: {"selectName":"secondaryAreaCoordinator","value":"icarus","label":"Icarus"},
+                streetMembership: [{"streetAddress":"Singleton Avenue from 23 to 25","streetNumberStart":"23","streetNumberFinish":"25","streetName":"Singleton","streetType":"Avenue","streetDirection":""}],
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -89,11 +128,12 @@ class WatchRetrieveContainer extends Component {
 
     render() {
         const {
-            tagsOptions, name, description, programLabel, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
+            icon, tagsOptions, name, description, programLabel, associateOption, districtOption, primaryAreaCoordinatorOption, secondaryAreaCoordinatorOption, streetMembership, errors,
         } = this.state;
 
         return (
             <WatchRetrieveComponent
+                icon={icon}
                 tags={tagsOptions}
                 name={name}
                 description={description}

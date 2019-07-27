@@ -8,7 +8,7 @@ import { FlashMessageComponent } from "../../flashMessageComponent";
 export default class WatchRetrieveComponent extends Component {
     render() {
         const {
-            tags, name, description, associate, district, programLabel, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, flashMessage
+            icon, tags, name, description, associate, district, programLabel, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, isLoading, onClick, flashMessage
         } = this.props;
         return (
             <main id="main" role="main">
@@ -21,7 +21,7 @@ export default class WatchRetrieveComponent extends Component {
                             <Link to="/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-building"></i>&nbsp;{name}
+                            <i className={`fas fa-${icon}`}></i>&nbsp;{name}
                         </li>
                     </ol>
                 </nav>
@@ -29,7 +29,7 @@ export default class WatchRetrieveComponent extends Component {
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1>
-                    <i className="fas fa-building"></i>&nbsp;{name}
+                    <i className={`fas fa-${icon}`}></i>&nbsp;{name}
                 </h1>
 
                 <div className="row mt-4 pt-3 mb-4 pb-2">
