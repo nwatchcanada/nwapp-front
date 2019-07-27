@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
 
 
 class TaskSearchComponent extends Component {
     render() {
-        const { urlArgument, onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
+        const { onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
+        const { errors, onTextChange, phone } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -13,7 +15,7 @@ class TaskSearchComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/tasks/${urlArgument}`}><i className="fas fa-tasks"></i>&nbsp;Tasks</Link>
+                            <Link to={`/tasks`}><i className="fas fa-tasks"></i>&nbsp;Tasks</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-search"></i>&nbsp;Search
@@ -56,6 +58,11 @@ class TaskSearchComponent extends Component {
                             onClick = { onAdvancedSearchPanelToggle }>
                             <i className="fas fa-times"></i> Advanced Search
                         </button>
+                        <div className="col-md-12 text-center">
+                            <Link to="/tasks" className="btn btn-secondary btn-lg mt-4 pl-4 pr-4">
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <div id="adv-search"
@@ -84,6 +91,17 @@ class TaskSearchComponent extends Component {
                                     maxLength="14" />
                                 <div id="phonenumber-error" className="invalid-feedback"></div>
                             </div>
+                            <BootstrapTelephoneInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.phone}
+                                label="Phone"
+                                onChange={onTextChange}
+                                value={phone}
+                                name="phone"
+                                type="text"
+                                placeholder="+1 (xxx) xxx-xxxx"
+                            />
                         </div>
                         <div className="form-row">
                             <div className="form-group col-md-7 mb-4">

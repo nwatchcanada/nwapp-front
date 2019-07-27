@@ -146,6 +146,8 @@ import StaffFullRetrieveContainer from "./staff/retrieve/staffFullRetrieveContai
 import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContainer";
 
 import TaskListContainer from "./tasks/list/taskListContainer";
+import TaskSearchContainer from "./tasks/search/taskSearchContainer";
+import TaskSearchResultContainer from "./tasks/search/taskSearchResultContainer";
 import AssignWatchAssociateTaskStep1Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Container";
 import AssignWatchAssociateTaskStep2Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Container";
 import AssignWatchAssociateTaskStep3Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep3Container";
@@ -291,6 +293,8 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/:slug/full" exact component={requiresAuth(StaffFullRetrieveContainer)} />
                                 <Route path="/staff/:slug/update" exact component={requiresAuth(StaffUpdateContainer)} />
                                 <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
+                                <Route path="/tasks/search" exact component={requiresAuth(TaskSearchContainer)} />
+                                <Route path="/tasks/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
                                 <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
                                 <Route path="/task/1/:slug/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />
                                 <Route path="/task/1/:slug/step-3" exact component={requiresAuth(AssignWatchAssociateTaskStep3Container)} />
