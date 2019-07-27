@@ -57,9 +57,7 @@ import WatchCreateStep4BizContainer from "./watches/create/biz/watchCreateStep4B
 import WatchCreateStep2ComContainer from "./watches/create/com/watchCreateStep2ComContainer";
 import WatchCreateStep3ComContainer from "./watches/create/com/watchCreateStep3ComContainer";
 import WatchCreateStep4ComContainer from "./watches/create/com/watchCreateStep4ComContainer";
-import WatchRetrieveRezContainer from "./watches/retrieve/watchRetrieveRezContainer";
-import WatchRetrieveBizContainer from "./watches/retrieve/watchRetrieveBizContainer";
-import WatchRetrieveComContainer from "./watches/retrieve/watchRetrieveComContainer";
+import WatchRetrieveContainer from "./watches/retrieve/watchRetrieveContainer";
 import WatchUpdateRezContainer from "./watches/update/watchUpdateRezContainer";
 import WatchUpdateBizContainer from "./watches/update/watchUpdateBizContainer";
 import WatchUpdateComContainer from "./watches/update/watchUpdateComContainer";
@@ -312,9 +310,7 @@ class AppContainer extends React.Component {
                                 <Route path="/watches/step-4-create-rez" exact component={requiresAuth(WatchCreateStep4RezContainer)} />
                                 <Route path="/watches/step-4-create-biz" exact component={requiresAuth(WatchCreateStep4BizContainer)} />
                                 <Route path="/watches/step-4-create-cc" exact component={requiresAuth(WatchCreateStep4ComContainer)} />
-                                <Route path="/watch-biz/:slug" exact component={requiresAuth(WatchRetrieveBizContainer)} />
-                                <Route path="/watch-cc/:slug" exact component={requiresAuth(WatchRetrieveComContainer)} />
-                                <Route path="/watch-rez/:slug" exact component={requiresAuth(WatchRetrieveRezContainer)} />
+                                <Route path="/watch/:slug" exact component={requiresAuth(WatchRetrieveContainer)} />
                                 <Route path="/watch-biz/:slug/update" exact component={requiresAuth(WatchUpdateBizContainer)} />
                                 <Route path="/watch-cc/:slug/update" exact component={requiresAuth(WatchUpdateComContainer)} />
                                 <Route path="/watch-rez/:slug/update" exact component={requiresAuth(WatchUpdateRezContainer)} />
