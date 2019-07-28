@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import BootstrapTable from 'react-bootstrap-table-next';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 
 export default class StaffDashboardComponent extends Component {
@@ -61,25 +63,7 @@ export default class StaffDashboardComponent extends Component {
                             </p>
                         </div>
 
-                        <h2><i className="fas fa-tasks"></i>&nbsp;Tasks List</h2>
-
-                        <div className="table-responsive">
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Watch Name</th>
-                                        <th>Type</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {latestTasks && latestTasks.map(
-                                        (latestTask, i) => <LastestTaskTableRow datum={latestTask} key={i} />)
-                                    }
-                                </tbody>
-                            </table>
-                            <Link to="/tasks" className="float-right">See more&nbsp;<i className="fas fa-chevron-right"></i></Link>
-                        </div>
+                        <RecentTaskListComponent latestTasks={latestTasks} />
 
                     </main>
                 </div>
@@ -88,20 +72,71 @@ export default class StaffDashboardComponent extends Component {
     }
 }
 
-class LastestTaskTableRow extends Component {
+
+class RecentTaskListComponent extends Component {
     render() {
-        const { slug, watchName, prettyTypeOf, absoluteUrl } = this.props.datum;
+        const { latestTasks } = this.props;
+
+        const columns = [{
+            dataField: 'watchName',
+            text: 'Watch Name',
+            sort: false
+        },{
+            dataField: 'prettyTypeOf',
+            text: 'Type',
+            sort: false
+        },{
+            dataField: 'slug',
+            text: '',
+            sort: false,
+            formatter: recentTaskLinkFormatter
+        }];
 
         return (
-            <tr slug={slug}>
-                <td>{watchName}</td>
-                <td>{prettyTypeOf}</td>
-                <td>
-                    <a href={absoluteUrl}>
-                        View&nbsp;<i className="fas fa-chevron-right"></i>
-                    </a>
-                </td>
-            </tr>
+            <div className="row">
+                <div className="col-md-12">
+                    <h2>
+                        <i className="fas fa-list"></i>&nbsp;Recent Task List
+                    </h2>
+
+                    <BootstrapTable
+                        bootstrap4
+                        keyField='slug'
+                        data={ latestTasks }
+                        columns={ columns }
+                        striped
+                        bordered={ false }
+                        noDataIndication="There are no recent tasks at the moment"
+                    />
+
+                    <Link to="/tasks" className="float-right">See more&nbsp;<i className="fas fa-chevron-right"></i></Link>
+
+                </div>
+            </div>
         );
     }
+}
+
+
+function recentTaskLinkFormatter(cell, row){
+    // DEVELOPERS NOTE:
+    // WE ARE ASSIGNING AN ID TO THE URL. THIS IS WHERE WE NEED TO ADD MORE IDS
+    // IF HAVE MORE DIFFERENT TYPES.
+    let typeOfID = 0;
+    switch(row.typeOf) {
+        case "unassigned-watch-associate":
+            typeOfID = 1;
+            break;
+        case "unassigned-watch-area-coordinator":
+            typeOfID = 2;
+            break;
+        default:
+           typeOfID = 0;
+           break;
+    }
+    return (
+        <Link to={`/task/${typeOfID}/${row.slug}/step-1`}>
+            View&nbsp;<i className="fas fa-chevron-right"></i>
+        </Link>
+    )
 }

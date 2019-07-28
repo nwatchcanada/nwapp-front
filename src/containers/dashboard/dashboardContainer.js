@@ -92,22 +92,25 @@ class DashboardContainer extends Component {
         const dashboardData = {
             latestTasks: [
                 {
-                    'slug': 'Argyle',
+                    'slug': 'argyle-task-1',
                     'number': 1,
-                    'watchName': 'Argyle',
+                    'watchName': 'argyle',
                     'prettyTypeOf': '48h follow up',
+                    'typeOf': 'unassigned-watch-associate',
                     'absoluteUrl': '/tasks/argyle'
                 },{
-                    'slug': 'byron',
+                    'slug': 'byron-task-1',
                     'number': 2,
                     'watchName': 'Byron',
                     'prettyTypeOf': 'Survey',
+                    'typeOf': 'unassigned-watch-associate',
                     'absoluteUrl': '/tasks/byron'
                 },{
-                    'slug': 'carling',
+                    'slug': 'carling-task-1',
                     'number': 3,
                     'watchName': 'Carling',
                     'prettyTypeOf': 'Assign associate',
+                    'typeOf': 'unassigned-watch-area-coordinator',
                     'absoluteUrl': '/tasks/carling'
                 }
             ]
