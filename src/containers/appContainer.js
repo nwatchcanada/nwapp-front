@@ -74,7 +74,7 @@ import HowHearDeleteContainer from "./settings/howHear/howHearDeleteContainer";
 import HowHearCreateContainer from "./settings/howHear/howHearCreateContainer";
 import HowHearUpdateContainer from "./settings/howHear/howHearUpdateContainer";
 
-import AnnouncementListContainer from "./settings/announcements/announcementListContainer";
+import AnnouncementListContainer from "./settings/announcements/list/announcementListContainer";
 import AnnouncementDeleteContainer from "./settings/announcements/announcementDeleteContainer";
 import AnnouncementCreateContainer from "./settings/announcements/announcementCreateContainer";
 import AnnouncementUpdateContainer from "./settings/announcements/announcementUpdateContainer";
