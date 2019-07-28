@@ -52,7 +52,7 @@ class HowHearCreateContainer extends Component {
 
     onSuccessfulSubmissionCallback(howHear) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "HowHear has been successfully created.");
+        this.props.setFlashMessage("success", "How hear item has been successfully created.");
         this.props.history.push("/settings/how-hears");
     }
 

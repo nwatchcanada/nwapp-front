@@ -69,7 +69,7 @@ import TagDeleteContainer from "./settings/tags/tagDeleteContainer";
 import TagCreateContainer from "./settings/tags/tagCreateContainer";
 import TagUpdateContainer from "./settings/tags/tagUpdateContainer";
 
-import HowHearsListContainer from "./settings/howHear/howHearListContainer";
+import HowHearsListContainer from "./settings/howHear/list/howHearListContainer";
 import HowHearDeleteContainer from "./settings/howHear/howHearDeleteContainer";
 import HowHearCreateContainer from "./settings/howHear/howHearCreateContainer";
 import HowHearUpdateContainer from "./settings/howHear/howHearUpdateContainer";
