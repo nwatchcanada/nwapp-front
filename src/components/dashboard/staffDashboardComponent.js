@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
-class StaffDashboardComponent extends Component {
+export default class StaffDashboardComponent extends Component {
     render() {
         const { dashboardData } = this.props;
         const { latestTasks } = dashboardData;
@@ -105,5 +105,3 @@ class LastestTaskTableRow extends Component {
         );
     }
 }
-
-export default StaffDashboardComponent;
