@@ -14,7 +14,7 @@ export default class StaffFullRetrieveComponent extends Component {
         const {
             firstName, lastName, dateOfBirth, description, tags, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, apartmentUnit, streetDirection, postalCode, locality, country, region, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, policeCheckDate,
             errors, isLoading, onClick,
             genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
         } = this.props;
@@ -187,6 +187,18 @@ export default class StaffFullRetrieveComponent extends Component {
                                     <th scope="row" className="bg-light">Alternative Telephone</th>
                                     <td>{emergencyAlternativeTelephone}</td>
                                 </tr>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-user-shield"></i>&nbsp;Policy
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Police Check Date</th>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{policeCheckDate}</Moment>
+                                    </td>
+                                </tr>
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-user-circle"></i>&nbsp;Account

@@ -57,6 +57,7 @@ class StaffFullRetrieveContainer extends Component {
             additionalComments: "",
             accountType: "",
             accountTypeLabel: "",
+            policeCheckDate: null,
             password: "",
             repeatPassword: "",
             isActive: "",
@@ -124,6 +125,7 @@ class StaffFullRetrieveContainer extends Component {
            additionalComments: "Good attention to detail.",
            accountType: "",
            accountTypeLabel: "Management Staff",
+           policeCheckDate: new Date(),
            password: "",
            repeatPassword: "",
            isActive: "",
@@ -183,7 +185,7 @@ class StaffFullRetrieveContainer extends Component {
         const {
             firstName, lastName, dateOfBirth, gender, description, tags, howHear, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, postalCode, locality, region, country, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, policeCheckDate,
             password, repeatPassword, isActive, isActiveOptions,
             genderLabel, howHearLabel, streetTypeLabel, accountTypeLabel, isActiveLabel,
             errors, isLoading
@@ -237,6 +239,7 @@ class StaffFullRetrieveContainer extends Component {
                 emergencyAlternativeTelephone={emergencyAlternativeTelephone}
                 additionalComments={additionalComments}
                 accountType={accountType}
+                policeCheckDate={policeCheckDate}
                 accountTypeLabel={accountTypeLabel}
                 password={password}
                 repeatPassword={repeatPassword}

@@ -65,6 +65,11 @@ export default function validateInput(data) {
         errors.postalCode = 'This field is required';
     }
 
+    // Security
+    if (data.policeCheckDate === undefined || data.policeCheckDate === null || data.policeCheckDate === "") {
+        errors.policeCheckDate = 'This field is required';
+    }
+
     // Account
     if (data.accountType === undefined || data.accountType === null || data.accountType === "") {
         errors.accountType = 'This field is required';

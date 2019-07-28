@@ -21,10 +21,10 @@ export default class StaffUpdateComponent extends Component {
             slug,
             firstName, lastName, dateOfBirth, gender, description, howHear, tags, tagOptions, howHearOptions, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions, postalCode, locality, country, region, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, isActive, isActiveOptions,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, policeCheckDate, isActive, isActiveOptions,
             password, repeatPassword,
             errors, isLoading,
-            onTextChange, onClick, onDateOfBirthChange, onSelectChange, onMultiChange, onCountryChange, onRegionChange, onRadioChange
+            onTextChange, onClick, onDateOfBirthChange, onPoliceCheckDateChange, onSelectChange, onMultiChange, onCountryChange, onRegionChange, onRadioChange
         } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
@@ -352,6 +352,18 @@ export default class StaffUpdateComponent extends Component {
                                 name="emergencyAlternativeTelephone"
                                 type="text"
                                 placeholder="+1 (xxx) xxx-xxxx"
+                            />
+
+                            <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>
+
+                            <BootstrapDatePicker
+                                label="Police Check Date (*)"
+                                name="policeCheckDate"
+                                dateObj={policeCheckDate}
+                                onTimeChange={onPoliceCheckDateChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.policeCheckDate}
                             />
 
                             <h4><i className="fas fa-user-circle"></i>&nbsp;Account</h4>

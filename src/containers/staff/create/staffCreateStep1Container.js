@@ -52,6 +52,7 @@ class StaffCreateStep1Container extends Component {
             emergencyTelephone: localStorage.getItem("nwapp-staff-create-emergencyTelephone"),
             emergencyAlternativeTelephone: localStorage.getItem("nwapp-staff-create-emergencyAlternativeTelephone"),
             additionalComments: localStorage.getItem("nwapp-staff-create-additionalComments"),
+            policeCheckDate: localStorageGetDateItem("nwapp-staff-create-policeCheckDate"),
             accountType: parseInt(localStorage.getItem("nwapp-staff-create-accountType")),
             password: localStorage.getItem("nwapp-staff-create-password"),
             repeatPassword: localStorage.getItem("nwapp-staff-create-repeatPassword"),
@@ -76,6 +77,7 @@ class StaffCreateStep1Container extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
         this.onDateOfBirthChange = this.onDateOfBirthChange.bind(this);
+        this.onPoliceCheckDateChange = this.onPoliceCheckDateChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
@@ -240,6 +242,13 @@ class StaffCreateStep1Container extends Component {
         localStorageSetObjectOrArrayItem('nwapp-staff-create-dateOfBirth', dateObj);
     }
 
+    onPoliceCheckDateChange(dateObj) {
+        this.setState({
+            policeCheckDate: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('nwapp-staff-create-policeCheckDate', dateObj);
+    }
+
     onCountryChange(value) {
         if (value === null || value === undefined || value === '') {
             this.setState({ country: null, region: null })
@@ -303,7 +312,7 @@ class StaffCreateStep1Container extends Component {
         const {
             firstName, lastName, dateOfBirth, gender, description, howHear, tags, phone, mobile, workEmail, personalEmail,
             streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, locality, region, country, postalCode, emergencyFullName,
-            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType,
+            emergencyRelationship, emergencyTelephone, emergencyAlternativeTelephone, additionalComments, accountType, policeCheckDate,
             password, repeatPassword, isActive, isActiveOptions,
             errors, isLoading
         } = this.state;
@@ -343,6 +352,7 @@ class StaffCreateStep1Container extends Component {
                 emergencyAlternativeTelephone={emergencyAlternativeTelephone}
                 additionalComments={additionalComments}
                 accountType={accountType}
+                policeCheckDate={policeCheckDate}
                 password={password}
                 repeatPassword={repeatPassword}
                 isActive={isActive}
@@ -353,6 +363,7 @@ class StaffCreateStep1Container extends Component {
                 onSelectChange={this.onSelectChange}
                 onMultiChange={this.onMultiChange}
                 onDateOfBirthChange={this.onDateOfBirthChange}
+                onPoliceCheckDateChange={this.onPoliceCheckDateChange}
                 onCountryChange={this.onCountryChange}
                 onRegionChange={this.onRegionChange}
                 onRadioChange={this.onRadioChange}
