@@ -64,7 +64,7 @@ import WatchUpdateContainer from "./watches/update/watchUpdateContainer";
 import WatchSearchContainer from "./watches/search/watchSearchContainer";
 import WatchSearchResultContainer from "./watches/search/watchSearchResultContainer";
 
-import TagsListContainer from "./settings/tags/tagListContainer";
+import TagsListContainer from "./settings/tags/list/tagListContainer";
 import TagDeleteContainer from "./settings/tags/tagDeleteContainer";
 import TagCreateContainer from "./settings/tags/tagCreateContainer";
 import TagUpdateContainer from "./settings/tags/tagUpdateContainer";
