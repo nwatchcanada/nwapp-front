@@ -32,6 +32,8 @@ import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirec
 import DashboardContainer from "./dashboard/dashboardContainer";
 
 import DistrictsListContainer from "./settings/districts/list/districtListContainer";
+import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
+import DistrictSearchResultContainer from "./settings/districts/search/districtSearchResultContainer";
 import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
 import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
 import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
@@ -205,6 +207,8 @@ class AppContainer extends React.Component {
                                 <Route path="/dashboard-redirect/:accessToken/:refreshToken" exact component={requiresAuth(TenantDashboardRedirectContainer)} />
                                 <Route path="/dashboard" exact component={requiresAuth(DashboardContainer)} />
                                 <Route path="/settings/districts" exact component={requiresAuth(DistrictsListContainer)} />
+                                <Route path="/settings/districts/search" exact component={requiresAuth(DistrictSearchContainer)} />
+                                <Route path="/settings/districts/search-results" exact component={requiresAuth(DistrictSearchResultContainer)} />
                                 <Route path="/settings/district/step-1-create" exact component={requiresAuth(DistrictCreateStepContainer)} />
                                 <Route path="/settings/district/step-2-create-rez" exact component={requiresAuth(DistrictCreateStep2ResidentialContainer)} />
                                 <Route path="/settings/district/step-3-create-rez" exact component={requiresAuth(DistrictCreateStep3ResidentialContainer)} />
