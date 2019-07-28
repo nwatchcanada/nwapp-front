@@ -15,7 +15,7 @@ import {
 export default function validateInput(data) {
     let errors = {};
 
-    if (data.category === undefined || data.category === null || validator.isEmpty(data.category) || data.category === "") {
+    if (data.category === undefined || data.category === null || data.category === "") {
         errors.category = 'This field is required';
     }
     if (data.typeOf === undefined || data.typeOf === null || data.typeOf === "") {
@@ -45,13 +45,13 @@ export default function validateInput(data) {
 export function validateLinkInput(data) {
     let errors = {};
 
-    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
+    if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
-    if (data.url === undefined || data.url === null || validator.isEmpty(data.url) || data.url === "") {
+    if (data.url === undefined || data.url === null ||  data.url === "") {
         errors.url = 'This field is required';
     }
-    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+    if (data.description === undefined || data.description === null || data.description === "") {
         errors.description = 'This field is required';
     }
 
@@ -65,13 +65,13 @@ export function validateLinkInput(data) {
 export function validateYouTubeVideoInput(data) {
     let errors = {};
 
-    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
+    if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
-    if (data.youTubeEmbedCode === undefined || data.youTubeEmbedCode === null || validator.isEmpty(data.youTubeEmbedCode) || data.youTubeEmbedCode === "") {
+    if (data.youTubeEmbedCode === undefined || data.youTubeEmbedCode === null || data.youTubeEmbedCode === "") {
         errors.youTubeEmbedCode = 'This field is required';
     }
-    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+    if (data.description === undefined || data.description === null || data.description === "") {
         errors.description = 'This field is required';
     }
 
@@ -85,13 +85,13 @@ export function validateYouTubeVideoInput(data) {
 export function validateImageInput(data) {
     let errors = {};
 
-    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
+    if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
-    if (data.imageFile === undefined || data.imageFile === null || validator.isEmpty(data.imageFile) || data.imageFile === "") {
+    if (data.imageFile === undefined || data.imageFile === null || data.imageFile === "") {
         errors.imageFile = 'This field is required';
     }
-    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+    if (data.description === undefined || data.description === null || data.description === "") {
         errors.description = 'This field is required';
     }
 
@@ -105,13 +105,13 @@ export function validateImageInput(data) {
 export function validateFileInput(data) {
     let errors = {};
 
-    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
+    if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
-    if (data.file === undefined || data.file === null || validator.isEmpty(data.file) || data.file === "") {
+    if (data.file === undefined || data.file === null || data.file === "") {
         errors.file = 'This field is required';
     }
-    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+    if (data.description === undefined || data.description === null || data.description === "") {
         errors.description = 'This field is required';
     }
 

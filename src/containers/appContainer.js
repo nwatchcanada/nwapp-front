@@ -79,7 +79,7 @@ import AnnouncementDeleteContainer from "./settings/announcements/announcementDe
 import AnnouncementCreateContainer from "./settings/announcements/announcementCreateContainer";
 import AnnouncementUpdateContainer from "./settings/announcements/announcementUpdateContainer";
 
-import ResourcesListContainer from "./settings/resources/resourceListContainer";
+import ResourcesListContainer from "./settings/resources/list/resourceListContainer";
 import ResourceDeleteContainer from "./settings/resources/resourceDeleteContainer";
 import ResourceCreateContainer from "./settings/resources/resourceCreateContainer";
 import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
