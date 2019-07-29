@@ -101,6 +101,7 @@ import MemberCreateStep8Container from "./members/create/memberCreateStep8Contai
 import MemberUpdateContainer from "./members/update/memberUpdateContainer";
 import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Container";
 import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
+import MemberPromoteStep3Container from "./members/promote/memberPromoteStep3Container";
 
 import ItemListContainer from "./items/list/itemListContainer";
 import ItemSearchContainer from "./items/search/itemSearchContainer";
@@ -255,6 +256,7 @@ class AppContainer extends React.Component {
                                 <Route path="/member/:slug/update" exact component={requiresAuth(MemberUpdateContainer)} />
                                 <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
                                 <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
+                                <Route path="/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
                                 <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />

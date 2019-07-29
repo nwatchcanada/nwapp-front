@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberPromoteStep2Component from "../../../components/members/promote/memberPromoteStep2Component";
+import MemberPromoteStep3Component from "../../../components/members/promote/memberPromoteStep3Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
@@ -106,7 +106,7 @@ class MemberPromoteStep2Container extends Component {
             'absoluteUrl': '/member/argyle'
         };
         return (
-            <MemberPromoteStep2Component
+            <MemberPromoteStep3Component
                 urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 memberData={memberData}

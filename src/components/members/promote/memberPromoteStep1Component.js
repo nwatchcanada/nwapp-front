@@ -39,7 +39,7 @@ export default class MemberPromoteStep1Component extends Component {
                             <span className="num">2.</span><span className="">Agreement</span>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">2.</span><span className="">Review</span>
+                            <span className="num">3.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>

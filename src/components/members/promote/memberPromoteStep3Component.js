@@ -34,9 +34,14 @@ export default class MemberPromoteStep2Component extends Component {
                                 <Link to={`/member/${slug}/promote/step-1`}>Selection</Link>
                             </span>
                         </div>
-                        <div id="step-2" className="st-grey active">
+                        <div id="step-2" className="st-grey">
+                            <span className="num">2.</span><span className="">
+                                <Link to={`/member/${slug}/promote/step-2`}>Agreement</Link>
+                            </span>
+                        </div>
+                        <div id="step-3" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Review</span>
+                                <span className="num">3.</span><span className="">Review</span>
                             </strong>
                         </div>
                     </div>
@@ -59,7 +64,7 @@ export default class MemberPromoteStep2Component extends Component {
 
                 <div className="row">
                     <div className="col-md-12">
-                        <Link to={`/member/${slug}/promote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                        <Link to={`/member/${slug}/promote/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                             <i className="fas fa-arrow-circle-left"></i> Back
                         </Link>
                     </div>
