@@ -115,8 +115,8 @@ class DashboardContainer extends Component {
                 }
             ]
         };
-        const { groupMembershipId } = this.props.user;
-        if (groupMembershipId === EXECUTIVE_GROUP_ID) {
+        const { groupId } = this.props.user;
+        if (groupId === EXECUTIVE_GROUP_ID) {
             return (
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -125,7 +125,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupMembershipId === MANAGEMENT_GROUP_ID) {
+        else if (groupId === MANAGEMENT_GROUP_ID) {
             return (
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -134,7 +134,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupMembershipId === FRONTLINE_STAFF_GROUP_ID) {
+        else if (groupId === FRONTLINE_STAFF_GROUP_ID) {
             return (
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -143,7 +143,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupMembershipId === ASSOCIATE_GROUP_ID) {
+        else if (groupId === ASSOCIATE_GROUP_ID) {
             return (
                 <AssociateDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -151,7 +151,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupMembershipId === AREA_COORDINATOR_GROUP_ID) {
+        else if (groupId === AREA_COORDINATOR_GROUP_ID) {
             return (
                 <AreaCoordinatorDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -160,7 +160,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupMembershipId === MEMBER_GROUP_ID) {
+        else if (groupId === MEMBER_GROUP_ID) {
             return (
                 <MemberDashboardComponent
                     // dashboard={this.props.dashboard}
