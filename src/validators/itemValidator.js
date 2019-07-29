@@ -78,8 +78,8 @@ export function validateEventInput(data) {
     if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
         errors.description = 'This field is required';
     }
-    if (data.shownTo === undefined || data.shownTo === null || data.shownTo === "" || isNaN(data.shownTo) ) {
-        errors.shownTo = 'This field is required';
+    if (data.shownToWhom === undefined || data.shownToWhom === null || data.shownToWhom === "" || isNaN(data.shownToWhom) ) {
+        errors.shownToWhom = 'This field is required';
     }
 
     return {

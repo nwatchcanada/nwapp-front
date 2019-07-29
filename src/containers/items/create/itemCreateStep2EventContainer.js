@@ -30,7 +30,7 @@ class ItemCreateStep2EventContainer extends Component {
             description: localStorage.getItem("nwapp-item-create-event-description"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
-            shownTo: localStorageGetIntegerItem("nwapp-item-create-event-shownTo"),
+            shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
             errors: {},
             isLoading: false
         }
@@ -283,7 +283,7 @@ class ItemCreateStep2EventContainer extends Component {
      */
 
     render() {
-        const { title, eventTypeOf, eventTypeOfOther, date, description, logoPhoto, galleryPhotos, shownTo, errors } = this.state;
+        const { title, eventTypeOf, eventTypeOfOther, date, description, logoPhoto, galleryPhotos, shownToWhom, errors } = this.state;
         return (
             <ItemCreateStep2EventComponent
                 title={title}
@@ -294,7 +294,7 @@ class ItemCreateStep2EventContainer extends Component {
                 description={description}
                 logoPhoto={logoPhoto}
                 galleryPhotos={galleryPhotos}
-                shownTo={shownTo}
+                shownToWhom={shownToWhom}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

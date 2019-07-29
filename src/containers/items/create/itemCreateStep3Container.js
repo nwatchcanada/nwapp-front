@@ -61,8 +61,8 @@ class ItemCreateStep3Container extends Component {
             eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
-            shownTo: localStorageGetIntegerItem("nwapp-item-create-event-shownTo"),
-            shownToLabel: localStorage.getItem("nwapp-item-create-event-shownTo-label"),
+            shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
+            shownToWhomLabel: localStorage.getItem("nwapp-item-create-event-shownToWhom-label"),
 
             // Incident
             incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
@@ -168,7 +168,7 @@ class ItemCreateStep3Container extends Component {
             eventDescription,
             logoPhoto,
             galleryPhotos,
-            shownToLabel,
+            shownToWhomLabel,
 
             // Incident
             incidentTitle,
@@ -213,7 +213,7 @@ class ItemCreateStep3Container extends Component {
                     eventDescription={eventDescription}
                     logoPhoto={logoPhoto}
                     galleryPhotos={galleryPhotos}
-                    shownToLabel={shownToLabel}
+                    shownToWhomLabel={shownToWhomLabel}
                 />
             );
         } else if (typeOf === CONCERN_ITEM_TYPE_OF) {

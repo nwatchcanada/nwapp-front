@@ -433,17 +433,17 @@ export const ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES = [
 export const ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES = [
     {
         id: 'willingToVolunteer-m-choice',
-        name: "shownTo",
+        name: "shownToWhom",
         value: 1,
         label: "General Public"
     },{
         id: 'willingToVolunteer-f-choice',
-        name: "shownTo",
+        name: "shownToWhom",
         value: 2,
         label: "All NWL Members"
     },{
         id: 'willingToVolunteer-pnts-choice',
-        name: "shownTo",
+        name: "shownToWhom",
         value: 3,
         label: "My Watch Area"
     }

@@ -11,7 +11,7 @@ export default class ItemCreateStep3EventComponent extends Component {
     render() {
         const {
             returnURL, errors, isLoading, onClick,
-            eventTitle, eventPrettyEventTypeOf, eventDate, eventDescription, logoPhoto, galleryPhotos, shownToLabel,
+            eventTitle, eventPrettyEventTypeOf, eventDate, eventDescription, logoPhoto, galleryPhotos, shownToWhomLabel,
         } = this.props;
 
         // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
@@ -130,7 +130,7 @@ export default class ItemCreateStep3EventComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Shown to Whom?</th>
-                                    <td>{shownToLabel}</td>
+                                    <td>{shownToWhomLabel}</td>
                                 </tr>
                             </tbody>
                         </table>

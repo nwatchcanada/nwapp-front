@@ -23,7 +23,7 @@ class ItemCreateStep2EventComponent extends Component {
             onClick,  onTextChange, onSelectChange, onDateTimeChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
-            shownTo, onRadioChange,
+            shownToWhom, onRadioChange,
         } = this.props;
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
         return (
@@ -145,11 +145,11 @@ class ItemCreateStep2EventComponent extends Component {
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.shownTo}
+                                error={errors.shownToWhom}
                                 label="This event should be shown to whom? (*)"
-                                name="shownTo"
+                                name="shownToWhom"
                                 onChange={onRadioChange}
-                                selectedValue={shownTo}
+                                selectedValue={shownToWhom}
                                 options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
                             />
 
