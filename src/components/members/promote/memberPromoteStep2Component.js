@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 import { AREA_COORDINATOR_GROUP_ID, ASSOCIATE_GROUP_ID } from "../../../constants/api";
 
 import { BootstrapCheckbox } from "../../bootstrap/bootstrapCheckbox";
+import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
 export default class MemberPromoteStep2Component extends Component {
     render() {
         const {
-            slug, onClick, isLoading, errors,
-            groupId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, onCheckboxChange,
+            slug, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
+            groupId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, policeCheckDate,
         } = this.props;
         const isAssociate = groupId === ASSOCIATE_GROUP_ID;
         return (
@@ -56,12 +57,11 @@ export default class MemberPromoteStep2Component extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h2>
-                                <i className="fas fa-file-signature"></i>&nbsp;Agreement
-                            </h2>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <h4><i className="fas fa-file-signature"></i>&nbsp;Agreement</h4>
 
                             <BootstrapCheckbox
                                 inputClassName="form-check-input form-check-input-lg"
@@ -114,6 +114,18 @@ export default class MemberPromoteStep2Component extends Component {
                                     name="associateAgreement"
                                 />
                             }
+
+                            <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>
+
+                            <BootstrapDatePicker
+                                label="Police Check Date (*)"
+                                name="policeCheckDate"
+                                dateObj={policeCheckDate}
+                                onTimeChange={onPoliceCheckDateChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.policeCheckDate}
+                            />
 
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

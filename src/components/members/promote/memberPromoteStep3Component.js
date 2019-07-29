@@ -1,11 +1,24 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
+// import 'moment-timezone';
+
+import { AREA_COORDINATOR_GROUP_ID, ASSOCIATE_GROUP_ID } from "../../../constants/api";
+import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
 export default class MemberPromoteStep2Component extends Component {
     render() {
-        const { slug, onClick, isLoading } = this.props;
+        const { groupId, policeCheckDate, errors, slug, onClick, isLoading } = this.props;
+
+        let groupLabel = "Unknown";
+        if (groupId === AREA_COORDINATOR_GROUP_ID) {
+            groupLabel = "Area Coordinator";
+        } else if (groupId === ASSOCIATE_GROUP_ID) {
+            groupLabel = "Associate";
+        }
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -47,26 +60,72 @@ export default class MemberPromoteStep2Component extends Component {
                     </div>
                 </div>
 
-                <h5>Please confirm before submitting the promotion.</h5>
+                <div className="row pt-3 mb-4 pb-2">
+                    <div className="col-md-10 mx-auto p-2">
 
-                <div className="jumbotron">
-                    <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
-                    <p className="lead">Are you sure you want to promote this member?</p>
-                    <hr className="my-4" />
-                    <p>You agree to the <a href="/terms">terms</a> of the organization when submitting this promotion.</p>
-                    <p className="lead">
-                        <button className="btn btn-primary btn-lg" disabled={isLoading} onClick={onClick}>
-                        Confirm & Submit
-                        </button>
-                    </p>
-                </div>
+                        <h2>
+                            <i className="fas fa-table"></i>&nbsp;Review
+                        </h2>
 
-
-                <div className="row">
-                    <div className="col-md-12">
-                        <Link to={`/member/${slug}/promote/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                            <i className="fas fa-arrow-circle-left"></i> Back
-                        </Link>
+                        <BootstrapErrorsProcessingAlert errors={errors} />
+                        <p><strong>Please confirm these details before promoting the member:</strong></p>
+                        <table className="table table-bordered custom-cell-w">
+                            <tbody>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-sitemap"></i>&nbsp;Type
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Promoted Role</th>
+                                    <td>{groupLabel}</td>
+                                </tr>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-file-signature"></i>&nbsp;Agreement
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Agreed to Area Coordinator agreement</th>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Agreed to Conflict of Interest agreement</th>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Agreed to Code of Conduct agreement</th>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Agreed to Confidentiality agreement</th>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Agreed to Associate agreement</th>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-shield-alt"></i>&nbsp;Policy
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Police Check Date</th>
+                                    <td><Moment format="YYYY/MM/DD">{policeCheckDate}</Moment></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form>
+                            <div className="form-group">
+                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                </button>
+                                <Link to={`/member/${slug}/promote/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                </Link>
+                            </div>
+                        </form>
                     </div>
                 </div>
 

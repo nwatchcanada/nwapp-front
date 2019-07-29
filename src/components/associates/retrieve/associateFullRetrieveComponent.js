@@ -50,14 +50,14 @@ export default class AssociateFullRetrieveComponent extends Component {
                             <Link to="/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;Argyle
+                            <i className="fas fa-crown"></i>&nbsp;Argyle
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;View Associate</h1>
+                <h1><i className="fas fa-crown"></i>&nbsp;View Associate</h1>
 
                 <div className="row">
                     <div className="step-navigation">

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
+import { AREA_COORDINATOR_GROUP_ID, ASSOCIATE_GROUP_ID } from "../../../constants/api";
 import MemberPromoteStep3Component from "../../../components/members/promote/memberPromoteStep3Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { localStorageGetIntegerItem, localStorageGetBooleanItem, localStorageGetDateItem } from "../../../helpers/localStorageUtility";
 
 
 class MemberPromoteStep2Container extends Component {
@@ -17,12 +19,19 @@ class MemberPromoteStep2Container extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
+            errors: [],
+            groupId: localStorageGetIntegerItem("nwapp-member-promote-group-id"),
+            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-member-promote-areaCoordinatorAgreement"),
+            conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-member-promote-conflictOfInterestAgreement"),
+            codeOfConductAgreement: localStorageGetBooleanItem("nwapp-member-promote-codeOfConductAgreement"),
+            confidentialityAgreement: localStorageGetBooleanItem("nwapp-member-promote-confidentialityAgreement"),
+            associateAgreement: localStorageGetBooleanItem("nwapp-member-promote-associateAgreement"),
+            policeCheckDate: localStorageGetDateItem("nwapp-member-promote-policeCheckDate"),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -89,7 +98,14 @@ class MemberPromoteStep2Container extends Component {
             isLoading: true,
         })
         this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/full");
+        if (this.state.groupId === AREA_COORDINATOR_GROUP_ID) {
+            this.props.history.push("/area-coordinator/"+this.state.slug+"/full");
+        }
+        else if (this.state.groupId === ASSOCIATE_GROUP_ID) {
+            this.props.history.push("/associate/"+this.state.slug+"/full");
+        } else {
+            this.props.history.push("/member/"+this.state.slug+"/full");
+        }
     }
 
 
@@ -107,9 +123,16 @@ class MemberPromoteStep2Container extends Component {
         };
         return (
             <MemberPromoteStep3Component
-                urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 memberData={memberData}
+                groupId={this.state.groupId}
+                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
+                conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
+                codeOfConductAgreement={this.state.codeOfConductAgreement}
+                confidentialityAgreement={this.state.confidentialityAgreement}
+                associateAgreement={this.state.associateAgreement}
+                policeCheckDate={this.state.policeCheckDate}
+                errors={this.state.errors}
                 onBack={this.onBack}
                 onClick={this.onClick}
             />
