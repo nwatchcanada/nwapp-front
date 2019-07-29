@@ -442,6 +442,7 @@ class ItemUpdateContainer extends Component {
                 onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
                 onGalleryDrop={this.onGalleryDrop}
                 onGalleryRemoveUploadClick={this.onGalleryRemoveUploadClick}
+                onRadioChange={this.onRadioChange}
             />
         );
     }

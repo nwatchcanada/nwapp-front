@@ -7,7 +7,7 @@ import ItemCreateStep3EventComponent from "../../../components/items/create/item
 import ItemCreateStep3IncidentComponent from "../../../components/items/create/itemCreateStep3IncidentComponent";
 import ItemCreateStep3InformationComponent from "../../../components/items/create/itemCreateStep3InformationComponent";
 import {
-    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
@@ -61,6 +61,8 @@ class ItemCreateStep3Container extends Component {
             eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
+            shownTo: localStorageGetIntegerItem("nwapp-item-create-event-shownTo"),
+            shownToLabel: localStorage.getItem("nwapp-item-create-event-shownTo-label"),
 
             // Incident
             incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
@@ -166,6 +168,7 @@ class ItemCreateStep3Container extends Component {
             eventDescription,
             logoPhoto,
             galleryPhotos,
+            shownToLabel,
 
             // Incident
             incidentTitle,
@@ -210,6 +213,7 @@ class ItemCreateStep3Container extends Component {
                     eventDescription={eventDescription}
                     logoPhoto={logoPhoto}
                     galleryPhotos={galleryPhotos}
+                    shownToLabel={shownToLabel}
                 />
             );
         } else if (typeOf === CONCERN_ITEM_TYPE_OF) {

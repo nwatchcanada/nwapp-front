@@ -35,7 +35,8 @@ class ItemUpdateComponent extends Component {
             photos,
             errors,
             isLoading,
-            onTextChange, onDateTimeChange, onSelectChange, onClick, onDrop, onRemoveUploadClick
+            onTextChange, onDateTimeChange, onSelectChange, onClick, onDrop, onRemoveUploadClick,
+            onRadioChange
         } = this.props;
 
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;

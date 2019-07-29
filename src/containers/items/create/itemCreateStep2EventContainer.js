@@ -4,7 +4,9 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep2EventComponent from "../../../components/items/create/itemCreateStep2EventComponent";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem,
+    localStorageGetDateItem, localStorageGetArrayItem,
+    localStorageGetBooleanItem, localStorageGetIntegerItem
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateEventInput } from "../../../validators/itemValidator";
@@ -21,19 +23,21 @@ class ItemCreateStep2EventContainer extends Component {
         super(props);
         this.state = {
             title: localStorage.getItem("nwapp-item-create-event-title"),
-            eventTypeOf: parseInt(localStorage.getItem("nwapp-item-create-event-eventTypeOf")),
+            eventTypeOf:localStorageGetIntegerItem("nwapp-item-create-event-eventTypeOf"),
             eventTypeOfOption: localStorageGetObjectItem('nwapp-item-create-event-eventTypeOfOption'),
             eventTypeOfOther: localStorage.getItem("nwapp-item-create-event-eventTypeOfOther"),
             date: localStorageGetDateItem("nwapp-item-create-event-date"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
+            shownTo: localStorageGetIntegerItem("nwapp-item-create-event-shownTo"),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onGalleryDrop = this.onGalleryDrop.bind(this);
         this.onGalleryRemoveUploadClick = this.onGalleryRemoveUploadClick.bind(this);
@@ -247,13 +251,39 @@ class ItemCreateStep2EventContainer extends Component {
         }
     }
 
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "nwapp-item-create-event-"+[e.target.name];
+        const storageLabelKey =  "nwapp-item-create-event-"+[e.target.name].toString()+"-label";
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"Label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
+    }
+
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { title, eventTypeOf, eventTypeOfOther, date, description, logoPhoto, galleryPhotos, errors } = this.state;
+        const { title, eventTypeOf, eventTypeOfOther, date, description, logoPhoto, galleryPhotos, shownTo, errors } = this.state;
         return (
             <ItemCreateStep2EventComponent
                 title={title}
@@ -264,9 +294,11 @@ class ItemCreateStep2EventContainer extends Component {
                 description={description}
                 logoPhoto={logoPhoto}
                 galleryPhotos={galleryPhotos}
+                shownTo={shownTo}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onRadioChange={this.onRadioChange}
                 onLogoDrop={this.onLogoDrop}
                 onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
                 onGalleryDrop={this.onGalleryDrop}

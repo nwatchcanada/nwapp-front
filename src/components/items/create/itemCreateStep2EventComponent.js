@@ -6,10 +6,14 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleImageUploadAndPreview } from "../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
-import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
+import {
+    OTHER_EVENT_TYPE_OF,
+    ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES
+} from "../../../constants/api";
 
 
 class ItemCreateStep2EventComponent extends Component {
@@ -19,6 +23,7 @@ class ItemCreateStep2EventComponent extends Component {
             onClick,  onTextChange, onSelectChange, onDateTimeChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
+            shownTo, onRadioChange,
         } = this.props;
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
         return (
@@ -135,6 +140,17 @@ class ItemCreateStep2EventComponent extends Component {
                                 name="galleryPhotos"
                                 filesArray={galleryPhotos}
                                 onRemoveUploadClick={onGalleryRemoveUploadClick}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.shownTo}
+                                label="This event should be shown to whom? (*)"
+                                name="shownTo"
+                                onChange={onRadioChange}
+                                selectedValue={shownTo}
+                                options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
                             />
 
                             <div className="form-group">
