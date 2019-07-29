@@ -134,10 +134,11 @@ import AreaCoordinatorUpdateContainer from "./areaCoordinators/update/areaCoordi
 import AreaCoordinatorCreateStep1Container from "./areaCoordinators/create/areaCoordinatorCreateStep1Container";
 import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaCoordinatorCreateStep2Container";
 import AreaCoordinatorCreateStep3Container from "./areaCoordinators/create/areaCoordinatorCreateStep3Container";
-import AreaCoordinatorPromoteContainer from "./areaCoordinators/promote/areaCoordinatorPromoteContainer";
 import AreaCoordinatorDemoteContainer from "./areaCoordinators/demote/areaCoordinatorDemoteContainer";
 import AreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorLiteRetrieveContainer";
 import AreaCoordinatorFullRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorFullRetrieveContainer";
+import AreaCoordinatorPromoteStep1Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep1Container";
+import AreaCoordinatorPromoteStep2Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep2Container";
 
 import StaffListContainer from "./staff/list/staffListContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
@@ -288,7 +289,8 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinator/:slug" exact component={requiresAuth(AreaCoordinatorLiteRetrieveContainer)} />
                                 <Route path="/area-coordinator/:slug/full" exact component={requiresAuth(AreaCoordinatorFullRetrieveContainer)} />
                                 <Route path="/area-coordinator/:slug/update" exact component={requiresAuth(AreaCoordinatorUpdateContainer)} />
-                                <Route path="/area-coordinator/:slug/promote" exact component={requiresAuth(AreaCoordinatorPromoteContainer)} />
+                                <Route path="/area-coordinator/:slug/promote/step-1" exact component={requiresAuth(AreaCoordinatorPromoteStep1Container)} />
+                                <Route path="/area-coordinator/:slug/promote/step-2" exact component={requiresAuth(AreaCoordinatorPromoteStep2Container)} />
                                 <Route path="/area-coordinator/:slug/demote" exact component={requiresAuth(AreaCoordinatorDemoteContainer)} />
                                 <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
                                 <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />

@@ -250,7 +250,7 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                     <td>
                                         <ul>
                                             <li>
-                                                <Link to={`/area-coordinator/${slug}/promote`}>
+                                                <Link to={`/area-coordinator/${slug}/promote/step-1`}>
                                                     Promote&nbsp;<i className="fas fa-chevron-right"></i>
                                                 </Link>
                                             </li>

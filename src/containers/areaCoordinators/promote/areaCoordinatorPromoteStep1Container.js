@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AreaCoordinatorPromoteComponent from "../../../components/areaCoordinators/promote/areaCoordinatorPromoteComponent";
+import AreaCoordinatorPromoteStep1Component from "../../../components/areaCoordinators/promote/areaCoordinatorPromoteStep1Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { validatePromotionInput } from "../../../validators/areaCoordinatorValidator";
+import {
+    localStorageGetIntegerItem,
+    localStorageGetBooleanItem,
+    localStorageGetDateItem,
+    localStorageSetObjectOrArrayItem
+} from "../../../helpers/localStorageUtility";
 
 
-class AreaCoordinatorPromoteContainer extends Component {
+class AreaCoordinatorPromoteStep1Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -22,9 +29,12 @@ class AreaCoordinatorPromoteContainer extends Component {
         // Update state.
         this.state = {
             slug: slug,
+            errors: [],
+            associateAgreement: localStorageGetBooleanItem("nwapp-area-coordinator-promote-associateAgreement"),
         }
 
         this.onClick = this.onClick.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -52,10 +62,9 @@ class AreaCoordinatorPromoteContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(member) {
+    onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members");
+        this.props.history.push("/area-coordinator/"+this.state.slug+"/promote/step-2");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -81,14 +90,28 @@ class AreaCoordinatorPromoteContainer extends Component {
         })
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-area-coordinator-promote-'+[e.target.name], e.target.checked);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.setState({
-            isLoading: true,
-        })
-        this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        this.props.history.push("/member/"+this.state.slug);
+
+        // Perform client-side validation.
+        const { errors, isValid } = validatePromotionInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
     }
 
 
@@ -98,18 +121,22 @@ class AreaCoordinatorPromoteContainer extends Component {
      */
 
     render() {
-        const memberData = {
+        const areaCoordinatorData = {
             'slug': 'Argyle',
             'number': 1,
             'name': 'Argyle',
-            'absoluteUrl': '/member/argyle'
+            'absoluteUrl': '/area-coordinator/argyle'
         };
         return (
-            <AreaCoordinatorPromoteComponent
+            <AreaCoordinatorPromoteStep1Component
+                groupId={this.state.groupId}
+                associateAgreement={this.state.associateAgreement}
+                errors={this.state.errors}
                 slug={this.state.slug}
-                memberData={memberData}
+                areaCoordinatorData={areaCoordinatorData}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                onCheckboxChange={this.onCheckboxChange}
             />
         );
     }
@@ -133,4 +160,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AreaCoordinatorPromoteContainer);
+)(AreaCoordinatorPromoteStep1Container);

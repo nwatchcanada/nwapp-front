@@ -41,3 +41,17 @@ export function validateDemotionInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+export function validatePromotionInput(data) {
+    let errors = {};
+
+    if (data.associateAgreement === undefined || data.associateAgreement === null || data.associateAgreement === "" || data.associateAgreement === false) {
+        errors.associateAgreement = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
