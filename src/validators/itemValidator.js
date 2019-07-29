@@ -81,6 +81,9 @@ export function validateEventInput(data) {
     if (data.shownToWhom === undefined || data.shownToWhom === null || data.shownToWhom === "" || isNaN(data.shownToWhom) ) {
         errors.shownToWhom = 'This field is required';
     }
+    if (data.canBePostedOnSocialMedia === undefined || data.canBePostedOnSocialMedia === null || data.canBePostedOnSocialMedia === "" || isNaN(data.canBePostedOnSocialMedia) ) {
+        errors.canBePostedOnSocialMedia = 'This field is required';
+    }
 
     return {
         errors,

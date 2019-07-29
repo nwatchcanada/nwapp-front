@@ -12,7 +12,8 @@ import { BootstrapSingleImageUploadAndPreview } from "../../bootstrap/bootstrapS
 import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import {
     OTHER_EVENT_TYPE_OF,
-    ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES
+    ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES,
+    ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES
 } from "../../../constants/api";
 
 
@@ -23,7 +24,7 @@ class ItemCreateStep2EventComponent extends Component {
             onClick,  onTextChange, onSelectChange, onDateTimeChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
-            shownToWhom, onRadioChange,
+            shownToWhom, canBePostedOnSocialMedia, onRadioChange,
         } = this.props;
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
         return (
@@ -151,6 +152,17 @@ class ItemCreateStep2EventComponent extends Component {
                                 onChange={onRadioChange}
                                 selectedValue={shownToWhom}
                                 options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.canBePostedOnSocialMedia}
+                                label="This event can be shared by others on social media? (*)"
+                                name="canBePostedOnSocialMedia"
+                                onChange={onRadioChange}
+                                selectedValue={canBePostedOnSocialMedia}
+                                options={ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES}
                             />
 
                             <div className="form-group">

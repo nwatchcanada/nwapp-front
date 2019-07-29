@@ -432,19 +432,34 @@ export const ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES = [
 
 export const ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES = [
     {
-        id: 'willingToVolunteer-m-choice',
+        id: 'shownToWhom-gp-choice',
         name: "shownToWhom",
         value: 1,
         label: "General Public"
     },{
-        id: 'willingToVolunteer-f-choice',
+        id: 'shownToWhom-anm-choice',
         name: "shownToWhom",
         value: 2,
         label: "All NWL Members"
     },{
-        id: 'willingToVolunteer-pnts-choice',
+        id: 'shownToWhom-mwas-choice',
         name: "shownToWhom",
         value: 3,
         label: "My Watch Area"
+    }
+];
+
+
+export const ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES = [
+    {
+        id: 'canBePostedOnSocialMedia-m-choice',
+        name: "canBePostedOnSocialMedia",
+        value: 1,
+        label: "Yes"
+    },{
+        id: 'canBePostedOnSocialMedia-f-choice',
+        name: "canBePostedOnSocialMedia",
+        value: 0,
+        label: "No"
     }
 ];

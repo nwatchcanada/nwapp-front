@@ -63,6 +63,8 @@ class ItemCreateStep3Container extends Component {
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
             shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
             shownToWhomLabel: localStorage.getItem("nwapp-item-create-event-shownToWhom-label"),
+            canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
+            canBePostedOnSocialMediaLabel: localStorage.getItem("nwapp-item-create-event-canBePostedOnSocialMedia-label"),
 
             // Incident
             incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
@@ -169,6 +171,7 @@ class ItemCreateStep3Container extends Component {
             logoPhoto,
             galleryPhotos,
             shownToWhomLabel,
+            canBePostedOnSocialMediaLabel,
 
             // Incident
             incidentTitle,
@@ -214,6 +217,7 @@ class ItemCreateStep3Container extends Component {
                     logoPhoto={logoPhoto}
                     galleryPhotos={galleryPhotos}
                     shownToWhomLabel={shownToWhomLabel}
+                    canBePostedOnSocialMediaLabel={canBePostedOnSocialMediaLabel}
                 />
             );
         } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
