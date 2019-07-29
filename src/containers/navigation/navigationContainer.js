@@ -315,7 +315,7 @@ class NavigationContainer extends React.Component {
         if (count > 0) {
             // Get our permission handling fields from the user object which
             // we received from the API endpoint.
-            const { groupMembershipId } = user;
+            const { groupId } = user;
 
             // Indicate we are authenticated.
             isAuthenticated = true;
@@ -324,7 +324,7 @@ class NavigationContainer extends React.Component {
             menuTitle = "Hi, "+user.firstName;
 
             // Lookup the user group membership and get the navigation tree.
-            menuData = NAVIGATION_TREE[parseInt(groupMembershipId)];
+            menuData = NAVIGATION_TREE[parseInt(groupId)];
         }
     }
 
