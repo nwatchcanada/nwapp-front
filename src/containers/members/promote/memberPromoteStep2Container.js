@@ -4,6 +4,8 @@ import Scroll from 'react-scroll';
 
 import MemberPromoteStep2Component from "../../../components/members/promote/memberPromoteStep2Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
+import { validatePromotionInput } from "../../../validators/memberValidator";
+import { localStorageGetIntegerItem, localStorageGetBooleanItem } from "../../../helpers/localStorageUtility";
 
 
 class MemberPromoteStep2Container extends Component {
@@ -17,15 +19,22 @@ class MemberPromoteStep2Container extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { urlArgument, slug } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            urlArgument: urlArgument,
             slug: slug,
+            errors: [],
+            groupId: localStorageGetIntegerItem("nwapp-member-promote-group-id"),
+            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-member-promote-areaCoordinatorAgreement"),
+            conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-member-promote-conflictOfInterestAgreement"),
+            codeOfConductAgreement: localStorageGetBooleanItem("nwapp-member-promote-codeOfConductAgreement"),
+            confidentialityAgreement: localStorageGetBooleanItem("nwapp-member-promote-confidentialityAgreement"),
+            associateAgreement: localStorageGetBooleanItem("nwapp-member-promote-associateAgreement"),
         }
 
         this.onClick = this.onClick.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -55,8 +64,7 @@ class MemberPromoteStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members");
+        this.props.history.push("/member/"+this.state.slug+"/promote/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -82,14 +90,28 @@ class MemberPromoteStep2Container extends Component {
         })
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-member-promote-'+[e.target.name], e.target.checked);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.setState({
-            isLoading: true,
-        })
-        this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/full");
+
+        // Perform client-side validation.
+        const { errors, isValid } = validatePromotionInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
     }
 
 
@@ -107,11 +129,18 @@ class MemberPromoteStep2Container extends Component {
         };
         return (
             <MemberPromoteStep2Component
-                urlArgument={this.state.urlArgument}
+                groupId={this.state.groupId}
+                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
+                conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
+                codeOfConductAgreement={this.state.codeOfConductAgreement}
+                confidentialityAgreement={this.state.confidentialityAgreement}
+                associateAgreement={this.state.associateAgreement}
+                errors={this.state.errors}
                 slug={this.state.slug}
                 memberData={memberData}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                onCheckboxChange={this.onCheckboxChange}
             />
         );
     }

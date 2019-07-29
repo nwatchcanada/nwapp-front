@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberPromoteStep1Component from "../../../components/members/promote/memberPromoteStep1Component";
+import MemberPromoteStep2Component from "../../../components/members/promote/memberPromoteStep2Component";
+import { setFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class MemberPromoteStep1Container extends Component {
+class MemberPromoteStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,10 +17,11 @@ class MemberPromoteStep1Container extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
+        const { urlArgument, slug } = this.props.match.params;
 
         // Update state.
         this.state = {
+            urlArgument: urlArgument,
             slug: slug,
         }
 
@@ -80,14 +82,14 @@ class MemberPromoteStep1Container extends Component {
         })
     }
 
-    onClick(e, groupId) {
+    onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-
-        // Set our promotion group id.
-        localStorage.setItem("nwapp-member-promote-group-id", groupId);
-
-        this.props.history.push("/member/"+this.state.slug+"/promote/step-2");
+        this.setState({
+            isLoading: true,
+        })
+        this.props.setFlashMessage("success", "Member has been successfully promoted.");
+        this.props.history.push("/members/"+this.state.urlArgument+"/"+this.state.slug+"/full");
     }
 
 
@@ -104,7 +106,8 @@ class MemberPromoteStep1Container extends Component {
             'absoluteUrl': '/member/argyle'
         };
         return (
-            <MemberPromoteStep1Component
+            <MemberPromoteStep2Component
+                urlArgument={this.state.urlArgument}
                 slug={this.state.slug}
                 memberData={memberData}
                 onBack={this.onBack}
@@ -121,11 +124,15 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberPromoteStep1Container);
+)(MemberPromoteStep2Container);

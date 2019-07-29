@@ -1,11 +1,19 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { AREA_COORDINATOR_GROUP_ID, ASSOCIATE_GROUP_ID } from "../../../constants/api";
+
+import { BootstrapCheckbox } from "../../bootstrap/bootstrapCheckbox";
+import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 
 
 export default class MemberPromoteStep2Component extends Component {
     render() {
-        const { slug, onClick, isLoading } = this.props;
+        const {
+            slug, onClick, isLoading, errors,
+            groupId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, onCheckboxChange,
+        } = this.props;
+        const isAssociate = groupId === ASSOCIATE_GROUP_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -36,32 +44,89 @@ export default class MemberPromoteStep2Component extends Component {
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
+                                <span className="num">2.</span><span className="">Agreement</span>
+                            </strong>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <strong>
                                 <span className="num">2.</span><span className="">Review</span>
                             </strong>
                         </div>
                     </div>
                 </div>
 
-                <h5>Please confirm before submitting the promotion.</h5>
-
-                <div className="jumbotron">
-                    <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
-                    <p className="lead">Are you sure you want to promote this member?</p>
-                    <hr className="my-4" />
-                    <p>You agree to the <a href="/terms">terms</a> of the organization when submitting this promotion.</p>
-                    <p className="lead">
-                        <button className="btn btn-primary btn-lg" disabled={isLoading} onClick={onClick}>
-                        Confirm & Submit
-                        </button>
-                    </p>
-                </div>
-
-
                 <div className="row">
-                    <div className="col-md-12">
-                        <Link to={`/member/${slug}/promote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                            <i className="fas fa-arrow-circle-left"></i> Back
-                        </Link>
+                    <div className="col-md-5 mx-auto mt-2">
+                        <form>
+                            <h2>
+                                <i className="fas fa-file-signature"></i>&nbsp;Agreement
+                            </h2>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.areaCoordinatorAgreement}
+                                label="I agree to the Area Coordinator agreement."
+                                onChange={onCheckboxChange}
+                                value={areaCoordinatorAgreement}
+                                name="areaCoordinatorAgreement"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.conflictOfInterestAgreement}
+                                label="I agree to the Conflict of Interest agreement."
+                                onChange={onCheckboxChange}
+                                value={conflictOfInterestAgreement}
+                                name="conflictOfInterestAgreement"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.codeOfConductAgreement}
+                                label="I agree to the Code of Conduct agreement."
+                                onChange={onCheckboxChange}
+                                value={codeOfConductAgreement}
+                                name="codeOfConductAgreement"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.confidentialityAgreement}
+                                label="I agree to the Confidentiality agreement."
+                                onChange={onCheckboxChange}
+                                value={confidentialityAgreement}
+                                name="confidentialityAgreement"
+                            />
+
+                            {isAssociate &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.associateAgreement}
+                                    label="I agree to the Associate agreement."
+                                    onChange={onCheckboxChange}
+                                    value={associateAgreement}
+                                    name="associateAgreement"
+                                />
+                            }
+
+                            <div className="form-group">
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                                <Link to={`/member/${slug}/promote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                </Link>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
 

@@ -3,7 +3,8 @@ import isEmpty from 'lodash/isEmpty';
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
+    COMMUNITY_CARES_TYPE_OF,
+    ASSOCIATE_GROUP_ID
 } from '../constants/api';
 
 
@@ -309,6 +310,38 @@ export function validateStep7CreateInput(data) {
         }
         if (data.companyType === undefined || data.companyType === null || data.companyType === "") {
             errors.companyType = 'This field is required';
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+export function validatePromotionInput(data) {
+    let errors = {};
+
+    if (data.groupId === undefined || data.groupId === null || data.groupId === "") {
+        errors.groupId = 'This field is required';
+    } else {
+        if (data.areaCoordinatorAgreement === undefined || data.areaCoordinatorAgreement === null || data.areaCoordinatorAgreement === "" || data.areaCoordinatorAgreement === false) {
+            errors.areaCoordinatorAgreement = 'This field is required.';
+        }
+        if (data.conflictOfInterestAgreement === undefined || data.conflictOfInterestAgreement === null || data.conflictOfInterestAgreement === "" || data.conflictOfInterestAgreement === false) {
+            errors.conflictOfInterestAgreement = 'This field is required';
+        }
+        if (data.codeOfConductAgreement === undefined || data.codeOfConductAgreement === null || data.codeOfConductAgreement === "" || data.codeOfConductAgreement === false) {
+            errors.codeOfConductAgreement = 'This field is required';
+        }
+        if (data.confidentialityAgreement === undefined || data.confidentialityAgreement === null || data.confidentialityAgreement === "" || data.confidentialityAgreement === false) {
+            errors.confidentialityAgreement = 'This field is required';
+        }
+        if (data.groupId === ASSOCIATE_GROUP_ID) {
+            if (data.associateAgreement === undefined || data.associateAgreement === null || data.associateAgreement === "" || data.associateAgreement === false) {
+                errors.associateAgreement = 'This field is required';
+            }
         }
     }
 
