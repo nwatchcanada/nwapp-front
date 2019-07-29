@@ -12,6 +12,12 @@ import {
    INFORMATION_ITEM_TYPE_OF,
    EVENT_TYPE_CHOICES
 } from "../../../constants/api";
+import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetDateItem,
+    localStorageGetArrayItem
+} from '../../../helpers/localStorageUtility';
 
 
 class ItemUpdateContainer extends Component {
@@ -35,6 +41,8 @@ class ItemUpdateContainer extends Component {
             eventTypeOf: "",
             eventTypeOfOption: {},
             eventTypeOfOther: "",
+            logoPhoto: {},
+            galleryPhotos: [],
             date: new Date(),
             photos: [],
             errors: {},
@@ -47,6 +55,10 @@ class ItemUpdateContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+        this.onGalleryDrop = this.onGalleryDrop.bind(this);
+        this.onGalleryRemoveUploadClick = this.onGalleryRemoveUploadClick.bind(this);
+        this.onLogoDrop = this.onLogoDrop.bind(this);
+        this.onLogoRemoveUploadClick = this.onLogoRemoveUploadClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -277,6 +289,109 @@ class ItemUpdateContainer extends Component {
         }
     }
 
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onGalleryDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // // For debuging purposes only.
+        // console.log("DEBUG | onDrop | file", file);
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // Append our array.
+        let a = this.state.galleryPhotos.slice(); //creates the clone of the state
+        a.push(fileWithPreview);
+
+        // // For debugging purposes.
+        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+        // console.log("DEBUG |", a, "\n");
+
+        // Update our local state to update the GUI.
+        this.setState({
+            galleryPhotos: a
+        })
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-galleryPhotos", a);
+    }
+
+    onGalleryRemoveUploadClick(e, name) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Iterate through all the photos.
+        const photos = this.state.galleryPhotos;
+        for (let i = 0; i < photos.length; i++) {
+            let row = photos[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(photos);
+
+            if (row.name === name) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredPhotos = photos.slice(
+                    0, i
+                ).concat(
+                    photos.slice(
+                        i + 1, photos.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    galleryPhotos: filteredPhotos
+                });
+
+                // Save our table data.
+                localStorageSetObjectOrArrayItem("nwapp-item-create-event-galleryPhotos", filteredPhotos);
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
+    }
+
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onLogoDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onLogoDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
+
+            // For debugging purposes.
+            console.log("DEBUG | onLogoDrop | fileWithPreview", fileWithPreview);
+
+            // Save to local storage our OBJECT.
+            localStorageSetObjectOrArrayItem("nwapp-item-create-event-logoPhoto", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                logoPhoto: fileWithPreview
+            })
+        }
+    }
+
+    onLogoRemoveUploadClick(e) {
+        this.setState({
+            logoPhoto: null
+        })
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-logoPhoto", null);
+    }
 
     /**
      *  Main render function
@@ -293,6 +408,8 @@ class ItemUpdateContainer extends Component {
             eventTypeOf,
             eventTypeOfOption,
             eventTypeOfOther,
+            logoPhoto,
+            galleryPhotos,
             date,
             photos,
             errors,
@@ -309,6 +426,8 @@ class ItemUpdateContainer extends Component {
                 eventTypeOfOptions={EVENT_TYPE_CHOICES}
                 eventTypeOfOption={eventTypeOfOption}
                 eventTypeOfOther={eventTypeOfOther}
+                logoPhoto={logoPhoto}
+                galleryPhotos={galleryPhotos}
                 date={date}
                 photos={photos}
                 errors={errors}
@@ -319,6 +438,10 @@ class ItemUpdateContainer extends Component {
                 onClick={this.onClick}
                 onDrop={this.onDrop}
                 onRemoveUploadClick={this.onRemoveUploadClick}
+                onLogoDrop={this.onLogoDrop}
+                onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
+                onGalleryDrop={this.onGalleryDrop}
+                onGalleryRemoveUploadClick={this.onGalleryRemoveUploadClick}
             />
         );
     }

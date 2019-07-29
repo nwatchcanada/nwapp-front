@@ -7,6 +7,7 @@ import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleImageUploadAndPreview } from "../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
 import {
@@ -28,6 +29,8 @@ class ItemUpdateComponent extends Component {
             eventTypeOf,
             eventTypeOfOptions,
             eventTypeOfOther,
+            logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
+            galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
             date,
             photos,
             errors,
@@ -153,6 +156,24 @@ class ItemUpdateComponent extends Component {
                                     onRemoveUploadClick={onRemoveUploadClick}
                                 />
                             }
+
+                            <BootstrapSingleImageUploadAndPreview
+                                error={errors.logoPhoto}
+                                label="Logo"
+                                onDrop={onLogoDrop}
+                                name="logoPhoto"
+                                fileObj={logoPhoto}
+                                onRemoveUploadClick={onLogoRemoveUploadClick}
+                            />
+
+                            <BootstrapMultipleImageUploadAndPreview
+                                error={errors.galleryPhotos}
+                                label="Gallery Photos"
+                                onDrop={onGalleryDrop}
+                                name="galleryPhotos"
+                                filesArray={galleryPhotos}
+                                onRemoveUploadClick={onGalleryRemoveUploadClick}
+                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
