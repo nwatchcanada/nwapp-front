@@ -165,9 +165,6 @@ const mapDispatchToProps = dispatch => {
         postLogin: (email, password, successCallback, failureCallback) => {
             dispatch(postLogin(email, password, successCallback, failureCallback))
         },
-        // attemptLoginRestForm: () => {
-        //     dispatch(attemptLoginRestForm())
-        // },
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         }
