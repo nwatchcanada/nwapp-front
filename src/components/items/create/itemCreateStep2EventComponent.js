@@ -7,6 +7,7 @@ import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
 
 
@@ -14,7 +15,8 @@ class ItemCreateStep2EventComponent extends Component {
     render() {
         const {
             title, eventTypeOf, eventTypeOfOptions, eventTypeOfOther, date, description, errors, isLoading,
-            onClick,  onTextChange, onSelectChange, onDateTimeChange
+            onClick,  onTextChange, onSelectChange, onDateTimeChange,
+            galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
         } = this.props;
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
         return (
@@ -113,6 +115,15 @@ class ItemCreateStep2EventComponent extends Component {
                                 helpText=""
                                 onChange={onTextChange}
                                 error={errors.description}
+                            />
+
+                            <BootstrapMultipleImageUploadAndPreview
+                                error={errors.galleryPhotos}
+                                label="Gallery Photos"
+                                onDrop={onGalleryDrop}
+                                name="galleryPhotos"
+                                filesArray={galleryPhotos}
+                                onRemoveUploadClick={onGalleryRemoveUploadClick}
                             />
 
                             <div className="form-group">

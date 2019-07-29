@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep2EventComponent from "../../../components/items/create/itemCreateStep2EventComponent";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateEventInput } from "../../../validators/itemValidator";
@@ -26,6 +26,7 @@ class ItemCreateStep2EventContainer extends Component {
             eventTypeOfOther: localStorage.getItem("nwapp-item-create-event-eventTypeOfOther"),
             date: localStorageGetDateItem("nwapp-item-create-event-date"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
+            galleryPhotos: localStorageGetArrayItem("nwapp-item-create-incident-galleryPhotos"),
             errors: {},
             isLoading: false
         }
@@ -33,6 +34,8 @@ class ItemCreateStep2EventContainer extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
+        this.onGalleryDrop = this.onGalleryDrop.bind(this);
+        this.onGalleryRemoveUploadClick = this.onGalleryRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -111,6 +114,76 @@ class ItemCreateStep2EventContainer extends Component {
         localStorageSetObjectOrArrayItem('nwapp-item-create-event-date', dateObj);
     }
 
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onGalleryDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // // For debuging purposes only.
+        // console.log("DEBUG | onDrop | file", file);
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // Append our array.
+        let a = this.state.galleryPhotos.slice(); //creates the clone of the state
+        a.push(fileWithPreview);
+
+        // // For debugging purposes.
+        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+        // console.log("DEBUG |", a, "\n");
+
+        // Update our local state to update the GUI.
+        this.setState({
+            galleryPhotos: a
+        })
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-galleryPhotos", a);
+    }
+
+    onGalleryRemoveUploadClick(e, name) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Iterate through all the photos.
+        const photos = this.state.galleryPhotos;
+        for (let i = 0; i < photos.length; i++) {
+            let row = photos[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(photos);
+
+            if (row.name === name) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredPhotos = photos.slice(
+                    0, i
+                ).concat(
+                    photos.slice(
+                        i + 1, photos.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    galleryPhotos: filteredPhotos
+                });
+
+                // Save our table data.
+                localStorageSetObjectOrArrayItem("nwapp-item-create-event-galleryPhotos", filteredPhotos);
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -127,7 +200,7 @@ class ItemCreateStep2EventContainer extends Component {
                 localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.eventTypeOfOther);
             } else {
                 localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.eventTypeOfOption.label);
-            }            
+            }
 
             this.onSuccessfulSubmissionCallback();
 
@@ -143,7 +216,7 @@ class ItemCreateStep2EventContainer extends Component {
      */
 
     render() {
-        const { title, eventTypeOf, eventTypeOfOther, date, description, errors } = this.state;
+        const { title, eventTypeOf, eventTypeOfOther, date, description, galleryPhotos, errors } = this.state;
         return (
             <ItemCreateStep2EventComponent
                 title={title}
@@ -152,9 +225,12 @@ class ItemCreateStep2EventContainer extends Component {
                 eventTypeOfOther={eventTypeOfOther}
                 date={date}
                 description={description}
+                galleryPhotos={galleryPhotos}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onGalleryDrop={this.onGalleryDrop}
+                onGalleryRemoveUploadClick={this.onGalleryRemoveUploadClick}
                 onClick={this.onClick}
                 onDateTimeChange={this.onDateTimeChange}
             />
