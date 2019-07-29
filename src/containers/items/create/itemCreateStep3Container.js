@@ -59,6 +59,8 @@ class ItemCreateStep3Container extends Component {
             eventPrettyEventTypeOf: localStorage.getItem('nwapp-item-create-event-pretty-event-type'),
             eventDate: localStorageGetDateItem("nwapp-item-create-event-date"),
             eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
+            logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
+            galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
 
             // Incident
             incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
@@ -162,6 +164,8 @@ class ItemCreateStep3Container extends Component {
             eventPrettyEventTypeOf,
             eventDate,
             eventDescription,
+            logoPhoto,
+            galleryPhotos,
 
             // Incident
             incidentTitle,
@@ -204,6 +208,8 @@ class ItemCreateStep3Container extends Component {
                     eventPrettyEventTypeOf={eventPrettyEventTypeOf}
                     eventDate={eventDate}
                     eventDescription={eventDescription}
+                    logoPhoto={logoPhoto}
+                    galleryPhotos={galleryPhotos}
                 />
             );
         } else if (typeOf === CONCERN_ITEM_TYPE_OF) {

@@ -7,6 +7,7 @@ import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleImageUploadAndPreview } from "../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
 
@@ -16,6 +17,7 @@ class ItemCreateStep2EventComponent extends Component {
         const {
             title, eventTypeOf, eventTypeOfOptions, eventTypeOfOther, date, description, errors, isLoading,
             onClick,  onTextChange, onSelectChange, onDateTimeChange,
+            logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
         } = this.props;
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
@@ -115,6 +117,15 @@ class ItemCreateStep2EventComponent extends Component {
                                 helpText=""
                                 onChange={onTextChange}
                                 error={errors.description}
+                            />
+
+                            <BootstrapSingleImageUploadAndPreview
+                                error={errors.logoPhoto}
+                                label="Logo"
+                                onDrop={onLogoDrop}
+                                name="logoPhoto"
+                                fileObj={logoPhoto}
+                                onRemoveUploadClick={onLogoRemoveUploadClick}
                             />
 
                             <BootstrapMultipleImageUploadAndPreview

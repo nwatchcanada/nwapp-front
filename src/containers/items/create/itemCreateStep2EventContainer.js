@@ -26,7 +26,8 @@ class ItemCreateStep2EventContainer extends Component {
             eventTypeOfOther: localStorage.getItem("nwapp-item-create-event-eventTypeOfOther"),
             date: localStorageGetDateItem("nwapp-item-create-event-date"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
-            galleryPhotos: localStorageGetArrayItem("nwapp-item-create-incident-galleryPhotos"),
+            logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
+            galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
             errors: {},
             isLoading: false
         }
@@ -36,6 +37,8 @@ class ItemCreateStep2EventContainer extends Component {
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onGalleryDrop = this.onGalleryDrop.bind(this);
         this.onGalleryRemoveUploadClick = this.onGalleryRemoveUploadClick.bind(this);
+        this.onLogoDrop = this.onLogoDrop.bind(this);
+        this.onLogoRemoveUploadClick = this.onLogoRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -184,6 +187,40 @@ class ItemCreateStep2EventContainer extends Component {
         }
     }
 
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onLogoDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onLogoDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
+
+            // For debugging purposes.
+            console.log("DEBUG | onLogoDrop | fileWithPreview", fileWithPreview);
+
+            // Save to local storage our OBJECT.
+            localStorageSetObjectOrArrayItem("nwapp-item-create-event-logoPhoto", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                logoPhoto: fileWithPreview
+            })
+        }
+    }
+
+    onLogoRemoveUploadClick(e) {
+        this.setState({
+            logoPhoto: null
+        })
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-logoPhoto", null);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -216,7 +253,7 @@ class ItemCreateStep2EventContainer extends Component {
      */
 
     render() {
-        const { title, eventTypeOf, eventTypeOfOther, date, description, galleryPhotos, errors } = this.state;
+        const { title, eventTypeOf, eventTypeOfOther, date, description, logoPhoto, galleryPhotos, errors } = this.state;
         return (
             <ItemCreateStep2EventComponent
                 title={title}
@@ -225,10 +262,13 @@ class ItemCreateStep2EventContainer extends Component {
                 eventTypeOfOther={eventTypeOfOther}
                 date={date}
                 description={description}
+                logoPhoto={logoPhoto}
                 galleryPhotos={galleryPhotos}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onLogoDrop={this.onLogoDrop}
+                onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
                 onGalleryDrop={this.onGalleryDrop}
                 onGalleryRemoveUploadClick={this.onGalleryRemoveUploadClick}
                 onClick={this.onClick}

@@ -63,7 +63,7 @@ export function validateEventInput(data) {
     if (data.title === undefined || data.title === null || validator.isEmpty(data.title) || data.title === "") {
         errors.title = 'This field is required';
     }
-    if (data.eventTypeOf === undefined || data.eventTypeOf === null || data.eventTypeOf === "") {
+    if (data.eventTypeOf === undefined || data.eventTypeOf === null || data.eventTypeOf === "" || isNaN(data.eventTypeOf) ) {
         errors.eventTypeOf = 'This field is required';
     } else {
         if (data.eventTypeOf === OTHER_EVENT_TYPE_OF) {

@@ -11,8 +11,27 @@ export default class ItemCreateStep3EventComponent extends Component {
     render() {
         const {
             returnURL, errors, isLoading, onClick,
-            eventTitle, eventPrettyEventTypeOf, eventDate, eventDescription,
+            eventTitle, eventPrettyEventTypeOf, eventDate, eventDescription, logoPhoto, galleryPhotos,
         } = this.props;
+
+        // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
+        const thumb = {
+            display: 'inline-flex',
+            // borderRadius: 2,
+            // border: '1px solid #eaeaea',
+            marginBottom: 8,
+            marginRight: 8,
+            width: 100,
+            height: 100,
+            padding: 4,
+            boxSizing: 'border-box'
+        };
+        const img = {
+            display: 'block',
+            width: 'auto',
+            height: '100%'
+        };
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -79,6 +98,35 @@ export default class ItemCreateStep3EventComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
                                     <td>{eventDescription}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Logo Photo</th>
+                                    <td>
+                                        <div style={thumb}>
+                                            <img
+                                                src={logoPhoto.preview}
+                                                style={img}
+                                                alt={logoPhoto.name}
+                                            />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Gallery Photos</th>
+                                    <td>
+                                        {galleryPhotos && galleryPhotos.map(
+                                            (photoObj, i) => <div key={i}>
+                                                <div style={thumb}>
+                                                    <img
+                                                        src={photoObj.preview}
+                                                        style={img}
+                                                        alt={photoObj.name}
+                                                    />
+                                                </div>
+                                                <br />
+                                            </div>
+                                        )}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
