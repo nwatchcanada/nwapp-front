@@ -21,13 +21,14 @@ class ItemCreateStep1Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
             errors: {},
-            isLoading: false
+            isLoading: false,
+            showModal: false,
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onShowModalClick = this.onShowModalClick.bind(this);
+        this.onCloseModalClick = this.onCloseModalClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -78,12 +79,6 @@ class ItemCreateStep1Container extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
     onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -103,19 +98,35 @@ class ItemCreateStep1Container extends Component {
         }
     }
 
+    onShowModalClick(e) {
+        e.preventDefault();
+        this.setState({
+            showModal: true,
+        });
+    }
+
+    onCloseModalClick(e) {
+        e.preventDefault();
+        this.setState({
+            showModal: false
+        })
+    }
+
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { name, errors } = this.state;
+        const { showModal, errors } = this.state;
         return (
             <ItemCreateStep1Component
-                name={name}
+                showModal={showModal}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
+                onShowModalClick={this.onShowModalClick}
+                onCloseModalClick={this.onCloseModalClick}
             />
         );
     }

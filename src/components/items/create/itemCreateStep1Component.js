@@ -1,6 +1,7 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import ReactModal from 'react-modal';
 
 import {
     INCIDENT_ITEM_TYPE_OF,
@@ -12,7 +13,20 @@ import {
 
 class ItemCreateStep1Component extends Component {
     render() {
-        const { onClick } = this.props;
+        const { onClick, onShowModalClick, onCloseModalClick, showModal, onAgreeModalClick } = this.props;
+
+        // Apply our styling for our modal component.
+        const customStyles = {
+            content : {
+                top                   : '50%',
+                left                  : '50%',
+                right                 : 'auto',
+                bottom                : 'auto',
+                marginRight           : '-50%',
+                transform             : 'translate(-50%, -50%)'
+            }
+        };
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -54,7 +68,7 @@ class ItemCreateStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Incident</h3>
                                 <p className="card-text">Add a residential district</p>
-                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, INCIDENT_ITEM_TYPE_OF); } }>
+                                <button className="btn btn-success btn-lg" onClick={onShowModalClick}>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>
@@ -110,6 +124,44 @@ class ItemCreateStep1Component extends Component {
                         <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>
                 </div>
+
+                <ReactModal
+                   isOpen={showModal}
+                    style={customStyles}
+             contentLabel="Minimal Modal Example"
+           onRequestClose={onCloseModalClick}>
+                   <div>
+
+                        <h1>
+                            <i className="fas fa-exclamation-triangle"></i>&nbsp;Are you in danger?
+                           <button type="button" className="btn btn-secondary btn-lg float-right" onClick={onCloseModalClick}>
+                               <span className="fa fa-times"></span>
+                           </button>
+                        </h1>
+
+                        <div className="row">
+                            <div className="col-md-8 mx-auto mt-2">
+
+                                <form className="needs-validation" noValidate>
+
+                                   <p>If you are someone else is in immediate danger, CALL 911 NOW. Do not fill out this report, instead, contact emergency services. Otherwise, proceed with the report details.</p>
+
+                                   <a href="tel:5196614553"
+                                      ype="button"
+                                      className="btn btn-lg btn-danger float-left">
+                                       <i className="fas fa-phone"></i>&nbsp;<strong>Dial 911</strong>
+                                   </a>
+                                   <button
+                                       onClick={ (event)=>{ onClick(event, INCIDENT_ITEM_TYPE_OF); } }
+                                       type="button"
+                                       className="btn btn-lg btn-primary float-right">
+                                       Proceed to filing an incident report&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                   </button>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+                </ReactModal>
 
             </main>
         );
