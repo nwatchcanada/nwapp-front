@@ -71,10 +71,7 @@ class ItemCreateStep3IncidentComponent extends Component {
                             <span className="num">4.</span><span className="">Details</span>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Cooperation</span>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Review</span>
+                            <span className="num">5.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>

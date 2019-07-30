@@ -2,14 +2,14 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
-import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 
 
-class ItemCreateStep2IncidentComponent extends Component {
+class ItemCreateStep4IncidentComponent extends Component {
     render() {
         const {
             title, date, description, location, errors, onTextChange, isLoading, onClick, onDateTimeChange,
@@ -38,9 +38,19 @@ class ItemCreateStep2IncidentComponent extends Component {
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
-                        <div id="step-2" className="st-grey active">
+                        <div id="step-2" className="st-grey">
+                            <Link to="/item/add/step-2-incident">
+                                <span className="num">2.</span><span className="">Categorize</span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <Link to="/item/add/step-3-incident">
+                                <span className="num">3.</span><span className="">Authorities</span>
+                            </Link>
+                        </div>
+                        <div id="step-4" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Details</span>
+                                <span className="num">4.</span><span className="">Details</span>
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
@@ -114,7 +124,7 @@ class ItemCreateStep2IncidentComponent extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/item/add/step-3-incident" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
@@ -128,4 +138,4 @@ class ItemCreateStep2IncidentComponent extends Component {
     }
 }
 
-export default ItemCreateStep2IncidentComponent;
+export default ItemCreateStep4IncidentComponent;

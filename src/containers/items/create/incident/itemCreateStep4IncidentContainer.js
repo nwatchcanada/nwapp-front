@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep2IncidentComponent from "../../../components/items/create/itemCreateStep2IncidentComponent";
+import ItemCreateStep4IncidentComponent from "../../../../components/items/create/incident/itemCreateStep4IncidentComponent";
 import {
     // localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
-} from '../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateIncidentInput } from "../../../validators/itemValidator";
+} from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { validateIncidentInput } from "../../../../validators/itemValidator";
 
 
-class ItemCreateStep2IncidentContainer extends Component {
+class ItemCreateStep4IncidentContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -207,7 +207,7 @@ class ItemCreateStep2IncidentContainer extends Component {
     render() {
         const { title, date, description, location, photos, errors } = this.state;
         return (
-            <ItemCreateStep2IncidentComponent
+            <ItemCreateStep4IncidentComponent
                 title={title}
                 date={date}
                 description={description}
@@ -242,4 +242,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep2IncidentContainer);
+)(ItemCreateStep4IncidentContainer);
