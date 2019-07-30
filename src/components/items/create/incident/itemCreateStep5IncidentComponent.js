@@ -10,12 +10,27 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 export default class ItemCreateStep5IncidentComponent extends Component {
     render() {
         const {
-            returnURL, errors, isLoading, onClick,
+            // Step 1
+            typeOf,
+
+            // Step 2
+            prettyIncidentTypeOf,
+
+            // Step 3
+            notifiedAuthorities,
+            notifiedAuthoritiesLabel,
+            acceptAuthorityCooperation,
+            acceptAuthorityCooperationLabel,
+
+            // Step 4
             incidentTitle,
             incidentDate,
             incidentDescription,
             incidentLocation,
             incidentPhotos,
+
+            // All
+            errors, isLoading, onClick,
         } = this.props;
 
         // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
@@ -101,6 +116,10 @@ export default class ItemCreateStep5IncidentComponent extends Component {
                                     <td>Incident</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row" className="bg-light">Category</th>
+                                    <td>{prettyIncidentTypeOf}</td>
+                                </tr>
+                                <tr>
                                     <th scope="row" className="bg-light">Title</th>
                                     <td>{incidentTitle}</td>
                                 </tr>
@@ -134,6 +153,14 @@ export default class ItemCreateStep5IncidentComponent extends Component {
                                             </div>
                                         )}
                                     </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Have authorities been notified of this incident</th>
+                                    <td>{notifiedAuthoritiesLabel}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Is willing to cooperate with authorities?</th>
+                                    <td>{acceptAuthorityCooperationLabel}</td>
                                 </tr>
                             </tbody>
                         </table>

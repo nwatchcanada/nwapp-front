@@ -26,52 +26,29 @@ class ItemCreateStep5IncidentContainer extends Component {
 
         // Extract the type of container.
         const typeOf = parseInt(localStorage.getItem("nwapp-item-create-typeOf"));
-        let returnURL;
-        if (typeOf === INCIDENT_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-incident";
-        } else if (typeOf === EVENT_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-event";
-        } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-concern";
-        } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-information";
-        }
 
         // Set the state.
         this.state = {
             typeOf: typeOf,
-            returnURL: returnURL,
 
-            // Concern Type
-            concernTitle: localStorage.getItem("nwapp-item-create-concern-title"),
-            concernDescription: localStorage.getItem("nwapp-item-create-concern-description"),
-            concernLocation: localStorage.getItem("nwapp-item-create-concern-location"),
-            concernPhotos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
+            // Step 2
+            incidentTypeOf:localStorageGetIntegerItem("nwapp-item-create-incident-incidentTypeOf"),
+            incidentTypeOfOption: localStorageGetObjectItem('nwapp-item-create-incident-incidentTypeOfOption'),
+            incidentTypeOfOther: localStorage.getItem("nwapp-item-create-incident-incidentTypeOfOther"),
+            prettyIncidentTypeOf: localStorage.getItem('nwapp-item-create-incident-pretty-incident-type'),
 
-            // Event
-            eventTitle: localStorage.getItem("nwapp-item-create-event-title"),
-            eventTypeOf: parseInt(localStorage.getItem("nwapp-item-create-event-eventTypeOf")),
-            eventTypeOfOption: localStorageGetObjectItem('nwapp-item-create-event-eventTypeOfOption'),
-            eventTypeOfOther: localStorage.getItem("nwapp-item-create-event-eventTypeOfOther"),
-            eventPrettyEventTypeOf: localStorage.getItem('nwapp-item-create-event-pretty-event-type'),
-            eventDate: localStorageGetDateItem("nwapp-item-create-event-date"),
-            eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
-            logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
-            galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
-            shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
-            shownToWhomLabel: localStorage.getItem("nwapp-item-create-event-shownToWhom-label"),
-            canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
-            canBePostedOnSocialMediaLabel: localStorage.getItem("nwapp-item-create-event-canBePostedOnSocialMedia-label"),
+            // Step 3
+            notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-notifiedAuthorities"),
+            acceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-acceptAuthorityCooperation"),
+            notifiedAuthoritiesLabel: localStorage.getItem("nwapp-item-create-incident-notifiedAuthorities-label"),
+            acceptAuthorityCooperationLabel: localStorage.getItem("nwapp-item-create-incident-acceptAuthorityCooperation-label"),
 
-            // Incident
+            // Step 4
             incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
             incidentDate: localStorageGetDateItem("nwapp-item-create-incident-date"),
             incidentDescription: localStorage.getItem("nwapp-item-create-incident-description"),
             incidentLocation: localStorage.getItem("nwapp-item-create-incident-location"),
             incidentPhotos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
-
-            // Information
-            informationDescription: localStorage.getItem("nwapp-item-create-information-description"),
 
             errors: {},
             isLoading: false
@@ -152,39 +129,51 @@ class ItemCreateStep5IncidentContainer extends Component {
 
     render() {
         const {
-            typeOf, returnURL, errors,
+            // Step 1
+            typeOf,
 
-            // Concern Type
-            concernTitle,
-            concernDescription,
-            concernLocation,
-            concernPhotos,
+            // Step 2
+            prettyIncidentTypeOf,
 
-            // Event
-            eventTitle,
-            eventPrettyEventTypeOf,
-            eventDate,
-            eventDescription,
-            logoPhoto,
-            galleryPhotos,
-            shownToWhomLabel,
-            canBePostedOnSocialMediaLabel,
+            // Step 3
+            notifiedAuthorities,
+            notifiedAuthoritiesLabel,
+            acceptAuthorityCooperation,
+            acceptAuthorityCooperationLabel,
 
-            // Incident
+            // Step 4
             incidentTitle,
             incidentDate,
             incidentDescription,
             incidentLocation,
             incidentPhotos,
 
-            // Information
-            informationDescription
+            // All
+            errors
         } = this.state;
 
         return (
             <ItemCreateStep5IncidentComponent
+                // Step 1
                 typeOf={typeOf}
-                returnURL={returnURL}
+
+                // Step 2
+                prettyIncidentTypeOf={prettyIncidentTypeOf}
+
+                // Step 3
+                notifiedAuthorities={notifiedAuthorities}
+                notifiedAuthoritiesLabel={notifiedAuthoritiesLabel}
+                acceptAuthorityCooperation={acceptAuthorityCooperation}
+                acceptAuthorityCooperationLabel={acceptAuthorityCooperationLabel}
+
+                // Step 4
+                incidentTitle={incidentTitle}
+                incidentDate={incidentDate}
+                incidentDescription={incidentDescription}
+                incidentLocation={incidentLocation}
+                incidentPhotos={incidentPhotos}
+
+                // All
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
