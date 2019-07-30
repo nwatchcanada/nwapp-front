@@ -1,6 +1,7 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import ReactModal from 'react-modal';
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
@@ -19,7 +20,21 @@ class ItemCreateStep3IncidentComponent extends Component {
             onRadioChange,
             isLoading,
             onClick,
+            onCloseModalClick,  showModal, onAgreeModalClick
         } = this.props;
+
+        // Apply our styling for our modal component.
+        const customStyles = {
+            content : {
+                top                   : '50%',
+                left                  : '50%',
+                right                 : 'auto',
+                bottom                : 'auto',
+                marginRight           : '-50%',
+                transform             : 'translate(-50%, -50%)'
+            }
+        };
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -64,6 +79,45 @@ class ItemCreateStep3IncidentComponent extends Component {
                         </div>
                     </div>
                 </div>
+
+                <ReactModal
+                   isOpen={showModal}
+                    style={customStyles}
+             contentLabel="Minimal Modal Example"
+           onRequestClose={onCloseModalClick}>
+                   <div>
+
+                        <h1>
+                            <i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation Required
+                           <button type="button" className="btn btn-secondary btn-lg float-right" onClick={onCloseModalClick}>
+                               <span className="fa fa-times"></span>
+                           </button>
+                        </h1>
+
+                        <div className="row">
+                            <div className="col-md-8 mx-auto mt-2">
+
+                                <form className="needs-validation" noValidate>
+
+                                   <p>Do you wish to erase and cancel this incident report?</p>
+
+                                   <button
+                                       onClick={onCloseModalClick}
+                                       type="button"
+                                       className="btn btn-lg btn-secondary float-left">
+                                       <i className="fas fa-times"></i>&nbsp;No, continue
+                                   </button>
+                                   <button
+                                       onClick={onAgreeModalClick}
+                                       type="button"
+                                       className="btn btn-lg btn-danger float-right">
+                                       Yes, erase&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                   </button>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+                </ReactModal>
 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">

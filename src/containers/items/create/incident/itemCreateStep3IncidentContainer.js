@@ -6,6 +6,7 @@ import ItemCreateStep3IncidentComponent from "../../../../components/items/creat
 import { localStorageGetIntegerItem, localStorageGetObjectItem, localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
 import { validateIncidentStep3Input } from "../../../../validators/itemValidator";
 import { OTHER_INCIDENT_TYPE_OF, INCIDENT_TYPE_CHOICES } from "../../../../constants/api";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 
 
 class ItemCreateStep3IncidentContainer extends Component {
@@ -17,6 +18,7 @@ class ItemCreateStep3IncidentContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showModal: false,
             errors: {},
             isLoading: false,
             notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-notifiedAuthorities"),
@@ -27,6 +29,8 @@ class ItemCreateStep3IncidentContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onCloseModalClick = this.onCloseModalClick.bind(this);
+        this.onAgreeModalClick = this.onAgreeModalClick.bind(this);
     }
 
     /**
@@ -109,12 +113,34 @@ class ItemCreateStep3IncidentContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            // CASE A:
+            if (this.acceptAuthorityCooperation === 1) {
+                this.onSuccessfulSubmissionCallback();
+
+            // CASE B:
+            } else {
+                this.setState({
+                    showModal: true
+                })
+            }
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
             this.onFailedSubmissionCallback(errors);
         }
+    }
+
+    onCloseModalClick(e) {
+        e.preventDefault();
+        this.setState({
+            showModal: false
+        })
+    }
+
+    onAgreeModalClick(e) {
+        e.preventDefault();
+        this.props.setFlashMessage("danger", "Incident item has been aborted.");
+        this.props.history.push("/items");
     }
 
     /**
@@ -123,7 +149,7 @@ class ItemCreateStep3IncidentContainer extends Component {
      */
 
     render() {
-        const { notifiedAuthorities, acceptAuthorityCooperation, errors } = this.state;
+        const { notifiedAuthorities, acceptAuthorityCooperation, showModal, errors } = this.state;
         return (
             <ItemCreateStep3IncidentComponent
                 notifiedAuthorities={notifiedAuthorities}
@@ -131,6 +157,9 @@ class ItemCreateStep3IncidentContainer extends Component {
                 onRadioChange={this.onRadioChange}
                 errors={errors}
                 onClick={this.onClick}
+                onCloseModalClick={this.onCloseModalClick}
+                showModal={showModal}
+                onAgreeModalClick={this.onAgreeModalClick}
             />
         );
     }
@@ -143,7 +172,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
