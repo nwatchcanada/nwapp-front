@@ -128,6 +128,18 @@ export default class ItemRetrieveComponent extends Component {
                                         </td>
                                     </tr>
                                 }
+                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">This event should be shown to whom?</th>
+                                        <td>{itemData.shownToWhomLabel}</td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">This event can be shared by others on social media?</th>
+                                        <td>{itemData.canBePostedOnSocialMediaLabel}</td>
+                                    </tr>
+                                }
                                 {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Date</th>

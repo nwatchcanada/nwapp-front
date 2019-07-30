@@ -84,7 +84,9 @@ class ItemRetrieveContainer extends Component {
                 }
             ],
             'shownToWhom': 1,
+            'shownToWhomLabel': "General Public",
             'canBePostedOnSocialMedia': 1,
+            'canBePostedOnSocialMediaLabel': "Yes",
             'absoluteUrl': '/item/byron'
         },{
             'typeOf': CONCERN_ITEM_TYPE_OF,
