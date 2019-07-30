@@ -210,6 +210,65 @@ export const EVENT_TYPE_CHOICES = [
 
 
 /**
+Break In
+Fraud
+Arson
+Assault
+Illegal Drugs
+Person in Need
+A Public Safety Issue
+ */
+
+
+/**
+ *  The item type of that we can use in the system.
+ */
+export const OTHER_INCIDENT_TYPE_OF = 1;
+export const BREAK_IN_INCIDENT_TYPE_OF = 2;
+export const FRAUD_INCIDENT_TYPE_OF = 3;
+export const ARSON_INCIDENT_TYPE_OF = 4;
+export const ASSAULT_INCIDENT_TYPE_OF = 5;
+export const ILLEGAL_DRUGS_INCIDENT_TYPE_OF = 6;
+export const PERSON_IN_NEED_INCIDENT_TYPE_OF = 7;
+export const PUBLIC_SAFETY_ISSUE_INCIDENT_TYPE_OF = 8;
+export const INCIDENT_TYPE_CHOICES = [
+    {
+        selectName: "incidentTypeOf",
+        value: BREAK_IN_INCIDENT_TYPE_OF,
+        label: "Break In"
+    },{
+        selectName: "incidentTypeOf",
+        value: FRAUD_INCIDENT_TYPE_OF,
+        label: "Fraud"
+    },{
+        selectName: "incidentTypeOf",
+        value: ARSON_INCIDENT_TYPE_OF,
+        label: "Arson"
+    },{
+        selectName: "incidentTypeOf",
+        value: ASSAULT_INCIDENT_TYPE_OF,
+        label: "Assault"
+    },{
+        selectName: "incidentTypeOf",
+        value: ILLEGAL_DRUGS_INCIDENT_TYPE_OF,
+        label: "Illegal Drugs"
+    },{
+        selectName: "incidentTypeOf",
+        value: PERSON_IN_NEED_INCIDENT_TYPE_OF,
+        label: "Person in Need"
+    },{
+        selectName: "incidentTypeOf",
+        value: PUBLIC_SAFETY_ISSUE_INCIDENT_TYPE_OF,
+        label: "Public Safety Issue"
+    },{
+        selectName: "incidentTypeOf",
+        value: OTHER_INCIDENT_TYPE_OF,
+        label: "Other"
+    }
+];
+
+
+/**
  *  The resource category of that we can use in the system.
  */
 export const HEALTH_RESOURCE_CATEGORY = 2

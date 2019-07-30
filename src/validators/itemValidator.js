@@ -6,7 +6,8 @@ import {
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
    INFORMATION_ITEM_TYPE_OF,
-   OTHER_EVENT_TYPE_OF
+   OTHER_EVENT_TYPE_OF,
+   OTHER_INCIDENT_TYPE_OF
 } from "../constants/api";
 
 
@@ -116,6 +117,27 @@ export function validateIncidentInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+export function validateIncidentStep2Input(data) {
+    let errors = {};
+
+    if (data.incidentTypeOf === undefined || data.incidentTypeOf === null || data.incidentTypeOf === "" || isNaN(data.incidentTypeOf) ) {
+        errors.incidentTypeOf = 'This field is required';
+    } else {
+        if (data.incidentTypeOf === OTHER_INCIDENT_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 
 
 /**
