@@ -16,7 +16,6 @@ class ItemCreateStep3IncidentComponent extends Component {
         const {
             notifiedAuthorities, acceptAuthorityCooperation,
             errors,
-            onTextChange,
             onRadioChange,
             isLoading,
             onClick,

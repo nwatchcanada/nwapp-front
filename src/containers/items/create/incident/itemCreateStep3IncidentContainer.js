@@ -58,7 +58,7 @@ class ItemCreateStep3IncidentContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-3");
+        this.props.history.push("/item/add/step-4-incident");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -113,11 +113,11 @@ class ItemCreateStep3IncidentContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            // CASE A:
-            if (this.acceptAuthorityCooperation === 1) {
+            // CASE A OF B:
+            if (this.state.acceptAuthorityCooperation === 1) {
                 this.onSuccessfulSubmissionCallback();
 
-            // CASE B:
+            // CASE B OF B:
             } else {
                 this.setState({
                     showModal: true

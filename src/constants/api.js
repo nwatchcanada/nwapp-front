@@ -542,13 +542,13 @@ export const ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES = [
 
 export const ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES = [
     {
-        id: 'canBePostedOnSocialMedia-m-choice',
-        name: "canBePostedOnSocialMedia",
+        id: 'acceptAuthorityCooperation-t-choice',
+        name: "acceptAuthorityCooperation",
         value: 1,
         label: "Yes"
     },{
-        id: 'canBePostedOnSocialMedia-f-choice',
-        name: "canBePostedOnSocialMedia",
+        id: 'acceptAuthorityCooperation-f-choice',
+        name: "acceptAuthorityCooperation",
         value: 0,
         label: "No"
     }
