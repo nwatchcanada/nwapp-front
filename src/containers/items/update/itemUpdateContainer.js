@@ -43,6 +43,8 @@ class ItemUpdateContainer extends Component {
             eventTypeOfOther: "",
             logoPhoto: {},
             galleryPhotos: [],
+            shownToWhom: "",
+            canBePostedOnSocialMedia: "",
             date: new Date(),
             photos: [],
             errors: {},
@@ -51,6 +53,7 @@ class ItemUpdateContainer extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onDrop = this.onDrop.bind(this);
@@ -100,6 +103,8 @@ class ItemUpdateContainer extends Component {
             'eventTypeOf': 2,
             'eventTypeOfOption': {selectName: "eventTypeOf", value: 2, label: "Garage Sale"},
             'eventPrettyEventTypeOf': "Garage Sale",
+            'shownToWhom': 1,
+            'canBePostedOnSocialMedia': 1,
             'absoluteUrl': '/item/byron'
         },{
             'typeOf': CONCERN_ITEM_TYPE_OF,
@@ -200,6 +205,32 @@ class ItemUpdateContainer extends Component {
         });
         console.log("onSelectChange | optionKey", optionKey);
         console.log("onSelectChange | state", this.state);
+    }
+
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "nwapp-item-update-event-"+[e.target.name];
+        const storageLabelKey =  "nwapp-item-update-event-"+[e.target.name].toString()+"-label";
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"Label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
     }
 
     onDateTimeChange(dateObj) {
@@ -410,6 +441,8 @@ class ItemUpdateContainer extends Component {
             eventTypeOfOther,
             logoPhoto,
             galleryPhotos,
+            shownToWhom,
+            canBePostedOnSocialMedia,
             date,
             photos,
             errors,
@@ -428,6 +461,8 @@ class ItemUpdateContainer extends Component {
                 eventTypeOfOther={eventTypeOfOther}
                 logoPhoto={logoPhoto}
                 galleryPhotos={galleryPhotos}
+                shownToWhom={shownToWhom}
+                canBePostedOnSocialMedia={canBePostedOnSocialMedia}
                 date={date}
                 photos={photos}
                 errors={errors}

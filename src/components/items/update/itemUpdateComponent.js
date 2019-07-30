@@ -7,6 +7,7 @@ import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
 import { BootstrapSingleImageUploadAndPreview } from "../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import { BootstrapMultipleImageUploadAndPreview } from "../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { OTHER_EVENT_TYPE_OF } from "../../../constants/api";
@@ -15,6 +16,8 @@ import {
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
    // INFORMATION_ITEM_TYPE_OF
+   ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES,
+   ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES
 } from "../../../constants/api";
 
 
@@ -36,7 +39,7 @@ class ItemUpdateComponent extends Component {
             errors,
             isLoading,
             onTextChange, onDateTimeChange, onSelectChange, onClick, onDrop, onRemoveUploadClick,
-            onRadioChange
+            shownToWhom, canBePostedOnSocialMedia, onRadioChange,
         } = this.props;
 
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
@@ -174,6 +177,28 @@ class ItemUpdateComponent extends Component {
                                 name="galleryPhotos"
                                 filesArray={galleryPhotos}
                                 onRemoveUploadClick={onGalleryRemoveUploadClick}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.shownToWhom}
+                                label="This event should be shown to whom? (*)"
+                                name="shownToWhom"
+                                onChange={onRadioChange}
+                                selectedValue={shownToWhom}
+                                options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.canBePostedOnSocialMedia}
+                                label="This event can be shared by others on social media? (*)"
+                                name="canBePostedOnSocialMedia"
+                                onChange={onRadioChange}
+                                selectedValue={canBePostedOnSocialMedia}
+                                options={ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES}
                             />
 
                             <div className="form-group">
