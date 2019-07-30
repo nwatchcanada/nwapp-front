@@ -101,16 +101,57 @@ class ItemUpdateComponent extends Component {
                             />
 
                             {isEventItem &&
-                                <BootstrapSingleSelect
-                                    borderColour="border-primary"
-                                    label="Event Type (*)"
-                                    name="eventTypeOf"
-                                    defaultOptionLabel="Please select the event type."
-                                    options={eventTypeOfOptions}
-                                    value={eventTypeOf}
-                                    error={errors.eventTypeOf}
-                                    onSelectChange={onSelectChange}
-                                />
+                                <div>
+                                    <BootstrapSingleSelect
+                                        borderColour="border-primary"
+                                        label="Event Type (*)"
+                                        name="eventTypeOf"
+                                        defaultOptionLabel="Please select the event type."
+                                        options={eventTypeOfOptions}
+                                        value={eventTypeOf}
+                                        error={errors.eventTypeOf}
+                                        onSelectChange={onSelectChange}
+                                    />
+                                    <BootstrapSingleImageUploadAndPreview
+                                        error={errors.logoPhoto}
+                                        label="Logo"
+                                        onDrop={onLogoDrop}
+                                        name="logoPhoto"
+                                        fileObj={logoPhoto}
+                                        onRemoveUploadClick={onLogoRemoveUploadClick}
+                                    />
+
+                                    <BootstrapMultipleImageUploadAndPreview
+                                        error={errors.galleryPhotos}
+                                        label="Gallery Photos"
+                                        onDrop={onGalleryDrop}
+                                        name="galleryPhotos"
+                                        filesArray={galleryPhotos}
+                                        onRemoveUploadClick={onGalleryRemoveUploadClick}
+                                    />
+
+                                    <BootstrapRadio
+                                        inputClassName="form-check-input form-check-input-lg"
+                                        borderColour="border-primary"
+                                        error={errors.shownToWhom}
+                                        label="This event should be shown to whom? (*)"
+                                        name="shownToWhom"
+                                        onChange={onRadioChange}
+                                        selectedValue={shownToWhom}
+                                        options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
+                                    />
+
+                                    <BootstrapRadio
+                                        inputClassName="form-check-input form-check-input-lg"
+                                        borderColour="border-primary"
+                                        error={errors.canBePostedOnSocialMedia}
+                                        label="This event can be shared by others on social media? (*)"
+                                        name="canBePostedOnSocialMedia"
+                                        onChange={onRadioChange}
+                                        selectedValue={canBePostedOnSocialMedia}
+                                        options={ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES}
+                                    />
+                                </div>
                             }
                             {isOtherEventTypeOf &&
                                 <BootstrapInput
@@ -160,46 +201,6 @@ class ItemUpdateComponent extends Component {
                                     onRemoveUploadClick={onRemoveUploadClick}
                                 />
                             }
-
-                            <BootstrapSingleImageUploadAndPreview
-                                error={errors.logoPhoto}
-                                label="Logo"
-                                onDrop={onLogoDrop}
-                                name="logoPhoto"
-                                fileObj={logoPhoto}
-                                onRemoveUploadClick={onLogoRemoveUploadClick}
-                            />
-
-                            <BootstrapMultipleImageUploadAndPreview
-                                error={errors.galleryPhotos}
-                                label="Gallery Photos"
-                                onDrop={onGalleryDrop}
-                                name="galleryPhotos"
-                                filesArray={galleryPhotos}
-                                onRemoveUploadClick={onGalleryRemoveUploadClick}
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.shownToWhom}
-                                label="This event should be shown to whom? (*)"
-                                name="shownToWhom"
-                                onChange={onRadioChange}
-                                selectedValue={shownToWhom}
-                                options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.canBePostedOnSocialMedia}
-                                label="This event can be shared by others on social media? (*)"
-                                name="canBePostedOnSocialMedia"
-                                onChange={onRadioChange}
-                                selectedValue={canBePostedOnSocialMedia}
-                                options={ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES}
-                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

@@ -95,7 +95,39 @@ export default class ItemRetrieveComponent extends Component {
                                         </td>
                                     </tr>
                                 }
-
+                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Logo Photo</th>
+                                        <td>
+                                            <div style={thumb}>
+                                                <img
+                                                    src={itemData.logoPhoto.preview}
+                                                    style={img}
+                                                    alt={itemData.logoPhoto.name}
+                                                />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Gallery Photos</th>
+                                        <td>
+                                            {itemData.galleryPhotos && itemData.galleryPhotos.map(
+                                                (photoObj, i) => <div key={i}>
+                                                    <div style={thumb}>
+                                                        <img
+                                                            src={photoObj.preview}
+                                                            style={img}
+                                                            alt={photoObj.name}
+                                                        />
+                                                    </div>
+                                                    <br />
+                                                </div>
+                                            )}
+                                        </td>
+                                    </tr>
+                                }
                                 {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Date</th>

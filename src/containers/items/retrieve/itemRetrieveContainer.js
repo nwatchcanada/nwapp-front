@@ -70,6 +70,21 @@ class ItemRetrieveContainer extends Component {
             'name': 'Byron',
             'description': 'This is the description for byron.',
             'eventPrettyEventTypeOf': "Garage Sale",
+            'logoPhoto': {
+                'path': 'Test File #1',
+                'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
+            },
+            'galleryPhotos': [
+                {
+                    'path': 'Test File #1',
+                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
+                },{
+                    'path': 'Test File #2',
+                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
+                }
+            ],
+            'shownToWhom': 1,
+            'canBePostedOnSocialMedia': 1,
             'absoluteUrl': '/item/byron'
         },{
             'typeOf': CONCERN_ITEM_TYPE_OF,
