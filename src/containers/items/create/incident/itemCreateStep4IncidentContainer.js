@@ -7,7 +7,6 @@ import {
     // localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateIncidentInput } from "../../../../validators/itemValidator";
 
 
@@ -63,8 +62,7 @@ class ItemCreateStep4IncidentContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/item/add/step-3");
+        this.props.history.push("/item/add/step-5-incident");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -231,11 +229,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 

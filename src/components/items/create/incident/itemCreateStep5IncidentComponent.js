@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 // import 'moment-timezone';
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
 
-export default class ItemCreateStep3IncidentComponent extends Component {
+export default class ItemCreateStep5IncidentComponent extends Component {
     render() {
         const {
             returnURL, errors, isLoading, onClick,
@@ -63,13 +63,23 @@ export default class ItemCreateStep3IncidentComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={returnURL}>
-                                <span className="num">2.</span><span className="">Details</span>
+                            <Link to="/item/add/step-2-incident">
+                                <span className="num">2.</span><span className="">Categorize</span>
                             </Link>
                         </div>
-                        <div id="step-3" className="st-grey active">
+                        <div id="step-3" className="st-grey">
+                            <Link to="/item/add/step-3-incident">
+                                <span className="num">3.</span><span className="">Authorities</span>
+                            </Link>
+                        </div>
+                        <div id="step-4" className="st-grey">
+                            <Link to="/item/add/step-4-incident">
+                                <span className="num">4.</span><span className="">Details</span>
+                            </Link>
+                        </div>
+                        <div id="step-5" className="st-grey active">
                             <strong>
-                                <span className="num">3.</span><span className="">Review</span>
+                                <span className="num">5.</span><span className="">Review</span>
                             </strong>
                         </div>
                     </div>
@@ -132,7 +142,7 @@ export default class ItemCreateStep3IncidentComponent extends Component {
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                 <i className="fas fa-check-circle"></i>&nbsp;Save
                             </button>
-                            <Link to={returnURL} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <Link to="/item/add/step-4-incident" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>

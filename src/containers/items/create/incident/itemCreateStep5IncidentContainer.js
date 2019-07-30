@@ -2,23 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep3ConcernComponent from "../../../components/items/create/itemCreateStep3ConcernComponent";
-import ItemCreateStep3EventComponent from "../../../components/items/create/itemCreateStep3EventComponent";
-// import ItemCreateStep3IncidentComponent from "../../../components/items/create/itemCreateStep3IncidentComponent";
-import ItemCreateStep3InformationComponent from "../../../components/items/create/itemCreateStep3InformationComponent";
+import ItemCreateStep5IncidentComponent from "../../../../components/items/create/incident/itemCreateStep5IncidentComponent";
 import {
     localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem, localStorageGetIntegerItem
-} from '../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
+} from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
     CONCERN_ITEM_TYPE_OF,
     INFORMATION_ITEM_TYPE_OF
-} from "../../../constants/api";
+} from "../../../../constants/api";
 
 
-class ItemCreateStep3Container extends Component {
+class ItemCreateStep5IncidentContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -184,57 +181,21 @@ class ItemCreateStep3Container extends Component {
             informationDescription
         } = this.state;
 
-        if (typeOf === INCIDENT_ITEM_TYPE_OF) {
-            return (null);
-        } else if (typeOf === EVENT_ITEM_TYPE_OF) {
-            return (
-                <ItemCreateStep3EventComponent
-                    typeOf={typeOf}
-                    returnURL={returnURL}
-                    errors={errors}
-                    onTextChange={this.onTextChange}
-                    onClick={this.onClick}
+        return (
+            <ItemCreateStep5IncidentComponent
+                typeOf={typeOf}
+                returnURL={returnURL}
+                errors={errors}
+                onTextChange={this.onTextChange}
+                onClick={this.onClick}
 
-                    eventTitle={eventTitle}
-                    eventPrettyEventTypeOf={eventPrettyEventTypeOf}
-                    eventDate={eventDate}
-                    eventDescription={eventDescription}
-                    logoPhoto={logoPhoto}
-                    galleryPhotos={galleryPhotos}
-                    shownToWhomLabel={shownToWhomLabel}
-                    canBePostedOnSocialMediaLabel={canBePostedOnSocialMediaLabel}
-                />
-            );
-        } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
-            return (
-                <ItemCreateStep3ConcernComponent
-                    typeOf={typeOf}
-                    returnURL={returnURL}
-                    errors={errors}
-                    onTextChange={this.onTextChange}
-                    onClick={this.onClick}
-
-                    concernTitle={concernTitle}
-                    concernDescription={concernDescription}
-                    concernLocation={concernLocation}
-                    concernPhotos={concernPhotos}
-                />
-            );
-        } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
-            return (
-                <ItemCreateStep3InformationComponent
-                    typeOf={typeOf}
-                    returnURL={returnURL}
-                    errors={errors}
-                    onTextChange={this.onTextChange}
-                    onClick={this.onClick}
-
-                    informationDescription={informationDescription}
-                />
-            );
-        } else {
-            this.props.history.push("/404");
-        }
+                incidentTitle={incidentTitle}
+                incidentDate={incidentDate}
+                incidentDescription={incidentDescription}
+                incidentLocation={incidentLocation}
+                incidentPhotos={incidentPhotos}
+            />
+        );
     }
 }
 
@@ -256,4 +217,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep3Container);
+)(ItemCreateStep5IncidentContainer);
