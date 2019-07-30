@@ -139,6 +139,22 @@ export function validateIncidentStep2Input(data) {
 }
 
 
+export function validateIncidentStep3Input(data) {
+    let errors = {};
+
+    if (data.notifiedAuthorities === undefined || data.notifiedAuthorities === null || data.notifiedAuthorities === "" || isNaN(data.notifiedAuthorities) ) {
+        errors.notifiedAuthorities = 'This field is required';
+    }
+    if (data.acceptAuthorityCooperation === undefined || data.acceptAuthorityCooperation === null || data.acceptAuthorityCooperation === "" || isNaN(data.acceptAuthorityCooperation) ) {
+        errors.acceptAuthorityCooperation = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 
 /**
  *  Validator will validate the `information` item.

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep2IncidentComponent from "../../../../components/items/create/incident/itemCreateStep2IncidentComponent";
+import ItemCreateStep3IncidentComponent from "../../../../components/items/create/incident/itemCreateStep3IncidentComponent";
 import { localStorageGetIntegerItem, localStorageGetObjectItem, localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
-import { validateIncidentStep2Input } from "../../../../validators/itemValidator";
+import { validateIncidentStep3Input } from "../../../../validators/itemValidator";
 import { OTHER_INCIDENT_TYPE_OF, INCIDENT_TYPE_CHOICES } from "../../../../constants/api";
 
 
-class ItemCreateStep2IncidentContainer extends Component {
+class ItemCreateStep3IncidentContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -17,15 +17,13 @@ class ItemCreateStep2IncidentContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            incidentTypeOf:localStorageGetIntegerItem("nwapp-item-create-incident-incidentTypeOf"),
-            incidentTypeOfOption: localStorageGetObjectItem('nwapp-item-create-incident-incidentTypeOfOption'),
-            incidentTypeOfOther: localStorage.getItem("nwapp-item-create-incident-incidentTypeOfOther"),
             errors: {},
-            isLoading: false
+            isLoading: false,
+            notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-notifiedAuthorities"),
+            acceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-acceptAuthorityCooperation"),
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -56,7 +54,7 @@ class ItemCreateStep2IncidentContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-3-incident");
+        this.props.history.push("/item/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -72,31 +70,34 @@ class ItemCreateStep2IncidentContainer extends Component {
     }
 
     /**
-     *  Incident handling functions
+     *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-        const key = "nwapp-item-create-incident-"+[e.target.name];
-        localStorage.setItem(key, e.target.value)
-    }
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "nwapp-item-create-incident-"+[e.target.name];
+        const storageLabelKey =  "nwapp-item-create-incident-"+[e.target.name].toString()+"-label";
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"Label";
 
-    onSelectChange(option) {
-        const optionKey = [option.selectName].toString()+"Option";
-        this.setState(
-            {
-                [option.selectName]: option.value,
-                [optionKey]: option,
-            },
-            ()=>{
-                console.log(this.state);
-                localStorage.setItem('nwapp-item-create-incident-'+[option.selectName], option.value);
-                localStorageSetObjectOrArrayItem('nwapp-item-create-incident-'+optionKey, option);
-            }
-        );
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
     }
 
     onClick(e) {
@@ -104,17 +105,10 @@ class ItemCreateStep2IncidentContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateIncidentStep2Input(this.state);
+        const { errors, isValid } = validateIncidentStep3Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            // Save for convinence the incident type depending on if the user
-            // chose a standard option or the `other` option.
-            if (this.state.incidentTypeOf === OTHER_INCIDENT_TYPE_OF) {
-                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.incidentTypeOfOther);
-            } else {
-                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.incidentTypeOfOption.label);
-            }
             this.onSuccessfulSubmissionCallback();
 
         // CASE 2 OF 2: Validation was a failure.
@@ -129,15 +123,13 @@ class ItemCreateStep2IncidentContainer extends Component {
      */
 
     render() {
-        const { incidentTypeOf, incidentTypeOfOther, errors } = this.state;
+        const { notifiedAuthorities, acceptAuthorityCooperation, errors } = this.state;
         return (
-            <ItemCreateStep2IncidentComponent
-                incidentTypeOf={incidentTypeOf}
-                incidentTypeOfOptions={INCIDENT_TYPE_CHOICES}
-                incidentTypeOfOther={incidentTypeOfOther}
+            <ItemCreateStep3IncidentComponent
+                notifiedAuthorities={notifiedAuthorities}
+                acceptAuthorityCooperation={acceptAuthorityCooperation}
+                onRadioChange={this.onRadioChange}
                 errors={errors}
-                onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );
@@ -158,4 +150,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep2IncidentContainer);
+)(ItemCreateStep3IncidentContainer);

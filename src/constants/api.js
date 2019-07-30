@@ -522,3 +522,34 @@ export const ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES = [
         label: "No"
     }
 ];
+
+
+
+export const ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES = [
+    {
+        id: 'notifiedAuthorities-t-choice',
+        name: "notifiedAuthorities",
+        value: 1,
+        label: "Yes"
+    },{
+        id: 'notifiedAuthorities-f-choice',
+        name: "notifiedAuthorities",
+        value: 0,
+        label: "No"
+    }
+];
+
+
+export const ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES = [
+    {
+        id: 'canBePostedOnSocialMedia-m-choice',
+        name: "canBePostedOnSocialMedia",
+        value: 1,
+        label: "Yes"
+    },{
+        id: 'canBePostedOnSocialMedia-f-choice',
+        name: "canBePostedOnSocialMedia",
+        value: 0,
+        label: "No"
+    }
+];
