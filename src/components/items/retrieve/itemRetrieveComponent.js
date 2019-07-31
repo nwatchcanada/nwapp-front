@@ -142,6 +142,30 @@ export default class ItemRetrieveComponent extends Component {
                                 }
                                 {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
+                                        <th scope="row" className="bg-light">Category</th>
+                                        <td>
+                                            {itemData.prettyIncidentTypeOf}
+                                        </td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Notified Authorities</th>
+                                        <td>
+                                            {itemData.notifiedAuthoritiesLabel}
+                                        </td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Accept Authority Cooperation</th>
+                                        <td>
+                                            {itemData.acceptAuthorityCooperationLabel}
+                                        </td>
+                                    </tr>
+                                }
+                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                    <tr>
                                         <th scope="row" className="bg-light">Date</th>
                                         <td>
                                             <Moment format="YYYY/MM/DD">{itemData.date}</Moment>
