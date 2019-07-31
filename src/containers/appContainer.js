@@ -117,6 +117,7 @@ import ItemCreateStep5IncidentContainer from "./items/create/incident/itemCreate
 import ItemCreateStep2InformationContainer from "./items/create/itemCreateStep2InformationContainer";
 import ItemCreateStep3Container from "./items/create/itemCreateStep3Container";
 import ItemUpdateContainer from "./items/update/itemUpdateContainer";
+import ItemUpdateIncidentContainer from "./items/update/itemUpdateIncidentContainer";
 import ItemArchiveContainer from "./items/archive/itemArchiveContainer";
 
 import AssociateListContainer from "./associates/list/associateListContainer";
@@ -275,6 +276,7 @@ class AppContainer extends React.Component {
                                 <Route path="/item/add/step-3" exact component={requiresAuth(ItemCreateStep3Container)} />
                                 <Route path="/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/item/:slug/update" exact component={requiresAuth(ItemUpdateContainer)} />
+                                <Route path="/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
                                 <Route path="/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
                                 <Route path="/associates/add/step-1" exact component={requiresAuth(AssociateCreateStep1Container)} />
                                 <Route path="/associates/add/step-2" exact component={requiresAuth(AssociateCreateStep2Container)} />

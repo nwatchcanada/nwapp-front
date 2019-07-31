@@ -99,6 +99,26 @@ export function validateEventInput(data) {
 export function validateIncidentInput(data) {
     let errors = {};
 
+    // STEP 2
+    if (data.incidentTypeOf === undefined || data.incidentTypeOf === null || data.incidentTypeOf === "" || isNaN(data.incidentTypeOf) ) {
+        errors.incidentTypeOf = 'This field is required';
+    } else {
+        if (data.incidentTypeOf === OTHER_INCIDENT_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    // STEP 3
+    if (data.notifiedAuthorities === undefined || data.notifiedAuthorities === null || data.notifiedAuthorities === "" || isNaN(data.notifiedAuthorities) ) {
+        errors.notifiedAuthorities = 'This field is required';
+    }
+    if (data.acceptAuthorityCooperation === undefined || data.acceptAuthorityCooperation === null || data.acceptAuthorityCooperation === "" || isNaN(data.acceptAuthorityCooperation) ) {
+        errors.acceptAuthorityCooperation = 'This field is required';
+    }
+
+    // STEP 4
     if (data.title === undefined || data.title === null || validator.isEmpty(data.title) || data.title === "") {
         errors.title = 'This field is required';
     }
@@ -154,6 +174,30 @@ export function validateIncidentStep3Input(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+export function validateIncidentStep4Input(data) {
+    let errors = {};
+
+    if (data.title === undefined || data.title === null || validator.isEmpty(data.title) || data.title === "") {
+        errors.title = 'This field is required';
+    }
+    if (data.date === undefined || data.date === null || data.date === "") {
+        errors.date = 'This field is required';
+    }
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+        errors.description = 'This field is required';
+    }
+    if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+        errors.location = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 
 
 /**

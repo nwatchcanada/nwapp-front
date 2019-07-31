@@ -35,6 +35,9 @@ class ItemUpdateContainer extends Component {
 
         this.state = {
             slug: slug,
+            prettyIncidentTypeOf: "",
+            notifiedAuthoritiesLabel: "",
+            acceptAuthorityCooperationLabel: "",
             title: "",
             description: "",
             location: "",
@@ -79,6 +82,9 @@ class ItemUpdateContainer extends Component {
             'typeOf': INCIDENT_ITEM_TYPE_OF,
             'icon': 'fire',
             'slug': 'argyle',
+            'prettyIncidentTypeOf': 'Assault',
+            'notifiedAuthoritiesLabel': 'Yes',
+            'acceptAuthorityCooperationLabel': 'Yes',
             'number': 1,
             'title': 'Argyle',
             'description': 'This is the description for argyle.',

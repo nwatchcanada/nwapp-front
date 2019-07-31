@@ -168,7 +168,17 @@ class ItemRetrieveContainer extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/item/"+this.state.slug+"/update");
+        if (this.state.itemData.typeOf === INCIDENT_ITEM_TYPE_OF) {
+            this.props.history.push("/item/"+this.state.itemData.slug+"/update-incidence");
+        } else if (this.state.itemData.typeOf === EVENT_ITEM_TYPE_OF) {
+            this.props.history.push("/item/"+this.state.itemData.slug+"/update-event");
+        } else if (this.state.itemData.typeOf === CONCERN_ITEM_TYPE_OF) {
+            this.props.history.push("/item/"+this.state.itemData.slug+"/update-concern");
+        }  else if (this.state.itemData.typeOf === INFORMATION_ITEM_TYPE_OF) {
+            this.props.history.push("/item/"+this.state.itemData.slug+"/update-info");
+        } else {
+            alert("ERROR: DID NOT FIND");
+        }
     }
 
     onArchiveClick(e) {
