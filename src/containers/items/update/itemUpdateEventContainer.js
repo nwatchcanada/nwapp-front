@@ -38,6 +38,7 @@ class ItemUpdateEventContainer extends Component {
             title: "",
             description: "",
             location: "",
+            date: new Date(),
             eventTypeOf: "",
             eventTypeOfOption: {},
             eventTypeOfOther: "",
@@ -54,8 +55,6 @@ class ItemUpdateEventContainer extends Component {
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
         this.onGalleryDrop = this.onGalleryDrop.bind(this);
         this.onGalleryRemoveUploadClick = this.onGalleryRemoveUploadClick.bind(this);
         this.onLogoDrop = this.onLogoDrop.bind(this);
@@ -72,29 +71,7 @@ class ItemUpdateEventContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        //TODO: REPLACE THIS CODE WITH API FETCHING CODE.
-        const itemsArray = [{
-            'typeOf': INCIDENT_ITEM_TYPE_OF,
-            'icon': 'fire',
-            'slug': 'argyle',
-            'prettyIncidentTypeOf': 'Assault',
-            'notifiedAuthoritiesLabel': 'Yes',
-            'acceptAuthorityCooperationLabel': 'Yes',
-            'number': 1,
-            'title': 'Argyle',
-            'description': 'This is the description for argyle.',
-            'location': 'London',
-            'photos': [
-                {
-                    'path': 'Test File #1',
-                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
-                },{
-                    'path': 'Test File #2',
-                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
-                }
-            ],
-            'absoluteUrl': '/item/argyle'
-        },{
+        this.setState({
             'typeOf': EVENT_ITEM_TYPE_OF,
             'icon': 'glass-cheers',
             'slug': 'byron',
@@ -106,16 +83,11 @@ class ItemUpdateEventContainer extends Component {
             'eventPrettyEventTypeOf': "Garage Sale",
             'shownToWhom': 1,
             'canBePostedOnSocialMedia': 1,
-            'absoluteUrl': '/item/byron'
-        },{
-            'typeOf': CONCERN_ITEM_TYPE_OF,
-            'icon': 'exclamation-circle',
-            'slug': 'carling',
-            'number': 3,
-            'title': 'Carling',
-            'description': 'This is the description for carling.',
-            'location': 'London',
-            'photos': [
+            'logoPhoto': {
+                'path': 'Test File #1',
+                'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
+            },
+            'galleryPhotos': [
                 {
                     'path': 'Test File #1',
                     'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
@@ -124,35 +96,8 @@ class ItemUpdateEventContainer extends Component {
                     'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
                 }
             ],
-            'absoluteUrl': '/item/carling'
-        },{
-            'typeOf': INFORMATION_ITEM_TYPE_OF,
-            'icon': 'info-circle',
-            'slug': 'darlyn',
-            'number': 4,
-            'title': null,
-            'description': 'What is the contact information for my area coordinator, I need to speak with her, this is in regards to a private matter.',
-            'absoluteUrl': '/item/darlyn'
-        }];
-        for (let i = 0; i < itemsArray.length; i++) {
-            const itemData = itemsArray[i];
-            if (itemData['slug'] === this.state.slug) {
-                this.setState({
-                    'typeOf': itemData.typeOf,
-                    'title': itemData.title,
-                    'slug': itemData.slug,
-                    'number': itemData.number,
-                    'name': itemData.name,
-                    'description': itemData.description,
-                    'location': itemData.location,
-                    'eventTypeOf': itemData.eventTypeOf,
-                    'eventTypeOfOption': itemData.eventTypeOfOption,
-                    'eventPrettyEventTypeOf': itemData.eventPrettyEventTypeOf,
-                    'photos': itemData.photos,
-                    'absoluteUrl': itemData.absoluteUrl,
-                });
-            }
-        }
+            'absoluteUrl': '/item/byron'
+        });
     }
 
     componentWillUnmount() {
@@ -254,70 +199,6 @@ class ItemUpdateEventContainer extends Component {
         // CASE 2 OF 2: Validation was a failure.
         } else {
             this.onFailedSubmissionCallback(errors);
-        }
-    }
-
-    /**
-     *  Special Thanks: https://react-dropzone.netlify.com/#previews
-     */
-    onDrop(acceptedFiles) {
-        const file = acceptedFiles[0];
-
-        // // For debuging purposes only.
-        // console.log("DEBUG | onDrop | file", file);
-
-        const fileWithPreview = Object.assign(file, {
-            preview: URL.createObjectURL(file)
-        });
-
-        // Append our array.
-        let a = this.state.photos.slice(); //creates the clone of the state
-        a.push(fileWithPreview);
-
-        // // For debugging purposes.
-        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
-        // console.log("DEBUG |", a, "\n");
-
-        // Update our local state to update the GUI.
-        this.setState({
-            photos: a
-        })
-    }
-
-    onRemoveUploadClick(e, name) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Iterate through all the photos.
-        const photos = this.state.photos;
-        for (let i = 0; i < photos.length; i++) {
-            let row = photos[i];
-
-            // // For debugging purposes only.
-            // console.log(row);
-            // console.log(photos);
-
-            if (row.name === name) {
-                //
-                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
-                //
-                const filteredPhotos = photos.slice(
-                    0, i
-                ).concat(
-                    photos.slice(
-                        i + 1, photos.length
-                    )
-                )
-
-                // Update our state with our NEW ARRAY which no longer has
-                // the item we deleted.
-                this.setState({
-                    photos: filteredPhotos
-                });
-
-                // Terminate our for-loop.
-                return;
-            }
         }
     }
 
@@ -436,6 +317,7 @@ class ItemUpdateEventContainer extends Component {
             typeOf,
             title,
             description,
+            date,
             location,
             eventTypeOf,
             eventTypeOfOption,
@@ -444,8 +326,6 @@ class ItemUpdateEventContainer extends Component {
             galleryPhotos,
             shownToWhom,
             canBePostedOnSocialMedia,
-            date,
-            photos,
             errors,
             isLoading
         } = this.state;
@@ -455,6 +335,7 @@ class ItemUpdateEventContainer extends Component {
                 typeOf={typeOf}
                 title={title}
                 description={description}
+                date={date}
                 location={location}
                 eventTypeOf={eventTypeOf}
                 eventTypeOfOptions={EVENT_TYPE_CHOICES}
@@ -470,8 +351,6 @@ class ItemUpdateEventContainer extends Component {
                 onSelectChange={this.onSelectChange}
                 onDateTimeChange={this.onDateTimeChange}
                 onClick={this.onClick}
-                onDrop={this.onDrop}
-                onRemoveUploadClick={this.onRemoveUploadClick}
                 onLogoDrop={this.onLogoDrop}
                 onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
                 onGalleryDrop={this.onGalleryDrop}

@@ -42,10 +42,6 @@ class ItemUpdateEventComponent extends Component {
         } = this.props;
 
         const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
-        const isIncidentItemOrConcernItemOrEventItem = typeOf === INCIDENT_ITEM_TYPE_OF || typeOf === CONCERN_ITEM_TYPE_OF || typeOf === EVENT_ITEM_TYPE_OF;
-        const isIncidentItemOrConcernItem = typeOf === INCIDENT_ITEM_TYPE_OF || typeOf === CONCERN_ITEM_TYPE_OF;
-        const isIncidentItemOrEventItem = typeOf === INCIDENT_ITEM_TYPE_OF || typeOf === EVENT_ITEM_TYPE_OF;
-        const isEventItem = typeOf === EVENT_ITEM_TYPE_OF;
 
         return (
             <main id="main" role="main">
@@ -96,16 +92,18 @@ class ItemUpdateEventComponent extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.eventTypeOfOther}
-                                label="Event Type - Other (*)"
-                                onChange={onTextChange}
-                                value={eventTypeOfOther}
-                                name="eventTypeOfOther"
-                                type="text"
-                            />
+                            {isOtherEventTypeOf &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.eventTypeOfOther}
+                                    label="Event Type - Other (*)"
+                                    onChange={onTextChange}
+                                    value={eventTypeOfOther}
+                                    name="eventTypeOfOther"
+                                    type="text"
+                                />
+                            }
 
                             <BootstrapDatePicker
                                 label="Date (*)"
