@@ -246,6 +246,7 @@ class ItemUpdateConcernContainer extends Component {
 
     render() {
         const {
+            slug,
             typeOf,
             title,
             date,
@@ -258,6 +259,7 @@ class ItemUpdateConcernContainer extends Component {
         } = this.state;
         return (
             <ItemUpdateConcernComponent
+                slug={slug}
                 typeOf={typeOf}
                 title={title}
                 date={date}
