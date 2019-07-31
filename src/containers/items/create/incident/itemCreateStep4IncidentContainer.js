@@ -7,7 +7,7 @@ import {
     // localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
-import { validateIncidentInput } from "../../../../validators/itemValidator";
+import { validateIncidentStep4Input } from "../../../../validators/itemValidator";
 
 
 class ItemCreateStep4IncidentContainer extends Component {
@@ -114,7 +114,7 @@ class ItemCreateStep4IncidentContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateIncidentInput(this.state);
+        const { errors, isValid } = validateIncidentStep4Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

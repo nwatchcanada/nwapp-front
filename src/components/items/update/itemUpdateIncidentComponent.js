@@ -42,11 +42,11 @@ class ItemUpdateIncidentComponent extends Component {
             acceptAuthorityCooperationLabel,
 
             // Step 4
-            incidentTitle,
-            incidentDate,
-            incidentDescription,
-            incidentLocation,
-            incidentPhotos,
+            title,
+            date,
+            description,
+            location,
+            photos,
 
             // All
             errors, isLoading, onClick, slug, onSelectChange, onTextChange, onRadioChange,
@@ -135,53 +135,53 @@ class ItemUpdateIncidentComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.incidentTitle}
+                                error={errors.title}
                                 label="Title (*)"
                                 onChange={onTextChange}
-                                value={incidentTitle}
-                                name="incidentTitle"
+                                value={title}
+                                name="title"
                                 type="text"
                             />
 
                             <BootstrapDatePicker
                                 label="Date (*)"
-                                name="incidentDate"
-                                dateObj={incidentDate}
+                                name="date"
+                                dateObj={date}
                                 onTimeChange={onDateTimeChange}
                                 datePickerClassName="form-control form-control-lg border"
                                 divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.incidentDate}
+                                error={errors.date}
                             />
 
                             <BootstrapTextarea
-                                name="incidentDescription"
+                                name="description"
                                 borderColour="border-primary"
                                 label="Description (*)"
                                 placeholder="Please describe your incident"
                                 rows="5"
-                                value={incidentDescription}
+                                value={description}
                                 helpText=""
                                 onChange={onTextChange}
-                                error={errors.incidentDescription}
+                                error={errors.description}
                             />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.incidentLocation}
+                                error={errors.location}
                                 label="Location (*)"
                                 onChange={onTextChange}
-                                value={incidentLocation}
-                                name="incidentLocation"
+                                value={location}
+                                name="location"
                                 type="text"
                             />
 
                             <BootstrapMultipleImageUploadAndPreview
-                                error={errors.incidentPhotos}
-                                label="incidentPhotos"
+                                error={errors.photos}
+                                label="photos"
                                 onDrop={onDrop}
-                                name="incidentPhotos"
-                                filesArray={incidentPhotos}
+                                name="photos"
+                                filesArray={photos}
                                 onRemoveUploadClick={onRemoveUploadClick}
                             />
 

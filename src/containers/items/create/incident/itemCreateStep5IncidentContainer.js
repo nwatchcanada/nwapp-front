@@ -44,11 +44,11 @@ class ItemCreateStep5IncidentContainer extends Component {
             acceptAuthorityCooperationLabel: localStorage.getItem("nwapp-item-create-incident-acceptAuthorityCooperation-label"),
 
             // Step 4
-            incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
-            incidentDate: localStorageGetDateItem("nwapp-item-create-incident-date"),
-            incidentDescription: localStorage.getItem("nwapp-item-create-incident-description"),
-            incidentLocation: localStorage.getItem("nwapp-item-create-incident-location"),
-            incidentPhotos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
+            title: localStorage.getItem("nwapp-item-create-incident-title"),
+            date: localStorageGetDateItem("nwapp-item-create-incident-date"),
+            description: localStorage.getItem("nwapp-item-create-incident-description"),
+            location: localStorage.getItem("nwapp-item-create-incident-location"),
+            photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
 
             errors: {},
             isLoading: false
@@ -142,11 +142,11 @@ class ItemCreateStep5IncidentContainer extends Component {
             acceptAuthorityCooperationLabel,
 
             // Step 4
-            incidentTitle,
-            incidentDate,
-            incidentDescription,
-            incidentLocation,
-            incidentPhotos,
+            title,
+            date,
+            description,
+            location,
+            photos,
 
             // All
             errors
@@ -167,22 +167,22 @@ class ItemCreateStep5IncidentContainer extends Component {
                 acceptAuthorityCooperationLabel={acceptAuthorityCooperationLabel}
 
                 // Step 4
-                incidentTitle={incidentTitle}
-                incidentDate={incidentDate}
-                incidentDescription={incidentDescription}
-                incidentLocation={incidentLocation}
-                incidentPhotos={incidentPhotos}
+                title={title}
+                date={date}
+                description={description}
+                location={location}
+                photos={photos}
 
                 // All
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
 
-                incidentTitle={incidentTitle}
-                incidentDate={incidentDate}
-                incidentDescription={incidentDescription}
-                incidentLocation={incidentLocation}
-                incidentPhotos={incidentPhotos}
+                title={title}
+                date={date}
+                description={description}
+                location={location}
+                photos={photos}
             />
         );
     }

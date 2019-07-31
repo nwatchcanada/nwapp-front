@@ -50,11 +50,11 @@ class ItemUpdateIncidentContainer extends Component {
             acceptAuthorityCooperationLabel: "Yes",
 
             // STEP 4
-            incidentTitle: "Argyle",
-            incidentDate: new Date(),
-            incidentDescription: "This is the description for argyle.",
-            incidentLocation: "London",
-            incidentPhotos: [
+            title: "Argyle",
+            date: new Date(),
+            description: "This is the description for argyle.",
+            location: "London",
+            photos: [
                 {
                     'path': 'Test File #1',
                     'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
@@ -276,11 +276,11 @@ class ItemUpdateIncidentContainer extends Component {
             acceptAuthorityCooperationLabel,
 
             // Step 4
-            incidentTitle,
-            incidentDate,
-            incidentDescription,
-            incidentLocation,
-            incidentPhotos,
+            title,
+            date,
+            description,
+            location,
+            photos,
 
             // All
             errors,
@@ -303,11 +303,11 @@ class ItemUpdateIncidentContainer extends Component {
                 acceptAuthorityCooperationLabel={acceptAuthorityCooperationLabel}
 
                 // Step 4
-                incidentTitle={incidentTitle}
-                incidentDate={incidentDate}
-                incidentDescription={incidentDescription}
-                incidentLocation={incidentLocation}
-                incidentPhotos={incidentPhotos}
+                title={title}
+                date={date}
+                description={description}
+                location={location}
+                photos={photos}
 
                 // All
                 errors={errors}

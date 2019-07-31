@@ -67,11 +67,11 @@ class ItemCreateStep3Container extends Component {
             canBePostedOnSocialMediaLabel: localStorage.getItem("nwapp-item-create-event-canBePostedOnSocialMedia-label"),
 
             // Incident
-            incidentTitle: localStorage.getItem("nwapp-item-create-incident-title"),
-            incidentDate: localStorageGetDateItem("nwapp-item-create-incident-date"),
-            incidentDescription: localStorage.getItem("nwapp-item-create-incident-description"),
-            incidentLocation: localStorage.getItem("nwapp-item-create-incident-location"),
-            incidentPhotos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
+            title: localStorage.getItem("nwapp-item-create-incident-title"),
+            date: localStorageGetDateItem("nwapp-item-create-incident-date"),
+            description: localStorage.getItem("nwapp-item-create-incident-description"),
+            location: localStorage.getItem("nwapp-item-create-incident-location"),
+            photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
 
             // Information
             informationDescription: localStorage.getItem("nwapp-item-create-information-description"),
@@ -174,11 +174,11 @@ class ItemCreateStep3Container extends Component {
             canBePostedOnSocialMediaLabel,
 
             // Incident
-            incidentTitle,
-            incidentDate,
-            incidentDescription,
-            incidentLocation,
-            incidentPhotos,
+            title,
+            date,
+            description,
+            location,
+            photos,
 
             // Information
             informationDescription

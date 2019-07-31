@@ -23,11 +23,11 @@ export default class ItemCreateStep5IncidentComponent extends Component {
             acceptAuthorityCooperationLabel,
 
             // Step 4
-            incidentTitle,
-            incidentDate,
-            incidentDescription,
-            incidentLocation,
-            incidentPhotos,
+            title,
+            date,
+            description,
+            location,
+            photos,
 
             // All
             errors, isLoading, onClick,
@@ -52,7 +52,7 @@ export default class ItemCreateStep5IncidentComponent extends Component {
         };
 
         // For debugging purposes only.
-        console.log(incidentPhotos);
+        console.log(photos);
 
         return (
             <main id="main" role="main">
@@ -121,26 +121,26 @@ export default class ItemCreateStep5IncidentComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Title</th>
-                                    <td>{incidentTitle}</td>
+                                    <td>{title}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Date</th>
                                     <td>
-                                        <Moment format="YYYY/MM/DD">{incidentDate}</Moment>
+                                        <Moment format="YYYY/MM/DD">{date}</Moment>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{incidentDescription}</td>
+                                    <td>{description}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Location</th>
-                                    <td>{incidentLocation}</td>
+                                    <td>{location}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Photos</th>
                                     <td>
-                                        {incidentPhotos && incidentPhotos.map(
+                                        {photos && photos.map(
                                             (photoObj, i) => <div key={i}>
                                                 <div style={thumb}>
                                                     <img
