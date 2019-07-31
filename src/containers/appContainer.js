@@ -108,7 +108,9 @@ import ItemSearchContainer from "./items/search/itemSearchContainer";
 import ItemSearchResultContainer from "./items/search/itemSearchResultContainer";
 import ItemRetrieveContainer from "./items/retrieve/itemRetrieveContainer";
 import ItemCreateStep1Container from "./items/create/itemCreateStep1Container";
-import ItemCreateStep2ConcernContainer from "./items/create/itemCreateStep2ConcernContainer";
+import ItemCreateStep2ConcernContainer from "./items/create/concern/itemCreateStep2ConcernContainer";
+import ItemCreateStep3ConcernContainer from "./items/create/concern/itemCreateStep3ConcernContainer";
+import ItemCreateStep4ConcernContainer from "./items/create/concern/itemCreateStep4ConcernContainer";
 import ItemCreateStep2EventContainer from "./items/create/itemCreateStep2EventContainer";
 import ItemCreateStep2IncidentContainer from "./items/create/incident/itemCreateStep2IncidentContainer";
 import ItemCreateStep3IncidentContainer from "./items/create/incident/itemCreateStep3IncidentContainer";
@@ -267,6 +269,8 @@ class AppContainer extends React.Component {
                                 <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />
                                 <Route path="/item/add/step-1" exact component={requiresAuth(ItemCreateStep1Container)} />
                                 <Route path="/item/add/step-2-concern" exact component={requiresAuth(ItemCreateStep2ConcernContainer)} />
+                                <Route path="/item/add/step-3-concern" exact component={requiresAuth(ItemCreateStep3ConcernContainer)} />
+                                <Route path="/item/add/step-4-concern" exact component={requiresAuth(ItemCreateStep4ConcernContainer)} />
                                 <Route path="/item/add/step-2-event" exact component={requiresAuth(ItemCreateStep2EventContainer)} />
                                 <Route path="/item/add/step-2-incident" exact component={requiresAuth(ItemCreateStep2IncidentContainer)} />
                                 <Route path="/item/add/step-3-incident" exact component={requiresAuth(ItemCreateStep3IncidentContainer)} />

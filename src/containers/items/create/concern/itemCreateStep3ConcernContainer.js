@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep2ConcernComponent from "../../../components/items/create/itemCreateStep2ConcernComponent";
+import ItemCreateStep3ConcernComponent from "../../../../components/items/create/concern/itemCreateStep3ConcernComponent";
 import {
     localStorageSetObjectOrArrayItem, localStorageGetArrayItem
-} from '../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateConcernInput } from "../../../validators/itemValidator";
+} from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { validateConcernInput } from "../../../../validators/itemValidator";
 
 
-class ItemCreateStep2ConcernContainer extends Component {
+class ItemCreateStep3ConcernContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -61,7 +61,7 @@ class ItemCreateStep2ConcernContainer extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/item/add/step-3");
+        this.props.history.push("/item/add/step-4-concern");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -184,7 +184,7 @@ class ItemCreateStep2ConcernContainer extends Component {
     render() {
         const { title, description, location, photos, errors } = this.state;
         return (
-            <ItemCreateStep2ConcernComponent
+            <ItemCreateStep3ConcernComponent
                 title={title}
                 description={description}
                 location={location}
@@ -217,4 +217,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep2ConcernContainer);
+)(ItemCreateStep3ConcernContainer);
