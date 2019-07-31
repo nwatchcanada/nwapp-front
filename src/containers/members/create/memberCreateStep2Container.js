@@ -80,10 +80,7 @@ class MemberCreateStep2Container extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Save the slug
-        localStorage.setItem('nwapp-create-member-slug', slug);
-
-        this.onSuccessfulSubmissionCallback();
+        this.props.history.push("/member/"+slug);
     }
 
     /**
