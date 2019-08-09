@@ -51,7 +51,7 @@ export const BootstrapSingleSelect = ({
         container: (base) => ({
             ...base,
             fontSize: '1.25rem',
-		    line-height: '1.72'	
+		    lineHeight: '1.72'
         }),
         control: (base, state) => ({
             ...base,
