@@ -47,6 +47,7 @@ class LoginComponent extends Component {
                         <BootstrapInputGroup
                             layoutSize="large"
                             labelIconClassName="fa fa-envelope color-blue"
+						    spanPrependClassName="input-group-text input-group-addon-e"	
                             name="email"
                             type="email"
                             placeholder="Email Address"
@@ -58,7 +59,8 @@ class LoginComponent extends Component {
 
                         <BootstrapInputGroup
                             layoutSize="large"
-                            labelIconClassName="fa fa-key color-blue"
+                            labelIconClassName="fa fa-key color-blue" 
+						    spanPrependClassName="input-group-text input-group-addon-p" 
                             name="password"
                             type="password"
                             placeholder="Password"
@@ -79,7 +81,7 @@ class LoginComponent extends Component {
                         <input
                             type="submit"
                             value="Sign In"
-                            className="btn btn-lg btn-primary btn-block"
+                            className="btn btn-lg btn-dark-blue btn-block"
                             disabled={isLoading}
                         />
                         <h5 className="text-center mt-3 mb-3">

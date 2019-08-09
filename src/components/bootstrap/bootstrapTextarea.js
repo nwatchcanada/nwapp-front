@@ -13,7 +13,7 @@ export const BootstrapTextarea = ({ name, label, placeholder, rows=1, value, hel
             <textarea
                 aria-describedby={helpID}
                 placeholder={placeholder}
-                className={classnames('form-control', { 'is-invalid': error }, { 'border-success': !error && borderColour === 'border-success' }, { 'border-primary': !error && borderColour === 'border-primary' } )}
+                className={classnames('form-control', 'form-control-lg', { 'is-invalid': error }, { 'border-success': !error && borderColour === 'border-success' }, { 'border-primary': !error && borderColour === 'border-primary' } )}
                 name={name}
                 value={value}
                 onChange={onChange}

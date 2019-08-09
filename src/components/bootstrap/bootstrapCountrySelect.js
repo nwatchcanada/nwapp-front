@@ -19,7 +19,7 @@ export const BootstrapCountrySelect = ({
                 value={value}
                 onChange={onChange}
                 priorityOptions={priorityOptions}
-                className={classnames('form-control', { 'is-invalid': error }, { 'border-success': !error && borderColour === 'border-success' }, { 'border-primary': !error && borderColour === 'border-primary' } )}
+                className={classnames('custom-select', 'form-control-lg', { 'is-invalid': error }, { 'border-success': !error && borderColour === 'border-success' }, { 'border-primary': !error && borderColour === 'border-primary' } )}
                 placeholder={placeholder}
             />
             <small id={helpID} className="form-text text-muted">{helpText}</small>

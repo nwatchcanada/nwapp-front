@@ -349,8 +349,8 @@ class NavigationContainer extends React.Component {
                 <ul className="navbar-nav flex-row">
                     {isAuthenticated && isTenant &&
                         <li className="dropdown-list dropdown nav-item">
-                            <Link aria-haspopup="true" to="/tasks" className="dropdown-toggle-nocaret nav-link" aria-expanded="false">
-                                <i className="fa fa-bell"></i>
+                            <Link aria-haspopup="true" to="/tasks" className="dropdown-toggle-nocaret nav-link text-white py-0" aria-expanded="false">
+                                <i className="far fa-check-square"></i>
                                 <span className="badge badge-danger">11</span>
                             </Link>
                         </li>

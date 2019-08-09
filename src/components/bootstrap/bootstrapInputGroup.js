@@ -8,14 +8,14 @@ import shortid from "shortid";
  * as a banner in our application.
  */
 export const BootstrapInputGroup = (
-    { layoutSize="regular", labelIconClassName, name, type, placeholder, value, helpText, onChange, error = null, disabled=false }
+    { layoutSize="regular", labelIconClassName, spanPrependClassName, name, type, placeholder, value, helpText, onChange, error = null, disabled=false }
 ) => {
     const ariaID = shortid.generate + "-help";
     if (layoutSize === "small") {
         return (
             <div className="input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
-                    <span className="input-group-text" id={ariaID}>
+					<span className={spanPrependClassName} id={ariaID}>
                         <i className={labelIconClassName}></i>
                     </span>
                 </div>
@@ -38,7 +38,7 @@ export const BootstrapInputGroup = (
         return (
             <div className="input-group mb-3">
                 <div className="input-group-prepend">
-                    <span className="input-group-text" id={ariaID}>
+                    <span className={spanPrependClassName} id={ariaID}>
                         <i className={labelIconClassName}></i>
                     </span>
                 </div>
@@ -61,7 +61,7 @@ export const BootstrapInputGroup = (
         return (
             <div className="input-group input-group-lg">
                 <div className="input-group-prepend">
-                    <span className="input-group-text" id={ariaID}>
+                    <span className={spanPrependClassName} id={ariaID}>
                         <i className={labelIconClassName}></i>
                     </span>
                 </div>
@@ -88,6 +88,7 @@ export const BootstrapInputGroup = (
 BootstrapInputGroup.propTypes = {
     layoutSize:  PropTypes.string,
     labelIconClassName: PropTypes.string.isRequired,
+    spanPrependClassName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
