@@ -581,21 +581,21 @@ table.custom-cell-w tr th{width:35% !important;}
 	margin: 5px auto 10px;
 }
 .display-4 {
-    font-size: 1.99rem;
+    font-size: 1.99rem !important;
 }
 }
 @media (min-width: 576px) and (max-width: 667px) {
 .display-4 {
-    font-size: 3.2rem;
+    font-size: 3.2rem !important;
 }	
 }
 
 .react-bootstrap-table table thead tr th:first-child,
 .react-bootstrap-table table tbody tr td:first-child {
-  width: 5rem;
+  width: 6rem;
 }
 .react-bootstrap-table table {
-    table-layout: auto;
+    table-layout: auto !important;
 }
 .react-bootstrap-table {
 display: block;
@@ -1150,7 +1150,7 @@ aside.ScrollUpButton__Container:focus {
   }
 
   main#main {
-    padding-top: 100px;
+    padding-top: 100px !important;
   }
 }
 
@@ -1167,17 +1167,17 @@ aside.ScrollUpButton__Container:focus {
 }
 
 .btn-dark-blue {
-    color: #fff;
-    background-color: #295697;
-    border-color: #295697;
+    color: #ffffff !important;
+    background-color: #295697 !important;
+    border-color: #295697 !important;
 }
 .btn-dark-blue:hover, .btn-dark-blue:focus {
-    background-color: #1c3c69;
-    border-color: #1c3c69;
+    background-color: #1c3c69 !important;
+    border-color: #1c3c69 !important;
 }
 .btn-dark-blue:focus {
-    box-shadow: 0 0 0 0.2rem rgba(41,86,151,.5);
+    box-shadow: 0 0 0 0.2rem rgba(41,86,151,.5) !important;
 }
 .btn-dark-blue:not(:disabled):not(.disabled):active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(41,86,151,.5);
+    box-shadow: 0 0 0 0.2rem rgba(41,86,151,.5) !important;
 }
