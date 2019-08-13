@@ -15,7 +15,7 @@ export default function validateInput(data) {
     if (data.password === undefined || data.password === null || validator.isEmpty(data.password) || data.password === "") {
         errors.password = 'This field is required';
         if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
-            errors.nonFieldErrors = "Please fill in the emai and password";
+            errors.nonFieldErrors = "Email & Password are required.";
         } else {
             errors.nonFieldErrors = "Please fill in the password";
         }

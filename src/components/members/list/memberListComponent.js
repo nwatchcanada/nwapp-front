@@ -35,14 +35,14 @@ class ActiveListComponent extends Component {
             sort: true
         },{
             dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
-        },{
-            dataField: 'slug',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
+        },{
+            dataField: 'slug',
+            text: 'Financials',
+            sort: false,
+            formatter: financialExternalLinkFormatter
         }];
 
         return (
@@ -100,14 +100,14 @@ class InactiveListComponent extends Component {
             sort: true
         },{
             dataField: 'slug',
-            text: 'Financials',
-            sort: false,
-            formatter: financialExternalLinkFormatter
-        },{
-            dataField: 'slug',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
+        },{
+            dataField: 'slug',
+            text: 'Financials',
+            sort: false,
+            formatter: financialExternalLinkFormatter
         }];
 
         return (
@@ -141,21 +141,19 @@ function iconFormatter(cell, row){
     )
 }
 
+function detailLinkFormatter(cell, row){
+    return (
+        <Link to={`/member/${row.slug}`}>
+            <i className="fa fa-id-card"></i>
+        </Link>
+    )
+}
 
 function financialExternalLinkFormatter(cell, row){
     return (
         <a target="_blank" href={`/financial/${row.slug}`}>
-            View&nbsp;<i className="fas fa-external-link-alt"></i>
+            <i className="fa fa-dollar-sign"></i>
         </a>
-    )
-}
-
-
-function detailLinkFormatter(cell, row){
-    return (
-        <Link to={`/member/${row.slug}`}>
-            View&nbsp;<i className="fas fa-chevron-right"></i>
-        </Link>
     )
 }
 

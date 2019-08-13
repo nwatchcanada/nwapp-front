@@ -21,10 +21,6 @@ class UnassignedListComponent extends Component {
             text: 'Task',
             sort: true
         },{
-            dataField: 'watchName',
-            text: 'Watch',
-            sort: true
-        },{
             dataField: 'slug',
             text: '',
             sort: false,
@@ -67,10 +63,6 @@ class PendingListComponent extends Component {
         },{
             dataField: 'taskName',
             text: 'Task',
-            sort: true
-        },{
-            dataField: 'watchName',
-            text: 'Watch',
             sort: true
         },{
             dataField: 'slug',
@@ -117,10 +109,6 @@ class ClosedListComponent extends Component {
         },{
             dataField: 'taskName',
             text: 'Task',
-            sort: true
-        },{
-            dataField: 'watchName',
-            text: 'Watch',
             sort: true
         },{
             dataField: 'slug',

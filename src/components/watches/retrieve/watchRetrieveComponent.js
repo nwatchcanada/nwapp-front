@@ -114,7 +114,7 @@ export default class WatchRetrieveComponent extends Component {
                         <form>
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-edit"></i>&nbsp;Update
+                                    <i className="fas fa-edit"></i>&nbsp;Edit
                                 </button>
                                 <Link to="/watches" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back

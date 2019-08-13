@@ -596,7 +596,7 @@ table.custom-cell-w tr th{width:35% !important;}
 }
 .react-bootstrap-table table thead tr th:first-child,
 .react-bootstrap-table table tbody tr td:first-child {
-  width: 6rem;
+  max-width: 6rem;
 }
 .react-bootstrap-table table {
     table-layout: auto !important;
@@ -1154,7 +1154,7 @@ aside.ScrollUpButton__Container:focus {
   }
 
   main#main {
-    padding-top: 100px !important;
+    padding-top: 60px !important;
   }
 }
 
@@ -1166,7 +1166,7 @@ aside.ScrollUpButton__Container:focus {
     }
 
     main#main {
-      padding-top: 100px;
+      padding-top: 60px;
     }
 }
 

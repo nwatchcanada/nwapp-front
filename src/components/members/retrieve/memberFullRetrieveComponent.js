@@ -344,7 +344,7 @@ export default class MemberFullRetrieveComponent extends Component {
                         <form>
                             <div className="form-group">
                                 <Link to={`/member/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
-                                    <i className="fas fa-edit"></i>&nbsp;Update
+                                    <i className="fas fa-edit"></i>&nbsp;Edit
                                 </Link>
                                 <Link to={`/members`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back

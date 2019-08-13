@@ -228,7 +228,7 @@ export default class ItemRetrieveComponent extends Component {
 
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
                             <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
-                                <i className="fas fa-edit"></i>&nbsp;Update
+                                <i className="fas fa-edit"></i>&nbsp;Edit
                             </button>
                             <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onBack}>
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
