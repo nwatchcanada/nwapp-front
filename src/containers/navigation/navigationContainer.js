@@ -328,15 +328,9 @@ class NavigationContainer extends React.Component {
         }
     }
 
-
-    const customStyles;
     // If no menu was set then we will create our anonymous menu by default.
     if (menuData === null || menuData === undefined) {
         isAuthenticated = false;
-	customStyles = {
-		display : 'none'
-	};
-
         menuTitle = "Menu"
         menuData = NAVIGATION_TREE[ANONYMOUS_GROUP_ID];
     }
