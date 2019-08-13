@@ -328,12 +328,15 @@ class NavigationContainer extends React.Component {
         }
     }
 
+
+    const customStyles;
     // If no menu was set then we will create our anonymous menu by default.
     if (menuData === null || menuData === undefined) {
         isAuthenticated = false;
-		const headerStyle = {
-			display : 'none'
-		}
+	customStyles = {
+		display : 'none'
+	};
+
         menuTitle = "Menu"
         menuData = NAVIGATION_TREE[ANONYMOUS_GROUP_ID];
     }
@@ -345,7 +348,7 @@ class NavigationContainer extends React.Component {
     // Render our top navigation.
     return (
         <div>
-            <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between" style={headerStyle} >
+            <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between" style={customStyles} >
                 <Link className="navbar-brand" to="/">
                     <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
                 </Link>
