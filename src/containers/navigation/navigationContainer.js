@@ -342,7 +342,7 @@ class NavigationContainer extends React.Component {
     // Render our top navigation.
     return (
         <div>
-            <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between" style={customStyles} >
+            <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
                 <Link className="navbar-brand" to="/">
                     <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
                 </Link>
