@@ -67,7 +67,7 @@ class ItemCreateStep1Component extends Component {
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Incident</h3>
-                                <p className="card-text">Add a residential district</p>
+                                <p className="card-text">Add an incident</p>
                                 <button className="btn btn-success btn-lg" onClick={onShowModalClick}>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
@@ -81,7 +81,7 @@ class ItemCreateStep1Component extends Component {
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Event</h3>
-                                <p className="card-text">Add a business district</p>
+                                <p className="card-text">Add an event</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, EVENT_ITEM_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
@@ -95,7 +95,7 @@ class ItemCreateStep1Component extends Component {
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Concern</h3>
-                                <p className="card-text">Add a community cares district</p>
+                                <p className="card-text">Add a concern</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, CONCERN_ITEM_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
@@ -109,7 +109,7 @@ class ItemCreateStep1Component extends Component {
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Information</h3>
-                                <p className="card-text">Add a community cares district</p>
+                                <p className="card-text">Add a resource</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, INFORMATION_ITEM_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
