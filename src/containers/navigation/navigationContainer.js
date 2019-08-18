@@ -341,6 +341,9 @@ class NavigationContainer extends React.Component {
 
     // Render our top navigation.
     return (
+	
+		{isAuthenticated &&
+		
         <div>
             <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
                 <Link className="navbar-brand" to="/">
@@ -351,15 +354,15 @@ class NavigationContainer extends React.Component {
                         <li className="dropdown-list dropdown nav-item">
                             <Link aria-haspopup="true" to="/tasks" className="dropdown-toggle-nocaret nav-link text-white py-0" aria-expanded="false">
                                 <i className="far fa-check-square"></i>
-                                <span className="badge badge-danger">11</span>
+                                <span className="badge badge-orange">11</span>
                             </Link>
                         </li>
                     }
-                    {isAuthenticated &&
+                    
                         <li className="nav-item">
                             &nbsp;&nbsp;&nbsp;
                         </li>
-                    }
+                    
                     <li className="nav-item">
                         <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
                             onClick = { this.sideMenuToggle }>
@@ -384,6 +387,7 @@ class NavigationContainer extends React.Component {
                 </Scrollbars>
             </nav>
         </div>
+		}
     )
   }
 }

@@ -1043,12 +1043,15 @@ ul.list-unstyled > li {
   position: absolute;
   top: 10px;
   right: 0;
-  padding: 2px 5px;
+  padding: 2px 5px 3px;
 
-  font-size: .75rem;
+  font-size: 1rem;
   border-radius: .625rem;
 }
-
+.badge-orange {
+	color: #ffffff;
+	background-color: #F26523;
+}
 .search-form {
   display: flex;
   flex-wrap: nowrap !important;
@@ -1154,20 +1157,8 @@ aside.ScrollUpButton__Container:focus {
   }
 
   main#main {
-    padding-top: 60px !important;
+    padding-top: 50px !important;
   }
-}
-
-@media only screen and (max-width: 666px) {
-    #sidebar {
-      width: 100%;
-      margin-right: -100%;
-      padding-top: 160px;
-    }
-
-    main#main {
-      padding-top: 60px;
-    }
 }
 
 .btn-dark-blue {
