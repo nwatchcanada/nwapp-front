@@ -341,53 +341,53 @@ class NavigationContainer extends React.Component {
 
     // Render our top navigation.
     return (
-	
-		{isAuthenticated &&
-		
         <div>
-            <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
-                <Link className="navbar-brand" to="/">
-                    <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
-                </Link>
-                <ul className="navbar-nav flex-row">
-                    {isAuthenticated && isTenant &&
-                        <li className="dropdown-list dropdown nav-item">
-                            <Link aria-haspopup="true" to="/tasks" className="dropdown-toggle-nocaret nav-link text-white py-0" aria-expanded="false">
-                                <i className="far fa-check-square"></i>
-                                <span className="badge badge-orange">11</span>
-                            </Link>
-                        </li>
-                    }
-                    
-                        <li className="nav-item">
-                            &nbsp;&nbsp;&nbsp;
-                        </li>
-                    
-                    <li className="nav-item">
-                        <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
-                            onClick = { this.sideMenuToggle }>
-                            <i className="fa fa-bars"></i>
-                        </button>
-                    </li>
-                </ul>
+            {isAuthenticated &&
+                <div>
+                    <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
+                        <Link className="navbar-brand" to="/">
+                            <img className="img-fluid" src="/img/nwl-compressed-logo.png" alt="Mikaponics" width="32px" />
+                        </Link>
+                        <ul className="navbar-nav flex-row">
+                            {isAuthenticated && isTenant &&
+                                <li className="dropdown-list dropdown nav-item">
+                                    <Link aria-haspopup="true" to="/tasks" className="dropdown-toggle-nocaret nav-link text-white py-0" aria-expanded="false">
+                                        <i className="far fa-check-square"></i>
+                                        <span className="badge badge-orange">11</span>
+                                    </Link>
+                                </li>
+                            }
 
-            </header>
-            <nav id="sidebar" className={ `${ this.state.active ? "active" : ""}` }>
-                <div className="sideMenuTouchGlass"
-                       onClick={ this.sideMenuToggle }
-                         style={{ display: this.state.active ? "block" : "none"}}></div>
-                <Scrollbars>
-                    <p className="text-center text-light mt-3 mb-2">{menuTitle}</p>
-                    <hr className="nav-divider" />
-                    <ul className="nav flex-column">
-                        { menuData.map((item, index)=>(
-                            <ItemNode menuData={item} key={index} sideMenuToggle={this.sideMenuToggle}></ItemNode>
-                        )) }
-                    </ul>
-                </Scrollbars>
-            </nav>
-        </div>
-		}
+                                <li className="nav-item">
+                                    &nbsp;&nbsp;&nbsp;
+                                </li>
+
+                            <li className="nav-item">
+                                <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
+                                    onClick = { this.sideMenuToggle }>
+                                    <i className="fa fa-bars"></i>
+                                </button>
+                            </li>
+                        </ul>
+
+                    </header>
+                    <nav id="sidebar" className={ `${ this.state.active ? "active" : ""}` }>
+                        <div className="sideMenuTouchGlass"
+                               onClick={ this.sideMenuToggle }
+                                 style={{ display: this.state.active ? "block" : "none"}}></div>
+                        <Scrollbars>
+                            <p className="text-center text-light mt-3 mb-2">{menuTitle}</p>
+                            <hr className="nav-divider" />
+                            <ul className="nav flex-column">
+                                { menuData.map((item, index)=>(
+                                    <ItemNode menuData={item} key={index} sideMenuToggle={this.sideMenuToggle}></ItemNode>
+                                )) }
+                            </ul>
+                        </Scrollbars>
+                    </nav>
+                </div>
+    		}
+		</div>
     )
   }
 }
