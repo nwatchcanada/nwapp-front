@@ -1041,7 +1041,7 @@ ul.list-unstyled > li {
 
 .top-navbar > .navbar-nav > .nav-item.dropdown > a > .badge {
   position: absolute;
-  top: 10px;
+  top: 2px;
   right: 0;
   padding: 2px 5px 3px;
 
@@ -1175,4 +1175,24 @@ aside.ScrollUpButton__Container:focus {
 }
 .btn-dark-blue:not(:disabled):not(.disabled):active:focus {
     box-shadow: 0 0 0 0.2rem rgba(41,86,151,.5) !important;
+}
+
+.ScrollUpButtonCustomContainer {
+	position: fixed;
+	right: -100px;
+	bottom: 20px;
+	transition: right 0.5s;
+	cursor: pointer;
+	padding: .5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: .2rem;
+	color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.ScrollUpButtonCustomToggled {
+	right: 20px;
+}
+.ScrollUpButtonCustomContainer span::before {
+	content: "\f106";
 }
