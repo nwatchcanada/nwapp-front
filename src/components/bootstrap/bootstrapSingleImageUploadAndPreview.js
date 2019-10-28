@@ -49,16 +49,19 @@ export const BootstrapSingleImageUploadAndPreview = ({
               {({getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles}) => {
                 const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
                 return (
-                  <div {...getRootProps()}>
+                  <div className="new-upload-ui" {...getRootProps()}>
                     <input {...getInputProps()} />
-                    {!isDragActive && 'Click here or drop a file to upload!'}
-                    {isDragActive && !isDragReject && "Drop it like it's hot!"}
-                    {isDragReject && "File type not accepted, sorry!"}
-                    {isFileTooLarge && (
-                      <div className="text-danger mt-2">
-                        {process.env.REACT_APP_IMAGE_UPLOAD_MAX_FILESIZE_ERROR_MESSAGE}
-                      </div>
-                    )}
+					<i className="fas fa-cloud-upload-alt fa-4x"></i>
+					<small className="text-secondary d-block">
+						{!isDragActive && 'Click here or drop a file to upload!'}
+						{isDragActive && !isDragReject && "Drop it like it's hot!"}
+						{isDragReject && "File type not accepted, sorry!"}
+						{isFileTooLarge && (
+							<div className="text-danger mt-2">
+								{process.env.REACT_APP_IMAGE_UPLOAD_MAX_FILESIZE_ERROR_MESSAGE}
+							</div>
+						)}
+					</small>
                   </div>
                 )}
               }

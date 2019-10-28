@@ -17,7 +17,9 @@ export const BootstrapMultipleSelect = ({
     helpText,
     error,
     onMultiChange,
-    borderColour="border-primary"
+    borderColour="border-primary",
+    isLoading=false,
+    disabled=false
 }) => {
     const id = shortid.generate();
 
@@ -47,7 +49,7 @@ export const BootstrapMultipleSelect = ({
     // Render our output for this component.
     return (
         <div className={classnames("form-group", { 'has-error': error } )}>
-            <label className="control-label">{label}</label>
+            <label className="control-label font-weight-bold">{label}</label>
 
             <Select
                 isMulti={true}
@@ -58,6 +60,8 @@ export const BootstrapMultipleSelect = ({
                 onChange={(...args) => onMultiChange(...args)}
                 options={options}
                 styles={customStyles}
+                isLoading={isLoading}
+                isDisabled={disabled}
             />
             {error && <div className="invalid-feedback" style={{display: 'block'}}>{error}</div>}
         </div>

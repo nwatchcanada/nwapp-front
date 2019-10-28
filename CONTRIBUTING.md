@@ -45,6 +45,9 @@ npm install --save react-dropzone
 npm install --save react-number-format
 npm install --save react-bootstrap-table-next
 npm install --save react-bootstrap-table2-paginator
+npm install --save react-bootstrap-table2-filter
+npm install --save react-bootstrap-table2-overlay
+npm install --save react-bootstrap-table2-toolkit
 ```
 
 ## What ``Chrome Plugins`` should I use?

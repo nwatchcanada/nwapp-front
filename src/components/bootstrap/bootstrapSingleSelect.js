@@ -31,10 +31,11 @@ export const BootstrapSingleSelect = ({
     options,
     defaultOptionLabel=null,
     value = null,
-    helpText,
+    helpText = null,
     error,
     onSelectChange,
-    borderColour="border-primary"
+    borderColour="border-primary",
+    isLoading = false
 }) => {
     const id = shortid.generate();
 
@@ -63,6 +64,7 @@ export const BootstrapSingleSelect = ({
         })
     }
     // console.log("error: ", error);
+    // console.log(helpText);
 
     // Render our output for this component.
     return (
@@ -77,6 +79,7 @@ export const BootstrapSingleSelect = ({
                 onChange={onSelectChange}
                 options={options}
                 styles={customStyles}
+                isLoading={isLoading}
             />
             {helpText && <small id={shortid.generate()} className="form-text text-muted">{helpText}</small>}
             {error && <div className="invalid-feedback" style={{display: 'block'}}>{error}</div>}
