@@ -75,6 +75,11 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         title: "Financials",
         url: "/financials"
     },{
+        id: "full-financials",
+        icon: "exclamation-circle",
+        title: "Concerns",
+        url: "/concerns"
+    },{
         id: "full-reports",
         icon: "book",
         title: "Reports",
@@ -139,6 +144,11 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         icon: "tasks",
         title: "Tasks",
         url: "/tasks"
+    },{
+        id: "full-financials",
+        icon: "exclamation-circle",
+        title: "Concerns",
+        url: "/concerns"
     },{
         id: "full-reports",
         icon: "book",

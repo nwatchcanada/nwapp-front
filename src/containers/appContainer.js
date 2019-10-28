@@ -167,6 +167,8 @@ import AssignWatchAreaCoordinatorTaskStep1Container from "./tasks/assignWatchAre
 import AssignWatchAreaCoordinatorTaskStep2Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep2Container";
 import AssignWatchAreaCoordinatorTaskStep3Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep3Container";
 
+import ConcernItemListContainer from "./concerns/concernItemListContainer";
+
 import ReportListContainer from "./reports/reportListContainer";
 
 import SettingListContainer from "./settings/settingListContainer";
@@ -327,6 +329,7 @@ class AppContainer extends React.Component {
                                 <Route path="/task/2/:slug/step-1" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep1Container)} />
                                 <Route path="/task/2/:slug/step-2" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep2Container)} />
                                 <Route path="/task/2/:slug/step-3" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep3Container)} />
+                                <Route path="/concerns" exact component={requiresAuth(ConcernItemListContainer)} />
                                 <Route path="/reports" exact component={requiresAuth(ReportListContainer)} />
                                 <Route path="/settings" exact component={requiresAuth(SettingListContainer)} />
                                 <Route path="/watches" exact component={requiresAuth(WatchListContainer)} />
