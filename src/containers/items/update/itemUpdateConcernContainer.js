@@ -6,7 +6,7 @@ import ItemUpdateConcernComponent from "../../../components/items/update/itemUpd
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateInput } from "../../../validators/itemValidator";
 import {
-   CONCERN_ITEM_TYPE_OF
+   CONCERN_ITEM_TYPE_OF, CONCERN_TYPE_CHOICES
 } from "../../../constants/api";
 import {
     localStorageGetObjectItem,
@@ -48,6 +48,9 @@ class ItemUpdateConcernContainer extends Component {
                     'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
                 }
             ],
+            concernTypeOf: 1,
+            concernTypeOfOption: CONCERN_TYPE_CHOICES,
+            concernTypeOfOther: "Something something something",
 
             // All
             errors: {},
@@ -58,6 +61,7 @@ class ItemUpdateConcernContainer extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
@@ -253,6 +257,8 @@ class ItemUpdateConcernContainer extends Component {
             description,
             location,
             photos,
+            concernTypeOf,
+            concernTypeOfOther,
 
             errors,
             isLoading
@@ -266,6 +272,9 @@ class ItemUpdateConcernContainer extends Component {
                 description={description}
                 location={location}
                 photos={photos}
+                concernTypeOf={concernTypeOf}
+                concernTypeOfOptions={CONCERN_TYPE_CHOICES}
+                concernTypeOfOther={concernTypeOfOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

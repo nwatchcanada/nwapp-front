@@ -20,7 +20,8 @@ import {
    ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES,
    INCIDENT_TYPE_CHOICES,
    ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES,
-   ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES
+   ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES,
+   CONCERN_TYPE_CHOICES, OTHER_CONCERN_TYPE_OF
 } from "../../../constants/api";
 
 
@@ -34,10 +35,12 @@ class ItemUpdateConcernComponent extends Component {
             description,
             location,
             photos,
+            concernTypeOf, concernTypeOfOptions, concernTypeOfOther,
 
             errors, isLoading, onClick, slug, onSelectChange, onTextChange, onRadioChange,
             onDateTimeChange, onDrop, onRemoveUploadClick
         } = this.props;
+        const isOtherEventTypeOf = concernTypeOf === OTHER_CONCERN_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -119,6 +122,29 @@ class ItemUpdateConcernComponent extends Component {
                                 filesArray={photos}
                                 onRemoveUploadClick={onRemoveUploadClick}
                             />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Concern Type (*)"
+                                name="concernTypeOf"
+                                defaultOptionLabel="Please select the type of concern."
+                                options={concernTypeOfOptions}
+                                value={concernTypeOf}
+                                error={errors.concernTypeOf}
+                                onSelectChange={onSelectChange}
+                            />
+                            {isOtherEventTypeOf &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.concernTypeOfOther}
+                                    label="Event Type - Other (*)"
+                                    onChange={onTextChange}
+                                    value={concernTypeOfOther}
+                                    name="concernTypeOfOther"
+                                    type="text"
+                                />
+                            }
 
 
                             <div className="form-group">
