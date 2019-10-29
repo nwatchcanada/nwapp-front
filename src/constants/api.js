@@ -268,6 +268,50 @@ export const INCIDENT_TYPE_CHOICES = [
 ];
 
 
+
+/**
+ *  The item type of that we can use in the system.
+ */
+export const OTHER_CONCERN_TYPE_OF = 1;
+export const WITH_NW_CONCERN_TYPE_OF = 2;
+export const WITH_NW_PARTNER = 3;
+export const WITH_NW_ASSOCIATE = 4;
+export const WITH_NW_AREA_COORDINATOR = 5;
+export const WITH_NW_MEMBER = 6;
+export const WITH_NW_BUSINESS_MEMBER = 7;
+export const CONCERN_TYPE_CHOICES = [
+    {
+        selectName: "concernTypeOf",
+        value: WITH_NW_CONCERN_TYPE_OF,
+        label: "Concern with NW"
+    },{
+        selectName: "concernTypeOf",
+        value: WITH_NW_PARTNER,
+        label: "Concern with an NW Partner"
+    },{
+        selectName: "concernTypeOf",
+        value: WITH_NW_ASSOCIATE,
+        label: "Concern with an NW Associate"
+    },{
+        selectName: "concernTypeOf",
+        value: WITH_NW_AREA_COORDINATOR,
+        label: "Concern with an NW Area Coordinator"
+    },{
+        selectName: "concernTypeOf",
+        value: WITH_NW_MEMBER,
+        label: "Concern with an NW Member"
+    },{
+        selectName: "concernTypeOf",
+        value: WITH_NW_BUSINESS_MEMBER,
+        label: "Concern with an NW Business Member"
+    },{
+        selectName: "concernTypeOf",
+        value: OTHER_CONCERN_TYPE_OF,
+        label: "Other"
+    }
+];
+
+
 /**
  *  The resource category of that we can use in the system.
  */

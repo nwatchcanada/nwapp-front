@@ -4,10 +4,11 @@ import Scroll from 'react-scroll';
 
 import ItemCreateStep3ConcernComponent from "../../../../components/items/create/concern/itemCreateStep3ConcernComponent";
 import {
-    localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+    localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateConcernInput } from "../../../../validators/itemValidator";
+import { CONCERN_TYPE_CHOICES, OTHER_CONCERN_TYPE_OF } from "../../../../constants/api";
 
 
 class ItemCreateStep3ConcernContainer extends Component {
@@ -23,11 +24,15 @@ class ItemCreateStep3ConcernContainer extends Component {
             description: localStorage.getItem("nwapp-item-create-concern-description"),
             location: localStorage.getItem("nwapp-item-create-concern-location"),
             photos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
+            concernTypeOf:localStorageGetIntegerItem("nwapp-item-create-concern-concernTypeOf"),
+            concernTypeOfOption: CONCERN_TYPE_CHOICES,
+            concernTypeOfOther: localStorage.getItem("nwapp-item-create-concern-concernTypeOfOther"),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
@@ -87,6 +92,18 @@ class ItemCreateStep3ConcernContainer extends Component {
         });
         const key = "nwapp-item-create-concern-"+[e.target.name];
         localStorage.setItem(key, e.target.value)
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('nwapp-item-create-concern-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-concern-'+optionKey, option);
+        console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+        // console.log(this.state);
     }
 
     onClick(e) {
@@ -182,18 +199,22 @@ class ItemCreateStep3ConcernContainer extends Component {
      */
 
     render() {
-        const { title, description, location, photos, errors } = this.state;
+        const { title, description, location, photos, concernTypeOf, concernTypeOfOther, errors } = this.state;
         return (
             <ItemCreateStep3ConcernComponent
                 title={title}
                 description={description}
                 location={location}
                 photos={photos}
+                concernTypeOf={concernTypeOf}
+                concernTypeOfOptions={CONCERN_TYPE_CHOICES}
+                concernTypeOfOther={concernTypeOfOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
                 onDrop={this.onDrop}
                 onRemoveUploadClick={this.onRemoveUploadClick}
+                onSelectChange={this.onSelectChange}
             />
         );
     }
