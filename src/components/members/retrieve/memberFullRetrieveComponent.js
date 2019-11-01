@@ -87,6 +87,11 @@ export default class MemberFullRetrieveComponent extends Component {
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </strong>
                         </div>
+                        <div id="step-3" className="st-grey">
+                            <Link to={`/member/${slug}/comments`}>
+                                <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 

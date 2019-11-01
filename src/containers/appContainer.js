@@ -89,6 +89,7 @@ import MemberSearchContainer from "./members/search/memberSearchContainer";
 import MemberSearchResultContainer from "./members/search/memberSearchResultContainer";
 import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
 import MemberFullRetrieveContainer from "./members/retrieve/memberFullRetrieveContainer";
+import MemberCommentContainer from "./members/retrieve/memberCommentContainer";
 import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
 import MemberCreateStep2Container from "./members/create/memberCreateStep2Container";
 import MemberCreateStep3Container from "./members/create/memberCreateStep3Container";
@@ -270,6 +271,7 @@ class AppContainer extends React.Component {
                                 <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
                                 <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
                                 <Route path="/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />
+                                <Route path="/member/:slug/comments" exact component={requiresAuth(MemberCommentContainer)} />
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
                                 <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />
