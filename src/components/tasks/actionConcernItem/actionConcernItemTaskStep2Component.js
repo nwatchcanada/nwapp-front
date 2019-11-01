@@ -7,13 +7,14 @@ import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
 import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
-import { GENDER_RADIO_CHOICES, NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES } from "../../../constants/api";
+import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { WILL_ACTION_CHOICES, NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES } from "../../../constants/api";
 
 
 class AssignWatchAssociateTaskStep1Component extends Component {
     render() {
-        const { gender, howDidYouHear, howDidYouHearOther, slug, errors, onTextChange, onSelectChange, onRadioChange, isLoading, onClick } = this.props;
-        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
+        const { willAction, comment, reason, reasonOther, slug, errors, onTextChange, onSelectChange, onRadioChange, isLoading, onClick } = this.props;
+        const isOtherHowDidYouHearSelected = reason === 1;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -61,34 +62,50 @@ class AssignWatchAssociateTaskStep1Component extends Component {
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.gender}
-                                label="Please select your gender (*)"
-                                name="gender"
+                                error={errors.willAction}
+                                label="Will NW staff be replying directly to this concern? (*)"
+                                name="willAction"
                                 onChange={onRadioChange}
-                                selectedValue={gender}
-                                options={GENDER_RADIO_CHOICES}
+                                selectedValue={willAction}
+                                options={WILL_ACTION_CHOICES}
                             />
 
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="How did you hear about us? (*)"
-                                name="howDidYouHear"
-                                defaultOptionLabel="Please select how you heard about us."
-                                options={NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES}
-                                value={howDidYouHear}
-                                error={errors.howDidYouHear}
-                                onSelectChange={onSelectChange}
-                            />
+                            {willAction === 0 &&
+                                <BootstrapSingleSelect
+                                    borderColour="border-primary"
+                                    label="Why will you not be responding directly to this concern? (*)"
+                                    name="reason"
+                                    defaultOptionLabel="Please select how you heard about us."
+                                    options={NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES}
+                                    value={reason}
+                                    error={errors.reason}
+                                    onSelectChange={onSelectChange}
+                                />
+                            }
+
+                            {willAction === 1 &&
+                                <BootstrapTextarea
+                                    name="comment"
+                                    borderColour="border-primary"
+                                    label="Comment (*)"
+                                    placeholder="Write any additional text here."
+                                    rows="5"
+                                    value={comment}
+                                    helpText=""
+                                    onChange={onTextChange}
+                                    error={errors.comment}
+                                />
+                            }
 
                             {isOtherHowDidYouHearSelected &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.howDidYouHearOther}
+                                    error={errors.reasonOther}
                                     label="Other (*)"
                                     onChange={onTextChange}
-                                    value={howDidYouHearOther}
-                                    name="howDidYouHearOther"
+                                    value={reasonOther}
+                                    name="reasonOther"
                                     type="text"
                                 />
                             }

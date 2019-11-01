@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ActionConcernItemTaskStep2Component from "../../../components/tasks/actionConcernItem/actionConcernItemTaskStep2Component";
-import { validateTask1Step2Input } from "../../../validators/taskValidator";
+import { validateTask3Step2Input } from "../../../validators/taskValidator";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import {
     localStorageGetObjectItem,
@@ -31,9 +31,9 @@ class TaskUpdateContainer extends Component {
             errors: {},
             isLoading: false,
             slug: slug,
-            gender: localStorageGetIntegerItem("nwapp-create-member-gender"),
-            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
-            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            willAction: localStorageGetIntegerItem("nwapp-task-3-willAction"),
+            reason: localStorageGetIntegerItem("nwapp-task-3-reason"),
+            reasonOther: localStorage.getItem("nwapp-task-3-reasonOther"),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -92,7 +92,8 @@ class TaskUpdateContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        localStorage.setItem('nwapp-task-3-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -100,37 +101,42 @@ class TaskUpdateContainer extends Component {
         this.setState({
             [option.selectName]: option.value,
             optionKey: option,
+        }, ()=> {
+            localStorage.setItem('nwapp-task-3-'+[option.selectName], option.value);
+            localStorage.setItem('nwapp-task-3-'+[option.selectName]+"-label", option.label);
+            localStorageSetObjectOrArrayItem('nwapp-task-3-'+optionKey, option);
+            // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+            console.log("onSelectChange | state | post-save", this.state)
         });
-        localStorage.setItem('nwapp-task-3-'+[option.selectName], option.value);
-        localStorage.setItem('nwapp-task-3-'+[option.selectName]+"-label", option.label);
-        localStorageSetObjectOrArrayItem('nwapp-task-3-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "nwapp-create-member-"+[e.target.name];
-        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
+        const storageValueKey = "nwapp-task-3-"+[e.target.name];
+        const storageLabelKey =  "nwapp-task-3-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
         const storeLabelKey = [e.target.name].toString()+"Label";
 
         // Save the data.
-        this.setState({ [e.target.name]: value, }); // Save to store.
-        this.setState({ storeLabelKey: label, }); // Save to store.
-        localStorage.setItem(storageValueKey, value) // Save to storage.
-        localStorage.setItem(storageLabelKey, label) // Save to storage.
+        this.setState({
+            [e.target.name]: parseInt(value),
+            storeLabelKey: label,
+        }, ()=> {
+            localStorage.setItem(storageValueKey, value) // Save to storage.
+            localStorage.setItem(storageLabelKey, label) // Save to storage.
 
-        // For the debugging purposes only.
-        console.log({
-            "STORE-VALUE-KEY": storageValueKey,
-            "STORE-VALUE": value,
-            "STORAGE-VALUE-KEY": storeValueKey,
-            "STORAGE-VALUE": value,
-            "STORAGE-LABEL-KEY": storeLabelKey,
-            "STORAGE-LABEL": label,
-        });
+            // For the debugging purposes only.
+            console.log("onRadioChange |", {
+                "STORE-VALUE-KEY": storageValueKey,
+                "STORE-VALUE": value,
+                "STORAGE-VALUE-KEY": storeValueKey,
+                "STORAGE-VALUE": value,
+                "STORAGE-LABEL-KEY": storeLabelKey,
+                "STORAGE-LABEL": label,
+            });
+        }); // Save to store.
     }
 
     onClick(e) {
@@ -138,7 +144,7 @@ class TaskUpdateContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateTask1Step2Input(this.state);
+        const { errors, isValid } = validateTask3Step2Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -157,13 +163,13 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { gender, howDidYouHear, howDidYouHearOther, errors, slug, } = this.state;
+        const { willAction, reason, reasonOther, errors, slug, } = this.state;
         return (
             <ActionConcernItemTaskStep2Component
                 slug={slug}
-                gender={gender}
-                howDidYouHear={howDidYouHear}
-                howDidYouHearOther={howDidYouHearOther}
+                willAction={willAction}
+                reason={reason}
+                reasonOther={reasonOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}

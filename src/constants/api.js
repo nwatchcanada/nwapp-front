@@ -599,30 +599,45 @@ export const ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES = [
 ];
 
 
+export const WILL_ACTION_CHOICES = [
+    {
+        id: 'willAction-n-choice',
+        name: "willAction",
+        value: 1,
+        label: "Yes"
+    },{
+        id: 'willAction-y-choice',
+        name: "willAction",
+        value: 0,
+        label: "No"
+    }
+];
+
+
+
+
+
+
 export const NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES = [
     {
         selectName: "reason",
-        value: "Avenue",
-        label: "Avenue"
+        value: 2,
+        label: "The concern has been referred to another community partner"
     },{
         selectName: "reason",
-        value: "Drive",
-        label: "Drive"
+        value: 3,
+        label: "This is outside the scope of NW"
     },{
         selectName: "reason",
-        value: "Road",
-        label: "Road"
+        value: 4,
+        label: "This concern has nothing to do with NW"
     },{
         selectName: "reason",
-        value: "Street",
-        label: "Street"
+        value:5,
+        label: "This concern is not serious"
     },{
         selectName: "reason",
-        value: "Way",
-        label: "Way"
-    },{
-        selectName: "reason",
-        value: "Other",
+        value: 1,
         label: "Other"
     }
 ];
