@@ -14,7 +14,7 @@ import {
 
 export default class ItemRetrieveComponent extends Component {
     render() {
-        const { itemData, onClick, onBack, onArchiveClick, flashMessage } = this.props;
+        const { itemData, onClick, onBack, onArchiveClick, flashMessage, slug } = this.props;
 
         // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
         const thumb = {
@@ -53,6 +53,22 @@ export default class ItemRetrieveComponent extends Component {
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-map-pin"></i>&nbsp;Argyle</h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
+                            </strong>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <Link to={`/item/${slug}/comments`}>
+                                <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <table className="table table-bordered custom-cell-w">

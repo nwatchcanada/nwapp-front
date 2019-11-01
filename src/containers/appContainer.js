@@ -108,6 +108,7 @@ import ItemListContainer from "./items/list/itemListContainer";
 import ItemSearchContainer from "./items/search/itemSearchContainer";
 import ItemSearchResultContainer from "./items/search/itemSearchResultContainer";
 import ItemRetrieveContainer from "./items/retrieve/itemRetrieveContainer";
+import ItemCommentContainer from "./items/retrieve/itemCommentContainer";
 import ItemCreateStep1Container from "./items/create/itemCreateStep1Container";
 import ItemCreateStep2ConcernContainer from "./items/create/concern/itemCreateStep2ConcernContainer";
 import ItemCreateStep3ConcernContainer from "./items/create/concern/itemCreateStep3ConcernContainer";
@@ -290,6 +291,7 @@ class AppContainer extends React.Component {
                                 <Route path="/item/add/step-2-information" exact component={requiresAuth(ItemCreateStep2InformationContainer)} />
                                 <Route path="/item/add/step-3" exact component={requiresAuth(ItemCreateStep3Container)} />
                                 <Route path="/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
+                                <Route path="/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
                                 <Route path="/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
                                 <Route path="/item/:slug/update-concern" exact component={requiresAuth(ItemUpdateConcernContainer)} />
                                 <Route path="/item/:slug/update-event" exact component={requiresAuth(ItemUpdateEventContainer)} />
