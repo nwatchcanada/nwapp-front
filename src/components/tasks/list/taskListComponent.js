@@ -154,6 +154,9 @@ function linkFormatter(cell, row){
         case "unassigned-watch-area-coordinator":
             typeOfID = 2;
             break;
+        case "action-concern-item":
+            typeOfID = 3;
+            break;
         default:
            typeOfID = 0;
            break;

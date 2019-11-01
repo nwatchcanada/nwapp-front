@@ -171,6 +171,10 @@ import AssignWatchAssociateTaskStep3Container from "./tasks/assignWatchAssociate
 import AssignWatchAreaCoordinatorTaskStep1Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep1Container";
 import AssignWatchAreaCoordinatorTaskStep2Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep2Container";
 import AssignWatchAreaCoordinatorTaskStep3Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep3Container";
+import ActionConcernItemTaskStep1Container from "./tasks/actionConcernItem/actionConcernItemTaskStep1Container";
+import ActionConcernItemTaskStep2Container from "./tasks/actionConcernItem/actionConcernItemTaskStep2Container";
+import ActionConcernItemTaskStep3Container from "./tasks/actionConcernItem/actionConcernItemTaskStep3Container";
+
 
 import ConcernItemListContainer from "./concerns/concernItemListContainer";
 
@@ -339,6 +343,9 @@ class AppContainer extends React.Component {
                                 <Route path="/task/2/:slug/step-1" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep1Container)} />
                                 <Route path="/task/2/:slug/step-2" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep2Container)} />
                                 <Route path="/task/2/:slug/step-3" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep3Container)} />
+                                <Route path="/task/3/:slug/step-1" exact component={requiresAuth(ActionConcernItemTaskStep1Container)} />
+                                <Route path="/task/3/:slug/step-2" exact component={requiresAuth(ActionConcernItemTaskStep2Container)} />
+                                <Route path="/task/3/:slug/step-3" exact component={requiresAuth(ActionConcernItemTaskStep3Container)} />
                                 <Route path="/concerns" exact component={requiresAuth(ConcernItemListContainer)} />
                                 <Route path="/reports" exact component={requiresAuth(ReportListContainer)} />
                                 <Route path="/settings" exact component={requiresAuth(SettingListContainer)} />
