@@ -6,7 +6,10 @@ import ActionConcernItemTaskStep2Component from "../../../components/tasks/actio
 import { validateTask1Step2Input } from "../../../validators/taskValidator";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetArrayItem,
+    localStorageGetIntegerItem
 } from '../../../helpers/localStorageUtility';
 
 
@@ -28,12 +31,14 @@ class TaskUpdateContainer extends Component {
             errors: {},
             isLoading: false,
             slug: slug,
-            associate: localStorage.getItem('nwapp-task-3-associate'),
-            associateOption: localStorageGetObjectItem('nwapp-task-3-associateOption'),
+            gender: localStorageGetIntegerItem("nwapp-create-member-gender"),
+            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -46,17 +51,6 @@ class TaskUpdateContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        this.setState({
-            associateData: {
-                results: [
-                    {'slug': 'bob-page', 'name': 'Bob Page'},
-                    {'slug': 'walter-simons', 'name': 'Walter Simons'},
-                    {'slug': 'jc-denton', 'name': 'JC Denton'},
-                    {'slug': 'paul-denton', 'name': 'Paul Denton'}
-                ]
-            }
-        });
     }
 
     componentWillUnmount() {
@@ -113,6 +107,32 @@ class TaskUpdateContainer extends Component {
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "nwapp-create-member-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"Label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -137,15 +157,17 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { associate, associateData, errors, slug, } = this.state;
+        const { gender, howDidYouHear, howDidYouHearOther, errors, slug, } = this.state;
         return (
             <ActionConcernItemTaskStep2Component
                 slug={slug}
-                associate={associate}
-                associateOptions={getAssociateReactSelectOptions(associateData)}
+                gender={gender}
+                howDidYouHear={howDidYouHear}
+                howDidYouHearOther={howDidYouHearOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onRadioChange={this.onRadioChange}
                 onClick={this.onClick}
             />
         );

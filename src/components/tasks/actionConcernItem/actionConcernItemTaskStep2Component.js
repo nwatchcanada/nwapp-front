@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
+import { GENDER_RADIO_CHOICES, NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES } from "../../../constants/api";
 
 
 class AssignWatchAssociateTaskStep1Component extends Component {
     render() {
-        const { associate, associateOptions, slug, errors, onSelectChange, isLoading, onClick } = this.props;
+        const { gender, howDidYouHear, howDidYouHearOther, slug, errors, onTextChange, onSelectChange, onRadioChange, isLoading, onClick } = this.props;
+        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -54,15 +58,40 @@ class AssignWatchAssociateTaskStep1Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.gender}
+                                label="Please select your gender (*)"
+                                name="gender"
+                                onChange={onRadioChange}
+                                selectedValue={gender}
+                                options={GENDER_RADIO_CHOICES}
+                            />
+
                             <BootstrapSingleSelect
-                                label="Associate (*)"
-                                name="associate"
-                                defaultOptionLabel="Please select the associate."
-                                options={associateOptions}
-                                value={associate}
-                                error={errors.associate}
+                                borderColour="border-primary"
+                                label="How did you hear about us? (*)"
+                                name="howDidYouHear"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES}
+                                value={howDidYouHear}
+                                error={errors.howDidYouHear}
                                 onSelectChange={onSelectChange}
                             />
+
+                            {isOtherHowDidYouHearSelected &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.howDidYouHearOther}
+                                    label="Other (*)"
+                                    onChange={onTextChange}
+                                    value={howDidYouHearOther}
+                                    name="howDidYouHearOther"
+                                    type="text"
+                                />
+                            }
 
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

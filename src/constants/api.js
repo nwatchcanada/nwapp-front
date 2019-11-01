@@ -597,3 +597,32 @@ export const ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES = [
         label: "No"
     }
 ];
+
+
+export const NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES = [
+    {
+        selectName: "reason",
+        value: "Avenue",
+        label: "Avenue"
+    },{
+        selectName: "reason",
+        value: "Drive",
+        label: "Drive"
+    },{
+        selectName: "reason",
+        value: "Road",
+        label: "Road"
+    },{
+        selectName: "reason",
+        value: "Street",
+        label: "Street"
+    },{
+        selectName: "reason",
+        value: "Way",
+        label: "Way"
+    },{
+        selectName: "reason",
+        value: "Other",
+        label: "Other"
+    }
+];
