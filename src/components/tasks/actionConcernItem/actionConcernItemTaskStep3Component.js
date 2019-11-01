@@ -4,7 +4,29 @@ import { Link } from "react-router-dom";
 
 class AssignWatchAssociateTaskStep3Component extends Component {
     render() {
-        const { associateLabel, onClick, onBack, slug } = this.props;
+        const { onClick, onBack, willAction, comment, reason, reasonOther, slug, errors, } = this.props;
+
+        let reasonLabel = "";
+        switch(reason) {
+            case 1:
+                reasonLabel = reasonOther;
+                break;
+            case 2:
+                reasonLabel = "The concern has been referred to another community partner";
+                break;
+            case 3:
+                reasonLabel = "This is outside the scope of NW";
+                break;
+            case 4:
+                reasonLabel = "This concern has nothing to do with NW";
+                break;
+            case 5:
+                reasonLabel = "This concern is not serious";
+                break;
+            default:
+                reasonLabel = "";
+          }
+
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -26,12 +48,12 @@ class AssignWatchAssociateTaskStep3Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/task/1/${slug}/step-1`}>
+                            <Link to={`/task/3/${slug}/step-1`}>
                                 <span className="num">1.</span><span className="">Info</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/task/1/${slug}/step-2`}>
+                            <Link to={`/task/3/${slug}/step-2`}>
                                 <span className="num">2.</span><span className="">Action</span>
                             </Link>
                         </div>
@@ -57,14 +79,26 @@ class AssignWatchAssociateTaskStep3Component extends Component {
                                 <td>A new watch has been created and requires an associate to be assigned. Please assign an associate to the watch.</td>
                             </tr>
                             <tr>
-                                <th scope="row" className="bg-light">Watch</th>
-                                <td>Argyle Community Watch</td>
+                                <th scope="row" className="bg-light">Will Reply</th>
+                                <td>
+                                    {willAction
+                                        ?"Yes"
+                                        :"No"
+                                    }
+                                </td>
                             </tr>
-
-                            <tr>
-                                <th scope="row" className="bg-light">Associate</th>
-                                <td>{associateLabel}</td>
-                            </tr>
+                            {willAction
+                                ?<tr>
+                                    <th scope="row" className="bg-light">Comment</th>
+                                    <td>{comment}</td>
+                                </tr>
+                                :<tr>
+                                    <th scope="row" className="bg-light">Reason</th>
+                                    <td>
+                                        {reasonLabel}
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
 

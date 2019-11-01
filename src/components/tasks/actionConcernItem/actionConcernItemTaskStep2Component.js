@@ -36,7 +36,7 @@ class AssignWatchAssociateTaskStep1Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/task/1/${slug}/step-1`}>
+                            <Link to={`/task/3/${slug}/step-1`}>
                                 <span className="num">1.</span><span className="">Info</span>
                             </Link>
                         </div>

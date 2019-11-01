@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import ActionConcernItemTaskStep3Component from "../../../components/tasks/actionConcernItem/actionConcernItemTaskStep3Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
+import {
+    localStorageGetIntegerItem
+} from '../../../helpers/localStorageUtility';
 
 
 class ActionConcernItemTaskStep3Container extends Component {
@@ -21,8 +24,9 @@ class ActionConcernItemTaskStep3Container extends Component {
         // Update state.
         this.state = {
             slug: slug,
-            associate: localStorage.getItem('nwapp-task-3-associate'),
-            associateLabel: localStorage.getItem('nwapp-task-3-associate-label'),
+            willAction: localStorageGetIntegerItem("nwapp-task-3-willAction"),
+            reason: localStorageGetIntegerItem("nwapp-task-3-reason"),
+            reasonOther: localStorage.getItem("nwapp-task-3-reasonOther"),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -77,17 +81,15 @@ class ActionConcernItemTaskStep3Container extends Component {
      */
 
     render() {
-        const taskData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/task/argyle'
-        };
+        const { willAction, reason, reasonOther, errors, slug, } = this.state;
+        
         return (
             <ActionConcernItemTaskStep3Component
-                associateLabel={this.state.associateLabel}
-                slug={this.state.slug}
-                taskData={taskData}
+                slug={slug}
+                willAction={willAction}
+                reason={reason}
+                reasonOther={reasonOther}
+                errors={errors}
                 onBack={this.onBack}
                 onClick={this.onClick}
             />

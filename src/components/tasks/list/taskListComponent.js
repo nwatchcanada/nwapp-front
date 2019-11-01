@@ -190,6 +190,8 @@ class TaskListComponent extends Component {
                     </ol>
                 </nav>
 
+                <FlashMessageComponent object={flashMessage} />
+
                 <div className="row">
                     <div className="col-md-12">
                         <section className="row text-center placeholders">
@@ -205,8 +207,6 @@ class TaskListComponent extends Component {
                         </section>
                     </div>
                 </div>
-
-                <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-tasks"></i>&nbsp;Tasks</h1>
 
