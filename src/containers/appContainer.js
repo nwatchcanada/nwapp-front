@@ -135,6 +135,7 @@ import AssociateCreateStep1Container from "./associates/create/associateCreateSt
 import AssociateCreateStep2Container from "./associates/create/associateCreateStep2Container";
 import AssociateCreateStep3Container from "./associates/create/associateCreateStep3Container";
 import AssociateDemoteContainer from "./associates/demote/associateDemoteContainer";
+import AssociateCommentContainer from "./associates/retrieve/associateCommentContainer";
 
 import AreaCoordinatorListContainer from "./areaCoordinators/list/areaCoordinatorListContainer";
 import AreaCoordinatorSearchContainer from "./areaCoordinators/search/areaCoordinatorSearchContainer";
@@ -303,6 +304,7 @@ class AppContainer extends React.Component {
                                 <Route path="/associate/:slug/full" exact component={requiresAuth(AssociateFullRetrieveContainer)} />
                                 <Route path="/associate/:slug/update" exact component={requiresAuth(AssociateUpdateContainer)} />
                                 <Route path="/associate/:slug/demote" exact component={requiresAuth(AssociateDemoteContainer)} />
+                                <Route path="/associate/:slug/comments" exact component={requiresAuth(AssociateCommentContainer)} />
                                 <Route path="/area-coordinators/add/step-1" exact component={requiresAuth(AreaCoordinatorCreateStep1Container)} />
                                 <Route path="/area-coordinators/add/step-2" exact component={requiresAuth(AreaCoordinatorCreateStep2Container)} />
                                 <Route path="/area-coordinators/add/step-3" exact component={requiresAuth(AreaCoordinatorCreateStep3Container)} />
