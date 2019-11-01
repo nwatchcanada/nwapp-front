@@ -39,6 +39,11 @@ export default class AreaCoordinatorLiteRetrieveComponent extends Component {
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
+                        <div id="step-3" className="st-grey">
+                            <Link to={`/area-coordinator/${slug}/comments`}>
+                                <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 

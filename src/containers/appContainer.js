@@ -148,6 +148,7 @@ import AreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/retrieve/ar
 import AreaCoordinatorFullRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorFullRetrieveContainer";
 import AreaCoordinatorPromoteStep1Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep1Container";
 import AreaCoordinatorPromoteStep2Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep2Container";
+import AreaCoordinatorCommentContainer from "./areaCoordinators/retrieve/areaCoordinatorCommentContainer";
 
 import StaffListContainer from "./staff/list/staffListContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
@@ -314,6 +315,7 @@ class AppContainer extends React.Component {
                                 <Route path="/area-coordinator/:slug/promote/step-1" exact component={requiresAuth(AreaCoordinatorPromoteStep1Container)} />
                                 <Route path="/area-coordinator/:slug/promote/step-2" exact component={requiresAuth(AreaCoordinatorPromoteStep2Container)} />
                                 <Route path="/area-coordinator/:slug/demote" exact component={requiresAuth(AreaCoordinatorDemoteContainer)} />
+                                <Route path="/area-coordinator/:slug/comments" exact component={requiresAuth(AreaCoordinatorCommentContainer)} />
                                 <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
                                 <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />
                                 <Route path="/staff" exact component={requiresAuth(StaffListContainer)} />
