@@ -159,6 +159,7 @@ import StaffCreateStep1Container from "./staff/create/staffCreateStep1Container"
 import StaffCreateStep2Container from "./staff/create/staffCreateStep2Container";
 import StaffFullRetrieveContainer from "./staff/retrieve/staffFullRetrieveContainer";
 import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContainer";
+import StaffCommentContainer from "./staff/retrieve/staffCommentContainer";
 
 import TaskListContainer from "./tasks/list/taskListContainer";
 import TaskSearchContainer from "./tasks/search/taskSearchContainer";
@@ -326,6 +327,7 @@ class AppContainer extends React.Component {
                                 <Route path="/staff/:slug" exact component={requiresAuth(StaffLiteRetrieveContainer)} />
                                 <Route path="/staff/:slug/full" exact component={requiresAuth(StaffFullRetrieveContainer)} />
                                 <Route path="/staff/:slug/update" exact component={requiresAuth(StaffUpdateContainer)} />
+                                <Route path="/staff/:slug/comments" exact component={requiresAuth(StaffCommentContainer)} />
                                 <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
                                 <Route path="/tasks/search" exact component={requiresAuth(TaskSearchContainer)} />
                                 <Route path="/tasks/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
