@@ -587,7 +587,7 @@ table.custom-cell-w tr th{width:35% !important;}
 @media (min-width: 576px) and (max-width: 667px) {
 .display-4 {
     font-size: 3.2rem !important;
-}	
+}
 }
 .custom-select {
 	height: calc(1.5em + 1rem + 2px) !important;

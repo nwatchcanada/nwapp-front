@@ -641,3 +641,56 @@ export const NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES = [
         label: "Other"
     }
 ];
+
+
+
+export const IS_OK_TO_EMAIL_CHOICES = [
+    {
+        id: 'isOkToEmail-t-choice',
+        name: "isOkToEmail",
+        value: 1,
+        label: "Yes"
+    },{
+        id: 'isOkToEmail-f-choice',
+        name: "isOkToEmail",
+        value: 0,
+        label: "No"
+    }
+];
+
+
+export const IS_OK_TO_TEXT_CHOICES = [
+    {
+        id: 'isOkToText-t-choice',
+        name: "isOkToText",
+        value: 1,
+        label: "Yes"
+    },{
+        id: 'isOkToText-f-choice',
+        name: "isOkToText",
+        value: 0,
+        label: "No"
+    }
+];
+
+
+
+
+export const ORGANIZATION_TYPE_OF_CHOICES = [
+    {
+        id: 'organizationTypeOf-t-choice',
+        selectName: "organizationTypeOf",
+        value: 2,
+        label: "Private"
+    },{
+        id: 'organizationTypeOf-f-choice',
+        selectName: "organizationTypeOf",
+        value: 3,
+        label: "Non-profit"
+    },{
+        id: 'organizationTypeOf-f-choice',
+        selectName: "organizationTypeOf",
+        value: 4,
+        label: "Government"
+    }
+];
