@@ -31,6 +31,9 @@ body.active{
 }
 }
 
+a {
+	text-decoration: none !important;
+}
 .link-ndecor {
   text-decoration: none !important;
   outline: 0;
@@ -91,6 +94,10 @@ body.active{
 }
 .form-signin .custom-control-label{
   font-size: 1.25rem;
+}
+.form-signin .form-control:focus {
+    border-color: #17bed8 !important;
+    box-shadow: 0 0 0 0.2rem rgba(23,162,184,.25) !important;
 }
 .signin-box{
       border: 0.2rem solid #f7f7f9;
@@ -244,13 +251,14 @@ a.plain-link{
     border-radius: .45rem !important;
 }
 .btn-orange {
-    color: #fff;
-    background-color: #F26523;
-    border-color: #F26523;
+    color: #ffffff !important;
+    background-color: #F26523 !important;
+    border-color: #F26523 !important;
 }
 .btn-orange:hover, .btn-orange:focus {
-    background-color: #d54d0d;
-    border-color: #d54d0d;
+	box-shadow: 0 0 0 0.2rem rgba(213,77,13,.25) !important;
+    background-color: #d54d0d !important;
+    border-color: #d54d0d !important;
 }
 .r-circle {
     border: 0;
@@ -526,9 +534,9 @@ table.custom-cell-w tr th{width:35% !important;}
 .step-navigation .st-grey {
 	background: #e9ecef;
 	display: inline-block;
-	padding: 1rem;
+	padding: 0.8rem;
 	border-radius: .3rem;
-	min-width: 180px;
+	/*min-width: 140px;*/
 	margin: 5px;
 	color: #6c757d !important;
 }
@@ -544,19 +552,19 @@ table.custom-cell-w tr th{width:35% !important;}
 	font-size: 1.5rem;
 	font-weight: 600;
 	padding-right: 5px;
-	float: left;
+	/*float: left;*/
 	margin-top: -5px;
 	height: 100%;
 }
 @media (min-width: 952px) and (max-width: 1024px) {
 .step-navigation .st-grey {
-	padding: 0.875rem !important;
-	font-size: 1.1rem !important;
-	min-width: 160px !important;
+	padding: 0.8rem !important;
+	font-size: 1rem !important;
+	/*min-width: 140px !important;*/
 	display: inherit;
 }
 .step-navigation .st-grey .num {
-	font-size: 1.2rem !important;
+	font-size: 1.1rem !important;
 	margin-top: -3px !important;
 }
 }
@@ -596,16 +604,16 @@ table.custom-cell-w tr th{width:35% !important;}
 }
 .react-bootstrap-table table thead tr th:first-child,
 .react-bootstrap-table table tbody tr td:first-child {
-  max-width: 6rem;
+	/*max-width: 6rem;*/
 }
 .react-bootstrap-table table {
     table-layout: auto !important;
 }
 .react-bootstrap-table {
-display: block;
-width: 100%;
-overflow-x: auto;
--webkit-overflow-scrolling: touch;
+	display: block;
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
 }
 .react-bootstrap-table-pagination ,.react-bootstrap-table-pagination-list {
 	margin-top: 10px;
@@ -1161,38 +1169,36 @@ aside.ScrollUpButton__Container:focus {
   }
 }
 
-.btn-dark-blue {
-    color: #ffffff !important;
-    background-color: #295697 !important;
-    border-color: #295697 !important;
-}
-.btn-dark-blue:hover, .btn-dark-blue:focus {
-    background-color: #1c3c69 !important;
-    border-color: #1c3c69 !important;
-}
-.btn-dark-blue:focus {
-    box-shadow: 0 0 0 0.2rem rgba(41,86,151,.5) !important;
-}
-.btn-dark-blue:not(:disabled):not(.disabled):active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(41,86,151,.5) !important;
-}
-
 .ScrollUpButtonCustomContainer {
 	position: fixed;
 	right: -100px;
 	bottom: 20px;
 	transition: right 0.5s;
 	cursor: pointer;
-	padding: .5rem 1rem;
+	padding: 7px 10px;
     font-size: 1.25rem;
     border-radius: .2rem;
 	color: #fff;
-    background-color: #17a2b8;
+    background-color: #17a2b8 !important;
     border-color: #17a2b8;
+	z-index: 9999;
 }
 .ScrollUpButtonCustomToggled {
 	right: 20px;
 }
-.ScrollUpButtonCustomContainer span::before {
+/*.ScrollUpButtonCustomContainer span::before {
 	content: "\f106";
+}*/
+
+.new-upload-ui {
+	border-radius: 4px;
+    padding: 20px;
+    border: 1px solid #dee2e6!important;
+    cursor: pointer;
+    color: #1d2124;
+    text-align: center;
+    background: #f8f9fa!important;
+}
+a {
+	text-decoration: none !important;
 }
