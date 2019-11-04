@@ -271,9 +271,6 @@ export default class AssociateFullRetrieveComponent extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <Link to={`/associate/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
-                                    <i className="fas fa-edit"></i>&nbsp;Edit
-                                </Link>
                                 <Link to={`/associates`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
