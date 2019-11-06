@@ -36,7 +36,7 @@ class AdminAssociateAddressUpdateComponent extends Component {
                 </nav>
 
                 <h1>
-                    <i className="fas fa-plus"></i>&nbsp;Add Member
+                    <i className="fas fa-edit"></i>&nbsp;Edit Associate (Contact)
                 </h1>
 
                 <div className="row">

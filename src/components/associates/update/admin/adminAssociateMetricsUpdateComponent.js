@@ -16,7 +16,7 @@ export default class AdminAssociateMetricsUpdateComponent extends Component {
             typeOf, returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
-            onRadioChange,  onMultiChange,
+            onRadioChange,  onMultiChange, fullName,
             errors, slug, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
@@ -51,51 +51,8 @@ export default class AdminAssociateMetricsUpdateComponent extends Component {
                 </nav>
 
                 <h1>
-                    <i className="fas fa-plus"></i>&nbsp;Add Member
+                    <i className="fas fa-edit"></i>&nbsp;Edit Associate (Metrics)
                 </h1>
-
-                <div className="row">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey">
-                            <Link to="/members/add/step-1">
-                                <span className="num">1.</span><span className="">Search</span>
-                            </Link>
-                        </div>
-                        <div id="step-2" className="st-grey">
-                            <Link to="/members/add/step-2">
-                                <span className="num">2.</span><span className="">Results</span>
-                            </Link>
-                        </div>
-                        <div id="step-3" className="st-grey">
-                            <Link to="/members/add/step-3">
-                                <span className="num">3.</span><span className="">Type</span>
-                            </Link>
-                        </div>
-                        <div id="step-4" className="st-grey">
-                            <Link to={returnURL}>
-                                <span className="num">4.</span><span className="">Contact</span>
-                            </Link>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <Link to="/members/add/step-5">
-                                <span className="num">5.</span><span className="">Address</span>
-                            </Link>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <Link to="/members/add/step-6">
-                                <span className="num">6.</span><span className="">Watch</span>
-                            </Link>
-                        </div>
-                         <div id="step-7" className="st-grey active">
-                            <strong>
-                                <span className="num">7.</span><span className="">Metrics</span>
-                            </strong>
-                        </div>
-                        <div id="step-8" className="st-grey">
-                            <span className="num">8.</span><span className="">Review</span>
-                        </div>
-                    </div>
-                </div>
 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">

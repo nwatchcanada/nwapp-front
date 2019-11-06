@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminAssociateAddressUpdateComponent from "../../../../components/associates/update/admin/adminAssociateAddressUpdateComponent";
+import AdminAssociateMetricsUpdateComponent from "../../../../components/associates/update/admin/adminAssociateMetricsUpdateComponent";
+import { validateStep7CreateInput } from "../../../../validators/memberValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
-import { validateStep5CreateInput } from "../../../../validators/memberValidator";
+import { getHowHearReactSelectOptions } from "../../../../actions/howHearAction";
+import { getTagReactSelectOptions } from "../../../../actions/tagAction";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../../constants/api';
-import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
-
-class AdminAssociateAddressUpdateContainer extends Component {
+class AdminAssociateMetricsUpdateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -38,21 +38,29 @@ class AdminAssociateAddressUpdateContainer extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
-            streetName: localStorage.getItem("nwapp-create-member-streetName"),
-            streetType: localStorage.getItem("nwapp-create-member-streetType"),
-            apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
-            streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
-            streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
-            streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
-            streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
-            postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
+            tags: localStorageGetArrayItem("nwapp-create-member-tags"),
+            birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
+            gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
+            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            meaning: localStorage.getItem("nwapp-create-member-meaning"),
+            expectations: localStorage.getItem("nwapp-create-member-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
+            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-companyYearsInOperation")),
+            companyType: localStorage.getItem("nwapp-create-member-companyType"),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -65,6 +73,31 @@ class AdminAssociateAddressUpdateContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            howDidYouHearData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Word of mouth',
+                    slug: 'word-of-mouth'
+                },{
+                    name: 'Internet',
+                    slug: 'internet'
+                }]
+            },
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -83,13 +116,13 @@ class AdminAssociateAddressUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-6");
+        this.props.history.push("/members/add/step-8");
     }
 
     onFailedSubmissionCallback(errors) {
         this.setState({
             errors: errors
-        })
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -106,7 +139,7 @@ class AdminAssociateAddressUpdateContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        });
+        })
         localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
     }
 
@@ -116,17 +149,60 @@ class AdminAssociateAddressUpdateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-create-member-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-create-member-'+optionKey, option);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "nwapp-create-member-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"Label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
+    }
+
+    onMultiChange(...args) {
+        // Extract the select options from the parameter.
+        const selectedOptions = args[0];
+
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+
+        // // Set all the tags we have selected to the STORAGE.
+        const key = 'nwapp-create-member-' + args[1].name;
+        localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
+        // console.log(this.state); // For debugging purposes only.
+
         // Perform client-side validation.
-        const { errors, isValid } = validateStep5CreateInput(this.state);
+        const { errors, isValid } = validateStep7CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -138,29 +214,47 @@ class AdminAssociateAddressUpdateContainer extends Component {
         }
     }
 
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { returnURL, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode, errors } = this.state;
+        const {
+            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            companyEmployeeCount, companyYearsInOperation, companyType,
+            errors
+        } = this.state;
+
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+
         return (
-            <AdminAssociateAddressUpdateComponent
+            <AdminAssociateMetricsUpdateComponent
+                typeOf={typeOf}
                 returnURL={returnURL}
-                streetNumber={streetNumber}
-                streetName={streetName}
-                streetType={streetType}
-                apartmentUnit={apartmentUnit}
-                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
-                streetTypeOther={streetTypeOther}
-                streetDirection={streetDirection}
-                streetDirectionOptions={STREET_DIRECTION_CHOICES}
-                postalCode={postalCode}
+                tags={tags}
+                tagOptions={tagOptions}
+                birthYear={birthYear}
+                gender={gender}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                howDidYouHear={howDidYouHear}
+                howDidYouHearOptions={howDidYouHearOptions}
+                howDidYouHearOther={howDidYouHearOther}
+                meaning={meaning}
+                expectations={expectations}
+                willingToVolunteer={willingToVolunteer}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                totalHouseholdCount={totalHouseholdCount}
+                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                companyEmployeeCount={companyEmployeeCount}
+                companyYearsInOperation={companyYearsInOperation}
+                companyType={companyType}
                 onSelectChange={this.onSelectChange}
+                onRadioChange={this.onRadioChange}
+                onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
             />
         );
@@ -181,4 +275,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminAssociateAddressUpdateContainer);
+)(AdminAssociateMetricsUpdateContainer);

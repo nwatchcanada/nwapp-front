@@ -3,11 +3,20 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminAssociateAddressUpdateComponent from "../../../../components/associates/update/admin/adminAssociateAddressUpdateComponent";
-import { validateStep4BizCreateInput } from "../../../../validators/memberValidator";
-import { BUSINESS_TYPE_OF } from '../../../../constants/api';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
+import { validateStep5CreateInput } from "../../../../validators/memberValidator";
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../../constants/api';
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
-class MemberCreateStep4BizContainer extends Component {
+
+class AdminAssociateAddressUpdateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,23 +25,34 @@ class MemberCreateStep4BizContainer extends Component {
     constructor(props) {
         super(props);
 
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
+        // Get the type of.
+        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
+        let returnURL;
+        if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
+            returnURL = "/members/add/step-4-rez-or-cc";
+        }
+        else if (typeOf === BUSINESS_TYPE_OF) {
+            returnURL = "/members/add/step-4-biz";
+        }
 
         this.state = {
-            companyName: localStorage.getItem("nwapp-create-member-biz-companyName"),
-            contactFirstName: localStorage.getItem("nwapp-create-member-biz-contactFirstName"),
-            contactLastName: localStorage.getItem("nwapp-create-member-biz-contactLastName"),
-            primaryPhone: localStorage.getItem("nwapp-create-member-biz-primaryPhone"),
-            secondaryPhone: localStorage.getItem("nwapp-create-member-biz-secondaryPhone"),
-            email: localStorage.getItem("nwapp-create-member-biz-email"),
+            returnURL: returnURL,
+            typeOf: typeOf,
+            streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
+            streetName: localStorage.getItem("nwapp-create-member-streetName"),
+            streetType: localStorage.getItem("nwapp-create-member-streetType"),
+            apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
+            streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
+            streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
+            streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
+            postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
             errors: {},
-            isLoading: false,
-            slug: slug,
+            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -45,11 +65,6 @@ class MemberCreateStep4BizContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // DEVELOPERS NOTE:
-        // Since we are in this page, we need to assign the user to be
-        // a business type user.
-        localStorage.setItem("nwapp-create-member-typeOf", BUSINESS_TYPE_OF);
     }
 
     componentWillUnmount() {
@@ -68,8 +83,7 @@ class MemberCreateStep4BizContainer extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Associate has been successfully updated.");
-        this.props.history.push("/associate/"+this.state.id+"/full");
+        this.props.history.push("/members/add/step-6");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -92,9 +106,19 @@ class MemberCreateStep4BizContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
-        const key = "nwapp-create-member-biz-"+[e.target.name];
-        localStorage.setItem(key, e.target.value);
+        });
+        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('nwapp-create-member-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-create-member-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onClick(e) {
@@ -102,7 +126,7 @@ class MemberCreateStep4BizContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateStep4BizCreateInput(this.state);
+        const { errors, isValid } = validateStep5CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -121,19 +145,23 @@ class MemberCreateStep4BizContainer extends Component {
      */
 
     render() {
-        const { companyName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors, slug } = this.state;
+        const { returnURL, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode, errors } = this.state;
         return (
             <AdminAssociateAddressUpdateComponent
-                companyName={companyName}
-                contactFirstName={contactFirstName}
-                contactLastName={contactLastName}
-                primaryPhone={primaryPhone}
-                secondaryPhone={secondaryPhone}
-                email={email}
+                returnURL={returnURL}
+                streetNumber={streetNumber}
+                streetName={streetName}
+                streetType={streetType}
+                apartmentUnit={apartmentUnit}
+                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
+                streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                postalCode={postalCode}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
-                slug={slug}
             />
         );
     }
@@ -153,4 +181,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep4BizContainer);
+)(AdminAssociateAddressUpdateContainer);
