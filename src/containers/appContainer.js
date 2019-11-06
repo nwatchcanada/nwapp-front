@@ -134,6 +134,7 @@ import AssociateFullRetrieveContainer from "./associates/retrieve/associateFullR
 import AssociateUpdateContainer from "./associates/update/associateUpdateContainer";
 import AdminAssociateContactUpdateContainer from "./associates/update/admin/adminAssociateContactUpdateContainer";
 import AdminAssociateAddressUpdateContainer from "./associates/update/admin/adminAssociateAddressUpdateContainer";
+import AdminAssociateMetricsUpdateContainer from "./associates/update/admin/adminAssociateMetricsUpdateContainer";
 import AssociateCreateStep1Container from "./associates/create/associateCreateStep1Container";
 import AssociateCreateStep2Container from "./associates/create/associateCreateStep2Container";
 import AssociateCreateStep3Container from "./associates/create/associateCreateStep3Container";
@@ -314,6 +315,7 @@ class AppContainer extends React.Component {
                                 <Route path="/associate/:slug/update" exact component={requiresAuth(AssociateUpdateContainer)} />
                                 <Route path="/admin/associate/:slug/update/contact" exact component={requiresAuth(AdminAssociateContactUpdateContainer)} />
                                 <Route path="/admin/associate/:slug/update/address" exact component={requiresAuth(AdminAssociateAddressUpdateContainer)} />
+                                <Route path="/admin/associate/:slug/update/metrics" exact component={requiresAuth(AdminAssociateMetricsUpdateContainer)} />
                                 <Route path="/associate/:slug/demote" exact component={requiresAuth(AssociateDemoteContainer)} />
                                 <Route path="/associate/:slug/comments" exact component={requiresAuth(AssociateCommentContainer)} />
                                 <Route path="/area-coordinators/add/step-1" exact component={requiresAuth(AreaCoordinatorCreateStep1Container)} />

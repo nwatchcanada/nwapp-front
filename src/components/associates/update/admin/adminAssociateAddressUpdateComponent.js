@@ -3,14 +3,19 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
-import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 
 
 class AdminAssociateAddressUpdateComponent extends Component {
     render() {
-        const { companyName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick, slug } = this.props;
+        const {
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
+            returnURL, errors, onTextChange, onSelectChange, isLoading, onClick, slug, fullName
+        } = this.props;
+
+        const isOtherStreetTypeSelected = streetType === 'Other';
+
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -19,10 +24,13 @@ class AdminAssociateAddressUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to={`/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
+                        </li>
+                        <li className="breadcrumb-item" aria-current="page">
+                            <Link to={`/associate/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add
+                            <i className="fas fa-edit"></i>&nbsp;Edit Associate (Address)
                         </li>
                     </ol>
                 </nav>
@@ -32,47 +40,10 @@ class AdminAssociateAddressUpdateComponent extends Component {
                 </h1>
 
                 <div className="row">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey">
-                            <Link to="/members/add/step-1">
-                                <span className="num">1.</span><span className="">Search</span>
-                            </Link>
-                        </div>
-                        <div id="step-2" className="st-grey">
-                            <Link to="/members/add/step-2">
-                                <span className="num">2.</span><span className="">Results</span>
-                            </Link>
-                        </div>
-                        <div id="step-3" className="st-grey">
-                            <Link to="/members/add/step-3">
-                                <span className="num">3.</span><span className="">Type</span>
-                            </Link>
-                        </div>
-                        <div id="step-4" className="st-grey active">
-                            <strong>
-                                <span className="num">4.</span><span className="">Contact</span>
-                            </strong>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Address</span>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Watch</span>
-                        </div>
-                         <div id="step-7" className="st-grey">
-                            <span className="num">7.</span><span className="">Metrics</span>
-                        </div>
-                        <div id="step-8" className="st-grey">
-                            <span className="num">8.</span><span className="">Review</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
                             <h2>
-                               <i className="fas fa-id-card"></i>&nbsp;Contact
+                                <i className="fas fa-address-book"></i>&nbsp;Address
                             </h2>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
@@ -81,68 +52,80 @@ class AdminAssociateAddressUpdateComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.companyName}
-                                label="Company Name (*)"
+                                error={errors.streetNumber}
+                                label="Street Number (*)"
                                 onChange={onTextChange}
-                                value={companyName}
-                                name="companyName"
+                                value={streetNumber}
+                                name="streetNumber"
                                 type="text"
                             />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.contactFirstName}
-                                label="Contact First Name (*)"
+                                error={errors.streetName}
+                                label="Street Name (*)"
                                 onChange={onTextChange}
-                                value={contactFirstName}
-                                name="contactFirstName"
+                                value={streetName}
+                                name="streetName"
                                 type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Street Type (*)"
+                                name="streetType"
+                                defaultOptionLabel="Please select a street type."
+                                options={streetTypeOptions}
+                                value={streetType}
+                                error={errors.streetType}
+                                onSelectChange={onSelectChange}
                             />
 
                             <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.contactLastName}
-                                label="Contact Last Name (*)"
-                                onChange={onTextChange}
-                                value={contactLastName}
-                                name="contactLastName"
-                                type="text"
-                            />
-
-                            <BootstrapTelephoneInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.primaryPhone}
-                                label="Primary Phone (*)"
-                                onChange={onTextChange}
-                                value={primaryPhone}
-                                name="primaryPhone"
-                                type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
-                            />
-
-                            <BootstrapTelephoneInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-success"
-                                error={errors.secondaryPhone}
-                                label="Secondary Phone"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
                                 onChange={onTextChange}
-                                value={secondaryPhone}
-                                name="secondaryPhone"
+                                value={apartmentUnit}
+                                name="apartmentUnit"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
+                            />
+
+                            {isOtherStreetTypeSelected &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.streetTypeOther}
+                                    label="Street Type Other (*)"
+                                    onChange={onTextChange}
+                                    value={streetTypeOther}
+                                    name="streetTypeOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
+                                borderColour="border-successs"
+                                label="Street Direction"
+                                name="streetDirection"
+                                defaultOptionLabel="Please select a street direction."
+                                options={streetDirectionOptions}
+                                value={streetDirection}
+                                error={errors.streetDirection}
+                                onSelectChange={onSelectChange}
+                                helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
                             />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.email}
-                                label="Email (*)"
+                                error={errors.postalCode}
+                                label="Postal Code (*)"
                                 onChange={onTextChange}
-                                value={email}
-                                name="email"
+                                value={postalCode}
+                                name="postalCode"
                                 type="text"
                             />
 
