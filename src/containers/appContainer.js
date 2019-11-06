@@ -101,6 +101,7 @@ import MemberCreateStep7Container from "./members/create/memberCreateStep7Contai
 import MemberCreateStep8Container from "./members/create/memberCreateStep8Container";
 import MemberUpdateContainer from "./members/update/memberUpdateContainer";
 import AdminMemberContactUpdateContainer from "./members/update/admin/adminMemberContactUpdateContainer";
+import AdminMemberAddressUpdateContainer from "./members/update/admin/adminMemberAddressUpdateContainer";
 import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Container";
 import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
 import MemberPromoteStep3Container from "./members/promote/memberPromoteStep3Container";
@@ -280,7 +281,8 @@ class AppContainer extends React.Component {
                                 <Route path="/member/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />
                                 <Route path="/member/:slug/full" exact component={requiresAuth(MemberFullRetrieveContainer)} />
                                 <Route path="/member/:slug/update" exact component={requiresAuth(MemberUpdateContainer)} />
-                                <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />    
+                                <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
+                                <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />    
                                 <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
                                 <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
                                 <Route path="/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />
