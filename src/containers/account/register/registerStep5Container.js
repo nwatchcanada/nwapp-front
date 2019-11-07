@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import RegisterStep5Component from "../../../components/account/register/registerStep5Component";
-import { validateStep5CreateInput } from "../../../validators/registerValidator";
+import AdminMemberMetricsUpdateComponent from "../../../components/account/register/registerStep5Component";
+import { validateStep7CreateInput } from "../../../validators/memberValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
@@ -26,34 +26,33 @@ class RegisterStep5Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("nwapp-register-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/register/step-2-rez-or-cc";
+            returnURL = "/members/add/step-4-rez-or-cc";
         }
         else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/register/step-2-biz";
+            returnURL = "/members/add/step-4-biz";
         }
 
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            tags: localStorageGetArrayItem("nwapp-register-tags"),
-            birthYear: localStorage.getItem("nwapp-register-birthYear"),
-            gender: parseInt(localStorage.getItem("nwapp-register-gender")),
-            howDidYouHear: localStorage.getItem("nwapp-register-howDidYouHear"),
-            howDidYouHearOption: localStorageGetObjectItem('nwapp-register-howDidYouHearOption'),
-            howDidYouHearOther: localStorage.getItem("nwapp-register-howDidYouHearOther"),
-            meaning: localStorage.getItem("nwapp-register-meaning"),
-            expectations: localStorage.getItem("nwapp-register-expectations"),
-            willingToVolunteer: parseInt(localStorage.getItem("nwapp-register-willingToVolunteer")),
-            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-register-anotherHouseholdMemberRegistered")),
-            anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-register-anotherHouseholdMemberRegistered-label"),
-            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-register-totalHouseholdCount")),
-            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-register-under18YearsHouseholdCount")),
-            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-register-companyEmployeeCount")),
-            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-register-companyYearsInOperation")),
-            companyType: localStorage.getItem("nwapp-register-companyType"),
+            tags: localStorageGetArrayItem("nwapp-create-member-tags"),
+            birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
+            gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
+            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            meaning: localStorage.getItem("nwapp-create-member-meaning"),
+            expectations: localStorage.getItem("nwapp-create-member-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
+            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-companyYearsInOperation")),
+            companyType: localStorage.getItem("nwapp-create-member-companyType"),
             errors: {},
             isLoading: false
         }
@@ -117,13 +116,13 @@ class RegisterStep5Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/register/step-6");
+        this.props.history.push("/members/add/step-8");
     }
 
     onFailedSubmissionCallback(errors) {
         this.setState({
             errors: errors
-        })
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -141,7 +140,7 @@ class RegisterStep5Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('nwapp-register-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -150,16 +149,16 @@ class RegisterStep5Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-register-'+[option.selectName].toString(), option.value);
-        localStorage.setItem('nwapp-register-'+[option.selectName].toString()+"Label", option.label);
-        localStorageSetObjectOrArrayItem('nwapp-register-'+optionKey, option);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "nwapp-register-"+[e.target.name];
-        const storageLabelKey =  "nwapp-register-"+[e.target.name].toString()+"-label";
+        const storageValueKey = "nwapp-create-member-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
@@ -192,7 +191,7 @@ class RegisterStep5Container extends Component {
         });
 
         // // Set all the tags we have selected to the STORAGE.
-        const key = 'nwapp-register-' + args[1].name;
+        const key = 'nwapp-create-member-' + args[1].name;
         localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
@@ -200,8 +199,10 @@ class RegisterStep5Container extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
+        // console.log(this.state); // For debugging purposes only.
+
         // Perform client-side validation.
-        const { errors, isValid } = validateStep5CreateInput(this.state);
+        const { errors, isValid } = validateStep7CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -221,7 +222,7 @@ class RegisterStep5Container extends Component {
     render() {
         const {
             typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
-            willingToVolunteer, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             errors
         } = this.state;
@@ -230,7 +231,7 @@ class RegisterStep5Container extends Component {
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
-            <RegisterStep5Component
+            <AdminMemberMetricsUpdateComponent
                 typeOf={typeOf}
                 returnURL={returnURL}
                 tags={tags}
@@ -246,7 +247,6 @@ class RegisterStep5Container extends Component {
                 expectations={expectations}
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
-                anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 companyEmployeeCount={companyEmployeeCount}
