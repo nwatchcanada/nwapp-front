@@ -66,6 +66,9 @@ export default class StaffFullRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-id-card"></i>&nbsp;Personal Information
+                                        <Link to={`/admin/staff/${slug}/update/contact`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 <tr>
@@ -105,6 +108,9 @@ export default class StaffFullRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-tty"></i>&nbsp;Contact Information
+                                        <Link to={`/admin/staff/${slug}/update/contact`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 <tr>
@@ -126,6 +132,9 @@ export default class StaffFullRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-map-marker"></i>&nbsp;Street Address
+                                        <Link to={`/admin/staff/${slug}/update/address`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 <tr>
@@ -169,6 +178,9 @@ export default class StaffFullRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-clinic-medical"></i>&nbsp;Emergency Contact
+                                        <Link to={`/admin/staff/${slug}/update/emergency`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 <tr>
@@ -220,10 +232,7 @@ export default class StaffFullRetrieveComponent extends Component {
                         </table>
 
                         <div className="form-group">
-                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                <i className="fas fa-edit"></i>&nbsp;Edit
-                            </button>
-                            <Link to={`/staff`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <Link to={`/staff`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>
