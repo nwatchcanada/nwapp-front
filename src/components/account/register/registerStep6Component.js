@@ -46,7 +46,7 @@ export default class MemberCreateStep6Component extends Component {
                         </div>
                          <div id="step-6" className="st-grey active">
                             <strong>
-                                <span className="num">5.</span><span className="">Legality</span>
+                                <span className="num">5.</span><span className="">Agreement</span>
                             </strong>
                         </div>
                         <div id="step-7" className="st-grey">
@@ -59,7 +59,7 @@ export default class MemberCreateStep6Component extends Component {
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
                             <h2>
-                                <i className="fas fa-balance-scale"></i>&nbsp;Legality
+                                <i className="fas fa-balance-scale"></i>&nbsp;Agreement
                             </h2>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />

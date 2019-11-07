@@ -46,7 +46,7 @@ class RegisterStep3Component extends Component {
                             <span className="num">5.</span><span className="">Metrics</span>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Legality</span>
+                            <span className="num">6.</span><span className="">Agreement</span>
                         </div>
                         <div id="step-7" className="st-grey">
                             <span className="num">7.</span><span className="">Review</span>
@@ -64,16 +64,22 @@ class RegisterStep3Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.streetNumber}
-                                label="Street Number (*)"
-                                onChange={onTextChange}
-                                value={streetNumber}
-                                name="streetNumber"
-                                type="text"
-                            />
+                            <div className="row">
+                                <div className="col-4">
+
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.streetNumber}
+                                        label="Street Number (*)"
+                                        onChange={onTextChange}
+                                        value={streetNumber}
+                                        name="streetNumber"
+                                        type="text"
+                                    />
+
+                                </div>
+                            </div>
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
@@ -110,16 +116,24 @@ class RegisterStep3Component extends Component {
                                 />
                             }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
-                                error={errors.apartmentUnit}
-                                label="Apt. Unit"
-                                onChange={onTextChange}
-                                value={apartmentUnit}
-                                name="apartmentUnit"
-                                type="text"
-                            />
+                            <div className="row">
+                                <div className="col-4">
+
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-success"
+                                        error={errors.apartmentUnit}
+                                        label="Apt. Unit"
+                                        onChange={onTextChange}
+                                        value={apartmentUnit}
+                                        name="apartmentUnit"
+                                        type="text"
+                                    />
+
+                                </div>
+                            </div>
+
+
 
                             <BootstrapSingleSelect
                                 borderColour="border-successs"
