@@ -69,12 +69,12 @@ class RegisterStep3Component extends Component {
 
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
-                                        borderColour="border-primary"
-                                        error={errors.streetNumber}
-                                        label="Street Number (*)"
+                                        borderColour="border-success"
+                                        error={errors.apartmentUnit}
+                                        label="Apt. Unit"
                                         onChange={onTextChange}
-                                        value={streetNumber}
-                                        name="streetNumber"
+                                        value={apartmentUnit}
+                                        name="apartmentUnit"
                                         type="text"
                                     />
 
@@ -86,12 +86,12 @@ class RegisterStep3Component extends Component {
 
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
-                                        borderColour="border-success"
-                                        error={errors.apartmentUnit}
-                                        label="Apt. Unit"
+                                        borderColour="border-primary"
+                                        error={errors.streetNumber}
+                                        label="Street Number (*)"
                                         onChange={onTextChange}
-                                        value={apartmentUnit}
-                                        name="apartmentUnit"
+                                        value={streetNumber}
+                                        name="streetNumber"
                                         type="text"
                                     />
 

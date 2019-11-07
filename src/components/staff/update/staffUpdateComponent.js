@@ -190,6 +190,17 @@ export default class StaffUpdateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
+                                onChange={onTextChange}
+                                value={apartmentUnit}
+                                name="apartmentUnit"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
                                 error={errors.streetNumber}
                                 label="Street Number (*)"
@@ -198,17 +209,6 @@ export default class StaffUpdateComponent extends Component {
                                 name="streetNumber"
                                 type="text"
                                 placeholder=""
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
-                                error={errors.apartmentUnit}
-                                label="Apt. Unit"
-                                onChange={onTextChange}
-                                value={apartmentUnit}
-                                name="apartmentUnit"
-                                type="text"
                             />
 
                             <BootstrapInput

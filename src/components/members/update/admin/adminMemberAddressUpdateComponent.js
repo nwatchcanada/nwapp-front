@@ -51,6 +51,17 @@ class AdminMemberAdressUpdateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
+                                onChange={onTextChange}
+                                value={apartmentUnit}
+                                name="apartmentUnit"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
                                 error={errors.streetNumber}
                                 label="Street Number (*)"
@@ -80,17 +91,6 @@ class AdminMemberAdressUpdateComponent extends Component {
                                 value={streetType}
                                 error={errors.streetType}
                                 onSelectChange={onSelectChange}
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
-                                error={errors.apartmentUnit}
-                                label="Apt. Unit"
-                                onChange={onTextChange}
-                                value={apartmentUnit}
-                                name="apartmentUnit"
-                                type="text"
                             />
 
                             {isOtherStreetTypeSelected &&
