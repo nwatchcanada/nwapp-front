@@ -96,7 +96,7 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">AreaCoordinatorship Class</th>
+                                    <th scope="row" className="bg-light">Membership Class</th>
                                     <td>{areaCoordinatorshipClass}</td>
                                 </tr>
 
@@ -105,6 +105,9 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-id-card"></i>&nbsp;Contact
+                                        <Link to={`/admin/area-coordinator/${slug}/update/contact`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 {isBizTypeOf &&
@@ -181,6 +184,9 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-address-book"></i>&nbsp;Address
+                                        <Link to={`/admin/area-coordinator/${slug}/update/address`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 <tr>
@@ -225,6 +231,9 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-chart-pie"></i>&nbsp;Metrics
+                                        <Link to={`/admin/area-coordinator/${slug}/update/metrics`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 {dateOfBirth &&
@@ -273,10 +282,7 @@ export default class AreaCoordinatorFullRetrieveComponent extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <Link to={`/area-coordinator/${slug}/update`} className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4">
-                                    <i className="fas fa-edit"></i>&nbsp;Edit
-                                </Link>
-                                <Link to={`/area-coordinators`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/area-coordinators`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
