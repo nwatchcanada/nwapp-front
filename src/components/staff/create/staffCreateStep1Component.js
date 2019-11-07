@@ -211,6 +211,17 @@ export default class StaffCreateStep1Component extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
+                                onChange={onTextChange}
+                                value={apartmentUnit}
+                                name="apartmentUnit"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
                                 error={errors.streetName}
                                 label="Street Number (*)"
@@ -244,17 +255,6 @@ export default class StaffCreateStep1Component extends Component {
                                     type="text"
                                 />
                             }
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
-                                error={errors.apartmentUnit}
-                                label="Apt. Unit"
-                                onChange={onTextChange}
-                                value={apartmentUnit}
-                                name="apartmentUnit"
-                                type="text"
-                            />
 
                             <BootstrapSingleSelect
                                 borderColour="border-successs"

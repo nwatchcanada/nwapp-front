@@ -81,6 +81,23 @@ class RegisterStep3Component extends Component {
                                 </div>
                             </div>
 
+                            <div className="row">
+                                <div className="col-4">
+
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-success"
+                                        error={errors.apartmentUnit}
+                                        label="Apt. Unit"
+                                        onChange={onTextChange}
+                                        value={apartmentUnit}
+                                        name="apartmentUnit"
+                                        type="text"
+                                    />
+
+                                </div>
+                            </div>
+
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
@@ -115,25 +132,6 @@ class RegisterStep3Component extends Component {
                                     type="text"
                                 />
                             }
-
-                            <div className="row">
-                                <div className="col-4">
-
-                                    <BootstrapInput
-                                        inputClassName="form-control form-control-lg"
-                                        borderColour="border-success"
-                                        error={errors.apartmentUnit}
-                                        label="Apt. Unit"
-                                        onChange={onTextChange}
-                                        value={apartmentUnit}
-                                        name="apartmentUnit"
-                                        type="text"
-                                    />
-
-                                </div>
-                            </div>
-
-
 
                             <BootstrapSingleSelect
                                 borderColour="border-successs"
