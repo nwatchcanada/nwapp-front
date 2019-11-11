@@ -63,7 +63,8 @@ class MemberCreateStep4BizContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(member) {
-        this.props.history.push("/members/add/step-5");
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.history.push("/member/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {

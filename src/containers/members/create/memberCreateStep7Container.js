@@ -291,7 +291,6 @@ class MemberCreateStep7Container extends Component {
                 expectation={expectation}
                 expectationOptions={expectationOptions}
                 expectationOther={expectationOther}
-                expectationOptions={expectationOptions}
                 expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}

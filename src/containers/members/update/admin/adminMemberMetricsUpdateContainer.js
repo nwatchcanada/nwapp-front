@@ -9,6 +9,8 @@ import {
 } from '../../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../../actions/howHearAction";
 import { getTagReactSelectOptions } from "../../../../actions/tagAction";
+import { getMeaningReactSelectOptions } from "../../../../actions/meaningAction";
+import { getExpectationReactSelectOptions } from "../../../../actions/expectationAction";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -24,20 +26,10 @@ class AdminMemberMetricsUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Get the type of.
         const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
-        let returnURL;
-        if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-4-rez-or-cc";
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-4-biz";
-        }
-
+        const { slug } = this.props.match.params;
         this.state = {
-            returnURL: returnURL,
-            typeOf: typeOf,
+            slug: slug,
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
             birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
             gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
@@ -45,7 +37,9 @@ class AdminMemberMetricsUpdateContainer extends Component {
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
             meaning: localStorage.getItem("nwapp-create-member-meaning"),
-            expectations: localStorage.getItem("nwapp-create-member-expectations"),
+            meaningOther: localStorage.getItem("nwapp-create-member-meaningOther"),
+            expectation: localStorage.getItem("nwapp-create-member-expectation"),
+            expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
@@ -96,6 +90,42 @@ class AdminMemberMetricsUpdateContainer extends Component {
                     name: 'Fitness',
                     slug: 'fitness'
                 }]
+            },
+            meaningData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Crime & Safety Resources',
+                    slug: "2"
+                },{
+                    name: 'Greater access to Police services',
+                    slug: "3"
+                },{
+                    name: 'Community Events',
+                    slug: "4"
+                },{
+                    name: 'Volunteer opportunities',
+                    slug: "5"
+                },{
+                    name: 'Other',
+                    slug: "1"
+                }]
+            },
+            expectationData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Some reason #1',
+                    slug: "2"
+                },{
+                    name: 'Some reason #2',
+                    slug: "3"
+                },{
+                    name: 'Some reason #3',
+                    slug: "4"
+                },{
+                    name: 'Some reason #4',
+                    slug: "5"
+                },{
+                    name: 'Other',
+                    slug: "1"
+                }]
             }
         });
     }
@@ -116,7 +146,7 @@ class AdminMemberMetricsUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-8");
+        this.props.history.push("/member/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -221,7 +251,7 @@ class AdminMemberMetricsUpdateContainer extends Component {
 
     render() {
         const {
-            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
+            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             errors
@@ -229,6 +259,8 @@ class AdminMemberMetricsUpdateContainer extends Component {
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+        const meaningOptions = getMeaningReactSelectOptions(this.state.meaningData, "meaning");
+        const expectationOptions = getMeaningReactSelectOptions(this.state.expectationData, "expectation");
 
         return (
             <AdminMemberMetricsUpdateComponent
@@ -244,7 +276,12 @@ class AdminMemberMetricsUpdateContainer extends Component {
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
                 meaning={meaning}
-                expectations={expectations}
+                meaningOptions={meaningOptions}
+                meaningOther={meaningOther}
+                expectation={expectation}
+                expectationOptions={expectationOptions}
+                expectationOther={expectationOther}
+                expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}

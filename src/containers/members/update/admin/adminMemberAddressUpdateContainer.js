@@ -25,19 +25,11 @@ class MemberCreateStep5Container extends Component {
     constructor(props) {
         super(props);
 
-        // Get the type of.
         const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
-        let returnURL;
-        if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-4-rez-or-cc";
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-4-biz";
-        }
+        const { slug } = this.props.match.params;
 
         this.state = {
-            returnURL: returnURL,
-            typeOf: typeOf,
+            slug: slug,
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
             streetType: localStorage.getItem("nwapp-create-member-streetType"),
@@ -83,7 +75,7 @@ class MemberCreateStep5Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-6");
+        this.props.history.push("/member/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {
