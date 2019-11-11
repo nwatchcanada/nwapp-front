@@ -14,7 +14,7 @@ export default class RegisterStep5Component extends Component {
     render() {
         const {
             typeOf, returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            meaning, meaningOptions, meaningOther, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -165,16 +165,29 @@ export default class RegisterStep5Component extends Component {
                                 />
                             }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
+                            <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                error={errors.meaning}
                                 label="What does NW mean to you (*)"
-                                onChange={onTextChange}
-                                value={meaning}
                                 name="meaning"
-                                type="text"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={meaningOptions}
+                                value={meaning}
+                                error={errors.meaning}
+                                onSelectChange={onSelectChange}
                             />
+
+                            {meaning === "1" &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.meaningOther}
+                                    label="Please select how you heard about us - Other (*)"
+                                    onChange={onTextChange}
+                                    value={meaningOther}
+                                    name="meaningOther"
+                                    type="text"
+                                />
+                            }
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"

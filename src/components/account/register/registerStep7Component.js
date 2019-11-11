@@ -19,7 +19,7 @@ export default class RegisterStep7Component extends Component {
             streetNumber, streetName, apartmentUnit, streetType, streetTypeOther, streetDirection, postalCode,
             watchSlug, watchIcon, watchName,
             tags, birthYear, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
-            meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            meaning, meaningLabel, meaningOther, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             agreement,
         } = this.props;
@@ -281,7 +281,12 @@ export default class RegisterStep7Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">What does NW mean to you?</th>
-                                    <td>{meaning}</td>
+                                    <td>
+                                        {meaning === "1"
+                                            ?meaningOther
+                                            :meaningLabel
+                                        }
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">What do you expect from NW?</th>

@@ -8,6 +8,7 @@ import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
 import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import {
     RESIDENCE_TYPE_OF,
@@ -26,7 +27,7 @@ class RegisterStep5Container extends Component {
         super(props);
 
         // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
+        const typeOf = parseInt(localStorage.getItem("nwapp-register-member-typeOf"));
         let returnURL;
         if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
             returnURL = "/members/add/step-4-rez-or-cc";
@@ -38,21 +39,22 @@ class RegisterStep5Container extends Component {
         this.state = {
             returnURL: returnURL,
             typeOf: typeOf,
-            tags: localStorageGetArrayItem("nwapp-create-member-tags"),
-            birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
-            gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
-            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
-            howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
-            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
-            meaning: localStorage.getItem("nwapp-create-member-meaning"),
-            expectations: localStorage.getItem("nwapp-create-member-expectations"),
-            willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
-            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
-            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
-            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-companyYearsInOperation")),
-            companyType: localStorage.getItem("nwapp-create-member-companyType"),
+            tags: localStorageGetArrayItem("nwapp-register-member-tags"),
+            birthYear: localStorage.getItem("nwapp-register-member-birthYear"),
+            gender: parseInt(localStorage.getItem("nwapp-register-member-gender")),
+            howDidYouHear: localStorage.getItem("nwapp-register-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('nwapp-register-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("nwapp-register-member-howDidYouHearOther"),
+            meaning: localStorage.getItem("nwapp-register-member-meaning"),
+            meaningOther: localStorage.getItem("nwapp-register-member-meaningOther"),
+            expectations: localStorage.getItem("nwapp-register-member-expectations"),
+            willingToVolunteer: parseInt(localStorage.getItem("nwapp-register-member-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-register-member-anotherHouseholdMemberRegistered")),
+            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-register-member-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-register-member-under18YearsHouseholdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-register-member-under18YearsHouseholdCount")),
+            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-register-member-companyYearsInOperation")),
+            companyType: localStorage.getItem("nwapp-register-member-companyType"),
             errors: {},
             isLoading: false
         }
@@ -95,6 +97,24 @@ class RegisterStep5Container extends Component {
                 },{
                     name: 'Fitness',
                     slug: 'fitness'
+                }]
+            },
+            meaningData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Crime & Safety Resources',
+                    slug: "2"
+                },{
+                    name: 'Greater access to Police services',
+                    slug: "3"
+                },{
+                    name: 'Community Events',
+                    slug: "4"
+                },{
+                    name: 'Volunteer opportunities',
+                    slug: "5"
+                },{
+                    name: 'Other',
+                    slug: "1"
                 }]
             }
         });
@@ -140,7 +160,7 @@ class RegisterStep5Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-register-member-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -149,16 +169,16 @@ class RegisterStep5Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString(), option.value);
-        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString()+"Label", option.label);
-        localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
+        localStorage.setItem('nwapp-register-member-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-register-member-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-register-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "nwapp-create-member-"+[e.target.name];
-        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
+        const storageValueKey = "nwapp-register-member-"+[e.target.name];
+        const storageLabelKey =  "nwapp-register-member-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
@@ -191,7 +211,7 @@ class RegisterStep5Container extends Component {
         });
 
         // // Set all the tags we have selected to the STORAGE.
-        const key = 'nwapp-create-member-' + args[1].name;
+        const key = 'nwapp-register-member-' + args[1].name;
         localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
@@ -221,7 +241,7 @@ class RegisterStep5Container extends Component {
 
     render() {
         const {
-            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, expectations,
+            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, meaningOther, expectations,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             errors
@@ -229,6 +249,7 @@ class RegisterStep5Container extends Component {
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+        const meaningOptions = getMeaningReactSelectOptions(this.state.meaningData, "meaning");
 
         return (
             <AdminMemberMetricsUpdateComponent
@@ -244,6 +265,8 @@ class RegisterStep5Container extends Component {
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
                 meaning={meaning}
+                meaningOptions={meaningOptions}
+                meaningOther={meaningOther}
                 expectations={expectations}
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}

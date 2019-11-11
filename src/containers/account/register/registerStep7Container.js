@@ -55,16 +55,18 @@ class RegisterStep7Container extends Component {
             watchSlug: localStorage.getItem('nwapp-register-watch-slug'),
             watchIcon: localStorage.getItem('nwapp-register-watch-icon'),
             watchName: localStorage.getItem('nwapp-register-watch-name'),
-            tags: localStorageGetArrayItem("nwapp-register-tags"),
+            tags: localStorageGetArrayItem("nwapp-register-member-tags"),
             birthYear: localStorage.getItem("nwapp-register-birthYear"),
-            gender: parseInt(localStorage.getItem("nwapp-register-gender")),
-            genderLabel: localStorage.getItem("nwapp-register-gender-label"),
-            howDidYouHear: localStorage.getItem("nwapp-register-howDidYouHear"),
-            howDidYouHearLabel: localStorage.getItem("nwapp-register-howDidYouHearLabel"),
+            gender: parseInt(localStorage.getItem("nwapp-register-member-gender")),
+            genderLabel: localStorage.getItem("nwapp-register-member-gender-label"),
+            howDidYouHear: localStorage.getItem("nwapp-register-member-howDidYouHear"),
+            howDidYouHearLabel: localStorage.getItem("nwapp-register-member-howDidYouHearLabel"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-register-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-register-howDidYouHearOther"),
-            meaning: localStorage.getItem("nwapp-register-meaning"),
-            expectations: localStorage.getItem("nwapp-register-expectations"),
+            meaning: localStorage.getItem("nwapp-register-member-meaning"),
+            meaningLabel: localStorage.getItem("nwapp-register-member-meaningLabel"),
+            meaningOther: localStorage.getItem("nwapp-register-member-meaningOther"),
+            expectations: localStorage.getItem("nwapp-register-member-expectations"),
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-register-willingToVolunteer")),
             willingToVolunteerLabel: localStorage.getItem("nwapp-register-willingToVolunteer-label"),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-register-anotherHouseholdMemberRegistered")),
@@ -131,7 +133,7 @@ class RegisterStep7Container extends Component {
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
             watchSlug, watchIcon, watchName,
-            tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, expectations,
+            tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, meaningLabel, meaningOther, expectations,
             willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.state;
@@ -169,6 +171,8 @@ class RegisterStep7Container extends Component {
                 howDidYouHearLabel={howDidYouHearLabel}
                 howDidYouHearOther={howDidYouHearOther}
                 meaning={meaning}
+                meaningLabel={meaningLabel}
+                meaningOther={meaningOther}
                 expectations={expectations}
                 willingToVolunteer={willingToVolunteer}
                 willingToVolunteerLabel={willingToVolunteerLabel}
