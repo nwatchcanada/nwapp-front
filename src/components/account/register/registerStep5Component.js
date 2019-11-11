@@ -14,7 +14,7 @@ export default class RegisterStep5Component extends Component {
     render() {
         const {
             typeOf, returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, meaningOptions, meaningOther, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            meaning, meaningOptions, meaningOther, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -189,16 +189,29 @@ export default class RegisterStep5Component extends Component {
                                 />
                             }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
+                            <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                error={errors.expectations}
                                 label="What do you expect from NW? (*)"
-                                onChange={onTextChange}
-                                value={expectations}
-                                name="expectations"
-                                type="text"
+                                name="expectation"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={expectationOptions}
+                                value={expectation}
+                                error={errors.expectation}
+                                onSelectChange={onSelectChange}
                             />
+
+                            {expectation === "1" &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.expectationOther}
+                                    label="What do you expect from NW - Other? (*)"
+                                    onChange={onTextChange}
+                                    value={expectationOther}
+                                    name="expectationOther"
+                                    type="text"
+                                />
+                            }
 
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"

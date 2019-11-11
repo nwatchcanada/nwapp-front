@@ -14,7 +14,7 @@ export default class MemberCreateStep7Component extends Component {
     render() {
         const {
             typeOf, returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            meaning, meaningOptions, meaningOther, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -165,27 +165,53 @@ export default class MemberCreateStep7Component extends Component {
                                 />
                             }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
+                            <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                error={errors.meaning}
                                 label="What does NW mean to you (*)"
-                                onChange={onTextChange}
-                                value={meaning}
                                 name="meaning"
-                                type="text"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={meaningOptions}
+                                value={meaning}
+                                error={errors.meaning}
+                                onSelectChange={onSelectChange}
                             />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
+                            {meaning === "1" &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.meaningOther}
+                                    label="Please select how you heard about us - Other (*)"
+                                    onChange={onTextChange}
+                                    value={meaningOther}
+                                    name="meaningOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                error={errors.expectations}
                                 label="What do you expect from NW? (*)"
-                                onChange={onTextChange}
-                                value={expectations}
-                                name="expectations"
-                                type="text"
+                                name="expectation"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={expectationOptions}
+                                value={expectation}
+                                error={errors.expectation}
+                                onSelectChange={onSelectChange}
                             />
+
+                            {expectation === "1" &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.expectationOther}
+                                    label="What do you expect from NW - Other? (*)"
+                                    onChange={onTextChange}
+                                    value={expectationOther}
+                                    name="expectationOther"
+                                    type="text"
+                                />
+                            }
 
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"

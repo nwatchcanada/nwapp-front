@@ -9,6 +9,7 @@ import {
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
+import { getExpectationReactSelectOptions } from "../../../actions/expectationAction";
 import { getTagReactSelectOptions } from "../../../actions/tagAction";
 import {
     RESIDENCE_TYPE_OF,
@@ -47,7 +48,8 @@ class RegisterStep5Container extends Component {
             howDidYouHearOther: localStorage.getItem("nwapp-register-member-howDidYouHearOther"),
             meaning: localStorage.getItem("nwapp-register-member-meaning"),
             meaningOther: localStorage.getItem("nwapp-register-member-meaningOther"),
-            expectations: localStorage.getItem("nwapp-register-member-expectations"),
+            expectation: localStorage.getItem("nwapp-register-member-expectation"),
+            expectationOther: localStorage.getItem("nwapp-register-member-expectationOther"),
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-register-member-willingToVolunteer")),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-register-member-anotherHouseholdMemberRegistered")),
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-register-member-totalHouseholdCount")),
@@ -111,6 +113,24 @@ class RegisterStep5Container extends Component {
                     slug: "4"
                 },{
                     name: 'Volunteer opportunities',
+                    slug: "5"
+                },{
+                    name: 'Other',
+                    slug: "1"
+                }]
+            },
+            expectationData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Some reason #1',
+                    slug: "2"
+                },{
+                    name: 'Some reason #2',
+                    slug: "3"
+                },{
+                    name: 'Some reason #3',
+                    slug: "4"
+                },{
+                    name: 'Some reason #4',
                     slug: "5"
                 },{
                     name: 'Other',
@@ -241,7 +261,7 @@ class RegisterStep5Container extends Component {
 
     render() {
         const {
-            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, meaningOther, expectations,
+            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             errors
@@ -250,6 +270,7 @@ class RegisterStep5Container extends Component {
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
         const meaningOptions = getMeaningReactSelectOptions(this.state.meaningData, "meaning");
+        const expectationOptions = getMeaningReactSelectOptions(this.state.expectationData, "expectation");
 
         return (
             <AdminMemberMetricsUpdateComponent
@@ -267,7 +288,11 @@ class RegisterStep5Container extends Component {
                 meaning={meaning}
                 meaningOptions={meaningOptions}
                 meaningOther={meaningOther}
-                expectations={expectations}
+                expectation={expectation}
+                expectationOptions={expectationOptions}
+                expectationOther={expectationOther}
+                expectationOptions={expectationOptions}
+                expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}

@@ -112,8 +112,8 @@ export function validateInput(data) {
     if (data.meaning === undefined || data.meaning === null || data.meaning === "") {
         errors.meaning = 'This field is required';
     }
-    if (data.expectations === undefined || data.expectations === null || data.expectations === "") {
-        errors.expectations = 'This field is required';
+    if (data.expectation === undefined || data.expectation === null || data.expectation === "") {
+        errors.expectation = 'This field is required';
     }
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
@@ -283,8 +283,8 @@ export function validateStep7CreateInput(data) {
     if (data.meaning === undefined || data.meaning === null || data.meaning === "") {
         errors.meaning = 'This field is required';
     }
-    if (data.expectations === undefined || data.expectations === null || data.expectations === "") {
-        errors.expectations = 'This field is required';
+    if (data.expectation === undefined || data.expectation === null || data.expectation === "") {
+        errors.expectation = 'This field is required';
     }
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
