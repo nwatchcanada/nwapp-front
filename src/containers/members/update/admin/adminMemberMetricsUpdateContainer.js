@@ -281,7 +281,6 @@ class AdminMemberMetricsUpdateContainer extends Component {
                 expectation={expectation}
                 expectationOptions={expectationOptions}
                 expectationOther={expectationOther}
-                expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
