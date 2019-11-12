@@ -227,6 +227,31 @@ const AUTH_MEMBER_MENU_DATA = [
         title: "Dashboard",
         url: "/dashboard"
     },{
+        id: "full-item",
+        icon: "map-pin",
+        title: "Items",
+        url: "/item"
+    },{
+        id: "full-resources",
+        icon: "atlas",
+        title: "Resources",
+        url: "/help"
+    },{
+        id: "full-perks",
+        icon: "pepper-hot",
+        title: "Perks",
+        url: "/perks"
+    },{
+        id: "full-donate",
+        icon: "donate",
+        title: "Donate",
+        url: "/donate"
+    },{
+        id: "full-profile",
+        icon: "user-circle",
+        title: "Profile",
+        url: "/profile"
+    },{
         id: "full-help",
         icon: "question-circle",
         title: "Help",
