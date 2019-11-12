@@ -159,12 +159,14 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         icon: "user-tie",
         title: "Staff",
         url: "/staff"
-    },{
-        id: "full-settings",
-        icon: "cogs",
-        title: "Settings",
-        url: "/settings"
-    },{
+    },
+    // {
+    //     id: "full-settings", // https://github.com/nwatchcanada/nwapp-front/issues/181
+    //     icon: "cogs",
+    //     title: "Settings",
+    //     url: "/settings"
+    // }
+    ,{
         id: "full-help",
         icon: "question-circle",
         title: "Help",
