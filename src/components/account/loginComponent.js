@@ -34,7 +34,7 @@ class LoginComponent extends Component {
             <AlertComponent />
             <div className="row">
                 <div className="col-sm-12 text-center">
-                <img className="img-fluid" src="/img/nwl-logo.png" alt="Logo" width="180px" /></div>
+                <img className="img-fluid" src="/img/nwl-logo.png" alt="Workery Logo" width="180px" /></div>
             </div>
             <div className="row">
                 <div className="col-sm-5 mx-auto">
@@ -47,7 +47,7 @@ class LoginComponent extends Component {
                         <BootstrapInputGroup
                             layoutSize="large"
                             labelIconClassName="fa fa-envelope color-blue"
-						    spanPrependClassName="input-group-text input-group-addon-e"	
+							spanPrependClassName="input-group-text input-group-addon-e"
                             name="email"
                             type="email"
                             placeholder="Email Address"
@@ -59,8 +59,8 @@ class LoginComponent extends Component {
 
                         <BootstrapInputGroup
                             layoutSize="large"
-                            labelIconClassName="fa fa-key color-blue" 
-						    spanPrependClassName="input-group-text input-group-addon-p" 
+                            labelIconClassName="fa fa-key color-blue"
+							spanPrependClassName="input-group-text input-group-addon-p"
                             name="password"
                             type="password"
                             placeholder="Password"
@@ -81,11 +81,11 @@ class LoginComponent extends Component {
                         <input
                             type="submit"
                             value="Sign In"
-                            className="btn btn-lg btn-dark-blue btn-fxw px-5 d-block mx-auto"
+                            className="btn btn-lg btn-info btn-fxw px-5 d-block mx-auto"
                             disabled={isLoading}
                         />
                         <h5 className="text-center mt-3 mb-3">
-                            <Link to="/send-password-reset" className="text-primary plain-link">Forgot Password?</Link>
+                            <Link to="/send-password-reset" className="text-info plain-link">Forgot Password?</Link>
                         </h5>
 
                     </form>

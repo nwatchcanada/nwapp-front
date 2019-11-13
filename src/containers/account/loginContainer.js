@@ -69,15 +69,18 @@ class LoginContainer extends Component {
      *  to the user's respected dashboard belonging to the tenant they belong to.
      */
     onSuccessfulSubmissionCallback(profile) {
+        console.log(profile); // For debugging purposes.
+
         this.setState({ errors: {}, });
-        const { tenantSchema, groupId } = profile;
-        if (groupId === EXECUTIVE_GROUP_ID) {
+        const { schemaName } = profile;
+        if (schemaName === null || schemaName === undefined || schemaName === "null") {
             const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + process.env.REACT_APP_WWW_DOMAIN + "/organizations";
+            console.log(location);
             window.location = location; // Do not use `react-router-dom` library.
         } else {
             const accessToken = getAccessTokenFromLocalStorage();
             const refreshToken = getRefreshTokenFromLocalStorage();
-            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + tenantSchema + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken+"/"+refreshToken;
+            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + schemaName + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken+"/"+refreshToken;
             window.location = location; // Do not use `react-router-dom` library.
         }
     }
@@ -118,9 +121,11 @@ class LoginContainer extends Component {
             // Clear any and all flash messages in our queue to be rendered.
             this.props.clearFlashMessage();
 
+            const email = this.state.email.toLowerCase();
+
             this.setState({ errors: {}, isLoading: true, })
             this.props.postLogin(
-                this.state.email,
+                email,
                 this.state.password,
                 this.onSuccessfulSubmissionCallback,
                 this.onFailedSubmissionCallback
