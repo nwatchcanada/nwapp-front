@@ -207,6 +207,31 @@ const AUTH_AREA_COORDINATOR_MENU_DATA = [
         title: "Dashboard",
         url: "/dashboard"
     },{
+        id: "full-items",
+        icon: "map-pin",
+        title: "Items",
+        url: "/items"
+    },{
+        id: "full-watches",
+        icon: "shield-alt",
+        title: "Watches",
+        url: "/watches"
+    },{
+        id: "full-resources",
+        icon: "atlas",
+        title: "Resources",
+        url: "/resources"
+    },{
+        id: "full-newspaper",
+        icon: "newspaper",
+        title: "News",
+        url: "/news"
+    },{
+        id: "full-perks",
+        icon: "pepper-hot",
+        title: "Perks",
+        url: "/perks"
+    },{
         id: "full-help",
         icon: "question-circle",
         title: "Help",
@@ -235,7 +260,7 @@ const AUTH_MEMBER_MENU_DATA = [
         id: "full-resources",
         icon: "atlas",
         title: "Resources",
-        url: "/help"
+        url: "/resources"
     },{
         id: "full-perks",
         icon: "pepper-hot",
