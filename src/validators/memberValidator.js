@@ -343,6 +343,9 @@ export function validatePromotionInput(data) {
                 errors.associateAgreement = 'This field is required';
             }
         }
+        if (data.policeCheckDate === undefined || data.policeCheckDate === null || data.policeCheckDate === "" || isNaN(data.policeCheckDate)) {
+            errors.policeCheckDate = 'This field is required.';
+        }
     }
 
     return {
