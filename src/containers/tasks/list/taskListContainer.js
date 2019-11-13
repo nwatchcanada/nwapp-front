@@ -55,9 +55,16 @@ class TaskListContainer extends Component {
             'slug': 'delta-task-3',
             'dueDate': "March 2, 2019",
             'taskName': "Action a NW concern item",
-            "watchName": "Carling",
+            "watchName": "Delta",
             "category": "unassigned",
             "typeOf": "action-concern-item",
+        },{
+            'slug': 'gamma-task-4',
+            'dueDate': "January 2, 2019",
+            'taskName': "Action a NW incident item",
+            "watchName": "Gamma",
+            "category": "unassigned",
+            "typeOf": "action-incident-item",
         }];
         this.setState({
             tasks: tasks,

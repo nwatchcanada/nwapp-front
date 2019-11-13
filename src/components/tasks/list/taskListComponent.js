@@ -157,6 +157,9 @@ function linkFormatter(cell, row){
         case "action-concern-item":
             typeOfID = 3;
             break;
+        case "action-incident-item":
+            typeOfID = 4;
+            break;
         default:
            typeOfID = 0;
            break;
