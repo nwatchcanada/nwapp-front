@@ -13,7 +13,7 @@ import {
     setAccessTokenInLocalStorage,
     setRefreshTokenInLocalStorage,
     attachAxiosRefreshTokenHandler
-} from '../helpers/jwtUtility';
+} from '../helpers/tokenUtility';
 import { getAPIBaseURL } from '../helpers/urlUtility';
 
 

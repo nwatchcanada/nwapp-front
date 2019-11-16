@@ -7,7 +7,7 @@ import LoginComponent from '../../components/account/loginComponent';
 import validateInput from "../../validators/loginValidator";
 import { postLogin } from "../../actions/loginAction";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
-import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../helpers/jwtUtility';
+import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../helpers/tokenUtility';
 
 
 class LoginContainer extends Component {
@@ -73,14 +73,25 @@ class LoginContainer extends Component {
 
         this.setState({ errors: {}, });
         const { schemaName } = profile;
-        if (schemaName === null || schemaName === undefined || schemaName === "null") {
+        if (schemaName === null || schemaName === undefined || schemaName === "null" || schemaName === "public") {
             const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + process.env.REACT_APP_WWW_DOMAIN + "/organizations";
+
+            // For debugging purposes only.
             console.log(location);
+
+            // Redirect to our new page.
             window.location = location; // Do not use `react-router-dom` library.
         } else {
             const accessToken = getAccessTokenFromLocalStorage();
             const refreshToken = getRefreshTokenFromLocalStorage();
-            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + schemaName + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken+"/"+refreshToken;
+            const location = process.env.REACT_APP_WWW_PROTOCOL + "://" + schemaName + "." + process.env.REACT_APP_WWW_DOMAIN + "/dashboard-redirect/"+accessToken.token+"/"+refreshToken.token;
+
+            // For debugging purposes only.
+            console.log(accessToken);
+            console.log(refreshToken);
+            console.log(location);
+
+            // Redirect to our new page.
             window.location = location; // Do not use `react-router-dom` library.
         }
     }

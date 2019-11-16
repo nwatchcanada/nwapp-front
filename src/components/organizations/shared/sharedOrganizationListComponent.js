@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { FlashMessageComponent } from "../../flashMessageComponent";
-import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../../helpers/jwtUtility';
+import { getAccessTokenFromLocalStorage, getRefreshTokenFromLocalStorage } from '../../../helpers/tokenUtility';
 
 
 class TableRow extends Component {
@@ -13,7 +13,7 @@ class TableRow extends Component {
 
         // Generate our redirect address.
         const absoluteUrl =  process.env.REACT_APP_WWW_PROTOCOL + "://" + schema + "." +process.env.REACT_APP_WWW_DOMAIN+"/dashboard"+"-redirect/"+accessToken+"/"+refreshToken;
-        
+
         return (
             <tr>
                 <td>{schema}</td>

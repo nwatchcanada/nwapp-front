@@ -7,7 +7,7 @@ import { TENANT_LIST_REQUEST, TENANT_LIST_FAILURE, TENANT_LIST_SUCCESS } from '.
 // import { NWAPP_TENANT_LIST_API_URL } from '../constants/api';
 import {
     getAccessTokenFromLocalStorage, attachAxiosRefreshTokenHandler
-} from '../helpers/jwtUtility';
+} from '../helpers/tokenUtility';
 import { getAPIBaseURL } from '../helpers/urlUtility';
 import { NWAPP_TENANT_LIST_API_ENDPOINT } from "../constants/api"
 

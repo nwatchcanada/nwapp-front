@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { pullProfile } from "../../actions/profileAction";
 import TenantRedirectComponent from "../../components/dashboard/tenantRedirectComponent";
-import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../../helpers/jwtUtility';
+import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../../helpers/tokenUtility';
 
 
 class TenantDashboardRedirectContainer extends Component {

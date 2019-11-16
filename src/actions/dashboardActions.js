@@ -7,7 +7,7 @@ import { DASHBOARD_REQUEST, DASHBOARD_FAILURE, DASHBOARD_SUCCESS } from '../cons
 // import { NWAPP_DASHBOARD_API_URL } from '../constants/api';
 import {
     getAccessTokenFromLocalStorage, attachAxiosRefreshTokenHandler
-} from '../helpers/jwtUtility';
+} from '../helpers/tokenUtility';
 import { getAPIBaseURL } from '../helpers/urlUtility';
 import { NWAPP_DASHBOARD_API_ENDPOINT } from "../constants/api"
 
