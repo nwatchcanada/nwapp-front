@@ -26,7 +26,7 @@ import RegisterStep7Container from "./account/register/registerStep7Container";
 
 // import ActivateContainer from "./account/activateContainer";
 // import ReferralContainer from "./account/referralContainer";
-import SharedOrganizationListContainer from "./organization/shared/sharedOrganizationListContainer";
+import SharedOrganizationListContainer from "./organization/shared/list/sharedOrganizationListContainer";
 import SharedOrganizationCreateContainer from "./organization/shared/sharedOrganizationCreateContainer";
 import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
