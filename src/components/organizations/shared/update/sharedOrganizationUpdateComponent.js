@@ -1,35 +1,38 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect';
-import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect';
-import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect';
+import { BootstrapRegionSelect } from '../../../bootstrap/bootstrapRegionSelect';
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 
 
-class SharedOrganizationCreateComponent extends Component {
+class SharedOrganizationUpdateComponent extends Component {
     render() {
         const {
-            schema, name, description, country, region, timezone, timezoneOptions, errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, locality, onClick, onCancelClick
+            schemaName, name, alternateName, description, country, region, locality, streetAddress, postalCode, timezone, timezoneOptions,
+            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onCancelClick
         } = this.props;
         return (
             <div>
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                            <Link to="/organizations"><i className="fas fa-building"></i>&nbsp;Organizations</Link>
                         </li>
-                        <li className="breadcrumb-item active" aria-current="page"><i className="fas fa-plus"></i>&nbsp;Add</li>
+                        <li className="breadcrumb-item active" aria-current="page"><i className="fas fa-edit"></i>&nbsp;Edit Organization</li>
                     </ol>
                 </nav>
-                <h1><i className="fas fa-plus"></i>&nbsp;Add Organization</h1>
+                <h1><i className="fas fa-edit"></i>&nbsp;Edit Organization</h1>
 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Join and grow with us</h1>
+                            <h1>Update Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -37,13 +40,14 @@ class SharedOrganizationCreateComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.schema}
+                                error={errors.schemaName}
                                 label="Schema (*)"
                                 onChange={onTextChange}
-                                value={schema}
-                                name="schema"
+                                value={schemaName}
+                                name="schemaName"
                                 type="text"
-                                helpText="This is the subdomain associated with the tenant. Value must be uniue and cannot be changed afterwords!"
+                                helpText="This is the subdomain clientd with the tenant. Value must be uniue and cannot be changed afterwords!"
+                                disabled={true}
                             />
 
                             <BootstrapInput
@@ -56,6 +60,18 @@ class SharedOrganizationCreateComponent extends Component {
                                 name="name"
                                 type="text"
                                 helpText="Please specify the full legal name as found on documents"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.alternateName}
+                                label="Alternate Name (*)"
+                                onChange={onTextChange}
+                                value={alternateName}
+                                name="alternateName"
+                                type="text"
+                                helpText="Please specify the alternate name"
                             />
 
                             <BootstrapTextarea
@@ -102,6 +118,28 @@ class SharedOrganizationCreateComponent extends Component {
                                 type="text"
                             />
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetAddress}
+                                label="Street Address (*)"
+                                onChange={onTextChange}
+                                value={streetAddress}
+                                name="streetAddress"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.postalCode}
+                                label="Postal Code (*)"
+                                onChange={onTextChange}
+                                value={postalCode}
+                                name="postalCode"
+                                type="text"
+                            />
+
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
                                 label="Timezone (*)"
@@ -131,4 +169,4 @@ class SharedOrganizationCreateComponent extends Component {
     }
 }
 
-export default SharedOrganizationCreateComponent;
+export default SharedOrganizationUpdateComponent;

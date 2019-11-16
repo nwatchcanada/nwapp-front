@@ -41,7 +41,7 @@ class RemoteListComponent extends Component {
             text: 'name',
             sort: true
         },{
-            dataField: 'id',
+            dataField: 'schemaName',
             text: '',
             sort: false,
             formatter: detailLinkFormatter
@@ -103,7 +103,7 @@ function detailLinkFormatter(cell, row){
 
     return (
         <div>
-            <a href={`/organization/${row.id}/update`}><i className="fas fa-edit"></i>&nbsp;Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href={`/organization/${row.schemaName}/update`}><i className="fas fa-edit"></i>&nbsp;Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href={absoluteUrl}>View&nbsp;<i className="fas fa-chevron-right"></i></a>
         </div>
     )

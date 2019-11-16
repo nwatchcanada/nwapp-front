@@ -181,7 +181,7 @@ export function postTenantDetail(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullTenantDetail(id, onSuccessCallback, onFailureCallback) {
+export function pullTenantDetail(schemaName, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -191,7 +191,7 @@ export function pullTenantDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = NWAPP_TENANT_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = NWAPP_TENANT_DETAIL_API_ENDPOINT+schemaName;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -275,7 +275,7 @@ export function putTenantDetail(postData, onSuccessCallback, onFailureCallback) 
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(NWAPP_TENANT_DETAIL_API_ENDPOINT+postData.id+"/", buffer).then( (successResponse) => {
+        customAxios.put(NWAPP_TENANT_DETAIL_API_ENDPOINT+postData.schemaName, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let device = camelizeKeys(responseData);

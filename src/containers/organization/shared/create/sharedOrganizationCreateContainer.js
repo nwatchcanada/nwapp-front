@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import SharedOrganizationCreateComponent from "../../../components/organizations/shared/sharedOrganizationCreateComponent";
-import validateInput from '../../../validators/organizationValidator';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { getTimezoneReactSelectOptions } from "../../../helpers/timezoneUtlity";
+import SharedOrganizationCreateComponent from "../../../../components/organizations/shared/create/sharedOrganizationCreateComponent";
+import validateInput from '../../../../validators/organizationValidator';
+import { getTimezoneReactSelectOptions } from "../../../../helpers/timezoneUtlity";
+import { postTenantDetail } from "../../../../actions/tenantActions";
+
 
 class SharedOrganizationCreateContainer extends Component {
 
@@ -20,15 +21,19 @@ class SharedOrganizationCreateContainer extends Component {
         this.state = {
             schema: '',
             name: '',
+            alternateName: '',
             description: '',
             country: '',
             region: '',
             locality: '',
+            streetAddress: '',
+            postalCode: '',
             timezone: '',
             errors: {},
             isLoading: false,
         }
 
+        this.getPostData = this.getPostData.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onCancelClick = this.onCancelClick.bind(this);
@@ -56,18 +61,50 @@ class SharedOrganizationCreateContainer extends Component {
     }
 
     /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Alternate Name: This field is required.
+        //
+        // Timezone Name: This field is required.
+        postData.timezoneName = this.state.timezone;
+
+        // Street Address: This field is required.
+        postData.addressCountry = this.state.country;
+
+        // Address Region: This field is required.
+        postData.addressRegion = this.state.region
+
+        // Address Locality: This field is required.
+        postData.addressLocality = this.state.locality;
+
+        // Postal Code: This field is required.
+        postData.postalCode = this.state.postalCode;
+
+        // Schema Name: This field is required.
+        postData.schemaName = this.state.schema;
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
+    }
+
+    /**
      *  API callback functions
      *------------------------------------------------------------
      */
 
     onSuccessfulSubmissionCallback() {
-        this.props.setFlashMessage("success", "Organization has been successfully created.");
-        this.props.history.push("/organizations");
+        this.props.history.push("/organization/add-success");
     }
 
     onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors
+            errors: errors, isLoading: false,
         })
 
         // The following code will cause the screen to scroll to the top of
@@ -121,29 +158,18 @@ class SharedOrganizationCreateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            this.setState({ errors: {}, isLoading: true, }, ()=> {
+                this.props.postTenantDetail(
+                    this.getPostData(),
+                    this.onSuccessfulSubmissionCallback,
+                    this.onFailedSubmissionCallback
+                );
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
             this.onFailedSubmissionCallback(errors);
         }
-
-        // validateInput
-        // this.props.postRegister(
-        //     this.state,
-        //     (data) => {
-        //         console.log(data); // Do nothing.
-        //     },
-        //     (data) => {
-        //         console.log(data);
-        //
-        //         // The following code will cause the screen to scroll to the top of
-        //         // the page. Please see ``react-scroll`` for more information:
-        //         // https://github.com/fisshy/react-scroll
-        //         var scroll = Scroll.animateScroll;
-        //         scroll.scrollToTop();
-        //     }
-        // );
     }
 
     /**
@@ -152,18 +178,22 @@ class SharedOrganizationCreateContainer extends Component {
      */
 
     render() {
-        const { schema, name, description, country, region, locality, timezone, errors, isLoading } = this.state;
-        const timezoneOptions = getTimezoneReactSelectOptions();
+        const {
+            schema, name, alternateName, description, country, region, locality, streetAddress, postalCode, timezone, errors, isLoading
+        } = this.state;
         return (
             <SharedOrganizationCreateComponent
                 schema={schema}
                 name={name}
+                alternateName={alternateName}
                 description={description}
                 country={country}
                 region={region}
                 locality={locality}
+                streetAddress={streetAddress}
                 timezone={timezone}
-                timezoneOptions={timezoneOptions}
+                timezoneOptions={getTimezoneReactSelectOptions()}
+                postalCode={postalCode}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}
@@ -185,14 +215,11 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // putDevice: (user, deviceSlug, data, successCallback, errorCallback) => {
-        //     dispatch(
-        //         putDevice(user, deviceSlug, data, successCallback, errorCallback)
-        //     )
-        // },
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
+        postTenantDetail: (postData, successCallback, errorCallback) => {
+            dispatch(
+                postTenantDetail(postData, successCallback, errorCallback)
+            )
+        },
     }
 }
 
