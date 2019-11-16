@@ -34,44 +34,44 @@ export const NWAPP_PURCHASE_DEVICE_API_URL = process.env.REACT_APP_API_HOST+'/ap
  *  The type of choices we have for the `Production` API endpoint for the
  *  `type_of` field.
  */
-export const EXECUTIVE_GROUP_ID = 1
-export const MANAGEMENT_GROUP_ID = 2
-export const FRONTLINE_STAFF_GROUP_ID = 3
-export const ASSOCIATE_GROUP_ID = 4
-export const AREA_COORDINATOR_GROUP_ID = 5
-export const MEMBER_GROUP_ID = 6
-export const ANONYMOUS_GROUP_ID = 0
+export const EXECUTIVE_ROLE_ID = 1
+export const MANAGEMENT_ROLE_ID = 2
+export const FRONTLINE_STAFF_ROLE_ID = 3
+export const ASSOCIATE_ROLE_ID = 4
+export const AREA_COORDINATOR_ROLE_ID = 5
+export const MEMBER_ROLE_ID = 6
+export const ANONYMOUS_ROLE_ID = 0
 export const GROUP_MEMBERSHIP_CHOICES = [
     {
         selectName: "group",
-        value: EXECUTIVE_GROUP_ID,
+        value: EXECUTIVE_ROLE_ID,
         label: "Executive"
     },{
         selectName: "group",
-        value: MANAGEMENT_GROUP_ID,
+        value: MANAGEMENT_ROLE_ID,
         label: "Manager"
     },{
         selectName: "group",
-        value: FRONTLINE_STAFF_GROUP_ID,
+        value: FRONTLINE_STAFF_ROLE_ID,
         label: "Frontline Staff"
     },{
         selectName: "group",
-        value: ASSOCIATE_GROUP_ID,
+        value: ASSOCIATE_ROLE_ID,
         label: "Associate"
     },{
         selectName: "group",
-        value: AREA_COORDINATOR_GROUP_ID,
+        value: AREA_COORDINATOR_ROLE_ID,
         label: "Area Coordinator"
     },{
         selectName: "group",
-        value: MEMBER_GROUP_ID,
+        value: MEMBER_ROLE_ID,
         label: "Member"
     }
 ];
 export const STAFF_GROUP_MEMBERSHIP_IDS_ARRAY = [
-    EXECUTIVE_GROUP_ID,
-    MANAGEMENT_GROUP_ID,
-    FRONTLINE_STAFF_GROUP_ID,
+    EXECUTIVE_ROLE_ID,
+    MANAGEMENT_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
 ];
 
 
@@ -492,11 +492,11 @@ export const GENDER_RADIO_CHOICES = [
 export const TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES = [
     {
         selectName: "accountType",
-        value: MANAGEMENT_GROUP_ID,
+        value: MANAGEMENT_ROLE_ID,
         label: "Management"
     },{
         selectName: "accountType",
-        value: FRONTLINE_STAFF_GROUP_ID,
+        value: FRONTLINE_STAFF_ROLE_ID,
         label: "Frontline Staff"
     }
 ];

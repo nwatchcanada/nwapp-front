@@ -129,7 +129,7 @@ class AreaCoordinatorPromoteStep1Container extends Component {
         };
         return (
             <AreaCoordinatorPromoteStep1Component
-                groupId={this.state.groupId}
+                roleId={this.state.roleId}
                 associateAgreement={this.state.associateAgreement}
                 errors={this.state.errors}
                 slug={this.state.slug}

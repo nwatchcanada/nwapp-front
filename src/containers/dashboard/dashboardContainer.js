@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-    EXECUTIVE_GROUP_ID,
-    MANAGEMENT_GROUP_ID,
-    FRONTLINE_STAFF_GROUP_ID,
-    ASSOCIATE_GROUP_ID,
-    AREA_COORDINATOR_GROUP_ID,
-    MEMBER_GROUP_ID
+    EXECUTIVE_ROLE_ID,
+    MANAGEMENT_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    AREA_COORDINATOR_ROLE_ID,
+    MEMBER_ROLE_ID
 } from '../../constants/api';
 import StaffDashboardComponent from "../../components/dashboard/staffDashboardComponent";
 import AssociateDashboardComponent from "../../components/dashboard/associateDashboardComponent";
@@ -115,9 +115,9 @@ class DashboardContainer extends Component {
                 }
             ]
         };
-        const { groupId } = this.props.user;
+        const { roleId } = this.props.user;
 
-        if (groupId === EXECUTIVE_GROUP_ID) {
+        if (roleId === EXECUTIVE_ROLE_ID) {
             return (
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -126,7 +126,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupId === MANAGEMENT_GROUP_ID) {
+        else if (roleId === MANAGEMENT_ROLE_ID) {
             return (
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -135,7 +135,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupId === FRONTLINE_STAFF_GROUP_ID) {
+        else if (roleId === FRONTLINE_STAFF_ROLE_ID) {
             return (
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -144,7 +144,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupId === ASSOCIATE_GROUP_ID) {
+        else if (roleId === ASSOCIATE_ROLE_ID) {
             return (
                 <AssociateDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -152,7 +152,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupId === AREA_COORDINATOR_GROUP_ID) {
+        else if (roleId === AREA_COORDINATOR_ROLE_ID) {
             return (
                 <AreaCoordinatorDashboardComponent
                     // dashboard={this.props.dashboard}
@@ -161,7 +161,7 @@ class DashboardContainer extends Component {
                 />
             );
         }
-        else if (groupId === MEMBER_GROUP_ID) {
+        else if (roleId === MEMBER_ROLE_ID) {
             return (
                 <MemberDashboardComponent
                     // dashboard={this.props.dashboard}

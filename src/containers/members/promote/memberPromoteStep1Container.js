@@ -80,12 +80,12 @@ class MemberPromoteStep1Container extends Component {
         })
     }
 
-    onClick(e, groupId) {
+    onClick(e, roleId) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
         // Set our promotion group id.
-        localStorage.setItem("nwapp-member-promote-group-id", groupId);
+        localStorage.setItem("nwapp-member-promote-group-id", roleId);
 
         this.props.history.push("/member/"+this.state.slug+"/promote/step-2");
     }

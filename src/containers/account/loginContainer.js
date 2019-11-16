@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import { EXECUTIVE_GROUP_ID } from '../../constants/api';
+import { EXECUTIVE_ROLE_ID } from '../../constants/api';
 import LoginComponent from '../../components/account/loginComponent';
 import validateInput from "../../validators/loginValidator";
 import { postLogin } from "../../actions/loginAction";

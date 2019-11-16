@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { AREA_COORDINATOR_GROUP_ID, ASSOCIATE_GROUP_ID } from "../../../constants/api";
+import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../constants/api";
 
 import { BootstrapCheckbox } from "../../bootstrap/bootstrapCheckbox";
 import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
@@ -12,9 +12,9 @@ export default class MemberPromoteStep2Component extends Component {
     render() {
         const {
             slug, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
-            groupId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, policeCheckDate,
+            roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, policeCheckDate,
         } = this.props;
-        const isAssociate = groupId === ASSOCIATE_GROUP_ID;
+        const isAssociate = roleId === ASSOCIATE_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">

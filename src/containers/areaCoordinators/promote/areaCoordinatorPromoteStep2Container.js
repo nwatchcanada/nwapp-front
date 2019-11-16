@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import { ASSOCIATE_GROUP_ID } from "../../../constants/api";
+import { ASSOCIATE_ROLE_ID } from "../../../constants/api";
 import AreaCoordinatorPromoteStep2Component from "../../../components/areaCoordinators/promote/areaCoordinatorPromoteStep2Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { localStorageGetIntegerItem, localStorageGetBooleanItem, localStorageGetDateItem } from "../../../helpers/localStorageUtility";
@@ -25,7 +25,7 @@ class AreaCoordinatorPromoteStep2Container extends Component {
         this.state = {
             slug: slug,
             errors: [],
-            groupId: ASSOCIATE_GROUP_ID,
+            roleId: ASSOCIATE_ROLE_ID,
             associateAgreement: localStorageGetBooleanItem("nwapp-area-coordinator-promote-associateAgreement"),
         }
 
@@ -93,7 +93,7 @@ class AreaCoordinatorPromoteStep2Container extends Component {
             isLoading: true,
         })
         this.props.setFlashMessage("success", "AreaCoordinator has been successfully promoted.");
-        if (this.state.groupId === ASSOCIATE_GROUP_ID) {
+        if (this.state.roleId === ASSOCIATE_ROLE_ID) {
             this.props.history.push("/associate/"+this.state.slug+"/full");
         } else {
             this.props.history.push("/area-coordinator/"+this.state.slug+"/full");
@@ -117,7 +117,7 @@ class AreaCoordinatorPromoteStep2Container extends Component {
             <AreaCoordinatorPromoteStep2Component
                 slug={this.state.slug}
                 areaCoordinatorData={areaCoordinatorData}
-                groupId={this.state.groupId}
+                roleId={this.state.roleId}
                 areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}

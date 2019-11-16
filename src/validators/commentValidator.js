@@ -3,7 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import {
     RESIDENTIAL_CUSTOMER_TYPE_OF_ID,
     COMMERCIAL_CUSTOMER_TYPE_OF_ID,
-    ASSOCIATE_GROUP_ID
+    ASSOCIATE_ROLE_ID
 } from '../constants/api';
 
 

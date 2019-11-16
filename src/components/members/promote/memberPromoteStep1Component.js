@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { AREA_COORDINATOR_GROUP_ID, ASSOCIATE_GROUP_ID } from "../../../constants/api";
+import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../constants/api";
 
 
 export default class MemberPromoteStep1Component extends Component {
@@ -55,7 +55,7 @@ export default class MemberPromoteStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Area Coordinator</h3>
                                 <p className="card-text">Promote the member to be an area coordinator.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, AREA_COORDINATOR_GROUP_ID) } }>
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, AREA_COORDINATOR_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>
@@ -69,7 +69,7 @@ export default class MemberPromoteStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Associate</h3>
                                 <p className="card-text">Promote the member to be an associate.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, ASSOCIATE_GROUP_ID) } }>
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, ASSOCIATE_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>

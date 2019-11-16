@@ -30,7 +30,7 @@ class MemberPromoteStep2Container extends Component {
         this.state = {
             slug: slug,
             errors: [],
-            groupId: localStorageGetIntegerItem("nwapp-member-promote-group-id"),
+            roleId: localStorageGetIntegerItem("nwapp-member-promote-group-id"),
             areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-member-promote-areaCoordinatorAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-member-promote-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-member-promote-codeOfConductAgreement"),
@@ -143,7 +143,7 @@ class MemberPromoteStep2Container extends Component {
         };
         return (
             <MemberPromoteStep2Component
-                groupId={this.state.groupId}
+                roleId={this.state.roleId}
                 areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}

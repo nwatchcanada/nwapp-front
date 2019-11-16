@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import { AREA_COORDINATOR_GROUP_ID, ASSOCIATE_GROUP_ID } from "../../../constants/api";
+import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../constants/api";
 import MemberPromoteStep3Component from "../../../components/members/promote/memberPromoteStep3Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { localStorageGetIntegerItem, localStorageGetBooleanItem, localStorageGetDateItem } from "../../../helpers/localStorageUtility";
@@ -25,7 +25,7 @@ class MemberPromoteStep2Container extends Component {
         this.state = {
             slug: slug,
             errors: [],
-            groupId: localStorageGetIntegerItem("nwapp-member-promote-group-id"),
+            roleId: localStorageGetIntegerItem("nwapp-member-promote-group-id"),
             areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-member-promote-areaCoordinatorAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-member-promote-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-member-promote-codeOfConductAgreement"),
@@ -98,10 +98,10 @@ class MemberPromoteStep2Container extends Component {
             isLoading: true,
         })
         this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        if (this.state.groupId === AREA_COORDINATOR_GROUP_ID) {
+        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
             this.props.history.push("/area-coordinator/"+this.state.slug+"/full");
         }
-        else if (this.state.groupId === ASSOCIATE_GROUP_ID) {
+        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
             this.props.history.push("/associate/"+this.state.slug+"/full");
         } else {
             this.props.history.push("/member/"+this.state.slug+"/full");
@@ -125,7 +125,7 @@ class MemberPromoteStep2Container extends Component {
             <MemberPromoteStep3Component
                 slug={this.state.slug}
                 memberData={memberData}
-                groupId={this.state.groupId}
+                roleId={this.state.roleId}
                 areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
