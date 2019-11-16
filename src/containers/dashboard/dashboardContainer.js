@@ -116,6 +116,7 @@ class DashboardContainer extends Component {
             ]
         };
         const { groupId } = this.props.user;
+
         if (groupId === EXECUTIVE_GROUP_ID) {
             return (
                 <StaffDashboardComponent

@@ -7,18 +7,18 @@ export const APP_STATE = 'APP_STATE';
  *  The API web-services endpoints.
  */
 export const NWAPP_API_BASE_PATH = '/api'
-export const NWAPP_LOGIN_API_ENDPOINT = '/v1/login';
-export const NWAPP_REFRESH_TOKEN_API_ENDPOINT = '/v1/refresh-token';
-export const NWAPP_PROFILE_API_ENDPOINT = '/v1/profile';
-export const NWAPP_TENANT_LIST_API_ENDPOINT = '/v1/organizations';
-export const NWAPP_TENANT_DETAIL_API_ENDPOINT = '/v1/organization/';
+export const NWAPP_LOGIN_API_ENDPOINT = '/v1/public/login';
+export const NWAPP_REFRESH_TOKEN_API_ENDPOINT = '/v1/public/refresh-token';
+export const NWAPP_PROFILE_API_ENDPOINT = '/v1/public/profile';
+export const NWAPP_TENANT_LIST_API_ENDPOINT = '/v1/public/organizations';
+export const NWAPP_TENANT_DETAIL_API_ENDPOINT = '/v1/public/organization/';
 export const NWAPP_DASHBOARD_API_ENDPOINT = '/v1/dashboard';
 
 
 // OLD - PLEASE DO SOMETHING WITH THESE.
 export const NWAPP_LOGOUT_API_ENDPOINT ='/api/v1/logout';
-export const NWAPP_LOGIN_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/login';
-export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/register';
+export const NWAPP_LOGIN_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/login';
+export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/register';
 export const NWAPP_ACTIVATE_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/activate';
 export const NWAPP_ACTIVATE_API_ENDPOINT = '/api/v1/activate';
 export const NWAPP_SEND_PASSWORD_RESET_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/send-password-reset';

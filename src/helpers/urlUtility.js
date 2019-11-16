@@ -41,7 +41,7 @@ export function getSubdomain() {
  */
 export function getAPIBaseURL() {
     const schema = getSubdomain();
-    if (schema !== null && schema !== undefined && schema !== "www") {
+    if (schema !== null && schema !== undefined && schema !== "www" && schema !== "public") {
         return process.env.REACT_APP_WWW_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + NWAPP_API_BASE_PATH;
     } else {
         return process.env.REACT_APP_WWW_PROTOCOL + "://" + process.env.REACT_APP_API_DOMAIN + NWAPP_API_BASE_PATH;
