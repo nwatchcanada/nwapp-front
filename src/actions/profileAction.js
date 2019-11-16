@@ -14,7 +14,7 @@ import {
     setRefreshTokenInLocalStorage,
     attachAxiosRefreshTokenHandler
 } from '../helpers/tokenUtility';
-import { getAPIBaseURL } from '../helpers/urlUtility';
+import { getPublicAPIBaseURL } from '../helpers/urlUtility';
 
 
 export const setProfileRequest = () => ({
@@ -51,7 +51,7 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
-            baseURL: getAPIBaseURL(),
+            baseURL: getPublicAPIBaseURL(),
             headers: {
                 'Authorization': "Bearer " + accessToken,
                 'Content-Type': 'application/json;',
@@ -137,7 +137,7 @@ export function postProfile(data, successCallback, failedCallback) {
         // Create a new Axios instance using our oAuth 2.0 bearer token
         // and various other headers.
         const customAxios = axios.create({
-            baseURL: getAPIBaseURL(),
+            baseURL: getPublicAPIBaseURL(),
             headers: {
                 'Authorization': "Bearer " + accessToken,
                 'Content-Type': 'application/msgpack;',
@@ -222,7 +222,7 @@ export function postActivateProfile(accessCode, successCallback, failedCallback)
 
         // Create a new Axios instance.
         const customAxios = axios.create({
-            baseURL: getAPIBaseURL(),
+            baseURL: getPublicAPIBaseURL(),
             headers: {
                 'Content-Type': 'application/msgpack;',
                 'Accept': 'application/msgpack',

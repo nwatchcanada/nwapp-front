@@ -6,7 +6,7 @@ import msgpack from 'msgpack-lite';
 import { LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../constants/actionTypes"
 import { NWAPP_LOGIN_API_ENDPOINT } from "../constants/api"
 import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../helpers/tokenUtility';
-import { getAPIBaseURL } from '../helpers/urlUtility';
+import { getPublicAPIBaseURL } from '../helpers/urlUtility';
 
 
 export const setLoginRequest = () => ({
@@ -40,7 +40,7 @@ export function postLogin(email, password, successCallback=null, failedCallback=
         // Create a new Axios instance which will be sending and receiving in
         // MessagePack (Buffer) format.
         const customAxios = axios.create({
-            baseURL: getAPIBaseURL(),
+            baseURL: getPublicAPIBaseURL(),
             headers: {
                 'Content-Type': 'application/msgpack;',
                 'Accept': 'application/msgpack',

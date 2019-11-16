@@ -48,6 +48,15 @@ export function getAPIBaseURL() {
     }
 }
 
+
+/**
+ *  Function always returns the public sub-domain of our API web-server.
+ */
+export function getPublicAPIBaseURL() {
+    return process.env.REACT_APP_WWW_PROTOCOL + "://" + process.env.REACT_APP_API_DOMAIN + NWAPP_API_BASE_PATH;
+}
+
+
 /**
  * Get the URL parameters
  * source: https://css-tricks.com/snippets/javascript/get-url-variables/

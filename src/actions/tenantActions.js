@@ -8,7 +8,7 @@ import {
     TENANT_LIST_REQUEST, TENANT_LIST_FAILURE, TENANT_LIST_SUCCESS,
     TENANT_DETAIL_REQUEST, TENANT_DETAIL_FAILURE, TENANT_DETAIL_SUCCESS
 } from '../constants/actionTypes';
-import { NWAPP_TENANT_LIST_API_ENDPOINT, NWAPP_TENANT_DETAIL_API_ENDPOINT } from '../constants/api';
+import { NWAPP_ORGANIZATION_LIST_API_ENDPOINT, NWAPP_ORGANIZATION_DETAIL_API_ENDPOINT } from '../constants/api';
 import getCustomAxios from '../helpers/customAxios';
 
 
@@ -30,7 +30,7 @@ export function pullTenantList(page=1, sizePerPage=10, filtersMap=new Map(), onS
 
         // Generate the URL from the map.
         // Note: Learn about `Map` iteration via https://hackernoon.com/what-you-should-know-about-es6-maps-dc66af6b9a1e
-        let aURL = NWAPP_TENANT_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
+        let aURL = NWAPP_ORGANIZATION_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
         filtersMap.forEach(
             (value, key) => {
                 let decamelizedkey = decamelize(key)
@@ -125,7 +125,7 @@ export function postTenantDetail(postData, successCallback, failedCallback) {
         console.log("postTenantDetail | data", postData);
 
         // Perform our API submission.
-        customAxios.post(NWAPP_TENANT_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(NWAPP_ORGANIZATION_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -191,7 +191,7 @@ export function pullTenantDetail(schemaName, onSuccessCallback, onFailureCallbac
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = NWAPP_TENANT_DETAIL_API_ENDPOINT+schemaName;
+        const aURL = NWAPP_ORGANIZATION_DETAIL_API_ENDPOINT+schemaName;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -275,7 +275,7 @@ export function putTenantDetail(postData, onSuccessCallback, onFailureCallback) 
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(NWAPP_TENANT_DETAIL_API_ENDPOINT+postData.schemaName, buffer).then( (successResponse) => {
+        customAxios.put(NWAPP_ORGANIZATION_DETAIL_API_ENDPOINT+postData.schemaName, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let device = camelizeKeys(responseData);

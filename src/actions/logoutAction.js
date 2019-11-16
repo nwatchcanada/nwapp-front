@@ -5,7 +5,7 @@ import msgpack from 'msgpack-lite';
 
 import { LOGOUT_REQUEST, LOGOUT_FAILURE, LOGOUT_SUCCESS } from "../constants/actionTypes"
 import { NWAPP_LOGOUT_API_ENDPOINT } from "../constants/api"
-import { getAPIBaseURL } from '../helpers/urlUtility';
+import { getPublicAPIBaseURL } from '../helpers/urlUtility';
 
 
 export const setLogoutRequest = () => ({
@@ -55,7 +55,7 @@ export function postLogout(user) {
         // Create our oAuth 2.0 authenticated API header to use with our
         // submission.
         const config = {
-            baseURL: getAPIBaseURL(),
+            baseURL: getPublicAPIBaseURL(),
             headers: {
                 'Authorization': "Bearer " + user.token,
                 'Content-Type': 'application/msgpack;',
