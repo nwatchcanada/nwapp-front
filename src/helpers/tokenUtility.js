@@ -83,7 +83,7 @@ export async function fetchTokenCredentials(email, password) {
  *  Function makes a call to our login API endpoint.
  */
 function atteptRefresh(refreshTokenString) {
-    return axios.post(process.env.REACT_APP_API_HOST+'/api/profile-with-token-refresh', {
+    return axios.post(process.env.REACT_APP_API_HOST+'/api/v1/public/refresh-token', {
         'refresh_token': refreshTokenString,
     })
 }
