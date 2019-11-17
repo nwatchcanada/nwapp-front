@@ -4,8 +4,12 @@ import Scroll from 'react-scroll';
 
 import SharedOrganizationCreateComponent from "../../../../components/organizations/shared/create/sharedOrganizationCreateComponent";
 import validateInput from '../../../../validators/organizationValidator';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
 import { getTimezoneReactSelectOptions } from "../../../../helpers/timezoneUtlity";
 import { postTenantDetail } from "../../../../actions/tenantActions";
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
 class SharedOrganizationCreateContainer extends Component {
@@ -19,16 +23,23 @@ class SharedOrganizationCreateContainer extends Component {
         super(props);
 
         this.state = {
-            schema: '',
-            name: '',
-            alternateName: '',
-            description: '',
-            country: '',
-            region: '',
-            locality: '',
-            streetAddress: '',
-            postalCode: '',
-            timezone: '',
+            schema: localStorage.getItem("nwapp-create-tenant-schema"),
+            name: localStorage.getItem("nwapp-create-tenant-name"),
+            alternateName: localStorage.getItem("nwapp-create-tenant-alternateName"),
+            description: localStorage.getItem("nwapp-create-tenant-description"),
+            country: localStorage.getItem("nwapp-create-tenant-country"),
+            region: localStorage.getItem("nwapp-create-tenant-region"),
+            locality: localStorage.getItem("nwapp-create-tenant-locality"),
+            streetNumber: localStorage.getItem("nwapp-create-tenant-streetNumber"),
+            streetName: localStorage.getItem("nwapp-create-tenant-streetName"),
+            streetType: localStorage.getItem("nwapp-create-tenant-streetType"),
+            apartmentUnit: localStorage.getItem("nwapp-create-tenant-apartmentUnit"),
+            streetTypeOption: localStorageGetObjectItem('nwapp-create-tenant-streetTypeOption'),
+            streetTypeOther: localStorage.getItem("nwapp-create-tenant-streetTypeOther"),
+            streetDirection: localStorage.getItem("nwapp-create-tenant-streetDirection"),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-create-tenant-streetDirectionOption'),
+            postalCode: localStorage.getItem("nwapp-create-tenant-postalCode"),
+            timezone: 'America/Toronto',
             errors: {},
             isLoading: false,
         }
@@ -122,7 +133,8 @@ class SharedOrganizationCreateContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        localStorage.setItem('nwapp-create-tenant-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -131,6 +143,7 @@ class SharedOrganizationCreateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
+        localStorageSetObjectOrArrayItem('nwapp-create-tenant-'+optionKey, option);
     }
 
     onCancelClick() {
@@ -179,7 +192,9 @@ class SharedOrganizationCreateContainer extends Component {
 
     render() {
         const {
-            schema, name, alternateName, description, country, region, locality, streetAddress, postalCode, timezone, errors, isLoading
+            schema, name, alternateName, description, country, region, locality,
+            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,
+            timezone, errors, isLoading
         } = this.state;
         return (
             <SharedOrganizationCreateComponent
@@ -190,10 +205,17 @@ class SharedOrganizationCreateContainer extends Component {
                 country={country}
                 region={region}
                 locality={locality}
-                streetAddress={streetAddress}
+                streetNumber={streetNumber}
+                streetName={streetName}
+                streetType={streetType}
+                apartmentUnit={apartmentUnit}
+                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
+                streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                postalCode={postalCode}
                 timezone={timezone}
                 timezoneOptions={getTimezoneReactSelectOptions()}
-                postalCode={postalCode}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}

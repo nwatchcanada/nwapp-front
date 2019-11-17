@@ -13,7 +13,8 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 class SharedOrganizationCreateComponent extends Component {
     render() {
         const {
-            schema, name, alternateName, description, country, region, locality, streetAddress, postalCode, timezone, timezoneOptions,
+            schema, name, alternateName, description, country, region, locality, timezone, timezoneOptions,
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
             errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onCancelClick
         } = this.props;
         return (
@@ -119,13 +120,71 @@ class SharedOrganizationCreateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.streetAddress}
-                                label="Street Address (*)"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
                                 onChange={onTextChange}
-                                value={streetAddress}
-                                name="streetAddress"
+                                value={apartmentUnit}
+                                name="apartmentUnit"
                                 type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetNumber}
+                                label="Street Number (*)"
+                                onChange={onTextChange}
+                                value={streetNumber}
+                                name="streetNumber"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetName}
+                                label="Street Name (*)"
+                                onChange={onTextChange}
+                                value={streetName}
+                                name="streetName"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Street Type (*)"
+                                name="streetType"
+                                defaultOptionLabel="Please select a street type."
+                                options={streetTypeOptions}
+                                value={streetType}
+                                error={errors.streetType}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {streetType === 'Other' && streetType === 'other' &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.streetTypeOther}
+                                    label="Street Type Other (*)"
+                                    onChange={onTextChange}
+                                    value={streetTypeOther}
+                                    name="streetTypeOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
+                                borderColour="border-successs"
+                                label="Street Direction"
+                                name="streetDirection"
+                                defaultOptionLabel="Please select a street direction."
+                                options={streetDirectionOptions}
+                                value={streetDirection}
+                                error={errors.streetDirection}
+                                onSelectChange={onSelectChange}
+                                helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
                             />
 
                             <BootstrapInput
@@ -148,6 +207,7 @@ class SharedOrganizationCreateComponent extends Component {
                                 value={timezone}
                                 error={errors.timezone}
                                 onSelectChange={onSelectChange}
+                                helpText="If organization's timezone is different then please specify here."
                             />
 
                             <div className="form-group">
