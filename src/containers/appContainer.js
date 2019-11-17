@@ -26,7 +26,8 @@ import RegisterStep7Container from "./account/register/registerStep7Container";
 
 // Organizations
 import SharedOrganizationListContainer from "./organization/shared/list/sharedOrganizationListContainer";
-import SharedOrganizationCreateContainer from "./organization/shared/create/sharedOrganizationCreateContainer";
+import SharedOrganizationCreateStep1Container from "./organization/shared/create/sharedOrganizationCreateStep1Container";
+import SharedOrganizationCreateStep2Container from "./organization/shared/create/sharedOrganizationCreateStep2Container";
 import SharedOrganizationCreateSuccessContainer from "./organization/shared/create/sharedOrganizationCreateSuccessContainer";
 import SharedOrganizationUpdateContainer from "./organization/shared/update/sharedOrganizationUpdateContainer";
 
@@ -240,7 +241,8 @@ class AppContainer extends React.Component {
                                 <Route path="/terms" exact component={TermsContainer} />
                                 <Route path="/help" exact component={HelpContainer} />
                                 <Route path="/organizations" exact component={requiresAuth(SharedOrganizationListContainer)} />
-                                <Route path="/organization/add" exact component={requiresAuth(SharedOrganizationCreateContainer)} />
+                                <Route path="/organization/add/step-1" exact component={requiresAuth(SharedOrganizationCreateStep1Container)} />
+                                <Route path="/organization/add/step-2" exact component={requiresAuth(SharedOrganizationCreateStep2Container)} />
                                 <Route path="/organization/add-success" exact component={requiresAuth(SharedOrganizationCreateSuccessContainer)} />
                                 <Route path="/organization/:schemaName/update" exact component={requiresAuth(SharedOrganizationUpdateContainer)} />
                                 <Route path="/dashboard-redirect/:accessToken/:refreshToken" exact component={TenantDashboardRedirectContainer} />

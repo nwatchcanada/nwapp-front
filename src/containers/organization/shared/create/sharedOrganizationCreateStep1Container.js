@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import SharedOrganizationCreateComponent from "../../../../components/organizations/shared/create/sharedOrganizationCreateComponent";
+import SharedOrganizationCreateStep1Component from "../../../../components/organizations/shared/create/sharedOrganizationCreateStep1Component";
 import validateInput from '../../../../validators/organizationValidator';
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../../helpers/localStorageUtility';
 import { getTimezoneReactSelectOptions } from "../../../../helpers/timezoneUtlity";
-import { postTenantDetail } from "../../../../actions/tenantActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
-class SharedOrganizationCreateContainer extends Component {
+class SharedOrganizationCreateStep1Container extends Component {
 
     /**
      *  Initializer & Utility
@@ -47,7 +46,7 @@ class SharedOrganizationCreateContainer extends Component {
         this.getPostData = this.getPostData.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-        this.onCancelClick = this.onCancelClick.bind(this);
+        this.onBackClick = this.onBackClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
         this.onRegionChange = this.onRegionChange.bind(this);
@@ -143,10 +142,11 @@ class SharedOrganizationCreateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
+        localStorage.setItem('nwapp-create-tenant-'+[option.selectName], option.value);
         localStorageSetObjectOrArrayItem('nwapp-create-tenant-'+optionKey, option);
     }
 
-    onCancelClick() {
+    onBackClick() {
         this.props.history.push("/organizations");
     }
 
@@ -156,10 +156,12 @@ class SharedOrganizationCreateContainer extends Component {
         } else {
             this.setState({ country: value, region: null })
         }
+        localStorage.setItem('nwapp-create-tenant-country', value);
     }
 
     onRegionChange(value) {
-        this.setState({ region: value })
+        this.setState({ region: value });
+        localStorage.setItem('nwapp-create-tenant-region', value);
     }
 
     onClick(e) {
@@ -171,13 +173,7 @@ class SharedOrganizationCreateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.setState({ errors: {}, isLoading: true, }, ()=> {
-                this.props.postTenantDetail(
-                    this.getPostData(),
-                    this.onSuccessfulSubmissionCallback,
-                    this.onFailedSubmissionCallback
-                );
-            });
+            this.props.history.push("/organization/add/step-2");
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -197,7 +193,7 @@ class SharedOrganizationCreateContainer extends Component {
             timezone, errors, isLoading
         } = this.state;
         return (
-            <SharedOrganizationCreateComponent
+            <SharedOrganizationCreateStep1Component
                 schema={schema}
                 name={name}
                 alternateName={alternateName}
@@ -220,7 +216,7 @@ class SharedOrganizationCreateContainer extends Component {
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                onCancelClick={this.onCancelClick}
+                onBackClick={this.onBackClick}
                 onCountryChange={this.onCountryChange}
                 onRegionChange={this.onRegionChange}
                 onClick={this.onClick}
@@ -236,17 +232,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        postTenantDetail: (postData, successCallback, errorCallback) => {
-            dispatch(
-                postTenantDetail(postData, successCallback, errorCallback)
-            )
-        },
-    }
+    return {}
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SharedOrganizationCreateContainer);
+)(SharedOrganizationCreateStep1Container);

@@ -10,12 +10,12 @@ import { BootstrapRegionSelect } from '../../../bootstrap/bootstrapRegionSelect'
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 
 
-class SharedOrganizationCreateComponent extends Component {
+class SharedOrganizationCreateStep2Component extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, region, locality, timezone, timezoneOptions,
             streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
-            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onCancelClick
+            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onBackClick
         } = this.props;
         return (
             <div>
@@ -211,8 +211,8 @@ class SharedOrganizationCreateComponent extends Component {
                             />
 
                             <div className="form-group">
-                                <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-secondary" onClick={onCancelClick}>
-                                    <i className="fas fa-times"></i>&nbsp;Cancel
+                                <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-orange" onClick={onBackClick}>
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </button>
                                 <button type="button" className="btn btn-lg float-right pl-4 pr-4 btn-success" onClick={onClick} disabled={isLoading}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
@@ -228,4 +228,4 @@ class SharedOrganizationCreateComponent extends Component {
     }
 }
 
-export default SharedOrganizationCreateComponent;
+export default SharedOrganizationCreateStep2Component;

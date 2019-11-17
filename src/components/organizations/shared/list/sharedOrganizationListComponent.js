@@ -138,7 +138,7 @@ class SharedOrganizationListComponent extends Component {
                     <section className="row text-center placeholders">
                         <div className="col-sm-3 placeholder">
                             <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                <Link to="/organization/add" className="d-block link-ndecor" title="add">
+                                <Link to="/organization/add/step-1" className="d-block link-ndecor" title="add">
                                     <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                 </Link>
                             </div>
