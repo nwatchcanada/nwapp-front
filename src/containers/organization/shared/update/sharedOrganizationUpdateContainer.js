@@ -4,9 +4,7 @@ import Scroll from 'react-scroll';
 
 import SharedOrganizationUpdateComponent from "../../../../components/organizations/shared/update/sharedOrganizationUpdateComponent";
 import validateInput from '../../../../validators/organizationValidator';
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
-} from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { getTimezoneReactSelectOptions } from "../../../../helpers/timezoneUtlity";
 import { pullTenantDetail, putTenantDetail } from "../../../../actions/tenantActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
@@ -29,22 +27,22 @@ class SharedOrganizationUpdateContainer extends Component {
         this.state = {
             schema: schemaName,
             schemaName: schemaName,
-            name: localStorage.getItem("nwapp-create-tenant-name"),
-            alternateName: localStorage.getItem("nwapp-create-tenant-alternateName"),
-            description: localStorage.getItem("nwapp-create-tenant-description"),
-            country: localStorage.getItem("nwapp-create-tenant-country"),
-            region: localStorage.getItem("nwapp-create-tenant-region"),
-            locality: localStorage.getItem("nwapp-create-tenant-locality"),
-            streetNumber: localStorage.getItem("nwapp-create-tenant-streetNumber"),
-            streetName: localStorage.getItem("nwapp-create-tenant-streetName"),
-            streetType: localStorage.getItem("nwapp-create-tenant-streetType"),
-            apartmentUnit: localStorage.getItem("nwapp-create-tenant-apartmentUnit"),
-            streetTypeOption: localStorageGetObjectItem('nwapp-create-tenant-streetTypeOption'),
-            streetTypeOther: localStorage.getItem("nwapp-create-tenant-streetTypeOther"),
-            streetDirection: localStorage.getItem("nwapp-create-tenant-streetDirection"),
-            streetDirectionOption: localStorageGetObjectItem('nwapp-create-tenant-streetDirectionOption'),
-            postalCode: localStorage.getItem("nwapp-create-tenant-postalCode"),
-            timezone: 'America/Toronto',
+            name: "-",
+            alternateName: "-",
+            description: "-",
+            country: "-",
+            region: "-",
+            locality: "-",
+            streetNumber: "-",
+            streetName: "-",
+            streetType: "-",
+            apartmentUnit: "-",
+            streetTypeOption: "-",
+            streetTypeOther: "-",
+            streetDirection: "-",
+            streetDirectionOption: "-",
+            postalCode: "-",
+            timezone: "-",
             errors: {},
             isLoading: true, // Reason for `true` is because we need to fetch the data first.
         }
@@ -149,7 +147,8 @@ class SharedOrganizationUpdateContainer extends Component {
     }
 
     onSuccessfulSubmissionCallback() {
-        this.props.history.push("/organization/add-success");
+        this.props.setFlashMessage("success", "Organization has been successfully updated.");
+        this.props.history.push("/organizations");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -173,7 +172,6 @@ class SharedOrganizationUpdateContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('nwapp-create-tenant-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -182,8 +180,6 @@ class SharedOrganizationUpdateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-create-tenant-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-create-tenant-'+optionKey, option);
     }
 
     onBackClick() {
@@ -196,12 +192,10 @@ class SharedOrganizationUpdateContainer extends Component {
         } else {
             this.setState({ country: value, region: null })
         }
-        localStorage.setItem('nwapp-create-tenant-country', value);
     }
 
     onRegionChange(value) {
         this.setState({ region: value });
-        localStorage.setItem('nwapp-create-tenant-region', value);
     }
 
     onClick(e) {
@@ -289,6 +283,9 @@ const mapDispatchToProps = dispatch => {
                 pullTenantDetail(schemaName, successCallback, errorCallback)
             )
         },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
     }
 }
 

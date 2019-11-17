@@ -4,6 +4,7 @@ import Scroll from 'react-scroll';
 
 import SharedOrganizationCreateStep2Component from "../../../../components/organizations/shared/create/sharedOrganizationCreateStep2Component";
 import validateInput from '../../../../validators/organizationValidator';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../../helpers/localStorageUtility';
@@ -112,6 +113,7 @@ class SharedOrganizationCreateStep2Container extends Component {
      */
 
     onSuccessfulSubmissionCallback() {
+        this.props.setFlashMessage("success", "Organization has been successfully created.");
         this.props.history.push("/organization/add-success");
     }
 
@@ -248,6 +250,9 @@ const mapDispatchToProps = dispatch => {
                 postTenantDetail(postData, successCallback, errorCallback)
             )
         },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
     }
 }
 
