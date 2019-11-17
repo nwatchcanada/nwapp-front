@@ -139,7 +139,7 @@ class SharedOrganizationUpdateContainer extends Component {
             streetDirection: tenantDetail.streetDirection,
             // streetDirectionOption: tenantDetail.streetDirectionOption,
             postalCode: tenantDetail.postalCode,
-            timezone: tenantDetail.timezone,
+            timezone: tenantDetail.timezoneName,
             isLoading: false, // Turn off because we have finished.
         });
     }
