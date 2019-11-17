@@ -5,10 +5,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { APP_STATE } from "./constants/redux";
 import {
     LOGIN_SUCCESS, LOGOUT_SUCCESS, DASHBOARD_SUCCESS, PROFILE_SUCCESS,
-    TENANT_LIST_SUCCESS
+    TENANT_LIST_SUCCESS, TENANT_DETAIL_SUCCESS
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
-import tenantListReducer from "./reducers/tenantReducer";
+import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducer";
 import dashboardReducer from "./reducers/dashboardReducer";
 import flashMessageReducer from "./reducers/flashMessageReducer";
 
@@ -18,6 +18,7 @@ const appReducer = combineReducers({
     userState: userReducer,
     dashboardState: dashboardReducer,
     tenantListState: tenantListReducer,
+    tenantDetailState: tenantDetailReducer,
     flashMessageState: flashMessageReducer,
 });
 
@@ -48,7 +49,7 @@ const localStorageMiddleware = ({ getState }) => {
         const result = next(action);
         if ([
             LOGIN_SUCCESS, LOGOUT_SUCCESS, DASHBOARD_SUCCESS, PROFILE_SUCCESS,
-            TENANT_LIST_SUCCESS
+            TENANT_LIST_SUCCESS, TENANT_DETAIL_SUCCESS
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))

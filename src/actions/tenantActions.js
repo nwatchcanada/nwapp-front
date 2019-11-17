@@ -198,25 +198,25 @@ export function pullTenantDetail(schemaName, onSuccessCallback, onFailureCallbac
             const responseData = msgpack.decode(Buffer(successResponse.data));
             // console.log(successResult); // For debugging purposes.
 
-            let profile = camelizeKeys(responseData);
+            let data = camelizeKeys(responseData);
 
             // Extra.
-            profile['isAPIRequestRunning'] = false;
-            profile['errors'] = {};
+            data['isAPIRequestRunning'] = false;
+            data['errors'] = {};
 
-            console.log("pullTenantDetail | Success:", profile); // For debugging purposes.
+            console.log("pullTenantDetail | Success:", data); // For debugging purposes.
 
             // Update the global state of the application to store our
-            // user profile for the application.
+            // user data for the application.
             store.dispatch(
-                setTenantDetailSuccess(profile)
+                setTenantDetailSuccess(data)
             );
 
             // DEVELOPERS NOTE:
             // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
             // OBJECT WE GOT FROM THE API.
             if (onSuccessCallback) {
-                onSuccessCallback(profile);
+                onSuccessCallback(data);
             }
 
         }).catch( (exception) => { // ERROR

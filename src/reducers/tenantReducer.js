@@ -1,7 +1,10 @@
-import { TENANT_LIST_REQUEST, TENANT_LIST_FAILURE, TENANT_LIST_SUCCESS } from '../constants/actionTypes';
+import {
+    TENANT_LIST_REQUEST, TENANT_LIST_FAILURE, TENANT_LIST_SUCCESS,
+    TENANT_DETAIL_REQUEST, TENANT_DETAIL_FAILURE, TENANT_DETAIL_SUCCESS
+} from '../constants/actionTypes';
 
 
-const tenantListReducer = function(state = [], action = {}) {
+export const tenantListReducer = function(state = [], action = {}) {
     switch (action.type) {
         case TENANT_LIST_REQUEST:
             return Object.assign({}, state, action.payload);
@@ -17,4 +20,19 @@ const tenantListReducer = function(state = [], action = {}) {
     }
 }
 
-export default tenantListReducer;
+
+export const tenantDetailReducer = function(state = [], action = {}) {
+    switch (action.type) {
+        case TENANT_DETAIL_REQUEST:
+            return Object.assign({}, state, action.payload);
+
+        case TENANT_DETAIL_FAILURE:
+            return Object.assign({}, state, action.payload);
+
+        case TENANT_DETAIL_SUCCESS:
+            return Object.assign({}, state, action.payload);
+
+        default:
+            return state;
+    }
+}

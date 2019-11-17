@@ -13,8 +13,9 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 class SharedOrganizationUpdateComponent extends Component {
     render() {
         const {
-            schemaName, name, alternateName, description, country, region, locality, streetAddress, postalCode, timezone, timezoneOptions,
-            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onCancelClick
+            schema, name, alternateName, description, country, region, locality, timezone, timezoneOptions,
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
+            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onBackClick
         } = this.props;
         return (
             <div>
@@ -24,7 +25,7 @@ class SharedOrganizationUpdateComponent extends Component {
                         <li className="breadcrumb-item">
                            <Link to="/organizations"><i className="fas fa-building"></i>&nbsp;Organizations</Link>
                         </li>
-                        <li className="breadcrumb-item active" aria-current="page"><i className="fas fa-edit"></i>&nbsp;Edit Organization</li>
+                        <li className="breadcrumb-item active" aria-current="page"><i className="fas fa-edit"></i>&nbsp;Update</li>
                     </ol>
                 </nav>
                 <h1><i className="fas fa-edit"></i>&nbsp;Edit Organization</h1>
@@ -32,7 +33,6 @@ class SharedOrganizationUpdateComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Update Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -40,14 +40,13 @@ class SharedOrganizationUpdateComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.schemaName}
+                                error={errors.schema}
                                 label="Schema (*)"
                                 onChange={onTextChange}
-                                value={schemaName}
-                                name="schemaName"
+                                value={schema}
+                                name="schema"
                                 type="text"
                                 helpText="This is the subdomain clientd with the tenant. Value must be uniue and cannot be changed afterwords!"
-                                disabled={true}
                             />
 
                             <BootstrapInput
@@ -120,13 +119,71 @@ class SharedOrganizationUpdateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.streetAddress}
-                                label="Street Address (*)"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
                                 onChange={onTextChange}
-                                value={streetAddress}
-                                name="streetAddress"
+                                value={apartmentUnit}
+                                name="apartmentUnit"
                                 type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetNumber}
+                                label="Street Number (*)"
+                                onChange={onTextChange}
+                                value={streetNumber}
+                                name="streetNumber"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetName}
+                                label="Street Name (*)"
+                                onChange={onTextChange}
+                                value={streetName}
+                                name="streetName"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Street Type (*)"
+                                name="streetType"
+                                defaultOptionLabel="Please select a street type."
+                                options={streetTypeOptions}
+                                value={streetType}
+                                error={errors.streetType}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {streetType === 'Other' && streetType === 'other' &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.streetTypeOther}
+                                    label="Street Type Other (*)"
+                                    onChange={onTextChange}
+                                    value={streetTypeOther}
+                                    name="streetTypeOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
+                                borderColour="border-successs"
+                                label="Street Direction"
+                                name="streetDirection"
+                                defaultOptionLabel="Please select a street direction."
+                                options={streetDirectionOptions}
+                                value={streetDirection}
+                                error={errors.streetDirection}
+                                onSelectChange={onSelectChange}
+                                helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
                             />
 
                             <BootstrapInput
@@ -149,11 +206,12 @@ class SharedOrganizationUpdateComponent extends Component {
                                 value={timezone}
                                 error={errors.timezone}
                                 onSelectChange={onSelectChange}
+                                helpText="If organization's timezone is different then please specify here."
                             />
 
                             <div className="form-group">
-                                <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-secondary" onClick={onCancelClick}>
-                                    <i className="fas fa-times"></i>&nbsp;Cancel
+                                <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-secondary" onClick={onBackClick}>
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </button>
                                 <button type="button" className="btn btn-lg float-right pl-4 pr-4 btn-success" onClick={onClick} disabled={isLoading}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
