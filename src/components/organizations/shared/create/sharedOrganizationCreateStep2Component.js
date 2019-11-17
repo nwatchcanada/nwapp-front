@@ -33,182 +33,90 @@ class SharedOrganizationCreateStep2Component extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Join and grow with us</h1>
-                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <div className="row">
+                                <div className="step-navigation">
+                                    <div id="step-1" className="st-grey">
+                                        <Link to="/organization/add/step-1">
+                                            <span className="num">1.</span><span className="">Step 1</span>
+                                        </Link>
+                                    </div>
+                                    <div id="step-2" className="st-grey active">
+                                        <strong>
+                                            <span className="num">2.</span><span className="">Review</span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.schema}
-                                label="Schema (*)"
-                                onChange={onTextChange}
-                                value={schema}
-                                name="schema"
-                                type="text"
-                                helpText="This is the subdomain clientd with the tenant. Value must be uniue and cannot be changed afterwords!"
-                            />
+                            <table className="table table-bordered custom-cell-w">
+                                <tbody>
+                                    <tr className="bg-dark">
+                                        <th scope="row" colSpan="2" className="text-light">
+                                            <i className="fas fa-table"></i>&nbsp;Details
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Schema</th>
+                                        <td>{schema}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Name</th>
+                                        <td>{name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Alternate Name</th>
+                                        <td>{alternateName}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Description</th>
+                                        <td>{description}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Country</th>
+                                        <td>{country}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Region</th>
+                                        <td>{region}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Locality</th>
+                                        <td>{locality}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Street #</th>
+                                        <td>{streetNumber}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Street Name</th>
+                                        <td>{streetName}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Apartment Unit</th>
+                                        <td>{apartmentUnit}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Street Type</th>
+                                        <td>{streetType}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Street Type (Other)</th>
+                                        <td>{streetTypeOther}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Street Direction</th>
+                                        <td>{streetDirection}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Postal Code</th>
+                                        <td>{postalCode}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.name}
-                                label="Name (*)"
-                                onChange={onTextChange}
-                                value={name}
-                                name="name"
-                                type="text"
-                                helpText="Please specify the full legal name as found on documents"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.alternateName}
-                                label="Alternate Name (*)"
-                                onChange={onTextChange}
-                                value={alternateName}
-                                name="alternateName"
-                                type="text"
-                                helpText="Please specify the alternate name"
-                            />
-
-                            <BootstrapTextarea
-                                name="description"
-                                borderColour="border-primary"
-                                label="Description"
-                                placeholder="Please set the organization description"
-                                rows="5"
-                                value={description}
-                                helpText="This is the description of the organization."
-                                onChange={onTextChange}
-                                error={errors.description}
-                            />
-
-                            <BootstrapCountrySelect
-                                inputClassName="form-control"
-                                borderColour="border-primary"
-                                error={errors.country}
-                                label="Country (*)"
-                                value={country}
-                                onChange={onCountryChange}
-                                priorityOptions={["CA", "US", "MX"]}
-                                name="country"
-                            />
-                            <BootstrapRegionSelect
-                                inputClassName="form-control"
-                                borderColour="border-primary"
-                                error={errors.region}
-                                label="Province / state (*)"
-                                country={country}
-                                value={region}
-                                onChange={onRegionChange}
-                                name="region"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control"
-                                borderColour="border-primary"
-                                error={errors.locality}
-                                label="Locality (*)"
-                                onChange={onTextChange}
-                                value={locality}
-                                name="locality"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
-                                error={errors.apartmentUnit}
-                                label="Apt. Unit"
-                                onChange={onTextChange}
-                                value={apartmentUnit}
-                                name="apartmentUnit"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.streetNumber}
-                                label="Street Number (*)"
-                                onChange={onTextChange}
-                                value={streetNumber}
-                                name="streetNumber"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.streetName}
-                                label="Street Name (*)"
-                                onChange={onTextChange}
-                                value={streetName}
-                                name="streetName"
-                                type="text"
-                            />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Street Type (*)"
-                                name="streetType"
-                                defaultOptionLabel="Please select a street type."
-                                options={streetTypeOptions}
-                                value={streetType}
-                                error={errors.streetType}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            {streetType === 'Other' && streetType === 'other' &&
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.streetTypeOther}
-                                    label="Street Type Other (*)"
-                                    onChange={onTextChange}
-                                    value={streetTypeOther}
-                                    name="streetTypeOther"
-                                    type="text"
-                                />
-                            }
-
-                            <BootstrapSingleSelect
-                                borderColour="border-successs"
-                                label="Street Direction"
-                                name="streetDirection"
-                                defaultOptionLabel="Please select a street direction."
-                                options={streetDirectionOptions}
-                                value={streetDirection}
-                                error={errors.streetDirection}
-                                onSelectChange={onSelectChange}
-                                helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.postalCode}
-                                label="Postal Code (*)"
-                                onChange={onTextChange}
-                                value={postalCode}
-                                name="postalCode"
-                                type="text"
-                            />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Timezone (*)"
-                                name="timezone"
-                                defaultOptionLabel="Please select a timezone."
-                                options={timezoneOptions}
-                                value={timezone}
-                                error={errors.timezone}
-                                onSelectChange={onSelectChange}
-                                helpText="If organization's timezone is different then please specify here."
-                            />
 
                             <div className="form-group">
                                 <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-orange" onClick={onBackClick}>
