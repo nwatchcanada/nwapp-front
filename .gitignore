@@ -22,5 +22,22 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#—————————————————————————————
+# Python VirtualEnv Directory
+#—————————————————————————————
+# Important Note: Make sure this is the name of the virtualenv directory
+# that you set when you where setting up the project.
+env_docs/
+env/
+env_docs/*
+env/*
+env_docs
+env
+.env_docs
+.env
+*.cfg
+env/pip-selfcheck.json
+*.csv#
+
 # Project related notes.
 private_notes.txt

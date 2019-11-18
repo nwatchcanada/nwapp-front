@@ -1,83 +1,25 @@
 ![Neighbourhood Watch Canada](https://github.com/nwatchcanada/nwapp-docs/blob/master/docs/img/nwl-logo-256x256.png)
 
 # Neighbourhood Watch Canada App Frontend
+
 [![Documentation Status](https://readthedocs.org/projects/nwapp-docs/badge/?version=latest)](https://nwapp-docs.readthedocs.io/en/latest/?badge=latest)
 
-TODO: Add description.
 
-## Installation
+## Overview
 
-1. Clone this project by running the following command.
-
-    ```bash
-    git clone https://github.com/nwatchcanada/nwapp-front.git
-    cd nwapp-front
-    ```
-
-2. Intall the dependent libraries.
-
-    ```bash
-    npm install
-    ```
-
-3. (OPTIONAL) If you are using [Google Chrome](https://www.google.com/chrome/) web-browser, Please download the following **Chrome extensions** to assist you in your development.
-
-    * [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-    * [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
-    * [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
-
-4. This project is uses subdomains to seperate tenants. As a result, we will need to bind a few subdomains to your ``hosts`` file. To do this follow these instructions.
-
-5. Update your hosts file to support our applications domain.
-
-    ```bash
-    sudo vi /etc/hosts
-    ```
-
-6. Append to the file...
-
-    ```text
-    127.0.0.1       public.localhost
-    127.0.0.1       london.localhost
-    127.0.0.1       toronto.localhost
-    127.0.0.1       sub1.localhost
-    127.0.0.1       sub2.localhost
-    ```
+Neighbourhood Watch Canada App Frontend is a single page application (SPA), written in ``JavaScript`` using ``React.js``, which provides a GUI for the [https://nwapp.ca](https://nwapp.ca) web-app.
 
 
-7. Refresh the dns on your machine to support our new domains.
+## Documentation
 
-    ```bash
-    dscacheutil -flushcache
-    ```
+For local installation, API reference and developer notes, the documentation can be found [here](https://nwapp-front.readthedocs.io/en/latest/).
 
-8. (OPTIONAL) You can override the environment variables if you like. Simply copy the current file and change according to your specs.
-
-    ```bash
-    cp .env .env.local
-    ```
-
-9. (OPTIONAL) Edit your environment variables file to your specification.
-
-    ```bash
-    vi .env.local
-    ```
-
-10. You are now setup!
-
-
-## Usage
-To run the web-app, you’ll need to run the server instance and access the page from your browser.
-
-Start up the web-server:
-
-  ```
-  npm start
-  ```
+If you want a self-hosted solution using [*CentOS 7*](https://www.centos.org/), the documentation can be found via [here](https://nwapp-docs.readthedocs.io/en/latest/).
 
 
 ## License
-This library is licensed under the **BSD** license. See [LICENSE](LICENSE) for more information.
+
+This library is licensed under the **BSD 3-Clause license**. See [LICENSE](LICENSE) for more information. Copyrighted ©2019 [Neighbourhood Watch London](https://nwlondon.ca/).
 
 
 ## Contact
