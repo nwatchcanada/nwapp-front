@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect'
+import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect'
 
 
 class MemberCreateStep5Component extends Component {
     render() {
         const {
-            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
-            errors, onTextChange, onSelectChange, isLoading, onClick
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode, locality, region, country,
+            errors, onTextChange, onSelectChange, isLoading, onClick, onRegionChange, onCountryChange,
         } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
@@ -162,6 +164,38 @@ class MemberCreateStep5Component extends Component {
                                 onChange={onTextChange}
                                 value={postalCode}
                                 name="postalCode"
+                                type="text"
+                            />
+
+                            <BootstrapCountrySelect
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.country}
+                                label="Country (*)"
+                                value={country}
+                                onChange={onCountryChange}
+                                priorityOptions={["CA", "US", "MX"]}
+                                name="country"
+                            />
+                            <BootstrapRegionSelect
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.region}
+                                label="Province / state (*)"
+                                country={country}
+                                value={region}
+                                onChange={onRegionChange}
+                                name="region"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.locality}
+                                label="Locality (*)"
+                                onChange={onTextChange}
+                                value={locality}
+                                name="locality"
                                 type="text"
                             />
 

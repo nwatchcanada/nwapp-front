@@ -35,6 +35,9 @@ class MemberCreateStep5Container extends Component {
             streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
+            country: localStorage.getItem("nwapp-create-member-country"),
+            region: localStorage.getItem("nwapp-create-member-region"),
+            locality: localStorage.getItem("nwapp-create-member-locality"),
             errors: {},
             isLoading: false
         }
@@ -42,6 +45,8 @@ class MemberCreateStep5Container extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onCountryChange = this.onCountryChange.bind(this);
+        this.onRegionChange = this.onRegionChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -109,6 +114,20 @@ class MemberCreateStep5Container extends Component {
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
+    onCountryChange(value) {
+        if (value === null || value === undefined || value === '') {
+            this.setState({ country: null, region: null })
+        } else {
+            this.setState({ country: value, region: null })
+        }
+        localStorage.setItem('nwapp-create-member-country', value);
+    }
+
+    onRegionChange(value) {
+        this.setState({ region: value });
+        localStorage.setItem('nwapp-create-member-region', value);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -133,7 +152,9 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode, errors } = this.state;
+        const {
+            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, region, locality, errors
+        } = this.state;
         return (
             <MemberCreateStep5Component
                 streetNumber={streetNumber}
@@ -145,9 +166,14 @@ class MemberCreateStep5Container extends Component {
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
+                country={country}
+                region={region}
+                locality={locality}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onRegionChange={this.onRegionChange}
+                onCountryChange={this.onCountryChange}
                 onClick={this.onClick}
             />
         );

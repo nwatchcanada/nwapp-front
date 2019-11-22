@@ -29,7 +29,7 @@ class MemberCreateStep7Container extends Component {
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
-            birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
+            yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
             gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
             howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
@@ -249,7 +249,7 @@ class MemberCreateStep7Container extends Component {
 
     render() {
         const {
-            typeOf, tags, birthYear, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
+            typeOf, tags, yearOfBirth, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
             errors
@@ -265,7 +265,7 @@ class MemberCreateStep7Container extends Component {
                 typeOf={typeOf}
                 tags={tags}
                 tagOptions={tagOptions}
-                birthYear={birthYear}
+                yearOfBirth={yearOfBirth}
                 gender={gender}
                 errors={errors}
                 onTextChange={this.onTextChange}

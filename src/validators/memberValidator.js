@@ -27,6 +27,12 @@ export function validateInput(data) {
         if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
             errors.email = 'This field is required';
         }
+        if (data.isOkToEmail === undefined || data.isOkToEmail === null || data.isOkToEmail === "" || isNaN(data.isOkToEmail)) {
+            errors.isOkToEmail = 'This field is required';
+        }
+        if (data.isOkToText === undefined || data.isOkToText === null || data.isOkToText === "" || isNaN(data.isOkToText) ) {
+            errors.isOkToText = 'This field is required';
+        }
 
     } else if (data.typeOf === BUSINESS_TYPE_OF) {
 
@@ -45,6 +51,12 @@ export function validateInput(data) {
         if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
             errors.email = 'This field is required';
         }
+        if (data.isOkToEmail === undefined || data.isOkToEmail === null || data.isOkToEmail === "" || isNaN(data.isOkToEmail)) {
+            errors.isOkToEmail = 'This field is required';
+        }
+        if (data.isOkToText === undefined || data.isOkToText === null || data.isOkToText === "" || isNaN(data.isOkToText) ) {
+            errors.isOkToText = 'This field is required';
+        }
 
     } else if (data.typeOf === COMMUNITY_CARES_TYPE_OF) {
 
@@ -59,6 +71,12 @@ export function validateInput(data) {
         }
         if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
             errors.email = 'This field is required';
+        }
+        if (data.isOkToEmail === undefined || data.isOkToEmail === null || data.isOkToEmail === "" || isNaN(data.isOkToEmail)) {
+            errors.isOkToEmail = 'This field is required';
+        }
+        if (data.isOkToText === undefined || data.isOkToText === null || data.isOkToText === "" || isNaN(data.isOkToText) ) {
+            errors.isOkToText = 'This field is required';
         }
 
     }
@@ -86,15 +104,15 @@ export function validateInput(data) {
 
     // --- EXTRA --- //
 
-    if (data.birthYear === undefined || data.birthYear === null || data.birthYear === "") {
-        errors.birthYear = 'This field is required';
+    if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
+        errors.yearOfBirth = 'This field is required';
     } else {
         try {
-            if (parseInt(data.birthYear) < 1900) {
-                errors.birthYear = 'Needs to be greater then 1900.';
+            if (parseInt(data.yearOfBirth) < 1900) {
+                errors.yearOfBirth = 'Needs to be greater then 1900.';
             }
         } catch(err) {
-            errors.birthYear = 'This field needs to be a number';
+            errors.yearOfBirth = 'This field needs to be a number';
         }
     }
     if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
@@ -152,32 +170,6 @@ export function validateInput(data) {
 /**
  *  Validator will validate step 4 in the member creation form.
  */
-export function validateStep4RezOrComCreateInput(data) {
-    let errors = {};
-
-    if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
-        errors.firstName = 'This field is required';
-    }
-    if (data.lastName === undefined || data.lastName === null || validator.isEmpty(data.lastName) || data.lastName === "") {
-        errors.lastName = 'This field is required';
-    }
-    if (data.primaryPhone === undefined || data.primaryPhone === null || validator.isEmpty(data.primaryPhone) || data.primaryPhone === "") {
-        errors.primaryPhone = 'This field is required';
-    }
-    if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
-        errors.email = 'This field is required';
-    }
-
-    return {
-        errors,
-        isValid: isEmpty(errors)
-    }
-}
-
-
-/**
- *  Validator will validate step 4 in the member creation form.
- */
 export function validateStep4CreateInput(data) {
     let errors = {};
 
@@ -193,6 +185,12 @@ export function validateStep4CreateInput(data) {
     if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
         errors.email = 'This field is required';
     }
+    if (data.isOkToEmail === undefined || data.isOkToEmail === null || data.isOkToEmail === "" || isNaN(data.isOkToEmail)) {
+        errors.isOkToEmail = 'This field is required';
+    }
+    if (data.isOkToText === undefined || data.isOkToText === null || data.isOkToText === "" || isNaN(data.isOkToText) ) {
+        errors.isOkToText = 'This field is required';
+    }
     if (data.typeOf === BUSINESS_TYPE_OF) {
         if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
             errors.organizationName = 'This field is required';
@@ -200,34 +198,6 @@ export function validateStep4CreateInput(data) {
         if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
             errors.organizationTypeOf = 'This field is required';
         }
-    }
-
-    return {
-        errors,
-        isValid: isEmpty(errors)
-    }
-}
-
-/**
- *  Validator will validate step 4 in the member creation form.
- */
-export function validateStep4BizCreateInput(data) {
-    let errors = {};
-
-    if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
-        errors.organizationName = 'This field is required';
-    }
-    if (data.contactFirstName === undefined || data.contactFirstName === null || validator.isEmpty(data.contactFirstName) || data.contactFirstName === "") {
-        errors.contactFirstName = 'This field is required';
-    }
-    if (data.contactLastName === undefined || data.contactLastName === null || validator.isEmpty(data.contactLastName) || data.contactLastName === "") {
-        errors.contactLastName = 'This field is required';
-    }
-    if (data.primaryPhone === undefined || data.primaryPhone === null || validator.isEmpty(data.primaryPhone) || data.primaryPhone === "") {
-        errors.primaryPhone = 'This field is required';
-    }
-    if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
-        errors.email = 'This field is required';
     }
 
     return {
@@ -261,6 +231,15 @@ export function validateStep5CreateInput(data) {
     if (data.postalCode === undefined || data.postalCode === null || validator.isEmpty(data.postalCode) || data.postalCode === "") {
         errors.postalCode = 'This field is required';
     }
+    if (data.country === undefined || data.country === null || validator.isEmpty(data.country) || data.country === "") {
+        errors.country = 'This field is required';
+    }
+    if (data.region === undefined || data.region === null || validator.isEmpty(data.region) || data.region === "") {
+        errors.region = 'This field is required';
+    }
+    if (data.locality === undefined || data.locality === null || validator.isEmpty(data.locality) || data.locality === "") {
+        errors.locality = 'This field is required';
+    }
 
     return {
         errors,
@@ -290,15 +269,15 @@ export function validateStep6CreateInput(data) {
 export function validateStep7CreateInput(data) {
     let errors = {};
 
-    if (data.birthYear === undefined || data.birthYear === null || data.birthYear === "") {
-        errors.birthYear = 'This field is required';
+    if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
+        errors.yearOfBirth = 'This field is required';
     } else {
         try {
-            if (parseInt(data.birthYear) < 1900) {
-                errors.birthYear = 'Needs to be greater then 1900.';
+            if (parseInt(data.yearOfBirth) < 1900) {
+                errors.yearOfBirth = 'Needs to be greater then 1900.';
             }
         } catch(err) {
-            errors.birthYear = 'This field needs to be a number';
+            errors.yearOfBirth = 'This field needs to be a number';
         }
     }
     if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
@@ -380,6 +359,12 @@ export function validateStep8CreateInput(data) {
     if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
         errors.email = 'This field is required';
     }
+    if (data.isOkToEmail === undefined || data.isOkToEmail === null || data.isOkToEmail === "" || isNaN(data.isOkToEmail)) {
+        errors.isOkToEmail = 'This field is required';
+    }
+    if (data.isOkToText === undefined || data.isOkToText === null || data.isOkToText === "" || isNaN(data.isOkToText) ) {
+        errors.isOkToText = 'This field is required';
+    }
 
     // --- ADDRESS --- //
 
@@ -404,15 +389,15 @@ export function validateStep8CreateInput(data) {
 
     // --- EXTRA --- //
 
-    if (data.birthYear === undefined || data.birthYear === null || data.birthYear === "") {
-        errors.birthYear = 'This field is required';
+    if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
+        errors.yearOfBirth = 'This field is required';
     } else {
         try {
-            if (parseInt(data.birthYear) < 1900) {
-                errors.birthYear = 'Needs to be greater then 1900.';
+            if (parseInt(data.yearOfBirth) < 1900) {
+                errors.yearOfBirth = 'Needs to be greater then 1900.';
             }
         } catch(err) {
-            errors.birthYear = 'This field needs to be a number';
+            errors.yearOfBirth = 'This field needs to be a number';
         }
     }
     if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {

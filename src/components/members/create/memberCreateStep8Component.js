@@ -19,7 +19,7 @@ export default class MemberCreateStep8Component extends Component {
             organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
             streetNumber, streetName, streetType, streetTypeOther, apartmentUnit, streetDirection, postalCode,
             watchSlug, watchIcon, watchName,
-            tags, tagOptions, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
+            tags, tagOptions, yearOfBirth, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
         } = this.props;
@@ -245,11 +245,11 @@ export default class MemberCreateStep8Component extends Component {
                                         }
                                     </td>
                                 </tr>
-                                {birthYear &&
+                                {yearOfBirth &&
                                     <tr>
                                         <th scope="row" className="bg-light">Year of Birth</th>
                                         <td>
-                                            {birthYear}
+                                            {yearOfBirth}
                                         </td>
                                     </tr>
                                 }

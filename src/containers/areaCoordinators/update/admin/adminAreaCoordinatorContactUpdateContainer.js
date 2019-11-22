@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminAreaCoordinatorContactUpdateComponent from "../../../../components/areaCoordinators/update/admin/adminAreaCoordinatorContactUpdateComponent";
-import { validateStep4BizCreateInput } from "../../../../validators/memberValidator";
+// import { validateStep4BizCreateInput } from "../../../../validators/memberValidator";
 import { BUSINESS_TYPE_OF } from '../../../../constants/api';
 
 
@@ -95,17 +95,17 @@ class AdminAreaCoordinatorContactUpdateContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateStep4BizCreateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        // // Perform client-side validation.
+        // const { errors, isValid } = validateStep4BizCreateInput(this.state);
+        //
+        // // CASE 1 OF 2: Validation passed successfully.
+        // if (isValid) {
+        //     this.onSuccessfulSubmissionCallback();
+        //
+        // // CASE 2 OF 2: Validation was a failure.
+        // } else {
+        //     this.onFailedSubmissionCallback(errors);
+        // }
     }
 
 

@@ -24,14 +24,19 @@ class MemberCreateStep4Container extends Component {
             firstName: localStorage.getItem("nwapp-create-member-firstName"),
             lastName: localStorage.getItem("nwapp-create-member-lastName"),
             primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
+            // primaryPhoneTypeOf: localStorageGetIntegerItem("workery-create-client-primaryPhoneTypeOf"),
             secondaryPhone: localStorage.getItem("nwapp-create-member-secondaryPhone"),
+            // secondaryPhoneTypeOf: localStorageGetIntegerItem("workery-create-client-secondaryPhoneTypeOf"),
             email: localStorage.getItem("nwapp-create-member-email"),
+            isOkToEmail: localStorageGetIntegerItem("workery-create-member-isOkToEmail"),
+            isOkToText: localStorageGetIntegerItem("workery-create-member-isOkToText"),
             errors: {},
             isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -100,6 +105,33 @@ class MemberCreateStep4Container extends Component {
         localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
+
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "workery-create-member-"+[e.target.name];
+        const storageLabelKey =  "workery-create-member-"+[e.target.name].toString()+"-label";
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"Label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -125,7 +157,7 @@ class MemberCreateStep4Container extends Component {
 
     render() {
         const {
-            typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, errors
+            typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, isOkToEmail, isOkToText, errors
         } = this.state;
         return (
             <MemberCreateStep4Component
@@ -137,9 +169,12 @@ class MemberCreateStep4Container extends Component {
                 primaryPhone={primaryPhone}
                 secondaryPhone={secondaryPhone}
                 email={email}
+                isOkToEmail={isOkToEmail}
+                isOkToText={isOkToText}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onRadioChange={this.onRadioChange}
                 onClick={this.onClick}
             />
         );

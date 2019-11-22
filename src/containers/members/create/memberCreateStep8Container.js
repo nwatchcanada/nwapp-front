@@ -37,6 +37,8 @@ class MemberCreateStep8Container extends Component {
             primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
             secondaryPhone: localStorage.getItem("nwapp-create-member-secondaryPhone"),
             email: localStorage.getItem("nwapp-create-member-email"),
+            isOkToEmail: localStorageGetIntegerItem("workery-create-member-isOkToEmail"),
+            isOkToText: localStorageGetIntegerItem("workery-create-member-isOkToText"),
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
             streetType: localStorage.getItem("nwapp-create-member-streetType"),
@@ -46,12 +48,15 @@ class MemberCreateStep8Container extends Component {
             streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
+            country: localStorage.getItem("nwapp-create-member-country"),
+            region: localStorage.getItem("nwapp-create-member-region"),
+            locality: localStorage.getItem("nwapp-create-member-locality"),
             watchSlug: localStorage.getItem('nwapp-create-member-watch-slug'),
             watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
             watchName: localStorage.getItem('nwapp-create-member-watch-name'),
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
-            birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
+            yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
             gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
             howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
@@ -191,7 +196,7 @@ class MemberCreateStep8Container extends Component {
             ()=>{
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                localStorageRemoveItemsContaining("workery-create-client-");
+                // localStorageRemoveItemsContaining("workery-create-client-"); //TODO: UNCOMMENT WHEN READY.
                 this.props.setFlashMessage("success", "Member has been successfully created.");
                 this.props.history.push("/client/"+response['id']);
             }
@@ -222,7 +227,7 @@ class MemberCreateStep8Container extends Component {
             organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
-            tags, birthYear, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
+            tags, yearOfBirth, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
         } = this.state;
@@ -250,7 +255,7 @@ class MemberCreateStep8Container extends Component {
                 watchIcon={watchIcon}
                 watchName={watchName}
                 tags={tags}
-                birthYear={birthYear}
+                yearOfBirth={yearOfBirth}
                 gender={gender}
                 errors={errors}
                 onTextChange={this.onTextChange}
