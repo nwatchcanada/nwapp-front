@@ -49,23 +49,22 @@ class MemberCreateStep8Container extends Component {
             watchSlug: localStorage.getItem('nwapp-create-member-watch-slug'),
             watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
             watchName: localStorage.getItem('nwapp-create-member-watch-name'),
+            typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
             birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
             gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
-            genderLabel: localStorage.getItem("nwapp-create-member-gender-label"),
             howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
-            howDidYouHearLabel: localStorage.getItem("nwapp-create-member-howDidYouHearLabel"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
             meaning: localStorage.getItem("nwapp-create-member-meaning"),
-            expectations: localStorage.getItem("nwapp-create-member-expectations"),
+            meaningOther: localStorage.getItem("nwapp-create-member-meaningOther"),
+            expectation: localStorage.getItem("nwapp-create-member-expectation"),
+            expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
-            willingToVolunteerLabel: localStorage.getItem("nwapp-create-member-willingToVolunteer-label"),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
-            anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered-label"),
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
             under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            organizationEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-organizationEmployeeCount")),
+            organizationEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
             organizationYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-organizationYearsInOperation")),
             organizationType: localStorage.getItem("nwapp-create-member-organizationType"),
             errors: {},
@@ -163,7 +162,7 @@ class MemberCreateStep8Container extends Component {
             }, ()=>{
                 // Once our state has been validated `client-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postClientDetail(
+                this.props.postMemberDetail(
                     this.getPostData(),
                     this.onSuccessCallback,
                     this.onFailureCallback
@@ -193,7 +192,7 @@ class MemberCreateStep8Container extends Component {
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 localStorageRemoveItemsContaining("workery-create-client-");
-                this.props.setFlashMessage("success", "Client has been successfully created.");
+                this.props.setFlashMessage("success", "Member has been successfully created.");
                 this.props.history.push("/client/"+response['id']);
             }
         )
@@ -223,8 +222,8 @@ class MemberCreateStep8Container extends Component {
             organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
-            tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, expectations,
-            willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            tags, birthYear, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
         } = this.state;
 
@@ -253,16 +252,16 @@ class MemberCreateStep8Container extends Component {
                 tags={tags}
                 birthYear={birthYear}
                 gender={gender}
-                genderLabel={genderLabel}
+                errors={errors}
+                onTextChange={this.onTextChange}
                 howDidYouHear={howDidYouHear}
-                howDidYouHearLabel={howDidYouHearLabel}
                 howDidYouHearOther={howDidYouHearOther}
                 meaning={meaning}
-                expectations={expectations}
+                meaningOther={meaningOther}
+                expectation={expectation}
+                expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
-                willingToVolunteerLabel={willingToVolunteerLabel}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
-                anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}

@@ -16,17 +16,17 @@ export const NWAPP_ORGANIZATION_DETAIL_API_ENDPOINT = '/v1/public/organization/'
 export const NWAPP_DASHBOARD_API_ENDPOINT = '/v1/dashboard';
 
 //TODO: PROCESS THE FOLLOWING
-export const WORKERY_MEMBER_LIST_API_ENDPOINT = '/v2/customers';
-export const WORKERY_MEMBER_DETAIL_API_ENDPOINT = '/v2/customer/';
-export const WORKERY_MEMBER_ARCHIVE_API_ENDPOINT = '/customers/operation/archive';
-export const WORKERY_MEMBER_REZ_UPGRADE_API_ENDPOINT = '/customers/operation/upgrade-residential';
-export const WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_API_ENDPOINT = '/customers/operation/avatar';
-export const WORKERY_MEMBER_COMMENT_LIST_API_ENDPOINT = '/customer-comments';
-export const WORKERY_MEMBER_FILE_LIST_API_ENDPOINT = '/customer-files';
-export const WORKERY_MEMBER_FILE_ARCHIVE_API_ENDPOINT = '/customer-file/XXX/';
-export const WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT = '/customer/XXX/contact';
-export const WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT = '/customer/XXX/address';
-export const WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT = '/customer/XXX/metrics';
+export const WORKERY_MEMBER_LIST_API_ENDPOINT = '/v1/members';
+export const WORKERY_MEMBER_DETAIL_API_ENDPOINT = '/v1/member/';
+export const WORKERY_MEMBER_ARCHIVE_API_ENDPOINT = '/v1/members/operation/archive';
+export const WORKERY_MEMBER_REZ_UPGRADE_API_ENDPOINT = '/v1/members/operation/upgrade-residential';
+export const WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_API_ENDPOINT = '/v1/members/operation/avatar';
+export const WORKERY_MEMBER_COMMENT_LIST_API_ENDPOINT = '/v1/member-comments';
+export const WORKERY_MEMBER_FILE_LIST_API_ENDPOINT = '/v1/member-files';
+export const WORKERY_MEMBER_FILE_ARCHIVE_API_ENDPOINT = '/v1/member-file/XXX/';
+export const WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT = '/v1/member/XXX/contact';
+export const WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT = '/v1/member/XXX/address';
+export const WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT = '/v1/member/XXX/metrics';
 
 /**
  *  The full address of certain API endpoints from our backend server.

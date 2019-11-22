@@ -365,7 +365,7 @@ export function validateStep8CreateInput(data) {
     if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
         errors.organizationName = 'This field is required';
     }
-    if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || validator.isEmpty(data.organizationTypeOf) || data.organizationTypeOf === "") {
+    if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
         errors.organizationTypeOf = 'This field is required';
     }
     if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
