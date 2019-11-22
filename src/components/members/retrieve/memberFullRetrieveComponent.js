@@ -23,7 +23,7 @@ export default class MemberFullRetrieveComponent extends Component {
             watchSlug, watchIcon, watchName,
             tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
-            companyEmployeeCount, companyYearsInOperation, companyType,
+            organizationEmployeeCount, organizationYearsInOperation, organizationType,
         } = this.props.memberData;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -315,19 +315,19 @@ export default class MemberFullRetrieveComponent extends Component {
                                 {isBizTypeOf &&
                                     <tr>
                                         <th scope="row" className="bg-light">How many employees does your business have?</th>
-                                        <td>{companyEmployeeCount}</td>
+                                        <td>{organizationEmployeeCount}</td>
                                     </tr>
                                 }
                                 {isBizTypeOf &&
                                     <tr>
-                                        <th scope="row" className="bg-light">How many years has your company been in operation?</th>
-                                        <td>{companyYearsInOperation}</td>
+                                        <th scope="row" className="bg-light">How many years has your organization been in operation?</th>
+                                        <td>{organizationYearsInOperation}</td>
                                     </tr>
                                 }
                                 {isBizTypeOf &&
                                     <tr>
                                         <th scope="row" className="bg-light">What type of business is this?</th>
-                                        <td>{companyType}</td>
+                                        <td>{organizationType}</td>
                                     </tr>
                                 }
 

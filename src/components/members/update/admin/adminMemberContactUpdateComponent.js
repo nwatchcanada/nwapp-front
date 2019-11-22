@@ -10,7 +10,7 @@ import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneIn
 
 class AdminMemberContactUpdateComponent extends Component {
     render() {
-        const { slug, companyName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick } = this.props;
+        const { slug, organizationName, contactFirstName, contactLastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -47,11 +47,11 @@ class AdminMemberContactUpdateComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.companyName}
+                                error={errors.organizationName}
                                 label="Company Name (*)"
                                 onChange={onTextChange}
-                                value={companyName}
-                                name="companyName"
+                                value={organizationName}
+                                name="organizationName"
                                 type="text"
                             />
 

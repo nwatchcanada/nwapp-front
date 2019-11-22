@@ -13,7 +13,7 @@ import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF, COMPANY_TYPE_OF_CHOICES } from '..
 class MemberCreateStep4Component extends Component {
     render() {
         const {
-            typeOf, companyName, companyTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick, onSelectChange
+            typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick, onSelectChange
         } = this.props;
         return (
             <main id="main" role="main">
@@ -87,21 +87,21 @@ class MemberCreateStep4Component extends Component {
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.companyName}
+                                        error={errors.organizationName}
                                         label="Company Name (*)"
                                         onChange={onTextChange}
-                                        value={companyName}
-                                        name="companyName"
+                                        value={organizationName}
+                                        name="organizationName"
                                         type="text"
                                     />
                                     <BootstrapSingleSelect
                                         borderColour="border-primary"
                                         label="Company Type (*)"
-                                        name="companyTypeOf"
+                                        name="organizationTypeOf"
                                         defaultOptionLabel="Please select a telephone type."
                                         options={COMPANY_TYPE_OF_CHOICES}
-                                        value={companyTypeOf}
-                                        error={errors.companyTypeOf}
+                                        value={organizationTypeOf}
+                                        error={errors.organizationTypeOf}
                                         onSelectChange={onSelectChange}
                                     />
                                 </div>

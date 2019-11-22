@@ -42,9 +42,9 @@ class MemberCreateStep7Container extends Component {
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
             under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            companyYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-companyYearsInOperation")),
-            companyType: localStorage.getItem("nwapp-create-member-companyType"),
+            organizationEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            organizationYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-organizationYearsInOperation")),
+            organizationType: localStorage.getItem("nwapp-create-member-organizationType"),
             errors: {},
             isLoading: false
         }
@@ -251,7 +251,7 @@ class MemberCreateStep7Container extends Component {
         const {
             typeOf, tags, birthYear, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            companyEmployeeCount, companyYearsInOperation, companyType,
+            organizationEmployeeCount, organizationYearsInOperation, organizationType,
             errors
         } = this.state;
 
@@ -283,9 +283,9 @@ class MemberCreateStep7Container extends Component {
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
-                companyEmployeeCount={companyEmployeeCount}
-                companyYearsInOperation={companyYearsInOperation}
-                companyType={companyType}
+                organizationEmployeeCount={organizationEmployeeCount}
+                organizationYearsInOperation={organizationYearsInOperation}
+                organizationType={organizationType}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}

@@ -15,7 +15,7 @@ export default class MemberCreateStep7Component extends Component {
         const {
             typeOf, returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             meaning, meaningOptions, meaningOther, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            companyEmployeeCount, companyYearsInOperation, companyType,
+            organizationEmployeeCount, organizationYearsInOperation, organizationType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick, slug
         } = this.props;
@@ -228,31 +228,31 @@ export default class MemberCreateStep7Component extends Component {
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.companyEmployeeCount}
+                                        error={errors.organizationEmployeeCount}
                                         label="How many employees does your business have (*)"
                                         onChange={onTextChange}
-                                        value={companyEmployeeCount}
-                                        name="companyEmployeeCount"
+                                        value={organizationEmployeeCount}
+                                        name="organizationEmployeeCount"
                                         type="number"
                                     />
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.companyYearsInOperation}
-                                        label="How many years has your company been in operation (*)"
+                                        error={errors.organizationYearsInOperation}
+                                        label="How many years has your organization been in operation (*)"
                                         onChange={onTextChange}
-                                        value={companyYearsInOperation}
-                                        name="companyYearsInOperation"
+                                        value={organizationYearsInOperation}
+                                        name="organizationYearsInOperation"
                                         type="number"
                                     />
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.companyType}
+                                        error={errors.organizationType}
                                         label="What type of business is this? (*)"
                                         onChange={onTextChange}
-                                        value={companyType}
-                                        name="companyType"
+                                        value={organizationType}
+                                        name="organizationType"
                                         type="text"
                                     />
                                 </div>

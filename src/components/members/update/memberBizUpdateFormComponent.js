@@ -12,9 +12,9 @@ export default class MemberBizUpdateFormComponent extends Component {
     render() {
         const { errors, onTextChange, onSelectChange, onRadioChange, onMultiChange, isLoading } = this.props;
         const { contactFirstName, contactLastName, primaryPhone, secondaryPhone, email } = this.props;
-        const { companyName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions } = this.props;
+        const { organizationName, streetNumber, streetName, streetType, streetTypeOptions, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOptions } = this.props;
         const { watch, watchOptions } = this.props;
-        const { tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, companyEmployeeCount, companyYearsInOperation, companyType } = this.props;
+        const { tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther, meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount, organizationEmployeeCount, organizationYearsInOperation, organizationType } = this.props;
 
         const isOtherStreetTypeSelected = streetType === 'Other';
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
@@ -34,11 +34,11 @@ export default class MemberBizUpdateFormComponent extends Component {
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
-                    error={errors.companyName}
+                    error={errors.organizationName}
                     label="Compan Name (*)"
                     onChange={onTextChange}
-                    value={companyName}
-                    name="companyName"
+                    value={organizationName}
+                    name="organizationName"
                     type="text"
                     disabled={isLoading}
                 />
@@ -326,31 +326,31 @@ export default class MemberBizUpdateFormComponent extends Component {
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
-                    error={errors.companyEmployeeCount}
+                    error={errors.organizationEmployeeCount}
                     label="How many employees does your business have (*)"
                     onChange={onTextChange}
-                    value={companyEmployeeCount}
-                    name="companyEmployeeCount"
+                    value={organizationEmployeeCount}
+                    name="organizationEmployeeCount"
                     type="number"
                 />
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
-                    error={errors.companyYearsInOperation}
-                    label="How many years has your company been in operation (*)"
+                    error={errors.organizationYearsInOperation}
+                    label="How many years has your organization been in operation (*)"
                     onChange={onTextChange}
-                    value={companyYearsInOperation}
-                    name="companyYearsInOperation"
+                    value={organizationYearsInOperation}
+                    name="organizationYearsInOperation"
                     type="number"
                 />
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
-                    error={errors.companyType}
+                    error={errors.organizationType}
                     label="What type of business is this? (*)"
                     onChange={onTextChange}
-                    value={companyType}
-                    name="companyType"
+                    value={organizationType}
+                    name="organizationType"
                     type="text"
                 />
 

@@ -19,7 +19,7 @@ class MemberUpdateComponent extends Component {
         const { urlArgument, slug, typeOf, errors, onTextChange, onSelectChange, onRadioChange, onMultiChange, onDOBDateTimeChange, isLoading, onClick } = this.props;
 
         // Biz - Contact
-        const { companyName, contactFirstName, contactLastName } = this.props;
+        const { organizationName, contactFirstName, contactLastName } = this.props;
 
         // Rez - Contact
         const { firstName, lastName, primaryPhone, secondaryPhone, email } = this.props;
@@ -34,7 +34,7 @@ class MemberUpdateComponent extends Component {
         const {
             tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            companyEmployeeCount, companyYearsInOperation, companyType,
+            organizationEmployeeCount, organizationYearsInOperation, organizationType,
         } = this.props;
 
         // Check the type of member this is.
@@ -133,7 +133,7 @@ class MemberUpdateComponent extends Component {
                                     isLoading={isLoading}
                                     onClick={onClick}
 
-                                    companyName={companyName}
+                                    organizationName={organizationName}
                                     contactFirstName={contactFirstName}
                                     contactLastName={contactLastName}
                                     primaryPhone={primaryPhone}
@@ -167,9 +167,9 @@ class MemberUpdateComponent extends Component {
                                     anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                                     totalHouseholdCount={totalHouseholdCount}
                                     under18YearsHouseholdCount={under18YearsHouseholdCount}
-                                    companyEmployeeCount={companyEmployeeCount}
-                                    companyYearsInOperation={companyYearsInOperation}
-                                    companyType={companyType}
+                                    organizationEmployeeCount={organizationEmployeeCount}
+                                    organizationYearsInOperation={organizationYearsInOperation}
+                                    organizationType={organizationType}
                                 />
                             }
 

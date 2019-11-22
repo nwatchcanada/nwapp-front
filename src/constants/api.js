@@ -15,6 +15,19 @@ export const NWAPP_ORGANIZATION_LIST_API_ENDPOINT = '/v1/public/organizations';
 export const NWAPP_ORGANIZATION_DETAIL_API_ENDPOINT = '/v1/public/organization/';
 export const NWAPP_DASHBOARD_API_ENDPOINT = '/v1/dashboard';
 
+//TODO: PROCESS THE FOLLOWING
+export const WORKERY_MEMBER_LIST_API_ENDPOINT = '/v2/customers';
+export const WORKERY_MEMBER_DETAIL_API_ENDPOINT = '/v2/customer/';
+export const WORKERY_MEMBER_ARCHIVE_API_ENDPOINT = '/customers/operation/archive';
+export const WORKERY_MEMBER_REZ_UPGRADE_API_ENDPOINT = '/customers/operation/upgrade-residential';
+export const WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_API_ENDPOINT = '/customers/operation/avatar';
+export const WORKERY_MEMBER_COMMENT_LIST_API_ENDPOINT = '/customer-comments';
+export const WORKERY_MEMBER_FILE_LIST_API_ENDPOINT = '/customer-files';
+export const WORKERY_MEMBER_FILE_ARCHIVE_API_ENDPOINT = '/customer-file/XXX/';
+export const WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT = '/customer/XXX/contact';
+export const WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT = '/customer/XXX/address';
+export const WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT = '/customer/XXX/metrics';
+
 /**
  *  The full address of certain API endpoints from our backend server.
  */
@@ -707,18 +720,18 @@ export const ORGANIZATION_TYPE_OF_CHOICES = [
 
 export const COMPANY_TYPE_OF_CHOICES = [
     {
-        id: 'companyTypeOf-t-choice',
-        selectName: "companyTypeOf",
+        id: 'organizationTypeOf-t-choice',
+        selectName: "organizationTypeOf",
         value: 2,
         label: "Private"
     },{
-        id: 'companyTypeOf-f-choice',
-        selectName: "companyTypeOf",
+        id: 'organizationTypeOf-f-choice',
+        selectName: "organizationTypeOf",
         value: 3,
         label: "Non-profit"
     },{
-        id: 'companyTypeOf-f-choice',
-        selectName: "companyTypeOf",
+        id: 'organizationTypeOf-f-choice',
+        selectName: "organizationTypeOf",
         value: 4,
         label: "Government"
     }

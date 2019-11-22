@@ -19,8 +19,8 @@ class MemberCreateStep4Container extends Component {
         super(props);
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
-            companyName: localStorage.getItem("nwapp-create-member-companyName"),
-            companyTypeOf: localStorageGetIntegerItem("nwapp-create-member-companyTypeOf"),
+            organizationName: localStorage.getItem("nwapp-create-member-organizationName"),
+            organizationTypeOf: localStorageGetIntegerItem("nwapp-create-member-organizationTypeOf"),
             firstName: localStorage.getItem("nwapp-create-member-firstName"),
             lastName: localStorage.getItem("nwapp-create-member-lastName"),
             primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
@@ -125,13 +125,13 @@ class MemberCreateStep4Container extends Component {
 
     render() {
         const {
-            typeOf, companyName, companyTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, errors
+            typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, errors
         } = this.state;
         return (
             <MemberCreateStep4Component
                 typeOf={typeOf}
-                companyName={companyName}
-                companyTypeOf={companyTypeOf}
+                organizationName={organizationName}
+                organizationTypeOf={organizationTypeOf}
                 firstName={firstName}
                 lastName={lastName}
                 primaryPhone={primaryPhone}

@@ -15,13 +15,13 @@ export default class MemberCreateStep8Component extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
         const {
-            typeOf, errors, onClick, isLoading,
-            companyName, companyTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
+            typeOf, errors, onSubmitClick, isLoading,
+            organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
             streetNumber, streetName, streetType, streetTypeOther, apartmentUnit, streetDirection, postalCode,
             watchSlug, watchIcon, watchName,
             tags, tagOptions, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
-            companyEmployeeCount, companyYearsInOperation, companyType,
+            organizationEmployeeCount, organizationYearsInOperation, organizationType,
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -147,13 +147,13 @@ export default class MemberCreateStep8Component extends Component {
                                 {typeOf === BUSINESS_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Company Name</th>
-                                        <td>{companyName}</td>
+                                        <td>{organizationName}</td>
                                     </tr>
                                 }
                                 {typeOf === BUSINESS_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Company Type Of</th>
-                                        <td>{companyTypeOf}</td>
+                                        <td>{organizationTypeOf}</td>
                                     </tr>
                                 }
                                 <tr>
@@ -177,7 +177,7 @@ export default class MemberCreateStep8Component extends Component {
                                     <td>{email}</td>
                                 </tr>
 
-                                
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-address-book"></i>&nbsp;Address
@@ -292,19 +292,19 @@ export default class MemberCreateStep8Component extends Component {
                                 {isBizTypeOf &&
                                     <tr>
                                         <th scope="row" className="bg-light">How many employees does your business have?</th>
-                                        <td>{companyEmployeeCount}</td>
+                                        <td>{organizationEmployeeCount}</td>
                                     </tr>
                                 }
                                 {isBizTypeOf &&
                                     <tr>
-                                        <th scope="row" className="bg-light">How many years has your company been in operation?</th>
-                                        <td>{companyYearsInOperation}</td>
+                                        <th scope="row" className="bg-light">How many years has your organization been in operation?</th>
+                                        <td>{organizationYearsInOperation}</td>
                                     </tr>
                                 }
                                 {isBizTypeOf &&
                                     <tr>
                                         <th scope="row" className="bg-light">What type of business is this?</th>
-                                        <td>{companyType}</td>
+                                        <td>{organizationType}</td>
                                     </tr>
                                 }
                                 <tr>
@@ -317,7 +317,7 @@ export default class MemberCreateStep8Component extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onSubmitClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
                                 <Link to="/members/add/step-7" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">

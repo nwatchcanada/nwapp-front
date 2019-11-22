@@ -47,10 +47,15 @@ export function localStorageGetDateItem(key) {
     }
 }
 
-export function localStorageGetBooleanItem(key) {
+
+/**
+ *  Function will return either a boolean value saved in local storage or return
+ *  a `null` value if nothing was found in the storage.
+ */
+export function localStorageGetBooleanOrNullItem(key) {
     const str = localStorage.getItem(key);
     if (str === "undefined" || str === "null") { // Defensive Code: Error.
-        console.error("localStorageGetBooleanItem: Detected `undefined` string, could be potential error.");
+        console.error("localStorageGetBooleanOrNullItem: Detected `undefined` string, could be potential error.");
         return null;
     }
     if (str === "false" || str === "False" || str === "0" || str === "no" || str === "No") {
@@ -62,6 +67,17 @@ export function localStorageGetBooleanItem(key) {
     }
 }
 
+
+/**
+ *  Function will return either a boolean value saved in local storage or return
+ *  a `False` value if nothing was found in the storage.
+ */
+export function localStorageGetBooleanItem(key) {
+    const result = localStorageGetBooleanOrNullItem(key);
+    return (result === null) ? false : result;
+}
+
+
 export function localStorageGetIntegerItem(key) {
     const str = localStorage.getItem(key);
     if (str === "undefined" || str === "null") { // Defensive Code: Error.
@@ -71,6 +87,28 @@ export function localStorageGetIntegerItem(key) {
     return parseInt(str);
 }
 
+export function localStorageGetFloatItem(key) {
+    const str = localStorage.getItem(key);
+    if (str === "undefined" || str === "null") { // Defensive Code: Error.
+        console.error("localStorageGetFloatItem: Detected `undefined` string, could be potential error.");
+        return null;
+    }
+    return parseFloat(str);
+}
+
 export function localStorageSetObjectOrArrayItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
+}
+
+
+export function localStorageRemoveItemsContaining(substring) {
+    // Iterate through all the keys in local storage and try to find the
+    // matching substring to see if we must delete the particular item.
+    for(var key in localStorage) {
+        if ( key.includes(substring) ) {
+            let value = localStorage.getItem(key);
+            console.log("Deleting from localStorage:", key, ":", value);
+            localStorage.removeItem(key);
+        }
+    }
 }
