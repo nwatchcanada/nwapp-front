@@ -6,7 +6,7 @@ import StaffCreateStep2Component from "../../../components/staff/create/staffCre
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import validateInput from "../../../validators/staffValidator";
 import { localStorageGetDateItem, localStorageGetArrayItem } from '../../../helpers/localStorageUtility';
-import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getHowHearReactSelectOptions } from "../../../actions/howHearActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 

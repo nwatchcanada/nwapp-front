@@ -8,7 +8,7 @@ import { validateInput } from "../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF, BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES
 } from '../../../constants/api';
-import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getHowHearReactSelectOptions } from "../../../actions/howHearActions";
 import { getTagReactSelectOptions } from "../../../actions/tagActions";
 
 

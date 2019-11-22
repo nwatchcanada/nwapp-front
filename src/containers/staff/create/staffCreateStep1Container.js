@@ -9,7 +9,7 @@ import {
     // localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';
-import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getHowHearReactSelectOptions } from "../../../actions/howHearActions";
 import { getTagReactSelectOptions } from "../../../actions/tagActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../constants/api";

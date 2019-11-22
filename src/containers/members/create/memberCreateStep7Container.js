@@ -7,7 +7,7 @@ import { validateStep7CreateInput } from "../../../validators/memberValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../helpers/localStorageUtility';
-import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getHowHearReactSelectOptions, pullHowHearList } from "../../../actions/howHearActions";
 import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
 import { getExpectationReactSelectOptions } from "../../../actions/expectationAction";
 import { getTagReactSelectOptions, pullTagList } from "../../../actions/tagActions";
@@ -33,7 +33,7 @@ class MemberCreateStep7Container extends Component {
             yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
             gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
             isHowHearLoading: true,
-            howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHear: localStorageGetIntegerItem("nwapp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
             meaning: localStorage.getItem("nwapp-create-member-meaning"),
@@ -72,15 +72,6 @@ class MemberCreateStep7Container extends Component {
 
         // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
         this.setState({
-            howDidYouHearData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Word of mouth',
-                    slug: 'word-of-mouth'
-                },{
-                    name: 'Internet',
-                    slug: 'internet'
-                }]
-            },
             meaningData: {
                 results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
                     name: 'Crime & Safety Resources',
@@ -122,7 +113,7 @@ class MemberCreateStep7Container extends Component {
         // Fetch all our GUI drop-down options which are populated by the API.
         const parametersMap = new Map()
         parametersMap.set("isArchived", 3)
-        // this.props.pullHowHearList(1,1000, parametersMap, this.onHowHearSuccessFetch);
+        this.props.pullHowHearList(1,1000, parametersMap, this.onHowHearSuccessFetch);
         this.props.pullTagList(1, 1000, parametersMap, this.onTagsSuccessFetch);
     }
 
@@ -261,13 +252,14 @@ class MemberCreateStep7Container extends Component {
             errors
         } = this.state;
 
-        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
         const meaningOptions = getMeaningReactSelectOptions(this.state.meaningData, "meaning");
         const expectationOptions = getMeaningReactSelectOptions(this.state.expectationData, "expectation");
 
         // For debugging purposes only.
         console.log("Tag Options:", tagOptions);
+        console.log("HHI Options:", howDidYouHearOptions);
 
         return (
             <MemberCreateStep7Component
@@ -310,6 +302,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         tagList: store.tagListState,
+        howHearList: store.howHearListState,
     };
 }
 
@@ -318,6 +311,11 @@ const mapDispatchToProps = dispatch => {
         pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
                 pullTagList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
+        pullHowHearList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullHowHearList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
     }

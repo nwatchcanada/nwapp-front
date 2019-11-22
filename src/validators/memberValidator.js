@@ -115,7 +115,7 @@ export function validateInput(data) {
             errors.yearOfBirth = 'This field needs to be a number';
         }
     }
-    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
+    if (data.gender === undefined || data.gender === null || data.gender === "") {
         errors.gender = 'This field is required';
     }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
@@ -280,10 +280,10 @@ export function validateStep7CreateInput(data) {
             errors.yearOfBirth = 'This field needs to be a number';
         }
     }
-    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
+    if (data.gender === undefined || data.gender === null || data.gender === "") {
         errors.gender = 'This field is required';
     }
-    if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {
+    if (data.howDidYouHear === undefined || data.howDidYouHear === null || isNaN(data.howDidYouHear) || data.howDidYouHear === "") {
         errors.howDidYouHear = 'This field is required';
     } else {
         if (data.howDidYouHear === "Other") {
@@ -400,7 +400,7 @@ export function validateStep8CreateInput(data) {
             errors.yearOfBirth = 'This field needs to be a number';
         }
     }
-    if (data.gender === undefined || data.gender === null || data.gender === "" || isNaN(data.gender) ) {
+    if (data.gender === undefined || data.gender === null || data.gender === "") {
         errors.gender = 'This field is required';
     }
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || validator.isEmpty(data.howDidYouHear) || data.howDidYouHear === "") {

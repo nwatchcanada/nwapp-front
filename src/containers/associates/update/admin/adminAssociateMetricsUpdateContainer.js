@@ -7,7 +7,7 @@ import { validateStep7CreateInput } from "../../../../validators/memberValidator
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
-import { getHowHearReactSelectOptions } from "../../../../actions/howHearAction";
+import { getHowHearReactSelectOptions } from "../../../../actions/howHearActions";
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
 import { getMeaningReactSelectOptions } from "../../../../actions/meaningAction";
 import { getExpectationReactSelectOptions } from "../../../../actions/expectationAction";

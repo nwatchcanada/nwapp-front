@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import StaffFullRetrieveComponent from "../../../components/staff/retrieve/staffFullRetrieveComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
-import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
+import { getHowHearReactSelectOptions } from "../../../actions/howHearActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 // import { GENDER_CHOICES, TENANT_STAFF_GROUP_MEMBERSHIP_CHOICES } from "../../../constants/api";
 
