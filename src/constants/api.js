@@ -24,6 +24,8 @@ export const WORKERY_HOW_HEAR_LIST_API_ENDPOINT = '/v1/how-hears';
 export const WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT = '/v1/how-hear/';
 export const WORKERY_EXPECTATION_LIST_API_ENDPOINT = '/v1/expectations';
 export const WORKERY_EXPECTATION_DETAIL_API_ENDPOINT = '/v1/expectation/';
+export const WORKERY_MEANING_LIST_API_ENDPOINT = '/v1/meanings';
+export const WORKERY_MEANING_DETAIL_API_ENDPOINT = '/v1/meaning/';
 
 /**
  *  The full address of certain API endpoints from our backend server.

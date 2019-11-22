@@ -127,7 +127,7 @@ export function validateInput(data) {
             }
         }
     }
-    if (data.meaning === undefined || data.meaning === null || data.meaning === "") {
+    if (data.meaning === undefined || data.meaning === null || data.meaning === "" || isNaN(data.meaning) ) {
         errors.meaning = 'This field is required';
     }
     if (data.expectation === undefined || data.expectation === null || data.expectation === "" || isNaN(data.expectation) ) {
@@ -269,6 +269,8 @@ export function validateStep6CreateInput(data) {
 export function validateStep7CreateInput(data) {
     let errors = {};
 
+    console.log("validateStep7CreateInput", data);
+
     if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
         errors.yearOfBirth = 'This field is required';
     } else {
@@ -292,7 +294,7 @@ export function validateStep7CreateInput(data) {
             }
         }
     }
-    if (data.meaning === undefined || data.meaning === null || data.meaning === "") {
+    if (data.meaning === undefined || data.meaning === null || data.meaning === "" || isNaN(data.meaning) ) {
         errors.meaning = 'This field is required';
     }
     if (data.expectation === undefined || data.expectation === null || data.expectation === "" || isNaN(data.expectation) ) {
@@ -412,7 +414,7 @@ export function validateStep8CreateInput(data) {
             }
         }
     }
-    if (data.meaning === undefined || data.meaning === null || data.meaning === "") {
+    if (data.meaning === undefined || data.meaning === null || data.meaning === "" || isNaN(data.meaning) ) {
         errors.meaning = 'This field is required';
     }
     if (data.expectation === undefined || data.expectation === null || data.expectation === "" || isNaN(data.expectation) ) {

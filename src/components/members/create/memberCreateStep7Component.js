@@ -14,7 +14,7 @@ export default class MemberCreateStep7Component extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -176,6 +176,7 @@ export default class MemberCreateStep7Component extends Component {
                                 value={meaning}
                                 error={errors.meaning}
                                 onSelectChange={onSelectChange}
+                                isLoading={isMeaningLoading}
                             />
 
                             {meaning === "1" &&

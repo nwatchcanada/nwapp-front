@@ -8,7 +8,7 @@ import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions, pullHowHearList } from "../../../actions/howHearActions";
-import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
+import { getMeaningReactSelectOptions, pullMeaningList } from "../../../actions/meaningActions";
 import { getExpectationReactSelectOptions, pullExpectationList } from "../../../actions/expectationActions";
 import { getTagReactSelectOptions, pullTagList } from "../../../actions/tagActions";
 import {
@@ -36,10 +36,11 @@ class MemberCreateStep7Container extends Component {
             howDidYouHear: localStorageGetIntegerItem("nwapp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
-            meaning: localStorage.getItem("nwapp-create-member-meaning"),
+            isMeaningLoading: true,
+            meaning: localStorageGetIntegerItem("nwapp-create-member-meaning"),
             meaningOther: localStorage.getItem("nwapp-create-member-meaningOther"),
             isExpectationLoading: true,
-            expectation: localStorage.getItem("nwapp-create-member-expectation"),
+            expectation: localStorageGetIntegerItem("nwapp-create-member-expectation"),
             expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
@@ -62,6 +63,7 @@ class MemberCreateStep7Container extends Component {
         this.onTagsSuccessFetch = this.onTagsSuccessFetch.bind(this);
         this.onHowHearSuccessFetch = this.onHowHearSuccessFetch.bind(this);
         this.onExpectationsSuccessFetch = this.onExpectationsSuccessFetch.bind(this);
+        this.onMeaningSuccessFetch = this.onMeaningSuccessFetch.bind(this);
     }
 
     /**
@@ -72,34 +74,13 @@ class MemberCreateStep7Container extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
-        this.setState({
-            meaningData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Crime & Safety Resources',
-                    slug: "2"
-                },{
-                    name: 'Greater access to Police services',
-                    slug: "3"
-                },{
-                    name: 'Community Events',
-                    slug: "4"
-                },{
-                    name: 'Volunteer opportunities',
-                    slug: "5"
-                },{
-                    name: 'Other',
-                    slug: "1"
-                }]
-            }
-        });
-
         // Fetch all our GUI drop-down options which are populated by the API.
         const parametersMap = new Map()
         parametersMap.set("isArchived", 3)
         this.props.pullHowHearList(1,1000, parametersMap, this.onHowHearSuccessFetch);
         this.props.pullTagList(1, 1000, parametersMap, this.onTagsSuccessFetch);
         this.props.pullExpectationList(1, 1000, parametersMap, this.onExpectationsSuccessFetch);
+        this.props.pullMeaningList(1,1000, parametersMap, this.onMeaningSuccessFetch);
     }
 
     componentWillUnmount() {
@@ -143,6 +124,10 @@ class MemberCreateStep7Container extends Component {
 
     onExpectationsSuccessFetch(tags) {
         this.setState({ isExpectationLoading: false, });
+    }
+
+    onMeaningSuccessFetch(howHearList) {
+        this.setState({ isMeaningLoading: false, });
     }
 
     /**
@@ -235,7 +220,7 @@ class MemberCreateStep7Container extends Component {
 
     render() {
         const {
-            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
+            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
             errors
@@ -243,13 +228,14 @@ class MemberCreateStep7Container extends Component {
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
-        const meaningOptions = getMeaningReactSelectOptions(this.state.meaningData, "meaning");
+        const meaningOptions = getMeaningReactSelectOptions(this.props.meaningList, "meaning");
         const expectationOptions = getExpectationReactSelectOptions(this.props.expectationList, "expectation");
 
-        // For debugging purposes only.
-        console.log("Tag Options:", tagOptions);
-        console.log("HHI Options:", howDidYouHearOptions);
-        console.log("Exp Options:", expectationOptions);
+        // // For debugging purposes only.
+        // console.log("Tag Options:", tagOptions);
+        // console.log("HHI Options:", howDidYouHearOptions);
+        // console.log("Exp Options:", expectationOptions);
+        // console.log("Mea Options:", meaningOptions);
 
         return (
             <MemberCreateStep7Component
@@ -265,6 +251,7 @@ class MemberCreateStep7Container extends Component {
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
+                isMeaningLoading={isMeaningLoading}
                 meaning={meaning}
                 meaningOptions={meaningOptions}
                 meaningOther={meaningOther}
@@ -294,6 +281,7 @@ const mapStateToProps = function(store) {
         user: store.userState,
         tagList: store.tagListState,
         howHearList: store.howHearListState,
+        meaningList: store.meaningListState,
         expectationList: store.expectationListState,
     };
 }
@@ -308,6 +296,11 @@ const mapDispatchToProps = dispatch => {
         pullHowHearList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
                 pullHowHearList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
+        pullMeaningList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullMeaningList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
         pullExpectationList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
