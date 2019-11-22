@@ -23,17 +23,13 @@ class MemberCreateStep8Container extends Component {
         super(props);
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
-            bizCompanyName: localStorage.getItem("nwapp-create-member-biz-companyName"),
-            bizContactFirstName: localStorage.getItem("nwapp-create-member-biz-contactFirstName"),
-            bizContactLastName: localStorage.getItem("nwapp-create-member-biz-contactLastName"),
-            bizPrimaryPhone: localStorage.getItem("nwapp-create-member-biz-primaryPhone"),
-            bizSecondaryPhone: localStorage.getItem("nwapp-create-member-biz-secondaryPhone"),
-            bizEmail: localStorage.getItem("nwapp-create-member-biz-email"),
-            rezFirstName: localStorage.getItem("nwapp-create-member-rez-or-com-firstName"),
-            rezLastName: localStorage.getItem("nwapp-create-member-rez-or-com-lastName"),
-            rezPrimaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-primaryPhone"),
-            rezSecondaryPhone: localStorage.getItem("nwapp-create-member-rez-or-com-secondaryPhone"),
-            rezEmail: localStorage.getItem("nwapp-create-member-rez-or-com-email"),
+            companyName: localStorage.getItem("nwapp-create-member-companyName"),
+            companyTypeOf: localStorageGetIntegerItem("nwapp-create-member-companyTypeOf"),
+            firstName: localStorage.getItem("nwapp-create-member-firstName"),
+            lastName: localStorage.getItem("nwapp-create-member-lastName"),
+            primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
+            secondaryPhone: localStorage.getItem("nwapp-create-member-secondaryPhone"),
+            email: localStorage.getItem("nwapp-create-member-email"),
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
             streetType: localStorage.getItem("nwapp-create-member-streetType"),
@@ -118,8 +114,7 @@ class MemberCreateStep8Container extends Component {
     render() {
         const {
             returnURL, typeOf, errors,
-            bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
-            rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
+            companyName, companyTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
             tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, expectations,
@@ -131,17 +126,13 @@ class MemberCreateStep8Container extends Component {
             <MemberCreateStep8Component
                 returnURL={returnURL}
                 typeOf={typeOf}
-                bizCompanyName={bizCompanyName}
-                bizContactFirstName={bizContactFirstName}
-                bizContactLastName={bizContactLastName}
-                bizPrimaryPhone={bizPrimaryPhone}
-                bizSecondaryPhone={bizSecondaryPhone}
-                bizEmail={bizEmail}
-                rezFirstName={rezFirstName}
-                rezLastName={rezLastName}
-                rezPrimaryPhone={rezPrimaryPhone}
-                rezSecondaryPhone={rezSecondaryPhone}
-                rezEmail={rezEmail}
+                companyName={companyName}
+                companyTypeOf={companyTypeOf}
+                firstName={firstName}
+                lastName={lastName}
+                primaryPhone={primaryPhone}
+                secondaryPhone={secondaryPhone}
+                email={email}
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}

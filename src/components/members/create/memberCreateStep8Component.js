@@ -16,8 +16,7 @@ export default class MemberCreateStep8Component extends Component {
     render() {
         const {
             typeOf, errors, onClick, isLoading,
-            bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
-            rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
+            companyName, companyTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
             streetNumber, streetName, streetType, streetTypeOther, apartmentUnit, streetDirection, postalCode,
             watchSlug, watchIcon, watchName,
             tags, tagOptions, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
@@ -145,77 +144,40 @@ export default class MemberCreateStep8Component extends Component {
                                         <i className="fas fa-id-card"></i>&nbsp;Contact
                                     </th>
                                 </tr>
-                                {isBizTypeOf &&
+                                {typeOf === BUSINESS_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Company Name</th>
-                                        <td>{bizCompanyName}</td>
+                                        <td>{companyName}</td>
                                     </tr>
                                 }
-                                {isBizTypeOf &&
+                                {typeOf === BUSINESS_TYPE_OF &&
                                     <tr>
-                                        <th scope="row" className="bg-light">Contact First Name</th>
-                                        <td>{bizContactFirstName}</td>
+                                        <th scope="row" className="bg-light">Company Type Of</th>
+                                        <td>{companyTypeOf}</td>
                                     </tr>
                                 }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Contact Last Name</th>
-                                        <td>{bizContactLastName}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Primary Phone #</th>
-                                        <td>{bizPrimaryPhone}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Secondary Phone #</th>
-                                        <td>{bizSecondaryPhone}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Email</th>
-                                        <td>{bizEmail}</td>
-                                    </tr>
-                                }
+                                <tr>
+                                    <th scope="row" className="bg-light">First Name</th>
+                                    <td>{firstName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Last Name</th>
+                                    <td>{lastName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Primary Phone #</th>
+                                    <td>{primaryPhone}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Secondary Phone #</th>
+                                    <td>{secondaryPhone}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Email</th>
+                                    <td>{email}</td>
+                                </tr>
 
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">First Name</th>
-                                        <td>{rezFirstName}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Last Name</th>
-                                        <td>{rezLastName}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Primary Phone #</th>
-                                        <td>{rezPrimaryPhone}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Secondary Phone #</th>
-                                        <td>{rezSecondaryPhone}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Email</th>
-                                        <td>{rezEmail}</td>
-                                    </tr>
-                                }
-
-
-
-
+                                
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-address-book"></i>&nbsp;Address
