@@ -15,7 +15,7 @@ export default class MemberCreateStep8Component extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
         const {
-            returnURL, typeOf, errors, onClick, isLoading,
+            typeOf, errors, onClick, isLoading,
             bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
             rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
             streetNumber, streetName, streetType, streetTypeOther, apartmentUnit, streetDirection, postalCode,
@@ -90,7 +90,7 @@ export default class MemberCreateStep8Component extends Component {
                             </Link>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <Link to={returnURL}>
+                            <Link to="/members/add/step-4">
                                 <span className="num">4.</span><span className="">Contact</span>
                             </Link>
                         </div>

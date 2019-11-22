@@ -3,19 +3,18 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
+import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
+import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF, COMPANY_TYPE_OF_CHOICES } from '../../../constants/api';
 
 
-class MemberCreateStep5Component extends Component {
+class MemberCreateStep4Component extends Component {
     render() {
         const {
-            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
-            errors, onTextChange, onSelectChange, isLoading, onClick
+            typeOf, companyName, companyTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, errors, onTextChange, isLoading, onClick, onSelectChange
         } = this.props;
-
-        const isOtherStreetTypeSelected = streetType === 'Other';
-
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -53,15 +52,13 @@ class MemberCreateStep5Component extends Component {
                                 <span className="num">3.</span><span className="">Type</span>
                             </Link>
                         </div>
-                        <div id="step-4" className="st-grey">
-                            <Link to="/members/add/step-4">
-                                <span className="num">4.</span><span className="">Contact</span>
-                            </Link>
-                        </div>
-                        <div id="step-5" className="st-grey active">
+                        <div id="step-4" className="st-grey active">
                             <strong>
-                                <span className="num">5.</span><span className="">Address</span>
+                                <span className="num">4.</span><span className="">Contact</span>
                             </strong>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Address</span>
                         </div>
                         <div id="step-6" className="st-grey">
                             <span className="num">6.</span><span className="">Watch</span>
@@ -79,89 +76,91 @@ class MemberCreateStep5Component extends Component {
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
                             <h2>
-                                <i className="fas fa-address-book"></i>&nbsp;Address
+                                <i className="fas fa-id-card"></i>&nbsp;Contact
                             </h2>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
-                                error={errors.apartmentUnit}
-                                label="Apt. Unit"
-                                onChange={onTextChange}
-                                value={apartmentUnit}
-                                name="apartmentUnit"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.streetNumber}
-                                label="Street Number (*)"
-                                onChange={onTextChange}
-                                value={streetNumber}
-                                name="streetNumber"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.streetName}
-                                label="Street Name (*)"
-                                onChange={onTextChange}
-                                value={streetName}
-                                name="streetName"
-                                type="text"
-                            />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Street Type (*)"
-                                name="streetType"
-                                defaultOptionLabel="Please select a street type."
-                                options={streetTypeOptions}
-                                value={streetType}
-                                error={errors.streetType}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            {isOtherStreetTypeSelected &&
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.streetTypeOther}
-                                    label="Street Type Other (*)"
-                                    onChange={onTextChange}
-                                    value={streetTypeOther}
-                                    name="streetTypeOther"
-                                    type="text"
-                                />
+                            {typeOf === BUSINESS_TYPE_OF &&
+                                <div>
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.companyName}
+                                        label="Company Name (*)"
+                                        onChange={onTextChange}
+                                        value={companyName}
+                                        name="companyName"
+                                        type="text"
+                                    />
+                                    <BootstrapSingleSelect
+                                        borderColour="border-primary"
+                                        label="Company Type (*)"
+                                        name="companyTypeOf"
+                                        defaultOptionLabel="Please select a telephone type."
+                                        options={COMPANY_TYPE_OF_CHOICES}
+                                        value={companyTypeOf}
+                                        error={errors.companyTypeOf}
+                                        onSelectChange={onSelectChange}
+                                    />
+                                </div>
                             }
 
-                            <BootstrapSingleSelect
-                                borderColour="border-successs"
-                                label="Street Direction"
-                                name="streetDirection"
-                                defaultOptionLabel="Please select a street direction."
-                                options={streetDirectionOptions}
-                                value={streetDirection}
-                                error={errors.streetDirection}
-                                onSelectChange={onSelectChange}
-                                helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.firstName}
+                                label="First Name (*)"
+                                onChange={onTextChange}
+                                value={firstName}
+                                name="firstName"
+                                type="text"
                             />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.postalCode}
-                                label="Postal Code (*)"
+                                error={errors.lastName}
+                                label="Last Name (*)"
                                 onChange={onTextChange}
-                                value={postalCode}
-                                name="postalCode"
+                                value={lastName}
+                                name="lastName"
+                                type="text"
+                            />
+
+                            <BootstrapTelephoneInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.primaryPhone}
+                                label="Primary Phone (*)"
+                                onChange={onTextChange}
+                                value={primaryPhone}
+                                name="primaryPhone"
+                                type="text"
+                                placeholder="+1 (xxx) xxx-xxxx"
+                            />
+
+                            <BootstrapTelephoneInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.secondaryPhone}
+                                label="Secondary Phone"
+                                onChange={onTextChange}
+                                value={secondaryPhone}
+                                name="secondaryPhone"
+                                type="text"
+                                placeholder="+1 (xxx) xxx-xxxx"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.email}
+                                label="Email (*)"
+                                onChange={onTextChange}
+                                value={email}
+                                name="email"
                                 type="text"
                             />
 
@@ -169,7 +168,7 @@ class MemberCreateStep5Component extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/members/add/step-4" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/members/add/step-3" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
@@ -183,4 +182,4 @@ class MemberCreateStep5Component extends Component {
     }
 }
 
-export default MemberCreateStep5Component;
+export default MemberCreateStep4Component;

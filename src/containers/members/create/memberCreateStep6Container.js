@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import MemberCreateStep6Component from "../../../components/members/create/memberCreateStep6Component";
+import { localStorageGetIntegerItem } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
     RESIDENCE_TYPE_OF,
@@ -18,23 +19,11 @@ class MemberCreateStep6Container extends Component {
 
     constructor(props) {
         super(props);
-
-        // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
-        let returnURL;
-        if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-4-rez-or-cc";
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-4-biz";
-        }
-
         this.state = {
-            returnURL: returnURL,
+            typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             watchSlug: localStorage.getItem('nwapp-create-member-watch-slug'),
             watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
             watchName: localStorage.getItem('nwapp-create-member-watch-name'),
-            typeOf: typeOf,
         }
     }
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default class MemberCreateStep6Component extends Component {
     render() {
-        const { returnURL, tableData, isLoading, onTableRowClick } = this.props;
+        const { tableData, isLoading, onTableRowClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -44,7 +44,7 @@ export default class MemberCreateStep6Component extends Component {
                             </Link>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <Link to={returnURL}>
+                            <Link to="/members/add/step-4">
                                 <span className="num">4.</span><span className="">Contact</span>
                             </Link>
                         </div>
@@ -119,7 +119,7 @@ class TableRow extends Component {
                 <td>
 
                     <button className="btn btn-primary btn-sm float-right" disabled={isLoading} onClick={ (event) => { onTableRowClick(event, slug, icon, name) } }>
-                        Select and proceed to metrics&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                        Select and Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                     </button>
                 </td>
             </tr>

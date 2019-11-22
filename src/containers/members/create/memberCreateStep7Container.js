@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import MemberCreateStep7Component from "../../../components/members/create/memberCreateStep7Component";
 import { validateStep7CreateInput } from "../../../validators/memberValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
@@ -26,20 +26,8 @@ class MemberCreateStep7Container extends Component {
 
     constructor(props) {
         super(props);
-
-        // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
-        let returnURL;
-        if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-4-rez-or-cc";
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-4-biz";
-        }
-
         this.state = {
-            returnURL: returnURL,
-            typeOf: typeOf,
+            typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
             birthYear: localStorage.getItem("nwapp-create-member-birthYear"),
             gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
@@ -261,7 +249,7 @@ class MemberCreateStep7Container extends Component {
 
     render() {
         const {
-            typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
+            typeOf, tags, birthYear, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             errors
@@ -275,7 +263,6 @@ class MemberCreateStep7Container extends Component {
         return (
             <MemberCreateStep7Component
                 typeOf={typeOf}
-                returnURL={returnURL}
                 tags={tags}
                 tagOptions={tagOptions}
                 birthYear={birthYear}

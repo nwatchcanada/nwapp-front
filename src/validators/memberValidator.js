@@ -178,6 +178,39 @@ export function validateStep4RezOrComCreateInput(data) {
 /**
  *  Validator will validate step 4 in the member creation form.
  */
+export function validateStep4CreateInput(data) {
+    let errors = {};
+
+    if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
+        errors.firstName = 'This field is required';
+    }
+    if (data.lastName === undefined || data.lastName === null || validator.isEmpty(data.lastName) || data.lastName === "") {
+        errors.lastName = 'This field is required';
+    }
+    if (data.primaryPhone === undefined || data.primaryPhone === null || validator.isEmpty(data.primaryPhone) || data.primaryPhone === "") {
+        errors.primaryPhone = 'This field is required';
+    }
+    if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
+        errors.email = 'This field is required';
+    }
+    if (data.typeOf === BUSINESS_TYPE_OF) {
+        if (data.companyName === undefined || data.companyName === null || validator.isEmpty(data.companyName) || data.companyName === "") {
+            errors.companyName = 'This field is required';
+        }
+        if (data.companyTypeOf === undefined || data.companyTypeOf === null || isNaN(data.companyTypeOf) || data.companyTypeOf === "") {
+            errors.companyTypeOf = 'This field is required';
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+/**
+ *  Validator will validate step 4 in the member creation form.
+ */
 export function validateStep4BizCreateInput(data) {
     let errors = {};
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import MemberCreateStep3Component from "../../../components/members/create/memberCreateStep3Component";
+import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF } from '../../../constants/api';
 
 
 class MemberCreateStep3Container extends Component {
@@ -9,6 +10,12 @@ class MemberCreateStep3Container extends Component {
      *  Initializer & Utility
      *------------------------------------------------------------
      */
+
+    constructor(props) {
+        super(props);
+        this.onRezOrComClick = this.onRezOrComClick.bind(this);
+        this.onBizClick = this.onBizClick.bind(this);
+    }
 
     /**
      *  Component Life-cycle Management
@@ -38,6 +45,16 @@ class MemberCreateStep3Container extends Component {
      *------------------------------------------------------------
      */
 
+    onRezOrComClick() {
+        localStorage.setItem("nwapp-create-member-typeOf", RESIDENCE_TYPE_OF);
+        this.props.history.push("/members/add/step-4");
+    }
+
+    onBizClick() {
+        localStorage.setItem("nwapp-create-member-typeOf", BUSINESS_TYPE_OF);
+        this.props.history.push("/members/add/step-4");
+    }
+
 
     /**
      *  Main render function
@@ -47,6 +64,8 @@ class MemberCreateStep3Container extends Component {
     render() {
         return (
             <MemberCreateStep3Component
+                onBizClick={this.onBizClick}
+                onRezOrComClick={this.onRezOrComClick}
             />
         );
     }

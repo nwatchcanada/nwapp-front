@@ -2,21 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
+import MemberCreateStep4Component from "../../../components/members/create/memberCreateStep4Component";
+import { validateStep4CreateInput } from "../../../validators/memberValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetIntegerItem
+    localStorageGetIntegerItem, localStorageSetObjectOrArrayItem
 } from '../../../helpers/localStorageUtility';
-import { validateStep5CreateInput } from "../../../validators/memberValidator";
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
-import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
 
-
-class MemberCreateStep5Container extends Component {
+class MemberCreateStep4Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -26,15 +19,13 @@ class MemberCreateStep5Container extends Component {
         super(props);
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
-            streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
-            streetName: localStorage.getItem("nwapp-create-member-streetName"),
-            streetType: localStorage.getItem("nwapp-create-member-streetType"),
-            apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
-            streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
-            streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
-            streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
-            streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
-            postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
+            companyName: localStorage.getItem("nwapp-create-member-companyName"),
+            companyTypeOf: localStorageGetIntegerItem("nwapp-create-member-companyTypeOf"),
+            firstName: localStorage.getItem("nwapp-create-member-firstName"),
+            lastName: localStorage.getItem("nwapp-create-member-lastName"),
+            primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
+            secondaryPhone: localStorage.getItem("nwapp-create-member-secondaryPhone"),
+            email: localStorage.getItem("nwapp-create-member-email"),
             errors: {},
             isLoading: false
         }
@@ -70,8 +61,7 @@ class MemberCreateStep5Container extends Component {
      */
 
     onSuccessfulSubmissionCallback(member) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-6");
+        this.props.history.push("/members/add/step-5");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -94,8 +84,9 @@ class MemberCreateStep5Container extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        });
-        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
+        })
+        const key = "nwapp-create-member-"+[e.target.name];
+        localStorage.setItem(key, e.target.value);
     }
 
     onSelectChange(option) {
@@ -104,17 +95,17 @@ class MemberCreateStep5Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-create-member-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-create-member-'+optionKey, option);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateStep5CreateInput(this.state);
+        const { errors, isValid } = validateStep4CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -133,18 +124,19 @@ class MemberCreateStep5Container extends Component {
      */
 
     render() {
-        const { streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode, errors } = this.state;
+        const {
+            typeOf, companyName, companyTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, errors
+        } = this.state;
         return (
-            <MemberCreateStep5Component
-                streetNumber={streetNumber}
-                streetName={streetName}
-                streetType={streetType}
-                apartmentUnit={apartmentUnit}
-                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
-                streetTypeOther={streetTypeOther}
-                streetDirection={streetDirection}
-                streetDirectionOptions={STREET_DIRECTION_CHOICES}
-                postalCode={postalCode}
+            <MemberCreateStep4Component
+                typeOf={typeOf}
+                companyName={companyName}
+                companyTypeOf={companyTypeOf}
+                firstName={firstName}
+                lastName={lastName}
+                primaryPhone={primaryPhone}
+                secondaryPhone={secondaryPhone}
+                email={email}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
@@ -168,4 +160,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep5Container);
+)(MemberCreateStep4Container);

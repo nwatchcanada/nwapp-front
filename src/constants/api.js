@@ -703,3 +703,23 @@ export const ORGANIZATION_TYPE_OF_CHOICES = [
         label: "Government"
     }
 ];
+
+
+export const COMPANY_TYPE_OF_CHOICES = [
+    {
+        id: 'companyTypeOf-t-choice',
+        selectName: "companyTypeOf",
+        value: 2,
+        label: "Private"
+    },{
+        id: 'companyTypeOf-f-choice',
+        selectName: "companyTypeOf",
+        value: 3,
+        label: "Non-profit"
+    },{
+        id: 'companyTypeOf-f-choice',
+        selectName: "companyTypeOf",
+        value: 4,
+        label: "Government"
+    }
+];

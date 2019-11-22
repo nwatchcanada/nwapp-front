@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MemberCreateStep8Component from "../../../components/members/create/memberCreateStep8Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
-    localStorageGetObjectItem, localStorageGetArrayItem
+    localStorageGetObjectItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
@@ -21,20 +21,8 @@ class MemberCreateStep8Container extends Component {
 
     constructor(props) {
         super(props);
-
-        // Get the type of.
-        const typeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
-        let returnURL;
-        if (typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF) {
-            returnURL = "/members/add/step-4-rez-or-cc";
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            returnURL = "/members/add/step-4-biz";
-        }
-
         this.state = {
-            returnURL: returnURL,
-            typeOf: typeOf,
+            typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             bizCompanyName: localStorage.getItem("nwapp-create-member-biz-companyName"),
             bizContactFirstName: localStorage.getItem("nwapp-create-member-biz-contactFirstName"),
             bizContactLastName: localStorage.getItem("nwapp-create-member-biz-contactLastName"),

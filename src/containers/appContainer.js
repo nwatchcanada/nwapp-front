@@ -96,6 +96,7 @@ import MemberCommentContainer from "./members/retrieve/memberCommentContainer";
 import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
 import MemberCreateStep2Container from "./members/create/memberCreateStep2Container";
 import MemberCreateStep3Container from "./members/create/memberCreateStep3Container";
+import MemberCreateStep4Container from "./members/create/memberCreateStep4Container";
 import MemberCreateStep4BizContainer from "./members/create/memberCreateStep4BizContainer";
 import MemberCreateStep4RezOrComContainer from "./members/create/memberCreateStep4RezOrComContainer";
 import MemberCreateStep5Container from "./members/create/memberCreateStep5Container";
@@ -282,6 +283,7 @@ class AppContainer extends React.Component {
                                 <Route path="/members/add/step-1" exact component={requiresAuth(MemberCreateStep1Container)} />
                                 <Route path="/members/add/step-2" exact component={requiresAuth(MemberCreateStep2Container)} />
                                 <Route path="/members/add/step-3" exact component={requiresAuth(MemberCreateStep3Container)} />
+                                <Route path="/members/add/step-4" exact component={requiresAuth(MemberCreateStep4Container)} />
                                 <Route path="/members/add/step-4-biz" exact component={requiresAuth(MemberCreateStep4BizContainer)} />
                                 <Route path="/members/add/step-4-rez-or-cc" exact component={requiresAuth(MemberCreateStep4RezOrComContainer)} />
                                 <Route path="/members/add/step-5" exact component={requiresAuth(MemberCreateStep5Container)} />
