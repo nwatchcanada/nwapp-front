@@ -50,10 +50,14 @@ class TenantDashboardRedirectContainer extends Component {
         // IMPORTANT: WE ARE TAKING THE ACCESS TOKEN FOUND AS A URL ARGUMENT
         // AND INSERTING IT INTO OUR TOKEN-UTILITY LIBRARY SO ALL OUR API
         // NOW CAN USE IT AND WE HAVE ACCESS TO THE TENANTED API DATA.
-        setAccessTokenInLocalStorage(accessTokenString);
+        setAccessTokenInLocalStorage({
+            'token': accessTokenString
+        });
 
         // IMPORTANT: WE NEED TO SAVE THE REFRESH TOKEN AS WELL!
-        setRefreshTokenInLocalStorage(refreshTokenString);
+        setRefreshTokenInLocalStorage({
+            'token': refreshTokenString
+        });
 
         // IMPORTANT: NOW THAT WE HAVE ATTACHED OUR ACCESS TOKEN TO OUR LOCAL
         // STORAGE, WE CAN NOW MAKE API CALLS.

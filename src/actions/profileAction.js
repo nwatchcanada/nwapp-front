@@ -5,16 +5,14 @@ import msgpack from 'msgpack-lite';
 
 import { PROFILE_REQUEST, PROFILE_SUCCESS, PROFILE_FAILURE } from "../constants/actionTypes";
 import {
-    NWAPP_PROFILE_API_ENDPOINT,
+    NWAPP_PROFILE_API_URL,
     NWAPP_ACTIVATE_API_ENDPOINT
 } from "../constants/api";
 import {
-    getAccessTokenFromLocalStorage,
     setAccessTokenInLocalStorage,
-    setRefreshTokenInLocalStorage,
-    attachAxiosRefreshTokenHandler
+    setRefreshTokenInLocalStorage
 } from '../helpers/tokenUtility';
-import { getPublicAPIBaseURL } from '../helpers/urlUtility';
+import getCustomAxios from '../helpers/customAxios';
 
 
 export const setProfileRequest = () => ({
@@ -45,26 +43,11 @@ export function pullProfile(successCallback=null, failedCallback=null) {
             setProfileRequest()
         );
 
-        // IMPORTANT: THIS IS THE ONLY WAY WE CAN GET THE ACCESS TOKEN.
-        const accessToken = getAccessTokenFromLocalStorage();
-
-        // Create a new Axios instance using our oAuth 2.0 bearer token
-        // and various other headers.
-        const customAxios = axios.create({
-            baseURL: getPublicAPIBaseURL(),
-            headers: {
-                'Authorization': "Bearer " + accessToken,
-                'Content-Type': 'application/json;',
-                'Accept': 'application/json',
-            },
-            // responseType: 'arraybuffer'
-        })
-
-        // Attach our Axios "refesh token" interceptor.
-        attachAxiosRefreshTokenHandler(customAxios);
+        // Generate our app's Axios instance.
+        const customAxios = getCustomAxios();
 
         // Run our Axios post.
-        customAxios.get(NWAPP_PROFILE_API_ENDPOINT).then( (successResponse) => { // SUCCESS
+        customAxios.get(NWAPP_PROFILE_API_URL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
             // const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -132,22 +115,8 @@ export function postProfile(data, successCallback, failedCallback) {
             setProfileRequest()
         );
 
-        const accessToken = getAccessTokenFromLocalStorage();
-
-        // Create a new Axios instance using our oAuth 2.0 bearer token
-        // and various other headers.
-        const customAxios = axios.create({
-            baseURL: getPublicAPIBaseURL(),
-            headers: {
-                'Authorization': "Bearer " + accessToken,
-                'Content-Type': 'application/msgpack;',
-                'Accept': 'application/msgpack',
-            },
-            responseType: 'arraybuffer'
-        })
-
-        // // Attach our Axios "refesh token" interceptor.
-        // attachAxiosRefreshTokenHandler(customAxios);
+        // Generate our app's Axios instance.
+        const customAxios = getCustomAxios();
 
         // The following code will convert the `camelized` data into `snake case`
         // data so our API endpoint will be able to read it.
@@ -157,7 +126,7 @@ export function postProfile(data, successCallback, failedCallback) {
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(NWAPP_PROFILE_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(NWAPP_PROFILE_API_URL, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -220,15 +189,8 @@ export function postActivateProfile(accessCode, successCallback, failedCallback)
             setProfileRequest()
         );
 
-        // Create a new Axios instance.
-        const customAxios = axios.create({
-            baseURL: getPublicAPIBaseURL(),
-            headers: {
-                'Content-Type': 'application/msgpack;',
-                'Accept': 'application/msgpack',
-            },
-            responseType: 'arraybuffer'
-        })
+        // Generate our app's Axios instance.
+        const customAxios = getCustomAxios();
 
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode({

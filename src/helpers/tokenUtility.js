@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { camelizeKeys } from 'humps';
-import { NWAPP_LOGIN_API_URL } from "../constants/api"
+import {
+    NWAPP_LOGIN_API_URL,
+    NWAPP_REFRESH_TOKEN_API_URL
+} from "../constants/api"
 
 /**
  *------------------------------------------------------------------------------
@@ -83,7 +86,7 @@ export async function fetchTokenCredentials(email, password) {
  *  Function makes a call to our login API endpoint.
  */
 function atteptRefresh(refreshTokenString) {
-    return axios.post(process.env.REACT_APP_API_HOST+'/api/v1/public/refresh-token', {
+    return axios.post(NWAPP_REFRESH_TOKEN_API_URL, {
         'refresh_token': refreshTokenString,
     })
 }

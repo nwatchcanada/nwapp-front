@@ -4,9 +4,13 @@
 export const APP_STATE = 'APP_STATE';
 
 /**
- *  The API web-services endpoints accessible from the public or tenant.
+ *  The base URL to apply to all the API endpoints.
  */
 export const NWAPP_API_BASE_PATH = '/api'
+
+/**
+ *  The API web-services endpoints accessible from the public or tenant.
+ */
 export const NWAPP_LOGIN_API_ENDPOINT = '/v1/public/login';
 export const NWAPP_LOGOUT_API_ENDPOINT = '/api/v1/public/logout';
 export const NWAPP_REFRESH_TOKEN_API_ENDPOINT = '/v1/public/refresh-token';
@@ -14,6 +18,15 @@ export const NWAPP_PROFILE_API_ENDPOINT = '/v1/public/profile';
 export const NWAPP_ORGANIZATION_LIST_API_ENDPOINT = '/v1/public/organizations';
 export const NWAPP_ORGANIZATION_DETAIL_API_ENDPOINT = '/v1/public/organization/';
 export const NWAPP_DASHBOARD_API_ENDPOINT = '/v1/dashboard';
+
+/**
+ *  The full address of certain API endpoints from our backend server.
+ */
+export const NWAPP_LOGIN_API_URL = process.env.REACT_APP_API_HOST + NWAPP_API_BASE_PATH + NWAPP_LOGIN_API_ENDPOINT;
+export const NWAPP_LOGOUT_API_URL = process.env.REACT_APP_API_HOST + NWAPP_API_BASE_PATH + NWAPP_LOGOUT_API_ENDPOINT;
+export const NWAPP_REFRESH_TOKEN_API_URL = process.env.REACT_APP_API_HOST + NWAPP_API_BASE_PATH + NWAPP_REFRESH_TOKEN_API_ENDPOINT;
+export const NWAPP_PROFILE_API_URL = process.env.REACT_APP_API_HOST + NWAPP_API_BASE_PATH + NWAPP_PROFILE_API_ENDPOINT;
+
 
 //TODO: PROCESS THE FOLLOWING
 export const WORKERY_MEMBER_LIST_API_ENDPOINT = '/v1/members';
@@ -27,11 +40,6 @@ export const WORKERY_MEMBER_FILE_ARCHIVE_API_ENDPOINT = '/v1/member-file/XXX/';
 export const WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT = '/v1/member/XXX/contact';
 export const WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT = '/v1/member/XXX/address';
 export const WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT = '/v1/member/XXX/metrics';
-
-/**
- *  The full address of certain API endpoints from our backend server.
- */
-export const NWAPP_LOGIN_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/login';
 
 // TODO: DO SOMETHING WITH BELOW
 export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/register';
