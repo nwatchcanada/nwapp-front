@@ -21,7 +21,7 @@ export default class MemberCreateStep8Component extends Component {
             watchSlug, watchIcon, watchName,
             tags, tagOptions, yearOfBirth, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
             meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationYearsInOperation, organizationType,
+            organizationEmployeeCount, organizationFoundingYear, organizationType,
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -298,7 +298,7 @@ export default class MemberCreateStep8Component extends Component {
                                 {isBizTypeOf &&
                                     <tr>
                                         <th scope="row" className="bg-light">How many years has your organization been in operation?</th>
-                                        <td>{organizationYearsInOperation}</td>
+                                        <td>{organizationFoundingYear}</td>
                                     </tr>
                                 }
                                 {isBizTypeOf &&

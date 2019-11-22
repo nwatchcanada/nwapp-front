@@ -152,8 +152,8 @@ export function validateInput(data) {
         if (data.organizationEmployeeCount === undefined || data.organizationEmployeeCount === null || data.organizationEmployeeCount === "" || isNaN(data.organizationEmployeeCount) ) {
             errors.organizationEmployeeCount = 'This field is required';
         }
-        if (data.organizationYearsInOperation === undefined || data.organizationYearsInOperation === null || data.organizationYearsInOperation === "" || isNaN(data.organizationYearsInOperation) ) {
-            errors.organizationYearsInOperation = 'This field is required';
+        if (data.organizationFoundingYear === undefined || data.organizationFoundingYear === null || data.organizationFoundingYear === "" || isNaN(data.organizationFoundingYear) ) {
+            errors.organizationFoundingYear = 'This field is required';
         }
         if (data.organizationType === undefined || data.organizationType === null || data.organizationType === "") {
             errors.organizationType = 'This field is required';
@@ -319,8 +319,8 @@ export function validateStep7CreateInput(data) {
         if (data.organizationEmployeeCount === undefined || data.organizationEmployeeCount === null || data.organizationEmployeeCount === "" || isNaN(data.organizationEmployeeCount) ) {
             errors.organizationEmployeeCount = 'This field is required';
         }
-        if (data.organizationYearsInOperation === undefined || data.organizationYearsInOperation === null || data.organizationYearsInOperation === "" || isNaN(data.organizationYearsInOperation) ) {
-            errors.organizationYearsInOperation = 'This field is required';
+        if (data.organizationFoundingYear === undefined || data.organizationFoundingYear === null || data.organizationFoundingYear === "" || isNaN(data.organizationFoundingYear) ) {
+            errors.organizationFoundingYear = 'This field is required';
         }
         if (data.organizationType === undefined || data.organizationType === null || data.organizationType === "") {
             errors.organizationType = 'This field is required';
@@ -439,8 +439,8 @@ export function validateStep8CreateInput(data) {
         if (data.organizationEmployeeCount === undefined || data.organizationEmployeeCount === null || data.organizationEmployeeCount === "" || isNaN(data.organizationEmployeeCount) ) {
             errors.organizationEmployeeCount = 'This field is required';
         }
-        if (data.organizationYearsInOperation === undefined || data.organizationYearsInOperation === null || data.organizationYearsInOperation === "" || isNaN(data.organizationYearsInOperation) ) {
-            errors.organizationYearsInOperation = 'This field is required';
+        if (data.organizationFoundingYear === undefined || data.organizationFoundingYear === null || data.organizationFoundingYear === "" || isNaN(data.organizationFoundingYear) ) {
+            errors.organizationFoundingYear = 'This field is required';
         }
         if (data.organizationType === undefined || data.organizationType === null || data.organizationType === "") {
             errors.organizationType = 'This field is required';

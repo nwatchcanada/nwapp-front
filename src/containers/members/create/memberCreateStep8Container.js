@@ -70,7 +70,7 @@ class MemberCreateStep8Container extends Component {
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
             under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
             organizationEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            organizationYearsInOperation: parseInt(localStorage.getItem("nwapp-create-member-organizationYearsInOperation")),
+            organizationFoundingYear: parseInt(localStorage.getItem("nwapp-create-member-organizationFoundingYear")),
             organizationType: localStorage.getItem("nwapp-create-member-organizationType"),
             errors: {},
             isLoading: false
@@ -120,6 +120,11 @@ class MemberCreateStep8Container extends Component {
         if (this.state.organizationTypeOf === null || this.state.organizationTypeOf === undefined || this.state.organizationTypeOf === "" || isNaN(this.state.organizationTypeOf)) {
             postData.organizationTypeOf = 0;
         }
+
+        // BUGFIX: When converting from camelCase to snake_case, there appears to
+        //         be a problem with the "18_y" conversion as it saves it as "18y"
+        //         therefore as a result we need to run this code.
+        postData.under_18_years_household_count = this.state.under18YearsHouseholdCount;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -229,7 +234,7 @@ class MemberCreateStep8Container extends Component {
             watchSlug, watchIcon, watchName,
             tags, yearOfBirth, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationYearsInOperation, organizationType,
+            organizationEmployeeCount, organizationFoundingYear, organizationType,
         } = this.state;
 
         return (
@@ -270,7 +275,7 @@ class MemberCreateStep8Container extends Component {
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}
-                organizationYearsInOperation={organizationYearsInOperation}
+                organizationFoundingYear={organizationFoundingYear}
                 organizationType={organizationType}
                 errors={errors}
                 onSubmitClick={this.onSubmitClick}

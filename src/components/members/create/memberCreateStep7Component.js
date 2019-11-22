@@ -15,7 +15,7 @@ export default class MemberCreateStep7Component extends Component {
         const {
             typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationYearsInOperation, organizationType,
+            organizationEmployeeCount, organizationFoundingYear, organizationType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
@@ -282,11 +282,11 @@ export default class MemberCreateStep7Component extends Component {
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.organizationYearsInOperation}
-                                        label="How many years has your organization been in operation (*)"
+                                        error={errors.organizationFoundingYear}
+                                        label="What year was your organization established? (*)"
                                         onChange={onTextChange}
-                                        value={organizationYearsInOperation}
-                                        name="organizationYearsInOperation"
+                                        value={organizationFoundingYear}
+                                        name="organizationFoundingYear"
                                         type="number"
                                     />
                                     <BootstrapInput
