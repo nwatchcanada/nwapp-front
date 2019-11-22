@@ -9,7 +9,7 @@ import {
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearActions";
 import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
-import { getExpectationReactSelectOptions } from "../../../actions/expectationAction";
+import { getExpectationReactSelectOptions } from "../../../actions/expectationActions";
 import { getTagReactSelectOptions } from "../../../actions/tagActions";
 import {
     RESIDENCE_TYPE_OF,

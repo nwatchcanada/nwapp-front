@@ -9,7 +9,7 @@ import {
 } from '../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions, pullHowHearList } from "../../../actions/howHearActions";
 import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
-import { getExpectationReactSelectOptions } from "../../../actions/expectationAction";
+import { getExpectationReactSelectOptions, pullExpectationList } from "../../../actions/expectationActions";
 import { getTagReactSelectOptions, pullTagList } from "../../../actions/tagActions";
 import {
     RESIDENCE_TYPE_OF,
@@ -38,6 +38,7 @@ class MemberCreateStep7Container extends Component {
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
             meaning: localStorage.getItem("nwapp-create-member-meaning"),
             meaningOther: localStorage.getItem("nwapp-create-member-meaningOther"),
+            isExpectationLoading: true,
             expectation: localStorage.getItem("nwapp-create-member-expectation"),
             expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
@@ -60,6 +61,7 @@ class MemberCreateStep7Container extends Component {
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
         this.onTagsSuccessFetch = this.onTagsSuccessFetch.bind(this);
         this.onHowHearSuccessFetch = this.onHowHearSuccessFetch.bind(this);
+        this.onExpectationsSuccessFetch = this.onExpectationsSuccessFetch.bind(this);
     }
 
     /**
@@ -89,24 +91,6 @@ class MemberCreateStep7Container extends Component {
                     name: 'Other',
                     slug: "1"
                 }]
-            },
-            expectationData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Some reason #1',
-                    slug: "2"
-                },{
-                    name: 'Some reason #2',
-                    slug: "3"
-                },{
-                    name: 'Some reason #3',
-                    slug: "4"
-                },{
-                    name: 'Some reason #4',
-                    slug: "5"
-                },{
-                    name: 'Other',
-                    slug: "1"
-                }]
             }
         });
 
@@ -115,6 +99,7 @@ class MemberCreateStep7Container extends Component {
         parametersMap.set("isArchived", 3)
         this.props.pullHowHearList(1,1000, parametersMap, this.onHowHearSuccessFetch);
         this.props.pullTagList(1, 1000, parametersMap, this.onTagsSuccessFetch);
+        this.props.pullExpectationList(1, 1000, parametersMap, this.onExpectationsSuccessFetch);
     }
 
     componentWillUnmount() {
@@ -154,6 +139,10 @@ class MemberCreateStep7Container extends Component {
 
     onHowHearSuccessFetch(howHearList) {
         this.setState({ isHowHearLoading: false, });
+    }
+
+    onExpectationsSuccessFetch(tags) {
+        this.setState({ isExpectationLoading: false, });
     }
 
     /**
@@ -246,7 +235,7 @@ class MemberCreateStep7Container extends Component {
 
     render() {
         const {
-            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
+            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
             errors
@@ -255,11 +244,12 @@ class MemberCreateStep7Container extends Component {
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
         const meaningOptions = getMeaningReactSelectOptions(this.state.meaningData, "meaning");
-        const expectationOptions = getMeaningReactSelectOptions(this.state.expectationData, "expectation");
+        const expectationOptions = getExpectationReactSelectOptions(this.props.expectationList, "expectation");
 
         // For debugging purposes only.
         console.log("Tag Options:", tagOptions);
         console.log("HHI Options:", howDidYouHearOptions);
+        console.log("Exp Options:", expectationOptions);
 
         return (
             <MemberCreateStep7Component
@@ -278,6 +268,7 @@ class MemberCreateStep7Container extends Component {
                 meaning={meaning}
                 meaningOptions={meaningOptions}
                 meaningOther={meaningOther}
+                isExpectationLoading={isExpectationLoading}
                 expectation={expectation}
                 expectationOptions={expectationOptions}
                 expectationOther={expectationOther}
@@ -303,6 +294,7 @@ const mapStateToProps = function(store) {
         user: store.userState,
         tagList: store.tagListState,
         howHearList: store.howHearListState,
+        expectationList: store.expectationListState,
     };
 }
 
@@ -316,6 +308,11 @@ const mapDispatchToProps = dispatch => {
         pullHowHearList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
                 pullHowHearList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
+        pullExpectationList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullExpectationList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
     }

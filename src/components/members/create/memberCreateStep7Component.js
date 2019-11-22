@@ -14,7 +14,7 @@ export default class MemberCreateStep7Component extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, meaningOptions, meaningOther, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -200,6 +200,7 @@ export default class MemberCreateStep7Component extends Component {
                                 value={expectation}
                                 error={errors.expectation}
                                 onSelectChange={onSelectChange}
+                                isLoading={isExpectationLoading}
                             />
 
                             {expectation === "1" &&

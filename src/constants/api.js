@@ -22,6 +22,8 @@ export const WORKERY_TAG_LIST_API_ENDPOINT = '/v1/tags';
 export const WORKERY_TAG_DETAIL_API_ENDPOINT = '/v1/tag/';
 export const WORKERY_HOW_HEAR_LIST_API_ENDPOINT = '/v1/how-hears';
 export const WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT = '/v1/how-hear/';
+export const WORKERY_EXPECTATION_LIST_API_ENDPOINT = '/v1/expectations';
+export const WORKERY_EXPECTATION_DETAIL_API_ENDPOINT = '/v1/expectation/';
 
 /**
  *  The full address of certain API endpoints from our backend server.

@@ -10,7 +10,7 @@ import {
 import { getHowHearReactSelectOptions } from "../../../../actions/howHearActions";
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
 import { getMeaningReactSelectOptions } from "../../../../actions/meaningAction";
-import { getExpectationReactSelectOptions } from "../../../../actions/expectationAction";
+import { getExpectationReactSelectOptions } from "../../../../actions/expectationActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
