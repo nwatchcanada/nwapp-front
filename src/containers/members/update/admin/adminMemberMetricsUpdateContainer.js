@@ -8,7 +8,7 @@ import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions } from "../../../../actions/howHearAction";
-import { getTagReactSelectOptions } from "../../../../actions/tagAction";
+import { getTagReactSelectOptions } from "../../../../actions/tagActions";
 import { getMeaningReactSelectOptions } from "../../../../actions/meaningAction";
 import { getExpectationReactSelectOptions } from "../../../../actions/expectationAction";
 import {

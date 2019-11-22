@@ -10,7 +10,7 @@ import {
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
 import { getMeaningReactSelectOptions } from "../../../actions/meaningAction";
 import { getExpectationReactSelectOptions } from "../../../actions/expectationAction";
-import { getTagReactSelectOptions } from "../../../actions/tagAction";
+import { getTagReactSelectOptions, pullTagList } from "../../../actions/tagActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -28,9 +28,11 @@ class MemberCreateStep7Container extends Component {
         super(props);
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
+            isTagsLoading: true,
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
             yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
             gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
+            isHowHearLoading: true,
             howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
@@ -56,6 +58,8 @@ class MemberCreateStep7Container extends Component {
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onTagsSuccessFetch = this.onTagsSuccessFetch.bind(this);
+        this.onHowHearSuccessFetch = this.onHowHearSuccessFetch.bind(this);
     }
 
     /**
@@ -75,18 +79,6 @@ class MemberCreateStep7Container extends Component {
                 },{
                     name: 'Internet',
                     slug: 'internet'
-                }]
-            },
-            tagsData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Health',
-                    slug: 'health'
-                },{
-                    name: 'Security',
-                    slug: 'security'
-                },{
-                    name: 'Fitness',
-                    slug: 'fitness'
                 }]
             },
             meaningData: {
@@ -126,6 +118,12 @@ class MemberCreateStep7Container extends Component {
                 }]
             }
         });
+
+        // Fetch all our GUI drop-down options which are populated by the API.
+        const parametersMap = new Map()
+        parametersMap.set("isArchived", 3)
+        // this.props.pullHowHearList(1,1000, parametersMap, this.onHowHearSuccessFetch);
+        this.props.pullTagList(1, 1000, parametersMap, this.onTagsSuccessFetch);
     }
 
     componentWillUnmount() {
@@ -157,6 +155,14 @@ class MemberCreateStep7Container extends Component {
         // https://github.com/fisshy/react-scroll
         var scroll = Scroll.animateScroll;
         scroll.scrollToTop();
+    }
+
+    onTagsSuccessFetch(tags) {
+        this.setState({ isTagsLoading: false, });
+    }
+
+    onHowHearSuccessFetch(howHearList) {
+        this.setState({ isHowHearLoading: false, });
     }
 
     /**
@@ -249,26 +255,31 @@ class MemberCreateStep7Container extends Component {
 
     render() {
         const {
-            typeOf, tags, yearOfBirth, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
+            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
             errors
         } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
-        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+        const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
         const meaningOptions = getMeaningReactSelectOptions(this.state.meaningData, "meaning");
         const expectationOptions = getMeaningReactSelectOptions(this.state.expectationData, "expectation");
+
+        // For debugging purposes only.
+        console.log("Tag Options:", tagOptions);
 
         return (
             <MemberCreateStep7Component
                 typeOf={typeOf}
+                isTagsLoading={isTagsLoading}
                 tags={tags}
                 tagOptions={tagOptions}
                 yearOfBirth={yearOfBirth}
                 gender={gender}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                isHowHearLoading={isHowHearLoading}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOptions={howDidYouHearOptions}
                 howDidYouHearOther={howDidYouHearOther}
@@ -298,11 +309,18 @@ class MemberCreateStep7Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        tagList: store.tagListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullTagList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
+    }
 }
 
 

@@ -6,10 +6,13 @@ import { APP_STATE } from "./constants/redux";
 import {
     LOGIN_SUCCESS, LOGOUT_SUCCESS, DASHBOARD_SUCCESS, PROFILE_SUCCESS,
     TENANT_LIST_SUCCESS, TENANT_DETAIL_SUCCESS, MEMBER_LIST_SUCCESS, MEMBER_DETAIL_SUCCESS,
+    HOW_HEAR_LIST_SUCCESS, TAG_DETAIL_SUCCESS
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
 import { memberListReducer, memberDetailReducer} from "./reducers/memberReducers";
+import { howHearListReducer, howHearDetailReducer } from "./reducers/howHearReducers";
+import { tagListReducer, tagDetailReducer } from "./reducers/tagReducers";
 import dashboardReducer from "./reducers/dashboardReducer";
 import flashMessageReducer from "./reducers/flashMessageReducer";
 
@@ -23,6 +26,8 @@ const appReducer = combineReducers({
     flashMessageState: flashMessageReducer,
     memberListState: memberListReducer,
     memberDetailState: memberDetailReducer,
+    tagListState: tagListReducer, tagDetailState: tagDetailReducer,
+    howHearListState: howHearListReducer, howHearDetailState: howHearDetailReducer,
 });
 
 
@@ -53,7 +58,7 @@ const localStorageMiddleware = ({ getState }) => {
         if ([
             LOGIN_SUCCESS, LOGOUT_SUCCESS, DASHBOARD_SUCCESS, PROFILE_SUCCESS,
             TENANT_LIST_SUCCESS, TENANT_DETAIL_SUCCESS, MEMBER_LIST_SUCCESS,
-            MEMBER_DETAIL_SUCCESS,
+            MEMBER_DETAIL_SUCCESS, HOW_HEAR_LIST_SUCCESS, TAG_DETAIL_SUCCESS
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))

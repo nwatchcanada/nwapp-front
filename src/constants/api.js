@@ -18,6 +18,10 @@ export const NWAPP_PROFILE_API_ENDPOINT = '/v1/public/profile';
 export const NWAPP_ORGANIZATION_LIST_API_ENDPOINT = '/v1/public/organizations';
 export const NWAPP_ORGANIZATION_DETAIL_API_ENDPOINT = '/v1/public/organization/';
 export const NWAPP_DASHBOARD_API_ENDPOINT = '/v1/dashboard';
+export const WORKERY_TAG_LIST_API_ENDPOINT = '/v1/tags';
+export const WORKERY_TAG_DETAIL_API_ENDPOINT = '/v1/tag/';
+export const WORKERY_HOW_HEAR_LIST_API_ENDPOINT = '/v1/how_hears';
+export const WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT = '/v1/how_hear/XXX';
 
 /**
  *  The full address of certain API endpoints from our backend server.

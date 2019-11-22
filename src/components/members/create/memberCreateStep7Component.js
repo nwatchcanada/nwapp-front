@@ -13,7 +13,7 @@ import { BUSINESS_TYPE_OF, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, A
 export default class MemberCreateStep7Component extends Component {
     render() {
         const {
-            typeOf, tags, tagOptions, yearOfBirth, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             meaning, meaningOptions, meaningOther, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationYearsInOperation, organizationType,
             onRadioChange,  onMultiChange,
@@ -117,6 +117,7 @@ export default class MemberCreateStep7Component extends Component {
                                 selectedOptions={tags}
                                 error={errors.tags}
                                 onMultiChange={onMultiChange}
+                                isLoading={isTagsLoading}
                             />
 
                             <BootstrapRadio

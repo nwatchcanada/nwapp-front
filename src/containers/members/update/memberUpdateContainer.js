@@ -9,7 +9,7 @@ import {
     RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF, BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES
 } from '../../../constants/api';
 import { getHowHearReactSelectOptions } from "../../../actions/howHearAction";
-import { getTagReactSelectOptions } from "../../../actions/tagAction";
+import { getTagReactSelectOptions } from "../../../actions/tagActions";
 
 
 class MemberUpdateContainer extends Component {
