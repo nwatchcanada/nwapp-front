@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import MemberLiteRetrieveComponent from "../../../components/members/retrieve/memberLiteRetrieveComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import { pullMemberDetail } from '../../../actions/memberActions';
 
 
 class MemberLiteRetrieveContainer extends Component {
@@ -27,21 +28,26 @@ class MemberLiteRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-     componentDidMount() {
-         window.scrollTo(0, 0);  // Start the page at the top of the page.
-     }
+    componentDidMount() {
+        window.scrollTo(0, 0);  // Start the page at the top of the page.
+        this.props.pullMemberDetail(
+            this.state.slug,
+            this.onSuccessfulSubmissionCallback,
+            this.onFailedSubmissionCallback
+        );
+    }
 
-     componentWillUnmount() {
-         // This code will fix the "ReactJS & Redux: Can't perform a React state
-         // update on an unmounted component" issue as explained in:
-         // https://stackoverflow.com/a/53829700
-         this.setState = (state,callback)=>{
-             return;
-         };
+    componentWillUnmount() {
+        // This code will fix the "ReactJS & Redux: Can't perform a React state
+        // update on an unmounted component" issue as explained in:
+        // https://stackoverflow.com/a/53829700
+        this.setState = (state,callback)=>{
+            return;
+        };
 
-         // Clear any and all flash messages in our queue to be rendered.
-         this.props.clearFlashMessage();
-     }
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
+    }
 
     /**
      *  API callback functions
@@ -95,7 +101,10 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullMemberDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullMemberDetail(slug, successCallback, failedCallback))
+        },
     }
 }
 

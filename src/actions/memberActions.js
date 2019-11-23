@@ -190,7 +190,7 @@ export function postMemberDetail(postData, onSuccessCallback, onFailureCallback)
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullMemberDetail(id, onSuccessCallback, onFailureCallback) {
+export function pullMemberDetail(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -200,7 +200,7 @@ export function pullMemberDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_MEMBER_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = WORKERY_MEMBER_DETAIL_API_ENDPOINT+slug;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -284,7 +284,7 @@ export function putMemberContactDetail(data, onSuccessCallback, onFailureCallbac
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT.replace("XXX", data.id), buffer).then( (successResponse) => {
+        customAxios.put(WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT.replace("XXX", data.slug), buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let member = camelizeKeys(responseData);
@@ -359,7 +359,7 @@ export function putMemberAddressDetail(data, onSuccessCallback, onFailureCallbac
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT.replace("XXX", data.id), buffer).then( (successResponse) => {
+        customAxios.put(WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT.replace("XXX", data.slug), buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let member = camelizeKeys(responseData);
@@ -434,7 +434,7 @@ export function putMemberMetricsDetail(data, onSuccessCallback, onFailureCallbac
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT.replace("XXX", data.id), buffer).then( (successResponse) => {
+        customAxios.put(WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT.replace("XXX", data.slug), buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let member = camelizeKeys(responseData);
@@ -494,7 +494,7 @@ export function putMemberMetricsDetail(data, onSuccessCallback, onFailureCallbac
 //                                   DELETE                                   //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteMemberDetail(id, onSuccessCallback, onFailureCallback) {
+export function deleteMemberDetail(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -505,7 +505,7 @@ export function deleteMemberDetail(id, onSuccessCallback, onFailureCallback) {
         const customAxios = getCustomAxios();
 
         // Perform our API submission.
-        customAxios.delete(WORKERY_MEMBER_DETAIL_API_ENDPOINT + id + "/").then( (successResponse) => {
+        customAxios.delete(WORKERY_MEMBER_DETAIL_API_ENDPOINT + slug).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let member = camelizeKeys(responseData);
@@ -857,7 +857,7 @@ export function getMemberReactSelectOptions(memberList=[], selectName="member") 
                 let member = results[i];
                 memberOptions.push({
                     selectName: selectName,
-                    value: member.id,
+                    value: member.slug,
                     label: member.fullName
                 });
                 // console.log(member);
