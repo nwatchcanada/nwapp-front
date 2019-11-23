@@ -2,16 +2,16 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
-import { FlashMessageComponent } from "../../flashMessageComponent";
+} from '../../../../constants/api';
+import { FlashMessageComponent } from "../../../flashMessageComponent";
 
 
-export default class MemberFullRetrieveComponent extends Component {
+export default class AdminMemberFullRetrieveComponent extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
         const { slug, flashMessage, tagOptions, howDidYouHearOptions } = this.props;
@@ -63,7 +63,7 @@ export default class MemberFullRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;Argyle
@@ -78,7 +78,7 @@ export default class MemberFullRetrieveComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/member/${slug}`}>
+                            <Link to={`/admin/member/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
@@ -88,7 +88,7 @@ export default class MemberFullRetrieveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <Link to={`/member/${slug}/comments`}>
+                            <Link to={`/admin/member/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
@@ -343,7 +343,7 @@ export default class MemberFullRetrieveComponent extends Component {
                                     <td>
                                         <ul>
                                             <li>
-                                                <Link to={`/member/${slug}/promote/step-1`}>
+                                                <Link to={`/admin/member/${slug}/promote/step-1`}>
                                                     Promote&nbsp;<i className="fas fa-chevron-right"></i>
                                                 </Link>
                                             </li>
@@ -355,7 +355,7 @@ export default class MemberFullRetrieveComponent extends Component {
                         </table>
                         <form>
                             <div className="form-group">
-                                <Link to={`/members`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/members`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

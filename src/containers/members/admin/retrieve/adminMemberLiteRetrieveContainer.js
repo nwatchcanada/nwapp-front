@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberLiteRetrieveComponent from "../../../components/members/retrieve/memberLiteRetrieveComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
-import { pullMemberDetail } from '../../../actions/memberActions';
+import AdminMemberLiteRetrieveComponent from "../../../../components/members/admin/retrieve/adminMemberLiteRetrieveComponent";
+import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import { pullMemberDetail } from '../../../../actions/memberActions';
 
 
-class MemberLiteRetrieveContainer extends Component {
+class AdminMemberLiteRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -81,7 +81,7 @@ class MemberLiteRetrieveContainer extends Component {
             'absoluteUrl': '/member/argyle'
         };
         return (
-            <MemberLiteRetrieveComponent
+            <AdminMemberLiteRetrieveComponent
                 slug={this.state.slug}
                 memberData={memberData}
                 flashMessage={this.props.flashMessage}
@@ -112,4 +112,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberLiteRetrieveContainer);
+)(AdminMemberLiteRetrieveContainer);

@@ -11,13 +11,13 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 import Moment from 'react-moment';
 // import 'moment-timezone';
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapPageLoadingAnimation } from "../../bootstrap/bootstrapPageLoadingAnimation";
-import { FlashMessageComponent } from "../../flashMessageComponent";
-import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
+import { FlashMessageComponent } from "../../../flashMessageComponent";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
-export default class MemberCommentComponent extends Component {
+export default class AdminMemberCommentComponent extends Component {
     render() {
         const {
             memberComments, flashMessage, isLoading, slug, member, text, onTextChange, errors, onClick
@@ -31,7 +31,7 @@ export default class MemberCommentComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
@@ -52,12 +52,12 @@ export default class MemberCommentComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/member/${slug}/comments`}>
+                            <Link to={`/admin/member/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/member/${slug}/full`}>
+                            <Link to={`/admin/member/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>

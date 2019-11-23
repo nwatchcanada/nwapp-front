@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberFullRetrieveComponent from "../../../components/members/retrieve/memberFullRetrieveComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
-import { getHowHearReactSelectOptions } from "../../../actions/howHearActions";
-import { getTagReactSelectOptions } from "../../../actions/tagActions";
+import AdminMemberFullRetrieveComponent from "../../../../components/members/admin/retrieve/adminMemberFullRetrieveComponent";
+import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import { getHowHearReactSelectOptions } from "../../../../actions/howHearActions";
+import { getTagReactSelectOptions } from "../../../../actions/tagActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+} from '../../../../constants/api';
 
 
-class MemberFullRetrieveContainer extends Component {
+class AdminMemberFullRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -257,7 +257,7 @@ class MemberFullRetrieveContainer extends Component {
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
         return (
-            <MemberFullRetrieveComponent
+            <AdminMemberFullRetrieveComponent
                 slug={this.state.slug}
                 memberData={this.state.memberData}
                 flashMessage={this.props.flashMessage}
@@ -287,4 +287,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberFullRetrieveContainer);
+)(AdminMemberFullRetrieveContainer);

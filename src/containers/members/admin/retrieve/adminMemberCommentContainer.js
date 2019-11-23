@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import OrderListComponent from "../../../components/members/retrieve/memberCommentComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import OrderListComponent from "../../../../components/members/admin/retrieve/adminMemberCommentComponent";
+import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 // import { pullMemberCommentList, postMemberComment } from "../../../actions/memberCommentActions"; //TODO: UNCOMMENT
-import { validateInput } from "../../../validators/commentValidator"
+import { validateInput } from "../../../../validators/commentValidator"
 
 
-class MemberCommentContainer extends Component {
+class AdminMemberCommentContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -252,4 +252,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCommentContainer);
+)(AdminMemberCommentContainer);

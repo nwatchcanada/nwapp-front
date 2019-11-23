@@ -90,9 +90,9 @@ import ResourceUpdateContainer from "./settings/resources/resourceUpdateContaine
 import AdminMemberListContainer from "./members/admin/list/adminMemberListContainer";
 import MemberSearchContainer from "./members/search/memberSearchContainer";
 import MemberSearchResultContainer from "./members/search/memberSearchResultContainer";
-import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
-import MemberFullRetrieveContainer from "./members/retrieve/memberFullRetrieveContainer";
-import MemberCommentContainer from "./members/retrieve/memberCommentContainer";
+import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminMemberLiteRetrieveContainer";
+import AdminMemberFullRetrieveContainer from "./members/admin/retrieve/adminMemberFullRetrieveContainer";
+import AdminMemberCommentContainer from "./members/admin/retrieve/adminMemberCommentContainer";
 import AdminMemberCreateStep1Container from "./members/admin/create/adminMemberCreateStep1Container";
 import AdminMemberCreateStep2Container from "./members/admin/create/adminMemberCreateStep2Container";
 import AdminMemberCreateStep3Container from "./members/admin/create/adminMemberCreateStep3Container";
@@ -289,16 +289,18 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/members" exact component={requiresAuth(AdminMemberListContainer)} />
                                 <Route path="/members/search" exact component={requiresAuth(MemberSearchContainer)} />
                                 <Route path="/members/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
-                                <Route path="/member/:slug" exact component={requiresAuth(MemberLiteRetrieveContainer)} />
-                                <Route path="/member/:slug/full" exact component={requiresAuth(MemberFullRetrieveContainer)} />
-                                <Route path="/member/:slug/update" exact component={requiresAuth(MemberUpdateContainer)} />
+                                <Route path="/admin/member/:slug" exact component={requiresAuth(AdminMemberLiteRetrieveContainer)} />
+                                <Route path="/admin/member/:slug/full" exact component={requiresAuth(AdminMemberFullRetrieveContainer)} />
+                                <Route path="/admin/member/:slug/comments" exact component={requiresAuth(AdminMemberCommentContainer)} />
+                                {/*
+                                <Route path="/admin/member/:slug/update" exact component={requiresAuth(AdminMemberUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/metrics" exact component={requiresAuth(AdminMemberMetricsUpdateContainer)} />
                                 <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
                                 <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
                                 <Route path="/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />
-                                <Route path="/member/:slug/comments" exact component={requiresAuth(MemberCommentContainer)} />
+                                */}
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
                                 <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />
