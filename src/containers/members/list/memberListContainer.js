@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { camelizeKeys, decamelize } from 'humps';
 
 import MemberListComponent from "../../../components/members/list/memberListComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
+import { pullMemberList } from "../../../actions/memberActions";
+import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../constants/api";
 
 
 class MemberListContainer extends Component {
@@ -13,12 +16,26 @@ class MemberListContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Force active users as per issue via https://github.com/over55/workery-front/issues/296
+        var parametersMap = new Map();
+        parametersMap.set("state", "active");
+
         this.state = {
-            filter: "active",
-            members: [],
+            // Pagination
+            page: 1,
+            sizePerPage: STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION,
+            totalSize: 0,
+
+            // Sorting, Filtering, & Searching
+            parametersMap: parametersMap,
+
+            // Overaly
+            isLoading: true,
         }
-        this.onFilterClick = this.onFilterClick.bind(this);
-        this.filterMembers = this.filterMembers.bind(this);
+        this.onTableChange = this.onTableChange.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -28,36 +45,6 @@ class MemberListContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // Load from API...
-        const members = [{
-            'slug': 'argyle',
-            'icon': 'home',
-            'firstName': "Bob",
-            'lastName': "Page",
-            "phone": "(111) 222-3333",
-            'email': "1@1.com",
-            "typeOf": "active",
-        },{
-            'slug': 'byron',
-            'icon': 'building',
-            'firstName': "Walter",
-            'lastName': "Simons",
-            "phone": "(222) 333-4444",
-            'email': "2@2.com",
-            "typeOf": "active",
-        },{
-            'slug': 'carling',
-            'icon': 'university',
-            'firstName': "JC",
-            'lastName': "Denton",
-            "phone": "(333) 444-5555",
-            'email': "3@3.com",
-            "typeOf": "active",
-        }];
-        this.setState({
-            members: members,
-        });
     }
 
     componentWillUnmount() {
@@ -77,12 +64,24 @@ class MemberListContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    onSuccessfulSubmissionCallback(response) {
+        console.log("onSuccessfulSubmissionCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isLoading: false,
+            },
+            ()=>{
+                console.log("onSuccessfulSubmissionCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessfulSubmissionCallback | State (Post-Fetch):", this.state);
+            }
+        )
     }
 
     onFailedSubmissionCallback(errors) {
         console.log(errors);
+        this.setState({ isLoading: false });
     }
 
     /**
@@ -90,27 +89,66 @@ class MemberListContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onFilterClick(e, filter) {
-        e.preventDefault();
-        this.setState({
-            filter: filter,
-        })
-    }
+    /**
+     *  Function takes the user interactions made with the table and perform
+     *  remote API calls to update the table based on user selection.
+     */
+    onTableChange(type, { sortField, sortOrder, data, page, sizePerPage, filters }) {
+        // Copy the `parametersMap` that we already have.
+        var parametersMap = this.state.parametersMap;
 
-    filterMembers() {
-        let filteredMembers = [];
-        if (this.state.members === undefined || this.state.members === null) {
-            return [];
-        }
-        for (let i = 0; i < this.state.members.length; i++) {
-            let member = this.state.members[i];
-            if (member.typeOf === this.state.filter) {
-                filteredMembers.push(member);
+        if (type === "sort") {
+            console.log(type, sortField, sortOrder); // For debugging purposes only.
+
+            if (sortOrder === "asc") {
+                parametersMap.set('o', decamelize(sortField));
             }
-        }
-        return filteredMembers;
-    }
+            if (sortOrder === "desc") {
+                parametersMap.set('o', "-"+decamelize(sortField));
+            }
 
+            this.setState(
+                { parametersMap: parametersMap, isLoading: true, },
+                ()=>{
+                    // STEP 3:
+                    // SUBMIT TO OUR API.
+                    this.props.pullMemberList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
+
+        } else if (type === "pagination") {
+            console.log(type, page, sizePerPage); // For debugging purposes only.
+
+            this.setState(
+                { page: page, sizePerPage:sizePerPage, isLoading: true, },
+                ()=>{
+                    this.props.pullMemberList(page, sizePerPage, this.state.parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
+
+        } else if (type === "filter") {
+            ////
+            //// DEPRECATED VIA https://github.com/over55/workery-front/issues/296
+            ////
+            // console.log(type, filters); // For debugging purposes only.
+            // if (filters.state === undefined) {
+            //     parametersMap.delete("state");
+            // } else {
+            //     const filterVal = filters.state.filterVal;
+            //     parametersMap.set("state", filterVal);
+            // }
+            // this.setState(
+            //     { parametersMap: parametersMap, isLoading: true, },
+            //     ()=>{
+            //         // STEP 3:
+            //         // SUBMIT TO OUR API.
+            //         this.props.pullMemberList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+            //     }
+            // );
+        }else {
+            alert("Unsupported feature detected!!"+type);
+        }
+    }
 
     /**
      *  Main render function
@@ -118,13 +156,16 @@ class MemberListContainer extends Component {
      */
 
     render() {
-
+        const { page, sizePerPage, totalSize, isLoading } = this.state;
         return (
             <MemberListComponent
-                filter={this.state.filter}
-                onFilterClick={this.onFilterClick}
-                members={this.filterMembers()}
+                page={page}
+                sizePerPage={sizePerPage}
+                totalSize={totalSize}
+                memberList={this.props.memberList}
+                onTableChange={this.onTableChange}
                 flashMessage={this.props.flashMessage}
+                isLoading={isLoading}
             />
         );
     }
@@ -134,6 +175,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
+        memberList: store.memberListState,
     };
 }
 
@@ -141,7 +183,12 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullMemberList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullMemberList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
     }
 }
 
