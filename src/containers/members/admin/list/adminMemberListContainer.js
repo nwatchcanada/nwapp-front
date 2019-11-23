@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 
-import MemberListComponent from "../../../components/members/list/memberListComponent";
-import { clearFlashMessage } from "../../../actions/flashMessageActions";
-import { pullMemberList } from "../../../actions/memberActions";
-import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../constants/api";
+import AdminMemberListComponent from "../../../../components/members/admin/list/adminMemberListComponent";
+import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import { pullMemberList } from "../../../../actions/memberActions";
+import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
 
 
-class MemberListContainer extends Component {
+class AdminMemberListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -158,7 +158,7 @@ class MemberListContainer extends Component {
     render() {
         const { page, sizePerPage, totalSize, isLoading } = this.state;
         return (
-            <MemberListComponent
+            <AdminMemberListComponent
                 page={page}
                 sizePerPage={sizePerPage}
                 totalSize={totalSize}
@@ -196,4 +196,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberListContainer);
+)(AdminMemberListContainer);

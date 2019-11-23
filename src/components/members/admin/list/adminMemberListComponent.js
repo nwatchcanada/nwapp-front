@@ -9,9 +9,9 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 // import overlayFactory from 'react-bootstrap-table2-overlay';
 
-import { BootstrapPageLoadingAnimation } from "../../bootstrap/bootstrapPageLoadingAnimation";
-import { FlashMessageComponent } from "../../flashMessageComponent";
-import { RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF } from "../../../constants/api";
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
+import { FlashMessageComponent } from "../../../flashMessageComponent";
+import { RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF } from "../../../../constants/api";
 
 
 const customTotal = (from, to, size) => (
@@ -195,7 +195,7 @@ function detailLinkFormatter(cell, row){
 }
 
 
-class MemberListComponent extends Component {
+class AdminMemberListComponent extends Component {
     render() {
         const {
             // Pagination
@@ -273,4 +273,4 @@ class MemberListComponent extends Component {
     }
 }
 
-export default MemberListComponent;
+export default AdminMemberListComponent;
