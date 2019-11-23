@@ -57,15 +57,21 @@ class MemberCreateStep8Container extends Component {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
             yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
-            gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
+            gender: localStorage.getItem("nwapp-create-member-gender"),
+            genderLabel: localStorage.getItem("nwapp-create-member-gender-label"),
+            howDidYouHearLabel: localStorage.getItem("nwapp-create-member-howDidYouHearLabel"),
             howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
             howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            meaningLabel: localStorage.getItem("nwapp-create-member-meaningLabel"),
             meaning: localStorage.getItem("nwapp-create-member-meaning"),
             meaningOther: localStorage.getItem("nwapp-create-member-meaningOther"),
+            expectationLabel: localStorage.getItem("nwapp-create-member-expectationLabel"),
             expectation: localStorage.getItem("nwapp-create-member-expectation"),
             expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
+            willingToVolunteerLabel: localStorage.getItem("nwapp-create-member-willingToVolunteer-label"),
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
+            anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered-label"),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
             under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
@@ -232,8 +238,8 @@ class MemberCreateStep8Container extends Component {
             organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
-            tags, yearOfBirth, gender, howDidYouHear, howDidYouHearOther,  meaning, meaningOther, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            tags, yearOfBirth, gender, genderLabel, howDidYouHearLabel, howDidYouHear, howDidYouHearOther, meaningLabel, meaning, meaningOther, expectationLabel, expectation, expectationOther,
+            willingToVolunteerLabel, willingToVolunteer, anotherHouseholdMemberRegisteredLabel, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationType,
         } = this.state;
 
@@ -262,15 +268,21 @@ class MemberCreateStep8Container extends Component {
                 tags={tags}
                 yearOfBirth={yearOfBirth}
                 gender={gender}
+                genderLabel={genderLabel}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                howDidYouHearLabel={howDidYouHearLabel}
                 howDidYouHear={howDidYouHear}
                 howDidYouHearOther={howDidYouHearOther}
+                meaningLabel={meaningLabel}
                 meaning={meaning}
                 meaningOther={meaningOther}
+                expectationLabel={expectationLabel}
                 expectation={expectation}
                 expectationOther={expectationOther}
+                willingToVolunteerLabel={willingToVolunteerLabel}
                 willingToVolunteer={willingToVolunteer}
+                anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}

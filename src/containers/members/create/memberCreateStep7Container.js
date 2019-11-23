@@ -31,7 +31,7 @@ class MemberCreateStep7Container extends Component {
             isTagsLoading: true,
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
             yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
-            gender: parseInt(localStorage.getItem("nwapp-create-member-gender")),
+            gender: localStorage.getItem("nwapp-create-member-gender"),
             isHowHearLoading: true,
             howDidYouHear: localStorageGetIntegerItem("nwapp-create-member-howDidYouHear"),
             howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),

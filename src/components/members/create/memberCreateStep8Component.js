@@ -20,7 +20,7 @@ export default class MemberCreateStep8Component extends Component {
             streetNumber, streetName, streetType, streetTypeOther, apartmentUnit, streetDirection, postalCode,
             watchSlug, watchIcon, watchName,
             tags, tagOptions, yearOfBirth, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
-            meaning, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            meaningLabel, meaning, expectationLabel, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationType,
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
@@ -263,11 +263,11 @@ export default class MemberCreateStep8Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">What does NW mean to you?</th>
-                                    <td>{meaning}</td>
+                                    <td>{meaningLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">What do you expect from NW?</th>
-                                    <td>{expectations}</td>
+                                    <td>{expectationLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Are you willing to volunteer as a area coordinator / associate?</th>
