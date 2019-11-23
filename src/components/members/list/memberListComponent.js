@@ -11,10 +11,7 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 
 import { BootstrapPageLoadingAnimation } from "../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../flashMessageComponent";
-// import {
-//     RESIDENTIAL_CUSTOMER_TYPE_OF_ID,
-//     COMMERCIAL_CUSTOMER_TYPE_OF_ID,
-// } from '../../../constants/api';
+import { RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF } from "../../../constants/api";
 
 
 const customTotal = (from, to, size) => (
@@ -66,7 +63,7 @@ class RemoteListComponent extends Component {
             text: 'Last Name',
             sort: true
         },{
-            dataField: 'telephone',
+            dataField: 'primaryPhone',
             text: 'Phone',
             sort: true,
             formatter: telephoneFormatter
@@ -76,7 +73,7 @@ class RemoteListComponent extends Component {
             sort: true,
             formatter: emailFormatter,
         },{
-            dataField: 'id',
+            dataField: 'slug',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
@@ -136,12 +133,15 @@ class RemoteListComponent extends Component {
 
 function iconFormatter(cell, row){
     switch(row.typeOf) {
-        // case COMMERCIAL_CUSTOMER_TYPE_OF_ID:
-        //     return <i className="fas fa-building"></i>;
-        //     break;
-        // case RESIDENTIAL_CUSTOMER_TYPE_OF_ID:
-        //     return <i className="fas fa-home"></i>;
-        //     break;
+        case BUSINESS_TYPE_OF:
+            return <i className="fas fa-building"></i>;
+            break;
+        case RESIDENCE_TYPE_OF:
+            return <i className="fas fa-home"></i>;
+            break;
+        case COMMUNITY_CARES_TYPE_OF:
+            return <i className="fas fa-university"></i>;
+            break;
         default:
             return <i className="fas fa-question"></i>;
             break;
@@ -149,25 +149,25 @@ function iconFormatter(cell, row){
 }
 
 
-function statusFormatter(cell, row){
-    switch(row.state) {
-        case "active":
-            return <i className="fas fa-check-circle" style={{ color: 'green' }}></i>;
-            break;
-        case "inactive":
-            return <i className="fas fa-archive" style={{ color: 'blue' }}></i>;
-            break;
-        default:
-        return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
-            break;
-    }
-}
+// function statusFormatter(cell, row){
+//     switch(row.state) {
+//         case "active":
+//             return <i className="fas fa-check-circle" style={{ color: 'green' }}></i>;
+//             break;
+//         case "inactive":
+//             return <i className="fas fa-archive" style={{ color: 'blue' }}></i>;
+//             break;
+//         default:
+//         return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
+//             break;
+//     }
+// }
 
 
 function telephoneFormatter(cell, row){
     return (
-        <a href={`tel:${row.e164Telephone}`}>
-            {row.telephone}
+        <a href={`tel:${row.e164PrimaryPhone}`}>
+            {row.primaryPhone}
         </a>
     )
 }
@@ -188,7 +188,7 @@ function emailFormatter(cell, row){
 
 function detailLinkFormatter(cell, row){
     return (
-        <Link to={`/member/${row.id}`}>
+        <Link to={`/member/${row.slug}`}>
             View&nbsp;<i className="fas fa-chevron-right"></i>
         </Link>
     )
