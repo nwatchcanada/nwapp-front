@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberCreateStep6Component from "../../../components/members/create/memberCreateStep6Component";
-import { localStorageGetIntegerItem } from '../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
+import AdminMemberCreateStep6Component from "../../../../components/members/admin/create/adminMemberCreateStep6Component";
+import { localStorageGetIntegerItem } from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+} from '../../../../constants/api';
 
 
-class MemberCreateStep6Container extends Component {
+class AdminMemberCreateStep6Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -89,7 +89,7 @@ class MemberCreateStep6Container extends Component {
         localStorage.setItem('nwapp-create-member-watch-slug', slug);
         localStorage.setItem('nwapp-create-member-watch-icon', icon);
         localStorage.setItem('nwapp-create-member-watch-name', name);
-        this.props.history.push("/members/add/step-7");
+        this.props.history.push("/admin/members/add/step-7");
     }
 
 
@@ -101,7 +101,7 @@ class MemberCreateStep6Container extends Component {
     render() {
         const { returnURL, tableData, isLoading } = this.state;
         return (
-            <MemberCreateStep6Component
+            <AdminMemberCreateStep6Component
                 tableData={tableData}
                 returnURL={returnURL}
                 isLoading={isLoading}
@@ -129,4 +129,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep6Container);
+)(AdminMemberCreateStep6Container);

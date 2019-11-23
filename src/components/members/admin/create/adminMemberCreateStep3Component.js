@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 
-export default class MemberCreateStep3Component extends Component {
+export default class AdminMemberCreateStep3Component extends Component {
     render() {
         const { onRezOrComClick, onBizClick } = this.props;
         return (
@@ -14,7 +14,7 @@ export default class MemberCreateStep3Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -29,12 +29,12 @@ export default class MemberCreateStep3Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/members/add/step-1">
+                            <Link to="/admin/members/add/step-1">
                                 <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to="/members/add/step-2">
+                            <Link to="/admin/members/add/step-2">
                                 <span className="num">2.</span><span className="">Results</span>
                             </Link>
                         </div>
@@ -98,7 +98,7 @@ export default class MemberCreateStep3Component extends Component {
 
                 <div className="form-group">
 
-                    <Link to="/members/add/step-2" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                    <Link to="/admin/members/add/step-2" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                         <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>
                 </div>

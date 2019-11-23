@@ -93,14 +93,14 @@ import MemberSearchResultContainer from "./members/search/memberSearchResultCont
 import MemberLiteRetrieveContainer from "./members/retrieve/memberLiteRetrieveContainer";
 import MemberFullRetrieveContainer from "./members/retrieve/memberFullRetrieveContainer";
 import MemberCommentContainer from "./members/retrieve/memberCommentContainer";
-import MemberCreateStep1Container from "./members/create/memberCreateStep1Container";
-import MemberCreateStep2Container from "./members/create/memberCreateStep2Container";
-import MemberCreateStep3Container from "./members/create/memberCreateStep3Container";
-import MemberCreateStep4Container from "./members/create/memberCreateStep4Container";
-import MemberCreateStep5Container from "./members/create/memberCreateStep5Container";
-import MemberCreateStep6Container from "./members/create/memberCreateStep6Container";
-import MemberCreateStep7Container from "./members/create/memberCreateStep7Container";
-import MemberCreateStep8Container from "./members/create/memberCreateStep8Container";
+import AdminMemberCreateStep1Container from "./members/admin/create/adminMemberCreateStep1Container";
+import AdminMemberCreateStep2Container from "./members/admin/create/adminMemberCreateStep2Container";
+import AdminMemberCreateStep3Container from "./members/admin/create/adminMemberCreateStep3Container";
+import AdminMemberCreateStep4Container from "./members/admin/create/adminMemberCreateStep4Container";
+import AdminMemberCreateStep5Container from "./members/admin/create/adminMemberCreateStep5Container";
+import AdminMemberCreateStep6Container from "./members/admin/create/adminMemberCreateStep6Container";
+import AdminMemberCreateStep7Container from "./members/admin/create/adminMemberCreateStep7Container";
+import AdminMemberCreateStep8Container from "./members/admin/create/adminMemberCreateStep8Container";
 import MemberUpdateContainer from "./members/update/memberUpdateContainer";
 import AdminMemberContactUpdateContainer from "./members/update/admin/adminMemberContactUpdateContainer";
 import AdminMemberAddressUpdateContainer from "./members/update/admin/adminMemberAddressUpdateContainer";
@@ -278,14 +278,14 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/resource/add" exact component={requiresAuth(ResourceCreateContainer)} />
                                 <Route path="/settings/resource/:slug/delete" exact component={requiresAuth(ResourceDeleteContainer)} />
                                 <Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
-                                <Route path="/members/add/step-1" exact component={requiresAuth(MemberCreateStep1Container)} />
-                                <Route path="/members/add/step-2" exact component={requiresAuth(MemberCreateStep2Container)} />
-                                <Route path="/members/add/step-3" exact component={requiresAuth(MemberCreateStep3Container)} />
-                                <Route path="/members/add/step-4" exact component={requiresAuth(MemberCreateStep4Container)} />
-                                <Route path="/members/add/step-5" exact component={requiresAuth(MemberCreateStep5Container)} />
-                                <Route path="/members/add/step-6" exact component={requiresAuth(MemberCreateStep6Container)} />
-                                <Route path="/members/add/step-7" exact component={requiresAuth(MemberCreateStep7Container)} />
-                                <Route path="/members/add/step-8" exact component={requiresAuth(MemberCreateStep8Container)} />
+                                <Route path="/admin/members/add/step-1" exact component={requiresAuth(AdminMemberCreateStep1Container)} />
+                                <Route path="/admin/members/add/step-2" exact component={requiresAuth(AdminMemberCreateStep2Container)} />
+                                <Route path="/admin/members/add/step-3" exact component={requiresAuth(AdminMemberCreateStep3Container)} />
+                                <Route path="/admin/members/add/step-4" exact component={requiresAuth(AdminMemberCreateStep4Container)} />
+                                <Route path="/admin/members/add/step-5" exact component={requiresAuth(AdminMemberCreateStep5Container)} />
+                                <Route path="/admin/members/add/step-6" exact component={requiresAuth(AdminMemberCreateStep6Container)} />
+                                <Route path="/admin/members/add/step-7" exact component={requiresAuth(AdminMemberCreateStep7Container)} />
+                                <Route path="/admin/members/add/step-8" exact component={requiresAuth(AdminMemberCreateStep8Container)} />
                                 <Route path="/admin/members" exact component={requiresAuth(AdminMemberListContainer)} />
                                 <Route path="/members/search" exact component={requiresAuth(MemberSearchContainer)} />
                                 <Route path="/members/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 
-export default class MemberCreateStep2Component extends Component {
+export default class AdminMemberCreateStep2Component extends Component {
     render() {
         const { isLoading, onClick } = this.props;
         return (
@@ -14,7 +14,7 @@ export default class MemberCreateStep2Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -27,7 +27,7 @@ export default class MemberCreateStep2Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/members/add/step-1">
+                            <Link to="/admin/members/add/step-1">
                                 <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
@@ -116,12 +116,12 @@ export default class MemberCreateStep2Component extends Component {
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
             		<h5>Would you like to add a NEW member?</h5>
-                    <Link to="/members/add/step-1">
+                    <Link to="/admin/members/add/step-1">
             		    <button type="button" class="btn btn-lg btn-dark m-3">
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
             		    </button>
                     </Link>
-            		<Link to="/members/add/step-3">
+            		<Link to="/admin/members/add/step-3">
             		    <button type="button" class="btn btn-lg btn-success m-3">
             		       <i class="fas fa-user"></i>&nbsp;Yes - add a new member
             		    </button>

@@ -3,24 +3,24 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import * as moment from 'moment';
 
-import MemberCreateStep8Component from "../../../components/members/create/memberCreateStep8Component";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
+import AdminMemberCreateStep8Component from "../../../../components/members/admin/create/adminMemberCreateStep8Component";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     localStorageGetObjectItem,
     localStorageGetArrayItem,
     localStorageGetIntegerItem,
     localStorageRemoveItemsContaining
-} from '../../../helpers/localStorageUtility';
+} from '../../../../helpers/localStorageUtility';
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
-import { postMemberDetail } from '../../../actions/memberActions';
-import { validateStep8CreateInput } from '../../../validators/memberValidator';
+} from '../../../../constants/api';
+import { postMemberDetail } from '../../../../actions/memberActions';
+import { validateStep8CreateInput } from '../../../../validators/memberValidator';
 
 
-class MemberCreateStep8Container extends Component {
+class AdminMemberCreateStep8Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -209,7 +209,7 @@ class MemberCreateStep8Container extends Component {
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 localStorageRemoveItemsContaining("workery-create-member-");
                 this.props.setFlashMessage("success", "Member has been successfully created.");
-                this.props.history.push("/member/"+response['slug']);
+                this.props.history.push("/admin/member/"+response['slug']);
             }
         )
     }
@@ -244,7 +244,7 @@ class MemberCreateStep8Container extends Component {
         } = this.state;
 
         return (
-            <MemberCreateStep8Component
+            <AdminMemberCreateStep8Component
                 typeOf={typeOf}
                 organizationName={organizationName}
                 organizationTypeOf={organizationTypeOf}
@@ -317,4 +317,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep8Container);
+)(AdminMemberCreateStep8Container);

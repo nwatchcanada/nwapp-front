@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep7Component from "../../../components/members/create/memberCreateStep7Component";
-import { validateStep7CreateInput } from "../../../validators/memberValidator";
+import AdminMemberCreateStep7Component from "../../../../components/members/admin/create/adminMemberCreateStep7Component";
+import { validateStep7CreateInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
-} from '../../../helpers/localStorageUtility';
-import { getHowHearReactSelectOptions, pullHowHearList } from "../../../actions/howHearActions";
-import { getMeaningReactSelectOptions, pullMeaningList } from "../../../actions/meaningActions";
-import { getExpectationReactSelectOptions, pullExpectationList } from "../../../actions/expectationActions";
-import { getTagReactSelectOptions, pullTagList } from "../../../actions/tagActions";
+} from '../../../../helpers/localStorageUtility';
+import { getHowHearReactSelectOptions, pullHowHearList } from "../../../../actions/howHearActions";
+import { getMeaningReactSelectOptions, pullMeaningList } from "../../../../actions/meaningActions";
+import { getExpectationReactSelectOptions, pullExpectationList } from "../../../../actions/expectationActions";
+import { getTagReactSelectOptions, pullTagList } from "../../../../actions/tagActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+} from '../../../../constants/api';
 
 
-class MemberCreateStep7Container extends Component {
+class AdminMemberCreateStep7Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -99,7 +99,7 @@ class MemberCreateStep7Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-8");
+        this.props.history.push("/admin/members/add/step-8");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -238,7 +238,7 @@ class MemberCreateStep7Container extends Component {
         // console.log("Mea Options:", meaningOptions);
 
         return (
-            <MemberCreateStep7Component
+            <AdminMemberCreateStep7Component
                 typeOf={typeOf}
                 isTagsLoading={isTagsLoading}
                 tags={tags}
@@ -315,4 +315,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep7Container);
+)(AdminMemberCreateStep7Container);

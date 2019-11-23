@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberCreateStep3Component from "../../../components/members/create/memberCreateStep3Component";
-import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF } from '../../../constants/api';
+import AdminMemberCreateStep3Component from "../../../../components/members/admin/create/adminMemberCreateStep3Component";
+import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF } from '../../../../constants/api';
 
 
-class MemberCreateStep3Container extends Component {
+class AdminMemberCreateStep3Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -47,12 +47,12 @@ class MemberCreateStep3Container extends Component {
 
     onRezOrComClick() {
         localStorage.setItem("nwapp-create-member-typeOf", RESIDENCE_TYPE_OF);
-        this.props.history.push("/members/add/step-4");
+        this.props.history.push("/admin/members/add/step-4");
     }
 
     onBizClick() {
         localStorage.setItem("nwapp-create-member-typeOf", BUSINESS_TYPE_OF);
-        this.props.history.push("/members/add/step-4");
+        this.props.history.push("/admin/members/add/step-4");
     }
 
 
@@ -63,7 +63,7 @@ class MemberCreateStep3Container extends Component {
 
     render() {
         return (
-            <MemberCreateStep3Component
+            <AdminMemberCreateStep3Component
                 onBizClick={this.onBizClick}
                 onRezOrComClick={this.onRezOrComClick}
             />
@@ -85,4 +85,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep3Container);
+)(AdminMemberCreateStep3Container);

@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneInput";
 
 
-export default class MemberCreateStep1Component extends Component {
+export default class AdminMemberCreateStep1Component extends Component {
     render() {
         const { firstName, lastName, email, phone, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -19,7 +19,7 @@ export default class MemberCreateStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -116,7 +116,7 @@ export default class MemberCreateStep1Component extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-search"></i>&nbsp;Search
                                 </button>
-                                <Link to="/members" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/members" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
@@ -126,7 +126,7 @@ export default class MemberCreateStep1Component extends Component {
                 </div>
                 <div className="col-md-12 text-center">
                     <h3 className="p-2">- or -</h3>
-                    <a href="/members/add/step-3" role="button">
+                    <a href="/admin/members/add/step-3" role="button">
                         Add New Member&nbsp;<i class="fas fa-chevron-right"></i>
                     </a>
                 </div>

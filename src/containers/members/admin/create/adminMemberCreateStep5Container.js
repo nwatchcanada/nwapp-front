@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep5Component from "../../../components/members/create/memberCreateStep5Component";
+import AdminMemberCreateStep5Component from "../../../../components/members/admin/create/adminMemberCreateStep5Component";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetIntegerItem
-} from '../../../helpers/localStorageUtility';
-import { validateStep5CreateInput } from "../../../validators/memberValidator";
+} from '../../../../helpers/localStorageUtility';
+import { validateStep5CreateInput } from "../../../../validators/memberValidator";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
-import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
+} from '../../../../constants/api';
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
 
-class MemberCreateStep5Container extends Component {
+class AdminMemberCreateStep5Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -76,7 +76,7 @@ class MemberCreateStep5Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-6");
+        this.props.history.push("/admin/members/add/step-6");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -156,7 +156,7 @@ class MemberCreateStep5Container extends Component {
             streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, region, locality, errors
         } = this.state;
         return (
-            <MemberCreateStep5Component
+            <AdminMemberCreateStep5Component
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
@@ -194,4 +194,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep5Container);
+)(AdminMemberCreateStep5Container);

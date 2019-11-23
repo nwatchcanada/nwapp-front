@@ -2,15 +2,15 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
-import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
-import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
-import { BUSINESS_TYPE_OF, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../constants/api";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
+import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
+import { BUSINESS_TYPE_OF, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
 
 
-export default class MemberCreateStep7Component extends Component {
+export default class AdminMemberCreateStep7Component extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
@@ -39,7 +39,7 @@ export default class MemberCreateStep7Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -54,32 +54,32 @@ export default class MemberCreateStep7Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/members/add/step-1">
+                            <Link to="/admin/members/add/step-1">
                                 <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to="/members/add/step-2">
+                            <Link to="/admin/members/add/step-2">
                                 <span className="num">2.</span><span className="">Results</span>
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <Link to="/members/add/step-3">
+                            <Link to="/admin/members/add/step-3">
                                 <span className="num">3.</span><span className="">Type</span>
                             </Link>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <Link to="/members/add/step-4">
+                            <Link to="/admin/members/add/step-4">
                                 <span className="num">4.</span><span className="">Contact</span>
                             </Link>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <Link to="/members/add/step-5">
+                            <Link to="/admin/members/add/step-5">
                                 <span className="num">5.</span><span className="">Address</span>
                             </Link>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <Link to="/members/add/step-6">
+                            <Link to="/admin/members/add/step-6">
                                 <span className="num">6.</span><span className="">Watch</span>
                             </Link>
                         </div>
@@ -306,7 +306,7 @@ export default class MemberCreateStep7Component extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/members/add/step-6" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/members/add/step-6" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // import 'moment-timezone';
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+} from '../../../../constants/api';
 
 
-export default class MemberCreateStep8Component extends Component {
+export default class AdminMemberCreateStep8Component extends Component {
     // Not using the following: streetTypeOption, streetDirectionOption, howDidYouHearOption
     render() {
         const {
@@ -59,7 +59,7 @@ export default class MemberCreateStep8Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -74,37 +74,37 @@ export default class MemberCreateStep8Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/members/add/step-1">
+                            <Link to="/admin/members/add/step-1">
                                 <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to="/members/add/step-2">
+                            <Link to="/admin/members/add/step-2">
                                 <span className="num">2.</span><span className="">Results</span>
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <Link to="/members/add/step-3">
+                            <Link to="/admin/members/add/step-3">
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <Link to="/members/add/step-4">
+                            <Link to="/admin/members/add/step-4">
                                 <span className="num">4.</span><span className="">Contact</span>
                             </Link>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <Link to="/members/add/step-5">
+                            <Link to="/admin/members/add/step-5">
                                 <span className="num">5.</span><span className="">Address</span>
                             </Link>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <Link to="/members/add/step-6">
+                            <Link to="/admin/members/add/step-6">
                                 <span className="num">6.</span><span className="">Watch</span>
                             </Link>
                         </div>
                          <div id="step-7" className="st-grey">
-                            <Link to="/members/add/step-7">
+                            <Link to="/admin/members/add/step-7">
                                 <span className="num">7.</span><span className="">Metrics</span>
                             </Link>
                         </div>
@@ -320,7 +320,7 @@ export default class MemberCreateStep8Component extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onSubmitClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to="/members/add/step-7" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/members/add/step-7" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

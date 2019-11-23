@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep4Component from "../../../components/members/create/memberCreateStep4Component";
-import { validateStep4CreateInput } from "../../../validators/memberValidator";
+import AdminMemberCreateStep4Component from "../../../../components/members/admin/create/adminMemberCreateStep4Component";
+import { validateStep4CreateInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetIntegerItem, localStorageSetObjectOrArrayItem
-} from '../../../helpers/localStorageUtility';
+} from '../../../../helpers/localStorageUtility';
 
 
-class MemberCreateStep4Container extends Component {
+class AdminMemberCreateStep4Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -66,7 +66,7 @@ class MemberCreateStep4Container extends Component {
      */
 
     onSuccessfulSubmissionCallback(member) {
-        this.props.history.push("/members/add/step-5");
+        this.props.history.push("/admin/members/add/step-5");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -160,7 +160,7 @@ class MemberCreateStep4Container extends Component {
             typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, isOkToEmail, isOkToText, errors
         } = this.state;
         return (
-            <MemberCreateStep4Component
+            <AdminMemberCreateStep4Component
                 typeOf={typeOf}
                 organizationName={organizationName}
                 organizationTypeOf={organizationTypeOf}
@@ -195,4 +195,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep4Container);
+)(AdminMemberCreateStep4Container);

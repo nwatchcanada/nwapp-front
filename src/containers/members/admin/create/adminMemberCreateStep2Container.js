@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberCreateStep2Component from "../../../components/members/create/memberCreateStep2Component";
+import AdminMemberCreateStep2Component from "../../../../components/members/admin/create/adminMemberCreateStep2Component";
 
 
-class MemberCreateStep2Container extends Component {
+class AdminMemberCreateStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -50,7 +50,7 @@ class MemberCreateStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/members/add/step-3");
+        this.props.history.push("/admin/members/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -91,7 +91,7 @@ class MemberCreateStep2Container extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <MemberCreateStep2Component
+            <AdminMemberCreateStep2Component
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -116,4 +116,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberCreateStep2Container);
+)(AdminMemberCreateStep2Container);
