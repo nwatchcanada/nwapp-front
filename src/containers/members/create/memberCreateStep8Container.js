@@ -207,9 +207,9 @@ class MemberCreateStep8Container extends Component {
             ()=>{
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                // localStorageRemoveItemsContaining("workery-create-client-"); //TODO: UNCOMMENT WHEN READY.
+                localStorageRemoveItemsContaining("workery-create-member-");
                 this.props.setFlashMessage("success", "Member has been successfully created.");
-                this.props.history.push("/client/"+response['id']);
+                this.props.history.push("/member/"+response['slug']);
             }
         )
     }
