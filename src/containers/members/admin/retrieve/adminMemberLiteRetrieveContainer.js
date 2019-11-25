@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminMemberLiteRetrieveComponent from "../../../../components/members/admin/retrieve/adminMemberLiteRetrieveComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { pullMemberDetail } from '../../../../actions/memberActions';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
 
 
 class AdminMemberLiteRetrieveContainer extends Component {
@@ -17,10 +21,22 @@ class AdminMemberLiteRetrieveContainer extends Component {
 
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const member = localStorageGetObjectItem("workery-admin-retrieve-member-"+slug.toString() );
+        const isLoading = isEmpty(member);
+
         // Update state.
         this.state = {
             slug: slug,
+            member: member,
+            isLoading: isLoading,
         }
+
+        // Update functions.
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
+        // this.onClientClick = this.onClientClick.bind(this);
     }
 
     /**
@@ -32,8 +48,8 @@ class AdminMemberLiteRetrieveContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
         this.props.pullMemberDetail(
             this.state.slug,
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
+            this.onSuccessCallback,
+            this.onFailureCallback
         );
     }
 
@@ -54,12 +70,25 @@ class AdminMemberLiteRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    // onClientClick(e) {
+    //     e.preventDefault();
+    //     localStorage.setItem("workery-create-order-clientId", this.props.clientDetail.id);
+    //     localStorage.setItem("workery-create-order-clientGivenName", this.props.clientDetail.givenName);
+    //     localStorage.setItem("workery-create-order-clientLastName", this.props.clientDetail.lastName);
+    //     this.props.history.push("/orders/add/step-3");
+    // }
+
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, member: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("workery-admin-retrieve-member-"+this.state.slug.toString(), response);
     }
 
-    onFailedSubmissionCallback(errors) {
-        console.log(errors);
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -74,17 +103,14 @@ class AdminMemberLiteRetrieveContainer extends Component {
      */
 
     render() {
-        const memberData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/member/argyle'
-        };
+        const { slug, isLoading } = this.state;
+        const member = isEmpty(this.state.member) ? {} : this.state.member;
         return (
             <AdminMemberLiteRetrieveComponent
-                slug={this.state.slug}
-                memberData={memberData}
+                slug={slug}
+                member={member}
                 flashMessage={this.props.flashMessage}
+                isLoading={isLoading}
             />
         );
     }
@@ -93,6 +119,7 @@ class AdminMemberLiteRetrieveContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        member: store.memberState,
         flashMessage: store.flashMessageState,
     };
 }

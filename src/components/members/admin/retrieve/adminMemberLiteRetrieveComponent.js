@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 
 
 export default class AdminMemberLiteRetrieveComponent extends Component {
     render() {
-        const { slug, flashMessage } = this.props;
+        const { slug, flashMessage, member, isLoading } = this.props;
         return (
             <div>
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -18,7 +20,7 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                             <Link to={`/admin/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;Argyle
+                            <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
                         </li>
                     </ol>
                 </nav>
@@ -47,44 +49,84 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                     </div>
                 </div>
 
-                <div className="row mt-4 pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto rounded bg-light border p-2">
+                <div className="row mt-0 pt-3 mb-4 pb-2">
+                    <div className="col-md-9 mx-auto rounded bg-light border p-2">
                         <div className="row">
-                            <div className="col-sm-5">
-                                <img src="/img/placeholder.png" className="img-fluid rounded" alt="Profile" />
+                            <div className="col-sm-4">
+                                <Link to={`/member/${slug}/avatar`}>
+                                    {member && member.avatarUrl !== undefined && member.avatarUrl !== null
+                                        ? <img src={member.avatarUrl} className="img-fluid rounded" alt="Profile" id={`customer-avatar-${slug}`} />
+                                        : <img src="/img/placeholder.png" className="img-fluid rounded" alt="Profile" id={`avatar-placeholder`}/>
+                                    }
+                                    <p><i className="fas fa-edit"></i>Click here to change photo</p>
+                                </Link>
                             </div>
-                            <div className="col-sm-7 px-4 py-3">
-                                <h3>Rodolfo Martinez</h3>
-                                <p className="text-muted">San Francisco, USA <i className="fas fa-map-marker-alt"></i></p>
-                                <p><i className="fas fa-envelope"></i> email@example.com</p>
-                                <p><i className="fas fa-phone-square"></i> (xxx) xxx-xxxx</p>
-                                <p className="m-0"><strong>Skills:</strong></p>
-                                <p>
-                                    <Link to="#" className="badge badge-info">Skill 1</Link>
-                                    <Link to="#" className="badge badge-info">Skill 2</Link>
-                                    <Link to="#" className="badge badge-info">Skill 3</Link>
-                                    <Link to="#" className="badge badge-dark">Skill 4</Link>
-                                    <Link to="#" className="badge badge-success">Html</Link>
-                                    <Link to="#" className="badge badge-primary">Developer</Link>
-                                    <Link to="#" className="badge badge-warning">Bootstrap</Link>
-                                </p>
-                                <div className="col-sm-12 p-0">
-                                    <p className="m-0"><strong>Ratings:</strong></p>
-                                    <div className="star-rating" data-rating="4.5">
-                                        <span className="far fa-star" data-rating="1"></span>
-                                        <span className="far fa-star" data-rating="2"></span>
-                                        <span className="far fa-star" data-rating="3"></span>
-                                        <span className="far fa-star" data-rating="4"></span>
-                                        <span className="far fa-star" data-rating="5"></span>
-                                    </div>
-                                </div>
+
+                            <div className="col-sm-8 px-4 py-3">
+                                {member && member.organizationName &&
+                                    <h1>{member.organizationName}</h1>
+                                }
+                                <h3>
+                                    {member && member.fullName}
+                                </h3>
+
+                                {member && member.address &&
+                                    <p className="text-muted">
+                                        <a href={member.addressUrl}>{member.address}&nbsp;<i className="fas fa-map-marker-alt"></i></a>
+                                    </p>
+                                }
+
+                                {member && member.email &&
+                                    <p>
+                                        <a href={`mailto:${member.email}`}><i className="fas fa-envelope"></i>&nbsp;{member.email}</a>
+                                    </p>
+                                }
+
+                                {member && member.telephone &&
+                                    <p>
+                                        <a href={`tel:${member.e164Telephone}`}>
+                                            <i className="fas fa-phone-square"></i>&nbsp;{member.telephone}
+                                        </a>
+                                    </p>
+                                }
+                                <p className="m-0"><strong>Tags:</strong></p>
+                                {member &&
+                                    <p>
+                                        {member.tags && member.tags.map(
+                                            (tag) => <TagItem tag={tag} key={tag.id} />)
+                                        }
+                                    </p>
+                                }
                             </div>
+
                         </div>
                     </div>
+                    {/*
+					<div className="col-sm-12 mx-auto text-center mt-4">
+						{member.state === 'inactive'
+                            ? <button className="btn btn-orange btn-lg">
+                                <i className="fas fa-lock"></i>&nbsp;Add Job
+                              </button>
+                            : <Link className="btn btn-success btn-lg" onClick={onClientClick}>
+                                <i className="fas fa-plus"></i>&nbsp;Add Job
+                              </Link>
+                        }
+					</div>
+                    */}
                 </div>
 
 
             </div>
         );
     }
+}
+
+
+class TagItem extends Component {
+    render() {
+        const { id, text } = this.props.tag;
+        return (
+            <span className="badge badge-info badge-lg" value={id}>{text}</span>
+        );
+    };
 }
