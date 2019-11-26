@@ -17,7 +17,7 @@ export default class AdminMemberCreateStep8Component extends Component {
         const {
             typeOf, errors, onSubmitClick, isLoading,
             organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
-            streetNumber, streetName, streetType, streetTypeOther, apartmentUnit, streetDirection, postalCode,
+            streetNumber, streetName, streetType, streetTypeLabel, streetTypeOther, apartmentUnit, streetDirection, streetDirectionLabel, postalCode,
             watchSlug, watchIcon, watchName,
             tags, tagOptions, yearOfBirth, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
             meaningLabel, meaning, expectationLabel, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
@@ -193,12 +193,15 @@ export default class AdminMemberCreateStep8Component extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Street Type</th>
-                                    <td>{streetType}</td>
+                                    <td>{streetTypeLabel}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type (Other)</th>
-                                    <td>{streetTypeOther}</td>
-                                </tr>
+                                {streetTypeOther &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Street Type (Other)</th>
+                                        <td>{streetTypeOther}</td>
+                                    </tr>
+
+                                }
                                 {apartmentUnit &&
                                     <tr>
                                         <th scope="row" className="bg-light">Apartment Unit</th>
@@ -207,14 +210,12 @@ export default class AdminMemberCreateStep8Component extends Component {
                                 }
                                 <tr>
                                     <th scope="row" className="bg-light">Street Direction</th>
-                                    <td>{streetDirection}</td>
+                                    <td>{streetDirectionLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Postal Code</th>
                                     <td>{postalCode}</td>
                                 </tr>
-
-
 
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">

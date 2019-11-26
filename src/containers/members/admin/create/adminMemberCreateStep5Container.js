@@ -28,11 +28,11 @@ class AdminMemberCreateStep5Container extends Component {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
-            streetType: localStorage.getItem("nwapp-create-member-streetType"),
+            streetType: localStorageGetIntegerItem("nwapp-create-member-streetType"),
             apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
             streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
-            streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
+            streetDirection: localStorageGetIntegerItem("nwapp-create-member-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
             country: localStorage.getItem("nwapp-create-member-country"),
@@ -109,8 +109,9 @@ class AdminMemberCreateStep5Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-create-member-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-create-member-'+optionKey, option);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 

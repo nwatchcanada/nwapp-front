@@ -41,11 +41,13 @@ class AdminMemberCreateStep8Container extends Component {
             isOkToText: localStorageGetIntegerItem("workery-create-member-isOkToText"),
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
-            streetType: localStorage.getItem("nwapp-create-member-streetType"),
+            streetType: localStorageGetIntegerItem("nwapp-create-member-streetType"),
+            streetTypeLabel: localStorage.getItem("nwapp-create-member-streetTypeLabel"),
             streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
             apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
-            streetDirection: localStorage.getItem("nwapp-create-member-streetDirection"),
+            streetDirection: localStorageGetIntegerItem("nwapp-create-member-streetDirection"),
+            streetDirectionLabel: localStorage.getItem("nwapp-create-member-streetDirectionLabel"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
             country: localStorage.getItem("nwapp-create-member-country"),
@@ -236,7 +238,7 @@ class AdminMemberCreateStep8Container extends Component {
         const {
             typeOf, errors,
             organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email,
-            streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionOption, postalCode,
+            streetNumber, streetName, streetType, streetTypeLabel, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionLabel, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
             tags, yearOfBirth, gender, genderLabel, howDidYouHearLabel, howDidYouHear, howDidYouHearOther, meaningLabel, meaning, meaningOther, expectationLabel, expectation, expectationOther,
             willingToVolunteerLabel, willingToVolunteer, anotherHouseholdMemberRegisteredLabel, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
@@ -256,10 +258,12 @@ class AdminMemberCreateStep8Container extends Component {
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
+                streetTypeLabel={streetTypeLabel}
                 streetTypeOption={streetTypeOption}
                 streetTypeOther={streetTypeOther}
                 apartmentUnit={apartmentUnit}
                 streetDirection={streetDirection}
+                streetDirectionLabel={streetDirectionLabel}
                 streetDirectionOption={streetDirectionOption}
                 postalCode={postalCode}
                 watchSlug={watchSlug}
