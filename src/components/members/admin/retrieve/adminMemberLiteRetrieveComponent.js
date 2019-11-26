@@ -72,7 +72,7 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
 
                                 {member && member.address &&
                                     <p className="text-muted">
-                                        <a href={member.addressUrl}>{member.address}&nbsp;<i className="fas fa-map-marker-alt"></i></a>
+                                        <a href={member.googleMapsUrl} target="_blank">{member.address}&nbsp;<i className="fas fa-map-marker-alt"></i></a>
                                     </p>
                                 }
 

@@ -376,10 +376,10 @@ export function validateStep8CreateInput(data) {
     if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "") {
         errors.streetName = 'This field is required';
     }
-    if (data.streetType === undefined || data.streetType === null || validator.isEmpty(data.streetType) || data.streetType === "") {
+    if (data.streetType === undefined || data.streetType === null || isNaN(data.streetType) || data.streetType === "") {
         errors.streetType = 'This field is required';
     } else {
-        if (data.streetType === "Other") {
+        if (data.streetType === 1) { // 1 = Other
             if (data.streetTypeOther === undefined || data.streetTypeOther === null || validator.isEmpty(data.streetTypeOther) || data.streetTypeOther === "") {
                 errors.streetTypeOther = 'This field is required';
             }
