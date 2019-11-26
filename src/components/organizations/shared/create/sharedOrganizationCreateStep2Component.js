@@ -14,7 +14,7 @@ class SharedOrganizationCreateStep2Component extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, region, locality, timezone, timezoneOptions,
-            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeLabel, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionLabel, streetDirectionOptions, postalCode,
             errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onBackClick
         } = this.props;
         return (
@@ -100,16 +100,20 @@ class SharedOrganizationCreateStep2Component extends Component {
                                     </tr>
                                     <tr>
                                         <th scope="row" className="bg-light">Street Type</th>
-                                        <td>{streetType}</td>
+                                        <td>{streetTypeLabel}</td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row" className="bg-light">Street Type (Other)</th>
-                                        <td>{streetTypeOther}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" className="bg-light">Street Direction</th>
-                                        <td>{streetDirection}</td>
-                                    </tr>
+                                    {streetTypeOther &&
+                                        <tr>
+                                            <th scope="row" className="bg-light">Street Type (Other)</th>
+                                            <td>{streetTypeOther}</td>
+                                        </tr>
+                                    }
+                                    {streetDirectionLabel &&
+                                        <tr>
+                                            <th scope="row" className="bg-light">Street Direction</th>
+                                            <td>{streetDirectionLabel}</td>
+                                        </tr>
+                                    }
                                     <tr>
                                         <th scope="row" className="bg-light">Postal Code</th>
                                         <td>{postalCode}</td>

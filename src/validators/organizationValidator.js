@@ -35,7 +35,7 @@ export default function validateInput(data) {
     if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "") {
         errors.streetName = 'This field is required';
     }
-    if (data.streetType === undefined || data.streetType === null || validator.isEmpty(data.streetType) || data.streetType === "") {
+    if (data.streetType === undefined || data.streetType === null || isNaN(data.streetType) || data.streetType === "") {
         errors.streetType = 'This field is required';
     } else {
         if (data.streetType === "Other") {

@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import SharedOrganizationCreateStep1Component from "../../../../components/organizations/shared/create/sharedOrganizationCreateStep1Component";
 import validateInput from '../../../../validators/organizationValidator';
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
 import { getTimezoneReactSelectOptions } from "../../../../helpers/timezoneUtlity";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
@@ -31,11 +31,11 @@ class SharedOrganizationCreateStep1Container extends Component {
             locality: localStorage.getItem("nwapp-create-tenant-locality"),
             streetNumber: localStorage.getItem("nwapp-create-tenant-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-tenant-streetName"),
-            streetType: localStorage.getItem("nwapp-create-tenant-streetType"),
+            streetType: localStorageGetIntegerItem("nwapp-create-tenant-streetType"),
             apartmentUnit: localStorage.getItem("nwapp-create-tenant-apartmentUnit"),
             streetTypeOption: localStorageGetObjectItem('nwapp-create-tenant-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-create-tenant-streetTypeOther"),
-            streetDirection: localStorage.getItem("nwapp-create-tenant-streetDirection"),
+            streetDirection: localStorageGetIntegerItem("nwapp-create-tenant-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-tenant-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-tenant-postalCode"),
             timezone: 'America/Toronto',
@@ -142,8 +142,10 @@ class SharedOrganizationCreateStep1Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-create-tenant-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-create-tenant-'+optionKey, option);
+        localStorage.setItem('nwapp-create-tenant-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-tenant-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-tenant-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onBackClick() {

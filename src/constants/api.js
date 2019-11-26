@@ -124,27 +124,27 @@ export const COMMUNITY_CARES_TYPE_OF = 3
 export const BASIC_STREET_TYPE_CHOICES = [
     {
         selectName: "streetType",
-        value: "Avenue",
+        value: 2,
         label: "Avenue"
     },{
         selectName: "streetType",
-        value: "Drive",
+        value: 3,
         label: "Drive"
     },{
         selectName: "streetType",
-        value: "Road",
+        value: 4,
         label: "Road"
     },{
         selectName: "streetType",
-        value: "Street",
+        value: 5,
         label: "Street"
     },{
         selectName: "streetType",
-        value: "Way",
+        value: 6,
         label: "Way"
     },{
         selectName: "streetType",
-        value: "Other",
+        value: 1,
         label: "Other"
     }
 ];
@@ -155,23 +155,23 @@ export const BASIC_STREET_TYPE_CHOICES = [
  */
 export const STREET_DIRECTION_CHOICES = [
     {
-        selectName: "streetDirection", value: "", label: "-"
+        selectName: "streetDirection", value: 0, label: "-"
     },{
-        selectName: "streetDirection", value: "E", label: "East"
+        selectName: "streetDirection", value: 1, label: "East"
     },{
-        selectName: "streetDirection", value: "N", label: "North"
+        selectName: "streetDirection", value: 2, label: "North"
     },{
-        selectName: "streetDirection", value: "NE", label: "Northeast"
+        selectName: "streetDirection", value: 3, label: "Northeast"
     },{
-        selectName: "streetDirection", value: "NW", label: "Northwest"
+        selectName: "streetDirection", value: 4, label: "Northwest"
     },{
-        selectName: "streetDirection", value: "S", label: "South"
+        selectName: "streetDirection", value: 5, label: "South"
     },{
-        selectName: "streetDirection", value: "SE", label: "Southeast"
+        selectName: "streetDirection", value: 6, label: "Southeast"
     },{
-        selectName: "streetDirection", value: "SW", label: "Southwest"
+        selectName: "streetDirection", value: 7, label: "Southwest"
     },{
-        selectName: "streetDirection", value: "W", label: "West"
+        selectName: "streetDirection", value: 8, label: "West"
     }
 ];
 

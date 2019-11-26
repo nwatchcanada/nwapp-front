@@ -6,7 +6,7 @@ import SharedOrganizationCreateStep2Component from "../../../../components/organ
 import validateInput from '../../../../validators/organizationValidator';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
 import { getTimezoneReactSelectOptions } from "../../../../helpers/timezoneUtlity";
 import { postTenantDetail } from "../../../../actions/tenantActions";
@@ -33,11 +33,13 @@ class SharedOrganizationCreateStep2Container extends Component {
             locality: localStorage.getItem("nwapp-create-tenant-locality"),
             streetNumber: localStorage.getItem("nwapp-create-tenant-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-tenant-streetName"),
-            streetType: localStorage.getItem("nwapp-create-tenant-streetType"),
+            streetType: localStorageGetIntegerItem("nwapp-create-tenant-streetType"),
+            streetTypeLabel: localStorage.getItem("nwapp-create-tenant-streetTypeLabel"),
             apartmentUnit: localStorage.getItem("nwapp-create-tenant-apartmentUnit"),
             streetTypeOption: localStorageGetObjectItem('nwapp-create-tenant-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-create-tenant-streetTypeOther"),
-            streetDirection: localStorage.getItem("nwapp-create-tenant-streetDirection"),
+            streetDirection: localStorageGetIntegerItem("nwapp-create-tenant-streetDirection"),
+            streetDirectionLabel: localStorage.getItem("nwapp-create-tenant-streetDirectionLabel"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-tenant-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-tenant-postalCode"),
             timezone: 'America/Toronto',
@@ -199,7 +201,7 @@ class SharedOrganizationCreateStep2Container extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, region, locality,
-            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,
+            streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit, streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
             timezone, errors, isLoading
         } = this.state;
         return (
@@ -214,10 +216,12 @@ class SharedOrganizationCreateStep2Container extends Component {
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
+                streetTypeLabel={streetTypeLabel}
                 apartmentUnit={apartmentUnit}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
                 streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
+                streetDirectionLabel={streetDirectionLabel}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
                 timezone={timezone}
