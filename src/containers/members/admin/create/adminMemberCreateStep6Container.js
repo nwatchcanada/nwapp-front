@@ -38,14 +38,17 @@ class AdminMemberCreateStep6Container extends Component {
         // REPLACE THIS CODE WITH API CODE.
         const tableData = [
             {
+                typeOf: RESIDENCE_TYPE_OF,
                 slug: "argyle-watch",
                 icon: "home",
                 name: "Argyle Community Watch"
             },{
+                typeOf: BUSINESS_TYPE_OF,
                 slug: "byron-watch",
                 icon: "building",
                 name: "Byron Business Watch"
             },{
+                typeOf: COMMUNITY_CARES_TYPE_OF,
                 slug: "carling-watch",
                 icon: "university",
                 name: "Carling Retirement Centre Watch"
@@ -81,11 +84,12 @@ class AdminMemberCreateStep6Container extends Component {
      *------------------------------------------------------------
      */
 
-    onTableRowClick(e, slug, icon, name) {
+    onTableRowClick(e, typeOf, slug, icon, name) {
         e.preventDefault();
         this.setState({
             isLoading: true
         })
+        localStorage.setItem('nwapp-create-member-watch-typeOf', typeOf);
         localStorage.setItem('nwapp-create-member-watch-slug', slug);
         localStorage.setItem('nwapp-create-member-watch-icon', icon);
         localStorage.setItem('nwapp-create-member-watch-name', name);

@@ -109,7 +109,7 @@ export default class AdminMemberCreateStep6Component extends Component {
 
 class TableRow extends Component {
     render() {
-        const { slug, icon, name } = this.props.datum;
+        const { typeOf, slug, icon, name } = this.props.datum;
         const { onTableRowClick, isLoading } = this.props;
 
         return (
@@ -118,7 +118,7 @@ class TableRow extends Component {
                 <td>{name}</td>
                 <td>
 
-                    <button className="btn btn-primary btn-sm float-right" disabled={isLoading} onClick={ (event) => { onTableRowClick(event, slug, icon, name) } }>
+                    <button className="btn btn-primary btn-sm float-right" disabled={isLoading} onClick={ (event) => { onTableRowClick(event, typeOf, slug, icon, name) } }>
                         Select and Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                     </button>
                 </td>

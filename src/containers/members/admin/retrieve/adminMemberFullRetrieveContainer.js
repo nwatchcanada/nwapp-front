@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminMemberFullRetrieveComponent from "../../../../components/members/admin/retrieve/adminMemberFullRetrieveComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
-import { getHowHearReactSelectOptions } from "../../../../actions/howHearActions";
-import { getTagReactSelectOptions } from "../../../../actions/tagActions";
+import { pullMemberDetail } from '../../../../actions/memberActions';
 import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../../constants/api';
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
 
 
 class AdminMemberFullRetrieveContainer extends Component {
@@ -23,13 +21,22 @@ class AdminMemberFullRetrieveContainer extends Component {
 
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const member = localStorageGetObjectItem("workery-admin-retrieve-member-"+slug.toString() );
+        const isLoading = isEmpty(member);
+
         // Update state.
         this.state = {
             slug: slug,
-            memberData: {},
-            errors: {},
-            isLoading: false
+            member: member,
+            isLoading: isLoading,
         }
+
+        // Update functions.
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
+        // this.onClientClick = this.onClientClick.bind(this);
     }
 
     /**
@@ -39,182 +46,11 @@ class AdminMemberFullRetrieveContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        //TODO: REPLACE THIS CODE WITH API DATA.
-        if (this.state.slug === 'argyle') {
-            this.setState({
-                memberData: {
-                    slug: 'argyle',
-                    number: 1,
-                    name: 'Argyle',
-                    absoluteUrl: '/member/argyle',
-                    typeOf: RESIDENCE_TYPE_OF,
-                    bizCompanyName: "",
-                    bizContactFirstName: "",
-                    bizContactLastName: "",
-                    bizPrimaryPhone: "",
-                    bizSecondaryPhone: "",
-                    bizEmail: "",
-                    rezFirstName: "Shinji",
-                    rezLastName: "Ikari",
-                    rezPrimaryPhone:  "(111) 111-1111",
-                    rezSecondaryPhone: "(222) 222-2222",
-                    rezEmail: "shinji.ikari@nerv.worldgov",
-                    streetNumber: 123,
-                    streetName: "Somewhere",
-                    streetType: "Street",
-                    streetTypeOption: "",
-                    streetTypeOther: "",
-                    apartmentUnit: "Upper",
-                    streetDirection: "North",
-                    streetDirectionOption: "",
-                    postalCode: "N6J4X4",
-                    watchSlug: "argyle",
-                    watchIcon: "home",
-                    watchName: "Argyle",
-                    tags:[
-                        "security", "fitness"
-                    ],
-                    // tags:[
-                    //     {selectName: "tags", value: "security", label: "Security"},
-                    //     {selectName: "tags", value: "fitness", label: "Fitness"}
-                    // ],
-                    birthYear: 1980,
-                    gender: 2,
-                    genderLabel: "Female",
-                    howDidYouHear: "internet",
-                    howDidYouHearOption: "",
-                    howDidYouHearOther: "",
-                    howDidYouHearLabel: "Internet",
-                    meaning: "Insert meaning here",
-                    expectations: "Insert expectations here",
-                    willingToVolunteerLabel: "Yes",
-                    anotherHouseholdMemberRegisteredLabel: "Yes",
-                }
-            });
-        } else if (this.state.slug === 'byron') {
-            this.setState({
-                memberData: {
-                    slug: 'byron',
-                    number: 1,
-                    name: 'Byron',
-                    absoluteUrl: '/member/byron',
-                    typeOf: BUSINESS_TYPE_OF,
-                    bizCompanyName: "City Pop Music",
-                    bizContactFirstName: "Mariya",
-                    bizContactLastName: "Takeuchi",
-                    bizPrimaryPhone: "(321) 321-3210",
-                    bizSecondaryPhone: "",
-                    bizEmail: "plastic_lover@gmail.com",
-                    rezFirstName: "",
-                    rezLastName: "",
-                    rezPrimaryPhone:  "",
-                    rezSecondaryPhone: "",
-                    rezEmail: "",
-                    streetNumber: 666999,
-                    streetName: "Shinjuku",
-                    streetType: "Street",
-                    streetTypeOption: "",
-                    streetTypeOther: "",
-                    apartmentUnit: null,
-                    streetDirection: "",
-                    streetDirectionOption: "",
-                    postalCode: "N6J4X4",
-                    watchSlug: "byron",
-                    watchIcon: "building",
-                    watchName: "Byron",
-                    tags:[
-                        "security", "fitness"
-                    ],
-                    birthYear: 1975,
-                    gender: 1,
-                    genderLabel: "Male",
-                    howDidYouHear: "internet",
-                    howDidYouHearOption: "",
-                    howDidYouHearOther: "",
-                    howDidYouHearLabel: "Internet",
-                    meaning: "Insert meaning here",
-                    expectations: "Insert expectations here",
-                    willingToVolunteerLabel: "No",
-                    anotherHouseholdMemberRegisteredLabel: "No",
-                    companyEmployeeCount: 4,
-                    companyYearsInOperation: 1,
-                    companyType: "Construction Company",
-                }
-            });
-        } else if (this.state.slug === 'carling') {
-            this.setState({
-                memberData: {
-                    slug: 'carling',
-                    number: 1,
-                    name: 'Carling',
-                    absoluteUrl: '/member/carling',
-                    typeOf: COMMUNITY_CARES_TYPE_OF,
-                    bizCompanyName: "",
-                    bizContactFirstName: "",
-                    bizContactLastName: "",
-                    bizPrimaryPhone: "",
-                    bizSecondaryPhone: "",
-                    bizEmail: "",
-                    rezFirstName: "Rei",
-                    rezLastName: "Ayanami",
-                    rezPrimaryPhone:  "(123) 123-12345",
-                    rezSecondaryPhone: "(987) 987-0987",
-                    rezEmail: "rei.ayanami@nerv.worldgov",
-                    streetNumber: 451,
-                    streetName: "Centre",
-                    streetType: "Street",
-                    streetTypeOption: "",
-                    streetTypeOther: "",
-                    apartmentUnit: null,
-                    streetDirection: "",
-                    streetDirectionOption: "",
-                    postalCode: "N6J4X4",
-                    watchSlug: "carling",
-                    watchIcon: "university",
-                    watchName: "Carling",
-                    tags:[
-                        "security", "fitness"
-                    ],
-                    birthYear: 1985,
-                    gender: 0,
-                    genderLabel: "Prefer not to say",
-                    howDidYouHear: "internet",
-                    howDidYouHearOption: "",
-                    howDidYouHearOther: "",
-                    howDidYouHearLabel: "Internet",
-                    meaning: "Insert meaning here",
-                    expectations: "Insert expectations here",
-                    willingToVolunteerLabel: "Maybe",
-                    anotherHouseholdMemberRegisteredLabel: "Yes",
-                }
-            });
-        }
-
-        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
-        this.setState({
-            howDidYouHearData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Word of mouth',
-                    slug: 'word-of-mouth'
-                },{
-                    name: 'Internet',
-                    slug: 'internet'
-                }]
-            },
-            tagsData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Health',
-                    slug: 'health'
-                },{
-                    name: 'Security',
-                    slug: 'security'
-                },{
-                    name: 'Fitness',
-                    slug: 'fitness'
-                }]
-            }
-        });
+        this.props.pullMemberDetail(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -234,12 +70,25 @@ class AdminMemberFullRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    // onClientClick(e) {
+    //     e.preventDefault();
+    //     localStorage.setItem("workery-create-order-clientId", this.props.clientDetail.id);
+    //     localStorage.setItem("workery-create-order-clientGivenName", this.props.clientDetail.givenName);
+    //     localStorage.setItem("workery-create-order-clientLastName", this.props.clientDetail.lastName);
+    //     this.props.history.push("/orders/add/step-3");
+    // }
+
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, member: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("workery-admin-retrieve-member-"+this.state.slug.toString(), response);
     }
 
-    onFailedSubmissionCallback(errors) {
-        console.log(errors);
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -254,15 +103,14 @@ class AdminMemberFullRetrieveContainer extends Component {
      */
 
     render() {
-        const howDidYouHearOptions = getHowHearReactSelectOptions(this.state.howDidYouHearData, "howDidYouHear");
-        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+        const { slug, isLoading } = this.state;
+        const member = isEmpty(this.state.member) ? {} : this.state.member;
         return (
             <AdminMemberFullRetrieveComponent
-                slug={this.state.slug}
-                memberData={this.state.memberData}
+                slug={slug}
+                member={member}
                 flashMessage={this.props.flashMessage}
-                tagOptions={tagOptions}
-                howDidYouHearOptions={howDidYouHearOptions}
+                isLoading={isLoading}
             />
         );
     }
@@ -271,6 +119,7 @@ class AdminMemberFullRetrieveContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        member: store.memberState,
         flashMessage: store.flashMessageState,
     };
 }
@@ -279,7 +128,10 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullMemberDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullMemberDetail(slug, successCallback, failedCallback))
+        },
     }
 }
 
