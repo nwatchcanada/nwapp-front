@@ -102,8 +102,8 @@ import AdminMemberCreateStep6Container from "./members/admin/create/adminMemberC
 import AdminMemberCreateStep7Container from "./members/admin/create/adminMemberCreateStep7Container";
 import AdminMemberCreateStep8Container from "./members/admin/create/adminMemberCreateStep8Container";
 import AdminMemberContactUpdateContainer from "./members/admin/update/adminMemberContactUpdateContainer";
-// import AdminMemberAddressUpdateContainer from "./members/update/admin/adminMemberAddressUpdateContainer";
-// import AdminMemberMetricsUpdateContainer from "./members/update/admin/adminMemberMetricsUpdateContainer";
+import AdminMemberAddressUpdateContainer from "./members/admin/update/adminMemberAddressUpdateContainer";
+import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMemberMetricsUpdateContainer";
 import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Container";
 import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
 import MemberPromoteStep3Container from "./members/promote/memberPromoteStep3Container";
@@ -292,9 +292,9 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/full" exact component={requiresAuth(AdminMemberFullRetrieveContainer)} />
                                 <Route path="/admin/member/:slug/comments" exact component={requiresAuth(AdminMemberCommentContainer)} />
                                 <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
-                                {/*
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/metrics" exact component={requiresAuth(AdminMemberMetricsUpdateContainer)} />
+                                {/*
                                 <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
                                 <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
                                 <Route path="/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />

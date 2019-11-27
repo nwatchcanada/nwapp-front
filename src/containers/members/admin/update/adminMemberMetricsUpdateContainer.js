@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
-import * as moment from 'moment';
 
-import ClientMetricsUpdateComponent from "../../../components/clients/update/clientMetricsUpdateComponent";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateMetricsInput } from "../../../validators/clientValidator";
+import AdminMemberCreateStep7Component from "../../../../components/members/admin/create/adminMemberCreateStep7Component";
+import { validateStep7CreateInput } from "../../../../validators/memberValidator";
 import {
-    RESIDENTIAL_CUSTOMER_TYPE_OF_ID, COMMERCIAL_CUSTOMER_TYPE_OF_ID
-} from '../../../constants/api';
-import { getHowHearReactSelectOptions, pullHowHearList } from "../../../actions/howHearActions";
-import { getTagReactSelectOptions, getPickedTagReactSelectOptions, pullTagList } from "../../../actions/tagActions";
-import { putClientMetricsDetail } from "../../../actions/clientActions";
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
+} from '../../../../helpers/localStorageUtility';
+import { getHowHearReactSelectOptions, pullHowHearList } from "../../../../actions/howHearActions";
+import { getMeaningReactSelectOptions, pullMeaningList } from "../../../../actions/meaningActions";
+import { getExpectationReactSelectOptions, pullExpectationList } from "../../../../actions/expectationActions";
+import { getTagReactSelectOptions, pullTagList } from "../../../../actions/tagActions";
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../../constants/api';
 
 
-class ClientMetricsUpdateContainer extends Component {
+class AdminMemberMetricUpdateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -22,128 +26,44 @@ class ClientMetricsUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { id } = this.props.match.params;
-
-        // Get our dates based on our browsers timezone.
-        // https://github.com/angular-ui/bootstrap/issues/2628#issuecomment-55125516
-        const birthdate = this.props.clientDetail.birthdate;
-        const birthdateObj = birthdate === undefined || birthdate === null ? null : new Date(birthdate);
-        if (birthdateObj) {
-            birthdateObj.setMinutes( birthdateObj.getMinutes() + birthdateObj.getTimezoneOffset() );
-        }
-
-        const joinDateObj = new Date(this.props.clientDetail.joinDate);
-        joinDateObj.setMinutes( joinDateObj.getMinutes() + joinDateObj.getTimezoneOffset() );
-
         this.state = {
-            errors: {},
-            isLoading: false,
-            id: id,
-
-            // STEP 3
-            typeOf: this.props.clientDetail.typeOf,
-
-            // STEP 4
-            givenName: this.props.clientDetail.givenName,
-            lastName: this.props.clientDetail.lastName,
-
-            // STEP 6
+            typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             isTagsLoading: true,
-            tags: this.props.clientDetail.tags,
-            dateOfBirth: birthdateObj,
-            gender: this.props.clientDetail.gender,
+            tags: localStorageGetArrayItem("nwapp-create-member-tags"),
+            yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
+            gender: localStorage.getItem("nwapp-create-member-gender"),
             isHowHearLoading: true,
-            howHear: this.props.clientDetail.howHear,
-            howHearOption: this.props.clientDetail.howHearOption,
-            howHearOther: this.props.clientDetail.howHearOther,
-            joinDate: joinDateObj,
-            description: this.props.clientDetail.description,
+            howDidYouHear: localStorageGetIntegerItem("nwapp-create-member-howDidYouHear"),
+            howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            isMeaningLoading: true,
+            meaning: localStorageGetIntegerItem("nwapp-create-member-meaning"),
+            meaningOther: localStorage.getItem("nwapp-create-member-meaningOther"),
+            isExpectationLoading: true,
+            expectation: localStorageGetIntegerItem("nwapp-create-member-expectation"),
+            expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
+            willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
+            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
+            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
+            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            organizationEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
+            organizationFoundingYear: parseInt(localStorage.getItem("nwapp-create-member-organizationFoundingYear")),
+            organizationType: localStorage.getItem("nwapp-create-member-organizationType"),
+            errors: {},
+            isLoading: false
         }
 
-        this.getPostData = this.getPostData.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
-        this.onTagMultiChange = this.onTagMultiChange.bind(this);
-        this.onDateOfBirthChange = this.onDateOfBirthChange.bind(this);
-        this.onJoinDateChange = this.onJoinDateChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessCallback = this.onSuccessCallback.bind(this);
-        this.onFailedCallback = this.onFailedCallback.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
         this.onTagsSuccessFetch = this.onTagsSuccessFetch.bind(this);
         this.onHowHearSuccessFetch = this.onHowHearSuccessFetch.bind(this);
-    }
-
-    /**
-     *  Utility function used to create the `postData` we will be submitting to
-     *  the API; as a result, this function will structure some dictionary key
-     *  items under different key names to support our API web-service's API.
-     */
-    getPostData() {
-        let postData = Object.assign({}, this.state);
-
-        // (2) Middle name (API ISSUE)
-        postData.middleName = this.state.middleName;
-
-        // (2) Join date - We need to format as per required API format.
-        const joinDateMoment = moment(this.state.joinDate);
-        postData.joinDate = joinDateMoment.format("YYYY-MM-DD");
-
-        const dateOfBirthMoment = moment(this.state.dateOfBirth);
-        postData.birthdate = dateOfBirthMoment.format("YYYY-MM-DD")
-
-        // (4) How Hear Other - This field may not be null, therefore make blank.
-        if (this.state.howHearOther === undefined || this.state.howHearOther === null) {
-            postData.howHearOther = "";
-        }
-
-        // // (5) Password & Password Repeat
-        // if (this.state.password === undefined || this.state.password === null || this.state.password === '' || this.state.password.length == 0) {
-        //     var randomString = Math.random().toString(34).slice(-10);
-        //     randomString += "A";
-        //     randomString += "!";
-        //     postData.password = randomString;
-        //     postData.passwordRepeat = randomString;
-        // }
-
-        // (6) Organization Type Of - This field may not be null, therefore make blank.
-        if (this.state.organizationTypeOf === undefined || this.state.organizationTypeOf === null) {
-            postData.organizationTypeOf = "";
-        }
-
-        // (8) Telephone type: This field is required.;
-        if (this.state.telephoneTypeOf === undefined || this.state.telephoneTypeOf === null || this.state.telephoneTypeOf === "") {
-            postData.telephoneTypeOf = 1;
-        }
-        if (this.state.otherTelephoneTypeOf === undefined || this.state.otherTelephoneTypeOf === null || this.state.otherTelephoneTypeOf === "") {
-            postData.otherTelephoneTypeOf = 1;
-        }
-
-        // (9) Address Country: This field is required.
-        postData.addressCountry = this.state.country;
-
-        // (10) Address Locality: This field is required.
-        postData.addressLocality = this.state.locality;
-
-        // (11) Address Region: This field is required.
-        postData.addressRegion = this.state.region
-
-        // () First Name and Last Name if biz
-        if (this.state.typeOf === COMMERCIAL_CUSTOMER_TYPE_OF_ID) {
-            postData.givenName = this.state.givenName;
-            postData.givenName = this.state.givenName;
-            postData.givenName = this.state.givenName;
-            postData.lastName = this.state.lastName;
-        } else {
-
-        }
-
-        // Finally: Return our new modified data.
-        console.log("getPostData |", postData);
-        return postData;
+        this.onExpectationsSuccessFetch = this.onExpectationsSuccessFetch.bind(this);
+        this.onMeaningSuccessFetch = this.onMeaningSuccessFetch.bind(this);
     }
 
     /**
@@ -159,6 +79,8 @@ class ClientMetricsUpdateContainer extends Component {
         parametersMap.set("isArchived", 3)
         this.props.pullHowHearList(1,1000, parametersMap, this.onHowHearSuccessFetch);
         this.props.pullTagList(1, 1000, parametersMap, this.onTagsSuccessFetch);
+        this.props.pullExpectationList(1, 1000, parametersMap, this.onExpectationsSuccessFetch);
+        this.props.pullMeaningList(1,1000, parametersMap, this.onMeaningSuccessFetch);
     }
 
     componentWillUnmount() {
@@ -175,14 +97,15 @@ class ClientMetricsUpdateContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessCallback(client) {
+    onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Client has been successfully updated.");
-        this.props.history.push("/client/"+this.state.id+"/full");
+        this.props.history.push("/admin/members/add/step-8");
     }
 
-    onFailedCallback(errors) {
-        this.setState({ errors: errors, isLoading: false, });
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -199,6 +122,14 @@ class ClientMetricsUpdateContainer extends Component {
         this.setState({ isHowHearLoading: false, });
     }
 
+    onExpectationsSuccessFetch(tags) {
+        this.setState({ isExpectationLoading: false, });
+    }
+
+    onMeaningSuccessFetch(howHearList) {
+        this.setState({ isMeaningLoading: false, });
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -208,51 +139,35 @@ class ClientMetricsUpdateContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-    }
-
-    onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Perform client-side validation.
-        const { errors, isValid } = validateMetricsInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.setState({ errors: {}, isLoading: true, }, ()=>{
-                this.props.putClientMetricsDetail(
-                    this.getPostData(),
-                    this.onSuccessCallback,
-                    this.onFailedCallback
-                );
-            });
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedCallback(errors);
-        }
+        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
-        const optionKey = [option.selectName].toString()+"Option";
+        const optionKey = [option.selectName]+"Option";
         this.setState({
             [option.selectName]: option.value,
             optionKey: option,
         });
-        console.log([option.selectName], optionKey, "|",option); // For debugging purposes only.
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-member-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-member-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "nwapp-create-client-"+[e.target.name];
+        const storageValueKey = "nwapp-create-member-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
-        const storeLabelKey = [e.target.name].toString()+"-label";
+        const storeLabelKey = [e.target.name].toString()+"Label";
 
         // Save the data.
         this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
         localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
 
         // For the debugging purposes only.
         console.log({
@@ -265,33 +180,37 @@ class ClientMetricsUpdateContainer extends Component {
         });
     }
 
-    onTagMultiChange(...args) {
+    onMultiChange(...args) {
         // Extract the select options from the parameter.
         const selectedOptions = args[0];
 
-        // We need to only return our `id` values, therefore strip out the
-        // `react-select` options format of the data and convert it into an
-        // array of integers to hold the primary keys of the `Tag` items selected.
-        let idTags = [];
-        if (selectedOptions !== null && selectedOptions !== undefined) {
-            for (let i = 0; i < selectedOptions.length; i++) {
-                let tag = selectedOptions[i];
-                idTags.push(tag.value);
-            }
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+
+        // // Set all the tags we have selected to the STORAGE.
+        const key = 'nwapp-create-member-' + args[1].name;
+        localStorageSetObjectOrArrayItem(key, selectedOptions);
+    }
+
+    onClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // console.log(this.state); // For debugging purposes only.
+
+        // Perform client-side validation.
+        const { errors, isValid } = validateStep7CreateInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
         }
-        this.setState({ tags: idTags, });
-    }
-
-    onDateOfBirthChange(dateOfBirth) {
-        this.setState({
-            dateOfBirth: dateOfBirth,
-        });
-    }
-
-    onJoinDateChange(joinDate) {
-        this.setState({
-            joinDate: joinDate,
-        });
     }
 
     /**
@@ -301,52 +220,57 @@ class ClientMetricsUpdateContainer extends Component {
 
     render() {
         const {
-            errors, id, typeOf, givenName, lastName, isLoading,
-
-            // STEP 6
-            isTagsLoading, tags, birthdate, gender, isHowHearLoading, howHear, howHearOption, howHearOther, joinDate, description, dateOfBirth
+            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            organizationEmployeeCount, organizationFoundingYear, organizationType,
+            errors
         } = this.state;
 
-        const howHearOptions = getHowHearReactSelectOptions(this.props.howHearList);
-        const tagOptions = getTagReactSelectOptions(this.props.tagList);
-        const transcodedTags = getPickedTagReactSelectOptions(tags, this.props.tagList)
+        const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
+        const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
+        const meaningOptions = getMeaningReactSelectOptions(this.props.meaningList, "meaning");
+        const expectationOptions = getExpectationReactSelectOptions(this.props.expectationList, "expectation");
+
+        // // For debugging purposes only.
+        // console.log("Tag Options:", tagOptions);
+        // console.log("HHI Options:", howDidYouHearOptions);
+        // console.log("Exp Options:", expectationOptions);
+        // console.log("Mea Options:", meaningOptions);
 
         return (
-            <ClientMetricsUpdateComponent
-                // STEP 3
+            <AdminMemberCreateStep7Component
                 typeOf={typeOf}
-
-                // STEP 4
-                givenName={givenName}
-                lastName={lastName}
-
-                // STEP 6
                 isTagsLoading={isTagsLoading}
-                tags={transcodedTags}
+                tags={tags}
                 tagOptions={tagOptions}
-                onTagMultiChange={this.onTagMultiChange}
-                dateOfBirth={dateOfBirth}
+                yearOfBirth={yearOfBirth}
                 gender={gender}
-                isHowHearLoading={isHowHearLoading}
-                howHear={howHear}
-                howHearOptions={howHearOptions}
-                howHearOption={howHearOption}
-                howHearOther={howHearOther}
-                joinDate={joinDate}
-                description={description}
-
-                // EVERYTHING ELSE
-                isLoading={isLoading}
-                givenName={givenName}
-                lastName={lastName}
-                id={id}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                isHowHearLoading={isHowHearLoading}
+                howDidYouHear={howDidYouHear}
+                howDidYouHearOptions={howDidYouHearOptions}
+                howDidYouHearOther={howDidYouHearOther}
+                isMeaningLoading={isMeaningLoading}
+                meaning={meaning}
+                meaningOptions={meaningOptions}
+                meaningOther={meaningOther}
+                isExpectationLoading={isExpectationLoading}
+                expectation={expectation}
+                expectationOptions={expectationOptions}
+                expectationOther={expectationOther}
+                expectationOther={expectationOther}
+                willingToVolunteer={willingToVolunteer}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                totalHouseholdCount={totalHouseholdCount}
+                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                organizationEmployeeCount={organizationEmployeeCount}
+                organizationFoundingYear={organizationFoundingYear}
+                organizationType={organizationType}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
+                onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
-                onDateOfBirthChange={this.onDateOfBirthChange}
-                onJoinDateChange={this.onJoinDateChange}
             />
         );
     }
@@ -355,36 +279,40 @@ class ClientMetricsUpdateContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        clientDetail: store.clientDetailState,
-        howHearList: store.howHearListState,
         tagList: store.tagListState,
+        howHearList: store.howHearListState,
+        meaningList: store.meaningListState,
+        expectationList: store.expectationListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
+        pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullTagList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
         },
         pullHowHearList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
                 pullHowHearList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
-        pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+        pullMeaningList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                pullTagList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+                pullMeaningList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
-        putClientMetricsDetail: (data, onSuccessCallback, onFailureCallback) => {
+        pullExpectationList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                putClientMetricsDetail(data, onSuccessCallback, onFailureCallback)
+                pullExpectationList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
     }
 }
 
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ClientMetricsUpdateContainer);
+)(AdminMemberMetricUpdateContainer);

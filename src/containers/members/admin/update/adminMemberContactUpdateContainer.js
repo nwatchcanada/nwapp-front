@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import * as moment from 'moment';
 
-import MemberContactUpdateComponent from "../../../../components/members/admin/update/adminMemberContactUpdateComponent";
+import AdminMemberContactUpdateComponent from "../../../../components/members/admin/update/adminMemberContactUpdateComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateContactInput } from "../../../../validators/memberValidator";
 import {
@@ -14,7 +14,7 @@ import { getTagReactSelectOptions, getPickedTagReactSelectOptions, pullTagList }
 import { putMemberContactDetail } from "../../../../actions/memberActions";
 
 
-class MemberUpdateContainer extends Component {
+class AdminMemberContactUpdateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -215,7 +215,7 @@ class MemberUpdateContainer extends Component {
         } = this.state;
 
         return (
-            <MemberContactUpdateComponent
+            <AdminMemberContactUpdateComponent
                 // STEP 3
                 typeOf={typeOf}
 
@@ -280,4 +280,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberUpdateContainer);
+)(AdminMemberContactUpdateContainer);

@@ -2,62 +2,111 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapPageLoadingAnimation } from "../../bootstrap/bootstrapPageLoadingAnimation";
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
-import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
-import { BootstrapRadio } from "../../bootstrap/bootstrapRadio";
-import { BootstrapCountrySelect } from '../../bootstrap/bootstrapCountrySelect'
-import { BootstrapRegionSelect } from '../../bootstrap/bootstrapRegionSelect'
-import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
-import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
-import { BootstrapMultipleSelect } from "../../bootstrap/bootstrapMultipleSelect";
-import {
-    IS_OK_TO_EMAIL_CHOICES,
-    IS_OK_TO_TEXT_CHOICES,
-    GENDER_RADIO_CHOICES
-} from "../../../constants/api";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
+import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
+import { BUSINESS_TYPE_OF, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
 
 
 export default class AdminMemberMetricUpdateComponent extends Component {
     render() {
         const {
-            // STEP 6
-            isTagsLoading, tags, tagOptions, onTagMultiChange, dateOfBirth, gender, isHowHearLoading, howHear, howHearOptions, howHearOption, howHearOther, joinDate, description,
-
-            // EVERYTHING ELSE
-            givenName, lastName, id, errors, isLoading, onClick, onTextChange, onRadioChange, onBillingCountryChange, onBillingRegionChange,
-            onMultiChange, onDateOfBirthChange, onSelectChange, onJoinDateChange,
+            typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            organizationEmployeeCount, organizationFoundingYear, organizationType,
+            onRadioChange,  onMultiChange,
+            errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
-        const isOtherHowDidYouHearSelected = howHear === 1;
+        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
+
+        // This code checks to see if we need to display the household count fields.
+        let showHouseholdCount = false;
+        try {
+            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
+        } catch (error) {
+            // Do nothing.
+        }
+
+        const isBizTypeOf = typeOf === BUSINESS_TYPE_OF || typeOf === toString(BUSINESS_TYPE_OF);
+
         return (
             <main id="main" role="main">
-                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/clients`}><i className="fas fa-user-circle"></i>&nbsp;Clients</Link>
-                        </li>
-                        <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/client/${id}/full`}><i className="fas fa-user"></i>&nbsp;{givenName} {lastName}</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-edit"></i>&nbsp;Update (Metrics)
+                            <i className="fas fa-plus"></i>&nbsp;Add
                         </li>
                     </ol>
                 </nav>
 
+                <h1>
+                    <i className="fas fa-plus"></i>&nbsp;Add Member
+                </h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <Link to="/admin/members/add/step-1">
+                                <span className="num">1.</span><span className="">Search</span>
+                            </Link>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <Link to="/admin/members/add/step-2">
+                                <span className="num">2.</span><span className="">Results</span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <Link to="/admin/members/add/step-3">
+                                <span className="num">3.</span><span className="">Type</span>
+                            </Link>
+                        </div>
+                        <div id="step-4" className="st-grey">
+                            <Link to="/admin/members/add/step-4">
+                                <span className="num">4.</span><span className="">Contact</span>
+                            </Link>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <Link to="/admin/members/add/step-5">
+                                <span className="num">5.</span><span className="">Address</span>
+                            </Link>
+                        </div>
+                        <div id="step-6" className="st-grey">
+                            <Link to="/admin/members/add/step-6">
+                                <span className="num">6.</span><span className="">Watch</span>
+                            </Link>
+                        </div>
+                         <div id="step-7" className="st-grey active">
+                            <strong>
+                                <span className="num">7.</span><span className="">Metrics</span>
+                            </strong>
+                        </div>
+                        <div id="step-8" className="st-grey">
+                            <span className="num">8.</span><span className="">Review</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-edit"></i>&nbsp;Client Metrics Form</h1>
+                            <h2>
+                                <i className="fas fa-chart-pie"></i>&nbsp;Metrics
+                            </h2>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <p className="border-bottom mb-3 pb-1 text-secondary">
+                                <i className="fas fa-user-shield"></i>&nbsp;Personal Information
+                            </p>
 
                             <BootstrapMultipleSelect
                                 borderColour="border-success"
@@ -67,7 +116,7 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                 options={tagOptions}
                                 selectedOptions={tags}
                                 error={errors.tags}
-                                onMultiChange={onTagMultiChange}
+                                onMultiChange={onMultiChange}
                                 isLoading={isTagsLoading}
                             />
 
@@ -82,26 +131,25 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                 options={GENDER_RADIO_CHOICES}
                             />
 
-                            <BootstrapDatePicker
-                                label="Date of Birth"
-                                name="dateOfBirth"
-                                dateObj={dateOfBirth}
-                                onTimeChange={onDateOfBirthChange}
-                                borderClassname="border-success"
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.dateOfBirth}
-                                helpText="This field is optional as start date can be set at a later task."
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.yearOfBirth}
+                                label="Year of Birth (*)"
+                                onChange={onTextChange}
+                                value={yearOfBirth}
+                                name="yearOfBirth"
+                                type="number"
                             />
 
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
                                 label="How did you hear about us? (*)"
-                                name="howHear"
+                                name="howDidYouHear"
                                 defaultOptionLabel="Please select how you heard about us."
-                                options={howHearOptions}
-                                value={howHear}
-                                error={errors.howHear}
+                                options={howDidYouHearOptions}
+                                value={howDidYouHear}
+                                error={errors.howDidYouHear}
                                 onSelectChange={onSelectChange}
                                 isLoading={isHowHearLoading}
                             />
@@ -110,41 +158,156 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.howHearOther}
+                                    error={errors.howDidYouHearOther}
                                     label="Other (*)"
                                     onChange={onTextChange}
-                                    value={howHearOther}
-                                    name="howHearOther"
+                                    value={howDidYouHearOther}
+                                    name="howDidYouHearOther"
                                     type="text"
                                 />
                             }
-                            <BootstrapDatePicker
-                                label="Join date (*)"
-                                name="joinDate"
-                                dateObj={joinDate}
-                                onTimeChange={onJoinDateChange}
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.joinDate}
-                            />
-                            <BootstrapTextarea
-                                name="description"
-                                borderColour="border-success"
-                                label="Description"
-                                placeholder="Please a description of the customer."
-                                rows="5"
-                                value={description}
-                                helpText=""
-                                onChange={onTextChange}
-                                error={errors.description}
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="What does NW mean to you (*)"
+                                name="meaning"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={meaningOptions}
+                                value={meaning}
+                                error={errors.meaning}
+                                onSelectChange={onSelectChange}
+                                isLoading={isMeaningLoading}
                             />
 
+                            {meaning === "1" &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.meaningOther}
+                                    label="Please select how you heard about us - Other (*)"
+                                    onChange={onTextChange}
+                                    value={meaningOther}
+                                    name="meaningOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="What do you expect from NW? (*)"
+                                name="expectation"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={expectationOptions}
+                                value={expectation}
+                                error={errors.expectation}
+                                onSelectChange={onSelectChange}
+                                isLoading={isExpectationLoading}
+                            />
+
+                            {expectation === "1" &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.expectationOther}
+                                    label="What do you expect from NW - Other? (*)"
+                                    onChange={onTextChange}
+                                    value={expectationOther}
+                                    name="expectationOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.willingToVolunteer}
+                                label="Are you willing to volunteer as a area coordinator / associate ? (*)"
+                                name="willingToVolunteer"
+                                onChange={onRadioChange}
+                                selectedValue={willingToVolunteer}
+                                options={WILLING_TO_VOLUNTEER_CHOICES}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.anotherHouseholdMemberRegistered}
+                                label="Is there another member of your household which is registered with us? (*)"
+                                name="anotherHouseholdMemberRegistered"
+                                onChange={onRadioChange}
+                                selectedValue={anotherHouseholdMemberRegistered}
+                                options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
+                            />
+
+                            {showHouseholdCount &&
+                                <div>
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.totalHouseholdCount}
+                                        label="How many people are in your household? (*)"
+                                        onChange={onTextChange}
+                                        value={totalHouseholdCount}
+                                        name="totalHouseholdCount"
+                                        type="number"
+                                    />
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.under18YearsHouseholdCount}
+                                        label="How many people in your household are under the age of 18? (*)"
+                                        onChange={onTextChange}
+                                        value={under18YearsHouseholdCount}
+                                        name="under18YearsHouseholdCount"
+                                        type="number"
+                                    />
+                                </div>
+                            }
+
+                            {isBizTypeOf &&
+                                <div>
+                                    <p className="border-bottom mb-3 pb-1 text-secondary">
+                                        <i className="fas fa-building"></i>&nbsp;Business Information
+                                    </p>
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.organizationEmployeeCount}
+                                        label="How many employees does your business have (*)"
+                                        onChange={onTextChange}
+                                        value={organizationEmployeeCount}
+                                        name="organizationEmployeeCount"
+                                        type="number"
+                                    />
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.organizationFoundingYear}
+                                        label="What year was your organization established? (*)"
+                                        onChange={onTextChange}
+                                        value={organizationFoundingYear}
+                                        name="organizationFoundingYear"
+                                        type="number"
+                                    />
+                                    <BootstrapInput
+                                        inputClassName="form-control form-control-lg"
+                                        borderColour="border-primary"
+                                        error={errors.organizationType}
+                                        label="What type of business is this? (*)"
+                                        onChange={onTextChange}
+                                        value={organizationType}
+                                        name="organizationType"
+                                        type="text"
+                                    />
+                                </div>
+                            }
+
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to={`/client/${id}/full`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                <Link to="/admin/members/add/step-6" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
 
