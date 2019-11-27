@@ -487,3 +487,43 @@ export function validatePromotionInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+/**
+ *  Validator will validate member contact.
+ */
+export function validateContactInput(data) {
+    let errors = {};
+
+    if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
+        errors.firstName = 'This field is required';
+    }
+    if (data.lastName === undefined || data.lastName === null || validator.isEmpty(data.lastName) || data.lastName === "") {
+        errors.lastName = 'This field is required';
+    }
+    if (data.primaryPhone === undefined || data.primaryPhone === null || validator.isEmpty(data.primaryPhone) || data.primaryPhone === "") {
+        errors.primaryPhone = 'This field is required';
+    }
+    if (data.email === undefined || data.email === null || validator.isEmpty(data.email) || data.email === "") {
+        errors.email = 'This field is required';
+    }
+    if (data.isOkToEmail === undefined || data.isOkToEmail === null || data.isOkToEmail === "" || isNaN(data.isOkToEmail)) {
+        errors.isOkToEmail = 'This field is required';
+    }
+    if (data.isOkToText === undefined || data.isOkToText === null || data.isOkToText === "" || isNaN(data.isOkToText) ) {
+        errors.isOkToText = 'This field is required';
+    }
+    if (data.typeOf === BUSINESS_TYPE_OF) {
+        if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
+            errors.organizationName = 'This field is required';
+        }
+        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
+            errors.organizationTypeOf = 'This field is required';
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
