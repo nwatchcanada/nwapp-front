@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminMemberCreateStep7Component from "../../../../components/members/admin/create/adminMemberCreateStep7Component";
+import AdminMemberMetricUpdateComponent from "../../../../components/members/admin/update/adminMemberMetricsUpdateComponent";
 import { validateStep7CreateInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
@@ -26,7 +26,13 @@ class AdminMemberMetricUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
         this.state = {
+            slug: slug,
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             isTagsLoading: true,
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
@@ -220,7 +226,7 @@ class AdminMemberMetricUpdateContainer extends Component {
 
     render() {
         const {
-            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
+            slug, typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationType,
             errors
@@ -238,7 +244,9 @@ class AdminMemberMetricUpdateContainer extends Component {
         // console.log("Mea Options:", meaningOptions);
 
         return (
-            <AdminMemberCreateStep7Component
+            <AdminMemberMetricUpdateComponent
+                slug={slug}
+                member={this.props.memberDetail}
                 typeOf={typeOf}
                 isTagsLoading={isTagsLoading}
                 tags={tags}
@@ -279,6 +287,7 @@ class AdminMemberMetricUpdateContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        memberDetail: store.memberDetailState,
         tagList: store.tagListState,
         howHearList: store.howHearListState,
         meaningList: store.meaningListState,

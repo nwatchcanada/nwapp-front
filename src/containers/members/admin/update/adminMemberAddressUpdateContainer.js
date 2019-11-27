@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminMemberAddressUpdateComponent from "../../../../components/members/admin/create/adminMemberCreateStep5Component";
+import AdminMemberAddressUpdateComponent from "../../../../components/members/admin/update/adminMemberAddressUpdateComponent";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
@@ -24,7 +24,13 @@ class AdminMemberAddressUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
         this.state = {
+            slug: slug,
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
@@ -154,10 +160,12 @@ class AdminMemberAddressUpdateContainer extends Component {
 
     render() {
         const {
-            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, region, locality, errors
+            slug, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, region, locality, errors
         } = this.state;
         return (
             <AdminMemberAddressUpdateComponent
+                slug={slug}
+                member={this.props.memberDetail}
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
@@ -184,6 +192,7 @@ class AdminMemberAddressUpdateContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        memberDetail: store.memberDetailState,
     };
 }
 
