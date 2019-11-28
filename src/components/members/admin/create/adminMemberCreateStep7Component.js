@@ -15,7 +15,7 @@ export default class AdminMemberCreateStep7Component extends Component {
         const {
             typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationFoundingYear, organizationType,
+            organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
@@ -292,11 +292,11 @@ export default class AdminMemberCreateStep7Component extends Component {
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.organizationType}
+                                        error={errors.organizationTypeOf}
                                         label="What type of business is this? (*)"
                                         onChange={onTextChange}
-                                        value={organizationType}
-                                        name="organizationType"
+                                        value={organizationTypeOf}
+                                        name="organizationTypeOf"
                                         type="text"
                                     />
                                 </div>

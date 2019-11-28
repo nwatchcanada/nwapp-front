@@ -155,8 +155,8 @@ export function validateInput(data) {
         if (data.organizationFoundingYear === undefined || data.organizationFoundingYear === null || data.organizationFoundingYear === "" || isNaN(data.organizationFoundingYear) ) {
             errors.organizationFoundingYear = 'This field is required';
         }
-        if (data.organizationType === undefined || data.organizationType === null || data.organizationType === "") {
-            errors.organizationType = 'This field is required';
+        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || data.organizationTypeOf === "") {
+            errors.organizationTypeOf = 'This field is required';
         }
     }
 
@@ -195,8 +195,8 @@ export function validateStep4CreateInput(data) {
         if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
             errors.organizationName = 'This field is required';
         }
-        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
-            errors.organizationTypeOf = 'This field is required';
+        if (data.organizationTypeOfOf === undefined || data.organizationTypeOfOf === null || isNaN(data.organizationTypeOfOf) || data.organizationTypeOfOf === "") {
+            errors.organizationTypeOfOf = 'This field is required';
         }
     }
 
@@ -322,8 +322,8 @@ export function validateStep7CreateInput(data) {
         if (data.organizationFoundingYear === undefined || data.organizationFoundingYear === null || data.organizationFoundingYear === "" || isNaN(data.organizationFoundingYear) ) {
             errors.organizationFoundingYear = 'This field is required';
         }
-        if (data.organizationType === undefined || data.organizationType === null || data.organizationType === "") {
-            errors.organizationType = 'This field is required';
+        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || data.organizationTypeOf === "") {
+            errors.organizationTypeOf = 'This field is required';
         }
     }
 
@@ -346,8 +346,8 @@ export function validateStep8CreateInput(data) {
     if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
         errors.organizationName = 'This field is required';
     }
-    if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
-        errors.organizationTypeOf = 'This field is required';
+    if (data.organizationTypeOfOf === undefined || data.organizationTypeOfOf === null || isNaN(data.organizationTypeOfOf) || data.organizationTypeOfOf === "") {
+        errors.organizationTypeOfOf = 'This field is required';
     }
     if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
         errors.firstName = 'This field is required';
@@ -442,8 +442,8 @@ export function validateStep8CreateInput(data) {
         if (data.organizationFoundingYear === undefined || data.organizationFoundingYear === null || data.organizationFoundingYear === "" || isNaN(data.organizationFoundingYear) ) {
             errors.organizationFoundingYear = 'This field is required';
         }
-        if (data.organizationType === undefined || data.organizationType === null || data.organizationType === "") {
-            errors.organizationType = 'This field is required';
+        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || data.organizationTypeOf === "") {
+            errors.organizationTypeOf = 'This field is required';
         }
     }
 
@@ -517,8 +517,8 @@ export function validateContactInput(data) {
         if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
             errors.organizationName = 'This field is required';
         }
-        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
-            errors.organizationTypeOf = 'This field is required';
+        if (data.organizationTypeOfOf === undefined || data.organizationTypeOfOf === null || isNaN(data.organizationTypeOfOf) || data.organizationTypeOfOf === "") {
+            errors.organizationTypeOfOf = 'This field is required';
         }
     }
 

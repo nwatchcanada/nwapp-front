@@ -54,7 +54,7 @@ class AdminMemberMetricUpdateContainer extends Component {
             under18YearsHouseholdCount: this.props.memberDetail.under18YearsHouseholdCount,
             organizationEmployeeCount: this.props.memberDetail.organizationEmployeeCount,
             organizationFoundingYear: this.props.memberDetail.organizationFoundingYear,
-            organizationType: this.props.memberDetail.organizationType,
+            organizationTypeOf: this.props.memberDetail.organizationTypeOf,
             errors: {},
             isLoading: false
         }
@@ -228,7 +228,7 @@ class AdminMemberMetricUpdateContainer extends Component {
         const {
             slug, typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationFoundingYear, organizationType,
+            organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
         } = this.state;
 
@@ -275,7 +275,7 @@ class AdminMemberMetricUpdateContainer extends Component {
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
-                organizationType={organizationType}
+                organizationTypeOf={organizationTypeOf}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}

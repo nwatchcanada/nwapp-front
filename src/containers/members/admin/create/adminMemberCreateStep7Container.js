@@ -48,7 +48,7 @@ class AdminMemberCreateStep7Container extends Component {
             under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
             organizationEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
             organizationFoundingYear: parseInt(localStorage.getItem("nwapp-create-member-organizationFoundingYear")),
-            organizationType: localStorage.getItem("nwapp-create-member-organizationType"),
+            organizationTypeOf: localStorage.getItem("nwapp-create-member-organizationTypeOf"),
             errors: {},
             isLoading: false
         }
@@ -222,7 +222,7 @@ class AdminMemberCreateStep7Container extends Component {
         const {
             typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationFoundingYear, organizationType,
+            organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
         } = this.state;
 
@@ -266,7 +266,7 @@ class AdminMemberCreateStep7Container extends Component {
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
-                organizationType={organizationType}
+                organizationTypeOf={organizationTypeOf}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
                 onMultiChange={this.onMultiChange}
