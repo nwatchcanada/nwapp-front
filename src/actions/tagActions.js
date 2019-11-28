@@ -486,27 +486,25 @@ export function getTagReactSelectOptions(tagList=[], selectName="tag") {
  * from the API and returns the HTML dropdown selections which will be consumed
  * by the GUI powered by `react-select`.
  */
-export function getPickedTagReactSelectOptions(tagPKsArray, tagList=[], selectName="tag") {
+export function getPickedTagReactSelectOptions(tagTargetsArray, tagList=[], selectName="tag") {
     const tagOptions = [];
-    const isAPIResponseNotEmpty = isEmpty(tagList) === false;
-    const isPKsArrayNotEmpty = isEmpty(tagPKsArray) === false;
-    if (isAPIResponseNotEmpty && isPKsArrayNotEmpty) {
+    if (isEmpty(tagList) === false && isEmpty(tagTargetsArray) === false) {
         const results = tagList.results;
-        const isResultsNotEmpty = isEmpty(results) === false;
+        const isResultsNotEmpty = results.length > 0;
+        // console.log("getPickedTagReactSelectOptions | results:",results);
+        // console.log("getPickedTagReactSelectOptions | isResultsNotEmpty:",isResultsNotEmpty);
         if (isResultsNotEmpty) {
-            for (let i = 0; i < tagPKsArray.length; i++) {
-                let tagPK = tagPKsArray[i];
-
+            for (let i = 0; i < tagTargetsArray.length; i++) {
+                let tagTarget = tagTargetsArray[i];
                 for (let j = 0; j < results.length; j++) {
-                    let tag = results[j];
-
-                    if (tag.id === tagPK) {
+                    let tagSearch = results[j];
+                    if (tagSearch.id === tagTarget.id) {
                         tagOptions.push({
                             selectName: selectName,
-                            value: tag.id,
-                            label: tag.text
+                            value: tagTarget.id,
+                            label: tagTarget.text
                         });
-                        // console.log(tag);
+                        // console.log(tagSearch);
                     } // end IF
 
                 } //end FOR

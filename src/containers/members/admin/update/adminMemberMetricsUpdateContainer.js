@@ -10,7 +10,7 @@ import {
 import { getHowHearReactSelectOptions, pullHowHearList } from "../../../../actions/howHearActions";
 import { getMeaningReactSelectOptions, pullMeaningList } from "../../../../actions/meaningActions";
 import { getExpectationReactSelectOptions, pullExpectationList } from "../../../../actions/expectationActions";
-import { getTagReactSelectOptions, pullTagList } from "../../../../actions/tagActions";
+import { getTagReactSelectOptions, getPickedTagReactSelectOptions, pullTagList } from "../../../../actions/tagActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -33,28 +33,28 @@ class AdminMemberMetricUpdateContainer extends Component {
 
         this.state = {
             slug: slug,
-            typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
+            typeOf: this.props.memberDetail.typeOf,
             isTagsLoading: true,
-            tags: localStorageGetArrayItem("nwapp-create-member-tags"),
-            yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
-            gender: localStorage.getItem("nwapp-create-member-gender"),
+            tags: this.props.memberDetail.tags,
+            yearOfBirth: this.props.memberDetail.yearOfBirth,
+            gender: this.props.memberDetail.gender,
             isHowHearLoading: true,
-            howDidYouHear: localStorageGetIntegerItem("nwapp-create-member-howDidYouHear"),
-            howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
-            howDidYouHearOther: localStorage.getItem("nwapp-create-member-howDidYouHearOther"),
+            howDidYouHear: this.props.memberDetail.howDidYouHear,
+            // howDidYouHearOption: localStorageGetObjectItem('nwapp-create-member-howDidYouHearOption'),
+            howDidYouHearOther: this.props.memberDetail.howDidYouHearOther,
             isMeaningLoading: true,
-            meaning: localStorageGetIntegerItem("nwapp-create-member-meaning"),
-            meaningOther: localStorage.getItem("nwapp-create-member-meaningOther"),
+            meaning: this.props.memberDetail.meaning,
+            meaningOther: this.props.memberDetail.meaningOther,
             isExpectationLoading: true,
-            expectation: localStorageGetIntegerItem("nwapp-create-member-expectation"),
-            expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
-            willingToVolunteer: parseInt(localStorage.getItem("nwapp-create-member-willingToVolunteer")),
-            anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered")),
-            totalHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-totalHouseholdCount")),
-            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            organizationEmployeeCount: parseInt(localStorage.getItem("nwapp-create-member-under18YearsHouseholdCount")),
-            organizationFoundingYear: parseInt(localStorage.getItem("nwapp-create-member-organizationFoundingYear")),
-            organizationType: localStorage.getItem("nwapp-create-member-organizationType"),
+            expectation: this.props.memberDetail.expectation,
+            expectationOther: this.props.memberDetail.expectationOther,
+            willingToVolunteer: this.props.memberDetail.willingToVolunteer,
+            anotherHouseholdMemberRegistered: this.props.memberDetail.anotherHouseholdMemberRegistered,
+            totalHouseholdCount: this.props.memberDetail.totalHouseholdCount,
+            under18YearsHouseholdCount: this.props.memberDetail.under18YearsHouseholdCount,
+            organizationEmployeeCount: this.props.memberDetail.organizationEmployeeCount,
+            organizationFoundingYear: this.props.memberDetail.organizationFoundingYear,
+            organizationType: this.props.memberDetail.organizationType,
             errors: {},
             isLoading: false
         }
@@ -234,6 +234,7 @@ class AdminMemberMetricUpdateContainer extends Component {
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
+        const transcodedTags = getPickedTagReactSelectOptions(tags, this.props.tagList)
         const meaningOptions = getMeaningReactSelectOptions(this.props.meaningList, "meaning");
         const expectationOptions = getExpectationReactSelectOptions(this.props.expectationList, "expectation");
 
@@ -249,7 +250,7 @@ class AdminMemberMetricUpdateContainer extends Component {
                 member={this.props.memberDetail}
                 typeOf={typeOf}
                 isTagsLoading={isTagsLoading}
-                tags={tags}
+                tags={transcodedTags}
                 tagOptions={tagOptions}
                 yearOfBirth={yearOfBirth}
                 gender={gender}
