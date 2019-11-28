@@ -21,7 +21,7 @@ export default class AdminMemberCreateStep8Component extends Component {
             watchSlug, watchIcon, watchName,
             tags, tagOptions, yearOfBirth, gender, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
             meaningLabel, meaning, expectationLabel, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationFoundingYear, organizationType,
+            organizationEmployeeCount, organizationFoundingYear,
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
         const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
@@ -305,7 +305,7 @@ export default class AdminMemberCreateStep8Component extends Component {
                                 {isBizTypeOf &&
                                     <tr>
                                         <th scope="row" className="bg-light">What type of business is this?</th>
-                                        <td>{organizationType}</td>
+                                        <td>{organizationTypeOf}</td>
                                     </tr>
                                 }
                                 <tr>
