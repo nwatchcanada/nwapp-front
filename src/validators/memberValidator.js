@@ -195,8 +195,8 @@ export function validateStep4CreateInput(data) {
         if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
             errors.organizationName = 'This field is required';
         }
-        if (data.organizationTypeOfOf === undefined || data.organizationTypeOfOf === null || isNaN(data.organizationTypeOfOf) || data.organizationTypeOfOf === "") {
-            errors.organizationTypeOfOf = 'This field is required';
+        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
+            errors.organizationTypeOf = 'This field is required';
         }
     }
 
@@ -346,8 +346,8 @@ export function validateStep8CreateInput(data) {
     if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
         errors.organizationName = 'This field is required';
     }
-    if (data.organizationTypeOfOf === undefined || data.organizationTypeOfOf === null || isNaN(data.organizationTypeOfOf) || data.organizationTypeOfOf === "") {
-        errors.organizationTypeOfOf = 'This field is required';
+    if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
+        errors.organizationTypeOf = 'This field is required';
     }
     if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
         errors.firstName = 'This field is required';
@@ -517,8 +517,8 @@ export function validateContactInput(data) {
         if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
             errors.organizationName = 'This field is required';
         }
-        if (data.organizationTypeOfOf === undefined || data.organizationTypeOfOf === null || isNaN(data.organizationTypeOfOf) || data.organizationTypeOfOf === "") {
-            errors.organizationTypeOfOf = 'This field is required';
+        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
+            errors.organizationTypeOf = 'This field is required';
         }
     }
 
