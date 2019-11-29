@@ -193,8 +193,8 @@ class AdminAssociateContactUpdateContainer extends Component {
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "workery-create-associate-"+[e.target.name];
-        const storageLabelKey =  "workery-create-associate-"+[e.target.name].toString()+"-label";
+        const storageValueKey = "nwapp-create-associate-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-associate-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();

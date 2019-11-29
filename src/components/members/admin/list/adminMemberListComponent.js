@@ -32,7 +32,7 @@ class RemoteListComponent extends Component {
             onTableChange, isLoading
         } = this.props;
 
-        // const selectOptions = {  // DEPRECATED VIA https://github.com/over55/workery-front/issues/296
+        // const selectOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
         //     "active": 'Active',
         //     "inactive": 'Archived',
         // };
@@ -47,7 +47,7 @@ class RemoteListComponent extends Component {
         //     dataField: 'state',
         //     text: 'Status',
         //     sort: false,
-        //     // filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/workery-front/issues/296
+        //     // filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
         //     //     options: selectOptions,
         //     //     defaultValue: 1,
         //     //     withoutEmptyOption: true

@@ -23,7 +23,7 @@ class AdminMemberFullRetrieveContainer extends Component {
 
         // The following code will extract our financial data from the local
         // storage if the financial data was previously saved.
-        const member = localStorageGetObjectItem("workery-admin-retrieve-member-"+slug.toString() );
+        const member = localStorageGetObjectItem("nwapp-admin-retrieve-member-"+slug.toString() );
         const isLoading = isEmpty(member);
 
         // Update state.
@@ -72,9 +72,9 @@ class AdminMemberFullRetrieveContainer extends Component {
 
     // onClientClick(e) {
     //     e.preventDefault();
-    //     localStorage.setItem("workery-create-order-clientId", this.props.clientDetail.id);
-    //     localStorage.setItem("workery-create-order-clientGivenName", this.props.clientDetail.givenName);
-    //     localStorage.setItem("workery-create-order-clientLastName", this.props.clientDetail.lastName);
+    //     localStorage.setItem("nwapp-create-order-clientId", this.props.clientDetail.id);
+    //     localStorage.setItem("nwapp-create-order-clientGivenName", this.props.clientDetail.givenName);
+    //     localStorage.setItem("nwapp-create-order-clientLastName", this.props.clientDetail.lastName);
     //     this.props.history.push("/orders/add/step-3");
     // }
 
@@ -84,7 +84,7 @@ class AdminMemberFullRetrieveContainer extends Component {
 
         // The following code will save the object to the browser's local
         // storage to be retrieved later more quickly.
-        localStorageSetObjectOrArrayItem("workery-admin-retrieve-member-"+this.state.slug.toString(), response);
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-member-"+this.state.slug.toString(), response);
     }
 
     onFailureCallback(errors) {

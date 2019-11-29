@@ -24,12 +24,12 @@ class AdminMemberCreateStep4Container extends Component {
             firstName: localStorage.getItem("nwapp-create-member-firstName"),
             lastName: localStorage.getItem("nwapp-create-member-lastName"),
             primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
-            // primaryPhoneTypeOf: localStorageGetIntegerItem("workery-create-client-primaryPhoneTypeOf"),
+            // primaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-primaryPhoneTypeOf"),
             secondaryPhone: localStorage.getItem("nwapp-create-member-secondaryPhone"),
-            // secondaryPhoneTypeOf: localStorageGetIntegerItem("workery-create-client-secondaryPhoneTypeOf"),
+            // secondaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-secondaryPhoneTypeOf"),
             email: localStorage.getItem("nwapp-create-member-email"),
-            isOkToEmail: localStorageGetIntegerItem("workery-create-member-isOkToEmail"),
-            isOkToText: localStorageGetIntegerItem("workery-create-member-isOkToText"),
+            isOkToEmail: localStorageGetIntegerItem("nwapp-create-member-isOkToEmail"),
+            isOkToText: localStorageGetIntegerItem("nwapp-create-member-isOkToText"),
             errors: {},
             isLoading: false
         }
@@ -108,8 +108,8 @@ class AdminMemberCreateStep4Container extends Component {
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "workery-create-member-"+[e.target.name];
-        const storageLabelKey =  "workery-create-member-"+[e.target.name].toString()+"-label";
+        const storageValueKey = "nwapp-create-member-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-member-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();

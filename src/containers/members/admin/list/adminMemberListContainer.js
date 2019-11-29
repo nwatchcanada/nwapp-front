@@ -17,7 +17,7 @@ class AdminMemberListContainer extends Component {
     constructor(props) {
         super(props);
 
-        // Force active users as per issue via https://github.com/over55/workery-front/issues/296
+        // Force active users as per issue via https://github.com/over55/nwapp-front/issues/296
         var parametersMap = new Map();
         parametersMap.set("state", "active");
 
@@ -128,7 +128,7 @@ class AdminMemberListContainer extends Component {
 
         } else if (type === "filter") {
             ////
-            //// DEPRECATED VIA https://github.com/over55/workery-front/issues/296
+            //// DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
             ////
             // console.log(type, filters); // For debugging purposes only.
             // if (filters.state === undefined) {

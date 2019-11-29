@@ -37,8 +37,8 @@ class AdminMemberCreateStep8Container extends Component {
             primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
             secondaryPhone: localStorage.getItem("nwapp-create-member-secondaryPhone"),
             email: localStorage.getItem("nwapp-create-member-email"),
-            isOkToEmail: localStorageGetIntegerItem("workery-create-member-isOkToEmail"),
-            isOkToText: localStorageGetIntegerItem("workery-create-member-isOkToText"),
+            isOkToEmail: localStorageGetIntegerItem("nwapp-create-member-isOkToEmail"),
+            isOkToText: localStorageGetIntegerItem("nwapp-create-member-isOkToText"),
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
             streetType: localStorageGetIntegerItem("nwapp-create-member-streetType"),
@@ -128,6 +128,11 @@ class AdminMemberCreateStep8Container extends Component {
         // (12) organizationTypeOf
         if (this.state.organizationTypeOf === null || this.state.organizationTypeOf === undefined || this.state.organizationTypeOf === "" || isNaN(this.state.organizationTypeOf)) {
             postData.organizationTypeOf = 0;
+            postData.organizationName = null;
+        } else {
+            if (this.state.organizationTypeOf !== BUSINESS_TYPE_OF) {
+                postData.organizationName = null;
+            }
         }
 
         // BUGFIX: When converting from camelCase to snake_case, there appears to
@@ -210,7 +215,7 @@ class AdminMemberCreateStep8Container extends Component {
             ()=>{
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                localStorageRemoveItemsContaining("workery-create-member-");
+                localStorageRemoveItemsContaining("nwapp-create-member-");
                 this.props.setFlashMessage("success", "Member has been successfully created.");
                 this.props.history.push("/admin/member/"+response['slug']);
             }
