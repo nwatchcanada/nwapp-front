@@ -18,7 +18,6 @@ export const BootstrapTelephoneInput = ({
     name,
     type,
     label,
-    placeholder,
     value,
     helpText,
     onChange,
@@ -33,14 +32,14 @@ export const BootstrapTelephoneInput = ({
         <div className={classnames(divClassName, { 'has-error': error })}>
             <label htmlFor={name} className="control-label">{label}</label>
             <NumberFormat
-                format="+1 (###) ###-####"
+                format="(###) ###-####"
                 mask="_"
                 className={classnames(inputClassName, { 'is-invalid': error }, { 'border-success': !error && borderColour === 'border-success' }, { 'border-primary': !error && borderColour === 'border-primary' } )}
                 key={shortid.generate}
                 name={name}
                 type={type}
                 aria-describedby={helpID}
-                placeholder={placeholder}
+                placeholder="(xxx) xxx-xxxx"
                 value={value}
                 onChange={onChange}
                 disabled={disabled}

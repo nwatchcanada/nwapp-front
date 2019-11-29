@@ -93,7 +93,7 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Primary Telephone</th>
-                                    <td><a href={`tel:${member.e164PrimaryPhone}`}>{member.primaryPhone}</a></td>
+                                    <td><a href={`tel:${member.primaryPhoneE164}`}>{member.primaryPhone}</a></td>
                                 </tr>
                                 {member && member.secondaryPhone &&
                                     <tr>

@@ -100,7 +100,6 @@ class TaskSearchComponent extends Component {
                                 value={phone}
                                 name="phone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
                         </div>
                         <div className="form-row">

@@ -119,7 +119,6 @@ export default class AdminMemberContactUpdateComponent extends Component {
                                 value={primaryPhone}
                                 name="primaryPhone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapTelephoneInput
@@ -131,7 +130,6 @@ export default class AdminMemberContactUpdateComponent extends Component {
                                 value={secondaryPhone}
                                 name="secondaryPhone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapInput

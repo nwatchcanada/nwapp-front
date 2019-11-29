@@ -156,7 +156,6 @@ export default class StaffCreateStep1Component extends Component {
                                 value={phone}
                                 name="phone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapTelephoneInput
@@ -168,7 +167,6 @@ export default class StaffCreateStep1Component extends Component {
                                 value={mobile}
                                 name="mobile"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapInput
@@ -348,7 +346,6 @@ export default class StaffCreateStep1Component extends Component {
                                 value={emergencyTelephone}
                                 name="emergencyTelephone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapTelephoneInput
@@ -360,7 +357,6 @@ export default class StaffCreateStep1Component extends Component {
                                 value={emergencyAlternativeTelephone}
                                 name="emergencyAlternativeTelephone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>

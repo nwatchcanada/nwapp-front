@@ -98,7 +98,6 @@ export default class AdminMemberCreateStep1Component extends Component {
                                 value={phone}
                                 name="phone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapInput

@@ -105,8 +105,12 @@ class AdminMemberCreateStep8Container extends Component {
 
         // BUGFIX: Street direction NaN case
         if (isNaN(this.state.streetDirection)) {
-            postData.streetDirection = null;
+            postData.streetDirection = 0;
         }
+
+        // BUGFIX: Phone numbers
+        // postData.primaryPhone = this.state.primaryPhone.replace("+1 ", "").replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
+        // postData.primaryPhone = this.state.primaryPhone.replace("+1 ", "")
 
         // (3) Tags - We need to only return our `id` values.
         let idTags = [];

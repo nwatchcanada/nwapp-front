@@ -86,7 +86,6 @@ class AdminAreaCoordinatorContactUpdateComponent extends Component {
                                 value={primaryPhone}
                                 name="primaryPhone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapTelephoneInput
@@ -98,7 +97,6 @@ class AdminAreaCoordinatorContactUpdateComponent extends Component {
                                 value={secondaryPhone}
                                 name="secondaryPhone"
                                 type="text"
-                                placeholder="+1 (xxx) xxx-xxxx"
                             />
 
                             <BootstrapInput
