@@ -82,10 +82,10 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                                     </p>
                                 }
 
-                                {member && member.primaryPhone &&
+                                {member && member.primaryPhoneNational &&
                                     <p>
                                         <a href={`tel:${member.primaryPhoneE164}`}>
-                                            <i className="fas fa-phone-square"></i>&nbsp;{member.primaryPhone}
+                                            <i className="fas fa-phone-square"></i>&nbsp;{member.primaryPhoneNational}
                                         </a>
                                     </p>
                                 }

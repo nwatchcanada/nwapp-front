@@ -63,7 +63,7 @@ class RemoteListComponent extends Component {
             text: 'Last Name',
             sort: true
         },{
-            dataField: 'primaryPhone',
+            dataField: 'primaryPhoneNational',
             text: 'Phone',
             sort: true,
             formatter: telephoneFormatter
@@ -166,8 +166,8 @@ function iconFormatter(cell, row){
 
 function telephoneFormatter(cell, row){
     return (
-        <a href={`tel:${row.e164PrimaryPhone}`}>
-            {row.primaryPhone}
+        <a href={`tel:${row.primaryPhoneE164}`}>
+            {row.primaryPhoneNational}
         </a>
     )
 }
