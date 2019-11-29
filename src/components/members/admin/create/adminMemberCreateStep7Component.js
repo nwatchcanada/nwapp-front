@@ -7,7 +7,7 @@ import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
-import { BUSINESS_TYPE_OF, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
+import { BUSINESS_TYPE_OF, ORGANIZATION_TYPE_OF_CHOICES, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
 
 
 export default class AdminMemberCreateStep7Component extends Component {
@@ -289,15 +289,15 @@ export default class AdminMemberCreateStep7Component extends Component {
                                         name="organizationFoundingYear"
                                         type="number"
                                     />
-                                    <BootstrapInput
-                                        inputClassName="form-control form-control-lg"
+                                    <BootstrapSingleSelect
                                         borderColour="border-primary"
-                                        error={errors.organizationTypeOf}
                                         label="What type of business is this? (*)"
-                                        onChange={onTextChange}
-                                        value={organizationTypeOf}
                                         name="organizationTypeOf"
-                                        type="text"
+                                        defaultOptionLabel="-"
+                                        options={ORGANIZATION_TYPE_OF_CHOICES}
+                                        value={organizationTypeOf}
+                                        error={errors.organizationTypeOf}
+                                        onSelectChange={onSelectChange}
                                     />
                                 </div>
                             }

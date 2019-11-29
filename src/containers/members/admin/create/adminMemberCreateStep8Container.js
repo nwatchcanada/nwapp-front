@@ -80,6 +80,7 @@ class AdminMemberCreateStep8Container extends Component {
             organizationEmployeeCount: localStorageGetObjectItem("nwapp-create-member-under18YearsHouseholdCount"),
             organizationFoundingYear: localStorageGetObjectItem("nwapp-create-member-organizationFoundingYear"),
             organizationTypeOf: localStorage.getItem("nwapp-create-member-organizationTypeOf"),
+            organizationTypeOfLabel: localStorage.getItem("nwapp-create-member-organizationTypeOfLabel"),
             errors: {},
             isLoading: false
         }
@@ -242,7 +243,7 @@ class AdminMemberCreateStep8Container extends Component {
             watchSlug, watchIcon, watchName,
             tags, yearOfBirth, gender, genderLabel, howDidYouHearLabel, howDidYouHear, howDidYouHearOther, meaningLabel, meaning, meaningOther, expectationLabel, expectation, expectationOther,
             willingToVolunteerLabel, willingToVolunteer, anotherHouseholdMemberRegisteredLabel, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationFoundingYear, organizationType,
+            organizationEmployeeCount, organizationFoundingYear, organizationType, organizationTypeOfLabel,
         } = this.state;
 
         return (
@@ -293,6 +294,7 @@ class AdminMemberCreateStep8Container extends Component {
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
                 organizationType={organizationType}
+                organizationTypeOfLabel={organizationTypeOfLabel}
                 errors={errors}
                 onSubmitClick={this.onSubmitClick}
             />
