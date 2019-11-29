@@ -59,7 +59,7 @@ class AdminMemberCreateStep8Container extends Component {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             tags: localStorageGetArrayItem("nwapp-create-member-tags"),
             yearOfBirth: localStorage.getItem("nwapp-create-member-yearOfBirth"),
-            gender: localStorage.getItem("nwapp-create-member-gender"),
+            gender: localStorageGetIntegerItem("nwapp-create-member-gender"),
             genderLabel: localStorage.getItem("nwapp-create-member-gender-label"),
             howDidYouHearLabel: localStorage.getItem("nwapp-create-member-howDidYouHearLabel"),
             howDidYouHear: localStorage.getItem("nwapp-create-member-howDidYouHear"),
@@ -72,13 +72,13 @@ class AdminMemberCreateStep8Container extends Component {
             expectation: localStorage.getItem("nwapp-create-member-expectation"),
             expectationOther: localStorage.getItem("nwapp-create-member-expectationOther"),
             willingToVolunteerLabel: localStorage.getItem("nwapp-create-member-willingToVolunteer-label"),
-            willingToVolunteer: localStorageGetObjectItem("nwapp-create-member-willingToVolunteer"),
+            willingToVolunteer: localStorageGetIntegerItem("nwapp-create-member-willingToVolunteer"),
             anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered-label"),
-            anotherHouseholdMemberRegistered: localStorageGetObjectItem("nwapp-create-member-anotherHouseholdMemberRegistered"),
-            totalHouseholdCount: localStorageGetObjectItem("nwapp-create-member-totalHouseholdCount"),
-            under18YearsHouseholdCount: localStorageGetObjectItem("nwapp-create-member-under18YearsHouseholdCount"),
-            organizationEmployeeCount: localStorageGetObjectItem("nwapp-create-member-under18YearsHouseholdCount"),
-            organizationFoundingYear: localStorageGetObjectItem("nwapp-create-member-organizationFoundingYear"),
+            anotherHouseholdMemberRegistered: localStorageGetIntegerItem("nwapp-create-member-anotherHouseholdMemberRegistered"),
+            totalHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-totalHouseholdCount"),
+            under18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
+            organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
+            organizationFoundingYear: localStorageGetIntegerItem("nwapp-create-member-organizationFoundingYear"),
             organizationTypeOf: localStorage.getItem("nwapp-create-member-organizationTypeOf"),
             organizationTypeOfLabel: localStorage.getItem("nwapp-create-member-organizationTypeOfLabel"),
             errors: {},
@@ -132,6 +132,8 @@ class AdminMemberCreateStep8Container extends Component {
         } else {
             if (this.state.organizationTypeOf !== BUSINESS_TYPE_OF) {
                 postData.organizationName = null;
+                postData.organizationEmployeeCount = 0;
+                postData.organizationFoundingYear = 0;
             }
         }
 

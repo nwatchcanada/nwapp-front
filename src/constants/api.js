@@ -476,10 +476,10 @@ export const ASSOCIATE_DEMOTION_ROLE_CHOICES = [
 /**
  *  The associate demotion roles.
  */
-export const MALE_GENDER = 2;
-export const FEMALE_GENDER = 3;
-export const PREFER_NOT_TO_SAY_GENDER = 4;
-export const OTHER_GENDER = 1;
+export const MALE_GENDER = 1;
+export const FEMALE_GENDER = 2;
+export const PREFER_NOT_TO_SAY_GENDER = 3;
+export const OTHER_GENDER = 5;
 export const GENDER_CHOICES = [
     {
         selectName: "gender",

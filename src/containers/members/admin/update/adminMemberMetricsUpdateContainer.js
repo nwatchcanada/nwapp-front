@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminMemberMetricUpdateComponent from "../../../../components/members/admin/update/adminMemberMetricsUpdateComponent";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateStep7CreateInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
@@ -105,7 +106,8 @@ class AdminMemberMetricUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/admin/members/add/step-8");
+        this.props.setFlashMessage("success", "Member has been successfully updated.");
+        this.props.history.push("/admin/member/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -298,6 +300,9 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
         pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
                 pullTagList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)

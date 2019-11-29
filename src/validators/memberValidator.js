@@ -342,12 +342,13 @@ export function validateStep8CreateInput(data) {
     let errors = {};
 
     // --- CONTACT --- //
-
-    if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
-        errors.organizationName = 'This field is required';
-    }
-    if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
-        errors.organizationTypeOf = 'This field is required';
+    if (data.typeOf === BUSINESS_TYPE_OF) {
+        if (data.organizationName === undefined || data.organizationName === null || validator.isEmpty(data.organizationName) || data.organizationName === "") {
+            errors.organizationName = 'This field is required';
+        }
+        if (data.organizationTypeOf === undefined || data.organizationTypeOf === null || isNaN(data.organizationTypeOf) || data.organizationTypeOf === "") {
+            errors.organizationTypeOf = 'This field is required';
+        }
     }
     if (data.firstName === undefined || data.firstName === null || validator.isEmpty(data.firstName) || data.firstName === "") {
         errors.firstName = 'This field is required';
