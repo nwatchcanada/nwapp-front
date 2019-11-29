@@ -77,7 +77,7 @@ class AdminMemberCreateStep8Container extends Component {
             anotherHouseholdMemberRegistered: localStorageGetIntegerItem("nwapp-create-member-anotherHouseholdMemberRegistered"),
             totalHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-totalHouseholdCount"),
             under18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
-            organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
+            organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-organizationEmployeeCount"),
             organizationFoundingYear: localStorageGetIntegerItem("nwapp-create-member-organizationFoundingYear"),
             organizationTypeOf: localStorage.getItem("nwapp-create-member-organizationTypeOf"),
             organizationTypeOfLabel: localStorage.getItem("nwapp-create-member-organizationTypeOfLabel"),
@@ -102,6 +102,11 @@ class AdminMemberCreateStep8Container extends Component {
         // // (2) Join date - We need to format as per required API format.
         // const joinDateMoment = moment(this.state.joinDate);
         // postData.joinDate = joinDateMoment.format("YYYY-MM-DD")
+
+        // BUGFIX: Street direction NaN case
+        if (isNaN(this.state.streetDirection)) {
+            postData.streetDirection = null;
+        }
 
         // (3) Tags - We need to only return our `id` values.
         let idTags = [];
@@ -137,10 +142,18 @@ class AdminMemberCreateStep8Container extends Component {
             }
         }
 
+        // Convert to boolean type.
+        postData.anotherHouseholdMemberRegistered = this.state.anotherHouseholdMemberRegistered === 1;
+
+        // BUGFIX: Handle NaN cases.
+        postData.totalHouseholdCount = isNaN(this.state.totalHouseholdCount) ? 0 : this.state.totalHouseholdCount;
+        postData.organizationFoundingYear = isNaN(this.state.organizationFoundingYear) ? 0 : this.state.organizationFoundingYear;
+        postData.organizationEmployeeCount = isNaN(this.state.organizationEmployeeCount) ? 0 : this.state.organizationEmployeeCount;
+
         // BUGFIX: When converting from camelCase to snake_case, there appears to
         //         be a problem with the "18_y" conversion as it saves it as "18y"
         //         therefore as a result we need to run this code.
-        postData.under_18_years_household_count = this.state.under18YearsHouseholdCount;
+        postData.under_18_years_household_count = isNaN(this.state.under18YearsHouseholdCount) ? 0 : this.state.under18YearsHouseholdCount;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
