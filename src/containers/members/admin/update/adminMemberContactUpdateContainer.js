@@ -126,7 +126,7 @@ class AdminMemberContactUpdateContainer extends Component {
     onSuccessCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Member has been successfully updated.");
-        this.props.history.push("/member/"+this.state.id+"/full");
+        this.props.history.push("/admin/member/"+this.state.slug+"/full");
     }
 
     onFailedCallback(errors) {
