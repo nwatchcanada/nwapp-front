@@ -214,14 +214,18 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                     <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
                                     <td>{member && member.under18YearsHouseholdCount}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">The employee count at this member's organization</th>
-                                    <td>{member && member.organizationEmployeeCount}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">The year this organization was founded</th>
-                                    <td>{member && member.organizationFoundingYear}</td>
-                                </tr>
+                                {member && member.organizationEmployeeCount &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">The employee count at this member's organization</th>
+                                        <td>{member && member.organizationEmployeeCount}</td>
+                                    </tr>
+                                }
+                                {member && member.organizationFoundingYear &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">The year this organization was founded</th>
+                                        <td>{member && member.organizationFoundingYear}</td>
+                                    </tr>
+                                }
 
 
 
