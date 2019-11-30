@@ -12,6 +12,7 @@ import { getHowHearReactSelectOptions, pullHowHearList } from "../../../../actio
 import { getMeaningReactSelectOptions, pullMeaningList } from "../../../../actions/meaningActions";
 import { getExpectationReactSelectOptions, pullExpectationList } from "../../../../actions/expectationActions";
 import { getTagReactSelectOptions, getPickedTagReactSelectOptions, pullTagList } from "../../../../actions/tagActions";
+import { putMemberMetricsDetail } from "../../../../actions/memberActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -63,6 +64,7 @@ class AdminMemberMetricUpdateContainer extends Component {
             isLoading: false
         }
 
+        this.getPostData = this.getPostData.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
@@ -74,6 +76,70 @@ class AdminMemberMetricUpdateContainer extends Component {
         this.onHowHearSuccessFetch = this.onHowHearSuccessFetch.bind(this);
         this.onExpectationsSuccessFetch = this.onExpectationsSuccessFetch.bind(this);
         this.onMeaningSuccessFetch = this.onMeaningSuccessFetch.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // // (2) Join date - We need to format as per required API format.
+        // const joinDateMoment = moment(this.state.joinDate);
+        // postData.joinDate = joinDateMoment.format("YYYY-MM-DD")
+
+        // BUGFIX: Street direction NaN case
+        if (isNaN(this.state.streetDirection)) {
+            postData.streetDirection = 0;
+        }
+
+        // BUGFIX: Phone numbers
+        // postData.primaryPhone = this.state.primaryPhone.replace("+1 ", "").replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
+        // postData.primaryPhone = this.state.primaryPhone.replace("+1 ", "")
+
+        // (3) Tags - We need to only return our `id` values.
+        let idTags = [];
+        for (let i = 0; i < this.state.tags.length; i++) {
+            let tag = this.state.tags[i];
+            idTags.push(tag.value);
+        }
+        postData.tags = idTags;
+
+        // (4) How Hear Other - This field may not be null, therefore make blank.
+        if (this.state.howHearOther === undefined || this.state.howHearOther === null) {
+            postData.howHearOther = "";
+        }
+
+        // (12) organizationTypeOf
+        if (this.state.organizationTypeOf === null || this.state.organizationTypeOf === undefined || this.state.organizationTypeOf === "" || isNaN(this.state.organizationTypeOf)) {
+            postData.organizationTypeOf = 0;
+            postData.organizationName = null;
+        } else {
+            if (this.state.organizationTypeOf !== BUSINESS_TYPE_OF) {
+                postData.organizationName = null;
+                postData.organizationEmployeeCount = 0;
+                postData.organizationFoundingYear = 0;
+            }
+        }
+
+        // Convert to boolean type.
+        postData.anotherHouseholdMemberRegistered = this.state.anotherHouseholdMemberRegistered === 1;
+
+        // BUGFIX: Handle NaN cases.
+        postData.totalHouseholdCount = isNaN(this.state.totalHouseholdCount) ? 0 : this.state.totalHouseholdCount;
+        postData.organizationFoundingYear = isNaN(this.state.organizationFoundingYear) ? 0 : this.state.organizationFoundingYear;
+        postData.organizationEmployeeCount = isNaN(this.state.organizationEmployeeCount) ? 0 : this.state.organizationEmployeeCount;
+
+        // BUGFIX: When converting from camelCase to snake_case, there appears to
+        //         be a problem with the "18_y" conversion as it saves it as "18y"
+        //         therefore as a result we need to run this code.
+        postData.under_18_years_household_count = isNaN(this.state.under18YearsHouseholdCount) ? 0 : this.state.under18YearsHouseholdCount;
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -216,7 +282,13 @@ class AdminMemberMetricUpdateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            this.setState({ errors: {}, isLoading: true, }, ()=>{
+                this.props.putMemberMetricsDetail(
+                    this.getPostData(),
+                    this.onSuccessfulSubmissionCallback,
+                    this.onFailedSubmissionCallback
+                );
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -323,6 +395,11 @@ const mapDispatchToProps = dispatch => {
         pullExpectationList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
                 pullExpectationList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
+        putMemberMetricsDetail: (data, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                putMemberMetricsDetail(data, onSuccessCallback, onFailureCallback)
             )
         },
     }
