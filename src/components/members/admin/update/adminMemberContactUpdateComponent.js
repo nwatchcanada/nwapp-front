@@ -55,6 +55,10 @@ export default class AdminMemberContactUpdateComponent extends Component {
                     </ol>
                 </nav>
 
+                <h1>
+                    <i className="fas fa-edit"></i>&nbsp;Edit Member (Contact)
+                </h1>
+
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>

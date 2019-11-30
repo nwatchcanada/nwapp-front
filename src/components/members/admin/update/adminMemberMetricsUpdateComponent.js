@@ -50,8 +50,9 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                         </li>
                     </ol>
                 </nav>
+
                 <h1>
-                    <i className="fas fa-plus"></i>&nbsp;Add Member
+                    <i className="fas fa-edit"></i>&nbsp;Edit Member (Metrics)
                 </h1>
 
                 <div className="row">
