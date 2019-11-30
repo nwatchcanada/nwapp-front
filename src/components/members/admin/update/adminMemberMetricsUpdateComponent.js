@@ -7,29 +7,19 @@ import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
-import { BUSINESS_TYPE_OF, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
+import { BUSINESS_TYPE_OF, ORGANIZATION_TYPE_OF_CHOICES, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
 
 
 export default class AdminMemberMetricUpdateComponent extends Component {
     render() {
         const {
-            slug, member,
-            typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
+            slug, member, typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
             isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
-
-        // This code checks to see if we need to display the household count fields.
-        let showHouseholdCount = false;
-        try {
-            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
-        } catch (error) {
-            // Do nothing.
-        }
-
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF || typeOf === toString(BUSINESS_TYPE_OF);
 
         return (
@@ -52,7 +42,7 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                 </nav>
 
                 <h1>
-                    <i className="fas fa-edit"></i>&nbsp;Edit Member (Metrics)
+                    <i className="fas fa-edit"></i>&nbsp;Update Member (Metrics)
                 </h1>
 
                 <div className="row">
@@ -200,7 +190,7 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                 options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
                             />
 
-                            {showHouseholdCount &&
+                            {anotherHouseholdMemberRegistered === 0 &&
                                 <div>
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
@@ -250,15 +240,15 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                         name="organizationFoundingYear"
                                         type="number"
                                     />
-                                    <BootstrapInput
-                                        inputClassName="form-control form-control-lg"
+                                    <BootstrapSingleSelect
                                         borderColour="border-primary"
-                                        error={errors.organizationTypeOf}
                                         label="What type of business is this? (*)"
-                                        onChange={onTextChange}
-                                        value={organizationTypeOf}
                                         name="organizationTypeOf"
-                                        type="text"
+                                        defaultOptionLabel="-"
+                                        options={ORGANIZATION_TYPE_OF_CHOICES}
+                                        value={organizationTypeOf}
+                                        error={errors.organizationTypeOf}
+                                        onSelectChange={onSelectChange}
                                     />
                                 </div>
                             }

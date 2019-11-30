@@ -32,11 +32,14 @@ class AdminMemberMetricUpdateContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        const transcodedTags = getPickedTagReactSelectOptions(this.props.memberDetail.tags, this.props.tagList)
+        const anotherHouseholdMemberRegistered = this.props.memberDetail.anotherHouseholdMemberRegistered === true ? 1 : 0;
+
         this.state = {
             slug: slug,
             typeOf: this.props.memberDetail.typeOf,
             isTagsLoading: true,
-            tags: this.props.memberDetail.tags,
+            tags: transcodedTags,
             yearOfBirth: this.props.memberDetail.yearOfBirth,
             gender: this.props.memberDetail.gender,
             isHowHearLoading: true,
@@ -50,7 +53,7 @@ class AdminMemberMetricUpdateContainer extends Component {
             expectation: this.props.memberDetail.expectation,
             expectationOther: this.props.memberDetail.expectationOther,
             willingToVolunteer: this.props.memberDetail.willingToVolunteer,
-            anotherHouseholdMemberRegistered: this.props.memberDetail.anotherHouseholdMemberRegistered,
+            anotherHouseholdMemberRegistered: anotherHouseholdMemberRegistered,
             totalHouseholdCount: this.props.memberDetail.totalHouseholdCount,
             under18YearsHouseholdCount: this.props.memberDetail.under18YearsHouseholdCount,
             organizationEmployeeCount: this.props.memberDetail.organizationEmployeeCount,
@@ -228,7 +231,7 @@ class AdminMemberMetricUpdateContainer extends Component {
 
     render() {
         const {
-            slug, typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
+            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
@@ -236,7 +239,6 @@ class AdminMemberMetricUpdateContainer extends Component {
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
         const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
-        const transcodedTags = getPickedTagReactSelectOptions(tags, this.props.tagList)
         const meaningOptions = getMeaningReactSelectOptions(this.props.meaningList, "meaning");
         const expectationOptions = getExpectationReactSelectOptions(this.props.expectationList, "expectation");
 
@@ -248,11 +250,11 @@ class AdminMemberMetricUpdateContainer extends Component {
 
         return (
             <AdminMemberMetricUpdateComponent
-                slug={slug}
+                slug={this.state.slug}
                 member={this.props.memberDetail}
                 typeOf={typeOf}
                 isTagsLoading={isTagsLoading}
-                tags={transcodedTags}
+                tags={tags}
                 tagOptions={tagOptions}
                 yearOfBirth={yearOfBirth}
                 gender={gender}
@@ -272,7 +274,7 @@ class AdminMemberMetricUpdateContainer extends Component {
                 expectationOther={expectationOther}
                 expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
-                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
+                anotherHouseholdMemberRegistered={parseInt(anotherHouseholdMemberRegistered)}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}
