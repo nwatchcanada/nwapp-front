@@ -124,8 +124,9 @@ class AdminMemberMetricUpdateContainer extends Component {
             }
         }
 
-        // Convert to boolean type.
-        postData.anotherHouseholdMemberRegistered = this.state.anotherHouseholdMemberRegistered === 1;
+        try { // Convert to boolean type.
+            postData.anotherHouseholdMemberRegistered = parseInt(this.state.anotherHouseholdMemberRegistered) === 1;
+        } catch (error) {} // Do nothing.
 
         // BUGFIX: Handle NaN cases.
         postData.totalHouseholdCount = isNaN(this.state.totalHouseholdCount) ? 0 : this.state.totalHouseholdCount;

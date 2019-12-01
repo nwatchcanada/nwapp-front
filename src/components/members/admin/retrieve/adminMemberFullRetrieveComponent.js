@@ -206,14 +206,18 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                         }
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">How many people are in your household?</th>
-                                    <td>{member && member.totalHouseholdCount}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
-                                    <td>{member && member.under18YearsHouseholdCount}</td>
-                                </tr>
+                                {member && member.anotherHouseholdMemberRegistered === false &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many people are in your household?</th>
+                                        <td>{member && member.totalHouseholdCount}</td>
+                                    </tr>
+                                }
+                                {member && member.anotherHouseholdMemberRegistered === false &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
+                                        <td>{member && member.under18YearsHouseholdCount}</td>
+                                    </tr>
+                                }
                                 {member && member.organizationEmployeeCount &&
                                     <tr>
                                         <th scope="row" className="bg-light">The employee count at this member's organization</th>
@@ -226,8 +230,6 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                         <td>{member && member.organizationFoundingYear}</td>
                                     </tr>
                                 }
-
-
 
 
                                 <tr className="bg-dark">
