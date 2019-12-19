@@ -49,9 +49,9 @@ export function pullProfile(successCallback=null, failedCallback=null) {
         // Run our Axios post.
         customAxios.get(NWAPP_PROFILE_API_URL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
-            // const responseData = msgpack.decode(Buffer(successResponse.data));
+            const responseData = msgpack.decode(Buffer(successResponse.data));
 
-            const responseData = successResponse.data;
+            // const responseData = successResponse.data;
 
             let profile = camelizeKeys(responseData);
 
