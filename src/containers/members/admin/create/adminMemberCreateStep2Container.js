@@ -20,37 +20,39 @@ class AdminMemberCreateStep2Container extends Component {
 
     constructor(props) {
         super(props);
-
-        const searchCriteria = localStorageGetObjectItem("nwapp-create-member-search-criteria");
-
-        // Force active users as per issue via https://github.com/over55/nwapp-front/issues/296
-        var parametersMap = new Map();
-        parametersMap.set("state", "active");
-
         this.state = {
-            // Pagination
-            page: 1,
-            sizePerPage: STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION,
-            totalSize: 0,
-
-            // Sorting, Filtering, & Searching
-            parametersMap: parametersMap,
-
-            // Overaly
+            givenName: localStorage.getItem("workery-create-member-givenName"),
+            lastName: localStorage.getItem("workery-create-member-lastName"),
+            email: localStorage.getItem("workery-create-member-email"),
+            phone: localStorage.getItem("workery-create-member-phone"),
             isLoading: true,
-
-            // Data
-            firstName: searchCriteria.firstName,
-            lastName: searchCriteria.lastName,
-            phone: searchCriteria.phone,
-            email: searchCriteria.email,
             errors: {},
+            page: 1,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
+        this.getParametersMapFromState = this.getParametersMapFromState.bind(this);
+        this.onNextClick = this.onNextClick.bind(this);
+        this.onPreviousClick = this.onPreviousClick.bind(this);
+    }
+
+    getParametersMapFromState() {
+        const parametersMap = new Map();
+        if (this.state.givenName !== undefined && this.state.givenName !== null) {
+            parametersMap.set('givenName', this.state.givenName);
+        }
+        if (this.state.lastName !== undefined && this.state.lastName !== null) {
+            parametersMap.set('lastName', this.state.lastName);
+        }
+        if (this.state.email !== undefined && this.state.email !== null) {
+            parametersMap.set('email', this.state.email);
+        }
+        if (this.state.phone !== undefined && this.state.phone !== null) {
+            parametersMap.set('phone', this.state.phone);
+        }
+        return parametersMap;
     }
 
     /**
@@ -60,7 +62,7 @@ class AdminMemberCreateStep2Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-        this.props.pullMemberList(this.state.page, this.state.sizePerPage, this.state.parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+        this.props.pullMemberList(1, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
     }
 
     componentWillUnmount() {
@@ -77,8 +79,8 @@ class AdminMemberCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(response) {
-        console.log("onSuccessfulSubmissionCallback | State (Pre-Fetch):", this.state);
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback | State (Pre-Fetch):", this.state);
         this.setState(
             {
                 page: response.page,
@@ -86,15 +88,23 @@ class AdminMemberCreateStep2Container extends Component {
                 isLoading: false,
             },
             ()=>{
-                console.log("onSuccessfulSubmissionCallback | Fetched:",response); // For debugging purposes only.
-                console.log("onSuccessfulSubmissionCallback | State (Post-Fetch):", this.state);
+                console.log("onSuccessCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessCallback | State (Post-Fetch):", this.state);
             }
         )
     }
 
-    onFailedSubmissionCallback(errors) {
-        console.log(errors);
-        this.setState({ isLoading: false });
+    onFailureCallback(errors) {
+        this.setState({
+            errors: errors,
+            isLoading: false
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
     }
 
     /**
@@ -108,11 +118,30 @@ class AdminMemberCreateStep2Container extends Component {
         })
     }
 
-    onClick(e, slug) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
+    onNextClick(e) {
+        const page = this.state.page + 1;
+        this.setState(
+            {
+                page: page,
+                isLoading: true,
+            },
+            ()=>{
+                this.props.pullMemberList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+            }
+        )
+    }
 
-        this.props.history.push("/member/"+slug);
+    onPreviousClick(e) {
+        const page = this.state.page - 1;
+        this.setState(
+            {
+                page: page,
+                isLoading: true,
+            },
+            ()=>{
+                this.props.pullMemberList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+            }
+        )
     }
 
     /**
@@ -121,14 +150,23 @@ class AdminMemberCreateStep2Container extends Component {
      */
 
     render() {
-        const { name, errors, isLoading } = this.state;
+        const { page, sizePerPage, totalSize, isLoading, errors } = this.state;
+        const members = (this.props.memberList && this.props.memberList.results) ? this.props.memberList.results : [];
+        const hasNext = this.props.memberList.next !== null;
+        const hasPrevious = this.props.memberList.previous !== null;
         return (
             <AdminMemberCreateStep2Component
-                name={name}
+                page={page}
+                sizePerPage={sizePerPage}
+                totalSize={totalSize}
+                members={members}
+                isLoading={isLoading}
                 errors={errors}
                 onTextChange={this.onTextChange}
-                onClick={this.onClick}
-                isLoading={isLoading}
+                hasNext={hasNext}
+                onNextClick={this.onNextClick}
+                hasPrevious={hasPrevious}
+                onPreviousClick={this.onPreviousClick}
             />
         );
     }

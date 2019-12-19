@@ -5,25 +5,62 @@ import { Link } from "react-router-dom";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
-export default class AdminMemberCreateStep2Component extends Component {
+class CardComponent extends Component {
     render() {
-        const { isLoading, onClick } = this.props;
+        const { member, isLoading } = this.props;
+        return (
+            <div className="col-sm-3" id={member.slug}>
+                <div className="card bg-light">
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            <Link to={`/admin/member/${member.slug}`}>
+                                {member.typeOf === 3 &&
+                                    <strong><i className="fas fa-building"></i>&nbsp;{member.organizationName}</strong>
+                                }
+                                {member.typeOf === 2 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{member.firstName}&nbsp;{member.lastName}</strong>
+                                }
+                                {member.typeOf === 1 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{member.firstName}&nbsp;{member.lastName}</strong>
+                                }
+                            </Link>
+                        </h5>
+                        <p className="card-text">
+                            {member.streetAddress}<br />
+                            {member.locality}, {member.region}, {member.postalCode}<br />
+                            <a href={`email:${member.email}`}>{member.email}</a><br />
+                            <a href={`tel:${member.primaryPhoneE164}`}>{member.primaryPhoneNational}</a>
+                        </p>
+                        <Link to={`/admin/member/${member.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
+                            Select&nbsp;<i class="fas fa-chevron-right"></i>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default class MemberCreateStep2Component extends Component {
+    render() {
+        const { members, isLoading, errors, hasNext, onNextClick, hasPrevious, onPreviousClick } = this.props;
         return (
             <main id="main" role="main">
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
                         </li>
                     </ol>
                 </nav>
-                <BootstrapPageLoadingAnimation isLoading={isLoading} />
+
                 <h1><i className="fas fa-plus"></i>&nbsp;Add Member</h1>
 
                 <div className="row">
@@ -48,13 +85,7 @@ export default class AdminMemberCreateStep2Component extends Component {
                             <span className="num">5.</span><span className="">Address</span>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Watch</span>
-                        </div>
-                         <div id="step-7" className="st-grey">
-                            <span className="num">7.</span><span className="">Metrics</span>
-                        </div>
-                        <div id="step-8" className="st-grey">
-                            <span className="num">8.</span><span className="">Review</span>
+                            <span className="num">6.</span><span className="">Metrics</span>
                         </div>
                     </div>
                 </div>
@@ -64,56 +95,18 @@ export default class AdminMemberCreateStep2Component extends Component {
                 </div>
 
                 <div className="card-group row">
+                    {members && members.map(
+                        (member) => <CardComponent member={member} key={member.id} isLoading={isLoading} />)
+                    }
+                </div>
 
-                    <div className="col-sm-3">
-                        <div className="card bg-light">
-                            <div className="card-body">
-                                <h5 className="card-title">
-                                    <Link to="#">
-                                        <strong><i className="fas fa-home"></i>&nbsp;Rodolfo Martinez</strong>
-                                    </Link>
-                                </h5>
-                                <p className="card-text">1848 Mickleborough Dr<br />
-                                    London, ON<br />
-                                    (519)521-3135
-                                </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "rodolfo-martinez") } } disabled={isLoading}>Select&nbsp;<i class="fas fa-chevron-right"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-3">
-                        <div className="card bg-light">
-                            <div className="card-body">
-                                <h5 className="card-title">
-                                    <Link to="#">
-                                        <strong><i className="fas fa-building"></i>&nbsp;Frank Herbert</strong>
-                                    </Link>
-                                </h5>
-                                <p className="card-text">1234 Dune Street<br />
-                                    London, ON<br />
-                                    (123)123-1234
-                                </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "frank-herbert") } } disabled={isLoading}>Select&nbsp;<i class="fas fa-chevron-right"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-3">
-                        <div className="card bg-light">
-                            <div className="card-body">
-                                <h5 className="card-title">
-                                    <Link to="#">
-                                        <strong><i className="fas fa-university"></i>&nbsp;Robert A. Heinlein</strong>
-                                    </Link>
-                                </h5>
-                                <p className="card-text">4567 Startship Trooper Avenue<br />
-                                    Toronto, ON<br />
-                                    (321)123-1234
-                                </p>
-                                <button type="button" className="btn btn-primary btn-lg btn-block" onClick={ (event)=> { onClick(event, "robert-a-heinlein") } } disabled={isLoading}>Select&nbsp;<i class="fas fa-chevron-right"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
+                <div className="float-right">
+                    {hasPrevious &&
+                        <Link onClick={onPreviousClick}><i class="fas fa-arrow-circle-left"></i>&nbsp;Previous</Link>
+                    }&nbsp;&nbsp;
+                    {hasNext &&
+                        <Link onClick={onNextClick}>Next&nbsp;<i class="fas fa-arrow-circle-right"></i></Link>
+                    }
                 </div>
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">

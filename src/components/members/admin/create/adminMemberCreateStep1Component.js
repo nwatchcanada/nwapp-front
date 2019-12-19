@@ -54,9 +54,6 @@ export default class AdminMemberCreateStep1Component extends Component {
                          <div id="step-7" className="st-grey">
                             <span className="num">7.</span><span className="">Metrics</span>
                         </div>
-                        <div id="step-8" className="st-grey">
-                            <span className="num">8.</span><span className="">Review</span>
-                        </div>
                     </div>
                 </div>
 
