@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import 'moment-timezone';
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
@@ -66,6 +67,7 @@ export default class AdminMemberCreateStep8Component extends Component {
                         </li>
                     </ol>
                 </nav>
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
 
                 <h1>
                     <i className="fas fa-plus"></i>&nbsp;Add Member

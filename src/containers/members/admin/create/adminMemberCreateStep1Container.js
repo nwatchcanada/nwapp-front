@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminMemberCreateStep1Component from "../../../../components/members/admin/create/adminMemberCreateStep1Component";
+import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetIntegerItem
+} from '../../../../helpers/localStorageUtility';
 
 
 class AdminMemberCreateStep1Container extends Component {
@@ -14,7 +19,10 @@ class AdminMemberCreateStep1Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
+            firstName: "",
+            lastName: "",
+            phone: "",
+            email: "",
             errors: {},
             isLoading: false
         }
@@ -50,6 +58,7 @@ class AdminMemberCreateStep1Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
+        localStorageSetObjectOrArrayItem("nwapp-create-member-search-criteria", this.state);
         this.props.history.push("/admin/members/add/step-2");
     }
 

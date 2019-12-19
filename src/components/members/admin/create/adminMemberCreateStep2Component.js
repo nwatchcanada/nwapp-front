@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
+
 
 export default class AdminMemberCreateStep2Component extends Component {
     render() {
@@ -21,7 +23,7 @@ export default class AdminMemberCreateStep2Component extends Component {
                         </li>
                     </ol>
                 </nav>
-
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <h1><i className="fas fa-plus"></i>&nbsp;Add Member</h1>
 
                 <div className="row">
