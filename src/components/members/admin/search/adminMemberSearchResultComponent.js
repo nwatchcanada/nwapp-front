@@ -1,103 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
+// import overlayFactory from 'react-bootstrap-table2-overlay';
 
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
+import {
+    RESIDENTIAL_CUSTOMER_TYPE_OF_ID,
+    COMMERCIAL_CUSTOMER_TYPE_OF_ID,
+} from '../../../../constants/api';
 
 
-class ListComponent extends Component {
+export default class AdminMemberSearchResultComponent extends Component {
     render() {
-        const { results } = this.props;
-
-        const columns = [{
-            dataField: 'icon',
-            text: '',
-            sort: false,
-            formatter: iconFormatter
-        },{
-            dataField: 'firstName',
-            text: 'First Name',
-            sort: true
-        },{
-            dataField: 'lastName',
-            text: 'Last Name',
-            sort: true
-        },{
-            dataField: 'phone',
-            text: 'Phone',
-            sort: true
-        },{
-            dataField: 'email',
-            text: 'Email',
-            sort: true
-        },{
-            dataField: 'slug',
-            text: '',
-            sort: false,
-            formatter: externalLinkFormatter
-        }];
-
-        return (
-            <div className="row">
-                <div className="col-md-12">
-                    <h2>
-                        <i className="fas fa-list"></i>&nbsp;Search Results
-                    </h2>
-
-                    <BootstrapTable
-                        bootstrap4
-                        keyField='slug'
-                        data={ results }
-                        columns={ columns }
-                        striped
-                        bordered={ false }
-                        pagination={ paginationFactory() }
-                        noDataIndication="There are results returned for this search."
-                    />
-
-                </div>
-            </div>
-        );
-    }
-}
-
-
-
-
-function iconFormatter(cell, row){
-    return (
-        <i className={`fas fa-${row.icon}`}></i>
-    )
-}
-
-
-function externalLinkFormatter(cell, row){
-    return (
-        <a target="_blank" href={`/member/${row.slug}`}>
-            View&nbsp;<i className="fas fa-external-link-alt"></i>
-        </a>
-    )
-}
-
-
-
-class AdminMemberSearchResultComponent extends Component {
-    render() {
-        const { results, flashMessage } = this.props;
+        const {
+            members, isLoading, errors, hasNext, onNextClick, hasPrevious, onPreviousClick, onMemberClick
+        } = this.props;
+        const hasNoMembers = members.length <= 0;
         return (
             <div>
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
+                           <Link to={`/admin/members`}><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/members/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to={`/admin/members/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results
@@ -105,23 +43,80 @@ class AdminMemberSearchResultComponent extends Component {
                     </ol>
                 </nav>
 
-                <FlashMessageComponent object={flashMessage} />
+                <h1><i className="fas fa-search"></i>&nbsp;Members Search</h1>
 
-                <h1><i className="fas fa-users"></i>&nbsp;Members</h1>
                 <div className="row">
                     <div className="col-md-12">
-                        <ListComponent results={results} />
-                    </div>
-                </div>
+                        <h2>
+                            <i className="fas fa-list"></i>&nbsp;Search Results
+                        </h2>
 
-                <div className="form-group">
-                    <Link to="/members/search" className="btn btn-secondary btn-lg">
-                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                    </Link>
+                        {hasNoMembers
+                            ?<div className="jumbotron">
+                                <h1 className="display-4">No Results Found</h1>
+                                <p className="lead">It appears nothing was found for your search results. Please try again by clicking below.</p>
+
+                                <p className="lead">
+                                    <Link className="btn btn-primary btn-lg" to="/members/search">Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
+                                </p>
+                            </div>
+                            :<div className="card-group row">
+                                {members && members.map(
+                                    (member) => <CardComponent member={member} key={member.id} isLoading={isLoading} onMemberClick={onMemberClick} />)
+                                }
+                            </div>
+                        }
+
+                        <div className="float-right">
+                            {hasPrevious &&
+                                <Link onClick={onPreviousClick}><i class="fas fa-arrow-circle-left"></i>&nbsp;Previous</Link>
+                            }&nbsp;&nbsp;
+                            {hasNext &&
+                                <Link onClick={onNextClick}>Next&nbsp;<i class="fas fa-arrow-circle-right"></i></Link>
+                            }
+                        </div>
+
+                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default AdminMemberSearchResultComponent;
+
+
+class CardComponent extends Component {
+    render() {
+        const { member, isLoading } = this.props;
+        return (
+            <div className="col-sm-3" id={member.slug}>
+                <div className="card bg-light">
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            <Link to={`/admin/member/${member.slug}`}>
+                                {member.typeOf === 3 &&
+                                    <strong><i className="fas fa-building"></i>&nbsp;{member.organizationName}</strong>
+                                }
+                                {member.typeOf === 2 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{member.firstName}&nbsp;{member.lastName}</strong>
+                                }
+                                {member.typeOf === 1 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{member.firstName}&nbsp;{member.lastName}</strong>
+                                }
+                            </Link>
+                        </h5>
+                        <p className="card-text">
+                            {member.streetAddress}<br />
+                            {member.locality}, {member.region}, {member.postalCode}<br />
+                            <a href={`email:${member.email}`}>{member.email}</a><br />
+                            <a href={`tel:${member.primaryPhoneE164}`}>{member.primaryPhoneNational}</a>
+                        </p>
+                        <Link to={`/admin/member/${member.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
+                            Select&nbsp;<i class="fas fa-chevron-right"></i>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}

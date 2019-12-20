@@ -8,6 +8,40 @@ import {
 } from '../constants/api';
 
 
+export function validateSearchInput(data) {
+    let errors = {};
+
+    if (data.advancedSearchActive === false) {
+        if (data.keyword === undefined || data.keyword === null || data.keyword === "") {
+            errors.keyword = 'This field is required.';
+        }
+    } else {
+        let hasEmptyField = 0;
+        if (data.givenName === undefined || data.givenName === null || data.givenName === "") {
+            hasEmptyField += 1;
+        }
+        if (data.lastName === undefined || data.lastName === null || data.lastName === "") {
+            hasEmptyField += 1;
+        }
+        if (data.telephone === undefined || data.telephone === null || data.telephone === "") {
+            hasEmptyField += 1;
+        }
+
+        if (hasEmptyField === 4) {
+            // errors.givenName = '';
+            // errors.lastName = '';
+            // errors.phone = '';
+            errors.MinimumOneFieldRequired = "Please input at leaset one field from the advanced section before submitting.";
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
 export function validateInput(data) {
     let errors = {};
 
