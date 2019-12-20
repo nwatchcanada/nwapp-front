@@ -21,10 +21,10 @@ class AdminMemberCreateStep2Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            givenName: localStorage.getItem("workery-create-member-givenName"),
-            lastName: localStorage.getItem("workery-create-member-lastName"),
-            email: localStorage.getItem("workery-create-member-email"),
-            phone: localStorage.getItem("workery-create-member-phone"),
+            firstName: localStorage.getItem("nwapp-create-member-firstName"),
+            lastName: localStorage.getItem("nwapp-create-member-lastName"),
+            email: localStorage.getItem("nwapp-create-member-email"),
+            phone: localStorage.getItem("nwapp-create-member-phone"),
             isLoading: true,
             errors: {},
             page: 1,
@@ -40,8 +40,8 @@ class AdminMemberCreateStep2Container extends Component {
 
     getParametersMapFromState() {
         const parametersMap = new Map();
-        if (this.state.givenName !== undefined && this.state.givenName !== null) {
-            parametersMap.set('givenName', this.state.givenName);
+        if (this.state.firstName !== undefined && this.state.firstName !== null) {
+            parametersMap.set('firstName', this.state.firstName);
         }
         if (this.state.lastName !== undefined && this.state.lastName !== null) {
             parametersMap.set('lastName', this.state.lastName);
@@ -115,7 +115,9 @@ class AdminMemberCreateStep2Container extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        const key = "nwapp-create-member-"+[e.target.name];
+        localStorage.setItem(key, e.target.value);
     }
 
     onNextClick(e) {

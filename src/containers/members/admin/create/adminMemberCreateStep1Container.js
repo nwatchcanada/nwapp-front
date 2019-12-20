@@ -82,7 +82,9 @@ class AdminMemberCreateStep1Container extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+        const key = "nwapp-create-member-"+[e.target.name];
+        localStorage.setItem(key, e.target.value);
     }
 
     onClick(e) {
