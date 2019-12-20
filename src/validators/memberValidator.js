@@ -207,6 +207,54 @@ export function validateInput(data) {
 /**
  *  Validator will validate step 4 in the member creation form.
  */
+export function validateStep1CreateInput(data) {
+    let errors = {};
+
+    let hasChosen = false;
+    if (data.firstName !== undefined && data.firstName !== null && data.firstName !== "") {
+        hasChosen = true;
+    } else {
+        if (data.firstName.length > 0) {
+            hasChosen = true;
+        }
+    }
+
+    if (data.lastName !== undefined && data.lastName !== null && data.lastName !== "") {
+        hasChosen = true;
+    } else {
+        if (data.lastName.length > 0) {
+            hasChosen = true;
+        }
+    }
+    if (data.phone !== undefined && data.phone !== null && data.phone !== "") {
+        hasChosen = true;
+    } else {
+        if (data.phone.length > 0) {
+            hasChosen = true;
+        }
+    }
+    if (data.email !== undefined && data.email !== null && data.email !== "") {
+        hasChosen = true;
+    } else {
+        if (data.email.length > 0) {
+            hasChosen = true;
+        }
+    }
+
+    if (hasChosen === false) {
+        errors.nonFieldField = 'Please input a field before submitting.';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+/**
+ *  Validator will validate step 4 in the member creation form.
+ */
 export function validateStep4CreateInput(data) {
     let errors = {};
 

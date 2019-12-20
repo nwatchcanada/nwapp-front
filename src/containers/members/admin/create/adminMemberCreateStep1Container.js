@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminMemberCreateStep1Component from "../../../../components/members/admin/create/adminMemberCreateStep1Component";
+import { validateStep1CreateInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem,
@@ -91,7 +92,17 @@ class AdminMemberCreateStep1Container extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        this.onSuccessfulSubmissionCallback();
+        // Perform client-side validation.
+        const { errors, isValid } = validateStep1CreateInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
     }
 
 
