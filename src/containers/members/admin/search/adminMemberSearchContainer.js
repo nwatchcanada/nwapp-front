@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberSearchComponent from "../../../components/members/search/memberSearchComponent";
+import AdminMemberSearchComponent from "../../../../components/members/admin/search/adminMemberSearchComponent";
 
 
-class MemberListContainer extends Component {
+class AdminMemberListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -79,7 +79,7 @@ class MemberListContainer extends Component {
 
     render() {
         return (
-            <MemberSearchComponent
+            <AdminMemberSearchComponent
                 advancedSearchActive={this.state.advancedSearchActive}
                 onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
                 onSearchClick={this.onSearchClick}
@@ -105,4 +105,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberListContainer);
+)(AdminMemberListContainer);

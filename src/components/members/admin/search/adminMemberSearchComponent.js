@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
+import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneInput";
 
 
-class MemberSearchComponent extends Component {
+class AdminMemberSearchComponent extends Component {
     render() {
         const { onSearchClick, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle } = this.props;
         const { errors, onTextChange, phone } = this.props;
@@ -165,4 +165,4 @@ class MemberSearchComponent extends Component {
     }
 }
 
-export default MemberSearchComponent;
+export default AdminMemberSearchComponent;

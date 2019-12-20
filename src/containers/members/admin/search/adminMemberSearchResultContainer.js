@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberSearchResultComponent from "../../../components/members/search/memberSearchResultComponent";
+import AdminMemberSearchResultComponent from "../../../../components/members/admin/search/adminMemberSearchResultComponent";
 
 
-class MemberSearchResultContainer extends Component {
+class AdminMemberSearchResultContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -82,7 +82,7 @@ class MemberSearchResultContainer extends Component {
             'absoluteUrl': '/member/carling'
         }];
         return (
-            <MemberSearchResultComponent
+            <AdminMemberSearchResultComponent
                 results={results}
             />
         );
@@ -104,4 +104,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberSearchResultContainer);
+)(AdminMemberSearchResultContainer);

@@ -88,8 +88,8 @@ import ResourceCreateContainer from "./settings/resources/resourceCreateContaine
 import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
 
 import AdminMemberListContainer from "./members/admin/list/adminMemberListContainer";
-import MemberSearchContainer from "./members/search/memberSearchContainer";
-import MemberSearchResultContainer from "./members/search/memberSearchResultContainer";
+import AdminMemberSearchContainer from "./members/admin/search/adminMemberSearchContainer";
+import AdminMemberSearchResultContainer from "./members/admin/search/adminMemberSearchResultContainer";
 import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminMemberLiteRetrieveContainer";
 import AdminMemberFullRetrieveContainer from "./members/admin/retrieve/adminMemberFullRetrieveContainer";
 import AdminMemberCommentContainer from "./members/admin/retrieve/adminMemberCommentContainer";
@@ -286,8 +286,8 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/members/add/step-7" exact component={requiresAuth(AdminMemberCreateStep7Container)} />
                                 <Route path="/admin/members/add/step-8" exact component={requiresAuth(AdminMemberCreateStep8Container)} />
                                 <Route path="/admin/members" exact component={requiresAuth(AdminMemberListContainer)} />
-                                <Route path="/members/search" exact component={requiresAuth(MemberSearchContainer)} />
-                                <Route path="/members/search-results" exact component={requiresAuth(MemberSearchResultContainer)} />
+                                <Route path="/admin/members/search" exact component={requiresAuth(AdminMemberSearchContainer)} />
+                                <Route path="/admin/members/search-results" exact component={requiresAuth(AdminMemberSearchResultContainer)} />
                                 <Route path="/admin/member/:slug" exact component={requiresAuth(AdminMemberLiteRetrieveContainer)} />
                                 <Route path="/admin/member/:slug/full" exact component={requiresAuth(AdminMemberFullRetrieveContainer)} />
                                 <Route path="/admin/member/:slug/comments" exact component={requiresAuth(AdminMemberCommentContainer)} />
