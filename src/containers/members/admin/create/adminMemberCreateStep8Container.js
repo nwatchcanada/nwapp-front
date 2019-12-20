@@ -32,6 +32,7 @@ class AdminMemberCreateStep8Container extends Component {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             organizationName: localStorage.getItem("nwapp-create-member-organizationName"),
             organizationTypeOf: localStorageGetIntegerItem("nwapp-create-member-organizationTypeOf"),
+            organizationTypeOfLabel: localStorage.getItem("nwapp-create-member-organizationTypeOfLabel"),
             firstName: localStorage.getItem("nwapp-create-member-firstName"),
             lastName: localStorage.getItem("nwapp-create-member-lastName"),
             primaryPhone: localStorage.getItem("nwapp-create-member-primaryPhone"),
@@ -79,8 +80,6 @@ class AdminMemberCreateStep8Container extends Component {
             under18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
             organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-organizationEmployeeCount"),
             organizationFoundingYear: localStorageGetIntegerItem("nwapp-create-member-organizationFoundingYear"),
-            organizationTypeOf: localStorage.getItem("nwapp-create-member-organizationTypeOf"),
-            organizationTypeOfLabel: localStorage.getItem("nwapp-create-member-organizationTypeOfLabel"),
             errors: {},
             isLoading: false
         }
@@ -139,7 +138,7 @@ class AdminMemberCreateStep8Container extends Component {
             postData.organizationTypeOf = 0;
             postData.organizationName = null;
         } else {
-            if (this.state.organizationTypeOf !== BUSINESS_TYPE_OF) {
+            if (this.state.typeOf !== BUSINESS_TYPE_OF) {
                 postData.organizationName = null;
                 postData.organizationEmployeeCount = 0;
                 postData.organizationFoundingYear = 0;
