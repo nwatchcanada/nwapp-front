@@ -44,8 +44,8 @@ class AdminMemberSearchResultContainer extends Component {
         if (search.keyword !== undefined && search.keyword !== "") {
             parametersMap.set("search", search.keyword);
         }
-        if (search.givenName !== undefined && search.givenName !== "") {
-            parametersMap.set("given_name", search.givenName);
+        if (search.firstName !== undefined && search.firstName !== "") {
+            parametersMap.set("first_name", search.firstName);
         }
         if (search.lastName !== undefined && search.lastName !== "") {
             parametersMap.set("last_name", search.lastName);

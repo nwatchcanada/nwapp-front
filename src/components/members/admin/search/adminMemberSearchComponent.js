@@ -10,7 +10,7 @@ class AdminMemberSearchComponent extends Component {
 
     render() {
         const { onSearchClick, handleKeyDown, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle, onTextChange } = this.props;
-        const { keyword, givenName, lastName, telephone, email, errors, isLoading } = this.props;
+        const { keyword, firstName, lastName, telephone, email, errors, isLoading } = this.props;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -94,11 +94,11 @@ class AdminMemberSearchComponent extends Component {
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.givenName}
+                                    error={errors.firstName}
                                     label="First Name"
                                     onChange={onTextChange}
-                                    value={givenName}
-                                    name="givenName"
+                                    value={firstName}
+                                    name="firstName"
                                     type="text"
                                     disabled={isLoading}
                                 />

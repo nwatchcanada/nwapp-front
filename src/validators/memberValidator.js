@@ -17,10 +17,13 @@ export function validateSearchInput(data) {
         }
     } else {
         let hasEmptyField = 0;
-        if (data.givenName === undefined || data.givenName === null || data.givenName === "") {
+        if (data.firstName === undefined || data.firstName === null || data.firstName === "") {
             hasEmptyField += 1;
         }
         if (data.lastName === undefined || data.lastName === null || data.lastName === "") {
+            hasEmptyField += 1;
+        }
+        if (data.email === undefined || data.email === null || data.email === "") {
             hasEmptyField += 1;
         }
         if (data.telephone === undefined || data.telephone === null || data.telephone === "") {
@@ -28,7 +31,7 @@ export function validateSearchInput(data) {
         }
 
         if (hasEmptyField === 4) {
-            // errors.givenName = '';
+            // errors.firstName = '';
             // errors.lastName = '';
             // errors.phone = '';
             errors.MinimumOneFieldRequired = "Please input at leaset one field from the advanced section before submitting.";

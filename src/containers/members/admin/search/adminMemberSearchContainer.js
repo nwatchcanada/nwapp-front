@@ -18,7 +18,7 @@ class AdminMemberListContainer extends Component {
         this.state = {
             keyword: "",
             advancedSearchActive: false,
-            givenName: "",
+            firstName: "",
             lastName: "",
             telephone: "",
             email: "",
@@ -157,7 +157,7 @@ class AdminMemberListContainer extends Component {
         return (
             <AdminMemberSearchComponent
                 keyword={this.state.keyword}
-                givenName={this.state.givenName}
+                firstName={this.state.firstName}
                 lastName={this.state.lastName}
                 telephone={this.state.telephone}
                 email={this.state.email}
