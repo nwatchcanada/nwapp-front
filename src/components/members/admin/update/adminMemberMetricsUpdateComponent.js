@@ -19,9 +19,10 @@ export default class AdminMemberMetricUpdateComponent extends Component {
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
-        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF || typeOf === toString(BUSINESS_TYPE_OF);
-
+        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other' || howDidYouHear === '1' || howDidYouHear === 1;
+        const isOtherMeaningSelected = meaning === 'Other' || meaning === '1' || meaning === 1;
+        const isOtherExpectationSelected = expectation === 'Other' || expectation === '1' || expectation === 1;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -130,7 +131,7 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                 isLoading={isMeaningLoading}
                             />
 
-                            {meaning === "1" &&
+                            {isOtherMeaningSelected &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
@@ -155,7 +156,7 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                 isLoading={isExpectationLoading}
                             />
 
-                            {expectation === "1" &&
+                            {isOtherExpectationSelected &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"

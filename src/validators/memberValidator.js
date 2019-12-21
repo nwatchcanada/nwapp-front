@@ -354,8 +354,6 @@ export function validateStep6CreateInput(data) {
 export function validateStep7CreateInput(data) {
     let errors = {};
 
-    console.log("validateStep7CreateInput", data);
-
     if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
         errors.yearOfBirth = 'This field is required';
     } else {
@@ -373,7 +371,7 @@ export function validateStep7CreateInput(data) {
     if (data.howDidYouHear === undefined || data.howDidYouHear === null || isNaN(data.howDidYouHear) || data.howDidYouHear === "") {
         errors.howDidYouHear = 'This field is required';
     } else {
-        if (data.howDidYouHear === "Other") {
+        if (data.howDidYouHear === 'Other' || data.howDidYouHear === '1' || data.howDidYouHear === 1) {
             if (data.howDidYouHearOther === undefined || data.howDidYouHearOther === null || validator.isEmpty(data.howDidYouHearOther) || data.howDidYouHearOther === "") {
                 errors.howDidYouHearOther = 'This field is required';
             }
@@ -381,9 +379,21 @@ export function validateStep7CreateInput(data) {
     }
     if (data.meaning === undefined || data.meaning === null || data.meaning === "" || isNaN(data.meaning) ) {
         errors.meaning = 'This field is required';
+    } else {
+        if (data.meaning === 'Other' || data.meaning === '1' || data.meaning === 1) {
+            if (data.meaningOther === undefined || data.meaningOther === null || validator.isEmpty(data.meaningOther) || data.meaningOther === "") {
+                errors.meaningOther = 'This field is required';
+            }
+        }
     }
     if (data.expectation === undefined || data.expectation === null || data.expectation === "" || isNaN(data.expectation) ) {
         errors.expectation = 'This field is required';
+    } else {
+        if (data.expectation === 'Other' || data.expectation === '1' || data.expectation === 1) {
+            if (data.expectationOther === undefined || data.expectationOther === null || validator.isEmpty(data.expectationOther) || data.expectationOther === "") {
+                errors.expectationOther = 'This field is required';
+            }
+        }
     }
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';

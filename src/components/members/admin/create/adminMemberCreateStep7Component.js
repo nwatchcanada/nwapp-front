@@ -19,7 +19,9 @@ export default class AdminMemberCreateStep7Component extends Component {
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
-        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other';
+        const isOtherHowDidYouHearSelected = howDidYouHear === 'Other' || howDidYouHear === '1' || howDidYouHear === 1;
+        const isOtherMeaningSelected = meaning === 'Other' || meaning === '1' || meaning === 1;
+        const isOtherExpectationSelected = expectation === 'Other' || expectation === '1' || expectation === 1;
 
         // This code checks to see if we need to display the household count fields.
         let showHouseholdCount = false;
@@ -179,7 +181,7 @@ export default class AdminMemberCreateStep7Component extends Component {
                                 isLoading={isMeaningLoading}
                             />
 
-                            {meaning === "1" &&
+                            {isOtherMeaningSelected &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
@@ -204,7 +206,7 @@ export default class AdminMemberCreateStep7Component extends Component {
                                 isLoading={isExpectationLoading}
                             />
 
-                            {expectation === "1" &&
+                            {isOtherExpectationSelected &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
