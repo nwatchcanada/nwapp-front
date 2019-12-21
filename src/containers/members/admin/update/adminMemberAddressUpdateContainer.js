@@ -6,14 +6,15 @@ import AdminMemberAddressUpdateComponent from "../../../../components/members/ad
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateStep5CreateInput } from "../../../../validators/memberValidator";
+import { putMemberAddressDetail } from "../../../../actions/memberActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../../constants/api';
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
-
 
 
 class AdminMemberAddressUpdateContainer extends Component {
@@ -48,6 +49,7 @@ class AdminMemberAddressUpdateContainer extends Component {
             isLoading: false
         }
 
+        this.getPostData = this.getPostData.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -55,6 +57,20 @@ class AdminMemberAddressUpdateContainer extends Component {
         this.onRegionChange = this.onRegionChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -82,7 +98,8 @@ class AdminMemberAddressUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/admin/members/add/step-6");
+        this.props.setFlashMessage("success", "Member has been successfully updated.");
+        this.props.history.push("/admin/member/"+this.state.slug+"/full");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -144,7 +161,13 @@ class AdminMemberAddressUpdateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            this.setState({ errors: {}, isLoading: true, }, ()=>{
+                this.props.putMemberAddressDetail(
+                    this.getPostData(),
+                    this.onSuccessfulSubmissionCallback,
+                    this.onFailedSubmissionCallback
+                );
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -197,7 +220,16 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        putMemberAddressDetail: (data, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                putMemberAddressDetail(data, onSuccessCallback, onFailureCallback)
+            )
+        },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
+    }
 }
 
 
