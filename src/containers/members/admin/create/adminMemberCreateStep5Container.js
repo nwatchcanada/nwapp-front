@@ -26,10 +26,10 @@ class AdminMemberCreateStep5Container extends Component {
         super(props);
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
+            apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
             streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-member-streetName"),
             streetType: localStorageGetIntegerItem("nwapp-create-member-streetType"),
-            apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
             streetTypeOption: localStorageGetObjectItem('nwapp-create-member-streetTypeOption'),
             streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
             streetDirection: localStorageGetIntegerItem("nwapp-create-member-streetDirection"),

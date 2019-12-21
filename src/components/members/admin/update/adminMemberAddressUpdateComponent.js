@@ -17,7 +17,8 @@ class AdminMemberAddressUpdateComponent extends Component {
             errors, onTextChange, onSelectChange, isLoading, onClick, onRegionChange, onCountryChange,
         } = this.props;
 
-        const isOtherStreetTypeSelected = streetType === 'Other';
+        // Check to see if the street type is "other".
+        const isOtherStreetTypeSelected = streetType === 'Other' || streetType === '1' || streetType === 1;
 
         return (
             <main id="main" role="main">
