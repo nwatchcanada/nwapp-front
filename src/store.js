@@ -8,10 +8,12 @@ import {
     TENANT_LIST_SUCCESS, TENANT_DETAIL_SUCCESS, MEMBER_LIST_SUCCESS, MEMBER_DETAIL_SUCCESS,
     HOW_HEAR_LIST_SUCCESS, HOW_HEAR_DETAIL_SUCCESS, TAG_LIST_SUCCESS, TAG_DETAIL_SUCCESS,
     EXPECTATION_LIST_SUCCESS, EXPECTATION_DETAIL_SUCCESS, MEANING_LIST_SUCCESS, MEANING_DETAIL_SUCCESS,
+    MEMBER_COMMENT_LIST_SUCCESS,
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
 import { memberListReducer, memberDetailReducer} from "./reducers/memberReducers";
+import { memberCommentListReducer } from "./reducers/memberCommentReducers";
 import { howHearListReducer, howHearDetailReducer } from "./reducers/howHearReducers";
 import { meaningListReducer, meaningDetailReducer } from "./reducers/meaningReducers";
 import { tagListReducer, tagDetailReducer } from "./reducers/tagReducers";
@@ -29,6 +31,7 @@ const appReducer = combineReducers({
     flashMessageState: flashMessageReducer,
     memberListState: memberListReducer,
     memberDetailState: memberDetailReducer,
+    memberCommentListState: memberCommentListReducer,
     tagListState: tagListReducer, tagDetailState: tagDetailReducer,
     howHearListState: howHearListReducer, howHearDetailState: howHearDetailReducer,
     meaningListState: meaningListReducer, meaningDetailState: meaningDetailReducer,

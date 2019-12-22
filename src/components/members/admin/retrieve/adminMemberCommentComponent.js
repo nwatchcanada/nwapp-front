@@ -31,7 +31,7 @@ export default class AdminMemberCommentComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
@@ -52,7 +52,7 @@ export default class AdminMemberCommentComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/member/${slug}/comments`}>
+                            <Link to={`/admin/member/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
@@ -61,19 +61,43 @@ export default class AdminMemberCommentComponent extends Component {
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
-                        <div id="step-3" className="st-grey active">
+                        { /*
+                        <div id="step-3" className="st-grey">
+                            <Link to={`/admin/member/${slug}/orders`}>
+                                <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
+                            </Link>
+                        </div>
+                        */}
+                        <div id="step-4" className="st-grey active">
                             <strong>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </strong>
                         </div>
+                        { /*
+                        <div id="step-5" className="st-grey">
+                            <Link to={`/admin/member/${slug}/files`}>
+                                <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
+                            </Link>
+                        </div>
+                        */}
+                        { /*
+                        <div id="step-6" className="st-grey">
+                            <Link to={`/admin/member/${slug}/operations`}>
+                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                            </Link>
+                        </div>
+                        */}
                     </div>
                 </div>
+
+
+
 
                 <div className="row align-items-start">
                     <h1>Comments/Notes</h1>
                     <div className="col-lg-12">
                         {memberComments && memberComments.map(
-                            (comment) => <CommentComponent comment={comment} id={comment.id} />
+                            (comment) => <CommentComponent comment={comment} id={comment.slug} />
                         )}
                         <hr className="my-4" />
                         <form>

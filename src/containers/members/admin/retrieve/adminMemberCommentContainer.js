@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import OrderListComponent from "../../../../components/members/admin/retrieve/adminMemberCommentComponent";
+import AdminMemberCommentComponent from "../../../../components/members/admin/retrieve/adminMemberCommentComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
-// import { pullMemberCommentList, postMemberComment } from "../../../actions/memberCommentActions"; //TODO: UNCOMMENT
+import { pullMemberCommentList, postMemberComment } from "../../../../actions/memberCommentActions";
 import { validateInput } from "../../../../validators/commentValidator"
 
 
@@ -17,9 +17,9 @@ class AdminMemberCommentContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
         const parametersMap = new Map();
-        parametersMap.set("about", id);
+        parametersMap.set("about", slug);
         parametersMap.set("o", "-created_at");
         this.state = {
             // Pagination
@@ -31,11 +31,10 @@ class AdminMemberCommentContainer extends Component {
             parametersMap: parametersMap,
 
             // Overaly
-            // isLoading: true, //TODO: UNCOMMENT
-            isLoading: false,  //TODO: DELETE
+            isLoading: true,
 
             // Everything else...
-            id: id,
+            slug: slug,
             text: "",
             errors: {},
         }
@@ -56,7 +55,7 @@ class AdminMemberCommentContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        postData.about = this.state.id;
+        postData.about = this.state.slug;
         postData.extraText = this.state.text;
 
         // Finally: Return our new modified data.
@@ -72,14 +71,14 @@ class AdminMemberCommentContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // // Get our data.
-        // this.props.pullMemberCommentList( //TODO: UNCOMMENT
-        //     this.state.page,
-        //     this.state.sizePerPage,
-        //     this.state.parametersMap,
-        //     this.onSuccessListCallback,
-        //     this.onFailureListCallback
-        // );
+        // Get our data.
+        this.props.pullMemberCommentList(
+            this.state.page,
+            this.state.sizePerPage,
+            this.state.parametersMap,
+            this.onSuccessListCallback,
+            this.onFailureListCallback
+        );
     }
 
     componentWillUnmount() {
@@ -130,14 +129,14 @@ class AdminMemberCommentContainer extends Component {
             ()=>{
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
-                // // Get our data.
-                // this.props.pullMemberCommentList( //TODO: UNCOMMENT
-                //     this.state.page,
-                //     this.state.sizePerPage,
-                //     this.state.parametersMap,
-                //     this.onSuccessListCallback,
-                //     this.onFailureListCallback
-                // );
+                // Get our data.
+                this.props.pullMemberCommentList(
+                    this.state.page,
+                    this.state.sizePerPage,
+                    this.state.parametersMap,
+                    this.onSuccessListCallback,
+                    this.onFailureListCallback
+                );
             }
         )
     }
@@ -176,13 +175,13 @@ class AdminMemberCommentContainer extends Component {
                 var scroll = Scroll.animateScroll;
                 scroll.scrollToTop();
 
-                // // Once our state has been validated `member-side` then we will
-                // // make an API request with the server to create our new production.
-                // this.props.postMemberComment( //TODO: UNCOMMENT
-                //     this.getPostData(),
-                //     this.onSuccessPostCallback,
-                //     this.onFailurePostCallback
-                // );
+                // Once our state has been validated `member-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.postMemberComment(
+                    this.getPostData(),
+                    this.onSuccessPostCallback,
+                    this.onFailurePostCallback
+                );
             });
         } else {
             this.setState({
@@ -204,12 +203,12 @@ class AdminMemberCommentContainer extends Component {
      */
 
     render() {
-        const { isLoading, id, text, errors } = this.state;
+        const { isLoading, slug, text, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
         const memberComments = this.props.memberCommentList ? this.props.memberCommentList.results : [];
         return (
-            <OrderListComponent
-                id={id}
+            <AdminMemberCommentComponent
+                slug={slug}
                 text={text}
                 member={member}
                 memberComments={memberComments}
@@ -237,14 +236,14 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        // pullMemberCommentList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => { //TODO: UNCOMMENT
-        //     dispatch(
-        //         pullMemberCommentList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
-        //     )
-        // },
-        // postMemberComment: (postData, successCallback, failedCallback) => {
-        //     dispatch(postMemberComment(postData, successCallback, failedCallback))
-        // },
+        pullMemberCommentList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullMemberCommentList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
+        postMemberComment: (postData, successCallback, failedCallback) => {
+            dispatch(postMemberComment(postData, successCallback, failedCallback))
+        },
     }
 }
 

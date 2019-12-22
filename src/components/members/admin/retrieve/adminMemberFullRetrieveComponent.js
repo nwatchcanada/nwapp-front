@@ -30,7 +30,7 @@ export default class AdminMemberFullRetrieveComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;View Member</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
 
                 <div className="row">
                     <div className="step-navigation">
