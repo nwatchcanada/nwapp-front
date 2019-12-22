@@ -80,13 +80,11 @@ export default class AdminMemberCommentComponent extends Component {
                             </Link>
                         </div>
                         */}
-                        { /*
                         <div id="step-6" className="st-grey">
                             <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
                         </div>
-                        */}
                     </div>
                 </div>
 
