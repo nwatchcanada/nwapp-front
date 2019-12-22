@@ -49,6 +49,11 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
+                        <div id="step-6" className="st-grey">
+                            <Link to={`/admin/member/${slug}/operations`}>
+                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
