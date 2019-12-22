@@ -134,7 +134,7 @@ class CommentComponent extends Component {
                 <img className="mr-3 img-head" src="/img/placeholder.png" alt="" />
                 <div className="media-body">
                     <div className="row">
-                        <h5 className="mt-0 col-sm-10"><strong>{comment.createdBy}</strong></h5>
+                        <h5 className="mt-0 col-sm-10"><strong>{comment.createdByFullName}</strong></h5>
                         <h6 className="col-sm-2 text-secondary text-right">
                             <Moment format="MM/DD/YYYY hh:mm:ss a">{comment.createdAt}</Moment>
                         </h6>

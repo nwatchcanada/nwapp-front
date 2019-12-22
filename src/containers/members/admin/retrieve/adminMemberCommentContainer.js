@@ -19,7 +19,7 @@ class AdminMemberCommentContainer extends Component {
         super(props);
         const { slug } = this.props.match.params;
         const parametersMap = new Map();
-        parametersMap.set("about", slug);
+        parametersMap.set("member", slug);
         parametersMap.set("o", "-created_at");
         this.state = {
             // Pagination
@@ -55,8 +55,7 @@ class AdminMemberCommentContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        postData.about = this.state.slug;
-        postData.extraText = this.state.text;
+        postData.member = this.state.slug;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -105,6 +104,7 @@ class AdminMemberCommentContainer extends Component {
                 page: response.page,
                 totalSize: response.count,
                 isLoading: false,
+                text: "", // Clear the textfield.
             },
             ()=>{
                 console.log("onSuccessListCallback | Fetched:",response); // For debugging purposes only.

@@ -27,8 +27,6 @@ export function pullMemberCommentList(page=1, sizePerPage=10, filtersMap=new Map
             setMemberCommentListRequest()
         );
 
-        console.log(page, sizePerPage, filtersMap, onSuccessCallback, onFailureCallback);
-
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
@@ -47,16 +45,12 @@ export function pullMemberCommentList(page=1, sizePerPage=10, filtersMap=new Map
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
-            console.log(responseData); // For debugging purposes.
-
             let data = camelizeKeys(responseData);
 
             // Extra.
             data['isAPIRequestRunning'] = false;
             data['errors'] = {};
             data['page'] = page;
-
-            // console.log(data); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user data for the application.
@@ -79,8 +73,6 @@ export function pullMemberCommentList(page=1, sizePerPage=10, filtersMap=new Map
                 const responseData = msgpack.decode(Buffer(responseBinaryData));
 
                 let errors = camelizeKeys(responseData);
-
-                console.log("pullMemberCommentList | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -153,8 +145,6 @@ export function postMemberComment(postData, successCallback, failedCallback) {
                 const responseData = msgpack.decode(Buffer(responseBinaryData));
 
                 let errors = camelizeKeys(responseData);
-
-                console.log("postMemberCommentList | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -229,7 +219,6 @@ export function getMemberCommentReactSelectOptions(memberCommentList=[], selectN
                     value: memberComment.id,
                     label: memberComment.text
                 });
-                // console.log(memberComment);
             }
         }
     }
