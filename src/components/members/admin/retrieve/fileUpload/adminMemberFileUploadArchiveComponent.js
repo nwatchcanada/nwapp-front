@@ -13,14 +13,12 @@ import Moment from 'react-moment';
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
-import { FlashMessageComponent } from "../../../flashMessageComponent";
-import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
-export default class AdminMemberCommentComponent extends Component {
+export default class AdminMemberFileUploadArchiveComponent extends Component {
     render() {
         const {
-            memberComments, flashMessage, isLoading, slug, member, text, onTextChange, errors, onClick
+            isLoading, slug, member, errors, onClick
         } = this.props;
         return (
             <div>
@@ -31,15 +29,13 @@ export default class AdminMemberCommentComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/members"><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
                         </li>
                     </ol>
                 </nav>
-
-                <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
 
@@ -52,91 +48,63 @@ export default class AdminMemberCommentComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/member/${slug}`}>
+                            <Link to={`/member/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/member/${slug}/full`}>
+                            <Link to={`/member/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
-                        { /*
                         <div id="step-3" className="st-grey">
-                            <Link to={`/admin/member/${slug}/orders`}>
+                            <Link to={`/member/${slug}/orders`}>
                                 <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
                             </Link>
                         </div>
-                        */}
-                        <div id="step-4" className="st-grey active">
-                            <strong>
+                        <div id="step-4" className="st-grey">
+                            <Link to={`/member/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
-                            </strong>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <Link to={`/admin/member/${slug}/files`}>
-                                <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </Link>
                         </div>
+                        <div id="step-5" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
+                            </strong>
+                        </div>
                         <div id="step-6" className="st-grey">
-                            <Link to={`/admin/member/${slug}/operations`}>
+                            <Link to={`/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
                         </div>
                     </div>
                 </div>
 
-
-
-
-                <div className="row align-items-start">
-                    <h1>Comments/Notes</h1>
-                    <div className="col-lg-12">
-                        {memberComments && memberComments.map(
-                            (comment) => <CommentComponent comment={comment} id={comment.slug} />
-                        )}
-                        <hr className="my-4" />
+                <div className="row">
+                    <div className="col-md-5 mx-auto mt-2">
                         <form>
+                            <h1><i className="fas fa-archive"></i>&nbsp;Archive File</h1>
+
                             <BootstrapErrorsProcessingAlert errors={errors} />
-                            <BootstrapTextarea
-                                name="text"
-                                borderColour="border-success"
-                                label="Additional Comments"
-                                placeholder="Write any additional text here."
-                                rows="5"
-                                value={text}
-                                helpText="This is the comment of the organization."
-                                onChange={onTextChange}
-                                error={errors.text}
-                            />
-                            <button type="button" className="btn btn-lg float-right pl-4 pr-4 btn-success" onClick={onClick}>
-                                <i className="fas fa-check-circle"></i>&nbsp;Save
-                            </button>
+
+                            <div className="jumbotron">
+                                <h1 className="display-4"><i className="fas fa-question-circle"></i>&nbsp;Are you sure?</h1>
+                                <p className="lead">You are about to archive the file, this file will no longer be available to the staff and the member.</p>
+                            </div>
+
+                            <div className="form-group">
+                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                </button>
+                                <Link to={`/member/${slug}/files`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                </Link>
+                            </div>
+
                         </form>
                     </div>
                 </div>
 
-            </div>
-        );
-    }
-}
-
-
-class CommentComponent extends Component {
-    render() {
-        const { comment } = this.props;
-        return (
-            <div className="media mt-4">
-                <img className="mr-3 img-head" src="/img/placeholder.png" alt="" />
-                <div className="media-body">
-                    <div className="row">
-                        <h5 className="mt-0 col-sm-10"><strong>{comment.createdByFullName}</strong></h5>
-                        <h6 className="col-sm-2 text-secondary text-right">
-                            <Moment format="MM/DD/YYYY hh:mm:ss a">{comment.createdAt}</Moment>
-                        </h6>
-                    </div>
-                    <p>{ comment.text }</p>
-                </div>
             </div>
         );
     }

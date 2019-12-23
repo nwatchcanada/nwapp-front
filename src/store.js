@@ -8,7 +8,7 @@ import {
     TENANT_LIST_SUCCESS, TENANT_DETAIL_SUCCESS, MEMBER_LIST_SUCCESS, MEMBER_DETAIL_SUCCESS,
     HOW_HEAR_LIST_SUCCESS, HOW_HEAR_DETAIL_SUCCESS, TAG_LIST_SUCCESS, TAG_DETAIL_SUCCESS,
     EXPECTATION_LIST_SUCCESS, EXPECTATION_DETAIL_SUCCESS, MEANING_LIST_SUCCESS, MEANING_DETAIL_SUCCESS,
-    MEMBER_COMMENT_LIST_SUCCESS,
+    MEMBER_COMMENT_LIST_SUCCESS, MEMBER_FILE_LIST_SUCCESS,
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -18,6 +18,7 @@ import { howHearListReducer, howHearDetailReducer } from "./reducers/howHearRedu
 import { meaningListReducer, meaningDetailReducer } from "./reducers/meaningReducers";
 import { tagListReducer, tagDetailReducer } from "./reducers/tagReducers";
 import { expectationListReducer, expectationDetailReducer } from "./reducers/expectationReducers";
+import { memberFileListReducer } from "./reducers/memberFileUploadReducers";
 import dashboardReducer from "./reducers/dashboardReducer";
 import flashMessageReducer from "./reducers/flashMessageReducer";
 
@@ -36,6 +37,7 @@ const appReducer = combineReducers({
     howHearListState: howHearListReducer, howHearDetailState: howHearDetailReducer,
     meaningListState: meaningListReducer, meaningDetailState: meaningDetailReducer,
     expectationListState: expectationListReducer, expectationDetailState: expectationDetailReducer,
+    memberFileListState: memberFileListReducer,
 });
 
 
@@ -68,7 +70,7 @@ const localStorageMiddleware = ({ getState }) => {
             TENANT_LIST_SUCCESS, TENANT_DETAIL_SUCCESS, MEMBER_LIST_SUCCESS,
             MEMBER_DETAIL_SUCCESS, HOW_HEAR_LIST_SUCCESS, HOW_HEAR_DETAIL_SUCCESS,
             TAG_LIST_SUCCESS, TAG_DETAIL_SUCCESS, EXPECTATION_LIST_SUCCESS, EXPECTATION_DETAIL_SUCCESS,
-            MEANING_LIST_SUCCESS, MEANING_DETAIL_SUCCESS,
+            MEANING_LIST_SUCCESS, MEANING_DETAIL_SUCCESS, MEMBER_FILE_LIST_SUCCESS,
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))

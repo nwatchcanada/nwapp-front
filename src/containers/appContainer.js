@@ -93,6 +93,9 @@ import AdminMemberSearchResultContainer from "./members/admin/search/adminMember
 import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminMemberLiteRetrieveContainer";
 import AdminMemberFullRetrieveContainer from "./members/admin/retrieve/adminMemberFullRetrieveContainer";
 import AdminMemberCommentContainer from "./members/admin/retrieve/adminMemberCommentContainer";
+import AdminMemberFileUploadListContainer from "./members/admin/retrieve/fileUpload/adminMemberFileUploadListContainer";
+import AdminMemberFileUploadAddContainer from "./members/admin/retrieve/fileUpload/adminMemberFileUploadAddContainer";
+// import AdminMemberFileUploadListContainer from "./members/admin/update/adminMemberFileUploadListContainer";
 import AdminMemberOperationsContainer from "./members/admin/retrieve/adminMemberOperationsContainer";
 import AdminMemberCreateStep1Container from "./members/admin/create/adminMemberCreateStep1Container";
 import AdminMemberCreateStep2Container from "./members/admin/create/adminMemberCreateStep2Container";
@@ -292,6 +295,8 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug" exact component={requiresAuth(AdminMemberLiteRetrieveContainer)} />
                                 <Route path="/admin/member/:slug/full" exact component={requiresAuth(AdminMemberFullRetrieveContainer)} />
                                 <Route path="/admin/member/:slug/comments" exact component={requiresAuth(AdminMemberCommentContainer)} />
+                                <Route path="/admin/member/:slug/files" exact component={requiresAuth(AdminMemberFileUploadListContainer)} />
+                                <Route path="/admin/member/:slug/file/add" exact component={requiresAuth(AdminMemberFileUploadAddContainer)} />
                                 <Route path="/admin/member/:slug/operations" exact component={requiresAuth(AdminMemberOperationsContainer)} />
                                 <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />
