@@ -146,7 +146,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}
-                memberData={this.props.member}
+                member={this.props.member}
                 onBack={this.onBack}
                 onClick={this.onClick}
                 onCheckboxChange={this.onCheckboxChange}

@@ -11,7 +11,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 export default class AdminMemberPromoteOperationStep2Component extends Component {
     render() {
         const {
-            slug, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
+            slug, member, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
             roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, policeCheckDate,
         } = this.props;
         const isAssociate = roleId === ASSOCIATE_ROLE_ID;
@@ -26,7 +26,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                             <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/member/${slug}`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
+                            <Link to={`/admin/member/${slug}`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote
