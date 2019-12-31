@@ -69,7 +69,7 @@ export async function fetchTokenCredentials(email, password) {
 
         // Save our tokens.
         setAccessTokenInLocalStorage(accessToken);
-        setRefreshTokenInLocalStorage(accessToken);
+        setRefreshTokenInLocalStorage(refreshToken);
 
         // Return our result.
         return {
@@ -105,7 +105,7 @@ export async function fetchRefreshCredentials(refreshTokenString) {
 
         // Save our tokens.
         setAccessTokenInLocalStorage(accessToken);
-        setRefreshTokenInLocalStorage(accessToken);
+        setRefreshTokenInLocalStorage(refreshToken);
 
         // Return our result.
         return {

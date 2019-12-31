@@ -33,6 +33,13 @@ export function getSubdomain() {
 }
 
 
+export function getDomainRootURL() {
+    let host = window.location.host;
+    let protocol = window.location.protocol;
+    return protocol + "//" + host;
+}
+
+
 /**
  *  Function takes the React environment variables and returns the base URL used
  *  for all API communication with our web-service. Function takes into account
