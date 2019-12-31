@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
-import MemberPromoteStep3Component from "../../../../components/members/admin/operations/memberPromoteStep3Component";
+import AdminMemberPromoteOperationStep2Component from "../../../../components/members/admin/operations/memberPromoteStep2Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { validatePromotionInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
-    localStorageGetDateItem
+    localStorageGetDateItem,
+    localStorageSetObjectOrArrayItem
 } from "../../../../helpers/localStorageUtility";
 
 
-class MemberPromoteStep2Container extends Component {
+class AdminMemberPromoteOperationStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -39,6 +40,8 @@ class MemberPromoteStep2Container extends Component {
         }
 
         this.onClick = this.onClick.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
+        this.onPoliceCheckDateChange = this.onPoliceCheckDateChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -68,8 +71,7 @@ class MemberPromoteStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members");
+        this.props.history.push("/member/"+this.state.slug+"/promote/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -95,20 +97,34 @@ class MemberPromoteStep2Container extends Component {
         })
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-member-promote-'+[e.target.name], e.target.checked);
+    }
+
+    onPoliceCheckDateChange(dateObj) {
+        this.setState({
+            policeCheckDate: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('nwapp-member-promote-policeCheckDate', dateObj);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.setState({
-            isLoading: true,
-        })
-        this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
-            this.props.history.push("/area-coordinator/"+this.state.slug+"/full");
-        }
-        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
-            this.props.history.push("/associate/"+this.state.slug+"/full");
+
+        // Perform client-side validation.
+        const { errors, isValid } = validatePromotionInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
         } else {
-            this.props.history.push("/member/"+this.state.slug+"/full");
+            this.onFailedSubmissionCallback(errors);
         }
     }
 
@@ -126,9 +142,7 @@ class MemberPromoteStep2Container extends Component {
             'absoluteUrl': '/member/argyle'
         };
         return (
-            <MemberPromoteStep3Component
-                slug={this.state.slug}
-                memberData={memberData}
+            <AdminMemberPromoteOperationStep2Component
                 roleId={this.state.roleId}
                 areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
@@ -137,8 +151,12 @@ class MemberPromoteStep2Container extends Component {
                 associateAgreement={this.state.associateAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
+                slug={this.state.slug}
+                memberData={memberData}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                onCheckboxChange={this.onCheckboxChange}
+                onPoliceCheckDateChange={this.onPoliceCheckDateChange}
             />
         );
     }
@@ -162,4 +180,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberPromoteStep2Container);
+)(AdminMemberPromoteOperationStep2Container);

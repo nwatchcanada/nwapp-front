@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import MemberPromoteStep1Component from "../../../../components/members/admin/operations/memberPromoteStep1Component";
 
 
-class MemberPromoteStep1Container extends Component {
+class AdminMemberPromoteOperationStep1Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -128,4 +128,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberPromoteStep1Container);
+)(AdminMemberPromoteOperationStep1Container);

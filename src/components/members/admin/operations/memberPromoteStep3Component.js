@@ -8,7 +8,7 @@ import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constan
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
 
-export default class MemberPromoteStep2Component extends Component {
+export default class AdminMemberPromoteOperationStep2Component extends Component {
     render() {
         const { roleId, policeCheckDate, errors, slug, onClick, isLoading } = this.props;
 

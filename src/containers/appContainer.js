@@ -109,9 +109,9 @@ import AdminMemberContactUpdateContainer from "./members/admin/update/adminMembe
 import AdminMemberAddressUpdateContainer from "./members/admin/update/adminMemberAddressUpdateContainer";
 import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMemberMetricsUpdateContainer";
 import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminMemberAvatarUpdateOperationContainer";
-import MemberPromoteStep1Container from "./members/admin/operations/memberPromoteStep1Container";
-import MemberPromoteStep2Container from "./members/admin/operations/memberPromoteStep2Container";
-import MemberPromoteStep3Container from "./members/admin/operations/memberPromoteStep3Container";
+import AdminMemberPromoteOperationStep1Container from "./members/admin/operations/adminMemberPromoteOperationStep1Container";
+import AdminMemberPromoteOperationStep2Container from "./members/admin/operations/adminMemberPromoteOperationStep2Container";
+import MemberPromoteStep3Container from "./members/admin/operations/adminMemberPromoteOperationStep3Container";
 
 import ItemListContainer from "./items/list/itemListContainer";
 import ItemSearchContainer from "./items/search/itemSearchContainer";
@@ -282,6 +282,12 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/resource/add" exact component={requiresAuth(ResourceCreateContainer)} />
                                 <Route path="/settings/resource/:slug/delete" exact component={requiresAuth(ResourceDeleteContainer)} />
                                 <Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
+
+                                {/*
+                                    ---------------
+                                    MEMBERS SECTION
+                                    ---------------
+                                */}
                                 <Route path="/admin/members/add/step-1" exact component={requiresAuth(AdminMemberCreateStep1Container)} />
                                 <Route path="/admin/members/add/step-2" exact component={requiresAuth(AdminMemberCreateStep2Container)} />
                                 <Route path="/admin/members/add/step-3" exact component={requiresAuth(AdminMemberCreateStep3Container)} />
@@ -304,12 +310,10 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/metrics" exact component={requiresAuth(AdminMemberMetricsUpdateContainer)} />
                                 <Route path="/admin/member/:slug/avatar" exact component={requiresAuth(AdminMemberAvatarUpdateOperationContainer)} />
+                                <Route path="/admin/member/:slug/promote/step-1" exact component={requiresAuth(AdminMemberPromoteOperationStep1Container)} />
+                                <Route path="/admin/member/:slug/promote/step-2" exact component={requiresAuth(AdminMemberPromoteOperationStep2Container)} />
+                                <Route path="/admin/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />
 
-                                {/*
-                                <Route path="/member/:slug/promote/step-1" exact component={requiresAuth(MemberPromoteStep1Container)} />
-                                <Route path="/member/:slug/promote/step-2" exact component={requiresAuth(MemberPromoteStep2Container)} />
-                                <Route path="/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />
-                                */}
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
                                 <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />

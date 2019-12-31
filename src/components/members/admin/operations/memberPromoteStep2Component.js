@@ -8,7 +8,7 @@ import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
 
-export default class MemberPromoteStep2Component extends Component {
+export default class AdminMemberPromoteOperationStep2Component extends Component {
     render() {
         const {
             slug, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
