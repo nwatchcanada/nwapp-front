@@ -7,7 +7,8 @@ import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constan
 
 export default class AdminMemberPromoteOperationStep1Component extends Component {
     render() {
-        const { slug, onClick, isLoading } = this.props;
+        const { slug, member, onClick, isLoading } = this.props;
+        console.log(member);
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -16,10 +17,10 @@ export default class AdminMemberPromoteOperationStep1Component extends Component
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/member/${slug}/full`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
+                            <Link to={`/admin/member/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote
@@ -80,7 +81,7 @@ export default class AdminMemberPromoteOperationStep1Component extends Component
 
                 <div className="row">
                     <div className="col-md-12">
-                        <Link to={`/member/${slug}/full`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                        <Link to={`/admin/member/${slug}/full`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                             <i className="fas fa-arrow-circle-left"></i> Back
                         </Link>
                     </div>

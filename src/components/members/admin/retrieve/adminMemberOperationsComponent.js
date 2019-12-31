@@ -13,8 +13,8 @@ import { FlashMessageComponent } from "../../../flashMessageComponent";
 
 export default class AdminMemberOperationsComponent extends Component {
     render() {
-        const { slug, memberDetail, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
-        const isActiveState = memberDetail.state === "active";
+        const { slug, member, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
+        const isActiveState = member.state === "active";
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -24,17 +24,17 @@ export default class AdminMemberOperationsComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/members`}><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
+                            <Link to={`/admin/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{memberDetail && memberDetail.fullName}
+                            <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-money-check-alt"></i>&nbsp;View Financial Details</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -80,11 +80,11 @@ export default class AdminMemberOperationsComponent extends Component {
                             <div className="col-sm-3 mb-4">
                                 <div className="card box-shadow text-center mx-auto h-100">
                                     <div className="card-custom-top-2">
-                                        <i className="fas fa-plus fa-3x"></i>
+                                        <i className="fas fa-star fa-3x"></i>
                                     </div>
                                     <div className="card-body">
-                                        <h3 className="card-title">Add Order</h3>
-                                        <p className="card-text">Create a new job for this member.</p>
+                                        <h3 className="card-title">Promote</h3>
+                                        <p className="card-text">Promote the member to become an <strong>area coordinator</strong> or <strong>associate</strong> in our system.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
                                         <Link className="btn btn-success btn-lg" onClick={onAddJobClick}>
@@ -145,6 +145,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                     </div>
                                 </div>
                             */}
+                            {/*
                             <div className="col-sm-3 mb-4">
                                 <div className="card box-shadow text-center mx-auto h-100">
                                     <div className="card-custom-top-2">
@@ -161,6 +162,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                     </div>
                                 </div>
                             </div>
+                            */}
                         </div>
 
                     </div>

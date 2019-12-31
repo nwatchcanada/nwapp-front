@@ -75,7 +75,7 @@ class AdminMemberOperationsContainer extends Component {
         localStorage.setItem("workery-create-order-memberId", this.props.memberDetail.id);
         localStorage.setItem("workery-create-order-memberGivenName", this.props.memberDetail.givenName);
         localStorage.setItem("workery-create-order-memberLastName", this.props.memberDetail.lastName);
-        this.props.history.push("/orders/add/step-3");
+        this.props.history.push("/admin/member/"+this.state.slug+"/promote/step-1");
     }
 
 
@@ -91,7 +91,7 @@ class AdminMemberOperationsContainer extends Component {
                 isLoading={this.state.isLoading}
                 flashMessage={this.props.flashMessage}
                 onAddJobClick={this.onAddJobClick}
-                memberDetail={this.props.memberDetail}
+                member={this.props.memberDetail}
                 user={this.props.user}
             />
         );

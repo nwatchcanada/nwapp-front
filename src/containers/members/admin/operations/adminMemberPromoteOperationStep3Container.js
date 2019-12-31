@@ -69,7 +69,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members");
+        this.props.history.push("/admin/members");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -103,12 +103,12 @@ class AdminMemberPromoteOperationStep2Container extends Component {
         })
         this.props.setFlashMessage("success", "Member has been successfully promoted.");
         if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
-            this.props.history.push("/area-coordinator/"+this.state.slug+"/full");
+            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
         }
         else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
-            this.props.history.push("/associate/"+this.state.slug+"/full");
+            this.props.history.push("/admin/associate/"+this.state.slug+"/full");
         } else {
-            this.props.history.push("/member/"+this.state.slug+"/full");
+            this.props.history.push("/admin/member/"+this.state.slug+"/full");
         }
     }
 
@@ -128,7 +128,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
         return (
             <MemberPromoteStep3Component
                 slug={this.state.slug}
-                memberData={memberData}
+                memberData={this.props.member}
                 roleId={this.state.roleId}
                 areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
@@ -147,6 +147,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        member: store.memberDetailState,
     };
 }
 

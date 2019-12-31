@@ -87,6 +87,11 @@ import ResourceDeleteContainer from "./settings/resources/resourceDeleteContaine
 import ResourceCreateContainer from "./settings/resources/resourceCreateContainer";
 import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
 
+/*
+---------------
+MEMBERS SECTION
+---------------
+*/
 import AdminMemberListContainer from "./members/admin/list/adminMemberListContainer";
 import AdminMemberSearchContainer from "./members/admin/search/adminMemberSearchContainer";
 import AdminMemberSearchResultContainer from "./members/admin/search/adminMemberSearchResultContainer";

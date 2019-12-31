@@ -27,10 +27,10 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/member/${slug}`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
+                            <Link to={`/admin/member/${slug}`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote
@@ -44,12 +44,12 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
                             <span className="num">1.</span><span className="">
-                                <Link to={`/member/${slug}/promote/step-1`}>Selection</Link>
+                                <Link to={`/admin/member/${slug}/promote/step-1`}>Selection</Link>
                             </span>
                         </div>
                         <div id="step-2" className="st-grey">
                             <span className="num">2.</span><span className="">
-                                <Link to={`/member/${slug}/promote/step-2`}>Agreement</Link>
+                                <Link to={`/admin/member/${slug}/promote/step-2`}>Agreement</Link>
                             </span>
                         </div>
                         <div id="step-3" className="st-grey active">
@@ -121,7 +121,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/member/${slug}/promote/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/member/${slug}/promote/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

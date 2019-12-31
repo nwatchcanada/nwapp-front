@@ -54,7 +54,7 @@ class AdminMemberPromoteOperationStep1Container extends Component {
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/members");
+        this.props.history.push("/admin/members");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -87,7 +87,7 @@ class AdminMemberPromoteOperationStep1Container extends Component {
         // Set our promotion group id.
         localStorage.setItem("nwapp-member-promote-group-id", roleId);
 
-        this.props.history.push("/member/"+this.state.slug+"/promote/step-2");
+        this.props.history.push("/admin/member/"+this.state.slug+"/promote/step-2");
     }
 
 
@@ -97,16 +97,11 @@ class AdminMemberPromoteOperationStep1Container extends Component {
      */
 
     render() {
-        const memberData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/member/argyle'
-        };
+        console.log(this.props.member)
         return (
             <AdminMemberPromoteOperationStep1Component
                 slug={this.state.slug}
-                memberData={memberData}
+                member={this.props.member}
                 onBack={this.onBack}
                 onClick={this.onClick}
             />
@@ -117,6 +112,7 @@ class AdminMemberPromoteOperationStep1Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        member: store.memberDetailState,
     };
 }
 

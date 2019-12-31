@@ -119,7 +119,7 @@ class AdminMemberLiteRetrieveContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        member: store.memberState,
+        member: store.memberDetailState,
         flashMessage: store.flashMessageState,
     };
 }

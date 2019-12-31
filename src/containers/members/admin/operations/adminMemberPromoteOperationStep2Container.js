@@ -71,7 +71,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/member/"+this.state.slug+"/promote/step-3");
+        this.props.history.push("/admin/member/"+this.state.slug+"/promote/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -135,12 +135,6 @@ class AdminMemberPromoteOperationStep2Container extends Component {
      */
 
     render() {
-        const memberData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/member/argyle'
-        };
         return (
             <AdminMemberPromoteOperationStep2Component
                 roleId={this.state.roleId}
@@ -152,7 +146,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}
-                memberData={memberData}
+                memberData={this.props.member}
                 onBack={this.onBack}
                 onClick={this.onClick}
                 onCheckboxChange={this.onCheckboxChange}
@@ -165,6 +159,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        member: store.memberDetailState,
     };
 }
 
