@@ -10,7 +10,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 
 export default class AdminMemberPromoteOperationStep2Component extends Component {
     render() {
-        const { roleId, policeCheckDate, errors, slug, onClick, isLoading } = this.props;
+        const { roleId, member, policeCheckDate, errors, slug, onClick, isLoading } = this.props;
 
         let groupLabel = "Unknown";
         if (roleId === AREA_COORDINATOR_ROLE_ID) {

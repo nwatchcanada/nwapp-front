@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import * as moment from 'moment';
 
 import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
 import MemberPromoteStep3Component from "../../../../components/members/admin/operations/adminMemberPromoteOperationStep3Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { postMemberPromoteOperation } from "../../../../actions/memberActions";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
@@ -39,8 +41,29 @@ class AdminMemberPromoteOperationStep2Container extends Component {
         }
 
         this.onClick = this.onClick.bind(this);
+        this.getPostData = this.getPostData.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // (1) Member
+        postData.member = this.state.slug;
+
+        // (2) Police Check Date
+        const policeCheckDateMoment = moment(this.state.policeCheckDate);
+        postData.policeCheckDate = policeCheckDateMoment.format("YYYY-MM-DD")
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -68,14 +91,22 @@ class AdminMemberPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Member has been successfully created.");
-        this.props.history.push("/admin/members");
+        this.props.setFlashMessage("success", "Member has been successfully promoted.");
+        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
+            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
+        }
+        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
+            this.props.history.push("/admin/associate/"+this.state.slug+"");
+        } else {
+            this.props.history.push("/admin/member/"+this.state.slug+"");
+        }
     }
 
     onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors
-        })
+            errors: errors,
+            isLoading: false,
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -100,16 +131,16 @@ class AdminMemberPromoteOperationStep2Container extends Component {
         e.preventDefault();
         this.setState({
             isLoading: true,
-        })
-        this.props.setFlashMessage("success", "Member has been successfully promoted.");
-        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
-            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
-        }
-        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
-            this.props.history.push("/admin/associate/"+this.state.slug+"/full");
-        } else {
-            this.props.history.push("/admin/member/"+this.state.slug+"/full");
-        }
+            errors: [],
+        });
+
+        // Once our state has been validated `client-side` then we will
+        // make an API request with the server to create our new production.
+        this.props.postMemberPromoteOperation(
+            this.getPostData(),
+            this.onSuccessfulSubmissionCallback,
+            this.onFailedSubmissionCallback
+        );
     }
 
 
@@ -119,16 +150,10 @@ class AdminMemberPromoteOperationStep2Container extends Component {
      */
 
     render() {
-        const memberData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/member/argyle'
-        };
         return (
             <MemberPromoteStep3Component
                 slug={this.state.slug}
-                memberData={this.props.member}
+                member={this.props.member}
                 roleId={this.state.roleId}
                 areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
@@ -155,7 +180,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        postMemberPromoteOperation: (postData, successCallback, failedCallback) => {
+            dispatch(postMemberPromoteOperation(postData, successCallback, failedCallback))
+        },
     }
 }
 

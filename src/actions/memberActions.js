@@ -12,7 +12,7 @@ import {
     WORKERY_MEMBER_LIST_API_ENDPOINT,
     WORKERY_MEMBER_DETAIL_API_ENDPOINT,
     WORKERY_MEMBER_ARCHIVE_API_OPERATION_ENDPOINT,
-    WORKERY_MEMBER_PROMOTE_OPERATION_API_ENDPOINT,
+    NWAPP_MEMBER_PROMOTE_OPERATION_API_ENDPOINT,
     WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT,
     WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT,
     WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT,
@@ -661,7 +661,7 @@ export function postMemberPromoteOperation(postData, onSuccessCallback, onFailur
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(WORKERY_MEMBER_PROMOTE_OPERATION_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(NWAPP_MEMBER_PROMOTE_OPERATION_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
