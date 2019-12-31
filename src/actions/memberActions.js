@@ -9,9 +9,11 @@ import {
     MEMBER_DETAIL_REQUEST, MEMBER_DETAIL_FAILURE, MEMBER_DETAIL_SUCCESS
 } from '../constants/actionTypes';
 import {
-    WORKERY_MEMBER_LIST_API_ENDPOINT, WORKERY_MEMBER_DETAIL_API_ENDPOINT,
-    WORKERY_MEMBER_ARCHIVE_API_ENDPOINT, WORKERY_MEMBER_REZ_UPGRADE_API_ENDPOINT,
-    WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_API_ENDPOINT,
+    WORKERY_MEMBER_LIST_API_ENDPOINT,
+    WORKERY_MEMBER_DETAIL_API_ENDPOINT,
+    WORKERY_MEMBER_ARCHIVE_API_OPERATION_ENDPOINT,
+    WORKERY_MEMBER_PROMOTE_OPERATION_API_ENDPOINT,
+    WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT,
     WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT,
     WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT,
     WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT
@@ -583,7 +585,7 @@ export function postMemberDeactivationDetail(postData, onSuccessCallback, onFail
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(WORKERY_MEMBER_ARCHIVE_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(WORKERY_MEMBER_ARCHIVE_API_OPERATION_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -640,7 +642,7 @@ export function postMemberDeactivationDetail(postData, onSuccessCallback, onFail
 }
 
 
-export function postMemberResidentialUpgradeDetail(postData, onSuccessCallback, onFailureCallback) {
+export function postMemberPromoteOperation(postData, onSuccessCallback, onFailureCallback) {
     return dispatch => {
 
         // Change the global state to attempting to log in.
@@ -659,7 +661,7 @@ export function postMemberResidentialUpgradeDetail(postData, onSuccessCallback, 
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(WORKERY_MEMBER_REZ_UPGRADE_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(WORKERY_MEMBER_PROMOTE_OPERATION_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -690,7 +692,7 @@ export function postMemberResidentialUpgradeDetail(postData, onSuccessCallback, 
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postMemberResidentialUpgradeDetail | error:", errors); // For debuggin purposes only.
+                console.log("postMemberPromoteOperation | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -734,7 +736,7 @@ export function postMemberAvatarCreateOrUpdateOperation(postData, onSuccessCallb
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -765,7 +767,7 @@ export function postMemberAvatarCreateOrUpdateOperation(postData, onSuccessCallb
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postMemberResidentialUpgradeDetail | error:", errors); // For debuggin purposes only.
+                console.log("postMemberPromoteOperation | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

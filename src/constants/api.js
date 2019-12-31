@@ -39,9 +39,9 @@ export const NWAPP_PROFILE_API_URL = process.env.REACT_APP_API_HOST + NWAPP_API_
 //TODO: PROCESS THE FOLLOWING
 export const WORKERY_MEMBER_LIST_API_ENDPOINT = '/v1/members';
 export const WORKERY_MEMBER_DETAIL_API_ENDPOINT = '/v1/member/';
-export const WORKERY_MEMBER_ARCHIVE_API_ENDPOINT = '/v1/members/operation/archive';
-export const WORKERY_MEMBER_REZ_UPGRADE_API_ENDPOINT = '/v1/members/operation/upgrade-residential';
-export const WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_API_ENDPOINT = '/v1/members/operation/avatar';
+export const WORKERY_MEMBER_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/members/operation/archive';
+export const WORKERY_MEMBER_PROMOTE_OPERATION_API_ENDPOINT = '/v1/members/operation/upgrade-residential';
+export const WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/members/operation/avatar';
 export const WORKERY_MEMBER_COMMENT_LIST_API_ENDPOINT = '/v1/member-comments';
 export const NWAPP_PRIVATE_FILE_UPLOAD_LIST_API_ENDPOINT = '/v1/private-file-uploads';
 export const NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT = '/v1/private-file-upload/<slug>';
