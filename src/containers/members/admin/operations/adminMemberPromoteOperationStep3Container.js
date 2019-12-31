@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
-import MemberPromoteStep3Component from "../../../../components/members/admin/operations/memberPromoteStep3Component";
+import MemberPromoteStep3Component from "../../../../components/members/admin/operations/adminMemberPromoteOperationStep3Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     localStorageGetIntegerItem,

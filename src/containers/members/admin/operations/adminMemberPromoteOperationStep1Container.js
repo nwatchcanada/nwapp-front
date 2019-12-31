@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberPromoteStep1Component from "../../../../components/members/admin/operations/memberPromoteStep1Component";
+import AdminMemberPromoteOperationStep1Component from "../../../../components/members/admin/operations/adminMemberPromoteOperationStep1Component";
 
 
 class AdminMemberPromoteOperationStep1Container extends Component {
@@ -104,7 +104,7 @@ class AdminMemberPromoteOperationStep1Container extends Component {
             'absoluteUrl': '/member/argyle'
         };
         return (
-            <MemberPromoteStep1Component
+            <AdminMemberPromoteOperationStep1Component
                 slug={this.state.slug}
                 memberData={memberData}
                 onBack={this.onBack}

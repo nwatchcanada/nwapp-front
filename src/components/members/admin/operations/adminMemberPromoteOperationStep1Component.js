@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
 
 
-export default class MemberPromoteStep1Component extends Component {
+export default class AdminMemberPromoteOperationStep1Component extends Component {
     render() {
         const { slug, onClick, isLoading } = this.props;
         return (

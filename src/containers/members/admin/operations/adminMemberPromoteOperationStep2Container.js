@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminMemberPromoteOperationStep2Component from "../../../../components/members/admin/operations/memberPromoteStep2Component";
+import AdminMemberPromoteOperationStep2Component from "../../../../components/members/admin/operations/adminMemberPromoteOperationStep2Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validatePromotionInput } from "../../../../validators/memberValidator";
 import {
