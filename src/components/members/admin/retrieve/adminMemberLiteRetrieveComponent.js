@@ -63,9 +63,9 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                     <div className="col-md-9 mx-auto rounded bg-light border p-2">
                         <div className="row">
                             <div className="col-sm-4">
-                                <Link to={`/member/${slug}/avatar`}>
+                                <Link to={`/admin/member/${slug}/avatar`}>
                                     {member && member.avatarUrl !== undefined && member.avatarUrl !== null
-                                        ? <img src={member.avatarUrl} className="img-fluid rounded" alt="Profile" id={`customer-avatar-${slug}`} />
+                                        ? <img src={member.avatarUrl} className="img-fluid rounded" alt="Profile" id={`member-avatar-${slug}`} />
                                         : <img src="/img/placeholder.png" className="img-fluid rounded" alt="Profile" id={`avatar-placeholder`}/>
                                     }
                                     <p><i className="fas fa-edit"></i>Click here to change photo</p>
