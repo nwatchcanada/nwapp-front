@@ -58,13 +58,16 @@ class AdminMemberFileUploadAddContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        // (3) Tags - We need to only return our `id` values.
+        // (1) Tags - We need to only return our `id` values.
         let idTags = [];
         for (let i = 0; i < this.state.tags.length; i++) {
             let tag = this.state.tags[i];
             idTags.push(tag.value);
         }
         postData.tags = idTags;
+
+        // (2) User
+        postData.user = this.state.slug;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -132,7 +135,7 @@ class AdminMemberFileUploadAddContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Member file has been successfully created.");
-                this.props.history.push("/member/"+this.state.slug+"/files");
+                this.props.history.push("/admin/member/"+this.state.slug+"/files");
             }
         )
     }

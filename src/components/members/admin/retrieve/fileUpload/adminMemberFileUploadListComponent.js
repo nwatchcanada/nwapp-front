@@ -236,11 +236,13 @@ class AdminMemberFileUploadListComponent extends Component {
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
+                        { /*
                         <div id="step-3" className="st-grey">
                             <Link to={`/admin/member/${slug}/orders`}>
                                 <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
                             </Link>
                         </div>
+                        */}
                         <div id="step-4" className="st-grey">
                             <Link to={`/admin/member/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>

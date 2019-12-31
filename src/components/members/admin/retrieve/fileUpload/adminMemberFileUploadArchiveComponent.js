@@ -29,7 +29,7 @@ export default class AdminMemberFileUploadArchiveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/members"><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
+                            <Link to="/admin/members"><i className="fas fa-user-circle"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
@@ -48,22 +48,24 @@ export default class AdminMemberFileUploadArchiveComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/member/${slug}`}>
+                            <Link to={`/admin/member/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/member/${slug}/full`}>
+                            <Link to={`/admin/member/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
+                        {/*
                         <div id="step-3" className="st-grey">
                             <Link to={`/member/${slug}/orders`}>
                                 <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
                             </Link>
                         </div>
+                        */}
                         <div id="step-4" className="st-grey">
-                            <Link to={`/member/${slug}/comments`}>
+                            <Link to={`/admin/member/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
@@ -73,7 +75,7 @@ export default class AdminMemberFileUploadArchiveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <Link to={`/member/${slug}/operations`}>
+                            <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
                         </div>

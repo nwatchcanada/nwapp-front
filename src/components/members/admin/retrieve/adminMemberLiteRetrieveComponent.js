@@ -46,6 +46,11 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
+                        <div id="step-5" className="st-grey">
+                            <Link to={`/admin/member/${slug}/files`}>
+                                <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
+                            </Link>
+                        </div>
                         <div id="step-6" className="st-grey">
                             <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
