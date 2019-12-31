@@ -715,7 +715,7 @@ export function postMemberResidentialUpgradeDetail(postData, onSuccessCallback, 
     }
 }
 
-export function postMemberAvatarCreateOrUpdate(postData, onSuccessCallback, onFailureCallback) {
+export function postMemberAvatarCreateOrUpdateOperation(postData, onSuccessCallback, onFailureCallback) {
     return dispatch => {
 
         // Change the global state to attempting to log in.

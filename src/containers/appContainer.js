@@ -109,9 +109,9 @@ import AdminMemberContactUpdateContainer from "./members/admin/update/adminMembe
 import AdminMemberAddressUpdateContainer from "./members/admin/update/adminMemberAddressUpdateContainer";
 import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMemberMetricsUpdateContainer";
 import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminMemberAvatarUpdateOperationContainer";
-import MemberPromoteStep1Container from "./members/promote/memberPromoteStep1Container";
-import MemberPromoteStep2Container from "./members/promote/memberPromoteStep2Container";
-import MemberPromoteStep3Container from "./members/promote/memberPromoteStep3Container";
+import MemberPromoteStep1Container from "./members/admin/operations/memberPromoteStep1Container";
+import MemberPromoteStep2Container from "./members/admin/operations/memberPromoteStep2Container";
+import MemberPromoteStep3Container from "./members/admin/operations/memberPromoteStep3Container";
 
 import ItemListContainer from "./items/list/itemListContainer";
 import ItemSearchContainer from "./items/search/itemSearchContainer";

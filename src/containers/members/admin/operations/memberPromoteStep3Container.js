@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberPromoteStep1Component from "../../../components/members/promote/memberPromoteStep1Component";
+import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import MemberPromoteStep3Component from "../../../../components/members/admin/operations/memberPromoteStep3Component";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import {
+    localStorageGetIntegerItem,
+    localStorageGetBooleanItem,
+    localStorageGetDateItem
+} from "../../../../helpers/localStorageUtility";
 
 
-class MemberPromoteStep1Container extends Component {
+class MemberPromoteStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -21,6 +28,14 @@ class MemberPromoteStep1Container extends Component {
         // Update state.
         this.state = {
             slug: slug,
+            errors: [],
+            roleId: localStorageGetIntegerItem("nwapp-member-promote-group-id"),
+            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-member-promote-areaCoordinatorAgreement"),
+            conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-member-promote-conflictOfInterestAgreement"),
+            codeOfConductAgreement: localStorageGetBooleanItem("nwapp-member-promote-codeOfConductAgreement"),
+            confidentialityAgreement: localStorageGetBooleanItem("nwapp-member-promote-confidentialityAgreement"),
+            associateAgreement: localStorageGetBooleanItem("nwapp-member-promote-associateAgreement"),
+            policeCheckDate: localStorageGetDateItem("nwapp-member-promote-policeCheckDate"),
         }
 
         this.onClick = this.onClick.bind(this);
@@ -80,14 +95,21 @@ class MemberPromoteStep1Container extends Component {
         })
     }
 
-    onClick(e, roleId) {
+    onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-
-        // Set our promotion group id.
-        localStorage.setItem("nwapp-member-promote-group-id", roleId);
-
-        this.props.history.push("/member/"+this.state.slug+"/promote/step-2");
+        this.setState({
+            isLoading: true,
+        })
+        this.props.setFlashMessage("success", "Member has been successfully promoted.");
+        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
+            this.props.history.push("/area-coordinator/"+this.state.slug+"/full");
+        }
+        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
+            this.props.history.push("/associate/"+this.state.slug+"/full");
+        } else {
+            this.props.history.push("/member/"+this.state.slug+"/full");
+        }
     }
 
 
@@ -104,9 +126,17 @@ class MemberPromoteStep1Container extends Component {
             'absoluteUrl': '/member/argyle'
         };
         return (
-            <MemberPromoteStep1Component
+            <MemberPromoteStep3Component
                 slug={this.state.slug}
                 memberData={memberData}
+                roleId={this.state.roleId}
+                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
+                conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
+                codeOfConductAgreement={this.state.codeOfConductAgreement}
+                confidentialityAgreement={this.state.confidentialityAgreement}
+                associateAgreement={this.state.associateAgreement}
+                policeCheckDate={this.state.policeCheckDate}
+                errors={this.state.errors}
                 onBack={this.onBack}
                 onClick={this.onClick}
             />
@@ -121,11 +151,15 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberPromoteStep1Container);
+)(MemberPromoteStep2Container);

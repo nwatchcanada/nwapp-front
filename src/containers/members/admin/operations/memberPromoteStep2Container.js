@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberPromoteStep2Component from "../../../components/members/promote/memberPromoteStep2Component";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validatePromotionInput } from "../../../validators/memberValidator";
+import MemberPromoteStep2Component from "../../../../components/members/admin/operations/memberPromoteStep2Component";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { validatePromotionInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
     localStorageGetDateItem,
     localStorageSetObjectOrArrayItem
-} from "../../../helpers/localStorageUtility";
+} from "../../../../helpers/localStorageUtility";
 
 
 class MemberPromoteStep2Container extends Component {

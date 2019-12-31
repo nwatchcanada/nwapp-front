@@ -1,7 +1,8 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../constants/api";
+
+import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
 
 
 export default class MemberPromoteStep1Component extends Component {

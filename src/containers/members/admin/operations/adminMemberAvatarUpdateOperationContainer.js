@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import MemberAvatarUpdateOperationComponent from "../../../../components/members/admin/operations/adminMemberAvatarUpdateOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { postMemberAvatarCreateOrUpdate } from "../../../../actions/memberActions";
+import { postMemberAvatarCreateOrUpdateOperation } from "../../../../actions/memberActions";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateImageInput } from "../../../../validators/fileValidator"
 
@@ -54,13 +54,16 @@ class AdminMemberAvatarUpdateOperationContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        // (3) Tags - We need to only return our `id` values.
+        // (1) Tags - We need to only return our `id` values.
         let idTags = [];
         for (let i = 0; i < this.state.tags.length; i++) {
             let tag = this.state.tags[i];
             idTags.push(tag.value);
         }
         postData.tags = idTags;
+
+        // (2) Member
+        postData.member = this.state.slug;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -162,7 +165,7 @@ class AdminMemberAvatarUpdateOperationContainer extends Component {
 
             // Once our state has been validated `client-side` then we will
             // make an API request with the server to create our new production.
-            this.props.postMemberAvatarCreateOrUpdate(
+            this.props.postMemberAvatarCreateOrUpdateOperation(
                 this.getPostData(),
                 this.onSuccessPostCallback,
                 this.onFailurePostCallback
@@ -283,8 +286,8 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        postMemberAvatarCreateOrUpdate: (postData, successCallback, failedCallback) => {
-            dispatch(postMemberAvatarCreateOrUpdate(postData, successCallback, failedCallback))
+        postMemberAvatarCreateOrUpdateOperation: (postData, successCallback, failedCallback) => {
+            dispatch(postMemberAvatarCreateOrUpdateOperation(postData, successCallback, failedCallback))
         },
     }
 }

@@ -1,11 +1,11 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../constants/api";
 
-import { BootstrapCheckbox } from "../../bootstrap/bootstrapCheckbox";
-import { BootstrapDatePicker } from '../../bootstrap/bootstrapDatePicker';
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
 
 export default class MemberPromoteStep2Component extends Component {
