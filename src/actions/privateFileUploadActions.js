@@ -5,13 +5,13 @@ import isEmpty from 'lodash/isEmpty';
 import msgpack from 'msgpack-lite';
 
 import {
-    MEMBER_FILE_LIST_REQUEST,
-    MEMBER_FILE_LIST_FAILURE,
-    MEMBER_FILE_LIST_SUCCESS
+    PRIVATE_FILE_UPLOAD_LIST_REQUEST,
+    PRIVATE_FILE_UPLOAD_LIST_FAILURE,
+    PRIVATE_FILE_UPLOAD_LIST_SUCCESS
 } from '../constants/actionTypes';
 import {
-    WORKERY_MEMBER_FILE_LIST_API_ENDPOINT,
-    WORKERY_MEMBER_FILE_ARCHIVE_API_ENDPOINT
+    NWAPP_PRIVATE_FILE_UPLOAD_LIST_API_ENDPOINT,
+    NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT
 } from '../constants/api';
 import getCustomAxios from '../helpers/customAxios';
 
@@ -20,11 +20,11 @@ import getCustomAxios from '../helpers/customAxios';
 //                                 LIST                                       //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullMemberFileUploadList(page=1, sizePerPage=10, filtersMap=new Map(), onSuccessCallback=null, onFailureCallback=null) {
+export function pullPrivateFileUploadList(page=1, sizePerPage=10, filtersMap=new Map(), onSuccessCallback=null, onFailureCallback=null) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setMemberFileUploadListRequest()
+            setPrivateFileUploadListRequest()
         );
 
         console.log(page, sizePerPage, filtersMap, onSuccessCallback, onFailureCallback);
@@ -34,7 +34,7 @@ export function pullMemberFileUploadList(page=1, sizePerPage=10, filtersMap=new 
 
         // Generate the URL from the map.
         // Note: Learn about `Map` iteration via https://hackernoon.com/what-you-should-know-about-es6-maps-dc66af6b9a1e
-        let aURL = WORKERY_MEMBER_FILE_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
+        let aURL = NWAPP_PRIVATE_FILE_UPLOAD_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
         filtersMap.forEach(
             (value, key) => {
                 let decamelizedkey = decamelize(key)
@@ -61,7 +61,7 @@ export function pullMemberFileUploadList(page=1, sizePerPage=10, filtersMap=new 
             // Update the global state of the application to store our
             // user data for the application.
             store.dispatch(
-                setMemberFileUploadListSuccess(data)
+                setPrivateFileUploadListSuccess(data)
             );
 
             // DEVELOPERS NOTE:
@@ -80,11 +80,11 @@ export function pullMemberFileUploadList(page=1, sizePerPage=10, filtersMap=new 
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullMemberFileUploadList | error:", errors); // For debuggin purposes only.
+                console.log("pullPrivateFileUploadList | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setMemberFileUploadListFailure({
+                    setPrivateFileUploadListFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -109,11 +109,11 @@ export function pullMemberFileUploadList(page=1, sizePerPage=10, filtersMap=new 
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postMemberFileUpload(postData, successCallback, failedCallback) {
+export function postPrivateFileUpload(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
-            setMemberFileUploadListRequest()
+            setPrivateFileUploadListRequest()
         );
 
         // Generate our app's Axios instance.
@@ -127,7 +127,7 @@ export function postMemberFileUpload(postData, successCallback, failedCallback) 
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(WORKERY_MEMBER_FILE_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(NWAPP_PRIVATE_FILE_UPLOAD_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -143,7 +143,7 @@ export function postMemberFileUpload(postData, successCallback, failedCallback) 
             // Update the global state of the application to store our
             // user device for the application.
             store.dispatch(
-                setMemberFileUploadListSuccess(device)
+                setPrivateFileUploadListSuccess(device)
             );
         }).catch( (exception) => {
             if (exception.response) {
@@ -154,11 +154,11 @@ export function postMemberFileUpload(postData, successCallback, failedCallback) 
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postMemberFileUploadList | error:", errors); // For debuggin purposes only.
+                console.log("postPrivateFileUploadList | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setMemberFileUploadListFailure({
+                    setPrivateFileUploadListFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -183,17 +183,17 @@ export function postMemberFileUpload(postData, successCallback, failedCallback) 
 //                                 DELETE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteMemberFileUpload(id, successCallback, failedCallback) {
+export function deletePrivateFileUpload(id, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setMemberFileUploadListRequest()
+            setPrivateFileUploadListRequest()
         );
 
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_MEMBER_FILE_ARCHIVE_API_ENDPOINT.replace("XXX", id);
+        const aURL = NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT.replace("XXX", id);
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -206,12 +206,12 @@ export function deleteMemberFileUpload(id, successCallback, failedCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("deleteMemberFileUpload | Success:", profile); // For debugging purposes.
+            console.log("deletePrivateFileUpload | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
             store.dispatch(
-                setMemberFileUploadListSuccess(profile)
+                setPrivateFileUploadListSuccess(profile)
             );
 
             if (successCallback) {
@@ -227,11 +227,11 @@ export function deleteMemberFileUpload(id, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("deleteMemberFileUpload | error:", errors); // For debuggin purposes only.
+                console.log("deletePrivateFileUpload | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setMemberFileUploadListFailure({
+                    setPrivateFileUploadListFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -256,8 +256,8 @@ export function deleteMemberFileUpload(id, successCallback, failedCallback) {
 //                                REDUX ACTIONS                               //
 ////////////////////////////////////////////////////////////////////////////////
 
-export const setMemberFileUploadListRequest = () => ({
-    type: MEMBER_FILE_LIST_REQUEST,
+export const setPrivateFileUploadListRequest = () => ({
+    type: PRIVATE_FILE_UPLOAD_LIST_REQUEST,
     payload: {
         isAPIRequestRunning: true,
         page: 1,
@@ -266,42 +266,17 @@ export const setMemberFileUploadListRequest = () => ({
 });
 
 
-export const setMemberFileUploadListFailure = (info) => ({
-    type: MEMBER_FILE_LIST_FAILURE,
+export const setPrivateFileUploadListFailure = (info) => ({
+    type: PRIVATE_FILE_UPLOAD_LIST_FAILURE,
     payload: info,
 });
 
 
-export const setMemberFileUploadListSuccess = (info) => ({
-    type: MEMBER_FILE_LIST_SUCCESS,
+export const setPrivateFileUploadListSuccess = (info) => ({
+    type: PRIVATE_FILE_UPLOAD_LIST_SUCCESS,
     payload: info,
 });
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                 UTILITY                                    //
 ////////////////////////////////////////////////////////////////////////////////
-
-/**
- * Utility function takes the API data and converts it to HTML dropdown
- * options which will be consumed by the `react-select` library elements.
- */
-export function getMemberFileUploadReactSelectOptions(memberFileList=[], selectName="memberFile") {
-    const memberFileOptions = [];
-    const isNotProductionsEmpty = isEmpty(memberFileList) === false;
-    if (isNotProductionsEmpty) {
-        const results = memberFileList.results;
-        const isResultsNotEmpty = isEmpty(results) === false;
-        if (isResultsNotEmpty) {
-            for (let i = 0; i < results.length; i++) {
-                let memberFile = results[i];
-                memberFileOptions.push({
-                    selectName: selectName,
-                    value: memberFile.id,
-                    label: memberFile.text
-                });
-                // console.log(memberFile);
-            }
-        }
-    }
-    return memberFileOptions;
-}

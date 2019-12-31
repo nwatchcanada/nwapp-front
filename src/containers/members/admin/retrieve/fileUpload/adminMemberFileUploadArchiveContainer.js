@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import MemberFileUploadArchiveComponent from "../../../../components/members/admin/retrieve/fileUpload/adminMemberFileUploadArchiveComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { deleteMemberFileUpload } from "../../../../actions/memberFileUploadActions";
+import { deletePrivateFileUpload } from "../../../../actions/privateFileUploadActions";
 
 
 class AdminMemberFileUploadArchiveContainer extends Component {
@@ -88,7 +88,7 @@ class AdminMemberFileUploadArchiveContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deleteMemberFileUpload(this.state.fileId, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deletePrivateFileUpload(this.state.fileId, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteMemberFileUpload: (id, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteMemberFileUpload(id, onSuccessCallback, onFailureCallback))
+        deletePrivateFileUpload: (id, onSuccessCallback, onFailureCallback) => {
+            dispatch(deletePrivateFileUpload(id, onSuccessCallback, onFailureCallback))
         },
     }
 }

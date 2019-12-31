@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import AdminMemberFileUploadListComponent from "../../../../../components/members/admin/retrieve/fileUpload/adminMemberFileUploadListComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullMemberFileUploadList, postMemberFileUpload } from "../../../../../actions/memberFileUploadActions";
+import { pullPrivateFileUploadList, postPrivateFileUpload } from "../../../../../actions/privateFileUploadActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 
 
@@ -73,7 +73,7 @@ class AdminMemberFileUploadListContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Get our data.
-        this.props.pullMemberFileUploadList(
+        this.props.pullPrivateFileUploadList(
             this.state.page,
             this.state.sizePerPage,
             this.state.parametersMap,
@@ -131,7 +131,7 @@ class AdminMemberFileUploadListContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 // Get our data.
-                this.props.pullMemberFileUploadList(
+                this.props.pullPrivateFileUploadList(
                     this.state.page,
                     this.state.sizePerPage,
                     this.state.parametersMap,
@@ -171,7 +171,7 @@ class AdminMemberFileUploadListContainer extends Component {
 
                 // Once our state has been validated `member-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postMemberFileUpload(
+                this.props.postPrivateFileUpload(
                     this.getPostData(),
                     this.onSuccessPostCallback,
                     this.onFailurePostCallback
@@ -214,7 +214,7 @@ class AdminMemberFileUploadListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullMemberFileUploadList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullPrivateFileUploadList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -224,7 +224,7 @@ class AdminMemberFileUploadListContainer extends Component {
             this.setState(
                 { page: page, sizePerPage:sizePerPage, isLoading: true, },
                 ()=>{
-                    this.props.pullMemberFileUploadList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullPrivateFileUploadList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -241,7 +241,7 @@ class AdminMemberFileUploadListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullMemberFileUploadList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullPrivateFileUploadList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
         }else {
@@ -277,7 +277,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        memberFileList: store.memberFileListState,
+        memberFileList: store.privateFileUploadListState,
         memberDetail: store.memberDetailState,
     };
 }
@@ -287,13 +287,13 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullMemberFileUploadList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+        pullPrivateFileUploadList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
             dispatch(
-                pullMemberFileUploadList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+                pullPrivateFileUploadList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
         },
-        postMemberFileUpload: (postData, successCallback, failedCallback) => {
-            dispatch(postMemberFileUpload(postData, successCallback, failedCallback))
+        postPrivateFileUpload: (postData, successCallback, failedCallback) => {
+            dispatch(postPrivateFileUpload(postData, successCallback, failedCallback))
         },
     }
 }

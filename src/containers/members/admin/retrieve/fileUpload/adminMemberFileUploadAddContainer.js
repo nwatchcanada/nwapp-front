@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import OrderListComponent from "../../../../../components/members/admin/retrieve/fileUpload/adminMemberFileUploadAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { postMemberFileUpload } from "../../../../../actions/memberFileUploadActions";
+import { postPrivateFileUpload } from "../../../../../actions/privateFileUploadActions";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
@@ -186,7 +186,7 @@ class AdminMemberFileUploadAddContainer extends Component {
 
             // Once our state has been validated `member-side` then we will
             // make an API request with the server to create our new production.
-            this.props.postMemberFileUpload(
+            this.props.postPrivateFileUpload(
                 this.getPostData(),
                 this.onSuccessPostCallback,
                 this.onFailurePostCallback
@@ -304,7 +304,7 @@ const mapStateToProps = function(store) {
         user: store.userState,
         tagList: store.tagListState,
         flashMessage: store.flashMessageState,
-        memberFileList: store.memberFileListState,
+        memberFileList: store.privateFileUploadListState,
         memberDetail: store.memberDetailState,
     };
 }
@@ -317,8 +317,8 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        postMemberFileUpload: (postData, successCallback, failedCallback) => {
-            dispatch(postMemberFileUpload(postData, successCallback, failedCallback))
+        postPrivateFileUpload: (postData, successCallback, failedCallback) => {
+            dispatch(postPrivateFileUpload(postData, successCallback, failedCallback))
         },
         pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
