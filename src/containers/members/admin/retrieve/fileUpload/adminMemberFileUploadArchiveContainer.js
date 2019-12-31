@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import MemberFileUploadArchiveComponent from "../../../../components/members/admin/retrieve/fileUpload/adminMemberFileUploadArchiveComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { deletePrivateFileUpload } from "../../../../actions/privateFileUploadActions";
+import MemberFileUploadArchiveComponent from "../../../../../components/members/admin/retrieve/fileUpload/adminMemberFileUploadArchiveComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { deletePrivateFileUpload } from "../../../../../actions/privateFileUploadActions";
 
 
 class AdminMemberFileUploadArchiveContainer extends Component {
@@ -16,12 +16,12 @@ class AdminMemberFileUploadArchiveContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { slug, fileId } = this.props.match.params;
+        const { slug, fileSlug } = this.props.match.params;
         this.state = {
             isLoading: false,
             member: slug,
-            id: slug,
-            fileId: fileId,
+            slug: slug,
+            fileSlug: fileSlug,
             errors: {},
         }
         this.onClick = this.onClick.bind(this);
@@ -62,7 +62,7 @@ class AdminMemberFileUploadArchiveContainer extends Component {
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Member file has been successfully archived.");
-                this.props.history.push("/member/"+this.state.slug+"/files");
+                this.props.history.push("/admin/member/"+this.state.slug+"/files");
             }
         )
     }
@@ -88,7 +88,7 @@ class AdminMemberFileUploadArchiveContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deletePrivateFileUpload(this.state.fileId, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deletePrivateFileUpload(this.state.fileSlug, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deletePrivateFileUpload: (id, onSuccessCallback, onFailureCallback) => {
-            dispatch(deletePrivateFileUpload(id, onSuccessCallback, onFailureCallback))
+        deletePrivateFileUpload: (slug, onSuccessCallback, onFailureCallback) => {
+            dispatch(deletePrivateFileUpload(slug, onSuccessCallback, onFailureCallback))
         },
     }
 }

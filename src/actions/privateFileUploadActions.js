@@ -183,7 +183,7 @@ export function postPrivateFileUpload(postData, successCallback, failedCallback)
 //                                 DELETE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deletePrivateFileUpload(id, successCallback, failedCallback) {
+export function deletePrivateFileUpload(slug, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -193,7 +193,7 @@ export function deletePrivateFileUpload(id, successCallback, failedCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT.replace("XXX", id);
+        const aURL = NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT.replace("<slug>", slug);
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.

@@ -172,7 +172,7 @@ function fileFormatter(cell, row){
             }
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             {row.isArchived === false &&
-                <Link to={`/admin/member/${row.member}/file/archive/${row.id}`}>
+                <Link to={`/admin/member/${row.user}/file/archive/${row.slug}`}>
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             }
