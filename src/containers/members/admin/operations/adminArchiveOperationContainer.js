@@ -46,7 +46,7 @@ class MemberArchiveOperationContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        postData.customer = this.props.memberDetail.id;
+        postData.member = this.props.memberDetail.slug;
         postData.state = "inactive";
         postData.deactivationReason = this.state.reason;
         postData.deactivationReasonOther = this.state.reasonOther;
@@ -83,7 +83,7 @@ class MemberArchiveOperationContainer extends Component {
     onSuccessCallback(response) {
         console.log("onSuccessCallback | Fetched:", response);
         this.props.setFlashMessage("success", "Member has been successfully deactivated.");
-        this.props.history.push("/member/"+this.props.memberDetail.id+"/operations");
+        this.props.history.push("/admin/member/"+this.props.memberDetail.slug+"/operations");
     }
 
     onFailureCallback(errors) {

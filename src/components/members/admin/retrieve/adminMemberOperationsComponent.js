@@ -15,7 +15,6 @@ export default class AdminMemberOperationsComponent extends Component {
     render() {
         const { slug, member, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
         const isActiveState = member.state === "active";
-        console.log("isActiveState",member);
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -36,6 +35,12 @@ export default class AdminMemberOperationsComponent extends Component {
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
+
+                {member.state === 'inactive' &&
+                    <div className="alert alert-info" role="alert">
+                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This member is archived and is read-only.
+                    </div>
+                }
 
                 <div className="row">
                     <div className="step-navigation">

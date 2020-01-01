@@ -29,6 +29,12 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
 
                 <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
 
+                {member.state === 'inactive' &&
+                    <div className="alert alert-info" role="alert">
+                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This member is archived and is read-only.
+                    </div>
+                }
+
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey active">
