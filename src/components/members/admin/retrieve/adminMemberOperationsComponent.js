@@ -15,6 +15,7 @@ export default class AdminMemberOperationsComponent extends Component {
     render() {
         const { slug, member, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
         const isActiveState = member.state === "active";
+        console.log("isActiveState",member);
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -101,10 +102,10 @@ export default class AdminMemberOperationsComponent extends Component {
                                         </div>
                                         <div className="card-body">
                                             <h3 className="card-title">Archive Member</h3>
-                                            <p className="card-text">This will make the member inactive.</p>
+                                            <p className="card-text">This will make the member <strong>inactive</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
-                                            <Link to={`/member/${slug}/archive`} className="btn btn-success btn-lg">
+                                            <Link to={`/admin/member/${slug}/archive`} className="btn btn-success btn-lg">
                                                 Go&nbsp;<i className="fas fa-chevron-right"></i>
                                             </Link>
                                         </div>
@@ -117,7 +118,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                         </div>
                                         <div className="card-body">
                                             <h3 className="card-title">Unarchive Member</h3>
-                                            <p className="card-text">This will make the member active.</p>
+                                            <p className="card-text">This will make the member <strong>active</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
                                             <Link to={`/member/${slug}/unarchive`} className="btn btn-success btn-lg">

@@ -116,7 +116,7 @@ import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMembe
 import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminMemberAvatarUpdateOperationContainer";
 import AdminMemberPromoteOperationStep1Container from "./members/admin/operations/adminMemberPromoteOperationStep1Container";
 import AdminMemberPromoteOperationStep2Container from "./members/admin/operations/adminMemberPromoteOperationStep2Container";
-import MemberPromoteStep3Container from "./members/admin/operations/adminMemberPromoteOperationStep3Container";
+import AdminMemberPromoteOperationStep3Container from "./members/admin/operations/adminMemberPromoteOperationStep3Container";
 
 import ItemListContainer from "./items/list/itemListContainer";
 import ItemSearchContainer from "./items/search/itemSearchContainer";
@@ -317,7 +317,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/avatar" exact component={requiresAuth(AdminMemberAvatarUpdateOperationContainer)} />
                                 <Route path="/admin/member/:slug/promote/step-1" exact component={requiresAuth(AdminMemberPromoteOperationStep1Container)} />
                                 <Route path="/admin/member/:slug/promote/step-2" exact component={requiresAuth(AdminMemberPromoteOperationStep2Container)} />
-                                <Route path="/admin/member/:slug/promote/step-3" exact component={requiresAuth(MemberPromoteStep3Container)} />
+                                <Route path="/admin/member/:slug/promote/step-3" exact component={requiresAuth(AdminMemberPromoteOperationStep3Container)} />
 
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
