@@ -48,7 +48,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-area-coordinator",
         icon: "horse-head",
         title: "Area Coordinators",
-        url: "/area-coordinators"
+        url: "/admin/area-coordinators"
     },{
         id: "full-associates",
         icon: "crown",
@@ -123,7 +123,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-area-coordinator",
         icon: "horse-head",
         title: "Area Coordinators",
-        url: "/area-coordinators"
+        url: "/admin/area-coordinators"
     },{
         id: "full-associates",
         icon: "crown",

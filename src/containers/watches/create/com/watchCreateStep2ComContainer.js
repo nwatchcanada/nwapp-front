@@ -11,7 +11,7 @@ import {
 } from '../../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../../actions/districtAction';
-import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorAction';
+import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 

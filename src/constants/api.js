@@ -26,6 +26,8 @@ export const WORKERY_EXPECTATION_LIST_API_ENDPOINT = '/v1/expectations';
 export const WORKERY_EXPECTATION_DETAIL_API_ENDPOINT = '/v1/expectation/';
 export const WORKERY_MEANING_LIST_API_ENDPOINT = '/v1/meanings';
 export const WORKERY_MEANING_DETAIL_API_ENDPOINT = '/v1/meaning/';
+export const NWAPP_PRIVATE_FILE_UPLOAD_LIST_API_ENDPOINT = '/v1/private-file-uploads';
+export const NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT = '/v1/private-file-upload/<slug>';
 
 /**
  *  The full address of certain API endpoints from our backend server.
@@ -43,11 +45,20 @@ export const WORKERY_MEMBER_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/members/operat
 export const NWAPP_MEMBER_PROMOTE_OPERATION_API_ENDPOINT = '/v1/members/operation/promote';
 export const WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/members/operation/avatar';
 export const WORKERY_MEMBER_COMMENT_LIST_API_ENDPOINT = '/v1/member-comments';
-export const NWAPP_PRIVATE_FILE_UPLOAD_LIST_API_ENDPOINT = '/v1/private-file-uploads';
-export const NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT = '/v1/private-file-upload/<slug>';
 export const WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT = '/v1/member/XXX/contact';
 export const WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT = '/v1/member/XXX/address';
 export const WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT = '/v1/member/XXX/metrics';
+
+//TODO: PROCESS THE FOLLOWING
+export const WORKERY_AREA_COORDINATOR_LIST_API_ENDPOINT = '/v1/area-coordinators';
+export const WORKERY_AREA_COORDINATOR_DETAIL_API_ENDPOINT = '/v1/area-coordinator/';
+export const WORKERY_AREA_COORDINATOR_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/area-coordinators/operation/archive';
+export const NWAPP_AREA_COORDINATOR_PROMOTE_OPERATION_API_ENDPOINT = '/v1/area-coordinators/operation/promote';
+export const WORKERY_AREA_COORDINATOR_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/area-coordinators/operation/avatar';
+export const WORKERY_AREA_COORDINATOR_COMMENT_LIST_API_ENDPOINT = '/v1/area-coordinator-comments';
+export const WORKERY_AREA_COORDINATOR_CONTACT_UPDATE_API_ENDPOINT = '/v1/area-coordinator/XXX/contact';
+export const WORKERY_AREA_COORDINATOR_ADDRESS_UPDATE_API_ENDPOINT = '/v1/area-coordinator/XXX/address';
+export const WORKERY_AREA_COORDINATOR_METRICS_UPDATE_API_ENDPOINT = '/v1/area-coordinator/XXX/metrics';
 
 // TODO: DO SOMETHING WITH BELOW
 export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/register';

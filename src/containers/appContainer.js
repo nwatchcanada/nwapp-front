@@ -88,9 +88,9 @@ import ResourceCreateContainer from "./settings/resources/resourceCreateContaine
 import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
 
 /*
----------------
-MEMBERS SECTION
----------------
+-------
+MEMBERS
+-------
 */
 import AdminMemberListContainer from "./members/admin/list/adminMemberListContainer";
 import AdminMemberSearchContainer from "./members/admin/search/adminMemberSearchContainer";
@@ -119,6 +119,45 @@ import AdminMemberPromoteOperationStep2Container from "./members/admin/operation
 import AdminMemberPromoteOperationStep3Container from "./members/admin/operations/adminMemberPromoteOperationStep3Container";
 import MemberArchiveOperationContainer from "./members/admin/operations/adminArchiveOperationContainer";
 import AdminMemberUnarchiveOperationContainer from "./members/admin/operations/adminUnarchiveOperationContainer";
+
+/*
+-----------------
+AREA COORDINATORS
+-----------------
+*/
+import AdminAreaCoordinatorListContainer from "./areaCoordinators/admin/list/adminAreaCoordinatorListContainer";
+/*
+import AreaCoordinatorSearchContainer from "./areaCoordinators/search/areaCoordinatorSearchContainer";
+import AreaCoordinatorSearchResultContainer from "./areaCoordinators/search/areaCoordinatorSearchResultContainer";
+import AreaCoordinatorUpdateContainer from "./areaCoordinators/update/areaCoordinatorUpdateContainer";
+import AdminAreaCoordinatorAddressUpdateContainer from "./areaCoordinators/update/admin/adminAreaCoordinatorAddressUpdateContainer";
+import AdminAreaCoordinatorContactUpdateContainer from "./areaCoordinators/update/admin/adminAreaCoordinatorContactUpdateContainer";
+import AdminAreaCoordinatorMetricsUpdateContainer from "./areaCoordinators/update/admin/adminAreaCoordinatorMetricsUpdateContainer";
+import AreaCoordinatorCreateStep1Container from "./areaCoordinators/create/areaCoordinatorCreateStep1Container";
+import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaCoordinatorCreateStep2Container";
+import AreaCoordinatorCreateStep3Container from "./areaCoordinators/create/areaCoordinatorCreateStep3Container";
+import AreaCoordinatorDemoteContainer from "./areaCoordinators/demote/areaCoordinatorDemoteContainer";
+import AreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorLiteRetrieveContainer";
+import AreaCoordinatorFullRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorFullRetrieveContainer";
+import AreaCoordinatorPromoteStep1Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep1Container";
+import AreaCoordinatorPromoteStep2Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep2Container";
+import AreaCoordinatorCommentContainer from "./areaCoordinators/retrieve/areaCoordinatorCommentContainer";
+*/
+/*
+<Route path="/area-coordinators/add/step-1" exact component={requiresAuth(AreaCoordinatorCreateStep1Container)} />
+<Route path="/area-coordinators/add/step-2" exact component={requiresAuth(AreaCoordinatorCreateStep2Container)} />
+<Route path="/area-coordinators/add/step-3" exact component={requiresAuth(AreaCoordinatorCreateStep3Container)} />
+<Route path="/area-coordinators" exact component={requiresAuth(AreaCoordinatorListContainer)} />
+<Route path="/area-coordinators/search" exact component={requiresAuth(AreaCoordinatorSearchContainer)} />
+<Route path="/area-coordinators/search-results" exact component={requiresAuth(AreaCoordinatorSearchResultContainer)} />
+<Route path="/area-coordinator/:slug" exact component={requiresAuth(AreaCoordinatorLiteRetrieveContainer)} />
+<Route path="/area-coordinator/:slug/full" exact component={requiresAuth(AreaCoordinatorFullRetrieveContainer)} />
+<Route path="/area-coordinator/:slug/update" exact component={requiresAuth(AreaCoordinatorUpdateContainer)} />
+<Route path="/area-coordinator/:slug/promote/step-1" exact component={requiresAuth(AreaCoordinatorPromoteStep1Container)} />
+<Route path="/area-coordinator/:slug/promote/step-2" exact component={requiresAuth(AreaCoordinatorPromoteStep2Container)} />
+<Route path="/area-coordinator/:slug/demote" exact component={requiresAuth(AreaCoordinatorDemoteContainer)} />
+<Route path="/area-coordinator/:slug/comments" exact component={requiresAuth(AreaCoordinatorCommentContainer)} />
+*/
 
 import ItemListContainer from "./items/list/itemListContainer";
 import ItemSearchContainer from "./items/search/itemSearchContainer";
@@ -156,23 +195,6 @@ import AssociateCreateStep2Container from "./associates/create/associateCreateSt
 import AssociateCreateStep3Container from "./associates/create/associateCreateStep3Container";
 import AssociateDemoteContainer from "./associates/demote/associateDemoteContainer";
 import AssociateCommentContainer from "./associates/retrieve/associateCommentContainer";
-
-import AreaCoordinatorListContainer from "./areaCoordinators/list/areaCoordinatorListContainer";
-import AreaCoordinatorSearchContainer from "./areaCoordinators/search/areaCoordinatorSearchContainer";
-import AreaCoordinatorSearchResultContainer from "./areaCoordinators/search/areaCoordinatorSearchResultContainer";
-import AreaCoordinatorUpdateContainer from "./areaCoordinators/update/areaCoordinatorUpdateContainer";
-import AdminAreaCoordinatorAddressUpdateContainer from "./areaCoordinators/update/admin/adminAreaCoordinatorAddressUpdateContainer";
-import AdminAreaCoordinatorContactUpdateContainer from "./areaCoordinators/update/admin/adminAreaCoordinatorContactUpdateContainer";
-import AdminAreaCoordinatorMetricsUpdateContainer from "./areaCoordinators/update/admin/adminAreaCoordinatorMetricsUpdateContainer";
-import AreaCoordinatorCreateStep1Container from "./areaCoordinators/create/areaCoordinatorCreateStep1Container";
-import AreaCoordinatorCreateStep2Container from "./areaCoordinators/create/areaCoordinatorCreateStep2Container";
-import AreaCoordinatorCreateStep3Container from "./areaCoordinators/create/areaCoordinatorCreateStep3Container";
-import AreaCoordinatorDemoteContainer from "./areaCoordinators/demote/areaCoordinatorDemoteContainer";
-import AreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorLiteRetrieveContainer";
-import AreaCoordinatorFullRetrieveContainer from "./areaCoordinators/retrieve/areaCoordinatorFullRetrieveContainer";
-import AreaCoordinatorPromoteStep1Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep1Container";
-import AreaCoordinatorPromoteStep2Container from "./areaCoordinators/promote/areaCoordinatorPromoteStep2Container";
-import AreaCoordinatorCommentContainer from "./areaCoordinators/retrieve/areaCoordinatorCommentContainer";
 
 import StaffListContainer from "./staff/list/staffListContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
@@ -291,9 +313,9 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
 
                                 {/*
-                                    ---------------
-                                    MEMBERS SECTION
-                                    ---------------
+                                    -------
+                                    MEMBERS
+                                    -------
                                 */}
                                 <Route path="/admin/members/add/step-1" exact component={requiresAuth(AdminMemberCreateStep1Container)} />
                                 <Route path="/admin/members/add/step-2" exact component={requiresAuth(AdminMemberCreateStep2Container)} />
@@ -322,6 +344,13 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/promote/step-3" exact component={requiresAuth(AdminMemberPromoteOperationStep3Container)} />
                                 <Route path="/admin/member/:slug/archive" exact component={requiresAuth(MemberArchiveOperationContainer)} />
                                 <Route path="/admin/member/:slug/unarchive" exact component={requiresAuth(AdminMemberUnarchiveOperationContainer)} />
+
+                                /*
+                                ----------------
+                                AREA COORDINATOR
+                                ----------------
+                                */
+                                <Route path="/admin/area-coordinators" exact component={requiresAuth(AdminAreaCoordinatorListContainer)} />
 
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
@@ -358,19 +387,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/associate/:slug/update/metrics" exact component={requiresAuth(AdminAssociateMetricsUpdateContainer)} />
                                 <Route path="/associate/:slug/demote" exact component={requiresAuth(AssociateDemoteContainer)} />
                                 <Route path="/associate/:slug/comments" exact component={requiresAuth(AssociateCommentContainer)} />
-                                <Route path="/area-coordinators/add/step-1" exact component={requiresAuth(AreaCoordinatorCreateStep1Container)} />
-                                <Route path="/area-coordinators/add/step-2" exact component={requiresAuth(AreaCoordinatorCreateStep2Container)} />
-                                <Route path="/area-coordinators/add/step-3" exact component={requiresAuth(AreaCoordinatorCreateStep3Container)} />
-                                <Route path="/area-coordinators" exact component={requiresAuth(AreaCoordinatorListContainer)} />
-                                <Route path="/area-coordinators/search" exact component={requiresAuth(AreaCoordinatorSearchContainer)} />
-                                <Route path="/area-coordinators/search-results" exact component={requiresAuth(AreaCoordinatorSearchResultContainer)} />
-                                <Route path="/area-coordinator/:slug" exact component={requiresAuth(AreaCoordinatorLiteRetrieveContainer)} />
-                                <Route path="/area-coordinator/:slug/full" exact component={requiresAuth(AreaCoordinatorFullRetrieveContainer)} />
-                                <Route path="/area-coordinator/:slug/update" exact component={requiresAuth(AreaCoordinatorUpdateContainer)} />
-                                <Route path="/area-coordinator/:slug/promote/step-1" exact component={requiresAuth(AreaCoordinatorPromoteStep1Container)} />
-                                <Route path="/area-coordinator/:slug/promote/step-2" exact component={requiresAuth(AreaCoordinatorPromoteStep2Container)} />
-                                <Route path="/area-coordinator/:slug/demote" exact component={requiresAuth(AreaCoordinatorDemoteContainer)} />
-                                <Route path="/area-coordinator/:slug/comments" exact component={requiresAuth(AreaCoordinatorCommentContainer)} />
+
                                 <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
                                 <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />
                                 <Route path="/staff" exact component={requiresAuth(StaffListContainer)} />

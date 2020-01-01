@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AssignWatchAreaCoordinatorTaskStep2Component from "../../../components/tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep2Component";
-import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
+import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorActions';
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../helpers/localStorageUtility';

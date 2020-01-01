@@ -8,7 +8,7 @@ import {
 import WatchUpdateComponent from "../../../components/watches/update/watchUpdateComponent";
 import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
 import { getDistrictReactSelectOptions } from '../../../actions/districtAction';
-import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorAction';
+import { getAreaCoordinatorReactSelectOptions } from '../../../actions/areaCoordinatorActions';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../constants/api";
 
