@@ -187,11 +187,16 @@ function emailFormatter(cell, row){
 
 
 function detailLinkFormatter(cell, row){
-    return (
-        <Link to={`/admin/member/${row.slug}`}>
-            View&nbsp;<i className="fas fa-chevron-right"></i>
-        </Link>
-    )
+    if (row.state === "inactive") {
+        return <div><i className="fas fa-lock"></i>&nbsp;Archived</div>;
+    } else {
+        return (
+            <Link to={`/admin/member/${row.slug}`}>
+                View&nbsp;<i className="fas fa-chevron-right"></i>
+            </Link>
+        )
+    }
+
 }
 
 
