@@ -1,8 +1,8 @@
-# Contributing to Neigbhourhood Watch App
+# Contributing to Neighbourhood Watch App
 
 ## Do you have questions about the source code?
 
-* Ask any question about how to use Neigbhourhood Watch App in the [nwl-app mailing list](https://groups.google.com/forum/#!forum/nwl-app).
+* Ask any question about how to use Neighbourhood Watch App in the [nwl-app mailing list](https://groups.google.com/forum/#!forum/nwl-app).
 
 ## Do you intend to add a new feature or change an existing one?
 * Suggest your change in the [nwl-app mailing list](https://groups.google.com/forum/#!forum/nwl-app). and start writing code.
