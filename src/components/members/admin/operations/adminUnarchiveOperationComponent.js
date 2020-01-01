@@ -7,10 +7,10 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
-export default class MemberUnarchiveOperationComponent extends Component {
+export default class AdminMemberUnarchiveOperationComponent extends Component {
     render() {
         // Common
-        const { comment, id, errors, onTextChange, onSelectChange, isLoading, onClick, member } = this.props;
+        const { comment, slug, errors, onTextChange, onSelectChange, isLoading, onClick, member } = this.props;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -20,10 +20,10 @@ export default class MemberUnarchiveOperationComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
+                            <Link to={`/admin/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/member/${id}/operations`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
+                            <Link to={`/admin/member/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-box-open"></i>&nbsp;Unarchive
@@ -55,7 +55,7 @@ export default class MemberUnarchiveOperationComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/member/${id}/operations`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/member/${slug}/operations`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

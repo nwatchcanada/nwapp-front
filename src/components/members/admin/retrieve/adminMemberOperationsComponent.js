@@ -126,7 +126,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                             <p className="card-text">This will make the member <strong>active</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
-                                            <Link to={`/member/${slug}/unarchive`} className="btn btn-success btn-lg">
+                                            <Link to={`/admin/member/${slug}/unarchive`} className="btn btn-success btn-lg">
                                                 Go&nbsp;<i className="fas fa-chevron-right"></i>
                                             </Link>
                                         </div>

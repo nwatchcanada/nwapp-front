@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import MemberUnarchiveOperationComponent from "../../../../components/members/admin/operations/adminUnarchiveOperationComponent";
+import AdminMemberUnarchiveOperationComponent from "../../../../components/members/admin/operations/adminUnarchiveOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { postMemberDeactivationDetail } from "../../../../actions/memberActions";
 import { validateActivationInput } from "../../../../validators/memberValidator";
 
 
-class MemberUnarchiveOperationContainer extends Component {
+class AdminMemberUnarchiveOperationContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -17,11 +17,11 @@ class MemberUnarchiveOperationContainer extends Component {
     constructor(props) {
         super(props);
 
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            id: id,
+            slug: slug,
             member: {},
             reason: "",
             reasonOther: "",
@@ -46,7 +46,7 @@ class MemberUnarchiveOperationContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        postData.customer = this.props.memberDetail.id;
+        postData.member = this.props.memberDetail.slug;
         postData.state = "active";
         postData.deactivationReason = 0; // NOT_SPECIFIED
         postData.deactivationReasonOther = ""
@@ -83,7 +83,7 @@ class MemberUnarchiveOperationContainer extends Component {
     onSuccessCallback(response) {
         console.log("onSuccessCallback | Fetched:", response);
         this.props.setFlashMessage("success", "Member has been successfully activated.");
-        this.props.history.push("/member/"+this.props.memberDetail.id+"/operations");
+        this.props.history.push("/admin/member/"+this.props.memberDetail.slug+"/operations");
     }
 
     onFailureCallback(errors) {
@@ -151,11 +151,11 @@ class MemberUnarchiveOperationContainer extends Component {
      */
 
     render() {
-        const { id, errors, isLoading, reason, reasonOther } = this.state;
+        const { slug, errors, isLoading, reason, reasonOther } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : [];
         return (
-            <MemberUnarchiveOperationComponent
-                id={id}
+            <AdminMemberUnarchiveOperationComponent
+                slug={slug}
                 errors={errors}
                 isLoading={isLoading}
                 reason={reason}
@@ -194,4 +194,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MemberUnarchiveOperationContainer);
+)(AdminMemberUnarchiveOperationContainer);
