@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ClientArchiveOperationComponent from "../../../components/clients/operations/clientArchiveOperationComponent";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { postClientDeactivationDetail } from "../../../actions/clientActions";
-import { validateDeactivationInput } from "../../../validators/clientValidator";
+import MemberArchiveOperationComponent from "../../../../components/members/admin/operations/adminArchiveOperationComponent";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { postMemberDeactivationDetail } from "../../../../actions/memberActions";
+import { validateDeactivationInput } from "../../../../validators/memberValidator";
 
 
-class ClientArchiveOperationContainer extends Component {
+class MemberArchiveOperationContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -22,7 +22,7 @@ class ClientArchiveOperationContainer extends Component {
         // Update state.
         this.state = {
             id: id,
-            client: {},
+            member: {},
             reason: "",
             reasonOther: "",
             isLoading: false,
@@ -46,7 +46,7 @@ class ClientArchiveOperationContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        postData.customer = this.props.clientDetail.id;
+        postData.customer = this.props.memberDetail.id;
         postData.state = "inactive";
         postData.deactivationReason = this.state.reason;
         postData.deactivationReasonOther = this.state.reasonOther;
@@ -82,8 +82,8 @@ class ClientArchiveOperationContainer extends Component {
 
     onSuccessCallback(response) {
         console.log("onSuccessCallback | Fetched:", response);
-        this.props.setFlashMessage("success", "Client has been successfully deactivated.");
-        this.props.history.push("/client/"+this.props.clientDetail.id+"/operations");
+        this.props.setFlashMessage("success", "Member has been successfully deactivated.");
+        this.props.history.push("/member/"+this.props.memberDetail.id+"/operations");
     }
 
     onFailureCallback(errors) {
@@ -116,13 +116,13 @@ class ClientArchiveOperationContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
+        // Perform member-side validation.
         const { errors, isValid } = validateDeactivationInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.setState({ isLoading: true, errors: [], }, ()=>{
-                this.props.postClientDeactivationDetail(
+                this.props.postMemberDeactivationDetail(
                     this.getPostData(),
                     this.onSuccessCallback,
                     this.onFailureCallback,
@@ -152,15 +152,15 @@ class ClientArchiveOperationContainer extends Component {
 
     render() {
         const { id, errors, isLoading, reason, reasonOther } = this.state;
-        const client = this.props.clientDetail ? this.props.clientDetail : [];
+        const member = this.props.memberDetail ? this.props.memberDetail : [];
         return (
-            <ClientArchiveOperationComponent
+            <MemberArchiveOperationComponent
                 id={id}
                 errors={errors}
                 isLoading={isLoading}
                 reason={reason}
                 reasonOther={reasonOther}
-                client={client}
+                member={member}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
@@ -173,7 +173,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        clientDetail: store.clientDetailState,
+        memberDetail: store.memberDetailState,
     };
 }
 
@@ -182,9 +182,9 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postClientDeactivationDetail: (postData, onSuccessCallback, onFailureCallback) => {
+        postMemberDeactivationDetail: (postData, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                postClientDeactivationDetail(postData, onSuccessCallback, onFailureCallback)
+                postMemberDeactivationDetail(postData, onSuccessCallback, onFailureCallback)
             )
         },
     }
@@ -194,4 +194,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ClientArchiveOperationContainer);
+)(MemberArchiveOperationContainer);

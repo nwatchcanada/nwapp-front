@@ -2,20 +2,20 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapPageLoadingAnimation } from "../../bootstrap/bootstrapPageLoadingAnimation";
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapSingleSelect } from "../../bootstrap/bootstrapSingleSelect";
-import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import {
     ARCHIVE_REASON_CHOICES
-} from '../../../constants/api';
+} from '../../../../constants/api';
 
 
-export default class ClientArchiveOperationComponent extends Component {
+export default class MemberArchiveOperationComponent extends Component {
     render() {
         // Common
-        const { reason, reasonOther, comment, id, errors, onTextChange, onSelectChange, isLoading, onClick, client } = this.props;
+        const { reason, reasonOther, comment, id, errors, onTextChange, onSelectChange, isLoading, onClick, member } = this.props;
         const isReasonOther = reason === 1;
         return (
             <main id="main" role="main">
@@ -26,10 +26,10 @@ export default class ClientArchiveOperationComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/clients`}><i className="fas fa-users"></i>&nbsp;Clients</Link>
+                            <Link to={`/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/client/${id}/operations`}><i className="fas fa-user"></i>&nbsp;{client && client.fullName}</Link>
+                            <Link to={`/member/${id}/operations`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-archive"></i>&nbsp;Archive
@@ -40,8 +40,8 @@ export default class ClientArchiveOperationComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-archive"></i>&nbsp;Archive Client</h1>
-                            <p>You are about to <strong>archive the client</strong> this means the client will be in a read-only state and the client cannot create work orders for our associates. Please explain why. All fields which have the (*) symbol are required to be filled out.</p>
+                            <h1><i className="fas fa-archive"></i>&nbsp;Archive Member</h1>
+                            <p>You are about to <strong>archive the member</strong> this means the member will be in a read-only state and the member cannot create work orders for our associates. Please explain why. All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
@@ -86,7 +86,7 @@ export default class ClientArchiveOperationComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/client/${id}/operations`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/member/${id}/operations`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
