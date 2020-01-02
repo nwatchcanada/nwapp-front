@@ -71,7 +71,12 @@ export default class AdminMemberOperationsComponent extends Component {
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </Link>
                         </div>
-                        <div id="step-6" className="st-grey active">
+                        <div id="step-6" className="st-grey">
+                            <Link to={`/admin/member/${slug}/community`}>
+                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
+                            </Link>
+                        </div>
+                        <div id="step-7" className="st-grey active">
                             <strong>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </strong>

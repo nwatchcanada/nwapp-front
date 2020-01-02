@@ -49,6 +49,7 @@ const appReducer = combineReducers({
     meaningListState: meaningListReducer, meaningDetailState: meaningDetailReducer,
     expectationListState: expectationListReducer, expectationDetailState: expectationDetailReducer,
     privateFileUploadListState: privateFileUploadListReducer,
+    scorePointListState: scorePointListReducer, scorePointDetailState: scorePointDetailReducer,
     awardListState: awardListReducer, awardDetailState: awardDetailReducer,
     badgeListState: badgeListReducer, badgeDetailState: badgeDetailReducer,
 });

@@ -112,7 +112,7 @@ export function pullScorePointList(page=1, sizePerPage=10, filtersMap=new Map(),
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postScorePointDetail(postData, successCallback, failedCallback) {
+export function postScorePoint(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -157,7 +157,7 @@ export function postScorePointDetail(postData, successCallback, failedCallback) 
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postScorePointDetail | error:", errors); // For debuggin purposes only.
+                console.log("postScorePoint | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

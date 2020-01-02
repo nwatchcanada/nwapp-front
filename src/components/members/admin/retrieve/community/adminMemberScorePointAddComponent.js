@@ -13,12 +13,18 @@ import Moment from 'react-moment';
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
+import { BootstrapMultipleSelect } from "../../../../bootstrap/bootstrapMultipleSelect";
+import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
+import { FlashMessageComponent } from "../../../../flashMessageComponent";
 
 
-export default class AdminMemberFileUploadArchiveComponent extends Component {
+export default class AdminMemberScorePointAddComponent extends Component {
     render() {
         const {
-            isLoading, slug, member, errors, onClick
+            title, description, tags, tagOptions, isTagSetsLoading, file, isArchived,
+            flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onClick,
+            onFileDrop, onRemoveScorePointClick
         } = this.props;
         return (
             <div>
@@ -36,6 +42,8 @@ export default class AdminMemberFileUploadArchiveComponent extends Component {
                         </li>
                     </ol>
                 </nav>
+
+                <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
 
@@ -69,20 +77,20 @@ export default class AdminMemberFileUploadArchiveComponent extends Component {
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
-                        <div id="step-5" className="st-grey active">
-                            <strong>
+                        <div id="step-5" className="st-grey">
+                            <Link to={`/admin/member/${slug}/files`}>
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
-                            </strong>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community`}>
-                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
-                        <div id="step-7" className="st-grey">
+                        <div id="step-6" className="st-grey active">
                             <strong>
-                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </strong>
+                        </div>                        
+                        <div id="step-6" className="st-grey">
+                            <Link to={`/admin/member/${slug}/operations`}>
+                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -90,20 +98,53 @@ export default class AdminMemberFileUploadArchiveComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-archive"></i>&nbsp;Archive File</h1>
+                            <h1>Upload a File</h1>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <div className="jumbotron">
-                                <h1 className="display-4"><i className="fas fa-question-circle"></i>&nbsp;Are you sure?</h1>
-                                <p className="lead">You are about to archive the file, this file will no longer be available to the staff and the member.</p>
-                            </div>
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.title}
+                                label="Title (*)"
+                                onChange={onTextChange}
+                                value={title}
+                                name="title"
+                                type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-success"
+                                label="Description"
+                                placeholder="Write any additional comments here."
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+
+
+                            <BootstrapMultipleSelect
+                                borderColour="border-success"
+                                label="Tags"
+                                name="tags"
+                                defaultOptionLabel="Please select the tag."
+                                options={tagOptions}
+                                selectedOptions={tags}
+                                error={errors.tags}
+                                onMultiChange={onMultiChange}
+                                isLoading={isTagSetsLoading}
+                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/member/${slug}/files`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/member/${slug}/files`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

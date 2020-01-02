@@ -191,7 +191,7 @@ function createdAtFormatter(cell, row){
 }
 
 
-class AdminMemberFileUploadListComponent extends Component {
+class AdminMemberScorePointListComponent extends Component {
     render() {
         const {
             // Pagination
@@ -254,20 +254,20 @@ class AdminMemberFileUploadListComponent extends Component {
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
-                        <div id="step-5" className="st-grey active">
-                            <strong>
+                        <div id="step-5" className="st-grey">
+                            <Link to={`/admin/member/${slug}/files`}>
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
-                            </strong>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community`}>
-                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
-                        <div id="step-7" className="st-grey">
+                        <div id="step-6" className="st-grey active">
                             <strong>
-                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </strong>
+                        </div>
+                        <div id="step-7" className="st-grey">
+                            <Link to={`/admin/member/${slug}/operations`}>
+                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -277,12 +277,12 @@ class AdminMemberFileUploadListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/member/${slug}/file/add`} className="d-block link-ndecor" title="Members">
+                                    <Link to={`/admin/member/${slug}/community/add-score-point`} className="d-block link-ndecor" title="Members">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
-                                <h4>Upload</h4>
-                                <div className="text-muted">Upload a file</div>
+                                <h4>Add Score</h4>
+                                <div className="text-muted">Add Score Points</div>
                             </div>
                         </section>
                     </div>
@@ -308,4 +308,4 @@ class AdminMemberFileUploadListComponent extends Component {
     }
 }
 
-export default AdminMemberFileUploadListComponent;
+export default AdminMemberScorePointListComponent;
