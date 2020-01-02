@@ -98,6 +98,11 @@ class SharedOrganizationCreateStep2Container extends Component {
         // Address Locality: This field is required.
         postData.addressLocality = this.state.locality;
 
+        // Street Direction: Cannot be NaN.
+        if (isNaN(this.state.streetDirection)) {
+            postData.streetDirection = 0;
+        }
+
         // Postal Code: This field is required.
         postData.postalCode = this.state.postalCode;
 
