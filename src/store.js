@@ -9,7 +9,10 @@ import {
     HOW_HEAR_LIST_SUCCESS, HOW_HEAR_DETAIL_SUCCESS, TAG_LIST_SUCCESS, TAG_DETAIL_SUCCESS,
     EXPECTATION_LIST_SUCCESS, EXPECTATION_DETAIL_SUCCESS, MEANING_LIST_SUCCESS, MEANING_DETAIL_SUCCESS,
     MEMBER_COMMENT_LIST_SUCCESS, PRIVATE_FILE_UPLOAD_LIST_SUCCESS,
-    AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS
+    AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS,
+    SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
+    BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS,
+    AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -24,7 +27,9 @@ import { expectationListReducer, expectationDetailReducer } from "./reducers/exp
 import { privateFileUploadListReducer } from "./reducers/privateFileUploadReducers";
 import dashboardReducer from "./reducers/dashboardReducer";
 import flashMessageReducer from "./reducers/flashMessageReducer";
-
+import { scorePointListReducer, scorePointDetailReducer } from "./reducers/scorePointReducers";
+import { badgeListReducer, badgeDetailReducer } from "./reducers/badgeReducers";
+import { awardListReducer, awardDetailReducer } from "./reducers/awardReducers";
 
 // Combine Reducers
 const appReducer = combineReducers({
@@ -44,6 +49,8 @@ const appReducer = combineReducers({
     meaningListState: meaningListReducer, meaningDetailState: meaningDetailReducer,
     expectationListState: expectationListReducer, expectationDetailState: expectationDetailReducer,
     privateFileUploadListState: privateFileUploadListReducer,
+    awardListState: awardListReducer, awardDetailState: awardDetailReducer,
+    badgeListState: badgeListReducer, badgeDetailState: badgeDetailReducer,
 });
 
 
@@ -77,7 +84,10 @@ const localStorageMiddleware = ({ getState }) => {
             MEMBER_DETAIL_SUCCESS, HOW_HEAR_LIST_SUCCESS, HOW_HEAR_DETAIL_SUCCESS,
             TAG_LIST_SUCCESS, TAG_DETAIL_SUCCESS, EXPECTATION_LIST_SUCCESS, EXPECTATION_DETAIL_SUCCESS,
             MEANING_LIST_SUCCESS, MEANING_DETAIL_SUCCESS, PRIVATE_FILE_UPLOAD_LIST_SUCCESS,
-            AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS
+            AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS,
+            SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
+            BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS,
+            AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))
