@@ -29,6 +29,14 @@ export const WORKERY_MEANING_DETAIL_API_ENDPOINT = '/v1/meaning/';
 export const NWAPP_PRIVATE_FILE_UPLOAD_LIST_API_ENDPOINT = '/v1/private-file-uploads';
 export const NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT = '/v1/private-file-upload/<slug>';
 
+export const NWAPP_SCORE_POINT_LIST_API_ENDPOINT = '/v1/score-points';
+export const NWAPP_AWARD_LIST_API_ENDPOINT = '/v1/awards';
+export const NWAPP_BADGES_LIST_API_ENDPOINT = '/v1/badges';
+export const NWAPP_SCORE_POINT_DETAIL_API_ENDPOINT = '/v1/score-point/<slug>';
+export const NWAPP_AWARD_DETAIL_API_ENDPOINT = '/v1/award/<slug>';
+export const NWAPP_BADGE_DETAIL_API_ENDPOINT = '/v1/badge/<slug>';
+
+
 /**
  *  The full address of certain API endpoints from our backend server.
  */
