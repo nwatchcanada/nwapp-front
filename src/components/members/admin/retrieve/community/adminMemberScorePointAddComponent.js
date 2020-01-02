@@ -23,8 +23,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
     render() {
         const {
             title, description, tags, tagOptions, isTagSetsLoading, file, isArchived,
-            flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onClick,
-            onFileDrop, onRemoveScorePointClick
+            flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onClick
         } = this.props;
         return (
             <div>
@@ -86,7 +85,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                             <strong>
                                 <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </strong>
-                        </div>                        
+                        </div>
                         <div id="step-6" className="st-grey">
                             <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
@@ -98,7 +97,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Upload a File</h1>
+                            <h1>Add Score Points</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -126,8 +125,6 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                 error={errors.description}
                             />
 
-
-
                             <BootstrapMultipleSelect
                                 borderColour="border-success"
                                 label="Tags"
@@ -144,7 +141,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/member/${slug}/files`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/member/${slug}/community`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

@@ -24,14 +24,12 @@ class AdminMemberScorePointAddContainer extends Component {
             isLoading: false,
             title: "",
             description: "",
-            fileReader: new FileReader(), // DJANGO-REACT UPLOAD: STEP 1 OF 4.
             tags: [],
             isTagSetsLoading: true,
             is_archived: false,
 
             // Everything else...
             member: slug,
-            file: null,
             slug: slug,
             text: "",
             errors: {},
@@ -43,9 +41,6 @@ class AdminMemberScorePointAddContainer extends Component {
         this.onSuccessPostCallback = this.onSuccessPostCallback.bind(this);
         this.onFailurePostCallback = this.onFailurePostCallback.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onFileDrop = this.onFileDrop.bind(this);
-        this.onRemoveScorePointClick = this.onRemoveScorePointClick.bind(this);
-        this.handleFile = this.handleFile.bind(this); // DJANGO-REACT UPLOAD: STEP 2 OF 4.
         this.onMultiChange = this.onMultiChange.bind(this);
         this.onTagFetchSuccessCallback = this.onTagFetchSuccessCallback.bind(this);
     }
@@ -134,8 +129,8 @@ class AdminMemberScorePointAddContainer extends Component {
             ()=>{
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "Member file has been successfully created.");
-                this.props.history.push("/admin/member/"+this.state.slug+"/files");
+                this.props.setFlashMessage("success", "Score has been successfully added to member.");
+                this.props.history.push("/admin/member/"+this.state.slug+"/community");
             }
         )
     }
@@ -172,31 +167,6 @@ class AdminMemberScorePointAddContainer extends Component {
         });
     }
 
-    handleFile(e) { // DJANGO-REACT UPLOAD: STEP 3 OF 4.
-        const content = this.state.fileReader.result;
-        this.setState({
-            errors: {},
-            isLoading: true,
-            upload_content: content,
-            upload_filename: this.state.file.name,
-            // upload_filename: this.state.fileReader
-        }, ()=>{
-            // The following code will cause the screen to scroll to the top of
-            // the page. Please see ``react-scroll`` for more information:
-            // https://github.com/fisshy/react-scroll
-            var scroll = Scroll.animateScroll;
-            scroll.scrollToTop();
-
-            // Once our state has been validated `member-side` then we will
-            // make an API request with the server to create our new production.
-            this.props.postScorePoint(
-                this.getPostData(),
-                this.onSuccessPostCallback,
-                this.onFailurePostCallback
-            );
-        });
-    }
-
     onClick(e) {
         e.preventDefault();
 
@@ -204,19 +174,7 @@ class AdminMemberScorePointAddContainer extends Component {
         // console.log(errors, isValid); // For debugging purposes only.
 
         if (isValid) {
-            // DJANGO-REACT UPLOAD: STEP 4 OF 4.
-            // DEVELOPERS NOTE:
-            // (1) http://jsbin.com/piqiqecuxo/1/edit?js,console,output
-            // (2) https://stackoverflow.com/questions/51272255/how-to-use-filereader-in-react
-            var fileReader = new FileReader();
-            fileReader.readAsDataURL(this.state.file);
-            fileReader.onload = this.handleFile;
-            fileReader.onerror = function (error) {
-                console.log('Error: ', error);
-            };
-            this.setState({
-                fileReader: fileReader,
-            });
+
 
         } else {
             this.setState({
@@ -233,47 +191,12 @@ class AdminMemberScorePointAddContainer extends Component {
     }
 
     /**
-     *  Special Thanks: https://react-dropzone.netlify.com/#previews
-     */
-    onFileDrop(acceptedFiles) {
-        console.log("DEBUG | onFileDrop | acceptedFiles", acceptedFiles);
-        const file = acceptedFiles[0];
-
-        // For debuging purposes only.
-        console.log("DEBUG | onFileDrop | file", file);
-
-        if (file !== undefined && file !== null) {
-            const fileWithPreview = Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            });
-
-            // For debugging purposes.
-            console.log("DEBUG | onFileDrop | fileWithPreview", fileWithPreview);
-
-            // Update our local state to update the GUI.
-            this.setState({
-                file: fileWithPreview
-            })
-        }
-    }
-
-    onRemoveScorePointClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Clear uploaded file.
-        this.setState({
-            file: null
-        })
-    }
-
-    /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { isLoading, slug, title, description, tags, isTagSetsLoading, is_archived, errors, file } = this.state;
+        const { isLoading, slug, title, description, tags, isTagSetsLoading, is_archived, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
         const memberFiles = this.props.memberFileList ? this.props.memberFileList.results : [];
         const tagOptions = getTagReactSelectOptions(this.props.tagList);
@@ -292,9 +215,6 @@ class AdminMemberScorePointAddContainer extends Component {
                 isLoading={isLoading}
                 errors={errors}
                 onClick={this.onClick}
-                file={file}
-                onFileDrop={this.onFileDrop}
-                onRemoveScorePointClick={this.onRemoveScorePointClick}
                 onMultiChange={this.onMultiChange}
                 isTagSetsLoading={isTagSetsLoading}
             />
