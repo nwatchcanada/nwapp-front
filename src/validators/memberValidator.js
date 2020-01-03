@@ -684,3 +684,28 @@ export function validateScorePointInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+export function validateBadgeInput(data) {
+    let errors = {};
+
+    if (data.typeOf === undefined || data.typeOf === null || data.typeOf === "" || isNaN(data.typeOf) || data.typeOf === 0) {
+        errors.typeOf = 'This field is required';
+    } else {
+        if (data.typeOf === 1) {
+            if (data.typeOfOther === undefined || data.typeOfOther === null || data.typeOfOther === "") {
+                errors.typeOfOther = 'This field is required.';
+            }
+            if (data.descriptionOther === undefined || data.descriptionOther === null || data.descriptionOther === "") {
+                errors.descriptionOther = 'This field is required.';
+            }
+        }
+    }
+    if (data.amount === undefined || data.amount === null || data.amount === "" || isNaN(data.amount) ) {
+        errors.amount = 'This field is required.';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}

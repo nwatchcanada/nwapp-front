@@ -94,12 +94,12 @@ export default class AdminMemberScorePointArchiveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-sub-2" className="st-grey">
-                            <Link to={`/admin/member/${slug}/full`}>
+                            <Link to={`/admin/member/${slug}/community/badges`}>
                                 <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
                             </Link>
                         </div>
                         <div id="step-sub-3" className="st-grey">
-                            <Link to={`/admin/member/${slug}/full`}>
+                            <Link to={`/admin/member/${slug}/community/awards`}>
                                 <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
                             </Link>
                         </div>

@@ -27,7 +27,7 @@ class RemoteListComponent extends Component {
             page, sizePerPage, totalSize,
 
             // Data
-            scorePointList,
+            badgeList,
 
             // Everything else.
             onTableChange, isLoading
@@ -131,7 +131,7 @@ class RemoteListComponent extends Component {
             <BootstrapTable
                 bootstrap4
                 keyField='id'
-                data={ scorePointList }
+                data={ badgeList }
                 columns={ columns }
                 defaultSorted={ defaultSorted }
                 striped
@@ -229,7 +229,7 @@ function detailLinkFormatter(cell, row){
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
-            <Link to={`/admin/member/${row.user}/community/score-point/archive/${row.uuid}`}>
+            <Link to={`/admin/member/${row.user}/community/badge/archive/${row.uuid}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
@@ -237,14 +237,14 @@ function detailLinkFormatter(cell, row){
 }
 
 
-class AdminMemberScorePointListComponent extends Component {
+class AdminMemberBadgeListComponent extends Component {
     render() {
         const {
             // Pagination
             page, sizePerPage, totalSize,
 
             // Data
-            scorePointList, member, slug,
+            badgeList, member, slug,
 
             // Everything else...
             flashMessage, onTableChange, isLoading
@@ -319,18 +319,18 @@ class AdminMemberScorePointListComponent extends Component {
                 </div>
                 <div className="row" id="subNav">
                     <div className="step-navigation">
-                        <div id="step-sub-1" className="st-grey active">
-                            <strong>
+                        <div id="step-sub-1" className="st-grey">
+                            <Link to={`/admin/member/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
-                            </strong>
-                        </div>
-                        <div id="step-sub-2" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/badges`}>
-                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
                             </Link>
                         </div>
+                        <div id="step-sub-2" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
+                            </strong>
+                        </div>
                         <div id="step-sub-3" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/awards`}>
+                            <Link to={`/admin/member/${slug}/full`}>
                                 <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
                             </Link>
                         </div>
@@ -342,12 +342,12 @@ class AdminMemberScorePointListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/member/${slug}/community/add-score-point`} className="d-block link-ndecor" title="Members">
+                                    <Link to={`/admin/member/${slug}/community/add-badge`} className="d-block link-ndecor" title="Members">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
-                                <h4>Add Score</h4>
-                                <div className="text-muted">Add Score Points</div>
+                                <h4>Add Badge</h4>
+                                <div className="text-muted">Add Badge</div>
                             </div>
                         </section>
                     </div>
@@ -362,7 +362,7 @@ class AdminMemberScorePointListComponent extends Component {
                             page={page}
                             sizePerPage={sizePerPage}
                             totalSize={totalSize}
-                            scorePointList={scorePointList}
+                            badgeList={badgeList}
                             onTableChange={onTableChange}
                             isLoading={isLoading}
                         />
@@ -373,4 +373,4 @@ class AdminMemberScorePointListComponent extends Component {
     }
 }
 
-export default AdminMemberScorePointListComponent;
+export default AdminMemberBadgeListComponent;

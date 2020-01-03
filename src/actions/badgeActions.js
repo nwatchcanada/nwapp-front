@@ -13,7 +13,7 @@ import {
     BADGE_DETAIL_SUCCESS
 } from '../constants/actionTypes';
 import {
-    NWAPP_BADGE_LIST_API_ENDPOINT,
+    NWAPP_BADGES_LIST_API_ENDPOINT,
     NWAPP_BADGE_DETAIL_API_ENDPOINT
 } from '../constants/api';
 import getCustomAxios from '../helpers/customAxios';
@@ -37,7 +37,7 @@ export function pullBadgeList(page=1, sizePerPage=10, filtersMap=new Map(), onSu
 
         // Generate the URL from the map.
         // Note: Learn about `Map` iteration via https://hackernoon.com/what-you-should-know-about-es6-maps-dc66af6b9a1e
-        let aURL = NWAPP_BADGE_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
+        let aURL = NWAPP_BADGES_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
         filtersMap.forEach(
             (value, key) => {
                 let decamelizedkey = decamelize(key)
@@ -112,7 +112,7 @@ export function pullBadgeList(page=1, sizePerPage=10, filtersMap=new Map(), onSu
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postBadgeDetail(postData, successCallback, failedCallback) {
+export function postBadge(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -130,7 +130,7 @@ export function postBadgeDetail(postData, successCallback, failedCallback) {
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(NWAPP_BADGE_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(NWAPP_BADGES_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -157,7 +157,7 @@ export function postBadgeDetail(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postBadgeDetail | error:", errors); // For debuggin purposes only.
+                console.log("postBadge | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

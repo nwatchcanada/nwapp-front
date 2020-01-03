@@ -21,7 +21,7 @@ import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { SCORE_POINT_TYPE_OF_CHOICES } from "../../../../../constants/api";
 
 
-export default class AdminMemberScorePointAddComponent extends Component {
+export default class AdminMemberBadgeAddComponent extends Component {
     render() {
         const {
             typeOf, typeOfOther, onSelectChange, descriptionOther, amount, tags, tagOptions, isTagSetsLoading, file, isArchived,
@@ -97,15 +97,15 @@ export default class AdminMemberScorePointAddComponent extends Component {
                 </div>
                 <div className="row" id="subNav">
                     <div className="step-navigation">
-                        <div id="step-sub-1" className="st-grey active">
-                            <strong>
+                        <div id="step-sub-1" className="st-grey">
+                            <Link to={`/admin/member/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
-                            </strong>
-                        </div>
-                        <div id="step-sub-2" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/badges`}>
-                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
                             </Link>
+                        </div>
+                        <div id="step-sub-2" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
+                            </strong>
                         </div>
                         <div id="step-sub-3" className="st-grey">
                             <Link to={`/admin/member/${slug}/community/awards`}>
@@ -142,7 +142,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                     label="Type of (Other) (*)"
                                     onChange={onTextChange}
                                     value={typeOfOther}
-                                    helpText="Please specify the title of this score point to display to the user."
+                                    helpText="Please specify the title of this badge to display to the user."
                                     name="typeOfOther"
                                     type="text"
                                 />
@@ -153,7 +153,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                     name="descriptionOther"
                                     borderColour="border-primary"
                                     label="Description (Other) (*)"
-                                    placeholder="Please write custom description for this score point."
+                                    placeholder="Please write custom description for this badge."
                                     rows="5"
                                     value={descriptionOther}
                                     helpText="Max length of 255 characters."
@@ -190,7 +190,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onSubmitClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/member/${slug}/community/score-points`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/member/${slug}/community/badges`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

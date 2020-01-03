@@ -123,6 +123,11 @@ import AdminMemberScorePointListContainer from "./members/admin/retrieve/communi
 import AdminMemberScorePointAddContainer from "./members/admin/retrieve/community/adminMemberScorePointAddContainer";
 import AdminMemberScorePointArchiveContainer from "./members/admin/retrieve/community/adminMemberScorePointArchiveContainer";
 
+import AdminMemberBadgeListContainer from "./members/admin/retrieve/community/adminMemberBadgeListContainer";
+import AdminMemberBadgeAddContainer from "./members/admin/retrieve/community/adminMemberBadgeAddContainer";
+// import AdminMemberBadgeArchiveContainer from "./members/admin/retrieve/community/adminMemberBadgeArchiveContainer";
+
+
 /*
 -----------------
 AREA COORDINATORS
@@ -340,6 +345,8 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/community/score-points" exact component={requiresAuth(AdminMemberScorePointListContainer)} />
                                 <Route path="/admin/member/:slug/community/add-score-point" exact component={requiresAuth(AdminMemberScorePointAddContainer)} />
                                 <Route path="/admin/member/:slug/community/score-point/archive/:scorePointSlug" exact component={requiresAuth(AdminMemberScorePointArchiveContainer)} />
+                                <Route path="/admin/member/:slug/community/badges" exact component={requiresAuth(AdminMemberBadgeListContainer)} />
+                                <Route path="/admin/member/:slug/community/add-badge" exact component={requiresAuth(AdminMemberBadgeAddContainer)} />
                                 <Route path="/admin/member/:slug/operations" exact component={requiresAuth(AdminMemberOperationsContainer)} />
                                 <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />
