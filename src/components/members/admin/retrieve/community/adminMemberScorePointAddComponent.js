@@ -25,7 +25,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
     render() {
         const {
             typeOf, typeOfOther, onSelectChange, descriptionOther, amount, tags, tagOptions, isTagSetsLoading, file, isArchived,
-            flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onClick
+            flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onSubmitClick
         } = this.props;
         return (
             <div>
@@ -151,7 +151,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                 onChange={onTextChange}
                                 value={amount}
                                 helpText="Please specify the amount of points to give."
-                                name="typeOfOther"
+                                name="amount"
                                 type="number"
                             />
 
@@ -168,7 +168,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                             />
 
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onSubmitClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
                                 <Link to={`/admin/member/${slug}/community`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">

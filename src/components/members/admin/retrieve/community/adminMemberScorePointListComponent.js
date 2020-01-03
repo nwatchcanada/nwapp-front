@@ -27,7 +27,7 @@ class RemoteListComponent extends Component {
             page, sizePerPage, totalSize,
 
             // Data
-            memberFiles,
+            scorePointList,
 
             // Everything else.
             onTableChange, isLoading
@@ -51,14 +51,20 @@ class RemoteListComponent extends Component {
             formatter: statusFormatter
         },
         {
-            dataField: 'title',
-            text: 'Title',
-            sort: false
+            dataField: 'typeOf',
+            text: 'Type',
+            sort: true,
+            formatter: typeOfFormatter
         },
         {
             dataField: 'description',
             text: 'Description',
             sort: false
+        },{
+            dataField: 'amount',
+            text: 'Amount',
+            sort: false,
+            formatter: amountFormatter
         },
         {
             dataField: 'createdAt',
@@ -66,12 +72,12 @@ class RemoteListComponent extends Component {
             sort: true,
             formatter: createdAtFormatter
         },
-        {
-            dataField: 'fileUrl',
-            text: 'File',
-            sort: false,
-            formatter: fileFormatter
-        },
+        // {
+        //     dataField: 'fileUrl',
+        //     text: 'File',
+        //     sort: false,
+        //     formatter: fileFormatter
+        // },
         // {
         //     dataField: 'email',
         //     text: 'Email',
@@ -124,7 +130,7 @@ class RemoteListComponent extends Component {
             <BootstrapTable
                 bootstrap4
                 keyField='id'
-                data={ memberFiles }
+                data={ scorePointList }
                 columns={ columns }
                 defaultSorted={ defaultSorted }
                 striped
@@ -149,6 +155,28 @@ function statusFormatter(cell, row){
             break;
         case true:
             return <i className="fas fa-archive" style={{ color: 'blue' }}></i>;
+            break;
+        default:
+            return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
+            break;
+    }
+}
+
+function amountFormatter(cell, row){
+    return <div style={{ color: 'green' }}>+&nbsp;{row.amount}</div>
+}
+
+
+function typeOfFormatter(cell, row){
+    switch(row.typeOf) {
+        case 1: // Other
+            return <div><i className="fas fa-question-circle" style={{ color: 'blue' }}></i>&nbsp;{row.typeOfLabel}</div>;
+            break;
+        case 2: // Donation
+            return <div><i className="fas fa-donate" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
+            break;
+        case 3: // Daily Usage
+            return <div><i className="fas fa-chart-bar" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
             break;
         default:
             return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
@@ -198,7 +226,7 @@ class AdminMemberScorePointListComponent extends Component {
             page, sizePerPage, totalSize,
 
             // Data
-            memberFiles, member, slug,
+            scorePointList, member, slug,
 
             // Everything else...
             flashMessage, onTableChange, isLoading
@@ -297,7 +325,7 @@ class AdminMemberScorePointListComponent extends Component {
                             page={page}
                             sizePerPage={sizePerPage}
                             totalSize={totalSize}
-                            memberFiles={memberFiles}
+                            scorePointList={scorePointList}
                             onTableChange={onTableChange}
                             isLoading={isLoading}
                         />

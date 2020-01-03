@@ -257,12 +257,13 @@ class AdminMemberScorePointListContainer extends Component {
     render() {
         const { isLoading, slug, text, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
-        const memberFileList = this.props.memberFileList && this.props.memberFileList.results ? this.props.memberFileList.results : [];
+        const scorePointList = this.props.scorePointList && this.props.scorePointList.results ? this.props.scorePointList.results : [];
+
         return (
             <AdminMemberScorePointListComponent
                 slug={slug}
                 member={member}
-                memberFiles={memberFileList}
+                scorePointList={scorePointList}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
                 errors={errors}
@@ -277,7 +278,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        memberFileList: store.scorePointListState,
+        scorePointList: store.scorePointListState,
         memberDetail: store.memberDetailState,
     };
 }

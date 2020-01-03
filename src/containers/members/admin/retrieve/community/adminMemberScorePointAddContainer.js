@@ -6,8 +6,7 @@ import Scroll from 'react-scroll';
 import OrderListComponent from "../../../../../components/members/admin/retrieve/community/adminMemberScorePointAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postScorePoint } from "../../../../../actions/scorePointActions";
-import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { validateInput } from "../../../../../validators/fileValidator"
+import { validateScorePointInput } from "../../../../../validators/memberValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
 import { SCORE_POINT_TYPE_OF_DESCRIPTION_DICT } from "../../../../../constants/api";
 
@@ -26,6 +25,7 @@ class AdminMemberScorePointAddContainer extends Component {
             typeOf: 0,
             typeOfOther: "",
             descriptionOther: "",
+            amount: "",
             tags: [],
             isTagSetsLoading: true,
             is_archived: false,
@@ -43,7 +43,7 @@ class AdminMemberScorePointAddContainer extends Component {
         this.onFailureListCallback = this.onFailureListCallback.bind(this);
         this.onSuccessPostCallback = this.onSuccessPostCallback.bind(this);
         this.onFailurePostCallback = this.onFailurePostCallback.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.onSubmitClick = this.onSubmitClick.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
         this.onTagFetchSuccessCallback = this.onTagFetchSuccessCallback.bind(this);
     }
@@ -91,9 +91,6 @@ class AdminMemberScorePointAddContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -181,15 +178,25 @@ class AdminMemberScorePointAddContainer extends Component {
         });
     }
 
-    onClick(e) {
+    onSubmitClick(e) {
         e.preventDefault();
 
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateScorePointInput(this.state);
         // console.log(errors, isValid); // For debugging purposes only.
 
         if (isValid) {
-
-
+            this.setState({
+                errors: {},
+                isLoading: true,
+            }, ()=>{
+                // Once our state has been validated `client-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.postScorePoint(
+                    this.getPostData(),
+                    this.onSuccessPostCallback,
+                    this.onFailurePostCallback
+                );
+            });
         } else {
             this.setState({
                 errors: errors,
@@ -203,14 +210,13 @@ class AdminMemberScorePointAddContainer extends Component {
             scroll.scrollToTop();
         }
     }
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { isLoading, slug, typeOf, typeOfOther, descriptionOther, tags, isTagSetsLoading, is_archived, errors } = this.state;
+        const { isLoading, slug, typeOf, typeOfOther, descriptionOther, amount, tags, isTagSetsLoading, is_archived, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
         const tagOptions = getTagReactSelectOptions(this.props.tagList);
         return (
@@ -219,6 +225,7 @@ class AdminMemberScorePointAddContainer extends Component {
                 typeOf={typeOf}
                 typeOfOther={typeOfOther}
                 descriptionOther={descriptionOther}
+                amount={amount}
                 tags={tags}
                 tagOptions={tagOptions}
                 is_archived={is_archived}
@@ -227,7 +234,7 @@ class AdminMemberScorePointAddContainer extends Component {
                 onTextChange={this.onTextChange}
                 isLoading={isLoading}
                 errors={errors}
-                onClick={this.onClick}
+                onSubmitClick={this.onSubmitClick}
                 onMultiChange={this.onMultiChange}
                 isTagSetsLoading={isTagSetsLoading}
                 onSelectChange={this.onSelectChange}
@@ -250,9 +257,6 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        },
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
         },
         postScorePoint: (postData, successCallback, failedCallback) => {
             dispatch(postScorePoint(postData, successCallback, failedCallback))
