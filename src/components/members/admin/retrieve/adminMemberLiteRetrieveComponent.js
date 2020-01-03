@@ -63,9 +63,9 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-7" className="st-grey">
-                            <strong>
+                            <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
-                            </strong>
+                            </Link>
                         </div>
                     </div>
                 </div>
