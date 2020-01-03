@@ -88,12 +88,13 @@ class RemoteListComponent extends Component {
         //     text: 'Financials',
         //     sort: false,
         //     formatter: financialExternalLinkFormatter
-        // },{
-        //     dataField: 'id',
-        //     text: 'Details',
-        //     sort: false,
-        //     formatter: detailLinkFormatter
-        // }
+        // },
+        {
+            dataField: 'uuid',
+            text: 'Archive?',
+            sort: false,
+            formatter: detailLinkFormatter
+        }
         ];
 
         const defaultSorted = [{
@@ -163,7 +164,11 @@ function statusFormatter(cell, row){
 }
 
 function amountFormatter(cell, row){
-    return <div style={{ color: 'green' }}>+&nbsp;{row.amount}</div>
+    if (row.isArchived === true) {
+        return <div style={{ color: 'red' }}>-&nbsp;{row.amount}</div>
+    } else {
+        return <div style={{ color: 'green' }}>+&nbsp;{row.amount}</div>
+    }
 }
 
 
@@ -216,6 +221,19 @@ function fileFormatter(cell, row){
 
 function createdAtFormatter(cell, row){
     return <Moment format="MM/DD/YYYY hh:mm:ss a">{row.createdAt}</Moment>
+}
+
+
+function detailLinkFormatter(cell, row){
+    if (row.isArchived === true) {
+        return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
+    } else {
+        return (
+            <Link to={`/admin/member/${row.user}/community/score-point/archive/${row.uuid}`}>
+                View&nbsp;<i className="fas fa-chevron-right"></i>
+            </Link>
+        )
+    }
 }
 
 

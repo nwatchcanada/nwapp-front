@@ -121,7 +121,7 @@ import MemberArchiveOperationContainer from "./members/admin/operations/adminArc
 import AdminMemberUnarchiveOperationContainer from "./members/admin/operations/adminUnarchiveOperationContainer";
 import AdminMemberScorePointListContainer from "./members/admin/retrieve/community/adminMemberScorePointListContainer";
 import AdminMemberScorePointAddContainer from "./members/admin/retrieve/community/adminMemberScorePointAddContainer";
-// import AdminMemberFileUploadArchiveContainer from "./members/admin/retrieve/fileUpload/adminMemberFileUploadArchiveContainer";
+import AdminMemberScorePointArchiveContainer from "./members/admin/retrieve/community/adminMemberScorePointArchiveContainer";
 
 /*
 -----------------
@@ -339,6 +339,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/file/archive/:fileSlug" exact component={requiresAuth(AdminMemberFileUploadArchiveContainer)} />
                                 <Route path="/admin/member/:slug/community/score-points" exact component={requiresAuth(AdminMemberScorePointListContainer)} />
                                 <Route path="/admin/member/:slug/community/add-score-point" exact component={requiresAuth(AdminMemberScorePointAddContainer)} />
+                                <Route path="/admin/member/:slug/community/score-point/archive/:scorePointSlug" exact component={requiresAuth(AdminMemberScorePointArchiveContainer)} />
                                 <Route path="/admin/member/:slug/operations" exact component={requiresAuth(AdminMemberOperationsContainer)} />
                                 <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />

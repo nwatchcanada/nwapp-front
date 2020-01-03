@@ -32,7 +32,7 @@ export const NWAPP_PRIVATE_FILE_UPLOAD_ARCHIVE_API_ENDPOINT = '/v1/private-file-
 export const NWAPP_SCORE_POINT_LIST_API_ENDPOINT = '/v1/score-points';
 export const NWAPP_AWARD_LIST_API_ENDPOINT = '/v1/awards';
 export const NWAPP_BADGES_LIST_API_ENDPOINT = '/v1/badges';
-export const NWAPP_SCORE_POINT_DETAIL_API_ENDPOINT = '/v1/score-point/<slug>';
+export const NWAPP_SCORE_POINT_DETAIL_API_ENDPOINT = '/v1/score-point/<uuid>';
 export const NWAPP_AWARD_DETAIL_API_ENDPOINT = '/v1/award/<slug>';
 export const NWAPP_BADGE_DETAIL_API_ENDPOINT = '/v1/badge/<slug>';
 

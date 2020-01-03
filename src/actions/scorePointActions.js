@@ -336,7 +336,7 @@ export function putScorePointDetail(postData, successCallback, failedCallback) {
 //                                 DELETE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteScorePointDetail(id, onSuccessCallback, onFailureCallback) {
+export function deleteScorePoint(uuid, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -346,7 +346,7 @@ export function deleteScorePointDetail(id, onSuccessCallback, onFailureCallback)
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = NWAPP_SCORE_POINT_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = NWAPP_SCORE_POINT_DETAIL_API_ENDPOINT.replace("<uuid>", uuid);
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -359,7 +359,7 @@ export function deleteScorePointDetail(id, onSuccessCallback, onFailureCallback)
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("deleteScorePointDetail | Success:", profile); // For debugging purposes.
+            console.log("deleteScorePoint | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
@@ -383,7 +383,7 @@ export function deleteScorePointDetail(id, onSuccessCallback, onFailureCallback)
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("deleteScorePointDetail | error:", errors); // For debuggin purposes only.
+                console.log("deleteScorePoint | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
