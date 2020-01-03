@@ -9,6 +9,7 @@ import { postScorePoint } from "../../../../../actions/scorePointActions";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
+import { SCORE_POINT_TYPE_OF_DESCRIPTION_DICT } from "../../../../../constants/api";
 
 
 class AdminMemberScorePointAddContainer extends Component {
@@ -22,8 +23,9 @@ class AdminMemberScorePointAddContainer extends Component {
         const { slug } = this.props.match.params;
         this.state = {
             isLoading: false,
-            title: "",
-            description: "",
+            typeOf: 0,
+            typeOfOther: "",
+            descriptionOther: "",
             tags: [],
             isTagSetsLoading: true,
             is_archived: false,
@@ -35,6 +37,7 @@ class AdminMemberScorePointAddContainer extends Component {
             errors: {},
         }
         this.getPostData = this.getPostData.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSuccessListCallback = this.onSuccessListCallback.bind(this);
         this.onFailureListCallback = this.onFailureListCallback.bind(this);
@@ -157,6 +160,17 @@ class AdminMemberScorePointAddContainer extends Component {
         });
     }
 
+    onSelectChange(option) {
+        const key = [option.selectName].toString();
+        const value = option.value;
+        const optionKey = key + "Option";
+
+        this.setState({
+            [option.selectName]: value,
+            optionKey: option,
+        });
+    }
+
     onMultiChange(...args) {
         // Extract the select options from the parameter.
         const selectedOptions = args[0];
@@ -196,20 +210,19 @@ class AdminMemberScorePointAddContainer extends Component {
      */
 
     render() {
-        const { isLoading, slug, title, description, tags, isTagSetsLoading, is_archived, errors } = this.state;
+        const { isLoading, slug, typeOf, typeOfOther, descriptionOther, tags, isTagSetsLoading, is_archived, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
-        const memberFiles = this.props.memberFileList ? this.props.memberFileList.results : [];
         const tagOptions = getTagReactSelectOptions(this.props.tagList);
         return (
             <OrderListComponent
                 slug={slug}
-                title={title}
-                description={description}
+                typeOf={typeOf}
+                typeOfOther={typeOfOther}
+                descriptionOther={descriptionOther}
                 tags={tags}
                 tagOptions={tagOptions}
                 is_archived={is_archived}
                 member={member}
-                memberFiles={memberFiles}
                 flashMessage={this.props.flashMessage}
                 onTextChange={this.onTextChange}
                 isLoading={isLoading}
@@ -217,6 +230,7 @@ class AdminMemberScorePointAddContainer extends Component {
                 onClick={this.onClick}
                 onMultiChange={this.onMultiChange}
                 isTagSetsLoading={isTagSetsLoading}
+                onSelectChange={this.onSelectChange}
             />
         );
     }

@@ -775,17 +775,17 @@ export const COMPANY_TYPE_OF_CHOICES = [
 
 export const ARCHIVE_REASON_CHOICES = [
     {
-        id: 'archive-reason-2-choice',
+        id: 'archive-reason-5-choice',
         selectName: "reason",
         value: 2,
         label: "Client is blacklisted"
     },{
-        id: 'archive-reason-2-choice',
+        id: 'archive-reason-4-choice',
         selectName: "reason",
         value: 3,
         label: "Client has moved"
     },{
-        id: 'archive-reason-2-choice',
+        id: 'archive-reason-3-choice',
         selectName: "reason",
         value: 4,
         label: "Client is deceased"
@@ -801,3 +801,36 @@ export const ARCHIVE_REASON_CHOICES = [
         label: "Other"
     }
 ];
+
+
+/**
+ *  "ScorePoint" Model
+ *  Type of options
+ */
+export const SCORE_POINT_TYPE_OF_CHOICES = [
+    {
+        id: 'typeOf-1-choice',
+        selectName: "typeOf",
+        value: 2,
+        label: "Donation"
+    },{
+        id: 'typeOf-3-choice',
+        selectName: "typeOf",
+        value: 3,
+        label: "Daily Usage"
+    },{
+        id: 'typeOf-1-choice',
+        selectName: "typeOf",
+        value: 1,
+        label: "Other"
+    }
+];
+
+/**
+ * Descriptions used for the `typeOf` option.
+ */
+export const SCORE_POINT_TYPE_OF_DESCRIPTION_DICT = {
+    1: "Score points awarded by staff.",
+    2: "Score awarded for donating to Neighbourhood Watch.",
+    3: "Score awarded using service in a day.",
+};

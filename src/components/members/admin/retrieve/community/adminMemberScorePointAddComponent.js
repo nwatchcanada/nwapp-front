@@ -14,15 +14,17 @@ import Moment from 'react-moment';
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
+import { SCORE_POINT_TYPE_OF_CHOICES } from "../../../../../constants/api";
 
 
 export default class AdminMemberScorePointAddComponent extends Component {
     render() {
         const {
-            title, description, tags, tagOptions, isTagSetsLoading, file, isArchived,
+            typeOf, typeOfOther, onSelectChange, descriptionOther, amount, tags, tagOptions, isTagSetsLoading, file, isArchived,
             flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onClick
         } = this.props;
         return (
@@ -102,27 +104,55 @@ export default class AdminMemberScorePointAddComponent extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Type of (*)"
+                                name="typeOf"
+                                defaultOptionLabel="Please select how you heard about us."
+                                options={SCORE_POINT_TYPE_OF_CHOICES}
+                                value={typeOf}
+                                error={errors.typeOf}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {typeOf === 1 &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.typeOfOther}
+                                    label="Type of (Other) (*)"
+                                    onChange={onTextChange}
+                                    value={typeOfOther}
+                                    helpText="Please specify the title of this score point to display to the user."
+                                    name="typeOfOther"
+                                    type="text"
+                                />
+                            }
+
+                            {typeOf === 1 &&
+                                <BootstrapTextarea
+                                    name="descriptionOther"
+                                    borderColour="border-primary"
+                                    label="Description (Other) (*)"
+                                    placeholder="Please write custom description for this score point."
+                                    rows="5"
+                                    value={descriptionOther}
+                                    helpText="Max length of 255 characters."
+                                    onChange={onTextChange}
+                                    error={errors.descriptionOther}
+                                />
+                            }
+
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
-                                error={errors.title}
-                                label="Title (*)"
+                                error={errors.amount}
+                                label="Amount (*)"
                                 onChange={onTextChange}
-                                value={title}
-                                name="title"
-                                type="text"
-                            />
-
-                            <BootstrapTextarea
-                                name="description"
-                                borderColour="border-success"
-                                label="Description"
-                                placeholder="Write any additional comments here."
-                                rows="5"
-                                value={description}
-                                helpText=""
-                                onChange={onTextChange}
-                                error={errors.description}
+                                value={amount}
+                                helpText="Please specify the amount of points to give."
+                                name="typeOfOther"
+                                type="number"
                             />
 
                             <BootstrapMultipleSelect
