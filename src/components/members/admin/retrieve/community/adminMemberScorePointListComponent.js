@@ -258,7 +258,7 @@ class AdminMemberScorePointListComponent extends Component {
                     </div>
                 }
 
-                <div className="row">
+                <div className="row" id="mainNav">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
                             <Link to={`/admin/member/${slug}`}>
@@ -295,6 +295,25 @@ class AdminMemberScorePointListComponent extends Component {
                         <div id="step-7" className="st-grey">
                             <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <div className="row" id="subNav">
+                    <div className="step-navigation">
+                        <div id="step-sub-1" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
+                            </strong>
+                        </div>
+                        <div id="step-sub-2" className="st-grey">
+                            <Link to={`/admin/member/${slug}/full`}>
+                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
+                            </Link>
+                        </div>
+                        <div id="step-sub-3" className="st-grey">
+                            <Link to={`/admin/member/${slug}/full`}>
+                                <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
                             </Link>
                         </div>
                     </div>

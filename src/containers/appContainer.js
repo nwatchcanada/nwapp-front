@@ -337,8 +337,8 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/files" exact component={requiresAuth(AdminMemberFileUploadListContainer)} />
                                 <Route path="/admin/member/:slug/file/add" exact component={requiresAuth(AdminMemberFileUploadAddContainer)} />
                                 <Route path="/admin/member/:slug/file/archive/:fileSlug" exact component={requiresAuth(AdminMemberFileUploadArchiveContainer)} />
-                                <Route path="/admin/member/:slug/community" exact component={requiresAuth(AdminMemberScorePointListContainer)} />
-                                <Route path="/admin/member/:slug/community/add-score-point" exact component={requiresAuth(AdminMemberScorePointAddContainer)} />                                
+                                <Route path="/admin/member/:slug/community/score-points" exact component={requiresAuth(AdminMemberScorePointListContainer)} />
+                                <Route path="/admin/member/:slug/community/add-score-point" exact component={requiresAuth(AdminMemberScorePointAddContainer)} />
                                 <Route path="/admin/member/:slug/operations" exact component={requiresAuth(AdminMemberOperationsContainer)} />
                                 <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />

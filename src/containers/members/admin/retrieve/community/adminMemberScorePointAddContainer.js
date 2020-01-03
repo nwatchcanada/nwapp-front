@@ -130,7 +130,7 @@ class AdminMemberScorePointAddContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Score has been successfully added to member.");
-                this.props.history.push("/admin/member/"+this.state.slug+"/community");
+                this.props.history.push("/admin/member/"+this.state.slug+"/community/score-points");
             }
         )
     }
