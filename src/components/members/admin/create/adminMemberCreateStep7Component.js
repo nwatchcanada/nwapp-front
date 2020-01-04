@@ -90,9 +90,6 @@ export default class AdminMemberCreateStep7Component extends Component {
                                 <span className="num">7.</span><span className="">Metrics</span>
                             </strong>
                         </div>
-                        <div id="step-8" className="st-grey">
-                            <span className="num">8.</span><span className="">Review</span>
-                        </div>
                     </div>
                 </div>
 

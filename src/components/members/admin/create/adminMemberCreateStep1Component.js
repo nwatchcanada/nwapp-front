@@ -122,7 +122,8 @@ export default class AdminMemberCreateStep1Component extends Component {
                 </div>
                 <div className="col-md-12 text-center">
                     <h3 className="p-2">- or -</h3>
-                    <a href="/admin/members/add/step-3" role="button">
+
+                    <a href="/admin/members/add/step-3" role="button" className="btn btn-success btn-lg">
                         Add New Member&nbsp;<i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
