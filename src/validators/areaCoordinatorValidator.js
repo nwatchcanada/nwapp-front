@@ -659,3 +659,57 @@ export function validateDeactivationInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+export function validateScorePointInput(data) {
+    let errors = {};
+
+    if (data.typeOf === undefined || data.typeOf === null || data.typeOf === "" || isNaN(data.typeOf) || data.typeOf === 0) {
+        errors.typeOf = 'This field is required';
+    } else {
+        if (data.typeOf === 1) {
+            if (data.typeOfOther === undefined || data.typeOfOther === null || data.typeOfOther === "") {
+                errors.typeOfOther = 'This field is required.';
+            }
+            if (data.descriptionOther === undefined || data.descriptionOther === null || data.descriptionOther === "") {
+                errors.descriptionOther = 'This field is required.';
+            }
+        }
+    }
+    if (data.amount === undefined || data.amount === null || data.amount === "" || isNaN(data.amount) ) {
+        errors.amount = 'This field is required.';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+export function validateBadgeInput(data) {
+    let errors = {};
+
+    if (data.typeOf === undefined || data.typeOf === null || data.typeOf === "" || isNaN(data.typeOf) || data.typeOf === 0) {
+        errors.typeOf = 'This field is required';
+    } else {
+        if (data.typeOf === 1) {
+            if (data.typeOfOther === undefined || data.typeOfOther === null || data.typeOfOther === "") {
+                errors.typeOfOther = 'This field is required.';
+            }
+            if (data.descriptionOther === undefined || data.descriptionOther === null || data.descriptionOther === "") {
+                errors.descriptionOther = 'This field is required.';
+            }
+            if (data.icon === undefined || data.icon === null || data.icon === "") {
+                errors.icon = 'This field is required.';
+            }
+            if (data.colour === undefined || data.colour === null || data.colour === "") {
+                errors.colour = 'This field is required.';
+            }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
