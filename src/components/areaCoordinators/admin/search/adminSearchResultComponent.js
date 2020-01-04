@@ -32,10 +32,10 @@ export default class AdminAreaCoordinatorSearchResultComponent extends Component
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/admin/areaCoordinators`}><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                           <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/admin/areaCoordinators/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to={`/admin/area-coordinators/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results
@@ -93,7 +93,7 @@ class CardComponent extends Component {
                 <div className="card bg-light">
                     <div className="card-body">
                         <h5 className="card-title">
-                            <Link to={`/admin/areaCoordinator/${areaCoordinator.slug}`}>
+                            <Link to={`/admin/area-coordinator/${areaCoordinator.slug}`}>
                                 {areaCoordinator.typeOf === 3 &&
                                     <strong><i className="fas fa-building"></i>&nbsp;{areaCoordinator.organizationName}</strong>
                                 }
@@ -111,7 +111,7 @@ class CardComponent extends Component {
                             <a href={`email:${areaCoordinator.email}`}>{areaCoordinator.email}</a><br />
                             <a href={`tel:${areaCoordinator.primaryPhoneE164}`}>{areaCoordinator.primaryPhoneNational}</a>
                         </p>
-                        <Link to={`/admin/areaCoordinator/${areaCoordinator.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
+                        <Link to={`/admin/area-coordinator/${areaCoordinator.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
                             Select&nbsp;<i class="fas fa-chevron-right"></i>
                         </Link>
                     </div>

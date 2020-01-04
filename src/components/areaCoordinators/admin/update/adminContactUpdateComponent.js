@@ -44,10 +44,10 @@ export default class AdminAreaCoordinatorContactUpdateComponent extends Componen
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/areaCoordinators`}><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                            <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/areaCoordinator/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{firstName} {lastName}</Link>
+                            <Link to={`/admin/area-coordinator/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{firstName} {lastName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update (Contact)
@@ -175,7 +175,7 @@ export default class AdminAreaCoordinatorContactUpdateComponent extends Componen
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/areaCoordinator/${slug}/full`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/area-coordinator/${slug}/full`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

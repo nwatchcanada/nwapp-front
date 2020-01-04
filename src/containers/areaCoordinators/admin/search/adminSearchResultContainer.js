@@ -132,7 +132,7 @@ class AdminAreaCoordinatorSearchResultContainer extends Component {
         this.setState(
             { isLoading: true },
             ()=>{
-                this.props.history.push("/admin/areaCoordinator/"+areaCoordinatorId+"");
+                this.props.history.push("/admin/area-coordinator/"+areaCoordinatorId+"");
             }
         );
     }

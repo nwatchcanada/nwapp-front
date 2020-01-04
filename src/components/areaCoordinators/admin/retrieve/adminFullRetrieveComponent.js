@@ -20,7 +20,7 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/areaCoordinators`}><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                            <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}
@@ -41,7 +41,7 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}`}>
+                            <Link to={`/admin/area-coordinator/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
@@ -51,24 +51,24 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/comments`}>
+                            <Link to={`/admin/area-coordinator/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/files`}>
+                            <Link to={`/admin/area-coordinator/${slug}/files`}>
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </Link>
                         </div>
                         {/*
                         <div id="step-6" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/community/score-points`}>
+                            <Link to={`/admin/area-coordinator/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
                         */}
                         <div id="step-7" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/operations`}>
+                            <Link to={`/admin/area-coordinator/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
                         </div>
@@ -99,7 +99,7 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-phone"></i>&nbsp;Contact
-                                        <Link to={`/admin/areaCoordinator/${slug}/update/contact`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                        <Link to={`/admin/area-coordinator/${slug}/update/contact`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
                                             <i className="fas fa-edit"></i>&nbsp;
                                         </Link>
                                     </th>
@@ -151,7 +151,7 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-map-marker-alt"></i>&nbsp;Postal Address
-                                        <Link to={`/admin/areaCoordinator/${slug}/update/address`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                        <Link to={`/admin/area-coordinator/${slug}/update/address`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
                                             <i className="fas fa-edit"></i>&nbsp;
                                         </Link>
                                     </th>
@@ -168,7 +168,7 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-chart-pie"></i>&nbsp;Metrics
-                                        <Link to={`/admin/areaCoordinator/${slug}/update/metrics`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                        <Link to={`/admin/area-coordinator/${slug}/update/metrics`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
                                             <i className="fas fa-edit"></i>&nbsp;
                                         </Link>
                                     </th>

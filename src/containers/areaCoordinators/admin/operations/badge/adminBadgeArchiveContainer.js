@@ -62,7 +62,7 @@ class AdminAreaCoordinatorBadgeArchiveContainer extends Component {
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Score points have been successfully archived.");
-                this.props.history.push("/admin/areaCoordinator/"+this.state.slug+"/community/badges");
+                this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/community/badges");
             }
         )
     }

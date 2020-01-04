@@ -75,7 +75,7 @@ class AdminAreaCoordinatorOperationsContainer extends Component {
         localStorage.setItem("workery-create-order-areaCoordinatorId", this.props.areaCoordinatorDetail.id);
         localStorage.setItem("workery-create-order-areaCoordinatorGivenName", this.props.areaCoordinatorDetail.givenName);
         localStorage.setItem("workery-create-order-areaCoordinatorLastName", this.props.areaCoordinatorDetail.lastName);
-        this.props.history.push("/admin/areaCoordinator/"+this.state.slug+"/promote/step-1");
+        this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/promote/step-1");
     }
 
 

@@ -36,10 +36,10 @@ export default class AdminAreaCoordinatorFileUploadAddComponent extends Componen
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/areaCoordinators"><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/areaCoordinator/${slug}/files`}>
+                            <Link to={`/admin/area-coordinator/${slug}/files`}>
                                 <i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}
                             </Link>
                         </li>
@@ -62,12 +62,12 @@ export default class AdminAreaCoordinatorFileUploadAddComponent extends Componen
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}`}>
+                            <Link to={`/admin/area-coordinator/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/full`}>
+                            <Link to={`/admin/area-coordinator/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
@@ -79,7 +79,7 @@ export default class AdminAreaCoordinatorFileUploadAddComponent extends Componen
                         </div>
                         */}
                         <div id="step-4" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/comments`}>
+                            <Link to={`/admin/area-coordinator/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
@@ -90,13 +90,13 @@ export default class AdminAreaCoordinatorFileUploadAddComponent extends Componen
                         </div>
                         {/*
                         <div id="step-6" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/community/score-points`}>
+                            <Link to={`/admin/area-coordinator/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
                         */}
                         <div id="step-7" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/operations`}>
+                            <Link to={`/admin/area-coordinator/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
                         </div>

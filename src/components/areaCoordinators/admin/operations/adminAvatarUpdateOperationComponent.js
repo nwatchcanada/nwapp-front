@@ -30,10 +30,10 @@ export default class AdminAreaCoordinatorAvatarUpdateOperationComponent extends 
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/areaCoordinators"><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/areaCoordinator/${slug}`}>
+                            <Link to={`/admin/area-coordinator/${slug}`}>
                                 <i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}
                             </Link>
                         </li>
@@ -59,29 +59,29 @@ export default class AdminAreaCoordinatorAvatarUpdateOperationComponent extends 
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/full`}>
+                            <Link to={`/admin/area-coordinator/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
                         {/*
                         <div id="step-3" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/orders`}>
+                            <Link to={`/admin/area-coordinator/${slug}/orders`}>
                                 <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
                             </Link>
                         </div>
                         */}
                         <div id="step-4" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/comments`}>
+                            <Link to={`/admin/area-coordinator/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/files`}>
+                            <Link to={`/admin/area-coordinator/${slug}/files`}>
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </Link>
                         </div>
                         <div id="step-6" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/operations`}>
+                            <Link to={`/admin/area-coordinator/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
                         </div>
@@ -109,7 +109,7 @@ export default class AdminAreaCoordinatorAvatarUpdateOperationComponent extends 
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/areaCoordinator/${slug}`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/area-coordinator/${slug}`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

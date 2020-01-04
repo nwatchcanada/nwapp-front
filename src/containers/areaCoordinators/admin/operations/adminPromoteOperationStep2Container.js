@@ -71,7 +71,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/admin/areaCoordinator/"+this.state.slug+"/promote/step-3");
+        this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/promote/step-3");
     }
 
     onFailedSubmissionCallback(errors) {

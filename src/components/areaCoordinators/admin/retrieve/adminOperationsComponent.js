@@ -24,7 +24,7 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/areaCoordinators`}><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                            <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}
@@ -45,35 +45,35 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}`}>
+                            <Link to={`/admin/area-coordinator/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/full`}>
+                            <Link to={`/admin/area-coordinator/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
                         { /*
                         <div id="step-3" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/orders`}>
+                            <Link to={`/admin/area-coordinator/${slug}/orders`}>
                                 <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
                             </Link>
                         </div>
                         */ }
                         <div id="step-4" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/comments`}>
+                            <Link to={`/admin/area-coordinator/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/files`}>
+                            <Link to={`/admin/area-coordinator/${slug}/files`}>
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </Link>
                         </div>
                         {/*
                         <div id="step-6" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/community/score-points`}>
+                            <Link to={`/admin/area-coordinator/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
@@ -117,7 +117,7 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                                             <p className="card-text">This will make the areaCoordinator <strong>inactive</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
-                                            <Link to={`/admin/areaCoordinator/${slug}/archive`} className="btn btn-success btn-lg">
+                                            <Link to={`/admin/area-coordinator/${slug}/archive`} className="btn btn-success btn-lg">
                                                 Go&nbsp;<i className="fas fa-chevron-right"></i>
                                             </Link>
                                         </div>
@@ -133,7 +133,7 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                                             <p className="card-text">This will make the areaCoordinator <strong>active</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
-                                            <Link to={`/admin/areaCoordinator/${slug}/unarchive`} className="btn btn-success btn-lg">
+                                            <Link to={`/admin/area-coordinator/${slug}/unarchive`} className="btn btn-success btn-lg">
                                                 Go&nbsp;<i className="fas fa-chevron-right"></i>
                                             </Link>
                                         </div>
@@ -151,7 +151,7 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                                         <p className="card-text">View and edit details pertaining to score points.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
-                                        <Link to={`/admin/areaCoordinator/${slug}/community/score-points`} className="btn btn-success btn-lg">
+                                        <Link to={`/admin/area-coordinator/${slug}/community/score-points`} className="btn btn-success btn-lg">
                                             Go&nbsp;<i className="fas fa-chevron-right"></i>
                                         </Link>
                                     </div>
@@ -168,7 +168,7 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                                         <p className="card-text">View and edit details pertaining to badges.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
-                                        <Link to={`/admin/areaCoordinator/${slug}/community/badges`} className="btn btn-success btn-lg">
+                                        <Link to={`/admin/area-coordinator/${slug}/community/badges`} className="btn btn-success btn-lg">
                                             Go&nbsp;<i className="fas fa-chevron-right"></i>
                                         </Link>
                                     </div>
@@ -185,7 +185,7 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                                         <p className="card-text">View and edit details pertaining to awards.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
-                                        <Link to={`/admin/areaCoordinator/${slug}/community/awards`} className="btn btn-success btn-lg">
+                                        <Link to={`/admin/area-coordinator/${slug}/community/awards`} className="btn btn-success btn-lg">
                                             Go&nbsp;<i className="fas fa-chevron-right"></i>
                                         </Link>
                                     </div>

@@ -69,7 +69,7 @@ class AdminAreaCoordinatorListContainer extends Component {
 				if (isValid) {
 
 					localStorageSetObjectOrArrayItem('workery-search-areaCoordinator-details', this.state);
-					this.props.history.push("/admin/areaCoordinators/search-results");
+					this.props.history.push("/admin/area-coordinators/search-results");
 
 
 				// CASE 2 OF 2: Validation was a failure.
@@ -105,7 +105,7 @@ class AdminAreaCoordinatorListContainer extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('workery-search-areaCoordinator-details', this.state);
-                    this.props.history.push("/admin/areaCoordinators/search-results");
+                    this.props.history.push("/admin/area-coordinators/search-results");
 
 
             // CASE 2 OF 2: Validation was a failure.
@@ -132,7 +132,7 @@ class AdminAreaCoordinatorListContainer extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('workery-search-areaCoordinator-details', this.state);
-                    this.props.history.push("/admin/areaCoordinators/search-results");
+                    this.props.history.push("/admin/area-coordinators/search-results");
 
 
             // CASE 2 OF 2: Validation was a failure.

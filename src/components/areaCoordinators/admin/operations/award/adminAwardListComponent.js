@@ -189,7 +189,7 @@ function fileFormatter(cell, row){
             }
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             {row.isArchived === false &&
-                <Link to={`/admin/areaCoordinator/${row.user}/file/archive/${row.slug}`}>
+                <Link to={`/admin/area-coordinator/${row.user}/file/archive/${row.slug}`}>
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             }
@@ -213,7 +213,7 @@ function detailLinkFormatter(cell, row){
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
-            <Link to={`/admin/areaCoordinator/${row.user}/community/award/archive/${row.uuid}`}>
+            <Link to={`/admin/area-coordinator/${row.user}/community/award/archive/${row.uuid}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
@@ -243,10 +243,10 @@ class AdminAreaCoordinatorAwardListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/areaCoordinators"><i className="fas fa-users"></i>&nbsp;AreaCoordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/areaCoordinator/${slug}/operations`}>
+                            <Link to={`/admin/area-coordinator/${slug}/operations`}>
                                 <i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}
                             </Link>
                         </li>
@@ -268,29 +268,29 @@ class AdminAreaCoordinatorAwardListComponent extends Component {
                 <div className="row" id="mainNav">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}`}>
+                            <Link to={`/admin/area-coordinator/${slug}`}>
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/full`}>
+                            <Link to={`/admin/area-coordinator/${slug}/full`}>
                                 <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
                             </Link>
                         </div>
                         { /*
                         <div id="step-3" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/orders`}>
+                            <Link to={`/admin/area-coordinator/${slug}/orders`}>
                                 <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
                             </Link>
                         </div>
                         */}
                         <div id="step-4" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/comments`}>
+                            <Link to={`/admin/area-coordinator/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <Link to={`/admin/areaCoordinator/${slug}/files`}>
+                            <Link to={`/admin/area-coordinator/${slug}/files`}>
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </Link>
                         </div>

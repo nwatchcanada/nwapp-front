@@ -129,7 +129,7 @@ class AdminAreaCoordinatorBadgeAddContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Score has been successfully added to areaCoordinator.");
-                this.props.history.push("/admin/areaCoordinator/"+this.state.slug+"/community/badges");
+                this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/community/badges");
             }
         )
     }

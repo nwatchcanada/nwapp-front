@@ -54,7 +54,7 @@ class AdminAreaCoordinatorPromoteOperationStep1Container extends Component {
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "AreaCoordinator has been successfully created.");
-        this.props.history.push("/admin/areaCoordinators");
+        this.props.history.push("/admin/area-coordinators");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -87,7 +87,7 @@ class AdminAreaCoordinatorPromoteOperationStep1Container extends Component {
         // Set our promotion group id.
         localStorage.setItem("nwapp-areaCoordinator-promote-group-id", roleId);
 
-        this.props.history.push("/admin/areaCoordinator/"+this.state.slug+"/promote/step-2");
+        this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/promote/step-2");
     }
 
 

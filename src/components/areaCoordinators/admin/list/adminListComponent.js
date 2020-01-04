@@ -118,7 +118,7 @@ class RemoteListComponent extends Component {
                 defaultSorted={ defaultSorted }
                 striped
                 bordered={ false }
-                noDataIndication="There are no areaCoordinators at the moment"
+                noDataIndication="There are no area coordinators at the moment"
                 remote
                 onTableChange={ onTableChange }
                 pagination={ paginationFactory(paginationOption) }
@@ -191,7 +191,7 @@ function detailLinkFormatter(cell, row){
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
-            <Link to={`/admin/areaCoordinator/${row.slug}`}>
+            <Link to={`/admin/area-coordinator/${row.slug}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
@@ -224,35 +224,35 @@ class AdminAreaCoordinatorListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-users"></i>&nbsp;AreaCoordinators
+                            <i className="fas fa-horse-head"></i>&nbsp;Area Coordinators
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-users"></i>&nbsp;AreaCoordinators</h1>
+                <h1><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</h1>
 
                 <div className="row">
                     <div className="col-md-12">
                         <section className="row text-center placeholders">
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/admin/areaCoordinators/add/step-1" className="d-block link-ndecor" title="AreaCoordinators">
+                                    <Link to="/admin/area-coordinators/add/step-1" className="d-block link-ndecor" title="AreaCoordinators">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
                                 <h4>Add</h4>
-                                <div className="text-muted">Add AreaCoordinators</div>
+                                <div className="text-muted">Add Area Coordinators</div>
                             </div>
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="/admin/areaCoordinators/search" className="d-block link-ndecor" title="Search">
+                                    <Link to="/admin/area-coordinators/search" className="d-block link-ndecor" title="Search">
                                         <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
                                     </Link>
                                 </div>
                                 <h4>Search</h4>
-                                <span className="text-muted">Search AreaCoordinators</span>
+                                <span className="text-muted">Search Area Coordinators</span>
                             </div>
                         </section>
                     </div>

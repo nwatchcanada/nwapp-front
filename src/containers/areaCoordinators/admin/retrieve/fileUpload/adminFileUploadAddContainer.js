@@ -135,7 +135,7 @@ class AdminAreaCoordinatorFileUploadAddContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "AreaCoordinator file has been successfully created.");
-                this.props.history.push("/admin/areaCoordinator/"+this.state.slug+"/files");
+                this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/files");
             }
         )
     }

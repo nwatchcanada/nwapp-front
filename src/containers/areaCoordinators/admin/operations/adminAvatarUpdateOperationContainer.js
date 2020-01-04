@@ -128,7 +128,7 @@ class AdminAreaCoordinatorAvatarUpdateOperationContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "AreaCoordinator avatar has been successfully updated.");
-                this.props.history.push("/admin/areaCoordinator/"+this.state.slug);
+                this.props.history.push("/admin/area-coordinator/"+this.state.slug);
             }
         )
     }

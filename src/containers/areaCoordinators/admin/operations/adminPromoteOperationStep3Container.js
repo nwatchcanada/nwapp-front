@@ -38,6 +38,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-associateAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-areaCoordinator-promote-policeCheckDate"),
+            isLoading: false,
         }
 
         this.onClick = this.onClick.bind(this);
@@ -98,7 +99,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
         else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
             this.props.history.push("/admin/associate/"+this.state.slug+"");
         } else {
-            this.props.history.push("/admin/areaCoordinator/"+this.state.slug+"");
+            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"");
         }
     }
 
@@ -164,6 +165,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
                 errors={this.state.errors}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                isLoading={this.state.isLoading}
             />
         );
     }

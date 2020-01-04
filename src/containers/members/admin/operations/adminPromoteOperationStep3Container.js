@@ -38,6 +38,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-member-promote-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-member-promote-associateAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-member-promote-policeCheckDate"),
+            isLoading: false,
         }
 
         this.onClick = this.onClick.bind(this);
@@ -164,6 +165,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
                 errors={this.state.errors}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                isLoading={this.state.isLoading}
             />
         );
     }
