@@ -60,11 +60,6 @@ class RemoteListComponent extends Component {
             dataField: 'description',
             text: 'Description',
             sort: false
-        },{
-            dataField: 'amount',
-            text: 'Amount',
-            sort: false,
-            formatter: amountFormatter
         },
         {
             dataField: 'createdAt',
@@ -163,25 +158,14 @@ function statusFormatter(cell, row){
     }
 }
 
-function amountFormatter(cell, row){
-    if (row.isArchived === true) {
-        return <div style={{ color: 'red' }}>-&nbsp;{row.amount}</div>
-    } else {
-        return <div style={{ color: 'green' }}>+&nbsp;{row.amount}</div>
-    }
-}
-
 
 function typeOfFormatter(cell, row){
     switch(row.typeOf) {
         case 1: // Other
-            return <div><i className="fas fa-question-circle" style={{ color: 'blue' }}></i>&nbsp;{row.typeOfLabel}</div>;
+            return <div><i className={`fas fa-${row.icon}`} style={{ color: row.colour }}></i>&nbsp;{row.typeOfLabel}</div>;
             break;
-        case 2: // Donation
+        case 2: // Supporter
             return <div><i className="fas fa-donate" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
-            break;
-        case 3: // Daily Usage
-            return <div><i className="fas fa-chart-bar" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
             break;
         default:
             return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;

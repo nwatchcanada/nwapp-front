@@ -18,13 +18,13 @@ import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSele
 import { BootstrapMultipleSelect } from "../../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
-import { SCORE_POINT_TYPE_OF_CHOICES } from "../../../../../constants/api";
+import { BADGE_TYPE_OF_CHOICES } from "../../../../../constants/api";
 
 
 export default class AdminMemberBadgeAddComponent extends Component {
     render() {
         const {
-            typeOf, typeOfOther, onSelectChange, descriptionOther, amount, tags, tagOptions, isTagSetsLoading, file, isArchived,
+            typeOf, typeOfOther, onSelectChange, descriptionOther, icon, colour, tags, tagOptions, isTagSetsLoading, file, isArchived,
             flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onSubmitClick
         } = this.props;
         return (
@@ -118,7 +118,7 @@ export default class AdminMemberBadgeAddComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Add Score Points</h1>
+                            <h1>Add Badge</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -128,7 +128,7 @@ export default class AdminMemberBadgeAddComponent extends Component {
                                 label="Type of (*)"
                                 name="typeOf"
                                 defaultOptionLabel="Please select how you heard about us."
-                                options={SCORE_POINT_TYPE_OF_CHOICES}
+                                options={BADGE_TYPE_OF_CHOICES}
                                 value={typeOf}
                                 error={errors.typeOf}
                                 onSelectChange={onSelectChange}
@@ -162,18 +162,34 @@ export default class AdminMemberBadgeAddComponent extends Component {
                                 />
                             }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.amount}
-                                label="Amount (*)"
-                                onChange={onTextChange}
-                                value={amount}
-                                helpText="Please specify the amount of points to give."
-                                name="amount"
-                                type="number"
-                            />
+                            {typeOf === 1 &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.icon}
+                                    label="Icon (*)"
+                                    onChange={onTextChange}
+                                    value={icon}
+                                    helpText="Please select the custom icon."
+                                    name="icon"
+                                    type="text"
+                                />
+                            }
 
+                            {typeOf === 1 &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.colour}
+                                    label="Colour (*)"
+                                    onChange={onTextChange}
+                                    value={colour}
+                                    helpText="Please select the custom colour."
+                                    name="colour"
+                                    type="text"
+                                />
+                            }
+                            
                             <BootstrapMultipleSelect
                                 borderColour="border-success"
                                 label="Tags"

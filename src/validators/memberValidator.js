@@ -698,10 +698,13 @@ export function validateBadgeInput(data) {
             if (data.descriptionOther === undefined || data.descriptionOther === null || data.descriptionOther === "") {
                 errors.descriptionOther = 'This field is required.';
             }
+            if (data.icon === undefined || data.icon === null || data.icon === "") {
+                errors.icon = 'This field is required.';
+            }
+            if (data.colour === undefined || data.colour === null || data.colour === "") {
+                errors.colour = 'This field is required.';
+            }
         }
-    }
-    if (data.amount === undefined || data.amount === null || data.amount === "" || isNaN(data.amount) ) {
-        errors.amount = 'This field is required.';
     }
 
     return {

@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import OrderListComponent from "../../../../../components/members/admin/retrieve/community/adminMemberBadgeAddComponent";
+import AdminMemberBadgeAddComponent from "../../../../../components/members/admin/retrieve/community/adminMemberBadgeAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postBadge } from "../../../../../actions/badgeActions";
 import { validateBadgeInput } from "../../../../../validators/memberValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
-import { SCORE_POINT_TYPE_OF_DESCRIPTION_DICT } from "../../../../../constants/api";
 
 
 class AdminMemberBadgeAddContainer extends Component {
@@ -130,7 +129,7 @@ class AdminMemberBadgeAddContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Score has been successfully added to member.");
-                this.props.history.push("/admin/member/"+this.state.slug+"/community/score-points");
+                this.props.history.push("/admin/member/"+this.state.slug+"/community/badges");
             }
         )
     }
@@ -220,7 +219,7 @@ class AdminMemberBadgeAddContainer extends Component {
         const member = this.props.memberDetail ? this.props.memberDetail : {};
         const tagOptions = getTagReactSelectOptions(this.props.tagList);
         return (
-            <OrderListComponent
+            <AdminMemberBadgeAddComponent
                 slug={slug}
                 typeOf={typeOf}
                 typeOfOther={typeOfOther}

@@ -8,7 +8,6 @@ import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postScorePoint } from "../../../../../actions/scorePointActions";
 import { validateScorePointInput } from "../../../../../validators/memberValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
-import { SCORE_POINT_TYPE_OF_DESCRIPTION_DICT } from "../../../../../constants/api";
 
 
 class AdminMemberScorePointAddContainer extends Component {

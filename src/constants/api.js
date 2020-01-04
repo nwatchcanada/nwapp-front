@@ -822,15 +822,26 @@ export const SCORE_POINT_TYPE_OF_CHOICES = [
         id: 'typeOf-1-choice',
         selectName: "typeOf",
         value: 1,
-        label: "Other"
+        label: "Other (Please specify)"
     }
 ];
 
+
+
 /**
- * Descriptions used for the `typeOf` option.
+ *  "Badge" Model
+ *  Type of options
  */
-export const SCORE_POINT_TYPE_OF_DESCRIPTION_DICT = {
-    1: "Score points awarded by staff.",
-    2: "Score awarded for donating to Neighbourhood Watch.",
-    3: "Score awarded using service in a day.",
-};
+export const BADGE_TYPE_OF_CHOICES = [
+    {
+        id: 'typeOf-1-choice',
+        selectName: "typeOf",
+        value: 2,
+        label: "Neighbourhood Watch Supporter"
+    },{
+        id: 'typeOf-1-choice',
+        selectName: "typeOf",
+        value: 1,
+        label: "Other (Please specify)"
+    }
+];
