@@ -92,40 +92,40 @@ import ResourceUpdateContainer from "./settings/resources/resourceUpdateContaine
 MEMBERS
 -------
 */
-import AdminMemberListContainer from "./members/admin/list/adminMemberListContainer";
-import AdminMemberSearchContainer from "./members/admin/search/adminMemberSearchContainer";
-import AdminMemberSearchResultContainer from "./members/admin/search/adminMemberSearchResultContainer";
-import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminMemberLiteRetrieveContainer";
-import AdminMemberFullRetrieveContainer from "./members/admin/retrieve/adminMemberFullRetrieveContainer";
-import AdminMemberCommentContainer from "./members/admin/retrieve/adminMemberCommentContainer";
-import AdminMemberFileUploadListContainer from "./members/admin/retrieve/fileUpload/adminMemberFileUploadListContainer";
-import AdminMemberFileUploadAddContainer from "./members/admin/retrieve/fileUpload/adminMemberFileUploadAddContainer";
-import AdminMemberFileUploadArchiveContainer from "./members/admin/retrieve/fileUpload/adminMemberFileUploadArchiveContainer";
-import AdminMemberOperationsContainer from "./members/admin/retrieve/adminMemberOperationsContainer";
-import AdminMemberCreateStep1Container from "./members/admin/create/adminMemberCreateStep1Container";
-import AdminMemberCreateStep2Container from "./members/admin/create/adminMemberCreateStep2Container";
-import AdminMemberCreateStep3Container from "./members/admin/create/adminMemberCreateStep3Container";
-import AdminMemberCreateStep4Container from "./members/admin/create/adminMemberCreateStep4Container";
-import AdminMemberCreateStep5Container from "./members/admin/create/adminMemberCreateStep5Container";
-import AdminMemberCreateStep6Container from "./members/admin/create/adminMemberCreateStep6Container";
-import AdminMemberCreateStep7Container from "./members/admin/create/adminMemberCreateStep7Container";
-import AdminMemberCreateStep8Container from "./members/admin/create/adminMemberCreateStep8Container";
-import AdminMemberContactUpdateContainer from "./members/admin/update/adminMemberContactUpdateContainer";
-import AdminMemberAddressUpdateContainer from "./members/admin/update/adminMemberAddressUpdateContainer";
-import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMemberMetricsUpdateContainer";
-import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminMemberAvatarUpdateOperationContainer";
-import AdminMemberPromoteOperationStep1Container from "./members/admin/operations/adminMemberPromoteOperationStep1Container";
-import AdminMemberPromoteOperationStep2Container from "./members/admin/operations/adminMemberPromoteOperationStep2Container";
-import AdminMemberPromoteOperationStep3Container from "./members/admin/operations/adminMemberPromoteOperationStep3Container";
+import AdminMemberListContainer from "./members/admin/list/adminListContainer";
+import AdminMemberSearchContainer from "./members/admin/search/adminSearchContainer";
+import AdminMemberSearchResultContainer from "./members/admin/search/adminSearchResultContainer";
+import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminLiteRetrieveContainer";
+import AdminMemberFullRetrieveContainer from "./members/admin/retrieve/adminFullRetrieveContainer";
+import AdminMemberCommentContainer from "./members/admin/retrieve/adminCommentContainer";
+import AdminMemberFileUploadListContainer from "./members/admin/retrieve/fileUpload/adminFileUploadListContainer";
+import AdminMemberFileUploadAddContainer from "./members/admin/retrieve/fileUpload/adminFileUploadAddContainer";
+import AdminMemberFileUploadArchiveContainer from "./members/admin/retrieve/fileUpload/adminFileUploadArchiveContainer";
+import AdminMemberOperationsContainer from "./members/admin/retrieve/adminOperationsContainer";
+import AdminMemberCreateStep1Container from "./members/admin/create/adminCreateStep1Container";
+import AdminMemberCreateStep2Container from "./members/admin/create/adminCreateStep2Container";
+import AdminMemberCreateStep3Container from "./members/admin/create/adminCreateStep3Container";
+import AdminMemberCreateStep4Container from "./members/admin/create/adminCreateStep4Container";
+import AdminMemberCreateStep5Container from "./members/admin/create/adminCreateStep5Container";
+import AdminMemberCreateStep6Container from "./members/admin/create/adminCreateStep6Container";
+import AdminMemberCreateStep7Container from "./members/admin/create/adminCreateStep7Container";
+import AdminMemberCreateStep8Container from "./members/admin/create/adminCreateStep8Container";
+import AdminMemberContactUpdateContainer from "./members/admin/update/adminContactUpdateContainer";
+import AdminMemberAddressUpdateContainer from "./members/admin/update/adminAddressUpdateContainer";
+import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMetricsUpdateContainer";
+import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminAvatarUpdateOperationContainer";
+import AdminMemberPromoteOperationStep1Container from "./members/admin/operations/adminPromoteOperationStep1Container";
+import AdminMemberPromoteOperationStep2Container from "./members/admin/operations/adminPromoteOperationStep2Container";
+import AdminMemberPromoteOperationStep3Container from "./members/admin/operations/adminPromoteOperationStep3Container";
 import MemberArchiveOperationContainer from "./members/admin/operations/adminArchiveOperationContainer";
 import AdminMemberUnarchiveOperationContainer from "./members/admin/operations/adminUnarchiveOperationContainer";
-import AdminMemberScorePointListContainer from "./members/admin/operations/scorePoint/adminMemberScorePointListContainer";
-import AdminMemberScorePointAddContainer from "./members/admin/operations/scorePoint/adminMemberScorePointAddContainer";
-import AdminMemberScorePointArchiveContainer from "./members/admin/operations/scorePoint/adminMemberScorePointArchiveContainer";
-import AdminMemberBadgeListContainer from "./members/admin/operations/badge/adminMemberBadgeListContainer";
-import AdminMemberBadgeAddContainer from "./members/admin/operations/badge/adminMemberBadgeAddContainer";
-import AdminMemberBadgeArchiveContainer from "./members/admin/operations/badge/adminMemberBadgeArchiveContainer";
-import AdminMemberAwardListContainer from "./members/admin/operations/award/adminMemberAwardListContainer";
+import AdminMemberScorePointListContainer from "./members/admin/operations/scorePoint/adminScorePointListContainer";
+import AdminMemberScorePointAddContainer from "./members/admin/operations/scorePoint/adminScorePointAddContainer";
+import AdminMemberScorePointArchiveContainer from "./members/admin/operations/scorePoint/adminScorePointArchiveContainer";
+import AdminMemberBadgeListContainer from "./members/admin/operations/badge/adminBadgeListContainer";
+import AdminMemberBadgeAddContainer from "./members/admin/operations/badge/adminBadgeAddContainer";
+import AdminMemberBadgeArchiveContainer from "./members/admin/operations/badge/adminBadgeArchiveContainer";
+import AdminMemberAwardListContainer from "./members/admin/operations/award/adminAwardListContainer";
 
 
 /*
@@ -133,7 +133,7 @@ import AdminMemberAwardListContainer from "./members/admin/operations/award/admi
 AREA COORDINATORS
 -----------------
 */
-import AdminAreaCoordinatorListContainer from "./areaCoordinators/admin/list/adminAreaCoordinatorListContainer";
+// import AdminAreaCoordinatorListContainer from "./areaCoordinators/admin/list/adminAreaCoordinatorListContainer";
 /*
 import AreaCoordinatorSearchContainer from "./areaCoordinators/search/areaCoordinatorSearchContainer";
 import AreaCoordinatorSearchResultContainer from "./areaCoordinators/search/areaCoordinatorSearchResultContainer";
@@ -365,7 +365,6 @@ class AppContainer extends React.Component {
                                 AREA COORDINATOR
                                 ----------------
                                 */
-                                <Route path="/admin/area-coordinators" exact component={requiresAuth(AdminAreaCoordinatorListContainer)} />
 
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
