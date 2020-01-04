@@ -31,8 +31,13 @@ export default class AdminMemberBadgeArchiveComponent extends Component {
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
+                        <li className="breadcrumb-item" aria-current="page">
+                            <Link to={`/admin/member/${slug}/operations`}>
+                                <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
+                            </Link>
+                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
+                            <i className="fas fa-id-card"></i>&nbsp;Badges
                         </li>
                     </ol>
                 </nav>

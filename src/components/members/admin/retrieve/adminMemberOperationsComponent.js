@@ -147,7 +147,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                         <i className="fas fa-scroll fa-3x"></i>
                                     </div>
                                     <div className="card-body">
-                                        <h3 className="card-title">Score</h3>
+                                        <h3 className="card-title">Score Points</h3>
                                         <p className="card-text">View and edit details pertaining to score points.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
