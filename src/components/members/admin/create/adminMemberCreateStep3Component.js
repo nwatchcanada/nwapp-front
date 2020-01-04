@@ -71,7 +71,7 @@ export default class AdminMemberCreateStep3Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Residential / Community Cares</h3>
                                 <p className="card-text">Add a residential or community cares member</p>
-                                <Link onClick={onRezOrComClick} className="btn btn-primary btn-lg">
+                                <Link onClick={onRezOrComClick} className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>
@@ -85,7 +85,7 @@ export default class AdminMemberCreateStep3Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Business</h3>
                                 <p className="card-text">Add a business member</p>
-                                <Link onClick={onBizClick} className="btn btn-primary btn-lg">
+                                <Link onClick={onBizClick} className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>
