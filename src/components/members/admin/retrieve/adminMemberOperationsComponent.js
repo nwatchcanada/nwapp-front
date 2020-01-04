@@ -144,14 +144,48 @@ export default class AdminMemberOperationsComponent extends Component {
                             <div className="col-sm-3 mb-4">
                                 <div className="card box-shadow text-center mx-auto h-100">
                                     <div className="card-custom-top-2">
-                                        <i className="fas fa-smile fa-3x"></i>
+                                        <i className="fas fa-scroll fa-3x"></i>
                                     </div>
                                     <div className="card-body">
-                                        <h3 className="card-title">Community</h3>
-                                        <p className="card-text">View and edit details pertaining to score points, badges and awards.</p>
+                                        <h3 className="card-title">Score</h3>
+                                        <p className="card-text">View and edit details pertaining to score points.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
                                         <Link to={`/admin/member/${slug}/community/score-points`} className="btn btn-success btn-lg">
+                                            Go&nbsp;<i className="fas fa-chevron-right"></i>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-sm-3 mb-4">
+                                <div className="card box-shadow text-center mx-auto h-100">
+                                    <div className="card-custom-top-2">
+                                        <i className="fas fa-id-card fa-3x"></i>
+                                    </div>
+                                    <div className="card-body">
+                                        <h3 className="card-title">Badges</h3>
+                                        <p className="card-text">View and edit details pertaining to badges.</p>
+                                    </div>
+                                    <div className="card-footer bg-transparent border-0">
+                                        <Link to={`/admin/member/${slug}/community/badges`} className="btn btn-success btn-lg">
+                                            Go&nbsp;<i className="fas fa-chevron-right"></i>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-sm-3 mb-4">
+                                <div className="card box-shadow text-center mx-auto h-100">
+                                    <div className="card-custom-top-2">
+                                        <i className="fas fa-trophy fa-3x"></i>
+                                    </div>
+                                    <div className="card-body">
+                                        <h3 className="card-title">Awards</h3>
+                                        <p className="card-text">View and edit details pertaining to awards.</p>
+                                    </div>
+                                    <div className="card-footer bg-transparent border-0">
+                                        <Link to={`/admin/member/${slug}/community/awards`} className="btn btn-success btn-lg">
                                             Go&nbsp;<i className="fas fa-chevron-right"></i>
                                         </Link>
                                     </div>

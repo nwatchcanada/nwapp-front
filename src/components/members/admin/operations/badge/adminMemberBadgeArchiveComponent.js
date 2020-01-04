@@ -81,25 +81,6 @@ export default class AdminMemberBadgeArchiveComponent extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row" id="subNav">
-                    <div className="step-navigation">
-                        <div id="step-sub-1" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/badges`}>
-                                <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
-                            </Link>
-                        </div>
-                        <div id="step-sub-2" className="st-grey active">
-                            <strong>
-                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
-                            </strong>
-                        </div>
-                        <div id="step-sub-3" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/awards`}>
-                                <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">

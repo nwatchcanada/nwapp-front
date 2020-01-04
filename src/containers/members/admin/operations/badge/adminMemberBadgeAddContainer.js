@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import OrderListComponent from "../../../../../components/members/admin/operations/community/adminMemberScorePointAddComponent";
+import AdminMemberBadgeAddComponent from "../../../../../components/members/admin/operations/badge/adminMemberBadgeAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { postScorePoint } from "../../../../../actions/scorePointActions";
-import { validateScorePointInput } from "../../../../../validators/memberValidator"
+import { postBadge } from "../../../../../actions/badgeActions";
+import { validateBadgeInput } from "../../../../../validators/memberValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
 
 
-class AdminMemberScorePointAddContainer extends Component {
+class AdminMemberBadgeAddContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -129,7 +129,7 @@ class AdminMemberScorePointAddContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Score has been successfully added to member.");
-                this.props.history.push("/admin/member/"+this.state.slug+"/community/score-points");
+                this.props.history.push("/admin/member/"+this.state.slug+"/community/badges");
             }
         )
     }
@@ -180,7 +180,7 @@ class AdminMemberScorePointAddContainer extends Component {
     onSubmitClick(e) {
         e.preventDefault();
 
-        const { errors, isValid } = validateScorePointInput(this.state);
+        const { errors, isValid } = validateBadgeInput(this.state);
         // console.log(errors, isValid); // For debugging purposes only.
 
         if (isValid) {
@@ -190,7 +190,7 @@ class AdminMemberScorePointAddContainer extends Component {
             }, ()=>{
                 // Once our state has been validated `client-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postScorePoint(
+                this.props.postBadge(
                     this.getPostData(),
                     this.onSuccessPostCallback,
                     this.onFailurePostCallback
@@ -219,7 +219,7 @@ class AdminMemberScorePointAddContainer extends Component {
         const member = this.props.memberDetail ? this.props.memberDetail : {};
         const tagOptions = getTagReactSelectOptions(this.props.tagList);
         return (
-            <OrderListComponent
+            <AdminMemberBadgeAddComponent
                 slug={slug}
                 typeOf={typeOf}
                 typeOfOther={typeOfOther}
@@ -247,7 +247,7 @@ const mapStateToProps = function(store) {
         user: store.userState,
         tagList: store.tagListState,
         flashMessage: store.flashMessageState,
-        memberFileList: store.scorePointListState,
+        memberFileList: store.badgeListState,
         memberDetail: store.memberDetailState,
     };
 }
@@ -257,8 +257,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postScorePoint: (postData, successCallback, failedCallback) => {
-            dispatch(postScorePoint(postData, successCallback, failedCallback))
+        postBadge: (postData, successCallback, failedCallback) => {
+            dispatch(postBadge(postData, successCallback, failedCallback))
         },
         pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
@@ -272,4 +272,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminMemberScorePointAddContainer);
+)(AdminMemberBadgeAddContainer);

@@ -17,11 +17,11 @@ class MemberArchiveOperationContainer extends Component {
     constructor(props) {
         super(props);
 
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // Update state.
         this.state = {
-            id: id,
+            slug: slug,
             member: {},
             reason: "",
             reasonOther: "",
@@ -151,11 +151,11 @@ class MemberArchiveOperationContainer extends Component {
      */
 
     render() {
-        const { id, errors, isLoading, reason, reasonOther } = this.state;
+        const { slug, errors, isLoading, reason, reasonOther } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : [];
         return (
             <MemberArchiveOperationComponent
-                id={id}
+                slug={slug}
                 errors={errors}
                 isLoading={isLoading}
                 reason={reason}

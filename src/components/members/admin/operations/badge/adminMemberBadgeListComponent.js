@@ -27,7 +27,7 @@ class RemoteListComponent extends Component {
             page, sizePerPage, totalSize,
 
             // Data
-            scorePointList,
+            badgeList,
 
             // Everything else.
             onTableChange, isLoading
@@ -60,11 +60,6 @@ class RemoteListComponent extends Component {
             dataField: 'description',
             text: 'Description',
             sort: false
-        },{
-            dataField: 'amount',
-            text: 'Amount',
-            sort: false,
-            formatter: amountFormatter
         },
         {
             dataField: 'createdAt',
@@ -131,12 +126,12 @@ class RemoteListComponent extends Component {
             <BootstrapTable
                 bootstrap4
                 keyField='id'
-                data={ scorePointList }
+                data={ badgeList }
                 columns={ columns }
                 defaultSorted={ defaultSorted }
                 striped
                 bordered={ false }
-                noDataIndication="There are no score points at the moment"
+                noDataIndication="There are no badges at the moment"
                 remote
                 onTableChange={ onTableChange }
                 pagination={ paginationFactory(paginationOption) }
@@ -163,25 +158,14 @@ function statusFormatter(cell, row){
     }
 }
 
-function amountFormatter(cell, row){
-    if (row.isArchived === true) {
-        return <div style={{ color: 'red' }}>-&nbsp;{row.amount}</div>
-    } else {
-        return <div style={{ color: 'green' }}>+&nbsp;{row.amount}</div>
-    }
-}
-
 
 function typeOfFormatter(cell, row){
     switch(row.typeOf) {
         case 1: // Other
-            return <div><i className="fas fa-question-circle" style={{ color: 'blue' }}></i>&nbsp;{row.typeOfLabel}</div>;
+            return <div><i className={`fas fa-${row.icon}`} style={{ color: row.colour }}></i>&nbsp;{row.typeOfLabel}</div>;
             break;
-        case 2: // Donation
+        case 2: // Supporter
             return <div><i className="fas fa-donate" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
-            break;
-        case 3: // Daily Usage
-            return <div><i className="fas fa-chart-bar" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
             break;
         default:
             return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
@@ -229,7 +213,7 @@ function detailLinkFormatter(cell, row){
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
-            <Link to={`/admin/member/${row.user}/community/score-point/archive/${row.uuid}`}>
+            <Link to={`/admin/member/${row.user}/community/badge/archive/${row.uuid}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
@@ -237,14 +221,14 @@ function detailLinkFormatter(cell, row){
 }
 
 
-class AdminMemberScorePointListComponent extends Component {
+class AdminMemberBadgeListComponent extends Component {
     render() {
         const {
             // Pagination
             page, sizePerPage, totalSize,
 
             // Data
-            scorePointList, member, slug,
+            badgeList, member, slug,
 
             // Everything else...
             flashMessage, onTableChange, isLoading
@@ -312,37 +296,18 @@ class AdminMemberScorePointListComponent extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row" id="subNav">
-                    <div className="step-navigation">
-                        <div id="step-sub-1" className="st-grey active">
-                            <strong>
-                                <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
-                            </strong>
-                        </div>
-                        <div id="step-sub-2" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/badges`}>
-                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
-                            </Link>
-                        </div>
-                        <div id="step-sub-3" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/awards`}>
-                                <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
 
                 <div className="row">
                     <div className="col-md-12">
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/member/${slug}/community/add-score-point`} className="d-block link-ndecor" title="Members">
+                                    <Link to={`/admin/member/${slug}/community/add-badge`} className="d-block link-ndecor" title="Members">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
-                                <h4>Add Score</h4>
-                                <div className="text-muted">Add Score Points</div>
+                                <h4>Add Badge</h4>
+                                <div className="text-muted">Add Badge</div>
                             </div>
                         </section>
                     </div>
@@ -357,7 +322,7 @@ class AdminMemberScorePointListComponent extends Component {
                             page={page}
                             sizePerPage={sizePerPage}
                             totalSize={totalSize}
-                            scorePointList={scorePointList}
+                            badgeList={badgeList}
                             onTableChange={onTableChange}
                             isLoading={isLoading}
                         />
@@ -368,4 +333,4 @@ class AdminMemberScorePointListComponent extends Component {
     }
 }
 
-export default AdminMemberScorePointListComponent;
+export default AdminMemberBadgeListComponent;

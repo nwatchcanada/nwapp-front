@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminMemberScorePointListComponent from "../../../../../components/members/admin/operations/community/adminMemberScorePointListComponent";
+import AdminMemberAwardListComponent from "../../../../../components/members/admin/operations/award/adminMemberAwardListComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullScorePointList, postScorePoint } from "../../../../../actions/scorePointActions";
+import { pullAwardList, postAward } from "../../../../../actions/awardActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 
 
-class AdminMemberScorePointListContainer extends Component {
+class AdminMemberAwardListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -73,7 +73,7 @@ class AdminMemberScorePointListContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Get our data.
-        this.props.pullScorePointList(
+        this.props.pullAwardList(
             this.state.page,
             this.state.sizePerPage,
             this.state.parametersMap,
@@ -131,7 +131,7 @@ class AdminMemberScorePointListContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 // Get our data.
-                this.props.pullScorePointList(
+                this.props.pullAwardList(
                     this.state.page,
                     this.state.sizePerPage,
                     this.state.parametersMap,
@@ -171,7 +171,7 @@ class AdminMemberScorePointListContainer extends Component {
 
                 // Once our state has been validated `member-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postScorePoint(
+                this.props.postAward(
                     this.getPostData(),
                     this.onSuccessPostCallback,
                     this.onFailurePostCallback
@@ -214,7 +214,7 @@ class AdminMemberScorePointListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullScorePointList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullAwardList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -224,7 +224,7 @@ class AdminMemberScorePointListContainer extends Component {
             this.setState(
                 { page: page, sizePerPage:sizePerPage, isLoading: true, },
                 ()=>{
-                    this.props.pullScorePointList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullAwardList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -241,7 +241,7 @@ class AdminMemberScorePointListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullScorePointList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullAwardList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
         }else {
@@ -257,13 +257,13 @@ class AdminMemberScorePointListContainer extends Component {
     render() {
         const { isLoading, slug, text, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
-        const scorePointList = this.props.scorePointList && this.props.scorePointList.results ? this.props.scorePointList.results : [];
+        const awardList = this.props.awardList && this.props.awardList.results ? this.props.awardList.results : [];
 
         return (
-            <AdminMemberScorePointListComponent
+            <AdminMemberAwardListComponent
                 slug={slug}
                 member={member}
-                scorePointList={scorePointList}
+                awardList={awardList}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
                 errors={errors}
@@ -278,7 +278,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        scorePointList: store.scorePointListState,
+        awardList: store.awardListState,
         memberDetail: store.memberDetailState,
     };
 }
@@ -288,13 +288,13 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullScorePointList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+        pullAwardList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
             dispatch(
-                pullScorePointList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+                pullAwardList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
         },
-        postScorePoint: (postData, successCallback, failedCallback) => {
-            dispatch(postScorePoint(postData, successCallback, failedCallback))
+        postAward: (postData, successCallback, failedCallback) => {
+            dispatch(postAward(postData, successCallback, failedCallback))
         },
     }
 }
@@ -303,4 +303,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminMemberScorePointListContainer);
+)(AdminMemberAwardListContainer);

@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminMemberAwardListComponent from "../../../../../components/members/admin/operations/community/adminMemberAwardListComponent";
+import AdminMemberBadgeListComponent from "../../../../../components/members/admin/operations/badge/adminMemberBadgeListComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullAwardList, postAward } from "../../../../../actions/awardActions";
+import { pullBadgeList, postBadge } from "../../../../../actions/badgeActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 
 
-class AdminMemberAwardListContainer extends Component {
+class AdminMemberBadgeListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -73,7 +73,7 @@ class AdminMemberAwardListContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Get our data.
-        this.props.pullAwardList(
+        this.props.pullBadgeList(
             this.state.page,
             this.state.sizePerPage,
             this.state.parametersMap,
@@ -131,7 +131,7 @@ class AdminMemberAwardListContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 // Get our data.
-                this.props.pullAwardList(
+                this.props.pullBadgeList(
                     this.state.page,
                     this.state.sizePerPage,
                     this.state.parametersMap,
@@ -171,7 +171,7 @@ class AdminMemberAwardListContainer extends Component {
 
                 // Once our state has been validated `member-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postAward(
+                this.props.postBadge(
                     this.getPostData(),
                     this.onSuccessPostCallback,
                     this.onFailurePostCallback
@@ -214,7 +214,7 @@ class AdminMemberAwardListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullAwardList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullBadgeList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -224,7 +224,7 @@ class AdminMemberAwardListContainer extends Component {
             this.setState(
                 { page: page, sizePerPage:sizePerPage, isLoading: true, },
                 ()=>{
-                    this.props.pullAwardList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullBadgeList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -241,7 +241,7 @@ class AdminMemberAwardListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullAwardList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullBadgeList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
         }else {
@@ -257,13 +257,13 @@ class AdminMemberAwardListContainer extends Component {
     render() {
         const { isLoading, slug, text, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
-        const awardList = this.props.awardList && this.props.awardList.results ? this.props.awardList.results : [];
+        const badgeList = this.props.badgeList && this.props.badgeList.results ? this.props.badgeList.results : [];
 
         return (
-            <AdminMemberAwardListComponent
+            <AdminMemberBadgeListComponent
                 slug={slug}
                 member={member}
-                awardList={awardList}
+                badgeList={badgeList}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
                 errors={errors}
@@ -278,7 +278,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        awardList: store.awardListState,
+        badgeList: store.badgeListState,
         memberDetail: store.memberDetailState,
     };
 }
@@ -288,13 +288,13 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullAwardList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+        pullBadgeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
             dispatch(
-                pullAwardList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+                pullBadgeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
         },
-        postAward: (postData, successCallback, failedCallback) => {
-            dispatch(postAward(postData, successCallback, failedCallback))
+        postBadge: (postData, successCallback, failedCallback) => {
+            dispatch(postBadge(postData, successCallback, failedCallback))
         },
     }
 }
@@ -303,4 +303,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminMemberAwardListContainer);
+)(AdminMemberBadgeListContainer);

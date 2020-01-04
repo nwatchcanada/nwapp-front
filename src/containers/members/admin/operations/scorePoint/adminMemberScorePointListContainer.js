@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminMemberBadgeListComponent from "../../../../../components/members/admin/operations/community/adminMemberBadgeListComponent";
+import AdminMemberScorePointListComponent from "../../../../../components/members/admin/operations/scorePoint/adminMemberScorePointListComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullBadgeList, postBadge } from "../../../../../actions/badgeActions";
+import { pullScorePointList, postScorePoint } from "../../../../../actions/scorePointActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 
 
-class AdminMemberBadgeListContainer extends Component {
+class AdminMemberScorePointListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -73,7 +73,7 @@ class AdminMemberBadgeListContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Get our data.
-        this.props.pullBadgeList(
+        this.props.pullScorePointList(
             this.state.page,
             this.state.sizePerPage,
             this.state.parametersMap,
@@ -131,7 +131,7 @@ class AdminMemberBadgeListContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 // Get our data.
-                this.props.pullBadgeList(
+                this.props.pullScorePointList(
                     this.state.page,
                     this.state.sizePerPage,
                     this.state.parametersMap,
@@ -171,7 +171,7 @@ class AdminMemberBadgeListContainer extends Component {
 
                 // Once our state has been validated `member-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postBadge(
+                this.props.postScorePoint(
                     this.getPostData(),
                     this.onSuccessPostCallback,
                     this.onFailurePostCallback
@@ -214,7 +214,7 @@ class AdminMemberBadgeListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullBadgeList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullScorePointList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -224,7 +224,7 @@ class AdminMemberBadgeListContainer extends Component {
             this.setState(
                 { page: page, sizePerPage:sizePerPage, isLoading: true, },
                 ()=>{
-                    this.props.pullBadgeList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullScorePointList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -241,7 +241,7 @@ class AdminMemberBadgeListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullBadgeList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullScorePointList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
         }else {
@@ -257,13 +257,13 @@ class AdminMemberBadgeListContainer extends Component {
     render() {
         const { isLoading, slug, text, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
-        const badgeList = this.props.badgeList && this.props.badgeList.results ? this.props.badgeList.results : [];
+        const scorePointList = this.props.scorePointList && this.props.scorePointList.results ? this.props.scorePointList.results : [];
 
         return (
-            <AdminMemberBadgeListComponent
+            <AdminMemberScorePointListComponent
                 slug={slug}
                 member={member}
-                badgeList={badgeList}
+                scorePointList={scorePointList}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
                 errors={errors}
@@ -278,7 +278,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        badgeList: store.badgeListState,
+        scorePointList: store.scorePointListState,
         memberDetail: store.memberDetailState,
     };
 }
@@ -288,13 +288,13 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullBadgeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+        pullScorePointList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
             dispatch(
-                pullBadgeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+                pullScorePointList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
         },
-        postBadge: (postData, successCallback, failedCallback) => {
-            dispatch(postBadge(postData, successCallback, failedCallback))
+        postScorePoint: (postData, successCallback, failedCallback) => {
+            dispatch(postScorePoint(postData, successCallback, failedCallback))
         },
     }
 }
@@ -303,4 +303,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminMemberBadgeListContainer);
+)(AdminMemberScorePointListContainer);
