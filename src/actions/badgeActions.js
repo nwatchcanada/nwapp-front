@@ -336,7 +336,7 @@ export function putBadgeDetail(postData, successCallback, failedCallback) {
 //                                 DELETE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteBadgeDetail(id, onSuccessCallback, onFailureCallback) {
+export function deleteBadge(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -346,7 +346,7 @@ export function deleteBadgeDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = NWAPP_BADGE_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = NWAPP_BADGE_DETAIL_API_ENDPOINT.replace("<slug>", slug);
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -359,7 +359,7 @@ export function deleteBadgeDetail(id, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("deleteBadgeDetail | Success:", profile); // For debugging purposes.
+            console.log("deleteBadge | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
@@ -383,7 +383,7 @@ export function deleteBadgeDetail(id, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("deleteBadgeDetail | error:", errors); // For debuggin purposes only.
+                console.log("deleteBadge | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
