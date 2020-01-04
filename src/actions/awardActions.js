@@ -112,7 +112,7 @@ export function pullAwardList(page=1, sizePerPage=10, filtersMap=new Map(), onSu
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postAwardDetail(postData, successCallback, failedCallback) {
+export function postAward(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -157,7 +157,7 @@ export function postAwardDetail(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postAwardDetail | error:", errors); // For debuggin purposes only.
+                console.log("postAward | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

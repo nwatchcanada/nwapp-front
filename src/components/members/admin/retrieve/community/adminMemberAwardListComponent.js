@@ -27,7 +27,7 @@ class RemoteListComponent extends Component {
             page, sizePerPage, totalSize,
 
             // Data
-            badgeList,
+            awardList,
 
             // Everything else.
             onTableChange, isLoading
@@ -126,7 +126,7 @@ class RemoteListComponent extends Component {
             <BootstrapTable
                 bootstrap4
                 keyField='id'
-                data={ badgeList }
+                data={ awardList }
                 columns={ columns }
                 defaultSorted={ defaultSorted }
                 striped
@@ -213,7 +213,7 @@ function detailLinkFormatter(cell, row){
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
-            <Link to={`/admin/member/${row.user}/community/badge/archive/${row.uuid}`}>
+            <Link to={`/admin/member/${row.user}/community/award/archive/${row.uuid}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
@@ -221,14 +221,14 @@ function detailLinkFormatter(cell, row){
 }
 
 
-class AdminMemberBadgeListComponent extends Component {
+class AdminMemberAwardListComponent extends Component {
     render() {
         const {
             // Pagination
             page, sizePerPage, totalSize,
 
             // Data
-            badgeList, member, slug,
+            awardList, member, slug,
 
             // Everything else...
             flashMessage, onTableChange, isLoading
@@ -308,15 +308,15 @@ class AdminMemberBadgeListComponent extends Component {
                                 <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
                             </Link>
                         </div>
-                        <div id="step-sub-2" className="st-grey active">
-                            <strong>
-                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
-                            </strong>
-                        </div>
-                        <div id="step-sub-3" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/awards`}>
-                                <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
+                        <div id="step-sub-2" className="st-grey">
+                            <Link to={`/admin/member/${slug}/community/badges`}>
+                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badge</span>
                             </Link>
+                        </div>
+                        <div id="step-sub-3" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
+                            </strong>
                         </div>
                     </div>
                 </div>
@@ -326,12 +326,12 @@ class AdminMemberBadgeListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/member/${slug}/community/add-badge`} className="d-block link-ndecor" title="Members">
+                                    <Link to={`/admin/member/${slug}/community/add-award`} className="d-block link-ndecor" title="Members">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
-                                <h4>Add Badge</h4>
-                                <div className="text-muted">Add Badge</div>
+                                <h4>Add Award</h4>
+                                <div className="text-muted">Add Award</div>
                             </div>
                         </section>
                     </div>
@@ -346,7 +346,7 @@ class AdminMemberBadgeListComponent extends Component {
                             page={page}
                             sizePerPage={sizePerPage}
                             totalSize={totalSize}
-                            badgeList={badgeList}
+                            awardList={awardList}
                             onTableChange={onTableChange}
                             isLoading={isLoading}
                         />
@@ -357,4 +357,4 @@ class AdminMemberBadgeListComponent extends Component {
     }
 }
 
-export default AdminMemberBadgeListComponent;
+export default AdminMemberAwardListComponent;
