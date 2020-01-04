@@ -136,7 +136,7 @@ class RemoteListComponent extends Component {
                 defaultSorted={ defaultSorted }
                 striped
                 bordered={ false }
-                noDataIndication="There are no members at the moment"
+                noDataIndication="There are no score points at the moment"
                 remote
                 onTableChange={ onTableChange }
                 pagination={ paginationFactory(paginationOption) }

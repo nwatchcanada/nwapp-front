@@ -131,7 +131,7 @@ class RemoteListComponent extends Component {
                 defaultSorted={ defaultSorted }
                 striped
                 bordered={ false }
-                noDataIndication="There are no members at the moment"
+                noDataIndication="There are no awards at the moment"
                 remote
                 onTableChange={ onTableChange }
                 pagination={ paginationFactory(paginationOption) }
@@ -318,22 +318,6 @@ class AdminMemberAwardListComponent extends Component {
                                 <span className="num"><i className="fas fa-trophy"></i>&nbsp;</span><span className="">Awards</span>
                             </strong>
                         </div>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-md-12">
-                        <section className="row text-center placeholders">
-                            <div className="col-sm-12 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/member/${slug}/community/add-award`} className="d-block link-ndecor" title="Members">
-                                        <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
-                                    </Link>
-                                </div>
-                                <h4>Add Award</h4>
-                                <div className="text-muted">Add Award</div>
-                            </div>
-                        </section>
                     </div>
                 </div>
 
