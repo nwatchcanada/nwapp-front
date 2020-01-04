@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminMemberBadgeAddComponent from "../../../../../components/members/admin/retrieve/community/adminMemberBadgeAddComponent";
+import AdminMemberBadgeAddComponent from "../../../../../components/members/admin/operations/community/adminMemberBadgeAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postBadge } from "../../../../../actions/badgeActions";
 import { validateBadgeInput } from "../../../../../validators/memberValidator"

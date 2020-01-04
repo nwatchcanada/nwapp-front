@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminMemberBadgeArchiveComponent from "../../../../../components/members/admin/retrieve/community/adminMemberBadgeArchiveComponent";
+import AdminMemberScorePointArchiveComponent from "../../../../../components/members/admin/operations/community/adminMemberScorePointArchiveComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { deleteBadge } from "../../../../../actions/badgeActions";
+import { deleteScorePoint } from "../../../../../actions/scorePointActions";
 
 
-class AdminMemberBadgeArchiveContainer extends Component {
+class AdminMemberScorePointArchiveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,12 +16,12 @@ class AdminMemberBadgeArchiveContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { slug, badgeSlug } = this.props.match.params;
+        const { slug, scorePointSlug } = this.props.match.params;
         this.state = {
             isLoading: false,
             member: slug,
             slug: slug,
-            badgeSlug: badgeSlug,
+            scorePointSlug: scorePointSlug,
             errors: {},
         }
         this.onClick = this.onClick.bind(this);
@@ -62,7 +62,7 @@ class AdminMemberBadgeArchiveContainer extends Component {
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Score points have been successfully archived.");
-                this.props.history.push("/admin/member/"+this.state.slug+"/community/badges");
+                this.props.history.push("/admin/member/"+this.state.slug+"/community/score-points");
             }
         )
     }
@@ -88,7 +88,7 @@ class AdminMemberBadgeArchiveContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deleteBadge(this.state.badgeSlug, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deleteScorePoint(this.state.scorePointSlug, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -101,7 +101,7 @@ class AdminMemberBadgeArchiveContainer extends Component {
         const { isLoading, slug, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
         return (
-            <AdminMemberBadgeArchiveComponent
+            <AdminMemberScorePointArchiveComponent
                 slug={slug}
                 member={member}
                 isLoading={isLoading}
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteBadge: (uuid, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteBadge(uuid, onSuccessCallback, onFailureCallback))
+        deleteScorePoint: (uuid, onSuccessCallback, onFailureCallback) => {
+            dispatch(deleteScorePoint(uuid, onSuccessCallback, onFailureCallback))
         },
     }
 }
@@ -134,4 +134,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminMemberBadgeArchiveContainer);
+)(AdminMemberScorePointArchiveContainer);

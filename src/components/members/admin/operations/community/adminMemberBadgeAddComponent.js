@@ -18,13 +18,13 @@ import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSele
 import { BootstrapMultipleSelect } from "../../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
-import { SCORE_POINT_TYPE_OF_CHOICES } from "../../../../../constants/api";
+import { BADGE_TYPE_OF_CHOICES } from "../../../../../constants/api";
 
 
-export default class AdminMemberScorePointAddComponent extends Component {
+export default class AdminMemberBadgeAddComponent extends Component {
     render() {
         const {
-            typeOf, typeOfOther, onSelectChange, descriptionOther, amount, tags, tagOptions, isTagSetsLoading, file, isArchived,
+            typeOf, typeOfOther, onSelectChange, descriptionOther, icon, colour, tags, tagOptions, isTagSetsLoading, file, isArchived,
             flashMessage, isLoading, slug, member, onTextChange, onMultiChange, errors, onSubmitClick
         } = this.props;
         return (
@@ -85,27 +85,22 @@ export default class AdminMemberScorePointAddComponent extends Component {
                         </div>
                         <div id="step-6" className="st-grey active">
                             <strong>
-                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
-                            </strong>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
-                            </Link>
+                            </strong>
                         </div>
                     </div>
                 </div>
                 <div className="row" id="subNav">
                     <div className="step-navigation">
-                        <div id="step-sub-1" className="st-grey active">
-                            <strong>
+                        <div id="step-sub-1" className="st-grey">
+                            <Link to={`/admin/member/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
-                            </strong>
-                        </div>
-                        <div id="step-sub-2" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/badges`}>
-                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
                             </Link>
+                        </div>
+                        <div id="step-sub-2" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
+                            </strong>
                         </div>
                         <div id="step-sub-3" className="st-grey">
                             <Link to={`/admin/member/${slug}/community/awards`}>
@@ -118,7 +113,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Add Score Points</h1>
+                            <h1>Add Badge</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -128,7 +123,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                 label="Type of (*)"
                                 name="typeOf"
                                 defaultOptionLabel="Please select how you heard about us."
-                                options={SCORE_POINT_TYPE_OF_CHOICES}
+                                options={BADGE_TYPE_OF_CHOICES}
                                 value={typeOf}
                                 error={errors.typeOf}
                                 onSelectChange={onSelectChange}
@@ -142,7 +137,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                     label="Type of (Other) (*)"
                                     onChange={onTextChange}
                                     value={typeOfOther}
-                                    helpText="Please specify the title of this score point to display to the user."
+                                    helpText="Please specify the title of this badge to display to the user."
                                     name="typeOfOther"
                                     type="text"
                                 />
@@ -153,7 +148,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                     name="descriptionOther"
                                     borderColour="border-primary"
                                     label="Description (Other) (*)"
-                                    placeholder="Please write custom description for this score point."
+                                    placeholder="Please write custom description for this badge."
                                     rows="5"
                                     value={descriptionOther}
                                     helpText="Max length of 255 characters."
@@ -162,17 +157,33 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                 />
                             }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.amount}
-                                label="Amount (*)"
-                                onChange={onTextChange}
-                                value={amount}
-                                helpText="Please specify the amount of points to give."
-                                name="amount"
-                                type="number"
-                            />
+                            {typeOf === 1 &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.icon}
+                                    label="Icon (*)"
+                                    onChange={onTextChange}
+                                    value={icon}
+                                    helpText="Please select the custom icon."
+                                    name="icon"
+                                    type="text"
+                                />
+                            }
+
+                            {typeOf === 1 &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.colour}
+                                    label="Colour (*)"
+                                    onChange={onTextChange}
+                                    value={colour}
+                                    helpText="Please select the custom colour."
+                                    name="colour"
+                                    type="text"
+                                />
+                            }
 
                             <BootstrapMultipleSelect
                                 borderColour="border-success"
@@ -190,7 +201,7 @@ export default class AdminMemberScorePointAddComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onSubmitClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/member/${slug}/community/score-points`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/member/${slug}/community/badges`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

@@ -119,13 +119,13 @@ import AdminMemberPromoteOperationStep2Container from "./members/admin/operation
 import AdminMemberPromoteOperationStep3Container from "./members/admin/operations/adminMemberPromoteOperationStep3Container";
 import MemberArchiveOperationContainer from "./members/admin/operations/adminArchiveOperationContainer";
 import AdminMemberUnarchiveOperationContainer from "./members/admin/operations/adminUnarchiveOperationContainer";
-import AdminMemberScorePointListContainer from "./members/admin/retrieve/community/adminMemberScorePointListContainer";
-import AdminMemberScorePointAddContainer from "./members/admin/retrieve/community/adminMemberScorePointAddContainer";
-import AdminMemberScorePointArchiveContainer from "./members/admin/retrieve/community/adminMemberScorePointArchiveContainer";
-import AdminMemberBadgeListContainer from "./members/admin/retrieve/community/adminMemberBadgeListContainer";
-import AdminMemberBadgeAddContainer from "./members/admin/retrieve/community/adminMemberBadgeAddContainer";
-import AdminMemberBadgeArchiveContainer from "./members/admin/retrieve/community/adminMemberBadgeArchiveContainer";
-import AdminMemberAwardListContainer from "./members/admin/retrieve/community/adminMemberAwardListContainer";
+import AdminMemberScorePointListContainer from "./members/admin/operations/community/adminMemberScorePointListContainer";
+import AdminMemberScorePointAddContainer from "./members/admin/operations/community/adminMemberScorePointAddContainer";
+import AdminMemberScorePointArchiveContainer from "./members/admin/operations/community/adminMemberScorePointArchiveContainer";
+import AdminMemberBadgeListContainer from "./members/admin/operations/community/adminMemberBadgeListContainer";
+import AdminMemberBadgeAddContainer from "./members/admin/operations/community/adminMemberBadgeAddContainer";
+import AdminMemberBadgeArchiveContainer from "./members/admin/operations/community/adminMemberBadgeArchiveContainer";
+import AdminMemberAwardListContainer from "./members/admin/operations/community/adminMemberAwardListContainer";
 
 
 /*

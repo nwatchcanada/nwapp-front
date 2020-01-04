@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import OrderListComponent from "../../../../../components/members/admin/retrieve/community/adminMemberScorePointAddComponent";
+import OrderListComponent from "../../../../../components/members/admin/operations/community/adminMemberScorePointAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postScorePoint } from "../../../../../actions/scorePointActions";
 import { validateScorePointInput } from "../../../../../validators/memberValidator"

@@ -71,11 +71,13 @@ export default class AdminMemberOperationsComponent extends Component {
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </Link>
                         </div>
+                        {/*
                         <div id="step-6" className="st-grey">
                             <Link to={`/admin/member/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
+                        */}
                         <div id="step-7" className="st-grey active">
                             <strong>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
@@ -138,24 +140,24 @@ export default class AdminMemberOperationsComponent extends Component {
                                     </div>
                                 </div>
                             }
-                            { /*
-                                <div className="col-sm-3 mb-4">
-                                    <div className="card box-shadow text-center mx-auto h-100">
-                                        <div className="card-custom-top-2">
-                                            <i className="fas fa-bolt fa-3x"></i>
-                                        </div>
-                                        <div className="card-body">
-                                            <h3 className="card-title">Upgrade Member</h3>
-                                            <p className="card-text">Make this a commercial member.</p>
-                                        </div>
-                                        <div className="card-footer bg-transparent border-0">
-                                            <Link to={`/member/${slug}/rez-upgrade`} className="btn btn-success btn-lg">
-                                                Go&nbsp;<i className="fas fa-chevron-right"></i>
-                                            </Link>
-                                        </div>
+
+                            <div className="col-sm-3 mb-4">
+                                <div className="card box-shadow text-center mx-auto h-100">
+                                    <div className="card-custom-top-2">
+                                        <i className="fas fa-smile fa-3x"></i>
+                                    </div>
+                                    <div className="card-body">
+                                        <h3 className="card-title">Community</h3>
+                                        <p className="card-text">View and edit details pertaining to score points, badges and awards.</p>
+                                    </div>
+                                    <div className="card-footer bg-transparent border-0">
+                                        <Link to={`/admin/member/${slug}/community/score-points`} className="btn btn-success btn-lg">
+                                            Go&nbsp;<i className="fas fa-chevron-right"></i>
+                                        </Link>
                                     </div>
                                 </div>
-                            */}
+                            </div>
+
                             {/*
                             <div className="col-sm-3 mb-4">
                                 <div className="card box-shadow text-center mx-auto h-100">

@@ -74,11 +74,13 @@ export default class AdminMemberFileUploadArchiveComponent extends Component {
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
                             </strong>
                         </div>
+                        {/*
                         <div id="step-6" className="st-grey">
                             <Link to={`/admin/member/${slug}/community/score-points`}>
                                 <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
+                        */}
                         <div id="step-7" className="st-grey">
                             <Link to={`/admin/member/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>

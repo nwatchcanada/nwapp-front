@@ -15,7 +15,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapA
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
-export default class AdminMemberScorePointArchiveComponent extends Component {
+export default class AdminMemberBadgeArchiveComponent extends Component {
     render() {
         const {
             isLoading, slug, member, errors, onClick
@@ -69,34 +69,29 @@ export default class AdminMemberScorePointArchiveComponent extends Component {
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
-                        <div id="step-5" className="st-grey active">
-                            <strong>
+                        <div id="step-5" className="st-grey">
+                            <Link to={`/admin/member/${slug}/files`}>
                                 <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
-                            </strong>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <Link to={`/admin/member/${slug}/community/score-points`}>
-                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
                             </Link>
                         </div>
-                        <div id="step-7" className="st-grey">
-                            <Link to={`/admin/member/${slug}/operations`}>
+                        <div id="step-6" className="st-grey active">
+                            <strong>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
-                            </Link>
+                            </strong>
                         </div>
                     </div>
                 </div>
                 <div className="row" id="subNav">
                     <div className="step-navigation">
-                        <div id="step-sub-1" className="st-grey active">
-                            <strong>
-                                <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
-                            </strong>
-                        </div>
-                        <div id="step-sub-2" className="st-grey">
+                        <div id="step-sub-1" className="st-grey">
                             <Link to={`/admin/member/${slug}/community/badges`}>
-                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
+                                <span className="num"><i className="fas fa-scroll"></i>&nbsp;</span><span className="">Score Points</span>
                             </Link>
+                        </div>
+                        <div id="step-sub-2" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-id-badge"></i>&nbsp;</span><span className="">Badges</span>
+                            </strong>
                         </div>
                         <div id="step-sub-3" className="st-grey">
                             <Link to={`/admin/member/${slug}/community/awards`}>
@@ -122,7 +117,7 @@ export default class AdminMemberScorePointArchiveComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/member/${slug}/community/score-points`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/member/${slug}/community/badges`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
