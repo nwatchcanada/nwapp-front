@@ -129,8 +129,8 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                                             <i className="fas fa-box-open fa-3x"></i>
                                         </div>
                                         <div className="card-body">
-                                            <h3 className="card-title">Unarchive AreaCoordinator</h3>
-                                            <p className="card-text">This will make the areaCoordinator <strong>active</strong>.</p>
+                                            <h3 className="card-title">Unarchive</h3>
+                                            <p className="card-text">This will make the area coordinator <strong>active</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
                                             <Link to={`/admin/area-coordinator/${slug}/unarchive`} className="btn btn-success btn-lg">
