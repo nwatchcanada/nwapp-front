@@ -165,10 +165,10 @@ function iconFormatter(cell, row){
 function roleIdFormatter(cell, row){
     switch(row.roleId) {
         case MANAGEMENT_ROLE_ID:
-            return <div><i className="fas fa-user-tie"></i>&nbsp;Management Staff</div>;
+            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Management Staff</div>;
             break;
         case FRONTLINE_STAFF_ROLE_ID:
-            return <div><i className="fas fa-user-tie"></i>&nbsp;Frontline Staff</div>;
+            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Frontline Staff</div>;
             break;
         case ASSOCIATE_ROLE_ID:
             return <div><i className="fas fa-crown"></i>&nbsp;Associate</div>;

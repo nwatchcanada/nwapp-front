@@ -86,7 +86,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         url: "/reports"
     },{
         id: "full-staff",
-        icon: "user-tie",
+        icon: "hat-wizard",
         title: "Staff",
         url: "/staff"
     },{
@@ -156,7 +156,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         url: "/reports"
     },{
         id: "full-staff",
-        icon: "user-tie",
+        icon: "hat-wizard",
         title: "Staff",
         url: "/staff"
     },

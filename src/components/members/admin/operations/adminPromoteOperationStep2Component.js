@@ -2,7 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import {
+    AREA_COORDINATOR_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    MANAGEMENT_ROLE_ID
+} from "../../../../constants/api";
 import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
@@ -14,7 +19,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
             slug, member, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
             roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, policeCheckDate,
         } = this.props;
-        const isAssociate = roleId === ASSOCIATE_ROLE_ID;
+        const isStaff = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -63,15 +68,17 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
 
                             <h4><i className="fas fa-file-signature"></i>&nbsp;Agreement</h4>
 
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
-                                error={errors.areaCoordinatorAgreement}
-                                label="I agree to the Area Coordinator agreement."
-                                onChange={onCheckboxChange}
-                                value={areaCoordinatorAgreement}
-                                name="areaCoordinatorAgreement"
-                            />
+                            {isStaff === false &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.areaCoordinatorAgreement}
+                                    label="I agree to the Area Coordinator agreement."
+                                    onChange={onCheckboxChange}
+                                    value={areaCoordinatorAgreement}
+                                    name="areaCoordinatorAgreement"
+                                />
+                            }
 
                             <BootstrapCheckbox
                                 inputClassName="form-check-input form-check-input-lg"
@@ -103,7 +110,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                 name="confidentialityAgreement"
                             />
 
-                            {isAssociate &&
+                            {roleId === ASSOCIATE_ROLE_ID && isStaff === false &&
                                 <BootstrapCheckbox
                                     inputClassName="form-check-input form-check-input-lg"
                                     borderColour="border-success"

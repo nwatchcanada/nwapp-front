@@ -37,7 +37,7 @@ export default class StaffUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/staff`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
+                            <Link to={`/staff`}><i className="fas fa-hat-wizard"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/staff/${slug}/full`}><i className="fas fa-user"></i>&nbsp;Argyle</Link>
@@ -53,7 +53,7 @@ export default class StaffUpdateComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h2><i className="fas fa-user-tie"></i>&nbsp;Staff Form</h2>
+                            <h2><i className="fas fa-hat-wizard"></i>&nbsp;Staff Form</h2>
 
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 

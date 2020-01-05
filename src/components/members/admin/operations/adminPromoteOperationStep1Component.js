@@ -2,7 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import {
+    AREA_COORDINATOR_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    MANAGEMENT_ROLE_ID
+} from "../../../../constants/api";
 
 
 export default class AdminMemberPromoteOperationStep1Component extends Component {
@@ -49,29 +54,57 @@ export default class AdminMemberPromoteOperationStep1Component extends Component
                 <h5>Please select what the promotion is.</h5>
 
                 <div className="card-group row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-3">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
                                 <i className="fas fa-horse-head fa-3x"></i>
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Area Coordinator</h3>
-                                <p className="card-text">Promote the member to be an area coordinator.</p>
+                                <p className="card-text">Promote the member to be an <strong>area coordinator</strong>.</p>
                                 <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, AREA_COORDINATOR_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-3">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
                                 <i className="fas fa-crown fa-3x"></i>
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Associate</h3>
-                                <p className="card-text">Promote the member to be an associate.</p>
+                                <p className="card-text">Promote the member to be an <strong>associate</strong>.</p>
                                 <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, ASSOCIATE_ROLE_ID) } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-hat-wizard fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Frontline Staff</h3>
+                                <p className="card-text">Promote the member to be <strong>staff</strong>.</p>
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, FRONTLINE_STAFF_ROLE_ID) } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-hat-wizard fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Management Staff</h3>
+                                <p className="card-text">Promote the member to be <strong>staff</strong>.</p>
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, FRONTLINE_STAFF_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>

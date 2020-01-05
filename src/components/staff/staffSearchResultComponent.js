@@ -37,7 +37,7 @@ class StaffSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/staff`}><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
+                           <Link to={`/staff`}><i className="fas fa-hat-wizard"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/staff/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
@@ -50,7 +50,7 @@ class StaffSearchResultComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user-tie"></i>&nbsp;Staff</h1>
+                <h1><i className="fas fa-hat-wizard"></i>&nbsp;Staff</h1>
                 <div className="row">
                     <div className="col-md-12">
 

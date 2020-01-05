@@ -165,14 +165,14 @@ class StaffListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user-tie"></i>&nbsp;Staff
+                            <i className="fas fa-hat-wizard"></i>&nbsp;Staff
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user-tie"></i>&nbsp;Staff</h1>
+                <h1><i className="fas fa-hat-wizard"></i>&nbsp;Staff</h1>
 
                 <div className="row">
                     <div className="col-md-12">
