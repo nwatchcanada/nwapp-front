@@ -113,7 +113,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                             <i className="fas fa-archive fa-3x"></i>
                                         </div>
                                         <div className="card-body">
-                                            <h3 className="card-title">Archive Member</h3>
+                                            <h3 className="card-title">Archive</h3>
                                             <p className="card-text">This will make the member <strong>inactive</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
@@ -129,7 +129,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                             <i className="fas fa-box-open fa-3x"></i>
                                         </div>
                                         <div className="card-body">
-                                            <h3 className="card-title">Unarchive Member</h3>
+                                            <h3 className="card-title">Unarchive</h3>
                                             <p className="card-text">This will make the member <strong>active</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">

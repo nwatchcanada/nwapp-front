@@ -34,8 +34,8 @@ export default class AdminAreaCoordinatorUnarchiveOperationComponent extends Com
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-box-open"></i>&nbsp;Unarchive AreaCoordinator</h1>
-                            <p>You are about to <strong>unarchive the areaCoordinator</strong>. Please explain why. All fields which have the (*) symbol are required to be filled out.</p>
+                            <h1><i className="fas fa-box-open"></i>&nbsp;Unarchive Area Coordinator</h1>
+                            <p>You are about to <strong>unarchive the area coordinator</strong>. Please explain why. All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 

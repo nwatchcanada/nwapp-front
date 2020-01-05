@@ -40,8 +40,8 @@ export default class AreaCoordinatorArchiveOperationComponent extends Component 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-archive"></i>&nbsp;Archive AreaCoordinator</h1>
-                            <p>You are about to <strong>archive the areaCoordinator</strong> this means the areaCoordinator will be in a read-only state and the areaCoordinator cannot create work orders for our associates. Please explain why. All fields which have the (*) symbol are required to be filled out.</p>
+                            <h1><i className="fas fa-archive"></i>&nbsp;Archive Area Coordinator</h1>
+                            <p>You are about to <strong>archive the area coordinator</strong> this means the areaCoordinator will be in a read-only state and the areaCoordinator cannot create work orders for our associates. Please explain why. All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
