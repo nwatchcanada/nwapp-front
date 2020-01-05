@@ -82,7 +82,7 @@ class AreaCoordinatorArchiveOperationContainer extends Component {
 
     onSuccessCallback(response) {
         console.log("onSuccessCallback | Fetched:", response);
-        this.props.setFlashMessage("success", "AreaCoordinator has been successfully deactivated.");
+        this.props.setFlashMessage("success", "Area coordinator has been successfully deactivated.");
         this.props.history.push("/admin/area-coordinator/"+this.props.areaCoordinatorDetail.slug+"/operations");
     }
 

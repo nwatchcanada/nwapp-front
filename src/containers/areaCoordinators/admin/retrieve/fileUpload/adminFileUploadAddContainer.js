@@ -6,7 +6,6 @@ import Scroll from 'react-scroll';
 import OrderListComponent from "../../../../../components/areaCoordinators/admin/retrieve/fileUpload/adminFileUploadAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postPrivateFileUpload } from "../../../../../actions/privateFileUploadActions";
-import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
 
@@ -93,9 +92,6 @@ class AdminAreaCoordinatorFileUploadAddContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -134,7 +130,7 @@ class AdminAreaCoordinatorFileUploadAddContainer extends Component {
             ()=>{
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "AreaCoordinator file has been successfully created.");
+                this.props.setFlashMessage("success", "Area coordinator file has been successfully created.");
                 this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/files");
             }
         )
@@ -316,9 +312,6 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        },
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
         },
         postPrivateFileUpload: (postData, successCallback, failedCallback) => {
             dispatch(postPrivateFileUpload(postData, successCallback, failedCallback))

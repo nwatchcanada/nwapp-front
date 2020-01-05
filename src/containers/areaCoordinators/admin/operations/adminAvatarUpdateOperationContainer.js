@@ -6,7 +6,6 @@ import Scroll from 'react-scroll';
 import AreaCoordinatorAvatarUpdateOperationComponent from "../../../../components/areaCoordinators/admin/operations/adminAvatarUpdateOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { postAreaCoordinatorAvatarCreateOrUpdateOperation } from "../../../../actions/areaCoordinatorActions";
-import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateImageInput } from "../../../../validators/fileValidator"
 
 
@@ -86,9 +85,6 @@ class AdminAreaCoordinatorAvatarUpdateOperationContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -127,7 +123,7 @@ class AdminAreaCoordinatorAvatarUpdateOperationContainer extends Component {
             ()=>{
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "AreaCoordinator avatar has been successfully updated.");
+                this.props.setFlashMessage("success", "Area coordinator avatar has been successfully updated.");
                 this.props.history.push("/admin/area-coordinator/"+this.state.slug);
             }
         )
@@ -282,9 +278,6 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        },
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
         },
         postAreaCoordinatorAvatarCreateOrUpdateOperation: (postData, successCallback, failedCallback) => {
             dispatch(postAreaCoordinatorAvatarCreateOrUpdateOperation(postData, successCallback, failedCallback))

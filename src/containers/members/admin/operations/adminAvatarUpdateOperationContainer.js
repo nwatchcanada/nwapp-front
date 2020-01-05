@@ -6,7 +6,6 @@ import Scroll from 'react-scroll';
 import MemberAvatarUpdateOperationComponent from "../../../../components/members/admin/operations/adminAvatarUpdateOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { postMemberAvatarCreateOrUpdateOperation } from "../../../../actions/memberActions";
-import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateImageInput } from "../../../../validators/fileValidator"
 
 
@@ -86,9 +85,6 @@ class AdminMemberAvatarUpdateOperationContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -282,9 +278,6 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        },
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
         },
         postMemberAvatarCreateOrUpdateOperation: (postData, successCallback, failedCallback) => {
             dispatch(postMemberAvatarCreateOrUpdateOperation(postData, successCallback, failedCallback))

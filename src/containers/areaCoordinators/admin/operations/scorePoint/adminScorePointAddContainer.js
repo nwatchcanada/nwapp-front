@@ -128,7 +128,7 @@ class AdminAreaCoordinatorScorePointAddContainer extends Component {
             ()=>{
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "Score has been successfully added to areaCoordinator.");
+                this.props.setFlashMessage("success", "Score has been successfully added to area coordinator.");
                 this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/community/score-points");
             }
         )
