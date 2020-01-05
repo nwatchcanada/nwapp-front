@@ -34,7 +34,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
         const { slug } = this.props.match.params;
 
         const transcodedTags = getPickedTagReactSelectOptions(this.props.areaCoordinatorDetail.tags, this.props.tagList)
-        const anotherHouseholdAreaCoordinatorRegistered = this.props.areaCoordinatorDetail.anotherHouseholdAreaCoordinatorRegistered === true ? 1 : 0;
+        const anotherHouseholdMemberRegistered = this.props.areaCoordinatorDetail.anotherHouseholdMemberRegistered === true ? 1 : 0;
 
         this.state = {
             slug: slug,
@@ -54,7 +54,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
             expectation: this.props.areaCoordinatorDetail.expectation,
             expectationOther: this.props.areaCoordinatorDetail.expectationOther,
             willingToVolunteer: this.props.areaCoordinatorDetail.willingToVolunteer,
-            anotherHouseholdAreaCoordinatorRegistered: anotherHouseholdAreaCoordinatorRegistered,
+            anotherHouseholdMemberRegistered: anotherHouseholdMemberRegistered,
             totalHouseholdCount: this.props.areaCoordinatorDetail.totalHouseholdCount,
             under18YearsHouseholdCount: this.props.areaCoordinatorDetail.under18YearsHouseholdCount,
             organizationEmployeeCount: this.props.areaCoordinatorDetail.organizationEmployeeCount,
@@ -125,7 +125,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
         }
 
         try { // Convert to boolean type.
-            postData.anotherHouseholdAreaCoordinatorRegistered = parseInt(this.state.anotherHouseholdAreaCoordinatorRegistered) === 1;
+            postData.anotherHouseholdMemberRegistered = parseInt(this.state.anotherHouseholdMemberRegistered) === 1;
         } catch (error) {} // Do nothing.
 
         // BUGFIX: Handle NaN cases.
@@ -176,7 +176,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "AreaCoordinator has been successfully updated.");
+        this.props.setFlashMessage("success", "Area coordinator has been successfully updated.");
         this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
     }
 
@@ -305,7 +305,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdAreaCoordinatorRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
         } = this.state;
@@ -347,7 +347,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
                 expectationOther={expectationOther}
                 expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
-                anotherHouseholdAreaCoordinatorRegistered={parseInt(anotherHouseholdAreaCoordinatorRegistered)}
+                anotherHouseholdMemberRegistered={parseInt(anotherHouseholdMemberRegistered)}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}

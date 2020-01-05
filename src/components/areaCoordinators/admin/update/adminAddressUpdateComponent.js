@@ -39,7 +39,7 @@ class AdminAreaCoordinatorAddressUpdateComponent extends Component {
                     </ol>
                 </nav>
                 <h1>
-                    <i className="fas fa-edit"></i>&nbsp;Edit AreaCoordinator (Address)
+                    <i className="fas fa-edit"></i>&nbsp;Edit Area Coordinator (Address)
                 </h1>
 
                 <div className="row">

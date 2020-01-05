@@ -14,7 +14,7 @@ export default class AdminAreaCoordinatorMetricUpdateComponent extends Component
     render() {
         const {
             slug, areaCoordinator, typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdAreaCoordinatorRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -43,7 +43,7 @@ export default class AdminAreaCoordinatorMetricUpdateComponent extends Component
                 </nav>
 
                 <h1>
-                    <i className="fas fa-edit"></i>&nbsp;Update AreaCoordinator (Metrics)
+                    <i className="fas fa-edit"></i>&nbsp;Update Area Coordinator (Metrics)
                 </h1>
 
                 <div className="row">
@@ -183,15 +183,15 @@ export default class AdminAreaCoordinatorMetricUpdateComponent extends Component
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.anotherHouseholdAreaCoordinatorRegistered}
+                                error={errors.anotherHouseholdMemberRegistered}
                                 label="Is there another areaCoordinator of your household which is registered with us? (*)"
-                                name="anotherHouseholdAreaCoordinatorRegistered"
+                                name="anotherHouseholdMemberRegistered"
                                 onChange={onRadioChange}
-                                selectedValue={anotherHouseholdAreaCoordinatorRegistered}
+                                selectedValue={anotherHouseholdMemberRegistered}
                                 options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
                             />
 
-                            {anotherHouseholdAreaCoordinatorRegistered === 0 &&
+                            {anotherHouseholdMemberRegistered === 0 &&
                                 <div>
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"

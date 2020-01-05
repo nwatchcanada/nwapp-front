@@ -173,10 +173,10 @@ export function validateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
-    if (data.anotherHouseholdAreaCoordinatorRegistered === undefined || data.anotherHouseholdAreaCoordinatorRegistered === null || data.anotherHouseholdAreaCoordinatorRegistered === "" || isNaN(data.anotherHouseholdAreaCoordinatorRegistered) ) {
-        errors.anotherHouseholdAreaCoordinatorRegistered = 'This field is required';
+    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
+        errors.anotherHouseholdMemberRegistered = 'This field is required';
     } else {
-        if (data.anotherHouseholdAreaCoordinatorRegistered === 0 || data.anotherHouseholdAreaCoordinatorRegistered === "0") {
+        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
@@ -398,10 +398,10 @@ export function validateStep7CreateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
-    if (data.anotherHouseholdAreaCoordinatorRegistered === undefined || data.anotherHouseholdAreaCoordinatorRegistered === null || data.anotherHouseholdAreaCoordinatorRegistered === "" || isNaN(data.anotherHouseholdAreaCoordinatorRegistered) ) {
-        errors.anotherHouseholdAreaCoordinatorRegistered = 'This field is required';
+    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
+        errors.anotherHouseholdMemberRegistered = 'This field is required';
     } else {
-        if (data.anotherHouseholdAreaCoordinatorRegistered === 0 || data.anotherHouseholdAreaCoordinatorRegistered === "0") {
+        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
@@ -519,10 +519,10 @@ export function validateStep8CreateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
-    if (data.anotherHouseholdAreaCoordinatorRegistered === undefined || data.anotherHouseholdAreaCoordinatorRegistered === null || data.anotherHouseholdAreaCoordinatorRegistered === "" || isNaN(data.anotherHouseholdAreaCoordinatorRegistered) ) {
-        errors.anotherHouseholdAreaCoordinatorRegistered = 'This field is required';
+    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
+        errors.anotherHouseholdMemberRegistered = 'This field is required';
     } else {
-        if (data.anotherHouseholdAreaCoordinatorRegistered === 0 || data.anotherHouseholdAreaCoordinatorRegistered === "0") {
+        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }

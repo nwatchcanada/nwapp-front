@@ -98,7 +98,7 @@ class AdminAreaCoordinatorAddressUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "AreaCoordinator has been successfully updated.");
+        this.props.setFlashMessage("success", "Area coordinator has been successfully updated.");
         this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
     }
 

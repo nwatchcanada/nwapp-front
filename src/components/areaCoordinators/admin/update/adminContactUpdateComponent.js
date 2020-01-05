@@ -56,7 +56,7 @@ export default class AdminAreaCoordinatorContactUpdateComponent extends Componen
                 </nav>
 
                 <h1>
-                    <i className="fas fa-edit"></i>&nbsp;Edit AreaCoordinator (Contact)
+                    <i className="fas fa-edit"></i>&nbsp;Edit Area Coordinator (Contact)
                 </h1>
 
                 <div className="row">
