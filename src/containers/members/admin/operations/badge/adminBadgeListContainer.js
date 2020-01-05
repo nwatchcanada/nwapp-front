@@ -229,7 +229,7 @@ class AdminMemberBadgeListContainer extends Component {
             );
 
         } else if (type === "filter") {
-            console.log(type, filters); // For debugging purposes only.
+            // console.log(type, filters); // For debugging purposes only.
             if (filters.is_archived === undefined) {
                 parametersMap.delete("is_archived");
             } else {

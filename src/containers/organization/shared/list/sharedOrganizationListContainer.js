@@ -123,7 +123,7 @@ class SharedOrganizationListContainer extends Component {
             );
 
         } else if (type === "filter") {
-            console.log(type, filters); // For debugging purposes only.
+            // console.log(type, filters); // For debugging purposes only.
             if (filters.state === undefined) {
                 parametersMap.delete("state");
             } else {
