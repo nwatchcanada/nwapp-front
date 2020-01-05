@@ -19,7 +19,7 @@ class AdminAreaCoordinatorBadgeListContainer extends Component {
         super(props);
         const { slug } = this.props.match.params;
         const parametersMap = new Map();
-        parametersMap.set("areaCoordinator", slug);
+        parametersMap.set("user", slug);
         // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
         parametersMap.set("o", "-created_at");
         this.state = {
