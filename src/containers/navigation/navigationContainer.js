@@ -53,7 +53,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-associates",
         icon: "crown",
         title: "Associates",
-        url: "/associates"
+        url: "/admin/associates"
     },{
         id: "full-watches",
         icon: "shield-alt",
@@ -128,7 +128,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-associates",
         icon: "crown",
         title: "Associates",
-        url: "/associates"
+        url: "/admin/associates"
     },{
         id: "full-watches",
         icon: "shield-alt",

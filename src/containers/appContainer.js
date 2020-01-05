@@ -34,6 +34,111 @@ import SharedOrganizationUpdateContainer from "./organization/shared/update/shar
 import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
 
+/*
+-------
+MEMBERS
+-------
+*/
+import AdminMemberListContainer from "./members/admin/list/adminListContainer";
+import AdminMemberSearchContainer from "./members/admin/search/adminSearchContainer";
+import AdminMemberSearchResultContainer from "./members/admin/search/adminSearchResultContainer";
+import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminLiteRetrieveContainer";
+import AdminMemberFullRetrieveContainer from "./members/admin/retrieve/adminFullRetrieveContainer";
+import AdminMemberCommentContainer from "./members/admin/retrieve/adminCommentContainer";
+import AdminMemberFileUploadListContainer from "./members/admin/retrieve/fileUpload/adminFileUploadListContainer";
+import AdminMemberFileUploadAddContainer from "./members/admin/retrieve/fileUpload/adminFileUploadAddContainer";
+import AdminMemberFileUploadArchiveContainer from "./members/admin/retrieve/fileUpload/adminFileUploadArchiveContainer";
+import AdminMemberOperationsContainer from "./members/admin/retrieve/adminOperationsContainer";
+import AdminMemberCreateStep1Container from "./members/admin/create/adminCreateStep1Container";
+import AdminMemberCreateStep2Container from "./members/admin/create/adminCreateStep2Container";
+import AdminMemberCreateStep3Container from "./members/admin/create/adminCreateStep3Container";
+import AdminMemberCreateStep4Container from "./members/admin/create/adminCreateStep4Container";
+import AdminMemberCreateStep5Container from "./members/admin/create/adminCreateStep5Container";
+import AdminMemberCreateStep6Container from "./members/admin/create/adminCreateStep6Container";
+import AdminMemberCreateStep7Container from "./members/admin/create/adminCreateStep7Container";
+import AdminMemberCreateStep8Container from "./members/admin/create/adminCreateStep8Container";
+import AdminMemberContactUpdateContainer from "./members/admin/update/adminContactUpdateContainer";
+import AdminMemberAddressUpdateContainer from "./members/admin/update/adminAddressUpdateContainer";
+import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMetricsUpdateContainer";
+import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminAvatarUpdateOperationContainer";
+import AdminMemberPromoteOperationStep1Container from "./members/admin/operations/adminPromoteOperationStep1Container";
+import AdminMemberPromoteOperationStep2Container from "./members/admin/operations/adminPromoteOperationStep2Container";
+import AdminMemberPromoteOperationStep3Container from "./members/admin/operations/adminPromoteOperationStep3Container";
+import MemberArchiveOperationContainer from "./members/admin/operations/adminArchiveOperationContainer";
+import AdminMemberUnarchiveOperationContainer from "./members/admin/operations/adminUnarchiveOperationContainer";
+import AdminMemberScorePointListContainer from "./members/admin/operations/scorePoint/adminScorePointListContainer";
+import AdminMemberScorePointAddContainer from "./members/admin/operations/scorePoint/adminScorePointAddContainer";
+import AdminMemberScorePointArchiveContainer from "./members/admin/operations/scorePoint/adminScorePointArchiveContainer";
+import AdminMemberBadgeListContainer from "./members/admin/operations/badge/adminBadgeListContainer";
+import AdminMemberBadgeAddContainer from "./members/admin/operations/badge/adminBadgeAddContainer";
+import AdminMemberBadgeArchiveContainer from "./members/admin/operations/badge/adminBadgeArchiveContainer";
+import AdminMemberAwardListContainer from "./members/admin/operations/award/adminAwardListContainer";
+
+/*
+-----------------
+AREA COORDINATORS
+-----------------
+*/
+import AdminAreaCoordinatorListContainer from "./areaCoordinators/admin/list/adminListContainer";
+import AdminAreaCoordinatorSearchContainer from "./areaCoordinators/admin/search/adminSearchContainer";
+import AdminAreaCoordinatorSearchResultContainer from "./areaCoordinators/admin/search/adminSearchResultContainer";
+import AdminAreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/admin/retrieve/adminLiteRetrieveContainer";
+import AdminAreaCoordinatorFullRetrieveContainer from "./areaCoordinators/admin/retrieve/adminFullRetrieveContainer";
+import AdminAreaCoordinatorCommentContainer from "./areaCoordinators/admin/retrieve/adminCommentContainer";
+import AdminAreaCoordinatorFileUploadListContainer from "./areaCoordinators/admin/retrieve/fileUpload/adminFileUploadListContainer";
+import AdminAreaCoordinatorFileUploadAddContainer from "./areaCoordinators/admin/retrieve/fileUpload/adminFileUploadAddContainer";
+import AdminAreaCoordinatorFileUploadArchiveContainer from "./areaCoordinators/admin/retrieve/fileUpload/adminFileUploadArchiveContainer";
+import AdminAreaCoordinatorOperationsContainer from "./areaCoordinators/admin/retrieve/adminOperationsContainer";
+import AdminAreaCoordinatorContactUpdateContainer from "./areaCoordinators/admin/update/adminContactUpdateContainer";
+import AdminAreaCoordinatorAddressUpdateContainer from "./areaCoordinators/admin/update/adminAddressUpdateContainer";
+import AdminAreaCoordinatorMetricsUpdateContainer from "./areaCoordinators/admin/update/adminMetricsUpdateContainer";
+import AdminAreaCoordinatorAvatarUpdateOperationContainer from "./areaCoordinators/admin/operations/adminAvatarUpdateOperationContainer";
+import AdminAreaCoordinatorPromoteOperationStep1Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep1Container";
+import AdminAreaCoordinatorPromoteOperationStep2Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep2Container";
+import AdminAreaCoordinatorPromoteOperationStep3Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep3Container";
+import AreaCoordinatorArchiveOperationContainer from "./areaCoordinators/admin/operations/adminArchiveOperationContainer";
+import AdminAreaCoordinatorUnarchiveOperationContainer from "./areaCoordinators/admin/operations/adminUnarchiveOperationContainer";
+import AdminAreaCoordinatorScorePointListContainer from "./areaCoordinators/admin/operations/scorePoint/adminScorePointListContainer";
+import AdminAreaCoordinatorScorePointAddContainer from "./areaCoordinators/admin/operations/scorePoint/adminScorePointAddContainer";
+import AdminAreaCoordinatorScorePointArchiveContainer from "./areaCoordinators/admin/operations/scorePoint/adminScorePointArchiveContainer";
+import AdminAreaCoordinatorBadgeListContainer from "./areaCoordinators/admin/operations/badge/adminBadgeListContainer";
+import AdminAreaCoordinatorBadgeAddContainer from "./areaCoordinators/admin/operations/badge/adminBadgeAddContainer";
+import AdminAreaCoordinatorBadgeArchiveContainer from "./areaCoordinators/admin/operations/badge/adminBadgeArchiveContainer";
+import AdminAreaCoordinatorAwardListContainer from "./areaCoordinators/admin/operations/award/adminAwardListContainer";
+
+/*
+---------
+ASSOCIATE
+---------
+*/
+import AdminAssociateListContainer from "./associates/admin/list/adminListContainer";
+import AdminAssociateSearchContainer from "./associates/admin/search/adminSearchContainer";
+import AdminAssociateSearchResultContainer from "./associates/admin/search/adminSearchResultContainer";
+import AdminAssociateLiteRetrieveContainer from "./associates/admin/retrieve/adminLiteRetrieveContainer";
+import AdminAssociateFullRetrieveContainer from "./associates/admin/retrieve/adminFullRetrieveContainer";
+import AdminAssociateCommentContainer from "./associates/admin/retrieve/adminCommentContainer";
+import AdminAssociateFileUploadListContainer from "./associates/admin/retrieve/fileUpload/adminFileUploadListContainer";
+import AdminAssociateFileUploadAddContainer from "./associates/admin/retrieve/fileUpload/adminFileUploadAddContainer";
+import AdminAssociateFileUploadArchiveContainer from "./associates/admin/retrieve/fileUpload/adminFileUploadArchiveContainer";
+import AdminAssociateOperationsContainer from "./associates/admin/retrieve/adminOperationsContainer";
+import AdminAssociateContactUpdateContainer from "./associates/admin/update/adminContactUpdateContainer";
+import AdminAssociateAddressUpdateContainer from "./associates/admin/update/adminAddressUpdateContainer";
+import AdminAssociateMetricsUpdateContainer from "./associates/admin/update/adminMetricsUpdateContainer";
+import AdminAssociateAvatarUpdateOperationContainer from "./associates/admin/operations/adminAvatarUpdateOperationContainer";
+import AdminAssociatePromoteOperationStep1Container from "./associates/admin/operations/adminPromoteOperationStep1Container";
+import AdminAssociatePromoteOperationStep2Container from "./associates/admin/operations/adminPromoteOperationStep2Container";
+import AdminAssociatePromoteOperationStep3Container from "./associates/admin/operations/adminPromoteOperationStep3Container";
+import AssociateArchiveOperationContainer from "./associates/admin/operations/adminArchiveOperationContainer";
+import AdminAssociateUnarchiveOperationContainer from "./associates/admin/operations/adminUnarchiveOperationContainer";
+import AdminAssociateScorePointListContainer from "./associates/admin/operations/scorePoint/adminScorePointListContainer";
+import AdminAssociateScorePointAddContainer from "./associates/admin/operations/scorePoint/adminScorePointAddContainer";
+import AdminAssociateScorePointArchiveContainer from "./associates/admin/operations/scorePoint/adminScorePointArchiveContainer";
+import AdminAssociateBadgeListContainer from "./associates/admin/operations/badge/adminBadgeListContainer";
+import AdminAssociateBadgeAddContainer from "./associates/admin/operations/badge/adminBadgeAddContainer";
+import AdminAssociateBadgeArchiveContainer from "./associates/admin/operations/badge/adminBadgeArchiveContainer";
+import AdminAssociateAwardListContainer from "./associates/admin/operations/award/adminAwardListContainer";
+
+
 import DistrictsListContainer from "./settings/districts/list/districtListContainer";
 import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
 import DistrictSearchResultContainer from "./settings/districts/search/districtSearchResultContainer";
@@ -87,78 +192,6 @@ import ResourceDeleteContainer from "./settings/resources/resourceDeleteContaine
 import ResourceCreateContainer from "./settings/resources/resourceCreateContainer";
 import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
 
-/*
--------
-MEMBERS
--------
-*/
-import AdminMemberListContainer from "./members/admin/list/adminListContainer";
-import AdminMemberSearchContainer from "./members/admin/search/adminSearchContainer";
-import AdminMemberSearchResultContainer from "./members/admin/search/adminSearchResultContainer";
-import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminLiteRetrieveContainer";
-import AdminMemberFullRetrieveContainer from "./members/admin/retrieve/adminFullRetrieveContainer";
-import AdminMemberCommentContainer from "./members/admin/retrieve/adminCommentContainer";
-import AdminMemberFileUploadListContainer from "./members/admin/retrieve/fileUpload/adminFileUploadListContainer";
-import AdminMemberFileUploadAddContainer from "./members/admin/retrieve/fileUpload/adminFileUploadAddContainer";
-import AdminMemberFileUploadArchiveContainer from "./members/admin/retrieve/fileUpload/adminFileUploadArchiveContainer";
-import AdminMemberOperationsContainer from "./members/admin/retrieve/adminOperationsContainer";
-import AdminMemberCreateStep1Container from "./members/admin/create/adminCreateStep1Container";
-import AdminMemberCreateStep2Container from "./members/admin/create/adminCreateStep2Container";
-import AdminMemberCreateStep3Container from "./members/admin/create/adminCreateStep3Container";
-import AdminMemberCreateStep4Container from "./members/admin/create/adminCreateStep4Container";
-import AdminMemberCreateStep5Container from "./members/admin/create/adminCreateStep5Container";
-import AdminMemberCreateStep6Container from "./members/admin/create/adminCreateStep6Container";
-import AdminMemberCreateStep7Container from "./members/admin/create/adminCreateStep7Container";
-import AdminMemberCreateStep8Container from "./members/admin/create/adminCreateStep8Container";
-import AdminMemberContactUpdateContainer from "./members/admin/update/adminContactUpdateContainer";
-import AdminMemberAddressUpdateContainer from "./members/admin/update/adminAddressUpdateContainer";
-import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMetricsUpdateContainer";
-import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminAvatarUpdateOperationContainer";
-import AdminMemberPromoteOperationStep1Container from "./members/admin/operations/adminPromoteOperationStep1Container";
-import AdminMemberPromoteOperationStep2Container from "./members/admin/operations/adminPromoteOperationStep2Container";
-import AdminMemberPromoteOperationStep3Container from "./members/admin/operations/adminPromoteOperationStep3Container";
-import MemberArchiveOperationContainer from "./members/admin/operations/adminArchiveOperationContainer";
-import AdminMemberUnarchiveOperationContainer from "./members/admin/operations/adminUnarchiveOperationContainer";
-import AdminMemberScorePointListContainer from "./members/admin/operations/scorePoint/adminScorePointListContainer";
-import AdminMemberScorePointAddContainer from "./members/admin/operations/scorePoint/adminScorePointAddContainer";
-import AdminMemberScorePointArchiveContainer from "./members/admin/operations/scorePoint/adminScorePointArchiveContainer";
-import AdminMemberBadgeListContainer from "./members/admin/operations/badge/adminBadgeListContainer";
-import AdminMemberBadgeAddContainer from "./members/admin/operations/badge/adminBadgeAddContainer";
-import AdminMemberBadgeArchiveContainer from "./members/admin/operations/badge/adminBadgeArchiveContainer";
-import AdminMemberAwardListContainer from "./members/admin/operations/award/adminAwardListContainer";
-
-
-/*
------------------
-AREA COORDINATORS
------------------
-*/
-import AdminAreaCoordinatorListContainer from "./areaCoordinators/admin/list/adminListContainer";
-import AdminAreaCoordinatorSearchContainer from "./areaCoordinators/admin/search/adminSearchContainer";
-import AdminAreaCoordinatorSearchResultContainer from "./areaCoordinators/admin/search/adminSearchResultContainer";
-import AdminAreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/admin/retrieve/adminLiteRetrieveContainer";
-import AdminAreaCoordinatorFullRetrieveContainer from "./areaCoordinators/admin/retrieve/adminFullRetrieveContainer";
-import AdminAreaCoordinatorCommentContainer from "./areaCoordinators/admin/retrieve/adminCommentContainer";
-import AdminAreaCoordinatorFileUploadListContainer from "./areaCoordinators/admin/retrieve/fileUpload/adminFileUploadListContainer";
-import AdminAreaCoordinatorFileUploadAddContainer from "./areaCoordinators/admin/retrieve/fileUpload/adminFileUploadAddContainer";
-import AdminAreaCoordinatorFileUploadArchiveContainer from "./areaCoordinators/admin/retrieve/fileUpload/adminFileUploadArchiveContainer";
-import AdminAreaCoordinatorOperationsContainer from "./areaCoordinators/admin/retrieve/adminOperationsContainer";
-import AdminAreaCoordinatorContactUpdateContainer from "./areaCoordinators/admin/update/adminContactUpdateContainer";
-import AdminAreaCoordinatorAddressUpdateContainer from "./areaCoordinators/admin/update/adminAddressUpdateContainer";
-import AdminAreaCoordinatorMetricsUpdateContainer from "./areaCoordinators/admin/update/adminMetricsUpdateContainer";
-import AdminAreaCoordinatorAvatarUpdateOperationContainer from "./areaCoordinators/admin/operations/adminAvatarUpdateOperationContainer";
-import AdminAreaCoordinatorPromoteOperationStep1Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep1Container";
-import AdminAreaCoordinatorPromoteOperationStep2Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep2Container";
-import AdminAreaCoordinatorPromoteOperationStep3Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep3Container";
-import AreaCoordinatorArchiveOperationContainer from "./areaCoordinators/admin/operations/adminArchiveOperationContainer";
-import AdminAreaCoordinatorUnarchiveOperationContainer from "./areaCoordinators/admin/operations/adminUnarchiveOperationContainer";
-import AdminAreaCoordinatorScorePointListContainer from "./areaCoordinators/admin/operations/scorePoint/adminScorePointListContainer";
-import AdminAreaCoordinatorScorePointAddContainer from "./areaCoordinators/admin/operations/scorePoint/adminScorePointAddContainer";
-import AdminAreaCoordinatorScorePointArchiveContainer from "./areaCoordinators/admin/operations/scorePoint/adminScorePointArchiveContainer";
-import AdminAreaCoordinatorBadgeListContainer from "./areaCoordinators/admin/operations/badge/adminBadgeListContainer";
-import AdminAreaCoordinatorBadgeAddContainer from "./areaCoordinators/admin/operations/badge/adminBadgeAddContainer";
-import AdminAreaCoordinatorBadgeArchiveContainer from "./areaCoordinators/admin/operations/badge/adminBadgeArchiveContainer";
-import AdminAreaCoordinatorAwardListContainer from "./areaCoordinators/admin/operations/award/adminAwardListContainer";
 
 
 import ItemListContainer from "./items/list/itemListContainer";
@@ -182,21 +215,6 @@ import ItemUpdateConcernContainer from "./items/update/itemUpdateConcernContaine
 import ItemUpdateEventContainer from "./items/update/itemUpdateEventContainer";
 import ItemUpdateInfoContainer from "./items/update/itemUpdateInfoContainer";
 import ItemArchiveContainer from "./items/archive/itemArchiveContainer";
-
-import AssociateListContainer from "./associates/list/associateListContainer";
-import AssociateSearchContainer from "./associates/search/associateSearchContainer";
-import AssociateSearchResultContainer from "./associates/search/associateSearchResultContainer";
-import AssociateLiteRetrieveContainer from "./associates/retrieve/associateLiteRetrieveContainer";
-import AssociateFullRetrieveContainer from "./associates/retrieve/associateFullRetrieveContainer";
-import AssociateUpdateContainer from "./associates/update/associateUpdateContainer";
-import AdminAssociateContactUpdateContainer from "./associates/update/admin/adminAssociateContactUpdateContainer";
-import AdminAssociateAddressUpdateContainer from "./associates/update/admin/adminAssociateAddressUpdateContainer";
-import AdminAssociateMetricsUpdateContainer from "./associates/update/admin/adminAssociateMetricsUpdateContainer";
-import AssociateCreateStep1Container from "./associates/create/associateCreateStep1Container";
-import AssociateCreateStep2Container from "./associates/create/associateCreateStep2Container";
-import AssociateCreateStep3Container from "./associates/create/associateCreateStep3Container";
-import AssociateDemoteContainer from "./associates/demote/associateDemoteContainer";
-import AssociateCommentContainer from "./associates/retrieve/associateCommentContainer";
 
 import StaffListContainer from "./staff/list/staffListContainer";
 import StaffSearchContainer from "./staff/staffSearchContainer";
@@ -386,6 +404,40 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/area-coordinator/:slug/archive" exact component={requiresAuth(AreaCoordinatorArchiveOperationContainer)} />
                                 <Route path="/admin/area-coordinator/:slug/unarchive" exact component={requiresAuth(AdminAreaCoordinatorUnarchiveOperationContainer)} />
 
+                                /*
+                                ---------
+                                ASSOCIATE
+                                ---------
+                                */
+                                <Route path="/admin/associates" exact component={requiresAuth(AdminAssociateListContainer)} />
+                                <Route path="/admin/associates/search" exact component={requiresAuth(AdminAssociateSearchContainer)} />
+                                <Route path="/admin/associates/search-results" exact component={requiresAuth(AdminAssociateSearchResultContainer)} />
+                                <Route path="/admin/associate/:slug" exact component={requiresAuth(AdminAssociateLiteRetrieveContainer)} />
+                                <Route path="/admin/associate/:slug/full" exact component={requiresAuth(AdminAssociateFullRetrieveContainer)} />
+                                <Route path="/admin/associate/:slug/comments" exact component={requiresAuth(AdminAssociateCommentContainer)} />
+                                <Route path="/admin/associate/:slug/files" exact component={requiresAuth(AdminAssociateFileUploadListContainer)} />
+                                <Route path="/admin/associate/:slug/file/add" exact component={requiresAuth(AdminAssociateFileUploadAddContainer)} />
+                                <Route path="/admin/associate/:slug/file/archive/:fileSlug" exact component={requiresAuth(AdminAssociateFileUploadArchiveContainer)} />
+                                <Route path="/admin/associate/:slug/community/score-points" exact component={requiresAuth(AdminAssociateScorePointListContainer)} />
+                                <Route path="/admin/associate/:slug/community/add-score-point" exact component={requiresAuth(AdminAssociateScorePointAddContainer)} />
+                                <Route path="/admin/associate/:slug/community/score-point/archive/:scorePointSlug" exact component={requiresAuth(AdminAssociateScorePointArchiveContainer)} />
+                                <Route path="/admin/associate/:slug/community/badges" exact component={requiresAuth(AdminAssociateBadgeListContainer)} />
+                                <Route path="/admin/associate/:slug/community/add-badge" exact component={requiresAuth(AdminAssociateBadgeAddContainer)} />
+                                <Route path="/admin/associate/:slug/community/badge/archive/:badgeSlug" exact component={requiresAuth(AdminAssociateBadgeArchiveContainer)} />
+                                <Route path="/admin/associate/:slug/community/awards" exact component={requiresAuth(AdminAssociateAwardListContainer)} />
+                                <Route path="/admin/associate/:slug/operations" exact component={requiresAuth(AdminAssociateOperationsContainer)} />
+                                <Route path="/admin/associate/:slug/update/contact" exact component={requiresAuth(AdminAssociateContactUpdateContainer)} />
+                                <Route path="/admin/associate/:slug/update/address" exact component={requiresAuth(AdminAssociateAddressUpdateContainer)} />
+                                <Route path="/admin/associate/:slug/update/metrics" exact component={requiresAuth(AdminAssociateMetricsUpdateContainer)} />
+                                <Route path="/admin/associate/:slug/avatar" exact component={requiresAuth(AdminAssociateAvatarUpdateOperationContainer)} />
+                                <Route path="/admin/associate/:slug/promote/step-1" exact component={requiresAuth(AdminAssociatePromoteOperationStep1Container)} />
+                                <Route path="/admin/associate/:slug/promote/step-2" exact component={requiresAuth(AdminAssociatePromoteOperationStep2Container)} />
+                                <Route path="/admin/associate/:slug/promote/step-3" exact component={requiresAuth(AdminAssociatePromoteOperationStep3Container)} />
+                                <Route path="/admin/associate/:slug/archive" exact component={requiresAuth(AssociateArchiveOperationContainer)} />
+                                <Route path="/admin/associate/:slug/unarchive" exact component={requiresAuth(AdminAssociateUnarchiveOperationContainer)} />
+
+
+
 
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
@@ -408,20 +460,6 @@ class AppContainer extends React.Component {
                                 <Route path="/item/:slug/update-event" exact component={requiresAuth(ItemUpdateEventContainer)} />
                                 <Route path="/item/:slug/update-info" exact component={requiresAuth(ItemUpdateInfoContainer)} />
                                 <Route path="/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
-                                <Route path="/associates/add/step-1" exact component={requiresAuth(AssociateCreateStep1Container)} />
-                                <Route path="/associates/add/step-2" exact component={requiresAuth(AssociateCreateStep2Container)} />
-                                <Route path="/associates/add/step-3" exact component={requiresAuth(AssociateCreateStep3Container)} />
-                                <Route path="/associates" exact component={requiresAuth(AssociateListContainer)} />
-                                <Route path="/associates/search" exact component={requiresAuth(AssociateSearchContainer)} />
-                                <Route path="/associates/search-results" exact component={requiresAuth(AssociateSearchResultContainer)} />
-                                <Route path="/associate/:slug" exact component={requiresAuth(AssociateLiteRetrieveContainer)} />
-                                <Route path="/associate/:slug/full" exact component={requiresAuth(AssociateFullRetrieveContainer)} />
-                                <Route path="/associate/:slug/update" exact component={requiresAuth(AssociateUpdateContainer)} />
-                                <Route path="/admin/associate/:slug/update/contact" exact component={requiresAuth(AdminAssociateContactUpdateContainer)} />
-                                <Route path="/admin/associate/:slug/update/address" exact component={requiresAuth(AdminAssociateAddressUpdateContainer)} />
-                                <Route path="/admin/associate/:slug/update/metrics" exact component={requiresAuth(AdminAssociateMetricsUpdateContainer)} />
-                                <Route path="/associate/:slug/demote" exact component={requiresAuth(AssociateDemoteContainer)} />
-                                <Route path="/associate/:slug/comments" exact component={requiresAuth(AssociateCommentContainer)} />
 
                                 <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
                                 <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />

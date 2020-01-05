@@ -11,8 +11,8 @@ import {
     MEMBER_COMMENT_LIST_SUCCESS, PRIVATE_FILE_UPLOAD_LIST_SUCCESS,
     AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS,
     SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
-    BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS,
-    AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
+    BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS, AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
+    ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -20,6 +20,8 @@ import { memberListReducer, memberDetailReducer} from "./reducers/memberReducers
 import { memberCommentListReducer } from "./reducers/memberCommentReducers";
 import { areaCoordinatorListReducer, areaCoordinatorDetailReducer} from "./reducers/areaCoordinatorReducers";
 import { areaCoordinatorCommentListReducer } from "./reducers/areaCoordinatorCommentReducers";
+import { associateListReducer, associateDetailReducer} from "./reducers/associateReducers";
+import { associateCommentListReducer } from "./reducers/associateCommentReducers";
 import { howHearListReducer, howHearDetailReducer } from "./reducers/howHearReducers";
 import { meaningListReducer, meaningDetailReducer } from "./reducers/meaningReducers";
 import { tagListReducer, tagDetailReducer } from "./reducers/tagReducers";
@@ -44,6 +46,9 @@ const appReducer = combineReducers({
     areaCoordinatorListState: areaCoordinatorListReducer,
     areaCoordinatorDetailState: areaCoordinatorDetailReducer,
     areaCoordinatorCommentListState: areaCoordinatorCommentListReducer,
+    associateListState: associateListReducer,
+    associateDetailState: associateDetailReducer,
+    associateCommentListState: associateCommentListReducer,
     tagListState: tagListReducer, tagDetailState: tagDetailReducer,
     howHearListState: howHearListReducer, howHearDetailState: howHearDetailReducer,
     meaningListState: meaningListReducer, meaningDetailState: meaningDetailReducer,
@@ -87,8 +92,8 @@ const localStorageMiddleware = ({ getState }) => {
             MEANING_LIST_SUCCESS, MEANING_DETAIL_SUCCESS, PRIVATE_FILE_UPLOAD_LIST_SUCCESS,
             AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS,
             SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
-            BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS,
-            AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
+            BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS, AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
+            ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))
