@@ -11,7 +11,14 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
-import { RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF } from "../../../../constants/api";
+import {
+    RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF,
+    MANAGEMENT_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    AREA_COORDINATOR_ROLE_ID,
+    MEMBER_ROLE_ID
+} from "../../../../constants/api";
 
 
 const customTotal = (from, to, size) => (
@@ -72,6 +79,11 @@ class RemoteListComponent extends Component {
             text: 'Email',
             sort: true,
             formatter: emailFormatter,
+        },{
+            dataField: 'roleId',
+            text: 'Role',
+            sort: true,
+            formatter: roleIdFormatter,
         },{
             dataField: 'slug',
             text: 'Details',
@@ -141,6 +153,31 @@ function iconFormatter(cell, row){
             break;
         case COMMUNITY_CARES_TYPE_OF:
             return <i className="fas fa-university"></i>;
+            break;
+        default:
+            return <i className="fas fa-question"></i>;
+            break;
+    }
+}
+
+
+
+function roleIdFormatter(cell, row){
+    switch(row.roleId) {
+        case MANAGEMENT_ROLE_ID:
+            return <div><i className="fas fa-user-tie"></i>&nbsp;Management Staff</div>;
+            break;
+        case FRONTLINE_STAFF_ROLE_ID:
+            return <div><i className="fas fa-user-tie"></i>&nbsp;Frontline Staff</div>;
+            break;
+        case ASSOCIATE_ROLE_ID:
+            return <div><i className="fas fa-crown"></i>&nbsp;Associate</div>;
+            break;
+        case AREA_COORDINATOR_ROLE_ID:
+            return <div><i className="fas fa-horse-head"></i>&nbsp;Area Coordinator</div>;
+            break;
+        case MEMBER_ROLE_ID:
+            return <div><i className="fas fa-users"></i>&nbsp;Member</div>;
             break;
         default:
             return <i className="fas fa-question"></i>;
