@@ -266,7 +266,7 @@ class AdminMemberCreateStep8Container extends Component {
             watchSlug, watchIcon, watchName,
             tags, yearOfBirth, gender, genderLabel, howDidYouHearLabel, howDidYouHear, howDidYouHearOther, meaningLabel, meaning, meaningOther, expectationLabel, expectation, expectationOther,
             willingToVolunteerLabel, willingToVolunteer, anotherHouseholdMemberRegisteredLabel, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
-            organizationEmployeeCount, organizationFoundingYear, organizationType, organizationTypeOfLabel,
+            organizationEmployeeCount, organizationFoundingYear, organizationType, organizationTypeOfLabel, isLoading
         } = this.state;
 
         return (
@@ -320,6 +320,7 @@ class AdminMemberCreateStep8Container extends Component {
                 organizationTypeOfLabel={organizationTypeOfLabel}
                 errors={errors}
                 onSubmitClick={this.onSubmitClick}
+                isLoading={isLoading}
             />
         );
     }
