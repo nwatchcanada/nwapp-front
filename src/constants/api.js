@@ -79,6 +79,17 @@ export const WORKERY_ASSOCIATE_CONTACT_UPDATE_API_ENDPOINT = '/v1/associate/XXX/
 export const WORKERY_ASSOCIATE_ADDRESS_UPDATE_API_ENDPOINT = '/v1/associate/XXX/address';
 export const WORKERY_ASSOCIATE_METRICS_UPDATE_API_ENDPOINT = '/v1/associate/XXX/metrics';
 
+//TODO: PROCESS THE FOLLOWING
+export const WORKERY_STAFF_LIST_API_ENDPOINT = '/v1/staffs';
+export const WORKERY_STAFF_DETAIL_API_ENDPOINT = '/v1/staff/';
+export const WORKERY_STAFF_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/staffs/operation/archive';
+export const NWAPP_STAFF_PROMOTE_OPERATION_API_ENDPOINT = '/v1/staffs/operation/promote';
+export const WORKERY_STAFF_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/staffs/operation/avatar';
+export const WORKERY_STAFF_COMMENT_LIST_API_ENDPOINT = '/v1/staff-comments';
+export const WORKERY_STAFF_CONTACT_UPDATE_API_ENDPOINT = '/v1/staff/XXX/contact';
+export const WORKERY_STAFF_ADDRESS_UPDATE_API_ENDPOINT = '/v1/staff/XXX/address';
+export const WORKERY_STAFF_METRICS_UPDATE_API_ENDPOINT = '/v1/staff/XXX/metrics';
+
 // TODO: DO SOMETHING WITH BELOW
 export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/register';
 export const NWAPP_ACTIVATE_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/activate';

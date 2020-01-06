@@ -138,6 +138,38 @@ import AdminAssociateBadgeAddContainer from "./associates/admin/operations/badge
 import AdminAssociateBadgeArchiveContainer from "./associates/admin/operations/badge/adminBadgeArchiveContainer";
 import AdminAssociateAwardListContainer from "./associates/admin/operations/award/adminAwardListContainer";
 
+/*
+-----
+STAFF
+-----
+*/
+import AdminStaffListContainer from "./staffs/admin/list/adminListContainer";
+import AdminStaffSearchContainer from "./staffs/admin/search/adminSearchContainer";
+import AdminStaffSearchResultContainer from "./staffs/admin/search/adminSearchResultContainer";
+import AdminStaffLiteRetrieveContainer from "./staffs/admin/retrieve/adminLiteRetrieveContainer";
+import AdminStaffFullRetrieveContainer from "./staffs/admin/retrieve/adminFullRetrieveContainer";
+import AdminStaffCommentContainer from "./staffs/admin/retrieve/adminCommentContainer";
+import AdminStaffFileUploadListContainer from "./staffs/admin/retrieve/fileUpload/adminFileUploadListContainer";
+import AdminStaffFileUploadAddContainer from "./staffs/admin/retrieve/fileUpload/adminFileUploadAddContainer";
+import AdminStaffFileUploadArchiveContainer from "./staffs/admin/retrieve/fileUpload/adminFileUploadArchiveContainer";
+import AdminStaffOperationsContainer from "./staffs/admin/retrieve/adminOperationsContainer";
+import AdminStaffContactUpdateContainer from "./staffs/admin/update/adminContactUpdateContainer";
+import AdminStaffAddressUpdateContainer from "./staffs/admin/update/adminAddressUpdateContainer";
+import AdminStaffMetricsUpdateContainer from "./staffs/admin/update/adminMetricsUpdateContainer";
+import AdminStaffAvatarUpdateOperationContainer from "./staffs/admin/operations/adminAvatarUpdateOperationContainer";
+import AdminStaffPromoteOperationStep1Container from "./staffs/admin/operations/adminPromoteOperationStep1Container";
+import AdminStaffPromoteOperationStep2Container from "./staffs/admin/operations/adminPromoteOperationStep2Container";
+import AdminStaffPromoteOperationStep3Container from "./staffs/admin/operations/adminPromoteOperationStep3Container";
+import StaffArchiveOperationContainer from "./staffs/admin/operations/adminArchiveOperationContainer";
+import AdminStaffUnarchiveOperationContainer from "./staffs/admin/operations/adminUnarchiveOperationContainer";
+import AdminStaffScorePointListContainer from "./staffs/admin/operations/scorePoint/adminScorePointListContainer";
+import AdminStaffScorePointAddContainer from "./staffs/admin/operations/scorePoint/adminScorePointAddContainer";
+import AdminStaffScorePointArchiveContainer from "./staffs/admin/operations/scorePoint/adminScorePointArchiveContainer";
+import AdminStaffBadgeListContainer from "./staffs/admin/operations/badge/adminBadgeListContainer";
+import AdminStaffBadgeAddContainer from "./staffs/admin/operations/badge/adminBadgeAddContainer";
+import AdminStaffBadgeArchiveContainer from "./staffs/admin/operations/badge/adminBadgeArchiveContainer";
+import AdminStaffAwardListContainer from "./staffs/admin/operations/award/adminAwardListContainer";
+
 
 import DistrictsListContainer from "./settings/districts/list/districtListContainer";
 import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
@@ -215,16 +247,6 @@ import ItemUpdateConcernContainer from "./items/update/itemUpdateConcernContaine
 import ItemUpdateEventContainer from "./items/update/itemUpdateEventContainer";
 import ItemUpdateInfoContainer from "./items/update/itemUpdateInfoContainer";
 import ItemArchiveContainer from "./items/archive/itemArchiveContainer";
-
-import StaffListContainer from "./staff/list/staffListContainer";
-import StaffSearchContainer from "./staff/staffSearchContainer";
-import StaffSearchResultContainer from "./staff/staffSearchResultContainer";
-import StaffUpdateContainer from "./staff/update/staffUpdateContainer";
-import StaffCreateStep1Container from "./staff/create/staffCreateStep1Container";
-import StaffCreateStep2Container from "./staff/create/staffCreateStep2Container";
-import StaffFullRetrieveContainer from "./staff/retrieve/staffFullRetrieveContainer";
-import StaffLiteRetrieveContainer from "./staff/retrieve/staffLiteRetrieveContainer";
-import StaffCommentContainer from "./staff/retrieve/staffCommentContainer";
 
 import TaskListContainer from "./tasks/list/taskListContainer";
 import TaskSearchContainer from "./tasks/search/taskSearchContainer";
@@ -436,6 +458,39 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/associate/:slug/archive" exact component={requiresAuth(AssociateArchiveOperationContainer)} />
                                 <Route path="/admin/associate/:slug/unarchive" exact component={requiresAuth(AdminAssociateUnarchiveOperationContainer)} />
 
+                                /*
+                                -----
+                                STAFF
+                                -----
+                                */
+                                <Route path="/admin/staffs" exact component={requiresAuth(AdminStaffListContainer)} />
+                                <Route path="/admin/staffs/search" exact component={requiresAuth(AdminStaffSearchContainer)} />
+                                <Route path="/admin/staffs/search-results" exact component={requiresAuth(AdminStaffSearchResultContainer)} />
+                                <Route path="/admin/staff/:slug" exact component={requiresAuth(AdminStaffLiteRetrieveContainer)} />
+                                <Route path="/admin/staff/:slug/full" exact component={requiresAuth(AdminStaffFullRetrieveContainer)} />
+                                <Route path="/admin/staff/:slug/comments" exact component={requiresAuth(AdminStaffCommentContainer)} />
+                                <Route path="/admin/staff/:slug/files" exact component={requiresAuth(AdminStaffFileUploadListContainer)} />
+                                <Route path="/admin/staff/:slug/file/add" exact component={requiresAuth(AdminStaffFileUploadAddContainer)} />
+                                <Route path="/admin/staff/:slug/file/archive/:fileSlug" exact component={requiresAuth(AdminStaffFileUploadArchiveContainer)} />
+                                <Route path="/admin/staff/:slug/community/score-points" exact component={requiresAuth(AdminStaffScorePointListContainer)} />
+                                <Route path="/admin/staff/:slug/community/add-score-point" exact component={requiresAuth(AdminStaffScorePointAddContainer)} />
+                                <Route path="/admin/staff/:slug/community/score-point/archive/:scorePointSlug" exact component={requiresAuth(AdminStaffScorePointArchiveContainer)} />
+                                <Route path="/admin/staff/:slug/community/badges" exact component={requiresAuth(AdminStaffBadgeListContainer)} />
+                                <Route path="/admin/staff/:slug/community/add-badge" exact component={requiresAuth(AdminStaffBadgeAddContainer)} />
+                                <Route path="/admin/staff/:slug/community/badge/archive/:badgeSlug" exact component={requiresAuth(AdminStaffBadgeArchiveContainer)} />
+                                <Route path="/admin/staff/:slug/community/awards" exact component={requiresAuth(AdminStaffAwardListContainer)} />
+                                <Route path="/admin/staff/:slug/operations" exact component={requiresAuth(AdminStaffOperationsContainer)} />
+                                <Route path="/admin/staff/:slug/update/contact" exact component={requiresAuth(AdminStaffContactUpdateContainer)} />
+                                <Route path="/admin/staff/:slug/update/address" exact component={requiresAuth(AdminStaffAddressUpdateContainer)} />
+                                <Route path="/admin/staff/:slug/update/metrics" exact component={requiresAuth(AdminStaffMetricsUpdateContainer)} />
+                                <Route path="/admin/staff/:slug/avatar" exact component={requiresAuth(AdminStaffAvatarUpdateOperationContainer)} />
+                                <Route path="/admin/staff/:slug/promote/step-1" exact component={requiresAuth(AdminStaffPromoteOperationStep1Container)} />
+                                <Route path="/admin/staff/:slug/promote/step-2" exact component={requiresAuth(AdminStaffPromoteOperationStep2Container)} />
+                                <Route path="/admin/staff/:slug/promote/step-3" exact component={requiresAuth(AdminStaffPromoteOperationStep3Container)} />
+                                <Route path="/admin/staff/:slug/archive" exact component={requiresAuth(StaffArchiveOperationContainer)} />
+                                <Route path="/admin/staff/:slug/unarchive" exact component={requiresAuth(AdminStaffUnarchiveOperationContainer)} />
+
+
 
 
 
@@ -461,15 +516,6 @@ class AppContainer extends React.Component {
                                 <Route path="/item/:slug/update-info" exact component={requiresAuth(ItemUpdateInfoContainer)} />
                                 <Route path="/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
 
-                                <Route path="/staff/add/step-1" exact component={requiresAuth(StaffCreateStep1Container)} />
-                                <Route path="/staff/add/step-2" exact component={requiresAuth(StaffCreateStep2Container)} />
-                                <Route path="/staff" exact component={requiresAuth(StaffListContainer)} />
-                                <Route path="/staff/search" exact component={requiresAuth(StaffSearchContainer)} />
-                                <Route path="/staff/search-results" exact component={requiresAuth(StaffSearchResultContainer)} />
-                                <Route path="/staff/:slug" exact component={requiresAuth(StaffLiteRetrieveContainer)} />
-                                <Route path="/staff/:slug/full" exact component={requiresAuth(StaffFullRetrieveContainer)} />
-                                <Route path="/staff/:slug/update" exact component={requiresAuth(StaffUpdateContainer)} />
-                                <Route path="/staff/:slug/comments" exact component={requiresAuth(StaffCommentContainer)} />
                                 <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
                                 <Route path="/tasks/search" exact component={requiresAuth(TaskSearchContainer)} />
                                 <Route path="/tasks/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />

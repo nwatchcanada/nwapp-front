@@ -12,7 +12,8 @@ import {
     AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS,
     SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
     BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS, AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
-    ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS
+    ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS,
+    STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -22,6 +23,8 @@ import { areaCoordinatorListReducer, areaCoordinatorDetailReducer} from "./reduc
 import { areaCoordinatorCommentListReducer } from "./reducers/areaCoordinatorCommentReducers";
 import { associateListReducer, associateDetailReducer} from "./reducers/associateReducers";
 import { associateCommentListReducer } from "./reducers/associateCommentReducers";
+import { staffListReducer, staffDetailReducer} from "./reducers/staffReducers";
+import { staffCommentListReducer } from "./reducers/staffCommentReducers";
 import { howHearListReducer, howHearDetailReducer } from "./reducers/howHearReducers";
 import { meaningListReducer, meaningDetailReducer } from "./reducers/meaningReducers";
 import { tagListReducer, tagDetailReducer } from "./reducers/tagReducers";
@@ -49,6 +52,9 @@ const appReducer = combineReducers({
     associateListState: associateListReducer,
     associateDetailState: associateDetailReducer,
     associateCommentListState: associateCommentListReducer,
+    staffListState: staffListReducer,
+    staffDetailState: staffDetailReducer,
+    staffCommentListState: staffCommentListReducer,
     tagListState: tagListReducer, tagDetailState: tagDetailReducer,
     howHearListState: howHearListReducer, howHearDetailState: howHearDetailReducer,
     meaningListState: meaningListReducer, meaningDetailState: meaningDetailReducer,
@@ -93,7 +99,8 @@ const localStorageMiddleware = ({ getState }) => {
             AREA_COORDINATOR_LIST_SUCCESS, AREA_COORDINATOR_DETAIL_SUCCESS, AREA_COORDINATOR_COMMENT_LIST_SUCCESS,
             SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
             BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS, AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
-            ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS
+            ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS,
+            STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))
