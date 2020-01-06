@@ -53,9 +53,6 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                 <span className="num">2.</span><span className="">Agreement</span>
                             </strong>
                         </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
-                        </div>
                     </div>
                 </div>
 
@@ -148,7 +145,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to={`/admin/member/${slug}/promote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
