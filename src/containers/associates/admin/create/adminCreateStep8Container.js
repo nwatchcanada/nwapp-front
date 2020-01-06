@@ -74,8 +74,8 @@ class AdminAssociateCreateStep8Container extends Component {
             expectationOther: localStorage.getItem("nwapp-create-associate-expectationOther"),
             willingToVolunteerLabel: localStorage.getItem("nwapp-create-associate-willingToVolunteer-label"),
             willingToVolunteer: localStorageGetIntegerItem("nwapp-create-associate-willingToVolunteer"),
-            anotherHouseholdAssociateRegisteredLabel: localStorage.getItem("nwapp-create-associate-anotherHouseholdAssociateRegistered-label"),
-            anotherHouseholdAssociateRegistered: localStorageGetIntegerItem("nwapp-create-associate-anotherHouseholdAssociateRegistered"),
+            anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-create-associate-anotherHouseholdMemberRegistered-label"),
+            anotherHouseholdMemberRegistered: localStorageGetIntegerItem("nwapp-create-associate-anotherHouseholdMemberRegistered"),
             totalHouseholdCount: localStorageGetIntegerItem("nwapp-create-associate-totalHouseholdCount"),
             under18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-associate-under18YearsHouseholdCount"),
             organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-associate-organizationEmployeeCount"),
@@ -146,7 +146,7 @@ class AdminAssociateCreateStep8Container extends Component {
         }
 
         // Convert to boolean type.
-        postData.anotherHouseholdAssociateRegistered = this.state.anotherHouseholdAssociateRegistered === 1;
+        postData.anotherHouseholdMemberRegistered = this.state.anotherHouseholdMemberRegistered === 1;
 
         // BUGFIX: Handle NaN cases.
         postData.totalHouseholdCount = isNaN(this.state.totalHouseholdCount) ? 0 : this.state.totalHouseholdCount;
@@ -265,7 +265,7 @@ class AdminAssociateCreateStep8Container extends Component {
             streetNumber, streetName, streetType, streetTypeLabel, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionLabel, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
             tags, yearOfBirth, gender, genderLabel, howDidYouHearLabel, howDidYouHear, howDidYouHearOther, meaningLabel, meaning, meaningOther, expectationLabel, expectation, expectationOther,
-            willingToVolunteerLabel, willingToVolunteer, anotherHouseholdAssociateRegisteredLabel, anotherHouseholdAssociateRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteerLabel, willingToVolunteer, anotherHouseholdMemberRegisteredLabel, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationType, organizationTypeOfLabel,
         } = this.state;
 
@@ -310,8 +310,8 @@ class AdminAssociateCreateStep8Container extends Component {
                 expectationOther={expectationOther}
                 willingToVolunteerLabel={willingToVolunteerLabel}
                 willingToVolunteer={willingToVolunteer}
-                anotherHouseholdAssociateRegisteredLabel={anotherHouseholdAssociateRegisteredLabel}
-                anotherHouseholdAssociateRegistered={anotherHouseholdAssociateRegistered}
+                anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}

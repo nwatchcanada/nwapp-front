@@ -43,7 +43,7 @@ class AdminAssociateCreateStep7Container extends Component {
             expectation: localStorageGetIntegerItem("nwapp-create-associate-expectation"),
             expectationOther: localStorage.getItem("nwapp-create-associate-expectationOther"),
             willingToVolunteer: localStorageGetIntegerItem("nwapp-create-associate-willingToVolunteer"),
-            anotherHouseholdAssociateRegistered: localStorageGetIntegerItem("nwapp-create-associate-anotherHouseholdAssociateRegistered"),
+            anotherHouseholdMemberRegistered: localStorageGetIntegerItem("nwapp-create-associate-anotherHouseholdMemberRegistered"),
             totalHouseholdCount: localStorageGetIntegerItem("nwapp-create-associate-totalHouseholdCount"),
             under18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-associate-under18YearsHouseholdCount"),
             organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-associate-under18YearsHouseholdCount"),
@@ -221,7 +221,7 @@ class AdminAssociateCreateStep7Container extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdAssociateRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
         } = this.state;
@@ -261,7 +261,7 @@ class AdminAssociateCreateStep7Container extends Component {
                 expectationOther={expectationOther}
                 expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
-                anotherHouseholdAssociateRegistered={anotherHouseholdAssociateRegistered}
+                anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}

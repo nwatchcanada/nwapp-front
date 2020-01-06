@@ -14,7 +14,7 @@ export default class AdminAssociateCreateStep7Component extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdAssociateRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -26,7 +26,7 @@ export default class AdminAssociateCreateStep7Component extends Component {
         // This code checks to see if we need to display the household count fields.
         let showHouseholdCount = false;
         try {
-            showHouseholdCount = parseInt(anotherHouseholdAssociateRegistered) === 0;
+            showHouseholdCount = parseInt(anotherHouseholdMemberRegistered) === 0;
         } catch (error) {
             // Do nothing.
         }
@@ -230,11 +230,11 @@ export default class AdminAssociateCreateStep7Component extends Component {
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.anotherHouseholdAssociateRegistered}
+                                error={errors.anotherHouseholdMemberRegistered}
                                 label="Is there another associate of your household which is registered with us? (*)"
-                                name="anotherHouseholdAssociateRegistered"
+                                name="anotherHouseholdMemberRegistered"
                                 onChange={onRadioChange}
-                                selectedValue={anotherHouseholdAssociateRegistered}
+                                selectedValue={anotherHouseholdMemberRegistered}
                                 options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
                             />
 

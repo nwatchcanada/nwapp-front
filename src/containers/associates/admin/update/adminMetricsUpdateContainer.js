@@ -34,7 +34,7 @@ class AdminAssociateMetricUpdateContainer extends Component {
         const { slug } = this.props.match.params;
 
         const transcodedTags = getPickedTagReactSelectOptions(this.props.associateDetail.tags, this.props.tagList)
-        const anotherHouseholdAssociateRegistered = this.props.associateDetail.anotherHouseholdAssociateRegistered === true ? 1 : 0;
+        const anotherHouseholdMemberRegistered = this.props.associateDetail.anotherHouseholdMemberRegistered === true ? 1 : 0;
 
         this.state = {
             slug: slug,
@@ -54,7 +54,7 @@ class AdminAssociateMetricUpdateContainer extends Component {
             expectation: this.props.associateDetail.expectation,
             expectationOther: this.props.associateDetail.expectationOther,
             willingToVolunteer: this.props.associateDetail.willingToVolunteer,
-            anotherHouseholdAssociateRegistered: anotherHouseholdAssociateRegistered,
+            anotherHouseholdMemberRegistered: anotherHouseholdMemberRegistered,
             totalHouseholdCount: this.props.associateDetail.totalHouseholdCount,
             under18YearsHouseholdCount: this.props.associateDetail.under18YearsHouseholdCount,
             organizationEmployeeCount: this.props.associateDetail.organizationEmployeeCount,
@@ -125,7 +125,7 @@ class AdminAssociateMetricUpdateContainer extends Component {
         }
 
         try { // Convert to boolean type.
-            postData.anotherHouseholdAssociateRegistered = parseInt(this.state.anotherHouseholdAssociateRegistered) === 1;
+            postData.anotherHouseholdMemberRegistered = parseInt(this.state.anotherHouseholdMemberRegistered) === 1;
         } catch (error) {} // Do nothing.
 
         // BUGFIX: Handle NaN cases.
@@ -305,7 +305,7 @@ class AdminAssociateMetricUpdateContainer extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdAssociateRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
         } = this.state;
@@ -347,7 +347,7 @@ class AdminAssociateMetricUpdateContainer extends Component {
                 expectationOther={expectationOther}
                 expectationOther={expectationOther}
                 willingToVolunteer={willingToVolunteer}
-                anotherHouseholdAssociateRegistered={parseInt(anotherHouseholdAssociateRegistered)}
+                anotherHouseholdMemberRegistered={parseInt(anotherHouseholdMemberRegistered)}
                 totalHouseholdCount={totalHouseholdCount}
                 under18YearsHouseholdCount={under18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}

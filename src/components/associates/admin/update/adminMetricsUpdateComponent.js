@@ -14,7 +14,7 @@ export default class AdminAssociateMetricUpdateComponent extends Component {
     render() {
         const {
             slug, associate, typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdAssociateRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -183,15 +183,15 @@ export default class AdminAssociateMetricUpdateComponent extends Component {
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.anotherHouseholdAssociateRegistered}
+                                error={errors.anotherHouseholdMemberRegistered}
                                 label="Is there another associate of your household which is registered with us? (*)"
-                                name="anotherHouseholdAssociateRegistered"
+                                name="anotherHouseholdMemberRegistered"
                                 onChange={onRadioChange}
-                                selectedValue={anotherHouseholdAssociateRegistered}
+                                selectedValue={anotherHouseholdMemberRegistered}
                                 options={ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES}
                             />
 
-                            {anotherHouseholdAssociateRegistered === 0 &&
+                            {anotherHouseholdMemberRegistered === 0 &&
                                 <div>
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"

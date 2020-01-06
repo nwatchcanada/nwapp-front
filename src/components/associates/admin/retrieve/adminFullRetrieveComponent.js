@@ -223,19 +223,19 @@ export default class AdminAssociateFullRetrieveComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Is there another associate of your household which is registered with us?</th>
                                     <td>
-                                        {associate && associate.anotherHouseholdAssociateRegistered
+                                        {associate && associate.anotherHouseholdMemberRegistered
                                             ? "Yes"
                                             : "No"
                                         }
                                     </td>
                                 </tr>
-                                {associate && associate.anotherHouseholdAssociateRegistered === false &&
+                                {associate && associate.anotherHouseholdMemberRegistered === false &&
                                     <tr>
                                         <th scope="row" className="bg-light">How many people are in your household?</th>
                                         <td>{associate && associate.totalHouseholdCount}</td>
                                     </tr>
                                 }
-                                {associate && associate.anotherHouseholdAssociateRegistered === false &&
+                                {associate && associate.anotherHouseholdMemberRegistered === false &&
                                     <tr>
                                         <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
                                         <td>{associate && associate.under18YearsHouseholdCount}</td>

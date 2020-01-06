@@ -173,10 +173,10 @@ export function validateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
-    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
-        errors.anotherHouseholdMemberRegistered = 'This field is required';
+    if (data.anotherHouseholdAssociateRegistered === undefined || data.anotherHouseholdAssociateRegistered === null || data.anotherHouseholdAssociateRegistered === "" || isNaN(data.anotherHouseholdAssociateRegistered) ) {
+        errors.anotherHouseholdAssociateRegistered = 'This field is required';
     } else {
-        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
+        if (data.anotherHouseholdAssociateRegistered === 0 || data.anotherHouseholdAssociateRegistered === "0") {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
@@ -398,10 +398,10 @@ export function validateStep7CreateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
-    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
-        errors.anotherHouseholdMemberRegistered = 'This field is required';
+    if (data.anotherHouseholdAssociateRegistered === undefined || data.anotherHouseholdAssociateRegistered === null || data.anotherHouseholdAssociateRegistered === "" || isNaN(data.anotherHouseholdAssociateRegistered) ) {
+        errors.anotherHouseholdAssociateRegistered = 'This field is required';
     } else {
-        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
+        if (data.anotherHouseholdAssociateRegistered === 0 || data.anotherHouseholdAssociateRegistered === "0") {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
@@ -519,10 +519,10 @@ export function validateStep8CreateInput(data) {
     if (data.willingToVolunteer === undefined || data.willingToVolunteer === null || data.willingToVolunteer === "" || isNaN(data.willingToVolunteer) ) {
         errors.willingToVolunteer = 'This field is required';
     }
-    if (data.anotherHouseholdMemberRegistered === undefined || data.anotherHouseholdMemberRegistered === null || data.anotherHouseholdMemberRegistered === "" || isNaN(data.anotherHouseholdMemberRegistered) ) {
-        errors.anotherHouseholdMemberRegistered = 'This field is required';
+    if (data.anotherHouseholdAssociateRegistered === undefined || data.anotherHouseholdAssociateRegistered === null || data.anotherHouseholdAssociateRegistered === "" || isNaN(data.anotherHouseholdAssociateRegistered) ) {
+        errors.anotherHouseholdAssociateRegistered = 'This field is required';
     } else {
-        if (data.anotherHouseholdMemberRegistered === 0 || data.anotherHouseholdMemberRegistered === "0") {
+        if (data.anotherHouseholdAssociateRegistered === 0 || data.anotherHouseholdAssociateRegistered === "0") {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
@@ -556,8 +556,8 @@ export function validatePromotionInput(data) {
     if (data.roleId === undefined || data.roleId === null || data.roleId === "") {
         errors.roleId = 'This field is required';
     } else {
-        if (data.associateAgreement === undefined || data.associateAgreement === null || data.associateAgreement === "" || data.associateAgreement === false) {
-            errors.associateAgreement = 'This field is required.';
+        if (data.areaCoordinatorAgreement === undefined || data.areaCoordinatorAgreement === null || data.areaCoordinatorAgreement === "" || data.areaCoordinatorAgreement === false) {
+            errors.areaCoordinatorAgreement = 'This field is required.';
         }
         if (data.conflictOfInterestAgreement === undefined || data.conflictOfInterestAgreement === null || data.conflictOfInterestAgreement === "" || data.conflictOfInterestAgreement === false) {
             errors.conflictOfInterestAgreement = 'This field is required';
@@ -659,7 +659,6 @@ export function validateDeactivationInput(data) {
         isValid: isEmpty(errors)
     }
 }
-
 
 export function validateScorePointInput(data) {
     let errors = {};
