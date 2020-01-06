@@ -88,7 +88,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-staff",
         icon: "hat-wizard",
         title: "Staff",
-        url: "/staff"
+        url: "/admin/staffs"
     },{
         id: "full-settings",
         icon: "cogs",
@@ -158,7 +158,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-staff",
         icon: "hat-wizard",
         title: "Staff",
-        url: "/staff"
+        url: "/admin/staffs"
     },
     // {
     //     id: "full-settings", // https://github.com/nwatchcanada/nwapp-front/issues/181
