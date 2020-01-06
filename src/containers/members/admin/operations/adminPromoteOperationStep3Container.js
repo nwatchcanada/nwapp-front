@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import * as moment from 'moment';
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import {
+    AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID, FRONTLINE_STAFF_ROLE_ID, MANAGEMENT_ROLE_ID
+} from "../../../../constants/api";
 import MemberPromoteStep3Component from "../../../../components/members/admin/operations/adminPromoteOperationStep3Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { postMemberPromoteOperation } from "../../../../actions/memberActions";
@@ -37,6 +39,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-member-promote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-member-promote-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-member-promote-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-member-promote-staffAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-member-promote-policeCheckDate"),
             isLoading: false,
         }
@@ -95,9 +98,12 @@ class AdminMemberPromoteOperationStep2Container extends Component {
         this.props.setFlashMessage("success", "Member has been successfully promoted.");
         if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
             this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
-        }
-        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
+        } else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
             this.props.history.push("/admin/associate/"+this.state.slug+"");
+        } else if (this.state.roleId === FRONTLINE_STAFF_ROLE_ID) {
+            this.props.history.push("/admin/staff/"+this.state.slug+"");
+        } else if (this.state.roleId === MANAGEMENT_ROLE_ID) {
+            this.props.history.push("/admin/staff/"+this.state.slug+"");
         } else {
             this.props.history.push("/admin/member/"+this.state.slug+"");
         }

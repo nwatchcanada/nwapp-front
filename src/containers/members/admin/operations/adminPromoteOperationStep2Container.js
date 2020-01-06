@@ -36,6 +36,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-member-promote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-member-promote-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-member-promote-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-member-promote-staffAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-member-promote-policeCheckDate"),
         }
 
@@ -143,6 +144,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
                 associateAgreement={this.state.associateAgreement}
+                staffAgreement={this.state.staffAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}

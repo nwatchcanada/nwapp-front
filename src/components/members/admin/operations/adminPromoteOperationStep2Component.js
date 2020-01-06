@@ -17,7 +17,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
     render() {
         const {
             slug, member, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
-            roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, policeCheckDate,
+            roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, staffAgreement, policeCheckDate,
         } = this.props;
         const isStaff = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
         return (
@@ -119,6 +119,18 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                     onChange={onCheckboxChange}
                                     value={associateAgreement}
                                     name="associateAgreement"
+                                />
+                            }
+
+                            {isStaff &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.staffAgreement}
+                                    label="I agree to the staff agreement."
+                                    onChange={onCheckboxChange}
+                                    value={staffAgreement}
+                                    name="staffAgreement"
                                 />
                             }
 
