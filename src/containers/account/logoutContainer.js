@@ -2,13 +2,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
+import Scroll from 'react-scroll';
 
-// import LogoutComponent from '../../components/account/logoutComponent';
+import TenantRedirectComponent from "../../components/dashboard/tenantRedirectComponent";
 import { postLogout, attemptLogout } from "../../actions/logoutAction";
 import { setFlashMessage } from "../../actions/flashMessageActions";
+import { APP_STATE } from "../../constants/redux";
 
 
 class LogoutContainer extends Component {
+
+    /**
+     *  Initializer & Utility
+     *------------------------------------------------------------
+     */
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            errors: {},
+            isLoading: true
+        }
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Component Life-cycle Management
+     *------------------------------------------------------------
+     */
+
     componentWillUnmount() {
         // This code will fix the "ReactJS & Redux: Can't perform a React state
         // update on an unmounted component" issue as explained in:
@@ -19,32 +42,98 @@ class LogoutContainer extends Component {
     }
 
     componentDidMount() {
-        // When this component loads up, we want to clear any previous errors
-        // returned in the state so do so now.
-        if (this.props.user.errors !== undefined && this.props.user.errors !== null) {
-            var keyCount = Object.keys(this.props.user.errors).length;
-            if (keyCount > 0) {
-                // this.props.attemptLoginRestForm();
-            }
-        }
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-    }
-
-    render() {
         const { user } = this.props;
         if (user !== undefined && user.token !== undefined && user.token !== null) {
-            // Call the API endpoint to log out.
-            this.props.postLogout(this.props.user);
-
+            // DEVELOPERS NOTE:
+            // Regardless of any server related errors, the client browser will
+            // automatically clear the storage pertaining to the user session.
+            this.props.postLogout( // Call the API endpoint to log out.
+                this.props.user,
+                this.onSuccessfulSubmissionCallback,
+                this.onFailedSubmissionCallback
+            );
+        } else {
             // CLEAR THE LOCAL STORAGE IF WE SUCCESSFULLY LOGGED OUT!
-            localStorage.clear();
+            localStorage.removeItem(APP_STATE) // Clear the state data of the app.
+            localStorage.clear(); // Clear any remaining items.
 
-            // Create a flash message telling the user that they successfully logged out.
             this.props.setFlashMessage("success", "You have successfully logged out.");
-            this.props.attemptLogout();
-
+            this.setState({
+                isLoading: false,
+            })
         }
-        return <Redirect to="/login" />;
+    }
+
+    /**
+     *  API callback functions
+     *------------------------------------------------------------
+     */
+
+    onSuccessfulSubmissionCallback(member) {
+        // CLEAR THE LOCAL STORAGE IF WE SUCCESSFULLY LOGGED OUT!
+        localStorage.removeItem(APP_STATE) // Clear the state data of the app.
+        localStorage.clear(); // Clear any remaining items.
+
+        // Create a flash message telling the user that they successfully logged out.
+        this.props.setFlashMessage("success", "You have successfully logged out.");
+
+        // Tell the state that we've successfully finished loading this page
+        // as a result we will redirect to the login page.
+        this.setState({
+            isLoading: false,
+        });
+    }
+
+    // onFailedSubmissionCallback(errors) {
+    //     this.setState({
+    //         errors: errors
+    //     })
+    //
+    //     // The following code will cause the screen to scroll to the top of
+    //     // the page. Please see ``react-scroll`` for more information:
+    //     // https://github.com/fisshy/react-scroll
+    //     var scroll = Scroll.animateScroll;
+    //     scroll.scrollToTop();
+    // }
+
+    onFailedSubmissionCallback(errors) {
+        // CLEAR THE LOCAL STORAGE IF WE SUCCESSFULLY LOGGED OUT!
+        localStorage.removeItem(APP_STATE) // Clear the state data of the app.
+        localStorage.clear(); // Clear any remaining items.
+
+        // Create a flash message telling the user that they successfully logged out.
+        this.props.setFlashMessage("success", "You have successfully logged out.");
+
+        // Tell the state that we've successfully finished loading this page
+        // as a result we will redirect to the login page.
+        this.setState({
+            isLoading: false,
+        });
+    }
+
+    /**
+     *  Event handling functions
+     *------------------------------------------------------------
+     */
+
+    // Nothing...
+
+    /**
+     *  Main render function
+     *------------------------------------------------------------
+     */
+
+    render() {
+        const { isLoading, errors } = this.state;
+        if (isLoading) {
+            return (
+                <TenantRedirectComponent errors={errors} />
+            );
+        } else {
+            return <Redirect to="/login" />;
+        }
+
     }
 }
 
@@ -60,8 +149,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postLogout: (user) => {
-            dispatch(postLogout(user))
+        postLogout: (user, onSuccessCallback, onFailureCallback) => {
+            dispatch(postLogout(user, onSuccessCallback, onFailureCallback))
         },
         attemptLogout: () => {
             dispatch(attemptLogout())
