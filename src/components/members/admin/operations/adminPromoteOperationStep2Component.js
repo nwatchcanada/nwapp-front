@@ -70,7 +70,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                     inputClassName="form-check-input form-check-input-lg"
                                     borderColour="border-success"
                                     error={errors.areaCoordinatorAgreement}
-                                    label="I agree to the Area Coordinator agreement."
+                                    label="I agree to the Area Coordinator agreement. (*)"
                                     onChange={onCheckboxChange}
                                     value={areaCoordinatorAgreement}
                                     name="areaCoordinatorAgreement"
@@ -81,7 +81,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
                                 error={errors.conflictOfInterestAgreement}
-                                label="I agree to the Conflict of Interest agreement."
+                                label="I agree to the Conflict of Interest agreement. (*)"
                                 onChange={onCheckboxChange}
                                 value={conflictOfInterestAgreement}
                                 name="conflictOfInterestAgreement"
@@ -91,7 +91,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
                                 error={errors.codeOfConductAgreement}
-                                label="I agree to the Code of Conduct agreement."
+                                label="I agree to the Code of Conduct agreement. (*)"
                                 onChange={onCheckboxChange}
                                 value={codeOfConductAgreement}
                                 name="codeOfConductAgreement"
@@ -101,7 +101,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
                                 error={errors.confidentialityAgreement}
-                                label="I agree to the Confidentiality agreement."
+                                label="I agree to the Confidentiality agreement. (*)"
                                 onChange={onCheckboxChange}
                                 value={confidentialityAgreement}
                                 name="confidentialityAgreement"
@@ -112,7 +112,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                     inputClassName="form-check-input form-check-input-lg"
                                     borderColour="border-success"
                                     error={errors.associateAgreement}
-                                    label="I agree to the Associate agreement."
+                                    label="I agree to the Associate agreement. (*)"
                                     onChange={onCheckboxChange}
                                     value={associateAgreement}
                                     name="associateAgreement"
@@ -124,7 +124,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                                     inputClassName="form-check-input form-check-input-lg"
                                     borderColour="border-success"
                                     error={errors.staffAgreement}
-                                    label="I agree to the staff agreement."
+                                    label="I agree to the staff agreement. (*)"
                                     onChange={onCheckboxChange}
                                     value={staffAgreement}
                                     name="staffAgreement"
