@@ -95,16 +95,20 @@ class AdminMemberPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Member has been successfully promoted.");
         if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
+            this.props.setFlashMessage("success", "Member has been successfully promoted to area coordinator.");
             this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
         } else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
+            this.props.setFlashMessage("success", "Member has been successfully promoted to associate.");
             this.props.history.push("/admin/associate/"+this.state.slug+"");
         } else if (this.state.roleId === FRONTLINE_STAFF_ROLE_ID) {
+            this.props.setFlashMessage("success", "Member has been successfully promoted to frontline staff.");
             this.props.history.push("/admin/staff/"+this.state.slug+"");
         } else if (this.state.roleId === MANAGEMENT_ROLE_ID) {
+            this.props.setFlashMessage("success", "Member has been successfully promoted to management staff.");
             this.props.history.push("/admin/staff/"+this.state.slug+"");
         } else {
+            this.props.setFlashMessage("success", "Member has been successfully promoted.");
             this.props.history.push("/admin/member/"+this.state.slug+"");
         }
     }
