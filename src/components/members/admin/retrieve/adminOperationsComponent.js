@@ -9,12 +9,14 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 // import {EXECUTIVE_GROUP_ID} from '../../../../constants/api';
 import { FlashMessageComponent } from "../../../flashMessageComponent";
+import { MEMBER_ROLE_ID } from "../../../../constants/api";
 
 
 export default class AdminMemberOperationsComponent extends Component {
     render() {
         const { slug, member, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
         const isActiveState = member.state === "active";
+        const areMemberPromotionsUnlocked = member.roleId === MEMBER_ROLE_ID;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -88,9 +90,8 @@ export default class AdminMemberOperationsComponent extends Component {
 
                 <div className="row">
                     <div className="col-md-12">
-
                         <div className="card-group row">
-                            <div className="col-sm-3 mb-4">
+                            {areMemberPromotionsUnlocked && <div className="col-sm-3 mb-4">
                                 <div className="card box-shadow text-center mx-auto h-100">
                                     <div className="card-custom-top-2">
                                         <i className="fas fa-star fa-3x"></i>
@@ -106,6 +107,7 @@ export default class AdminMemberOperationsComponent extends Component {
                                     </div>
                                 </div>
                             </div>
+                            }
                             {isActiveState
                                 ?<div className="col-sm-3 mb-4">
                                     <div className="card box-shadow text-center mx-auto h-100">
