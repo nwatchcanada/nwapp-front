@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 
-export default class AreaCoordinatorCreateStep2Component extends Component {
+export default class AdminAreaCoordinatorCreateStep2Component extends Component {
     render() {
         const { isLoading, onClick } = this.props;
         return (
@@ -14,7 +14,7 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -27,7 +27,7 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/area-coordinators/add/step-1">
+                            <Link to="/admin/area-coordinators/add/step-1">
                                 <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
@@ -101,12 +101,12 @@ export default class AreaCoordinatorCreateStep2Component extends Component {
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
             		<h5>Would you like to add a NEW area coordinator?</h5>
-                    <a href="/area-coordinators/add/step-1">
+                    <a href="/admin/area-coordinators/add/step-1">
             		    <button type="button" class="btn btn-lg btn-dark m-3">
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
             		    </button>
                     </a>
-            		<a href="/members/add" target="_blank">
+            		<a href="/admin/members/add" target="_blank">
             		    <button type="button" class="btn btn-lg btn-success m-3">
             		       <i class="fas fa-external-link-alt"></i>&nbsp;Yes - add a new member
             		    </button>

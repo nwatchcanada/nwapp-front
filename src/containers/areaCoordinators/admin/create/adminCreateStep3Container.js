@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AreaCoordinatorCreateStep3Component from "../../../components/areaCoordinators/create/areaCoordinatorCreateStep3Component";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
+import AdminAreaCoordinatorCreateStep3Component from "../../../../components/areaCoordinators/admin/create/adminCreateStep3Component";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+} from '../../../../constants/api';
 
 
-class AreaCoordinatorCreateStep3Container extends Component {
+class AdminAreaCoordinatorCreateStep3Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -206,7 +206,7 @@ class AreaCoordinatorCreateStep3Container extends Component {
            howDidYouHear, howDidYouHearOption, howDidYouHearOther
         } = this.state;
         return (
-            <AreaCoordinatorCreateStep3Component
+            <AdminAreaCoordinatorCreateStep3Component
                 typeOf={typeOf}
                 bizCompanyName={bizCompanyName}
                 bizContactFirstName={bizContactFirstName}
@@ -258,4 +258,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AreaCoordinatorCreateStep3Container);
+)(AdminAreaCoordinatorCreateStep3Container);

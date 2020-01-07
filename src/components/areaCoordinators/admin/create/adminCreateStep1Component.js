@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../bootstrap/bootstrapInput";
-import { BootstrapTelephoneInput } from "../../bootstrap/bootstrapTelephoneInput";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneInput";
 
 
-export default class AreaCoordinatorCreateStep1Component extends Component {
+export default class AdminAreaCoordinatorCreateStep1Component extends Component {
     render() {
         const { firstName, lastName, email, phone, errors, onTextChange, isLoading, onClick } = this.props;
         return (
@@ -19,7 +19,7 @@ export default class AreaCoordinatorCreateStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -110,7 +110,7 @@ export default class AreaCoordinatorCreateStep1Component extends Component {
                 </div>
                 <div className="col-md-12 text-center">
                     <h3 className="p-2">- or -</h3>
-                    <a href="/members/add/step-1" role="button" target="_blank">
+                    <a href="/admin/members/add/step-1" role="button" target="_blank">
                         Add New Member&nbsp;<i class="fas fa-external-link-alt"></i>
                     </a>
                 </div>

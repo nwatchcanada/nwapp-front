@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AreaCoordinatorCreateStep1Component from "../../../components/areaCoordinators/create/areaCoordinatorCreateStep1Component";
+import AdminAreaCoordinatorCreateStep2Component from "../../../../components/areaCoordinators/admin/create/adminCreateStep2Component";
 
 
-class AreaCoordinatorCreateStep1Container extends Component {
+class AdminAreaCoordinatorCreateStep2Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -50,7 +50,7 @@ class AreaCoordinatorCreateStep1Container extends Component {
 
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/area-coordinators/add/step-2");
+        this.props.history.push("/area-coordinators/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -76,13 +76,15 @@ class AreaCoordinatorCreateStep1Container extends Component {
         })
     }
 
-    onClick(e) {
+    onClick(e, slug) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
+        // Save the slug
+        localStorage.setItem('nwapp-create-area-coordinator-slug', slug);
+
         this.onSuccessfulSubmissionCallback();
     }
-
 
     /**
      *  Main render function
@@ -92,7 +94,7 @@ class AreaCoordinatorCreateStep1Container extends Component {
     render() {
         const { name, errors } = this.state;
         return (
-            <AreaCoordinatorCreateStep1Component
+            <AdminAreaCoordinatorCreateStep2Component
                 name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
@@ -116,4 +118,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AreaCoordinatorCreateStep1Container);
+)(AdminAreaCoordinatorCreateStep2Container);

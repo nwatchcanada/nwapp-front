@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 // import 'moment-timezone';
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../constants/api';
+} from '../../../../constants/api';
 
 
-export default class AreaCoordinatorCreateStep3Component extends Component {
+export default class AdminAreaCoordinatorCreateStep3Component extends Component {
     render() {
         const {
             errors, isLoading, onClick, typeOf,
