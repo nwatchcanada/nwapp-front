@@ -2,7 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import {
+    AREA_COORDINATOR_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    MANAGEMENT_ROLE_ID
+} from "../../../../constants/api";
 import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
@@ -12,9 +17,9 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
     render() {
         const {
             slug, areaCoordinator, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
-            roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, policeCheckDate,
+            roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, staffAgreement, policeCheckDate,
         } = this.props;
-        const isAssociate = roleId === ASSOCIATE_ROLE_ID;
+        const isStaff = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -23,7 +28,7 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-users"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/area-coordinator/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
@@ -34,7 +39,7 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-star"></i>&nbsp;Promote AreaCoordinator</h1>
+                <h1><i className="fas fa-star"></i>&nbsp;Promote Area Coordinator</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -48,9 +53,6 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
                                 <span className="num">2.</span><span className="">Agreement</span>
                             </strong>
                         </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
-                        </div>
                     </div>
                 </div>
 
@@ -63,21 +65,23 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
 
                             <h4><i className="fas fa-file-signature"></i>&nbsp;Agreement</h4>
 
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
-                                error={errors.areaCoordinatorAgreement}
-                                label="I agree to the Area Coordinator agreement."
-                                onChange={onCheckboxChange}
-                                value={areaCoordinatorAgreement}
-                                name="areaCoordinatorAgreement"
-                            />
+                            {isStaff === false &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.areaCoordinatorAgreement}
+                                    label="I agree to the Area Coordinator agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={areaCoordinatorAgreement}
+                                    name="areaCoordinatorAgreement"
+                                />
+                            }
 
                             <BootstrapCheckbox
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
                                 error={errors.conflictOfInterestAgreement}
-                                label="I agree to the Conflict of Interest agreement."
+                                label="I agree to the Conflict of Interest agreement. (*)"
                                 onChange={onCheckboxChange}
                                 value={conflictOfInterestAgreement}
                                 name="conflictOfInterestAgreement"
@@ -87,7 +91,7 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
                                 error={errors.codeOfConductAgreement}
-                                label="I agree to the Code of Conduct agreement."
+                                label="I agree to the Code of Conduct agreement. (*)"
                                 onChange={onCheckboxChange}
                                 value={codeOfConductAgreement}
                                 name="codeOfConductAgreement"
@@ -97,21 +101,33 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
                                 error={errors.confidentialityAgreement}
-                                label="I agree to the Confidentiality agreement."
+                                label="I agree to the Confidentiality agreement. (*)"
                                 onChange={onCheckboxChange}
                                 value={confidentialityAgreement}
                                 name="confidentialityAgreement"
                             />
 
-                            {isAssociate &&
+                            {roleId === ASSOCIATE_ROLE_ID && isStaff === false &&
                                 <BootstrapCheckbox
                                     inputClassName="form-check-input form-check-input-lg"
                                     borderColour="border-success"
                                     error={errors.associateAgreement}
-                                    label="I agree to the Associate agreement."
+                                    label="I agree to the Associate agreement. (*)"
                                     onChange={onCheckboxChange}
                                     value={associateAgreement}
                                     name="associateAgreement"
+                                />
+                            }
+
+                            {isStaff &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.staffAgreement}
+                                    label="I agree to the staff agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={staffAgreement}
+                                    name="staffAgreement"
                                 />
                             }
 
@@ -129,7 +145,7 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to={`/admin/area-coordinator/${slug}/promote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back

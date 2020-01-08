@@ -36,6 +36,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-staffAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-areaCoordinator-promote-policeCheckDate"),
         }
 
@@ -143,6 +144,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
                 associateAgreement={this.state.associateAgreement}
+                staffAgreement={this.state.staffAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}

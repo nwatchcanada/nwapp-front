@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import * as moment from 'moment';
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import {
+    AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID, FRONTLINE_STAFF_ROLE_ID, MANAGEMENT_ROLE_ID
+} from "../../../../constants/api";
 import AreaCoordinatorPromoteStep3Component from "../../../../components/areaCoordinators/admin/operations/adminPromoteOperationStep3Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { postAreaCoordinatorPromoteOperation } from "../../../../actions/areaCoordinatorActions";
@@ -37,6 +39,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-promote-staffAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-areaCoordinator-promote-policeCheckDate"),
             isLoading: false,
         }
@@ -92,14 +95,15 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Area coordinator has been successfully promoted.");
-        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
-            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
-        }
-        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
+        if (this.state.roleId === ASSOCIATE_ROLE_ID) {
+            this.props.setFlashMessage("success", "AreaCoordinator has been successfully promoted to associate.");
             this.props.history.push("/admin/associate/"+this.state.slug+"");
-        } else {
-            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"");
+        } else if (this.state.roleId === FRONTLINE_STAFF_ROLE_ID) {
+            this.props.setFlashMessage("success", "AreaCoordinator has been successfully promoted to frontline staff.");
+            this.props.history.push("/admin/staff/"+this.state.slug+"");
+        } else if (this.state.roleId === MANAGEMENT_ROLE_ID) {
+            this.props.setFlashMessage("success", "AreaCoordinator has been successfully promoted to management staff.");
+            this.props.history.push("/admin/staff/"+this.state.slug+"");
         }
     }
 

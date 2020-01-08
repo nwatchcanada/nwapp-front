@@ -29,7 +29,7 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-users"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/area-coordinator/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
@@ -40,94 +40,27 @@ export default class AdminAreaCoordinatorPromoteOperationStep2Component extends 
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-star"></i>&nbsp;Promote AreaCoordinator</h1>
-
-                <div className="row">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey">
-                            <span className="num">1.</span><span className="">
-                                <Link to={`/admin/area-coordinator/${slug}/promote/step-1`}>Selection</Link>
-                            </span>
-                        </div>
-                        <div id="step-2" className="st-grey">
-                            <span className="num">2.</span><span className="">
-                                <Link to={`/admin/area-coordinator/${slug}/promote/step-2`}>Agreement</Link>
-                            </span>
-                        </div>
-                        <div id="step-3" className="st-grey active">
-                            <strong>
-                                <span className="num">3.</span><span className="">Review</span>
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-
                 <div className="row pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
 
-                        <h2>
-                            <i className="fas fa-table"></i>&nbsp;Review
-                        </h2>
-
                         <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before promoting the areaCoordinator:</strong></p>
-                        <table className="table table-bordered custom-cell-w">
-                            <tbody>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-sitemap"></i>&nbsp;Type
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Promoted Role</th>
-                                    <td>{groupLabel}</td>
-                                </tr>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-file-signature"></i>&nbsp;Agreement
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Agreed to Area Coordinator agreement</th>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Agreed to Conflict of Interest agreement</th>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Agreed to Code of Conduct agreement</th>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Agreed to Confidentiality agreement</th>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Agreed to Associate agreement</th>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-shield-alt"></i>&nbsp;Policy
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Police Check Date</th>
-                                    <td><Moment format="YYYY/MM/DD">{policeCheckDate}</Moment></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <form>
-                            <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+
+                        <div className="jumbotron">
+                            <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
+                            <p className="lead">This will promote our areaCoordinator.</p>
+                            <hr />
+                            <p>Please click <strong>save</strong> to proceed.</p>
+                            <p>
+                            <Link to={`/admin/area-coordinator/${slug}/promote/step-2`} className="btn btn-orange btn-lg  float-left">
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                            </Link>
+                            &nbsp;&nbsp;&nbsp;
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/area-coordinator/${slug}/promote/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                                </Link>
-                            </div>
-                        </form>
+                            </p>
+                        </div>
+
                     </div>
                 </div>
 
