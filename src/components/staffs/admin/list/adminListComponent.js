@@ -80,11 +80,6 @@ class RemoteListComponent extends Component {
             sort: true,
             formatter: emailFormatter,
         },{
-            dataField: 'roleId',
-            text: 'Role',
-            sort: true,
-            formatter: roleIdFormatter,
-        },{
             dataField: 'slug',
             text: 'Details',
             sort: false,
@@ -159,32 +154,6 @@ function iconFormatter(cell, row){
             break;
     }
 }
-
-
-
-function roleIdFormatter(cell, row){
-    switch(row.roleId) {
-        case MANAGEMENT_ROLE_ID:
-            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Management Staff</div>;
-            break;
-        case FRONTLINE_STAFF_ROLE_ID:
-            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Frontline Staff</div>;
-            break;
-        case ASSOCIATE_ROLE_ID:
-            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Staff</div>;
-            break;
-        case AREA_COORDINATOR_ROLE_ID:
-            return <div><i className="fas fa-horse-head"></i>&nbsp;Area Coordinator</div>;
-            break;
-        case MEMBER_ROLE_ID:
-            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Staff</div>;
-            break;
-        default:
-            return <i className="fas fa-question"></i>;
-            break;
-    }
-}
-
 
 // function statusFormatter(cell, row){
 //     switch(row.state) {
