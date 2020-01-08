@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
+import { MANAGEMENT_ROLE_ID } from "../../../../constants/api";
 
 
 export default class AdminStaffPromoteOperationStep1Component extends Component {
@@ -57,7 +57,7 @@ export default class AdminStaffPromoteOperationStep1Component extends Component 
                             <div className="card-body">
                                 <h3 className="card-title">Management Staff</h3>
                                 <p className="card-text">Promote the staff member to be part of the management role.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, AREA_COORDINATOR_ROLE_ID) } }>
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, MANAGEMENT_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>

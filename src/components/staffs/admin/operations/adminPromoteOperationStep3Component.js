@@ -40,29 +40,22 @@ export default class AdminStaffPromoteOperationStep2Component extends Component 
 
                         <BootstrapErrorsProcessingAlert errors={errors} />
 
-                        <div className="row pt-3 mb-4 pb-2">
-                            <div className="col-md-10 mx-auto p-2">
-
-                                <BootstrapErrorsProcessingAlert errors={errors} />
-
-                                <div className="jumbotron">
-                                    <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
-                                    <p className="lead">This will promote our staff.</p>
-                                    <hr />
-                                    <p>Please click <strong>save</strong> to proceed.</p>
-                                    <p>
-                                    <Link to={`/admin/staff/${slug}/promote/step-2`} className="btn btn-orange btn-lg  float-left">
-                                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                                    </Link>
-                                    &nbsp;&nbsp;&nbsp;
-                                        <button className="btn btn-success btn-lg" disabled={isLoading} onClick={onClick}>
-                                            <i className="fas fa-check-circle"></i>&nbsp;Save
-                                        </button>
-                                    </p>
-                                </div>
-
-                            </div>
+                        <div className="jumbotron">
+                            <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
+                            <p className="lead">This will promote our staff.</p>
+                            <hr />
+                            <p>Please click <strong>save</strong> to proceed.</p>
+                            <p>
+                            <Link to={`/admin/staff/${slug}/promote/step-2`} className="btn btn-orange btn-lg  float-left">
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                            </Link>
+                            &nbsp;&nbsp;&nbsp;
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={onClick}>
+                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                </button>
+                            </p>
                         </div>
+
                     </div>
                 </div>
 
