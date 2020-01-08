@@ -4,7 +4,9 @@ import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF,
-    ASSOCIATE_ROLE_ID
+    ASSOCIATE_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    MANAGEMENT_ROLE_ID
 } from '../constants/api';
 
 
@@ -556,9 +558,6 @@ export function validatePromotionInput(data) {
     if (data.roleId === undefined || data.roleId === null || data.roleId === "") {
         errors.roleId = 'This field is required';
     } else {
-        if (data.associateAgreement === undefined || data.associateAgreement === null || data.associateAgreement === "" || data.associateAgreement === false) {
-            errors.associateAgreement = 'This field is required.';
-        }
         if (data.conflictOfInterestAgreement === undefined || data.conflictOfInterestAgreement === null || data.conflictOfInterestAgreement === "" || data.conflictOfInterestAgreement === false) {
             errors.conflictOfInterestAgreement = 'This field is required';
         }
@@ -568,9 +567,9 @@ export function validatePromotionInput(data) {
         if (data.confidentialityAgreement === undefined || data.confidentialityAgreement === null || data.confidentialityAgreement === "" || data.confidentialityAgreement === false) {
             errors.confidentialityAgreement = 'This field is required';
         }
-        if (data.roleId === ASSOCIATE_ROLE_ID) {
-            if (data.associateAgreement === undefined || data.associateAgreement === null || data.associateAgreement === "" || data.associateAgreement === false) {
-                errors.associateAgreement = 'This field is required';
+        if (data.roleId === FRONTLINE_STAFF_ROLE_ID || data.roleId === MANAGEMENT_ROLE_ID) {
+            if (data.staffAgreement === undefined || data.staffAgreement === null || data.staffAgreement === "" || data.staffAgreement === false) {
+                errors.staffAgreement = 'This field is required';
             }
         }
         if (data.policeCheckDate === undefined || data.policeCheckDate === null || data.policeCheckDate === "" || isNaN(data.policeCheckDate)) {

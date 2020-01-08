@@ -31,11 +31,10 @@ class AdminAssociatePromoteOperationStep2Container extends Component {
             slug: slug,
             errors: [],
             roleId: localStorageGetIntegerItem("nwapp-associate-promote-group-id"),
-            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-associate-promote-areaCoordinatorAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-associate-promote-staffAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-associate-promote-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-associate-promote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-associate-promote-confidentialityAgreement"),
-            associateAgreement: localStorageGetBooleanItem("nwapp-associate-promote-associateAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-associate-promote-policeCheckDate"),
         }
 
@@ -138,11 +137,10 @@ class AdminAssociatePromoteOperationStep2Container extends Component {
         return (
             <AdminAssociatePromoteOperationStep2Component
                 roleId={this.state.roleId}
-                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
+                staffAgreement={this.state.staffAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
-                associateAgreement={this.state.associateAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}

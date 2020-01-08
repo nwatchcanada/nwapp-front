@@ -32,11 +32,10 @@ class AdminAssociatePromoteOperationStep2Container extends Component {
             slug: slug,
             errors: [],
             roleId: localStorageGetIntegerItem("nwapp-associate-promote-group-id"),
-            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-associate-promote-areaCoordinatorAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-associate-promote-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-associate-promote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-associate-promote-confidentialityAgreement"),
-            associateAgreement: localStorageGetBooleanItem("nwapp-associate-promote-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-associate-promote-staffAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-associate-promote-policeCheckDate"),
             isLoading: false,
         }
@@ -92,15 +91,8 @@ class AdminAssociatePromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Associate has been successfully promoted.");
-        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
-            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
-        }
-        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
-            this.props.history.push("/admin/associate/"+this.state.slug+"");
-        } else {
-            this.props.history.push("/admin/associate/"+this.state.slug+"");
-        }
+        this.props.setFlashMessage("success", "Associate has been successfully promoted to staff.");
+        this.props.history.push("/admin/staff/"+this.state.slug+"");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -156,11 +148,10 @@ class AdminAssociatePromoteOperationStep2Container extends Component {
                 slug={this.state.slug}
                 associate={this.props.associate}
                 roleId={this.state.roleId}
-                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
-                associateAgreement={this.state.associateAgreement}
+                staffAgreement={this.state.staffAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 onBack={this.onBack}

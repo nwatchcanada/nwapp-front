@@ -97,7 +97,7 @@ export default class AdminAssociateOperationsComponent extends Component {
                                     </div>
                                     <div className="card-body">
                                         <h3 className="card-title">Promote</h3>
-                                        <p className="card-text">Promote the associate to become an <strong>area coordinator</strong> or <strong>associate</strong> in our system.</p>
+                                        <p className="card-text">Promote the associate to become a <strong>staff</strong> member in our system.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
                                         <Link className="btn btn-success btn-lg" onClick={onAddJobClick}>
