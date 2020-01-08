@@ -12,9 +12,8 @@ export default class AdminStaffPromoteOperationStep2Component extends Component 
     render() {
         const {
             slug, staff, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
-            roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, staffAgreement, policeCheckDate,
+            roleId, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, policeCheckDate,
         } = this.props;
-        const isStaff = roleId === ASSOCIATE_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -66,16 +65,6 @@ export default class AdminStaffPromoteOperationStep2Component extends Component 
                             <BootstrapCheckbox
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
-                                error={errors.areaCoordinatorAgreement}
-                                label="I agree to the Area Coordinator agreement."
-                                onChange={onCheckboxChange}
-                                value={areaCoordinatorAgreement}
-                                name="areaCoordinatorAgreement"
-                            />
-
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
                                 error={errors.conflictOfInterestAgreement}
                                 label="I agree to the Conflict of Interest agreement."
                                 onChange={onCheckboxChange}
@@ -103,18 +92,6 @@ export default class AdminStaffPromoteOperationStep2Component extends Component 
                                 name="confidentialityAgreement"
                             />
 
-                            {isStaff &&
-                                <BootstrapCheckbox
-                                    inputClassName="form-check-input form-check-input-lg"
-                                    borderColour="border-success"
-                                    error={errors.staffAgreement}
-                                    label="I agree to the Staff agreement."
-                                    onChange={onCheckboxChange}
-                                    value={staffAgreement}
-                                    name="staffAgreement"
-                                />
-                            }
-
                             <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>
 
                             <BootstrapDatePicker
@@ -129,7 +106,7 @@ export default class AdminStaffPromoteOperationStep2Component extends Component 
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to={`/admin/staff/${slug}/promote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back

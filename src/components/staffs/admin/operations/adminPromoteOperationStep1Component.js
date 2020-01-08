@@ -49,29 +49,15 @@ export default class AdminStaffPromoteOperationStep1Component extends Component 
                 <h5>Please select what the promotion is.</h5>
 
                 <div className="card-group row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
                                 <i className="fas fa-horse-head fa-3x"></i>
                             </div>
                             <div className="card-body">
-                                <h3 className="card-title">Area Coordinator</h3>
-                                <p className="card-text">Promote the staff to be an area coordinator.</p>
+                                <h3 className="card-title">Management Staff</h3>
+                                <p className="card-text">Promote the staff member to be part of the management role.</p>
                                 <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, AREA_COORDINATOR_ROLE_ID) } }>
-                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6">
-                        <div className="card box-shadow text-center mx-auto">
-                            <div className="card-custom-top-2">
-                                <i className="fas fa-hat-wizard fa-3x"></i>
-                            </div>
-                            <div className="card-body">
-                                <h3 className="card-title">Staff</h3>
-                                <p className="card-text">Promote the staff to be an staff.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, ASSOCIATE_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>

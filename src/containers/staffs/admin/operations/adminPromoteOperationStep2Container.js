@@ -31,11 +31,10 @@ class AdminStaffPromoteOperationStep2Container extends Component {
             slug: slug,
             errors: [],
             roleId: localStorageGetIntegerItem("nwapp-staff-promote-group-id"),
-            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-staff-promote-areaCoordinatorAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-staff-promote-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-staff-promote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-staff-promote-confidentialityAgreement"),
-            staffAgreement: localStorageGetBooleanItem("nwapp-staff-promote-staffAgreement"),
+            staffAgreement: true,
             policeCheckDate: localStorageGetDateItem("nwapp-staff-promote-policeCheckDate"),
         }
 
@@ -138,11 +137,9 @@ class AdminStaffPromoteOperationStep2Container extends Component {
         return (
             <AdminStaffPromoteOperationStep2Component
                 roleId={this.state.roleId}
-                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
-                staffAgreement={this.state.staffAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}

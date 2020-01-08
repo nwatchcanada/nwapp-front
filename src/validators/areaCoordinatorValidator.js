@@ -556,9 +556,9 @@ export function validatePromotionInput(data) {
     if (data.roleId === undefined || data.roleId === null || data.roleId === "") {
         errors.roleId = 'This field is required';
     } else {
-        if (data.areaCoordinatorAgreement === undefined || data.areaCoordinatorAgreement === null || data.areaCoordinatorAgreement === "" || data.areaCoordinatorAgreement === false) {
-            errors.areaCoordinatorAgreement = 'This field is required.';
-        }
+        // if (data.areaCoordinatorAgreement === undefined || data.areaCoordinatorAgreement === null || data.areaCoordinatorAgreement === "" || data.areaCoordinatorAgreement === false) {
+        //     errors.areaCoordinatorAgreement = 'This field is required.';
+        // }
         if (data.conflictOfInterestAgreement === undefined || data.conflictOfInterestAgreement === null || data.conflictOfInterestAgreement === "" || data.conflictOfInterestAgreement === false) {
             errors.conflictOfInterestAgreement = 'This field is required';
         }
