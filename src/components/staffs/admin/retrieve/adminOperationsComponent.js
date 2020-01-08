@@ -7,7 +7,11 @@ import NumberFormat from 'react-number-format';
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
-// import {EXECUTIVE_GROUP_ID} from '../../../../constants/api';
+import {
+    EXECUTIVE_GROUP_ID,
+    MANAGEMENT_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID
+} from '../../../../constants/api';
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 
 
@@ -15,6 +19,7 @@ export default class AdminStaffOperationsComponent extends Component {
     render() {
         const { slug, staff, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
         const isActiveState = staff.state === "active";
+        const isFrontlineStaff = staff.state === FRONTLINE_STAFF_ROLE_ID;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -88,24 +93,25 @@ export default class AdminStaffOperationsComponent extends Component {
 
                 <div className="row">
                     <div className="col-md-12">
-
                         <div className="card-group row">
-                            <div className="col-sm-3 mb-4">
-                                <div className="card box-shadow text-center mx-auto h-100">
-                                    <div className="card-custom-top-2">
-                                        <i className="fas fa-star fa-3x"></i>
-                                    </div>
-                                    <div className="card-body">
-                                        <h3 className="card-title">Promote</h3>
-                                        <p className="card-text">Promote the staff to become an <strong>area coordinator</strong> or <strong>staff</strong> in our system.</p>
-                                    </div>
-                                    <div className="card-footer bg-transparent border-0">
-                                        <Link className="btn btn-success btn-lg" onClick={onAddJobClick}>
-                                            Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                        </Link>
+                            {isFrontlineStaff &&
+                                <div className="col-sm-3 mb-4">
+                                    <div className="card box-shadow text-center mx-auto h-100">
+                                        <div className="card-custom-top-2">
+                                            <i className="fas fa-star fa-3x"></i>
+                                        </div>
+                                        <div className="card-body">
+                                            <h3 className="card-title">Promote</h3>
+                                            <p className="card-text">Promote the staff to become an <strong>area coordinator</strong> or <strong>staff</strong> in our system.</p>
+                                        </div>
+                                        <div className="card-footer bg-transparent border-0">
+                                            <Link className="btn btn-success btn-lg" onClick={onAddJobClick}>
+                                                Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                             {isActiveState
                                 ?<div className="col-sm-3 mb-4">
                                     <div className="card box-shadow text-center mx-auto h-100">
