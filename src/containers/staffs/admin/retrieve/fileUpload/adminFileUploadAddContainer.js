@@ -6,7 +6,6 @@ import Scroll from 'react-scroll';
 import OrderListComponent from "../../../../../components/staffs/admin/retrieve/fileUpload/adminFileUploadAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postPrivateFileUpload } from "../../../../../actions/privateFileUploadActions";
-import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 import { getTagReactSelectOptions, pullTagList } from "../../../../../actions/tagActions";
 
@@ -93,9 +92,6 @@ class AdminStaffFileUploadAddContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -316,9 +312,6 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        },
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
         },
         postPrivateFileUpload: (postData, successCallback, failedCallback) => {
             dispatch(postPrivateFileUpload(postData, successCallback, failedCallback))
