@@ -19,7 +19,7 @@ export default class AdminStaffOperationsComponent extends Component {
     render() {
         const { slug, staff, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
         const isActiveState = staff.state === "active";
-        const isFrontlineStaff = staff.state === FRONTLINE_STAFF_ROLE_ID;
+        const isFrontlineStaff = staff.roleId === FRONTLINE_STAFF_ROLE_ID;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -102,7 +102,7 @@ export default class AdminStaffOperationsComponent extends Component {
                                         </div>
                                         <div className="card-body">
                                             <h3 className="card-title">Promote</h3>
-                                            <p className="card-text">Promote the staff to become an <strong>area coordinator</strong> or <strong>staff</strong> in our system.</p>
+                                            <p className="card-text">Promote the staff to become a <strong>management staff</strong> member in our system.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
                                             <Link className="btn btn-success btn-lg" onClick={onAddJobClick}>
