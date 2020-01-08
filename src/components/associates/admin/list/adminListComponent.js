@@ -80,11 +80,6 @@ class RemoteListComponent extends Component {
             sort: true,
             formatter: emailFormatter,
         },{
-            dataField: 'roleId',
-            text: 'Role',
-            sort: true,
-            formatter: roleIdFormatter,
-        },{
             dataField: 'slug',
             text: 'Details',
             sort: false,
