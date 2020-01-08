@@ -96,13 +96,13 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
         if (this.state.roleId === ASSOCIATE_ROLE_ID) {
-            this.props.setFlashMessage("success", "AreaCoordinator has been successfully promoted to associate.");
+            this.props.setFlashMessage("success", "Area coordinator has been successfully promoted to associate.");
             this.props.history.push("/admin/associate/"+this.state.slug+"");
         } else if (this.state.roleId === FRONTLINE_STAFF_ROLE_ID) {
-            this.props.setFlashMessage("success", "AreaCoordinator has been successfully promoted to frontline staff.");
+            this.props.setFlashMessage("success", "Area coordinator has been successfully promoted to frontline staff.");
             this.props.history.push("/admin/staff/"+this.state.slug+"");
         } else if (this.state.roleId === MANAGEMENT_ROLE_ID) {
-            this.props.setFlashMessage("success", "AreaCoordinator has been successfully promoted to management staff.");
+            this.props.setFlashMessage("success", "Area coordinator has been successfully promoted to management staff.");
             this.props.history.push("/admin/staff/"+this.state.slug+"");
         }
     }
