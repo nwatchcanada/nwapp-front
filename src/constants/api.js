@@ -84,6 +84,7 @@ export const WORKERY_STAFF_LIST_API_ENDPOINT = '/v1/staffs';
 export const WORKERY_STAFF_DETAIL_API_ENDPOINT = '/v1/staff/';
 export const WORKERY_STAFF_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/staffs/operation/archive';
 export const NWAPP_STAFF_PROMOTE_OPERATION_API_ENDPOINT = '/v1/staffs/operation/promote';
+export const NWAPP_STAFF_DEMOTE_OPERATION_API_ENDPOINT = '/v1/staffs/operation/demote';
 export const WORKERY_STAFF_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/staffs/operation/avatar';
 export const WORKERY_STAFF_COMMENT_LIST_API_ENDPOINT = '/v1/staff-comments';
 export const WORKERY_STAFF_CONTACT_UPDATE_API_ENDPOINT = '/v1/staff/XXX/contact';

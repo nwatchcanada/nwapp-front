@@ -59,7 +59,7 @@ export default class AdminStaffDemoteOperationStep1Component extends Component {
                             <div className="card-body">
                                 <h3 className="card-title">Member</h3>
                                 <p className="card-text">Demote the staff to be a <strong>member</strong>.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, FRONTLINE_STAFF_ROLE_ID) } }>
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, MEMBER_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>
@@ -93,20 +93,22 @@ export default class AdminStaffDemoteOperationStep1Component extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-3">
-                        <div className="card box-shadow text-center mx-auto">
-                            <div className="card-custom-top-2">
-                                <i className="fas fa-hat-wizard fa-3x"></i>
-                            </div>
-                            <div className="card-body">
-                                <h3 className="card-title">Frontline Staff</h3>
-                                <p className="card-text">Demote the member to be <strong>staff</strong>.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, FRONTLINE_STAFF_ROLE_ID) } }>
-                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </button>
+                    {staff.roleId == MANAGEMENT_ROLE_ID &&
+                        <div className="col-sm-3">
+                            <div className="card box-shadow text-center mx-auto">
+                                <div className="card-custom-top-2">
+                                    <i className="fas fa-hat-wizard fa-3x"></i>
+                                </div>
+                                <div className="card-body">
+                                    <h3 className="card-title">Frontline Staff</h3>
+                                    <p className="card-text">Demote the member to be <strong>staff</strong>.</p>
+                                    <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, FRONTLINE_STAFF_ROLE_ID) } }>
+                                        Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
 
                 <div className="row">

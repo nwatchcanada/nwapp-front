@@ -165,7 +165,7 @@ import AdminStaffPromoteOperationStep2Container from "./staffs/admin/operations/
 import AdminStaffPromoteOperationStep3Container from "./staffs/admin/operations/adminPromoteOperationStep3Container";
 import AdminStaffDemoteOperationStep1Container from "./staffs/admin/operations/adminDemoteOperationStep1Container";
 import AdminStaffDemoteOperationStep2Container from "./staffs/admin/operations/adminDemoteOperationStep2Container";
-// import AdminStaffDemoteOperationStep3Container from "./staffs/admin/operations/adminDemoteOperationStep3Container";
+import AdminStaffDemoteOperationStep3Container from "./staffs/admin/operations/adminDemoteOperationStep3Container";
 import StaffArchiveOperationContainer from "./staffs/admin/operations/adminArchiveOperationContainer";
 import AdminStaffUnarchiveOperationContainer from "./staffs/admin/operations/adminUnarchiveOperationContainer";
 import AdminStaffScorePointListContainer from "./staffs/admin/operations/scorePoint/adminScorePointListContainer";
@@ -498,6 +498,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/staff/:slug/promote/step-3" exact component={requiresAuth(AdminStaffPromoteOperationStep3Container)} />
                                 <Route path="/admin/staff/:slug/demote/step-1" exact component={requiresAuth(AdminStaffDemoteOperationStep1Container)} />
                                 <Route path="/admin/staff/:slug/demote/step-2" exact component={requiresAuth(AdminStaffDemoteOperationStep2Container)} />
+                                <Route path="/admin/staff/:slug/demote/step-3" exact component={requiresAuth(AdminStaffDemoteOperationStep3Container)} />
                                 <Route path="/admin/staff/:slug/archive" exact component={requiresAuth(StaffArchiveOperationContainer)} />
                                 <Route path="/admin/staff/:slug/unarchive" exact component={requiresAuth(AdminStaffUnarchiveOperationContainer)} />
 
