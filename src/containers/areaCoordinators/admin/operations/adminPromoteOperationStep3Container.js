@@ -12,7 +12,8 @@ import { postAreaCoordinatorPromoteOperation } from "../../../../actions/areaCoo
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
-    localStorageGetDateItem
+    localStorageGetDateItem,
+    localStorageRemoveItemsContaining
 } from "../../../../helpers/localStorageUtility";
 
 
@@ -95,6 +96,7 @@ class AdminAreaCoordinatorPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(areaCoordinator) {
         this.setState({ errors: {}, isLoading: true, })
+        localStorageRemoveItemsContaining("nwapp-areaCoordinator-promote-");
         if (this.state.roleId === ASSOCIATE_ROLE_ID) {
             this.props.setFlashMessage("success", "Area coordinator has been successfully promoted to associate.");
             this.props.history.push("/admin/associate/"+this.state.slug+"");

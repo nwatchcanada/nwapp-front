@@ -12,7 +12,8 @@ import { postMemberPromoteOperation } from "../../../../actions/memberActions";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
-    localStorageGetDateItem
+    localStorageGetDateItem,
+    localStorageRemoveItemsContaining
 } from "../../../../helpers/localStorageUtility";
 
 
@@ -95,6 +96,7 @@ class AdminMemberPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(member) {
         this.setState({ errors: {}, isLoading: true, })
+        localStorageRemoveItemsContaining("nwapp-member-promote-");
         if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
             this.props.setFlashMessage("success", "Member has been successfully promoted to area coordinator.");
             this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");

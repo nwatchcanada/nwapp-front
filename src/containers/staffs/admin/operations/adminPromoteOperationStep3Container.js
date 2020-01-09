@@ -10,7 +10,8 @@ import { postStaffPromoteOperation } from "../../../../actions/staffActions";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
-    localStorageGetDateItem
+    localStorageGetDateItem,
+    localStorageRemoveItemsContaining
 } from "../../../../helpers/localStorageUtility";
 
 
@@ -92,6 +93,7 @@ class AdminStaffPromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(staff) {
         this.setState({ errors: {}, isLoading: true, })
+        localStorageRemoveItemsContaining("nwapp-staff-promote-");
         this.props.setFlashMessage("success", "Staff has been successfully promoted.");
         if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
             this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");

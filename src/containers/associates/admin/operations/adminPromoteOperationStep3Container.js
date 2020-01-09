@@ -10,7 +10,8 @@ import { postAssociatePromoteOperation } from "../../../../actions/associateActi
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
-    localStorageGetDateItem
+    localStorageGetDateItem,
+    localStorageRemoveItemsContaining
 } from "../../../../helpers/localStorageUtility";
 
 
@@ -91,6 +92,7 @@ class AdminAssociatePromoteOperationStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
+        localStorageRemoveItemsContaining("nwapp-associate-promote-");
         this.props.setFlashMessage("success", "Associate has been successfully promoted to staff.");
         this.props.history.push("/admin/staff/"+this.state.slug+"");
     }

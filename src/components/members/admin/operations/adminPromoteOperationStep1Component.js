@@ -101,7 +101,7 @@ export default class AdminMemberPromoteOperationStep1Component extends Component
                             <div className="card-body">
                                 <h3 className="card-title">Management Staff</h3>
                                 <p className="card-text">Promote the member to be <strong>staff</strong>.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, FRONTLINE_STAFF_ROLE_ID) } }>
+                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, MANAGEMENT_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>
