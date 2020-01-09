@@ -4,13 +4,14 @@ import Scroll from 'react-scroll';
 
 import AdminStaffDemoteOperationStep2Component from "../../../../components/staffs/admin/operations/adminDemoteOperationStep2Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validatePromotionInput } from "../../../../validators/staffValidator";
+import { validateDemotionInput } from "../../../../validators/staffValidator";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
     localStorageGetDateItem,
     localStorageSetObjectOrArrayItem
 } from "../../../../helpers/localStorageUtility";
+import { DEMOTION_REASON_CHOICES } from "../../../../constants/api";
 
 
 class AdminStaffDemoteOperationStep2Container extends Component {
@@ -31,16 +32,14 @@ class AdminStaffDemoteOperationStep2Container extends Component {
             slug: slug,
             errors: [],
             roleId: localStorageGetIntegerItem("nwapp-staff-demote-group-id"),
-            conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-staff-demote-conflictOfInterestAgreement"),
-            codeOfConductAgreement: localStorageGetBooleanItem("nwapp-staff-demote-codeOfConductAgreement"),
-            confidentialityAgreement: localStorageGetBooleanItem("nwapp-staff-demote-confidentialityAgreement"),
-            staffAgreement: true,
-            policeCheckDate: localStorageGetDateItem("nwapp-staff-demote-policeCheckDate"),
+            reason: "",
+            reasonOptions: DEMOTION_REASON_CHOICES,
+            reasonOther: "",
         }
 
         this.onClick = this.onClick.bind(this);
-        this.onCheckboxChange = this.onCheckboxChange.bind(this);
-        this.onPoliceCheckDateChange = this.onPoliceCheckDateChange.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -96,18 +95,13 @@ class AdminStaffDemoteOperationStep2Container extends Component {
         })
     }
 
-    onCheckboxChange(e) {
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
         this.setState({
-            [e.target.name]: e.target.checked,
+            [option.selectName]: option.value,
+            optionKey: option,
         });
-        localStorage.setItem('nwapp-staff-demote-'+[e.target.name], e.target.checked);
-    }
-
-    onPoliceCheckDateChange(dateObj) {
-        this.setState({
-            policeCheckDate: dateObj,
-        })
-        localStorageSetObjectOrArrayItem('nwapp-staff-demote-policeCheckDate', dateObj);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onClick(e) {
@@ -115,7 +109,7 @@ class AdminStaffDemoteOperationStep2Container extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validatePromotionInput(this.state);
+        const { errors, isValid } = validateDemotionInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -137,17 +131,17 @@ class AdminStaffDemoteOperationStep2Container extends Component {
         return (
             <AdminStaffDemoteOperationStep2Component
                 roleId={this.state.roleId}
-                conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
-                codeOfConductAgreement={this.state.codeOfConductAgreement}
-                confidentialityAgreement={this.state.confidentialityAgreement}
-                policeCheckDate={this.state.policeCheckDate}
+                reason={this.state.reason}
+                reasonOptions={this.state.reasonOptions}
+                reasonOther={this.state.reasonOther}
                 errors={this.state.errors}
                 slug={this.state.slug}
                 staff={this.props.staff}
                 onBack={this.onBack}
                 onClick={this.onClick}
-                onCheckboxChange={this.onCheckboxChange}
-                onPoliceCheckDateChange={this.onPoliceCheckDateChange}
+                onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
+                staff={this.props.staff}
             />
         );
     }

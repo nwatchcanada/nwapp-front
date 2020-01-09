@@ -2,18 +2,19 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
-import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
-import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { OTHER_DEMOTION_REASON } from "../../../../constants/api";
 
 
 export default class AdminStaffDemoteOperationStep2Component extends Component {
     render() {
         const {
-            slug, staff, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
-            roleId, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, policeCheckDate,
+            slug, onClick, isLoading, errors, onTextChange,
+            reason, reasonOptions, reasonOther, onSelectChange, staff
         } = this.props;
+        const isOtherReason = reason === OTHER_DEMOTION_REASON;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -38,83 +39,60 @@ export default class AdminStaffDemoteOperationStep2Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <span className="num">1.</span><span className="">
-                                <Link to={`/admin/staff/${slug}/demote/step-1`}>Selection</Link>
-                            </span>
+                            <Link to={`/admin/staff/${slug}/demote/step-1`}>
+                                <span className="num">1.</span><span className="">Selection</span>
+                            </Link>
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
                                 <span className="num">2.</span><span className="">Agreement</span>
                             </strong>
                         </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
-                        </div>
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-md-5 mx-auto mt-2">
-                        <form>
+                <div className="col-md-5 mx-auto mt-2">
+                    <h3 className="pt-4 pb-2 text-center">Details</h3>
+                    <form id="business-form" method="post" className="needs-validation" action="" noValidate>
+                        <div className="form-group">
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <h4><i className="fas fa-file-signature"></i>&nbsp;Agreement</h4>
-
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
-                                error={errors.conflictOfInterestAgreement}
-                                label="I agree to the Conflict of Interest agreement."
-                                onChange={onCheckboxChange}
-                                value={conflictOfInterestAgreement}
-                                name="conflictOfInterestAgreement"
+                            <BootstrapSingleSelect
+                                label="Reason (*)"
+                                name="reason"
+                                defaultOptionLabel="Please select the reason for the demotion."
+                                options={reasonOptions}
+                                value={reason}
+                                error={errors.reason}
+                                onSelectChange={onSelectChange}
                             />
 
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
-                                error={errors.codeOfConductAgreement}
-                                label="I agree to the Code of Conduct agreement."
-                                onChange={onCheckboxChange}
-                                value={codeOfConductAgreement}
-                                name="codeOfConductAgreement"
-                            />
-
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
-                                error={errors.confidentialityAgreement}
-                                label="I agree to the Confidentiality agreement."
-                                onChange={onCheckboxChange}
-                                value={confidentialityAgreement}
-                                name="confidentialityAgreement"
-                            />
-
-                            <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>
-
-                            <BootstrapDatePicker
-                                label="Police Check Date (*)"
-                                name="policeCheckDate"
-                                dateObj={policeCheckDate}
-                                onTimeChange={onPoliceCheckDateChange}
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.policeCheckDate}
-                            />
+                            {isOtherReason &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.reasonOther}
+                                    label="Other (*)"
+                                    onChange={onTextChange}
+                                    value={reasonOther}
+                                    name="reasonOther"
+                                    type="text"
+                                />
+                            }
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    <i className="fas fa-check-circle"></i>&nbsp;Confirm & Submit
                                 </button>
                                 <Link to={`/admin/staff/${slug}/demote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                    <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
 
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
 
             </main>

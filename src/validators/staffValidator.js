@@ -4,7 +4,8 @@ import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF,
-    ASSOCIATE_ROLE_ID
+    ASSOCIATE_ROLE_ID,
+    OTHER_DEMOTION_REASON
 } from '../constants/api';
 
 
@@ -704,6 +705,29 @@ export function validateBadgeInput(data) {
             }
             if (data.colour === undefined || data.colour === null || data.colour === "") {
                 errors.colour = 'This field is required.';
+            }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+/**
+ *  Validator will validate demotion form.
+ */
+export function validateDemotionInput(data) {
+    let errors = {};
+
+    if (data.reason === undefined || data.reason === null || data.reason === "") {
+        errors.reason = 'This field is required';
+    } else {
+        if (data.reason === OTHER_DEMOTION_REASON) {
+            if (data.reasonOther === undefined || data.reasonOther === null || validator.isEmpty(data.reasonOther) || data.reasonOther === "") {
+                errors.reasonOther = 'This field is required';
             }
         }
     }
