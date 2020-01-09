@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import * as moment from 'moment';
 
-import AdminStaffDemoteOperationStep3Component from "../../../../components/staffs/admin/operations/adminDemoteOperationStep3Component";
+import {
+    MEMBER_ROLE_ID, AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID
+ } from "../../../../constants/api";
+import StaffDemoteStep4Component from "../../../../components/staffs/admin/operations/adminDemoteOperationStep4Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateDemotionStep3Input } from "../../../../validators/staffValidator";
+import { postStaffDemoteOperation } from "../../../../actions/staffActions";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
     localStorageGetDateItem,
-    localStorageSetObjectOrArrayItem
+    localStorageRemoveItemsContaining
 } from "../../../../helpers/localStorageUtility";
 
 
-class AdminStaffDemoteOperationStep2Container extends Component {
+class AdminStaffDemoteOperationStep4Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -31,6 +35,8 @@ class AdminStaffDemoteOperationStep2Container extends Component {
             slug: slug,
             errors: [],
             roleId: localStorageGetIntegerItem("nwapp-staff-demote-group-id"),
+            reason: localStorageGetIntegerItem("nwapp-staff-demote-reason"),
+            reasonOther: localStorage.getItem("nwapp-staff-demote-reasonOther"),
             areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-staff-demote-areaCoordinatorAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-staff-demote-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-staff-demote-codeOfConductAgreement"),
@@ -38,13 +44,33 @@ class AdminStaffDemoteOperationStep2Container extends Component {
             associateAgreement: localStorageGetBooleanItem("nwapp-staff-demote-associateAgreement"),
             staffAgreement: localStorageGetBooleanItem("nwapp-staff-demote-staffAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-staff-demote-policeCheckDate"),
+            isLoading: false,
         }
 
         this.onClick = this.onClick.bind(this);
-        this.onCheckboxChange = this.onCheckboxChange.bind(this);
-        this.onPoliceCheckDateChange = this.onPoliceCheckDateChange.bind(this);
+        this.getPostData = this.getPostData.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // (1) Staff
+        postData.staff = this.state.slug;
+
+        // (2) Police Check Date
+        const policeCheckDateMoment = moment(this.state.policeCheckDate);
+        postData.policeCheckDate = policeCheckDateMoment.format("YYYY-MM-DD")
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -71,14 +97,26 @@ class AdminStaffDemoteOperationStep2Container extends Component {
      */
 
     onSuccessfulSubmissionCallback(staff) {
+        localStorageRemoveItemsContaining("nwapp-staff-demote-");
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/admin/staff/"+this.state.slug+"/demote/step-4");
+        this.props.setFlashMessage("success", "Staff has been successfully demoted.");
+        if (this.state.roleId === AREA_COORDINATOR_ROLE_ID) {
+            this.props.history.push("/admin/area-coordinator/"+this.state.slug+"/full");
+        }
+        else if (this.state.roleId === ASSOCIATE_ROLE_ID) {
+            this.props.history.push("/admin/associate/"+this.state.slug+"");
+        } else if (this.state.roleId === MEMBER_ROLE_ID) {
+            this.props.history.push("/admin/member/"+this.state.slug+"");
+        } else {
+            this.props.history.push("/admin/staff/"+this.state.slug+"");
+        }
     }
 
     onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors
-        })
+            errors: errors,
+            isLoading: false,
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -98,35 +136,21 @@ class AdminStaffDemoteOperationStep2Container extends Component {
         })
     }
 
-    onCheckboxChange(e) {
-        this.setState({
-            [e.target.name]: e.target.checked,
-        });
-        localStorage.setItem('nwapp-staff-demote-'+[e.target.name], e.target.checked);
-    }
-
-    onPoliceCheckDateChange(dateObj) {
-        this.setState({
-            policeCheckDate: dateObj,
-        })
-        localStorageSetObjectOrArrayItem('nwapp-staff-demote-policeCheckDate', dateObj);
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
+        this.setState({
+            isLoading: true,
+            errors: [],
+        });
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateDemotionStep3Input(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        // Once our state has been validated `client-side` then we will
+        // make an API request with the server to create our new production.
+        this.props.postStaffDemoteOperation(
+            this.getPostData(),
+            this.onSuccessfulSubmissionCallback,
+            this.onFailedSubmissionCallback
+        );
     }
 
 
@@ -137,22 +161,20 @@ class AdminStaffDemoteOperationStep2Container extends Component {
 
     render() {
         return (
-            <AdminStaffDemoteOperationStep3Component
+            <StaffDemoteStep4Component
+                slug={this.state.slug}
+                staff={this.props.staff}
                 roleId={this.state.roleId}
                 areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
-                associateAgreement={this.state.associateAgreement}
                 staffAgreement={this.state.staffAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
-                slug={this.state.slug}
-                staff={this.props.staff}
                 onBack={this.onBack}
                 onClick={this.onClick}
-                onCheckboxChange={this.onCheckboxChange}
-                onPoliceCheckDateChange={this.onPoliceCheckDateChange}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -169,7 +191,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        postStaffDemoteOperation: (postData, successCallback, failedCallback) => {
+            dispatch(postStaffDemoteOperation(postData, successCallback, failedCallback))
+        },
     }
 }
 
@@ -177,4 +202,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminStaffDemoteOperationStep2Container);
+)(AdminStaffDemoteOperationStep4Container);
