@@ -725,7 +725,7 @@ export function validateBadgeInput(data) {
 export function validateDemotionInput(data) {
     let errors = {};
 
-    if (data.reason === undefined || data.reason === null || data.reason === "") {
+    if (data.reason === undefined || data.reason === null || data.reason === "" || isNaN(data.reason) ) {
         errors.reason = 'This field is required';
     } else {
         if (data.reason === OTHER_DEMOTION_REASON) {
@@ -767,18 +767,6 @@ export function validateDemotionInput(data) {
             errors.policeCheckDate = 'This field is required.';
         }
     }
-
-    return {
-        errors,
-        isValid: isEmpty(errors)
-    }
-}
-
-
-export function validateDemotionStep3Input(data) {
-    let errors = {};
-
-
 
     return {
         errors,

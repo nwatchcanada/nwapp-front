@@ -11,9 +11,9 @@ import {
 } from "../../../../constants/api";
 
 
-export default class AdminStaffDemoteOperationStep1Component extends Component {
+export default class AdminAssociateDemoteOperationStep1Component extends Component {
     render() {
-        const { slug, staff, onClick, isLoading } = this.props;
+        const { slug, associate, onClick, isLoading } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -22,10 +22,10 @@ export default class AdminStaffDemoteOperationStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/staffs"><i className="fas fa-hat-wizard"></i>&nbsp;Staffs</Link>
+                            <Link to="/admin/associates"><i className="fas fa-hat-wizard"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/staff/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{staff && staff.fullName}</Link>
+                            <Link to={`/admin/associate/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star-half"></i>&nbsp;Demote
@@ -33,7 +33,7 @@ export default class AdminStaffDemoteOperationStep1Component extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-star-half"></i>&nbsp;Demote Staff</h1>
+                <h1><i className="fas fa-star-half"></i>&nbsp;Demote Associate</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -51,69 +51,40 @@ export default class AdminStaffDemoteOperationStep1Component extends Component {
                 <h5>Please select what the demotion is.</h5>
 
                 <div className="card-group row">
-                    <div className="col-sm-3">
+                    <div className="col-sm-6">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
                                 <i className="fas fa-users fa-3x"></i>
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Member</h3>
-                                <p className="card-text">Demote the staff to be a <strong>member</strong>.</p>
+                                <p className="card-text">Demote the associate to be a <strong>member</strong>.</p>
                                 <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, MEMBER_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-3">
+                    <div className="col-sm-6">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
                                 <i className="fas fa-horse-head fa-3x"></i>
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Area Coordinator</h3>
-                                <p className="card-text">Demote the staff to be an <strong>area coordinator</strong>.</p>
+                                <p className="card-text">Demote the associate to be an <strong>area coordinator</strong>.</p>
                                 <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, AREA_COORDINATOR_ROLE_ID) } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-3">
-                        <div className="card box-shadow text-center mx-auto">
-                            <div className="card-custom-top-2">
-                                <i className="fas fa-crown fa-3x"></i>
-                            </div>
-                            <div className="card-body">
-                                <h3 className="card-title">Associate</h3>
-                                <p className="card-text">Demote the staff to be a <strong>associate</strong>.</p>
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, ASSOCIATE_ROLE_ID) } }>
-                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    {staff.roleId == MANAGEMENT_ROLE_ID &&
-                        <div className="col-sm-3">
-                            <div className="card box-shadow text-center mx-auto">
-                                <div className="card-custom-top-2">
-                                    <i className="fas fa-hat-wizard fa-3x"></i>
-                                </div>
-                                <div className="card-body">
-                                    <h3 className="card-title">Frontline Staff</h3>
-                                    <p className="card-text">Demote the member to be <strong>staff</strong>.</p>
-                                    <button className="btn btn-success btn-lg" disabled={isLoading} onClick={ (event)=>{ onClick(event, FRONTLINE_STAFF_ROLE_ID) } }>
-                                        Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    }
+
                 </div>
 
                 <div className="row">
                     <div className="col-md-12">
-                        <Link to={`/admin/staff/${slug}/operations`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                        <Link to={`/admin/associate/${slug}/operations`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                             <i className="fas fa-arrow-circle-left"></i> Back
                         </Link>
                     </div>

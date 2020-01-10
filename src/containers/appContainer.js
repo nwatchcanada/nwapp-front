@@ -131,6 +131,9 @@ import AdminAssociateAvatarUpdateOperationContainer from "./associates/admin/ope
 import AdminAssociatePromoteOperationStep1Container from "./associates/admin/operations/adminPromoteOperationStep1Container";
 import AdminAssociatePromoteOperationStep2Container from "./associates/admin/operations/adminPromoteOperationStep2Container";
 import AdminAssociatePromoteOperationStep3Container from "./associates/admin/operations/adminPromoteOperationStep3Container";
+import AdminAssociateDemoteOperationStep1Container from "./associates/admin/operations/adminDemoteOperationStep1Container";
+import AdminAssociateDemoteOperationStep2Container from "./associates/admin/operations/adminDemoteOperationStep2Container";
+import AdminAssociateDemoteOperationStep3Container from "./associates/admin/operations/adminDemoteOperationStep3Container";
 import AssociateArchiveOperationContainer from "./associates/admin/operations/adminArchiveOperationContainer";
 import AdminAssociateUnarchiveOperationContainer from "./associates/admin/operations/adminUnarchiveOperationContainer";
 import AdminAssociateScorePointListContainer from "./associates/admin/operations/scorePoint/adminScorePointListContainer";
@@ -464,6 +467,9 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/associate/:slug/promote/step-1" exact component={requiresAuth(AdminAssociatePromoteOperationStep1Container)} />
                                 <Route path="/admin/associate/:slug/promote/step-2" exact component={requiresAuth(AdminAssociatePromoteOperationStep2Container)} />
                                 <Route path="/admin/associate/:slug/promote/step-3" exact component={requiresAuth(AdminAssociatePromoteOperationStep3Container)} />
+                                <Route path="/admin/associate/:slug/demote/step-1" exact component={requiresAuth(AdminAssociateDemoteOperationStep1Container)} />
+                                <Route path="/admin/associate/:slug/demote/step-2" exact component={requiresAuth(AdminAssociateDemoteOperationStep2Container)} />
+                                <Route path="/admin/associate/:slug/demote/step-3" exact component={requiresAuth(AdminAssociateDemoteOperationStep3Container)} />
                                 <Route path="/admin/associate/:slug/archive" exact component={requiresAuth(AssociateArchiveOperationContainer)} />
                                 <Route path="/admin/associate/:slug/unarchive" exact component={requiresAuth(AdminAssociateUnarchiveOperationContainer)} />
 

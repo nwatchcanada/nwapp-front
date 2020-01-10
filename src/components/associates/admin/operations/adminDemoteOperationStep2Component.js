@@ -16,23 +16,22 @@ import {
 } from "../../../../constants/api";
 
 
-export default class AdminStaffDemoteOperationStep2Component extends Component {
+export default class AdminAssociateDemoteOperationStep2Component extends Component {
     render() {
         const {
             slug, onClick, isLoading, errors,
             onTextChange, onPoliceCheckDateChange, onCheckboxChange, onSelectChange,
-            reason, reasonOptions, reasonOther, staff,
+            reason, reasonOptions, reasonOther, associate,
             roleId,
             areaCoordinatorAgreement,
             conflictOfInterestAgreement,
             codeOfConductAgreement,
             confidentialityAgreement,
             associateAgreement,
-            staffAgreement,
             policeCheckDate
         } = this.props;
         const isOtherReason = reason === OTHER_DEMOTION_REASON;
-        const isStaff = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
+        const isAssociate = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -41,10 +40,10 @@ export default class AdminStaffDemoteOperationStep2Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/staffs"><i className="fas fa-hat-wizard"></i>&nbsp;Staffs</Link>
+                            <Link to="/admin/associates"><i className="fas fa-hat-wizard"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/staff/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{staff && staff.fullName}</Link>
+                            <Link to={`/admin/associate/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star-half"></i>&nbsp;Demote
@@ -52,12 +51,12 @@ export default class AdminStaffDemoteOperationStep2Component extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-star-half"></i>&nbsp;Demote Staff</h1>
+                <h1><i className="fas fa-star-half"></i>&nbsp;Demote Associate</h1>
 
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/staff/${slug}/demote/step-1`}>
+                            <Link to={`/admin/associate/${slug}/demote/step-1`}>
                                 <span className="num">1.</span><span className="">Selection</span>
                             </Link>
                         </div>
@@ -158,15 +157,15 @@ export default class AdminStaffDemoteOperationStep2Component extends Component {
                                 />
                             }
 
-                            {isStaff &&
+                            {isAssociate &&
                                 <BootstrapCheckbox
                                     inputClassName="form-check-input form-check-input-lg"
                                     borderColour="border-success"
-                                    error={errors.staffAgreement}
-                                    label="I agree to the staff agreement. (*)"
+                                    error={errors.associateAgreement}
+                                    label="I agree to the associate agreement. (*)"
                                     onChange={onCheckboxChange}
-                                    value={staffAgreement}
-                                    name="staffAgreement"
+                                    value={associateAgreement}
+                                    name="associateAgreement"
                                 />
                             }
 
@@ -186,7 +185,7 @@ export default class AdminStaffDemoteOperationStep2Component extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to={`/admin/staff/${slug}/demote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/associate/${slug}/demote/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
