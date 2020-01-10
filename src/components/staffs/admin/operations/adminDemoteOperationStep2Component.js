@@ -5,16 +5,34 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
-import { OTHER_DEMOTION_REASON } from "../../../../constants/api";
+import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import {
+    OTHER_DEMOTION_REASON,
+    AREA_COORDINATOR_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    MANAGEMENT_ROLE_ID
+} from "../../../../constants/api";
 
 
 export default class AdminStaffDemoteOperationStep2Component extends Component {
     render() {
         const {
-            slug, onClick, isLoading, errors, onTextChange,
-            reason, reasonOptions, reasonOther, onSelectChange, staff
+            slug, onClick, isLoading, errors,
+            onTextChange, onPoliceCheckDateChange, onCheckboxChange, onSelectChange,
+            reason, reasonOptions, reasonOther, staff,
+            roleId,
+            areaCoordinatorAgreement,
+            conflictOfInterestAgreement,
+            codeOfConductAgreement,
+            confidentialityAgreement,
+            associateAgreement,
+            staffAgreement,
+            policeCheckDate
         } = this.props;
         const isOtherReason = reason === OTHER_DEMOTION_REASON;
+        const isStaff = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -62,6 +80,8 @@ export default class AdminStaffDemoteOperationStep2Component extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
+                            <h4><i className="fas fa-id-card"></i>&nbsp;Why demotion?</h4>
+
                             <BootstrapSingleSelect
                                 label="Reason (*)"
                                 name="reason"
@@ -84,6 +104,86 @@ export default class AdminStaffDemoteOperationStep2Component extends Component {
                                     type="text"
                                 />
                             }
+
+                            <h4><i className="fas fa-gavel"></i>&nbsp;Agrements</h4>
+
+                            {roleId === AREA_COORDINATOR_ROLE_ID &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.areaCoordinatorAgreement}
+                                    label="I agree to the Area Coordinator agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={areaCoordinatorAgreement}
+                                    name="areaCoordinatorAgreement"
+                                />
+                            }
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.conflictOfInterestAgreement}
+                                label="I agree to the Conflict of Interest agreement. (*)"
+                                onChange={onCheckboxChange}
+                                value={conflictOfInterestAgreement}
+                                name="conflictOfInterestAgreement"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.codeOfConductAgreement}
+                                label="I agree to the Code of Conduct agreement. (*)"
+                                onChange={onCheckboxChange}
+                                value={codeOfConductAgreement}
+                                name="codeOfConductAgreement"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.confidentialityAgreement}
+                                label="I agree to the Confidentiality agreement. (*)"
+                                onChange={onCheckboxChange}
+                                value={confidentialityAgreement}
+                                name="confidentialityAgreement"
+                            />
+
+                            {roleId === ASSOCIATE_ROLE_ID &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.associateAgreement}
+                                    label="I agree to the Associate agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={associateAgreement}
+                                    name="associateAgreement"
+                                />
+                            }
+
+                            {isStaff &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.staffAgreement}
+                                    label="I agree to the staff agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={staffAgreement}
+                                    name="staffAgreement"
+                                />
+                            }
+
+                            <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>
+
+                            <BootstrapDatePicker
+                                label="Police Check Date (*)"
+                                name="policeCheckDate"
+                                dateObj={policeCheckDate}
+                                onTimeChange={onPoliceCheckDateChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.policeCheckDate}
+                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

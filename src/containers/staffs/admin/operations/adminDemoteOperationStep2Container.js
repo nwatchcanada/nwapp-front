@@ -35,11 +35,20 @@ class AdminStaffDemoteOperationStep2Container extends Component {
             reason: localStorageGetIntegerItem("nwapp-staff-demote-reason"),
             reasonOptions: DEMOTION_REASON_CHOICES,
             reasonOther: localStorage.getItem("nwapp-staff-demote-reasonOther"),
+            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-staff-demote-areaCoordinatorAgreement"),
+            conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-staff-demote-conflictOfInterestAgreement"),
+            codeOfConductAgreement: localStorageGetBooleanItem("nwapp-staff-demote-codeOfConductAgreement"),
+            confidentialityAgreement: localStorageGetBooleanItem("nwapp-staff-demote-confidentialityAgreement"),
+            associateAgreement: localStorageGetBooleanItem("nwapp-staff-demote-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-staff-demote-staffAgreement"),
+            policeCheckDate: localStorageGetDateItem("nwapp-staff-demote-policeCheckDate"),
         }
 
         this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
+        this.onPoliceCheckDateChange = this.onPoliceCheckDateChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -108,6 +117,20 @@ class AdminStaffDemoteOperationStep2Container extends Component {
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-staff-demote-'+[e.target.name], e.target.checked);
+    }
+
+    onPoliceCheckDateChange(dateObj) {
+        this.setState({
+            policeCheckDate: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('nwapp-staff-demote-policeCheckDate', dateObj);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -138,6 +161,13 @@ class AdminStaffDemoteOperationStep2Container extends Component {
                 reason={this.state.reason}
                 reasonOptions={this.state.reasonOptions}
                 reasonOther={this.state.reasonOther}
+                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
+                conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
+                codeOfConductAgreement={this.state.codeOfConductAgreement}
+                confidentialityAgreement={this.state.confidentialityAgreement}
+                associateAgreement={this.state.associateAgreement}
+                staffAgreement={this.state.staffAgreement}
+                policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}
                 staff={this.props.staff}
@@ -145,6 +175,8 @@ class AdminStaffDemoteOperationStep2Container extends Component {
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
+                onCheckboxChange={this.onCheckboxChange}
+                onPoliceCheckDateChange={this.onPoliceCheckDateChange}
                 staff={this.props.staff}
             />
         );

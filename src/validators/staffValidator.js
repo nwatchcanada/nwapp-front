@@ -735,16 +735,6 @@ export function validateDemotionInput(data) {
         }
     }
 
-    return {
-        errors,
-        isValid: isEmpty(errors)
-    }
-}
-
-
-export function validateDemotionStep3Input(data) {
-    let errors = {};
-
     if (data.roleId === undefined || data.roleId === null || data.roleId === "") {
         errors.roleId = 'This field is required';
     } else {
@@ -777,6 +767,18 @@ export function validateDemotionStep3Input(data) {
             errors.policeCheckDate = 'This field is required.';
         }
     }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+export function validateDemotionStep3Input(data) {
+    let errors = {};
+
+
 
     return {
         errors,
