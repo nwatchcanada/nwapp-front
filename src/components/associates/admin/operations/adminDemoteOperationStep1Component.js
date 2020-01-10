@@ -22,7 +22,7 @@ export default class AdminAssociateDemoteOperationStep1Component extends Compone
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/associates"><i className="fas fa-hat-wizard"></i>&nbsp;Associates</Link>
+                            <Link to="/admin/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/associate/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</Link>
