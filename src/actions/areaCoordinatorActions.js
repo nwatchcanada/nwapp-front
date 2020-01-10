@@ -13,6 +13,7 @@ import {
     WORKERY_AREA_COORDINATOR_DETAIL_API_ENDPOINT,
     WORKERY_AREA_COORDINATOR_ARCHIVE_API_OPERATION_ENDPOINT,
     NWAPP_AREA_COORDINATOR_PROMOTE_OPERATION_API_ENDPOINT,
+    NWAPP_AREA_COORDINATOR_DEMOTE_OPERATION_API_ENDPOINT,
     WORKERY_AREA_COORDINATOR_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT,
     WORKERY_AREA_COORDINATOR_CONTACT_UPDATE_API_ENDPOINT,
     WORKERY_AREA_COORDINATOR_ADDRESS_UPDATE_API_ENDPOINT,
@@ -716,6 +717,85 @@ export function postAreaCoordinatorPromoteOperation(postData, onSuccessCallback,
 
     }
 }
+
+
+
+
+export function postAreaCoordinatorDemoteOperation(postData, onSuccessCallback, onFailureCallback) {
+    return dispatch => {
+
+        // Change the global state to attempting to log in.
+        store.dispatch(
+            setAreaCoordinatorDetailRequest()
+        );
+
+        // Generate our app's Axios instance.
+        const customAxios = getCustomAxios();
+
+        // The following code will convert the `camelized` data into `snake case`
+        // data so our API endpoint will be able to read it.
+        let decamelizedData = decamelizeKeys(postData);
+
+        // Encode from JS Object to MessagePack (Buffer)
+        var buffer = msgpack.encode(decamelizedData);
+
+        // Perform our API submission.
+        customAxios.post(NWAPP_AREA_COORDINATOR_DEMOTE_OPERATION_API_ENDPOINT, buffer).then( (successResponse) => {
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
+
+            let associate = camelizeKeys(responseData);
+
+            // Extra.
+            associate['isAPIRequestRunning'] = false;
+            associate['errors'] = {};
+
+            // Update the global state of the application to store our
+            // user associate for the application.
+            store.dispatch(
+                setAreaCoordinatorDetailSuccess(associate)
+            );
+
+            // DEVELOPERS NOTE:
+            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+            // OBJECT WE GOT FROM THE API.
+            if (onSuccessCallback) {
+                onSuccessCallback(associate);
+            }
+        }).catch( (exception) => {
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
+
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
+
+                let errors = camelizeKeys(responseData);
+
+                console.log("postAreaCoordinatorDemoteOperation | error:", errors); // For debuggin purposes only.
+
+                // Send our failure to the redux.
+                store.dispatch(
+                    setAreaCoordinatorDetailFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (onFailureCallback) {
+                    onFailureCallback(errors);
+                }
+            }
+
+        }).then( () => {
+            // Do nothing.
+        });
+
+    }
+}
+
 
 export function postAreaCoordinatorAvatarCreateOrUpdateOperation(postData, onSuccessCallback, onFailureCallback) {
     return dispatch => {

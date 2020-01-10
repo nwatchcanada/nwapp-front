@@ -106,6 +106,22 @@ export default class AdminAreaCoordinatorOperationsComponent extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <div className="col-sm-3 mb-4">
+                                <div className="card box-shadow text-center mx-auto h-100">
+                                    <div className="card-custom-top-2">
+                                        <i className="fas fa-star-half fa-3x"></i>
+                                    </div>
+                                    <div className="card-body">
+                                        <h3 className="card-title">Demote</h3>
+                                        <p className="card-text">Demote the area coordinator to become a <strong>member</strong> in our system.</p>
+                                    </div>
+                                    <div className="card-footer bg-transparent border-0">
+                                        <Link className="btn btn-success btn-lg" to={`/admin/area-coordinator/${slug}/demote/step-1`}>
+                                            Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                             {isActiveState
                                 ?<div className="col-sm-3 mb-4">
                                     <div className="card box-shadow text-center mx-auto h-100">

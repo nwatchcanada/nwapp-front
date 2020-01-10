@@ -62,6 +62,7 @@ export const WORKERY_AREA_COORDINATOR_LIST_API_ENDPOINT = '/v1/area-coordinators
 export const WORKERY_AREA_COORDINATOR_DETAIL_API_ENDPOINT = '/v1/area-coordinator/';
 export const WORKERY_AREA_COORDINATOR_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/area-coordinators/operation/archive';
 export const NWAPP_AREA_COORDINATOR_PROMOTE_OPERATION_API_ENDPOINT = '/v1/area-coordinators/operation/promote';
+export const NWAPP_AREA_COORDINATOR_DEMOTE_OPERATION_API_ENDPOINT = '/v1/area-coordinators/operation/demote';
 export const WORKERY_AREA_COORDINATOR_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/area-coordinators/operation/avatar';
 export const WORKERY_AREA_COORDINATOR_COMMENT_LIST_API_ENDPOINT = '/v1/area-coordinator-comments';
 export const WORKERY_AREA_COORDINATOR_CONTACT_UPDATE_API_ENDPOINT = '/v1/area-coordinator/XXX/contact';

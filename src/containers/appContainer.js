@@ -96,6 +96,9 @@ import AdminAreaCoordinatorAvatarUpdateOperationContainer from "./areaCoordinato
 import AdminAreaCoordinatorPromoteOperationStep1Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep1Container";
 import AdminAreaCoordinatorPromoteOperationStep2Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep2Container";
 import AdminAreaCoordinatorPromoteOperationStep3Container from "./areaCoordinators/admin/operations/adminPromoteOperationStep3Container";
+import AdminAreaCoordinatorDemoteOperationStep1Container from "./areaCoordinators/admin/operations/adminDemoteOperationStep1Container";
+import AdminAreaCoordinatorDemoteOperationStep2Container from "./areaCoordinators/admin/operations/adminDemoteOperationStep2Container";
+import AdminAreaCoordinatorDemoteOperationStep3Container from "./areaCoordinators/admin/operations/adminDemoteOperationStep3Container";
 import AreaCoordinatorArchiveOperationContainer from "./areaCoordinators/admin/operations/adminArchiveOperationContainer";
 import AdminAreaCoordinatorUnarchiveOperationContainer from "./areaCoordinators/admin/operations/adminUnarchiveOperationContainer";
 import AdminAreaCoordinatorScorePointListContainer from "./areaCoordinators/admin/operations/scorePoint/adminScorePointListContainer";
@@ -435,6 +438,9 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/area-coordinator/:slug/promote/step-1" exact component={requiresAuth(AdminAreaCoordinatorPromoteOperationStep1Container)} />
                                 <Route path="/admin/area-coordinator/:slug/promote/step-2" exact component={requiresAuth(AdminAreaCoordinatorPromoteOperationStep2Container)} />
                                 <Route path="/admin/area-coordinator/:slug/promote/step-3" exact component={requiresAuth(AdminAreaCoordinatorPromoteOperationStep3Container)} />
+                                <Route path="/admin/area-coordinator/:slug/demote/step-1" exact component={requiresAuth(AdminAreaCoordinatorDemoteOperationStep1Container)} />
+                                <Route path="/admin/area-coordinator/:slug/demote/step-2" exact component={requiresAuth(AdminAreaCoordinatorDemoteOperationStep2Container)} />
+                                <Route path="/admin/area-coordinator/:slug/demote/step-3" exact component={requiresAuth(AdminAreaCoordinatorDemoteOperationStep3Container)} />
                                 <Route path="/admin/area-coordinator/:slug/archive" exact component={requiresAuth(AreaCoordinatorArchiveOperationContainer)} />
                                 <Route path="/admin/area-coordinator/:slug/unarchive" exact component={requiresAuth(AdminAreaCoordinatorUnarchiveOperationContainer)} />
 

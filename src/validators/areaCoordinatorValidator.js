@@ -4,7 +4,11 @@ import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF,
-    ASSOCIATE_ROLE_ID
+    OTHER_DEMOTION_REASON,
+    AREA_COORDINATOR_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    MANAGEMENT_ROLE_ID
 } from '../constants/api';
 
 
@@ -571,6 +575,62 @@ export function validatePromotionInput(data) {
         if (data.roleId === ASSOCIATE_ROLE_ID) {
             if (data.associateAgreement === undefined || data.associateAgreement === null || data.associateAgreement === "" || data.associateAgreement === false) {
                 errors.associateAgreement = 'This field is required';
+            }
+        }
+        if (data.policeCheckDate === undefined || data.policeCheckDate === null || data.policeCheckDate === "" || isNaN(data.policeCheckDate)) {
+            errors.policeCheckDate = 'This field is required.';
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+/**
+ *  Validator will validate demotion form.
+ */
+export function validateDemotionInput(data) {
+    let errors = {};
+
+    if (data.reason === undefined || data.reason === null || data.reason === "" || isNaN(data.reason) ) {
+        errors.reason = 'This field is required';
+    } else {
+        if (data.reason === OTHER_DEMOTION_REASON) {
+            if (data.reasonOther === undefined || data.reasonOther === null || validator.isEmpty(data.reasonOther) || data.reasonOther === "") {
+                errors.reasonOther = 'This field is required';
+            }
+        }
+    }
+
+    if (data.roleId === undefined || data.roleId === null || data.roleId === "") {
+        errors.roleId = 'This field is required';
+    } else {
+        if (data.roleId === AREA_COORDINATOR_ROLE_ID) {
+            if (data.areaCoordinatorAgreement === undefined || data.areaCoordinatorAgreement === null || data.areaCoordinatorAgreement === "" || data.areaCoordinatorAgreement === false) {
+                errors.areaCoordinatorAgreement = 'This field is required.';
+            }
+        }
+
+        if (data.conflictOfInterestAgreement === undefined || data.conflictOfInterestAgreement === null || data.conflictOfInterestAgreement === "" || data.conflictOfInterestAgreement === false) {
+            errors.conflictOfInterestAgreement = 'This field is required';
+        }
+        if (data.codeOfConductAgreement === undefined || data.codeOfConductAgreement === null || data.codeOfConductAgreement === "" || data.codeOfConductAgreement === false) {
+            errors.codeOfConductAgreement = 'This field is required';
+        }
+        if (data.confidentialityAgreement === undefined || data.confidentialityAgreement === null || data.confidentialityAgreement === "" || data.confidentialityAgreement === false) {
+            errors.confidentialityAgreement = 'This field is required';
+        }
+        if (data.roleId === AREA_COORDINATOR_ROLE_ID) {
+            if (data.areaCoordinatorAgreement === undefined || data.areaCoordinatorAgreement === null || data.areaCoordinatorAgreement === "" || data.areaCoordinatorAgreement === false) {
+                errors.areaCoordinatorAgreement = 'This field is required';
+            }
+        }
+        if (data.roleId === FRONTLINE_STAFF_ROLE_ID || data.roleId === MANAGEMENT_ROLE_ID) {
+            if (data.staffAgreement === undefined || data.staffAgreement === null || data.staffAgreement === "" || data.staffAgreement === false) {
+                errors.staffAgreement = 'This field is required';
             }
         }
         if (data.policeCheckDate === undefined || data.policeCheckDate === null || data.policeCheckDate === "" || isNaN(data.policeCheckDate)) {
