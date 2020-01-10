@@ -37,11 +37,9 @@ class AdminAreaCoordinatorDemoteOperationStep3Container extends Component {
             roleId: localStorageGetIntegerItem("nwapp-areaCoordinator-demote-group-id"),
             reason: localStorageGetIntegerItem("nwapp-areaCoordinator-demote-reason"),
             reasonOther: localStorage.getItem("nwapp-areaCoordinator-demote-reasonOther"),
-            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-demote-areaCoordinatorAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-demote-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-demote-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-demote-confidentialityAgreement"),
-            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-areaCoordinator-demote-areaCoordinatorAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-areaCoordinator-demote-policeCheckDate"),
             isLoading: false,
         }
