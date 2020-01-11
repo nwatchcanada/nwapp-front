@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminStaffCreateStep1Component from "../../../../components/staffs/admin/create/adminCreateStep1Component";
-import { validateStep1CreateInput } from "../../../../validators/staffValidator";
-import {
-    localStorageGetObjectItem,
-    localStorageSetObjectOrArrayItem,
-    localStorageGetIntegerItem
-} from '../../../../helpers/localStorageUtility';
+import { validateSearchInput } from "../../../../validators/staffValidator";
+import { localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
 
 
 class AdminStaffCreateStep1Container extends Component {
@@ -18,20 +14,21 @@ class AdminStaffCreateStep1Container extends Component {
      */
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
+            keyword: "",
+            advancedSearchActive: false,
             firstName: "",
             lastName: "",
-            phone: "",
+            telephone: "",
             email: "",
             errors: {},
-            isLoading: false
         }
-
         this.onTextChange = this.onTextChange.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
+        this.onSearchClick = this.onSearchClick.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.onAdvancedSearchClick = this.onAdvancedSearchClick.bind(this);
     }
 
     /**
@@ -57,54 +54,99 @@ class AdminStaffCreateStep1Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(staff) {
-        this.setState({ errors: {}, isLoading: true, })
-        localStorageSetObjectOrArrayItem("nwapp-create-staff-search-criteria", this.state);
-        this.props.history.push("/admin/staffs/add/step-2");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
+	handleKeyDown(e) {
+
+		if (e.keyCode === 13) {
+			this.setState({ advancedSearchActive: false, }, ()=> {
+				// Perform staff-side validation.
+				const { errors, isValid } = validateSearchInput(this.state);
+
+				// CASE 1 OF 2: Validation passed successfully.
+				if (isValid) {
+
+                    localStorageSetObjectOrArrayItem('nwapp-staff-add-search', this.state);
+                    this.props.history.push("/admin/staffs/add/step-2");
+
+
+				// CASE 2 OF 2: Validation was a failure.
+				} else {
+					this.setState({ errors: errors });
+
+					// The following code will cause the screen to scroll to the top of
+					// the page. Please see ``react-scroll`` for more information:
+					// https://github.com/fisshy/react-scroll
+					var scroll = Scroll.animateScroll;
+					scroll.scrollToTop();
+				}
+			});
+		}
+	}
 
     onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-        const key = "nwapp-create-staff-"+[e.target.name];
-        localStorage.setItem(key, e.target.value);
+        this.setState({ [e.target.name]: e.target.value, });
     }
 
-    onClick(e) {
+    onAdvancedSearchPanelToggle() {
+        this.setState({ advancedSearchActive: !this.state.advancedSearchActive });
+    }
+
+    onSearchClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
+        this.setState({ advancedSearchActive: false, }, ()=> {
+            // Perform staff-side validation.
+            const { errors, isValid } = validateSearchInput(this.state);
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateStep1CreateInput(this.state);
+            // CASE 1 OF 2: Validation passed successfully.
+            if (isValid) {
 
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+                localStorageSetObjectOrArrayItem('nwapp-staff-add-search', this.state);
+                this.props.history.push("/admin/staffs/add/step-2");
 
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+
+            // CASE 2 OF 2: Validation was a failure.
+            } else {
+                this.setState({ errors: errors });
+
+                // The following code will cause the screen to scroll to the top of
+                // the page. Please see ``react-scroll`` for more information:
+                // https://github.com/fisshy/react-scroll
+                var scroll = Scroll.animateScroll;
+                scroll.scrollToTop();
+            }
+        });
     }
 
+    onAdvancedSearchClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+        this.setState({ advancedSearchActive: true, }, ()=> {
+            // Perform staff-side validation.
+            const { errors, isValid } = validateSearchInput(this.state);
+
+            // CASE 1 OF 2: Validation passed successfully.
+            if (isValid) {
+
+                localStorageSetObjectOrArrayItem('nwapp-staff-add-search', this.state);
+                this.props.history.push("/admin/staffs/add/step-2");
+
+
+            // CASE 2 OF 2: Validation was a failure.
+            } else {
+                this.setState({ errors: errors });
+
+                // The following code will cause the screen to scroll to the top of
+                // the page. Please see ``react-scroll`` for more information:
+                // https://github.com/fisshy/react-scroll
+                var scroll = Scroll.animateScroll;
+                scroll.scrollToTop();
+            }
+        });
+    }
 
     /**
      *  Main render function
@@ -112,13 +154,20 @@ class AdminStaffCreateStep1Container extends Component {
      */
 
     render() {
-        const { name, errors } = this.state;
         return (
             <AdminStaffCreateStep1Component
-                name={name}
-                errors={errors}
+                keyword={this.state.keyword}
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                telephone={this.state.telephone}
+                email={this.state.email}
                 onTextChange={this.onTextChange}
-                onClick={this.onClick}
+                advancedSearchActive={this.state.advancedSearchActive}
+                onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
+                onSearchClick={this.onSearchClick}
+				handleKeyDown={this.handleKeyDown}
+                onAdvancedSearchClick={this.onAdvancedSearchClick}
+                errors={this.state.errors}
             />
         );
     }

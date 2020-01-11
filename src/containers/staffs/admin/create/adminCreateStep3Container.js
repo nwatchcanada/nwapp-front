@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Scroll from 'react-scroll';
 
 import AdminStaffCreateStep3Component from "../../../../components/staffs/admin/create/adminCreateStep3Component";
-import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF } from '../../../../constants/api';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { validatePromotionInput } from "../../../../validators/staffValidator";
+import {
+    localStorageGetIntegerItem,
+    localStorageGetBooleanItem,
+    localStorageGetDateItem,
+    localStorageSetObjectOrArrayItem
+} from "../../../../helpers/localStorageUtility";
+import {
+    FRONTLINE_STAFF_ROLE_ID
+} from "../../../../constants/api";
 
 
 class AdminStaffCreateStep3Container extends Component {
@@ -13,8 +24,30 @@ class AdminStaffCreateStep3Container extends Component {
 
     constructor(props) {
         super(props);
-        this.onRezOrComClick = this.onRezOrComClick.bind(this);
-        this.onBizClick = this.onBizClick.bind(this);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
+        // Update state.
+        this.state = {
+            slug: slug,
+            errors: [],
+            roleId: FRONTLINE_STAFF_ROLE_ID,
+            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-staff-add-areaCoordinatorAgreement"),
+            conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-staff-add-conflictOfInterestAgreement"),
+            codeOfConductAgreement: localStorageGetBooleanItem("nwapp-staff-add-codeOfConductAgreement"),
+            confidentialityAgreement: localStorageGetBooleanItem("nwapp-staff-add-confidentialityAgreement"),
+            associateAgreement: localStorageGetBooleanItem("nwapp-staff-add-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-staff-add-staffAgreement"),
+            policeCheckDate: localStorageGetDateItem("nwapp-staff-add-policeCheckDate"),
+        }
+
+        this.onClick = this.onClick.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
+        this.onPoliceCheckDateChange = this.onPoliceCheckDateChange.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -40,19 +73,64 @@ class AdminStaffCreateStep3Container extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback(staff) {
+        this.setState({ errors: {}, isLoading: true, })
+        localStorage.setItem("nwapp-staff-add-roleId", FRONTLINE_STAFF_ROLE_ID);
+        this.props.history.push("/admin/staffs/add/step-4");
+    }
+
+    onFailedSubmissionCallback(errors) {
+        this.setState({
+            errors: errors
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onRezOrComClick() {
-        localStorage.setItem("nwapp-create-staff-typeOf", RESIDENCE_TYPE_OF);
-        this.props.history.push("/admin/staffs/add/step-4");
+    onTextChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
     }
 
-    onBizClick() {
-        localStorage.setItem("nwapp-create-staff-typeOf", BUSINESS_TYPE_OF);
-        this.props.history.push("/admin/staffs/add/step-4");
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-staff-add-'+[e.target.name], e.target.checked);
+    }
+
+    onPoliceCheckDateChange(dateObj) {
+        this.setState({
+            policeCheckDate: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('nwapp-staff-add-policeCheckDate', dateObj);
+    }
+
+    onClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Perform client-side validation.
+        const { errors, isValid } = validatePromotionInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
     }
 
 
@@ -64,8 +142,21 @@ class AdminStaffCreateStep3Container extends Component {
     render() {
         return (
             <AdminStaffCreateStep3Component
-                onBizClick={this.onBizClick}
-                onRezOrComClick={this.onRezOrComClick}
+                roleId={this.state.roleId}
+                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
+                conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
+                codeOfConductAgreement={this.state.codeOfConductAgreement}
+                confidentialityAgreement={this.state.confidentialityAgreement}
+                associateAgreement={this.state.associateAgreement}
+                staffAgreement={this.state.staffAgreement}
+                policeCheckDate={this.state.policeCheckDate}
+                errors={this.state.errors}
+                slug={this.state.slug}
+                staff={this.props.staff}
+                onBack={this.onBack}
+                onClick={this.onClick}
+                onCheckboxChange={this.onCheckboxChange}
+                onPoliceCheckDateChange={this.onPoliceCheckDateChange}
             />
         );
     }
@@ -74,11 +165,16 @@ class AdminStaffCreateStep3Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        staff: store.staffDetailState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 

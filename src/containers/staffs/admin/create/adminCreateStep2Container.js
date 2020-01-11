@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
 import AdminStaffCreateStep2Component from "../../../../components/staffs/admin/create/adminCreateStep2Component";
-import {
-    localStorageGetObjectItem,
-    localStorageSetObjectOrArrayItem,
-    localStorageGetIntegerItem
-} from '../../../../helpers/localStorageUtility';
-import { pullStaffList } from "../../../../actions/staffActions";
+import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import { pullMemberList } from "../../../../actions/memberActions";
 import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
+import { localStorageGetObjectItem } from '../../../../helpers/localStorageUtility';
 
 
 class AdminStaffCreateStep2Container extends Component {
@@ -20,38 +18,45 @@ class AdminStaffCreateStep2Container extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            firstName: localStorage.getItem("nwapp-create-staff-firstName"),
-            lastName: localStorage.getItem("nwapp-create-staff-lastName"),
-            email: localStorage.getItem("nwapp-create-staff-email"),
-            phone: localStorage.getItem("nwapp-create-staff-phone"),
-            isLoading: true,
-            errors: {},
-            page: 1,
-        }
 
-        this.onTextChange = this.onTextChange.bind(this);
+        const search = localStorageGetObjectItem('nwapp-staff-add-search');
+        this.state = {
+            // Pagination
+            page: 1,
+            sizePerPage: 100,
+            totalSize: 0,
+
+            // Everything else
+            isLoading: true,
+            search: search,
+        }
+        this.getParametersMapFromState = this.getParametersMapFromState.bind(this);
+        this.onMemberClick = this.onMemberClick.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
-        this.getParametersMapFromState = this.getParametersMapFromState.bind(this);
         this.onNextClick = this.onNextClick.bind(this);
         this.onPreviousClick = this.onPreviousClick.bind(this);
     }
 
     getParametersMapFromState() {
+        const search = localStorageGetObjectItem('nwapp-staff-add-search');
         const parametersMap = new Map();
-        if (this.state.firstName !== undefined && this.state.firstName !== null) {
-            parametersMap.set('firstName', this.state.firstName);
+        if (search.keyword !== undefined && search.keyword !== "") {
+            parametersMap.set("search", search.keyword);
         }
-        if (this.state.lastName !== undefined && this.state.lastName !== null) {
-            parametersMap.set('lastName', this.state.lastName);
+        if (search.firstName !== undefined && search.firstName !== "") {
+            parametersMap.set("first_name", search.firstName);
         }
-        if (this.state.email !== undefined && this.state.email !== null) {
-            parametersMap.set('email', this.state.email);
+        if (search.lastName !== undefined && search.lastName !== "") {
+            parametersMap.set("last_name", search.lastName);
         }
-        if (this.state.phone !== undefined && this.state.phone !== null) {
-            parametersMap.set('phone', this.state.phone);
+        if (search.telephone !== undefined && search.telephone !== "") {
+            parametersMap.set("telephone", search.telephone);
         }
+        if (search.email !== undefined && search.email !== "") {
+            parametersMap.set("email", search.email);
+        }
+        console.log("FILTERING", parametersMap); // For debugging purposes only.
         return parametersMap;
     }
 
@@ -62,7 +67,15 @@ class AdminStaffCreateStep2Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-        this.props.pullStaffList(1, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+
+        this.setState(
+            { parametersMap: this.getParametersMapFromState(), isLoading: true, },
+            ()=>{
+                // STEP 3:
+                // SUBMIT TO OUR API.
+                this.props.pullMemberList(this.state.page, this.state.sizePerPage, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+            }
+        );
     }
 
     componentWillUnmount() {
@@ -72,6 +85,9 @@ class AdminStaffCreateStep2Container extends Component {
         this.setState = (state,callback)=>{
             return;
         };
+
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
     }
 
     /**
@@ -112,12 +128,14 @@ class AdminStaffCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-        const key = "nwapp-create-staff-"+[e.target.name];
-        localStorage.setItem(key, e.target.value);
+    onMemberClick(e, memberSlug, memberGivenName, memberLastName) {
+        this.setState(
+            { isLoading: true },
+            ()=>{
+                localStorage.setItem('nwapp-staff-add-member', memberSlug);
+                this.props.history.push("/admin/staffs/add/step-3");
+            }
+        );
     }
 
     onNextClick(e) {
@@ -128,7 +146,7 @@ class AdminStaffCreateStep2Container extends Component {
                 isLoading: true,
             },
             ()=>{
-                this.props.pullStaffList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullMemberList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         )
     }
@@ -141,10 +159,12 @@ class AdminStaffCreateStep2Container extends Component {
                 isLoading: true,
             },
             ()=>{
-                this.props.pullStaffList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullMemberList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         )
     }
+
+
 
     /**
      *  Main render function
@@ -153,18 +173,18 @@ class AdminStaffCreateStep2Container extends Component {
 
     render() {
         const { page, sizePerPage, totalSize, isLoading, errors } = this.state;
-        const staffs = (this.props.staffList && this.props.staffList.results) ? this.props.staffList.results : [];
-        const hasNext = this.props.staffList.next !== null;
-        const hasPrevious = this.props.staffList.previous !== null;
+        const members = (this.props.memberList && this.props.memberList.results) ? this.props.memberList.results : [];
+        const hasNext = this.props.memberList.next !== null;
+        const hasPrevious = this.props.memberList.previous !== null;
         return (
             <AdminStaffCreateStep2Component
                 page={page}
                 sizePerPage={sizePerPage}
                 totalSize={totalSize}
-                staffs={staffs}
+                members={members}
                 isLoading={isLoading}
                 errors={errors}
-                onTextChange={this.onTextChange}
+                onMemberClick={this.onMemberClick}
                 hasNext={hasNext}
                 onNextClick={this.onNextClick}
                 hasPrevious={hasPrevious}
@@ -177,15 +197,19 @@ class AdminStaffCreateStep2Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        staffList: store.staffListState,
+        flashMessage: store.flashMessageState,
+        memberList: store.memberListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        pullStaffList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
+        },
+        pullMemberList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                pullStaffList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+                pullMemberList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
     }

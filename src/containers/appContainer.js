@@ -187,6 +187,11 @@ import AdminStaffBadgeListContainer from "./staffs/admin/operations/badge/adminB
 import AdminStaffBadgeAddContainer from "./staffs/admin/operations/badge/adminBadgeAddContainer";
 import AdminStaffBadgeArchiveContainer from "./staffs/admin/operations/badge/adminBadgeArchiveContainer";
 import AdminStaffAwardListContainer from "./staffs/admin/operations/award/adminAwardListContainer";
+import AdminStaffCreateStep1Container from "./staffs/admin/create/adminCreateStep1Container";
+import AdminStaffCreateStep2Container from "./staffs/admin/create/adminCreateStep2Container";
+import AdminStaffCreateStep3Container from "./staffs/admin/create/adminCreateStep3Container";
+import AdminStaffCreateStep4Container from "./staffs/admin/create/adminCreateStep4Container";
+
 
 
 import DistrictsListContainer from "./settings/districts/list/districtListContainer";
@@ -495,6 +500,10 @@ class AppContainer extends React.Component {
                                 STAFF
                                 -----
                                 */
+                                <Route path="/admin/staffs/add/step-1" exact component={requiresAuth(AdminStaffCreateStep1Container)} />
+                                <Route path="/admin/staffs/add/step-2" exact component={requiresAuth(AdminStaffCreateStep2Container)} />
+                                <Route path="/admin/staffs/add/step-3" exact component={requiresAuth(AdminStaffCreateStep3Container)} />
+                                <Route path="/admin/staffs/add/step-4" exact component={requiresAuth(AdminStaffCreateStep4Container)} />
                                 <Route path="/admin/staffs" exact component={requiresAuth(AdminStaffListContainer)} />
                                 <Route path="/admin/staffs/search" exact component={requiresAuth(AdminStaffSearchContainer)} />
                                 <Route path="/admin/staffs/search-results" exact component={requiresAuth(AdminStaffSearchResultContainer)} />
