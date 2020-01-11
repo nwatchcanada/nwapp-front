@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import * as moment from 'moment';
 
 import AdminAssociateCreateStep4Component from "../../../../components/associates/admin/create/adminCreateStep4Component";
-import { validateStep4CreateInput } from "../../../../validators/associateValidator";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { postMemberPromoteOperation } from "../../../../actions/memberActions";
 import {
-    localStorageGetIntegerItem, localStorageSetObjectOrArrayItem
-} from '../../../../helpers/localStorageUtility';
+    localStorageGetIntegerItem,
+    localStorageGetBooleanItem,
+    localStorageGetDateItem,
+    localStorageRemoveItemsContaining
+} from "../../../../helpers/localStorageUtility";
 
 
-class AdminAssociateCreateStep4Container extends Component {
+class AdminAssociatePromoteOperationStep4Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -17,29 +22,46 @@ class AdminAssociateCreateStep4Container extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            typeOf: localStorageGetIntegerItem("nwapp-create-associate-typeOf"),
-            organizationName: localStorage.getItem("nwapp-create-associate-organizationName"),
-            organizationTypeOf: localStorageGetIntegerItem("nwapp-create-associate-organizationTypeOf"),
-            firstName: localStorage.getItem("nwapp-create-associate-firstName"),
-            lastName: localStorage.getItem("nwapp-create-associate-lastName"),
-            primaryPhone: localStorage.getItem("nwapp-create-associate-primaryPhone"),
-            // primaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-primaryPhoneTypeOf"),
-            secondaryPhone: localStorage.getItem("nwapp-create-associate-secondaryPhone"),
-            // secondaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-secondaryPhoneTypeOf"),
-            email: localStorage.getItem("nwapp-create-associate-email"),
-            isOkToEmail: localStorageGetIntegerItem("nwapp-create-associate-isOkToEmail"),
-            isOkToText: localStorageGetIntegerItem("nwapp-create-associate-isOkToText"),
-            errors: {},
-            isLoading: false
+            slug: localStorage.getItem("nwapp-associate-add-member"),
+            errors: [],
+            roleId: localStorageGetIntegerItem("nwapp-associate-add-roleId"),
+            memberSlug: localStorage.getItem("nwapp-associate-add-member"),
+            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-associate-add-areaCoordinatorAgreement"),
+            conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-associate-add-conflictOfInterestAgreement"),
+            codeOfConductAgreement: localStorageGetBooleanItem("nwapp-associate-add-codeOfConductAgreement"),
+            confidentialityAgreement: localStorageGetBooleanItem("nwapp-associate-add-confidentialityAgreement"),
+            associateAgreement: localStorageGetBooleanItem("nwapp-associate-add-associateAgreement"),
+            staffAgreement: localStorageGetBooleanItem("nwapp-associate-add-staffAgreement"),
+            policeCheckDate: localStorageGetDateItem("nwapp-associate-add-policeCheckDate"),
+            isLoading: false,
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
-        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.getPostData = this.getPostData.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // (1) Associate
+        postData.member = this.state.memberSlug;
+
+        // (2) Police Check Date
+        const policeCheckDateMoment = moment(this.state.policeCheckDate);
+        postData.policeCheckDate = policeCheckDateMoment.format("YYYY-MM-DD")
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -66,13 +88,17 @@ class AdminAssociateCreateStep4Container extends Component {
      */
 
     onSuccessfulSubmissionCallback(associate) {
-        this.props.history.push("/admin/associates/add/step-5");
+        this.setState({ errors: {}, isLoading: true, })
+        localStorageRemoveItemsContaining("nwapp-associate-add-");
+        this.props.setFlashMessage("success", "Member has been successfully promoted to area coordinator.");
+        this.props.history.push("/admin/associate/"+this.state.slug+"");
     }
 
     onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors
-        })
+            errors: errors,
+            isLoading: false,
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -90,63 +116,23 @@ class AdminAssociateCreateStep4Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        const key = "nwapp-create-associate-"+[e.target.name];
-        localStorage.setItem(key, e.target.value);
-    }
-
-    onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            optionKey: option,
-        });
-        localStorage.setItem('nwapp-create-associate-'+[option.selectName].toString(), option.value);
-        localStorage.setItem('nwapp-create-associate-'+[option.selectName].toString()+"Label", option.label);
-        localStorageSetObjectOrArrayItem('nnwapp-create-associate-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
-    }
-
-    onRadioChange(e) {
-        // Get the values.
-        const storageValueKey = "nwapp-create-associate-"+[e.target.name];
-        const storageLabelKey =  "nwapp-create-associate-"+[e.target.name].toString()+"-label";
-        const value = e.target.value;
-        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
-        const storeValueKey = [e.target.name].toString();
-        const storeLabelKey = [e.target.name].toString()+"Label";
-
-        // Save the data.
-        this.setState({ [e.target.name]: value, }); // Save to store.
-        this.setState({ storeLabelKey: label, }); // Save to store.
-        localStorage.setItem(storageValueKey, value) // Save to storage.
-        localStorage.setItem(storageLabelKey, label) // Save to storage.
-
-        // For the debugging purposes only.
-        console.log({
-            "STORE-VALUE-KEY": storageValueKey,
-            "STORE-VALUE": value,
-            "STORAGE-VALUE-KEY": storeValueKey,
-            "STORAGE-VALUE": value,
-            "STORAGE-LABEL-KEY": storeLabelKey,
-            "STORAGE-LABEL": label,
-        });
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
+        this.setState({
+            isLoading: true,
+            errors: [],
+        });
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateStep4CreateInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        // Once our state has been validated `client-side` then we will
+        // make an API request with the server to create our new production.
+        this.props.postMemberPromoteOperation(
+            this.getPostData(),
+            this.onSuccessfulSubmissionCallback,
+            this.onFailedSubmissionCallback
+        );
     }
 
 
@@ -156,26 +142,21 @@ class AdminAssociateCreateStep4Container extends Component {
      */
 
     render() {
-        const {
-            typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, isOkToEmail, isOkToText, errors
-        } = this.state;
         return (
             <AdminAssociateCreateStep4Component
-                typeOf={typeOf}
-                organizationName={organizationName}
-                organizationTypeOf={organizationTypeOf}
-                firstName={firstName}
-                lastName={lastName}
-                primaryPhone={primaryPhone}
-                secondaryPhone={secondaryPhone}
-                email={email}
-                isOkToEmail={isOkToEmail}
-                isOkToText={isOkToText}
-                errors={errors}
-                onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
-                onRadioChange={this.onRadioChange}
+                slug={this.state.slug}
+                associate={this.props.associate}
+                roleId={this.state.roleId}
+                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
+                conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
+                codeOfConductAgreement={this.state.codeOfConductAgreement}
+                confidentialityAgreement={this.state.confidentialityAgreement}
+                associateAgreement={this.state.associateAgreement}
+                policeCheckDate={this.state.policeCheckDate}
+                errors={this.state.errors}
+                onBack={this.onBack}
                 onClick={this.onClick}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -184,15 +165,23 @@ class AdminAssociateCreateStep4Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        associate: store.associateDetailState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
+        postMemberPromoteOperation: (postData, successCallback, failedCallback) => {
+            dispatch(postMemberPromoteOperation(postData, successCallback, failedCallback))
+        },
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminAssociateCreateStep4Container);
+)(AdminAssociatePromoteOperationStep4Container);

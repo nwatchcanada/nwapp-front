@@ -5,45 +5,10 @@ import { Link } from "react-router-dom";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
-class CardComponent extends Component {
+export default class AdminMemberCreateStep2Component extends Component {
     render() {
-        const { associate, isLoading } = this.props;
-        return (
-            <div className="col-sm-3" id={associate.slug}>
-                <div className="card bg-light">
-                    <div className="card-body">
-                        <h5 className="card-title">
-                            <Link to={`/admin/associate/${associate.slug}`}>
-                                {associate.typeOf === 3 &&
-                                    <strong><i className="fas fa-building"></i>&nbsp;{associate.organizationName}</strong>
-                                }
-                                {associate.typeOf === 2 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{associate.firstName}&nbsp;{associate.lastName}</strong>
-                                }
-                                {associate.typeOf === 1 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{associate.firstName}&nbsp;{associate.lastName}</strong>
-                                }
-                            </Link>
-                        </h5>
-                        <p className="card-text">
-                            {associate.streetAddress}<br />
-                            {associate.locality}, {associate.region}, {associate.postalCode}<br />
-                            <a href={`email:${associate.email}`}>{associate.email}</a><br />
-                            <a href={`tel:${associate.primaryPhoneE164}`}>{associate.primaryPhoneNational}</a>
-                        </p>
-                        <Link to={`/admin/associate/${associate.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
-                            Select&nbsp;<i class="fas fa-chevron-right"></i>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default class AssociateCreateStep2Component extends Component {
-    render() {
-        const { associates, isLoading, errors, hasNext, onNextClick, hasPrevious, onPreviousClick } = this.props;
+        const { members, isLoading, errors, hasNext, onNextClick, hasPrevious, onPreviousClick, onMemberClick } = this.props;
+        const hasNoMembers = members.length <= 0;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -56,7 +21,7 @@ export default class AssociateCreateStep2Component extends Component {
                             <Link to="/admin/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add
+                            <i className="fas fa-plus"></i>&nbsp;Add Associate
                         </li>
                     </ol>
                 </nav>
@@ -76,58 +41,106 @@ export default class AssociateCreateStep2Component extends Component {
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Type</span>
-                        </div>
-                        <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Contact</span>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Address</span>
-                        </div>
-                        <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Watch</span>
-                        </div>
-                         <div id="step-7" className="st-grey">
-                            <span className="num">7.</span><span className="">Metrics</span>
+                            <span className="num">3.</span><span className="">Agreement</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Please select the associate.</h5>
+            		<h5>Please select the member to promote.</h5>
                 </div>
 
-                <div className="card-group row">
-                    {associates && associates.map(
-                        (associate) => <CardComponent associate={associate} key={associate.id} isLoading={isLoading} />)
-                    }
+
+
+                <div className="row">
+                    <div className="col-md-12">
+                        <h2>
+                            <i className="fas fa-list"></i>&nbsp;Search Results
+                        </h2>
+
+                        {hasNoMembers
+                            ?<div className="jumbotron">
+                                <h1 className="display-4">No Results Found</h1>
+                                <p className="lead">It appears nothing was found for your search results. Please try again by clicking below.</p>
+
+                                <p className="lead">
+                                    <Link className="btn btn-primary btn-lg" to="/admin/associates/add/step-1">Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
+                                </p>
+                            </div>
+                            :<div className="card-group row">
+                                {members && members.map(
+                                    (member) => <CardComponent member={member} key={member.id} isLoading={isLoading} onMemberClick={onMemberClick} />)
+                                }
+                            </div>
+                        }
+
+                        <div className="float-right">
+                            {hasPrevious &&
+                                <Link onClick={onPreviousClick}><i class="fas fa-arrow-circle-left"></i>&nbsp;Previous</Link>
+                            }&nbsp;&nbsp;
+                            {hasNext &&
+                                <Link onClick={onNextClick}>Next&nbsp;<i class="fas fa-arrow-circle-right"></i></Link>
+                            }
+                        </div>
+
+                    </div>
                 </div>
 
-                <div className="float-right">
-                    {hasPrevious &&
-                        <Link onClick={onPreviousClick}><i class="fas fa-arrow-circle-left"></i>&nbsp;Previous</Link>
-                    }&nbsp;&nbsp;
-                    {hasNext &&
-                        <Link onClick={onNextClick}>Next&nbsp;<i class="fas fa-arrow-circle-right"></i></Link>
-                    }
-                </div>
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Would you like to add a NEW associate?</h5>
-                    <Link to="/admin/associates/add/step-1">
+            		<h5>Would you like to add a NEW area coordinator?</h5>
+                    <a href="/admin/associates/add/step-1">
             		    <button type="button" class="btn btn-lg btn-dark m-3">
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
             		    </button>
-                    </Link>
-            		<Link to="/admin/associates/add/step-3">
+                    </a>
+            		<a href="/admin/members/add/step-1" target="_blank">
             		    <button type="button" class="btn btn-lg btn-success m-3">
-            		       <i class="fas fa-user"></i>&nbsp;Yes - add a new associate
+            		       <i class="fas fa-external-link-alt"></i>&nbsp;Yes - add a new member
             		    </button>
-                    </Link>
+                    </a>
                 </div>
 
 
             </main>
+        );
+    }
+}
+
+
+
+class CardComponent extends Component {
+    render() {
+        const { member, isLoading, onMemberClick } = this.props;
+        return (
+            <div className="col-sm-3" id={member.slug}>
+                <div className="card bg-light">
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            <Link to={`/admin/associates/add/step-1`}>
+                                {member.typeOf === 3 &&
+                                    <strong><i className="fas fa-building"></i>&nbsp;{member.organizationName}</strong>
+                                }
+                                {member.typeOf === 2 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{member.firstName}&nbsp;{member.lastName}</strong>
+                                }
+                                {member.typeOf === 1 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{member.firstName}&nbsp;{member.lastName}</strong>
+                                }
+                            </Link>
+                        </h5>
+                        <p className="card-text">
+                            {member.streetAddress}<br />
+                            {member.locality}, {member.region}, {member.postalCode}<br />
+                            <a href={`email:${member.email}`}>{member.email}</a><br />
+                            <a href={`tel:${member.primaryPhoneE164}`}>{member.primaryPhoneNational}</a>
+                        </p>
+                        <Link onClick={ (event)=> { onMemberClick(event, member.slug, member.firstName, member.lastName) } } type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
+                            Select&nbsp;<i class="fas fa-chevron-right"></i>
+                        </Link>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

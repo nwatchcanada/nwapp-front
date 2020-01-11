@@ -113,7 +113,6 @@ import AdminAreaCoordinatorCreateStep2Container from "./areaCoordinators/admin/c
 import AdminAreaCoordinatorCreateStep3Container from "./areaCoordinators/admin/create/adminCreateStep3Container";
 import AdminAreaCoordinatorCreateStep4Container from "./areaCoordinators/admin/create/adminCreateStep4Container";
 
-
 /*
 ---------
 ASSOCIATE
@@ -148,6 +147,11 @@ import AdminAssociateBadgeListContainer from "./associates/admin/operations/badg
 import AdminAssociateBadgeAddContainer from "./associates/admin/operations/badge/adminBadgeAddContainer";
 import AdminAssociateBadgeArchiveContainer from "./associates/admin/operations/badge/adminBadgeArchiveContainer";
 import AdminAssociateAwardListContainer from "./associates/admin/operations/award/adminAwardListContainer";
+import AdminAssociateCreateStep1Container from "./associates/admin/create/adminCreateStep1Container";
+import AdminAssociateCreateStep2Container from "./associates/admin/create/adminCreateStep2Container";
+import AdminAssociateCreateStep3Container from "./associates/admin/create/adminCreateStep3Container";
+import AdminAssociateCreateStep4Container from "./associates/admin/create/adminCreateStep4Container";
+
 
 /*
 -----
@@ -452,6 +456,10 @@ class AppContainer extends React.Component {
                                 ASSOCIATE
                                 ---------
                                 */
+                                <Route path="/admin/associates/add/step-1" exact component={requiresAuth(AdminAssociateCreateStep1Container)} />
+                                <Route path="/admin/associates/add/step-2" exact component={requiresAuth(AdminAssociateCreateStep2Container)} />
+                                <Route path="/admin/associates/add/step-3" exact component={requiresAuth(AdminAssociateCreateStep3Container)} />
+                                <Route path="/admin/associates/add/step-4" exact component={requiresAuth(AdminAssociateCreateStep4Container)} />
                                 <Route path="/admin/associates" exact component={requiresAuth(AdminAssociateListContainer)} />
                                 <Route path="/admin/associates/search" exact component={requiresAuth(AdminAssociateSearchContainer)} />
                                 <Route path="/admin/associates/search-results" exact component={requiresAuth(AdminAssociateSearchResultContainer)} />
