@@ -1,42 +1,25 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import Moment from 'react-moment';
-// import 'moment-timezone';
 
-import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../../constants/api';
+    AREA_COORDINATOR_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    MANAGEMENT_ROLE_ID
+} from "../../../../constants/api";
+import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
 
 export default class AdminAreaCoordinatorCreateStep3Component extends Component {
     render() {
         const {
-            errors, isLoading, onClick, typeOf,
-            bizCompanyName, bizContactFirstName, bizContactLastName, bizPrimaryPhone, bizSecondaryPhone, bizEmail,
-            rezFirstName, rezLastName, rezPrimaryPhone, rezSecondaryPhone, rezEmail,
-            streetNumber, streetName, streetType, streetTypeOther, streetDirection,
-            watchSlug, watchIcon, watchName,
-            dobObj, howDidYouHear, howDidYouHearOther
+            slug, areaCoordinator, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
+            roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, staffAgreement, policeCheckDate,
         } = this.props;
-
-        const isBizTypeOf = typeOf === BUSINESS_TYPE_OF;
-        const isRezOrCom = typeOf === RESIDENCE_TYPE_OF || typeOf === COMMUNITY_CARES_TYPE_OF;
-
-        let membershipClass;
-        if (typeOf === BUSINESS_TYPE_OF) {
-            membershipClass = "Business";
-        }
-        else if (typeOf === RESIDENCE_TYPE_OF) {
-            membershipClass = "Residential";
-        }
-        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
-            membershipClass = "Community Cares";
-        }
-
+        const isStaff = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -45,217 +28,135 @@ export default class AdminAreaCoordinatorCreateStep3Component extends Component 
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
+                            <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add
+                            <i className="fas fa-plus"></i>&nbsp;Add Area Coordinator
                         </li>
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-plus"></i>&nbsp;Add Form</h1>
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Area Coordinator</h1>
 
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/area-coordinators/add/step-1">
-                                <span className="num">1.</span><span className="">Search</span>
-                            </Link>
+                            <span className="num">1.</span><span className="">
+                                <Link to={`/admin/area-coordinators/add/step-1`}>Selection</Link>
+                            </span>
                         </div>
-                        <div id="step-2" className="st-grey ">
-                            <Link to="/area-coordinators/add/step-2">
+                        <div id="step-2" className="st-grey">
+                            <Link to={`/admin/area-coordinators/add/step-2`}>
                                 <span className="num">2.</span><span className="">Results</span>
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey active">
                             <strong>
-                                <span className="num">3.</span><span className="">Review</span>
+                                <span className="num">3.</span><span className="">Agreement</span>
                             </strong>
                         </div>
                     </div>
                 </div>
 
-                <div className="row pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto p-2">
-
-                        <h2>
-                            <i className="fas fa-table"></i>&nbsp;Review
-                        </h2>
-
-                        <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before promoting the member to become an area coordinator:</strong></p>
-                        <table className="table table-bordered custom-cell-w">
-                            <tbody>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-sitemap"></i>&nbsp;Type
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Membership Class</th>
-                                    <td>{membershipClass}</td>
-                                </tr>
-
-
-
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-id-card"></i>&nbsp;Contact
-                                    </th>
-                                </tr>
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Company Name</th>
-                                        <td>{bizCompanyName}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Contact First Name</th>
-                                        <td>{bizContactFirstName}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Contact Last Name</th>
-                                        <td>{bizContactLastName}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Primary Phone #</th>
-                                        <td>{bizPrimaryPhone}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Secondary Phone #</th>
-                                        <td>{bizSecondaryPhone}</td>
-                                    </tr>
-                                }
-                                {isBizTypeOf &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Email</th>
-                                        <td>{bizEmail}</td>
-                                    </tr>
-                                }
-
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">First Name</th>
-                                        <td>{rezFirstName}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Last Name</th>
-                                        <td>{rezLastName}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Primary Phone #</th>
-                                        <td>{rezPrimaryPhone}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Secondary Phone #</th>
-                                        <td>{rezSecondaryPhone}</td>
-                                    </tr>
-                                }
-                                {isRezOrCom &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Email</th>
-                                        <td>{rezEmail}</td>
-                                    </tr>
-                                }
-
-
-
-
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-address-book"></i>&nbsp;Address
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Number</th>
-                                    <td>{streetNumber}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Name</th>
-                                    <td>{streetName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type</th>
-                                    <td>{streetType}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type (Other)</th>
-                                    <td>{streetTypeOther}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Direction</th>
-                                    <td>{streetDirection}</td>
-                                </tr>
-
-
-
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-shield-alt"></i>&nbsp;Watch
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Name</th>
-                                    <td>
-                                        <a href={`/watch-biz/${watchSlug}`} target="_blank" rel="noopener noreferrer">
-                                            <i className={`fas fa-${watchIcon}`}></i>&nbsp;{watchName}&nbsp;<i className="fas fa-external-link-alt"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-
-
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-chart-pie"></i>&nbsp;Metrics
-                                    </th>
-                                </tr>
-                                {dobObj &&
-                                    <tr>
-                                        <th scope="row" className="bg-light">Date of Birth</th>
-                                        <td>
-                                            <Moment format="YYYY/MM/DD">{dobObj}</Moment>
-                                        </td>
-                                    </tr>
-                                }
-                                <tr>
-                                    <th scope="row" className="bg-light">How did you hear about us?</th>
-                                    <td>{howDidYouHear}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">How did you hear about us? (Other)</th>
-                                    <td>{howDidYouHearOther}</td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
+                <div className="row">
+                    <div className="col-md-5 mx-auto mt-2">
                         <form>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <h4><i className="fas fa-file-signature"></i>&nbsp;Agreement</h4>
+
+                            {isStaff === false &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.areaCoordinatorAgreement}
+                                    label="I agree to the Area Coordinator agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={areaCoordinatorAgreement}
+                                    name="areaCoordinatorAgreement"
+                                />
+                            }
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.conflictOfInterestAgreement}
+                                label="I agree to the Conflict of Interest agreement. (*)"
+                                onChange={onCheckboxChange}
+                                value={conflictOfInterestAgreement}
+                                name="conflictOfInterestAgreement"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.codeOfConductAgreement}
+                                label="I agree to the Code of Conduct agreement. (*)"
+                                onChange={onCheckboxChange}
+                                value={codeOfConductAgreement}
+                                name="codeOfConductAgreement"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.confidentialityAgreement}
+                                label="I agree to the Confidentiality agreement. (*)"
+                                onChange={onCheckboxChange}
+                                value={confidentialityAgreement}
+                                name="confidentialityAgreement"
+                            />
+
+                            {roleId === ASSOCIATE_ROLE_ID && isStaff === false &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.associateAgreement}
+                                    label="I agree to the Associate agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={associateAgreement}
+                                    name="associateAgreement"
+                                />
+                            }
+
+                            {isStaff &&
+                                <BootstrapCheckbox
+                                    inputClassName="form-check-input form-check-input-lg"
+                                    borderColour="border-success"
+                                    error={errors.staffAgreement}
+                                    label="I agree to the staff agreement. (*)"
+                                    onChange={onCheckboxChange}
+                                    value={staffAgreement}
+                                    name="staffAgreement"
+                                />
+                            }
+
+                            <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>
+
+                            <BootstrapDatePicker
+                                label="Police Check Date (*)"
+                                name="policeCheckDate"
+                                dateObj={policeCheckDate}
+                                onTimeChange={onPoliceCheckDateChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.policeCheckDate}
+                            />
+
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/area-coordinators/add/step-2" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/area-coordinators/add/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
+
                         </form>
                     </div>
                 </div>
-
 
             </main>
         );

@@ -111,6 +111,8 @@ import AdminAreaCoordinatorAwardListContainer from "./areaCoordinators/admin/ope
 import AdminAreaCoordinatorCreateStep1Container from "./areaCoordinators/admin/create/adminCreateStep1Container";
 import AdminAreaCoordinatorCreateStep2Container from "./areaCoordinators/admin/create/adminCreateStep2Container";
 import AdminAreaCoordinatorCreateStep3Container from "./areaCoordinators/admin/create/adminCreateStep3Container";
+import AdminAreaCoordinatorCreateStep4Container from "./areaCoordinators/admin/create/adminCreateStep4Container";
+
 
 /*
 ---------
@@ -414,6 +416,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/area-coordinators/add/step-1" exact component={requiresAuth(AdminAreaCoordinatorCreateStep1Container)} />
                                 <Route path="/admin/area-coordinators/add/step-2" exact component={requiresAuth(AdminAreaCoordinatorCreateStep2Container)} />
                                 <Route path="/admin/area-coordinators/add/step-3" exact component={requiresAuth(AdminAreaCoordinatorCreateStep3Container)} />
+                                <Route path="/admin/area-coordinators/add/step-4" exact component={requiresAuth(AdminAreaCoordinatorCreateStep4Container)} />
                                 <Route path="/admin/area-coordinators" exact component={requiresAuth(AdminAreaCoordinatorListContainer)} />
                                 <Route path="/admin/area-coordinators/search" exact component={requiresAuth(AdminAreaCoordinatorSearchContainer)} />
                                 <Route path="/admin/area-coordinators/search-results" exact component={requiresAuth(AdminAreaCoordinatorSearchResultContainer)} />
