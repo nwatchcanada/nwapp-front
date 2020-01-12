@@ -89,32 +89,6 @@ class DashboardContainer extends Component {
      */
 
     render() {
-        const dashboardData = {
-            latestTasks: [
-                {
-                    'slug': 'argyle-task-1',
-                    'number': 1,
-                    'watchName': 'argyle',
-                    'prettyTypeOf': '48h follow up',
-                    'typeOf': 'unassigned-watch-associate',
-                    'absoluteUrl': '/tasks/argyle'
-                },{
-                    'slug': 'byron-task-1',
-                    'number': 2,
-                    'watchName': 'Byron',
-                    'prettyTypeOf': 'Survey',
-                    'typeOf': 'unassigned-watch-associate',
-                    'absoluteUrl': '/tasks/byron'
-                },{
-                    'slug': 'carling-task-1',
-                    'number': 3,
-                    'watchName': 'Carling',
-                    'prettyTypeOf': 'Assign associate',
-                    'typeOf': 'unassigned-watch-area-coordinator',
-                    'absoluteUrl': '/tasks/carling'
-                }
-            ]
-        };
         const { roleId } = this.props.user;
 
         if (roleId === EXECUTIVE_ROLE_ID) {
@@ -122,7 +96,7 @@ class DashboardContainer extends Component {
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
-                    dashboardData={dashboardData}
+                    dashboardData={this.props.dashboard}
                 />
             );
         }
@@ -131,7 +105,7 @@ class DashboardContainer extends Component {
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
-                    dashboardData={dashboardData}
+                    dashboardData={this.props.dashboard}
                 />
             );
         }
@@ -140,15 +114,15 @@ class DashboardContainer extends Component {
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
-                    dashboardData={dashboardData}
+                    dashboardData={this.props.dashboard}
                 />
             );
         }
         else if (roleId === ASSOCIATE_ROLE_ID) {
             return (
                 <AssociateDashboardComponent
-                    // dashboard={this.props.dashboard}
                     user={this.props.user}
+                    dashboardData={this.props.dashboard}
                 />
             );
         }
@@ -157,7 +131,7 @@ class DashboardContainer extends Component {
                 <AreaCoordinatorDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
-                    dashboardData={dashboardData}
+                    dashboardData={this.props.dashboard}
                 />
             );
         }
@@ -166,7 +140,7 @@ class DashboardContainer extends Component {
                 <MemberDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
-                    dashboardData={dashboardData}
+                    dashboardData={this.props.dashboard}
                 />
             );
         } else {

@@ -45,30 +45,36 @@ export function pullDashboard(schema, successCallback=null, failedCallback=null)
 
         // Make the call to the web-service.
         customAxios.get(NWAPP_DASHBOARD_API_ENDPOINT).then( (successResponse) => { // SUCCESS
-            const responseData = successResponse.data
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
 
-            let dashboard = camelizeKeys(responseData);
+            console.log(responseData); // For debugging purposes.
+
+            let data = camelizeKeys(responseData);
 
             // Extra.
-            dashboard['isAPIRequestRunning'] = false;
-            dashboard['errors'] = {};
+            data['isAPIRequestRunning'] = false;
+            data['errors'] = {};
 
             // Update the global state of the application to store our
             // user dashboard for the application.
             store.dispatch(
-                setDashboardSuccess(dashboard)
+                setDashboardSuccess(data)
             );
 
             // DEVELOPERS NOTE:
             // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
             // OBJECT WE GOT FROM THE API.
             if (successCallback) {
-                successCallback(dashboard);
+                successCallback(data);
             }
 
         }).catch( (exception) => {
             if (exception.response) {
-                const responseData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
+
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
 
                 let errors = camelizeKeys(responseData);
 
