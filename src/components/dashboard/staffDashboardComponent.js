@@ -7,8 +7,9 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 export default class StaffDashboardComponent extends Component {
     render() {
         const { dashboardData } = this.props;
-        console.log(dashboardData);
-        const { activeMembersCount, activeWatchesCount, activeAssociatesCount, activeTasksCount, latestTasks } = dashboardData;
+        const {
+            activeMembersCount, activeWatchesCount, activeAssociatesCount, activeTasksCount, latestTasks
+        } = dashboardData;
         return (
             <div className="container-fluid">
                 <div className="d-flex align-items-stretch">
@@ -71,9 +72,13 @@ export default class StaffDashboardComponent extends Component {
                                 </Link>
                             </p>
                         </div>
-{/*
-                        <RecentTaskListComponent latestTasks={latestTasks} />
-*/}
+                        {latestTasks && latestTasks.length > 0
+                            ? <RecentTaskListComponent latestTasks={latestTasks} />
+                            : <div className="jumbotron">
+                                <h1 className="display-4"><i className="fas fa-tasks"></i>&nbsp;Latest Tasks</h1>
+                                <p className="lead">There are latest tasks. Please check back later to see if the system created a task.</p>
+                            </div>
+                        }
                     </main>
                 </div>
             </div>
