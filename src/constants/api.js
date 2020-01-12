@@ -400,7 +400,7 @@ export const CONCERN_TYPE_CHOICES = [
 export const HEALTH_RESOURCE_CATEGORY = 2
 export const HOUSING_RESOURCE_CATEGORY = 3
 export const LONELINESS_RESOURCE_CATEGORY = 4
-export const FOOD_SECURITY_RESOUCE_CATEGORY = 5
+export const FOOD_AND_NUTRITION_RESOUCE_CATEGORY = 5
 export const EDUCATION_RESOURCE_CATEGORY = 6
 export const MUNICIPAL_RESOURCE_CATEGORY = 7
 export const POLICE_RESOURCE_CATEGORY = 8
@@ -421,8 +421,8 @@ export const RESOURCE_CATEGORY_CHOICES = [
         label: "Loneliness"
     },{
         selectName: "category",
-        value: FOOD_SECURITY_RESOUCE_CATEGORY,
-        label: "Food Security"
+        value: FOOD_AND_NUTRITION_RESOUCE_CATEGORY,
+        label: "Food & Nutrition"
     },{
         selectName: "category",
         value: EDUCATION_RESOURCE_CATEGORY,
