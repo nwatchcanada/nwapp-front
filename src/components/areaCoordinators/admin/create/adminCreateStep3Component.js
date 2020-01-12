@@ -19,7 +19,6 @@ export default class AdminAreaCoordinatorCreateStep3Component extends Component 
             slug, areaCoordinator, onClick, isLoading, errors, onPoliceCheckDateChange, onCheckboxChange,
             roleId, areaCoordinatorAgreement, conflictOfInterestAgreement, codeOfConductAgreement, confidentialityAgreement, associateAgreement, staffAgreement, policeCheckDate,
         } = this.props;
-        const isStaff = roleId === FRONTLINE_STAFF_ROLE_ID || roleId === MANAGEMENT_ROLE_ID;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -67,17 +66,15 @@ export default class AdminAreaCoordinatorCreateStep3Component extends Component 
 
                             <h4><i className="fas fa-file-signature"></i>&nbsp;Agreement</h4>
 
-                            {isStaff === false &&
-                                <BootstrapCheckbox
-                                    inputClassName="form-check-input form-check-input-lg"
-                                    borderColour="border-success"
-                                    error={errors.areaCoordinatorAgreement}
-                                    label="I agree to the Area Coordinator agreement. (*)"
-                                    onChange={onCheckboxChange}
-                                    value={areaCoordinatorAgreement}
-                                    name="areaCoordinatorAgreement"
-                                />
-                            }
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.areaCoordinatorAgreement}
+                                label="I agree to the Area Coordinator agreement. (*)"
+                                onChange={onCheckboxChange}
+                                value={areaCoordinatorAgreement}
+                                name="areaCoordinatorAgreement"
+                            />
 
                             <BootstrapCheckbox
                                 inputClassName="form-check-input form-check-input-lg"
@@ -108,30 +105,6 @@ export default class AdminAreaCoordinatorCreateStep3Component extends Component 
                                 value={confidentialityAgreement}
                                 name="confidentialityAgreement"
                             />
-
-                            {roleId === ASSOCIATE_ROLE_ID && isStaff === false &&
-                                <BootstrapCheckbox
-                                    inputClassName="form-check-input form-check-input-lg"
-                                    borderColour="border-success"
-                                    error={errors.associateAgreement}
-                                    label="I agree to the Associate agreement. (*)"
-                                    onChange={onCheckboxChange}
-                                    value={associateAgreement}
-                                    name="associateAgreement"
-                                />
-                            }
-
-                            {isStaff &&
-                                <BootstrapCheckbox
-                                    inputClassName="form-check-input form-check-input-lg"
-                                    borderColour="border-success"
-                                    error={errors.staffAgreement}
-                                    label="I agree to the staff agreement. (*)"
-                                    onChange={onCheckboxChange}
-                                    value={staffAgreement}
-                                    name="staffAgreement"
-                                />
-                            }
 
                             <h4><i className="fas fa-user-shield"></i>&nbsp;Policy</h4>
 

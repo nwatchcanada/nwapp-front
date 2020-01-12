@@ -3,17 +3,14 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminAreaCoordinatorCreateStep3Component from "../../../../components/areaCoordinators/admin/create/adminCreateStep3Component";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validatePromotionInput } from "../../../../validators/areaCoordinatorValidator";
+import { validatePromotionInput } from "../../../../validators/memberValidator";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
     localStorageGetDateItem,
     localStorageSetObjectOrArrayItem
 } from "../../../../helpers/localStorageUtility";
-import {
-    AREA_COORDINATOR_ROLE_ID
-} from "../../../../constants/api";
+import { AREA_COORDINATOR_ROLE_ID } from "../../../../constants/api";
 
 
 class AdminAreaCoordinatorCreateStep3Container extends Component {
@@ -170,11 +167,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 

@@ -6,7 +6,9 @@ import Scroll from 'react-scroll';
 import AdminAreaCoordinatorCreateStep2Component from "../../../../components/areaCoordinators/admin/create/adminCreateStep2Component";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { pullMemberList } from "../../../../actions/memberActions";
-import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
+import {
+    STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION, MEMBER_ROLE_ID
+} from "../../../../constants/api";
 import { localStorageGetObjectItem } from '../../../../helpers/localStorageUtility';
 
 
@@ -41,6 +43,11 @@ class AdminAreaCoordinatorCreateStep2Container extends Component {
     getParametersMapFromState() {
         const search = localStorageGetObjectItem('nwapp-areaCoordinator-add-search');
         const parametersMap = new Map();
+
+        // DEVELOPERS NOTE:
+        // (1) We restrict our
+        parametersMap.set("role_ids", MEMBER_ROLE_ID);
+
         if (search.keyword !== undefined && search.keyword !== "") {
             parametersMap.set("search", search.keyword);
         }
