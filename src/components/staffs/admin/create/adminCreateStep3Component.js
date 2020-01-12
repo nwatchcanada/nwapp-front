@@ -69,16 +69,6 @@ export default class AdminStaffCreateStep3Component extends Component {
                             <BootstrapCheckbox
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-success"
-                                error={errors.areaCoordinatorAgreement}
-                                label="I agree to the Area Coordinator agreement. (*)"
-                                onChange={onCheckboxChange}
-                                value={areaCoordinatorAgreement}
-                                name="areaCoordinatorAgreement"
-                            />
-
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
                                 error={errors.conflictOfInterestAgreement}
                                 label="I agree to the Conflict of Interest agreement. (*)"
                                 onChange={onCheckboxChange}
@@ -111,16 +101,6 @@ export default class AdminStaffCreateStep3Component extends Component {
                                 borderColour="border-success"
                                 error={errors.staffAgreement}
                                 label="I agree to the Staff agreement. (*)"
-                                onChange={onCheckboxChange}
-                                value={staffAgreement}
-                                name="staffAgreement"
-                            />
-
-                            <BootstrapCheckbox
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-success"
-                                error={errors.staffAgreement}
-                                label="I agree to the staff agreement. (*)"
                                 onChange={onCheckboxChange}
                                 value={staffAgreement}
                                 name="staffAgreement"

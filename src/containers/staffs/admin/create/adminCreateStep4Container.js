@@ -90,7 +90,7 @@ class AdminStaffPromoteOperationStep4Container extends Component {
     onSuccessfulSubmissionCallback(staff) {
         this.setState({ errors: {}, isLoading: true, })
         localStorageRemoveItemsContaining("nwapp-staff-add-");
-        this.props.setFlashMessage("success", "Member has been successfully promoted to area coordinator.");
+        this.props.setFlashMessage("success", "User has been successfully promoted to frontline staff member.");
         this.props.history.push("/admin/staff/"+this.state.slug+"");
     }
 

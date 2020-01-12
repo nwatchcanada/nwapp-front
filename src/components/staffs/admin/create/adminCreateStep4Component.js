@@ -37,7 +37,7 @@ export default class AdminStaffPromoteOperationStep4Component extends Component 
 
                         <div className="jumbotron">
                             <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
-                            <p className="lead">This will promote our area coordinator.</p>
+                            <p className="lead">This will promote our <strong>user</strong> to become a <strong>frontline staff</strong> member. If you want to create a <strong>management staff</strong> member then you will need to promote a staff member instead.</p>
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>
