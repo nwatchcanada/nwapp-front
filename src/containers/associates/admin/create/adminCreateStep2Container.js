@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import AdminAssociateCreateStep2Component from "../../../../components/associates/admin/create/adminCreateStep2Component";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
-import { pullMemberList } from "../../../../actions/memberActions";
+import { pullAreaCoordinatorList } from "../../../../actions/areaCoordinatorActions";
 import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
 import { localStorageGetObjectItem } from '../../../../helpers/localStorageUtility';
 
@@ -31,7 +31,7 @@ class AdminAssociateCreateStep2Container extends Component {
             search: search,
         }
         this.getParametersMapFromState = this.getParametersMapFromState.bind(this);
-        this.onMemberClick = this.onMemberClick.bind(this);
+        this.onAreaCoordinatorClick = this.onAreaCoordinatorClick.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
         this.onNextClick = this.onNextClick.bind(this);
@@ -73,7 +73,7 @@ class AdminAssociateCreateStep2Container extends Component {
             ()=>{
                 // STEP 3:
                 // SUBMIT TO OUR API.
-                this.props.pullMemberList(this.state.page, this.state.sizePerPage, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullAreaCoordinatorList(this.state.page, this.state.sizePerPage, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         );
     }
@@ -128,11 +128,11 @@ class AdminAssociateCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onMemberClick(e, memberSlug, memberGivenName, memberLastName) {
+    onAreaCoordinatorClick(e, areaCoordinatorSlug, areaCoordinatorGivenName, areaCoordinatorLastName) {
         this.setState(
             { isLoading: true },
             ()=>{
-                localStorage.setItem('nwapp-associate-add-member', memberSlug);
+                localStorage.setItem('nwapp-associate-add-areaCoordinatorSlug', areaCoordinatorSlug);
                 this.props.history.push("/admin/associates/add/step-3");
             }
         );
@@ -146,7 +146,7 @@ class AdminAssociateCreateStep2Container extends Component {
                 isLoading: true,
             },
             ()=>{
-                this.props.pullMemberList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullAreaCoordinatorList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         )
     }
@@ -159,7 +159,7 @@ class AdminAssociateCreateStep2Container extends Component {
                 isLoading: true,
             },
             ()=>{
-                this.props.pullMemberList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullAreaCoordinatorList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         )
     }
@@ -173,18 +173,18 @@ class AdminAssociateCreateStep2Container extends Component {
 
     render() {
         const { page, sizePerPage, totalSize, isLoading, errors } = this.state;
-        const members = (this.props.memberList && this.props.memberList.results) ? this.props.memberList.results : [];
-        const hasNext = this.props.memberList.next !== null;
-        const hasPrevious = this.props.memberList.previous !== null;
+        const areaCoordinators = (this.props.areaCoordinatorList && this.props.areaCoordinatorList.results) ? this.props.areaCoordinatorList.results : [];
+        const hasNext = this.props.areaCoordinatorList.next !== null;
+        const hasPrevious = this.props.areaCoordinatorList.previous !== null;
         return (
             <AdminAssociateCreateStep2Component
                 page={page}
                 sizePerPage={sizePerPage}
                 totalSize={totalSize}
-                members={members}
+                areaCoordinators={areaCoordinators}
                 isLoading={isLoading}
                 errors={errors}
-                onMemberClick={this.onMemberClick}
+                onAreaCoordinatorClick={this.onAreaCoordinatorClick}
                 hasNext={hasNext}
                 onNextClick={this.onNextClick}
                 hasPrevious={hasPrevious}
@@ -198,7 +198,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        memberList: store.memberListState,
+        areaCoordinatorList: store.areaCoordinatorListState,
     };
 }
 
@@ -207,9 +207,9 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullMemberList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+        pullAreaCoordinatorList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                pullMemberList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+                pullAreaCoordinatorList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
     }

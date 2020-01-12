@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import AdminAssociateCreateStep3Component from "../../../../components/associates/admin/create/adminCreateStep3Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validatePromotionInput } from "../../../../validators/associateValidator";
+import { validatePromotionInput } from "../../../../validators/areaCoordinatorValidator";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
@@ -34,12 +34,10 @@ class AdminAssociateCreateStep3Container extends Component {
             slug: slug,
             errors: [],
             roleId: ASSOCIATE_ROLE_ID,
-            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-associate-add-areaCoordinatorAgreement"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-associate-add-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-associate-add-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-associate-add-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-associate-add-associateAgreement"),
-            staffAgreement: localStorageGetBooleanItem("nwapp-associate-add-staffAgreement"),
             policeCheckDate: localStorageGetDateItem("nwapp-associate-add-policeCheckDate"),
         }
 
@@ -143,12 +141,10 @@ class AdminAssociateCreateStep3Container extends Component {
         return (
             <AdminAssociateCreateStep3Component
                 roleId={this.state.roleId}
-                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
                 associateAgreement={this.state.associateAgreement}
-                staffAgreement={this.state.staffAgreement}
                 policeCheckDate={this.state.policeCheckDate}
                 errors={this.state.errors}
                 slug={this.state.slug}

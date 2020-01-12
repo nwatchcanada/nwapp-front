@@ -5,7 +5,7 @@ import * as moment from 'moment';
 
 import AdminAssociateCreateStep4Component from "../../../../components/associates/admin/create/adminCreateStep4Component";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { postMemberPromoteOperation } from "../../../../actions/memberActions";
+import { postAreaCoordinatorPromoteOperation } from "../../../../actions/areaCoordinatorActions";
 import {
     localStorageGetIntegerItem,
     localStorageGetBooleanItem,
@@ -24,16 +24,14 @@ class AdminAssociatePromoteOperationStep4Container extends Component {
         super(props);
 
         this.state = {
-            slug: localStorage.getItem("nwapp-associate-add-member"),
             errors: [],
             roleId: localStorageGetIntegerItem("nwapp-associate-add-roleId"),
-            memberSlug: localStorage.getItem("nwapp-associate-add-member"),
-            areaCoordinatorAgreement: localStorageGetBooleanItem("nwapp-associate-add-areaCoordinatorAgreement"),
+            areaCoordinatorSlug: localStorage.getItem("nwapp-associate-add-areaCoordinatorSlug"),
             conflictOfInterestAgreement: localStorageGetBooleanItem("nwapp-associate-add-conflictOfInterestAgreement"),
             codeOfConductAgreement: localStorageGetBooleanItem("nwapp-associate-add-codeOfConductAgreement"),
             confidentialityAgreement: localStorageGetBooleanItem("nwapp-associate-add-confidentialityAgreement"),
             associateAgreement: localStorageGetBooleanItem("nwapp-associate-add-associateAgreement"),
-            staffAgreement: localStorageGetBooleanItem("nwapp-associate-add-staffAgreement"),
+            staffAgreement: false,
             policeCheckDate: localStorageGetDateItem("nwapp-associate-add-policeCheckDate"),
             isLoading: false,
         }
@@ -53,7 +51,7 @@ class AdminAssociatePromoteOperationStep4Container extends Component {
         let postData = Object.assign({}, this.state);
 
         // (1) Associate
-        postData.member = this.state.memberSlug;
+        postData.areaCoordinator = this.state.areaCoordinatorSlug;
 
         // (2) Police Check Date
         const policeCheckDateMoment = moment(this.state.policeCheckDate);
@@ -90,8 +88,8 @@ class AdminAssociatePromoteOperationStep4Container extends Component {
     onSuccessfulSubmissionCallback(associate) {
         this.setState({ errors: {}, isLoading: true, })
         localStorageRemoveItemsContaining("nwapp-associate-add-");
-        this.props.setFlashMessage("success", "Member has been successfully promoted to area coordinator.");
-        this.props.history.push("/admin/associate/"+this.state.slug+"");
+        this.props.setFlashMessage("success", "Area coordinator has been successfully promoted to associate.");
+        this.props.history.push("/admin/associate/"+associate.slug+"");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -128,7 +126,7 @@ class AdminAssociatePromoteOperationStep4Container extends Component {
 
         // Once our state has been validated `client-side` then we will
         // make an API request with the server to create our new production.
-        this.props.postMemberPromoteOperation(
+        this.props.postAreaCoordinatorPromoteOperation(
             this.getPostData(),
             this.onSuccessfulSubmissionCallback,
             this.onFailedSubmissionCallback
@@ -147,7 +145,6 @@ class AdminAssociatePromoteOperationStep4Container extends Component {
                 slug={this.state.slug}
                 associate={this.props.associate}
                 roleId={this.state.roleId}
-                areaCoordinatorAgreement={this.state.areaCoordinatorAgreement}
                 conflictOfInterestAgreement={this.state.conflictOfInterestAgreement}
                 codeOfConductAgreement={this.state.codeOfConductAgreement}
                 confidentialityAgreement={this.state.confidentialityAgreement}
@@ -174,8 +171,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postMemberPromoteOperation: (postData, successCallback, failedCallback) => {
-            dispatch(postMemberPromoteOperation(postData, successCallback, failedCallback))
+        postAreaCoordinatorPromoteOperation: (postData, successCallback, failedCallback) => {
+            dispatch(postAreaCoordinatorPromoteOperation(postData, successCallback, failedCallback))
         },
     }
 }

@@ -47,6 +47,11 @@ class AdminAssociateCreateStep1Component extends Component {
 
                 <div id="m-search" className="col-sm-5 mx-auto mt-4 pt-4">
 
+                    <div className="jumbotron">
+                        <h1 className="display-4"><i className="fas fa-search"></i>&nbsp;Search Users</h1>
+                        <p className="lead">To create an <strong>associate</strong>, you will need to promote an <strong>area coordinator</strong> from our area coordinators list. Please enter the search field.</p>
+                    </div>
+
                     <BootstrapErrorsProcessingAlert errors={errors} />
 
                     <form id="searchForm" className="needs-validation" noValidate>
