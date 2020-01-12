@@ -45,7 +45,12 @@ class AdminAreaCoordinatorCreateStep1Component extends Component {
                     </div>
                 </div>
 
-                <div id="m-search" className="col-sm-5 mx-auto mt-4 pt-4">
+                <div id="m-search" className="col-sm-5 mx-auto pt-4">
+
+                    <div className="jumbotron">
+                        <h1 className="display-4"><i className="fas fa-search"></i>&nbsp;Search Members</h1>
+                        <p className="lead">To create an <strong>area coordinator</strong>, you will need to promote a <strong>member</strong> from our members list.</p>
+                    </div>
 
                     <BootstrapErrorsProcessingAlert errors={errors} />
 
