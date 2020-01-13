@@ -93,7 +93,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-settings",
         icon: "cogs",
         title: "Settings",
-        url: "/settings"
+        url: "/admin/settings"
     },{
         id: "full-help",
         icon: "question-circle",

@@ -2,6 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, withRouter, Switch } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 
+/*
+------------
+FOUNDATIONAL
+------------
+*/
 import requiresAuth from '../helpers/requiresAuth';
 import NavigationContainer from './navigation/navigationContainer';
 import NotFound404Container from './navigation/notFound404Container';
@@ -15,6 +20,7 @@ import SendResetPasswordSuccessContainer from "./account/auth/sendResetPasswordS
 import ResetPasswordContainer from "./account/auth/resetPasswordContainer";
 import ResetPasswordSuccessContainer from "./account/auth/resetPasswordSuccessContainer";
 
+//TODO: IMPLEMENTATION
 import RegisterStep1Container from "./account/register/registerStep1Container";
 import RegisterStep2BizContainer from "./account/register/registerStep2BizContainer";
 import RegisterStep2RezOrComContainer from "./account/register/registerStep2RezOrComContainer";
@@ -24,13 +30,22 @@ import RegisterStep5Container from "./account/register/registerStep5Container";
 import RegisterStep6Container from "./account/register/registerStep6Container";
 import RegisterStep7Container from "./account/register/registerStep7Container";
 
-// Organizations
+/*
+------------
+ORGANIZATION
+------------
+*/
 import SharedOrganizationListContainer from "./organization/shared/list/sharedOrganizationListContainer";
 import SharedOrganizationCreateStep1Container from "./organization/shared/create/sharedOrganizationCreateStep1Container";
 import SharedOrganizationCreateStep2Container from "./organization/shared/create/sharedOrganizationCreateStep2Container";
 import SharedOrganizationCreateSuccessContainer from "./organization/shared/create/sharedOrganizationCreateSuccessContainer";
 import SharedOrganizationUpdateContainer from "./organization/shared/update/sharedOrganizationUpdateContainer";
 
+/*
+---------
+DASHBOARD
+---------
+*/
 import TenantDashboardRedirectContainer from "./dashboard/tenantDashboardRedirectContainer";
 import DashboardContainer from "./dashboard/dashboardContainer";
 
@@ -152,7 +167,6 @@ import AdminAssociateCreateStep2Container from "./associates/admin/create/adminC
 import AdminAssociateCreateStep3Container from "./associates/admin/create/adminCreateStep3Container";
 import AdminAssociateCreateStep4Container from "./associates/admin/create/adminCreateStep4Container";
 
-
 /*
 -----
 STAFF
@@ -192,24 +206,46 @@ import AdminStaffCreateStep2Container from "./staffs/admin/create/adminCreateSte
 import AdminStaffCreateStep3Container from "./staffs/admin/create/adminCreateStep3Container";
 import AdminStaffCreateStep4Container from "./staffs/admin/create/adminCreateStep4Container";
 
+/*
+---------
+DISTRICTS
+---------
+*/
+import AdminDistrictListContainer from "./settings/admin/district/list/adminListContainer";
+// import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
+// import DistrictSearchResultContainer from "./settings/districts/search/districtSearchResultContainer";
+// import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
+// import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
+// import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
+// import DistrictCreateStep2BusinessContainer from "./settings/districts/create/districtCreateStep2BizContainer";
+// import DistrictCreateStep3BusinessContainer from "./settings/districts/create/districtCreateStep3BizContainer";
+// import DistrictCreateStep2CommunityCareContainer from "./settings/districts/create/districtCreateStep2ComContainer";
+// import DistrictCreateStep3CommunityCareContainer from "./settings/districts/create/districtCreateStep3ComContainer";
+// import DistrictRetrieveBizContainer from "./settings/districts/retrieve/districtRetrieveBizContainer";
+// import DistrictRetrieveComContainer from "./settings/districts/retrieve/districtRetrieveComContainer";
+// import DistrictRetrieveRezContainer from "./settings/districts/retrieve/districtRetrieveRezContainer";
+// import DistrictUpdateBizContainer from "./settings/districts/update/districtUpdateBizContainer";
+// import DistrictUpdateComContainer from "./settings/districts/update/districtUpdateComContainer";
+// import DistrictUpdateRezContainer from "./settings/districts/update/districtUpdateRezContainer";
+
+// <Route path="/settings/districts/search" exact component={requiresAuth(DistrictSearchContainer)} />
+// <Route path="/settings/districts/search-results" exact component={requiresAuth(DistrictSearchResultContainer)} />
+// <Route path="/settings/district/step-1-create" exact component={requiresAuth(DistrictCreateStepContainer)} />
+// <Route path="/settings/district/step-2-create-rez" exact component={requiresAuth(DistrictCreateStep2ResidentialContainer)} />
+// <Route path="/settings/district/step-3-create-rez" exact component={requiresAuth(DistrictCreateStep3ResidentialContainer)} />
+// <Route path="/settings/district/step-2-create-biz" exact component={requiresAuth(DistrictCreateStep2BusinessContainer)} />
+// <Route path="/settings/district/step-3-create-biz" exact component={requiresAuth(DistrictCreateStep3BusinessContainer)} />
+// <Route path="/settings/district/step-2-create-cc" exact component={requiresAuth(DistrictCreateStep2CommunityCareContainer)} />
+// <Route path="/settings/district/step-3-create-cc" exact component={requiresAuth(DistrictCreateStep3CommunityCareContainer)} />
+// <Route path="/settings/district-biz/:slug" exact component={requiresAuth(DistrictRetrieveBizContainer)} />
+// <Route path="/settings/district-cc/:slug" exact component={requiresAuth(DistrictRetrieveComContainer)} />
+// <Route path="/settings/district-rez/:slug" exact component={requiresAuth(DistrictRetrieveRezContainer)} />
+// <Route path="/settings/district-biz/:slug/update" exact component={requiresAuth(DistrictUpdateBizContainer)} />
+// <Route path="/settings/district-cc/:slug/update" exact component={requiresAuth(DistrictUpdateComContainer)} />
+// <Route path="/settings/district-rez/:slug/update" exact component={requiresAuth(DistrictUpdateRezContainer)} />
 
 
-import DistrictsListContainer from "./settings/districts/list/districtListContainer";
-import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
-import DistrictSearchResultContainer from "./settings/districts/search/districtSearchResultContainer";
-import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
-import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
-import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
-import DistrictCreateStep2BusinessContainer from "./settings/districts/create/districtCreateStep2BizContainer";
-import DistrictCreateStep3BusinessContainer from "./settings/districts/create/districtCreateStep3BizContainer";
-import DistrictCreateStep2CommunityCareContainer from "./settings/districts/create/districtCreateStep2ComContainer";
-import DistrictCreateStep3CommunityCareContainer from "./settings/districts/create/districtCreateStep3ComContainer";
-import DistrictRetrieveBizContainer from "./settings/districts/retrieve/districtRetrieveBizContainer";
-import DistrictRetrieveComContainer from "./settings/districts/retrieve/districtRetrieveComContainer";
-import DistrictRetrieveRezContainer from "./settings/districts/retrieve/districtRetrieveRezContainer";
-import DistrictUpdateBizContainer from "./settings/districts/update/districtUpdateBizContainer";
-import DistrictUpdateComContainer from "./settings/districts/update/districtUpdateComContainer";
-import DistrictUpdateRezContainer from "./settings/districts/update/districtUpdateRezContainer";
+
 
 import WatchListContainer from "./watches/list/watchListContainer";
 import WatchCreateStepContainer from "./watches/create/watchCreateStep1Container";
@@ -318,6 +354,17 @@ class AppContainer extends React.Component {
 								<span></span>
 							</ScrollUpButton>
                             <Switch>
+                                /*
+                                ------------
+                                FOUNDATIONAL
+                                ------------
+                                */
+
+                                /*
+                                -------------
+                                TODO: PROCESS
+                                -------------
+                                */
                                 <Route path="/" exact component={LoginContainer} />
                                 <Route path="/login" exact component={LoginContainer} />
                                 <Route path="/logout" exact component={LogoutContainer} />
@@ -344,22 +391,6 @@ class AppContainer extends React.Component {
                                 <Route path="/organization/:schemaName/update" exact component={requiresAuth(SharedOrganizationUpdateContainer)} />
                                 <Route path="/dashboard-redirect/:accessToken/:refreshToken" exact component={TenantDashboardRedirectContainer} />
                                 <Route path="/dashboard" exact component={requiresAuth(DashboardContainer)} />
-                                <Route path="/settings/districts" exact component={requiresAuth(DistrictsListContainer)} />
-                                <Route path="/settings/districts/search" exact component={requiresAuth(DistrictSearchContainer)} />
-                                <Route path="/settings/districts/search-results" exact component={requiresAuth(DistrictSearchResultContainer)} />
-                                <Route path="/settings/district/step-1-create" exact component={requiresAuth(DistrictCreateStepContainer)} />
-                                <Route path="/settings/district/step-2-create-rez" exact component={requiresAuth(DistrictCreateStep2ResidentialContainer)} />
-                                <Route path="/settings/district/step-3-create-rez" exact component={requiresAuth(DistrictCreateStep3ResidentialContainer)} />
-                                <Route path="/settings/district/step-2-create-biz" exact component={requiresAuth(DistrictCreateStep2BusinessContainer)} />
-                                <Route path="/settings/district/step-3-create-biz" exact component={requiresAuth(DistrictCreateStep3BusinessContainer)} />
-                                <Route path="/settings/district/step-2-create-cc" exact component={requiresAuth(DistrictCreateStep2CommunityCareContainer)} />
-                                <Route path="/settings/district/step-3-create-cc" exact component={requiresAuth(DistrictCreateStep3CommunityCareContainer)} />
-                                <Route path="/settings/district-biz/:slug" exact component={requiresAuth(DistrictRetrieveBizContainer)} />
-                                <Route path="/settings/district-cc/:slug" exact component={requiresAuth(DistrictRetrieveComContainer)} />
-                                <Route path="/settings/district-rez/:slug" exact component={requiresAuth(DistrictRetrieveRezContainer)} />
-                                <Route path="/settings/district-biz/:slug/update" exact component={requiresAuth(DistrictUpdateBizContainer)} />
-                                <Route path="/settings/district-cc/:slug/update" exact component={requiresAuth(DistrictUpdateComContainer)} />
-                                <Route path="/settings/district-rez/:slug/update" exact component={requiresAuth(DistrictUpdateRezContainer)} />
                                 <Route path="/settings/tags" exact component={requiresAuth(TagsListContainer)} />
                                 <Route path="/settings/tag/add" exact component={requiresAuth(TagCreateContainer)} />
                                 <Route path="/settings/tag/:slug/delete" exact component={requiresAuth(TagDeleteContainer)} />
@@ -376,6 +407,20 @@ class AppContainer extends React.Component {
                                 <Route path="/settings/resource/add" exact component={requiresAuth(ResourceCreateContainer)} />
                                 <Route path="/settings/resource/:slug/delete" exact component={requiresAuth(ResourceDeleteContainer)} />
                                 <Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
+
+                                {/*
+                                    --------
+                                    SETTINGS
+                                    --------
+                                */}
+                                <Route path="/admin/settings" exact component={requiresAuth(SettingListContainer)} />
+
+                                {/*
+                                    --------------------
+                                    SETTINGS - DISTRICTS
+                                    --------------------
+                                */}
+                                <Route path="/admin/settings/districts" exact component={requiresAuth(AdminDistrictListContainer)} />
 
                                 {/*
                                     -------
@@ -534,7 +579,11 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/staff/:slug/archive" exact component={requiresAuth(StaffArchiveOperationContainer)} />
                                 <Route path="/admin/staff/:slug/unarchive" exact component={requiresAuth(AdminStaffUnarchiveOperationContainer)} />
 
-
+                                /*
+                                -------------
+                                TODO: PROCESS
+                                -------------
+                                */
                                 <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
                                 <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
                                 <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />
@@ -574,7 +623,7 @@ class AppContainer extends React.Component {
                                 <Route path="/task/4/:slug/step-3" exact component={requiresAuth(ActionIncidentItemTaskStep3Container)} />
                                 <Route path="/concerns" exact component={requiresAuth(ConcernItemListContainer)} />
                                 <Route path="/reports" exact component={requiresAuth(ReportListContainer)} />
-                                <Route path="/settings" exact component={requiresAuth(SettingListContainer)} />
+
                                 <Route path="/watches" exact component={requiresAuth(WatchListContainer)} />
                                 <Route path="/watches/search" exact component={requiresAuth(WatchSearchContainer)} />
                                 <Route path="/watches/search-results" exact component={requiresAuth(WatchSearchResultContainer)} />
