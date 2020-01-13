@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../flashMessageComponent";
+import { FlashMessageComponent } from "../../flashMessageComponent";
 
 
-class SettingListComponent extends Component {
+class AdminSettingListComponent extends Component {
     render() {
         const { flashMessage } = this.props;
         return (
@@ -38,7 +38,7 @@ class SettingListComponent extends Component {
                                             <div className="card-body">
                                                 <h3 className="card-title">Districts</h3>
                                                 <p className="card-text">View setting about districts</p>
-                                                <Link to="/settings/districts" className="btn btn-success btn-lg">
+                                                <Link to="/admin/settings/districts" className="btn btn-success btn-lg">
                                                     Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                                 </Link>
                                             </div>
@@ -115,4 +115,4 @@ class SettingListComponent extends Component {
     }
 }
 
-export default SettingListComponent;
+export default AdminSettingListComponent;

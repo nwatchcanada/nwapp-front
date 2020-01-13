@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SettingListComponent from "../../components/settings/settingListComponent";
-import { clearFlashMessage } from "../../actions/flashMessageActions";
+import AdminSettingListComponent from "../../../components/settings/admin/adminSettingListComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class SettingListContainer extends Component {
+class AdminSettingListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -74,7 +74,7 @@ class SettingListContainer extends Component {
             'absoluteUrl': '/setting/carling'
         }];
         return (
-            <SettingListComponent
+            <AdminSettingListComponent
                 tableData={tableData}
                 flashMessage={this.props.flashMessage}
             />
@@ -101,4 +101,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SettingListContainer);
+)(AdminSettingListContainer);

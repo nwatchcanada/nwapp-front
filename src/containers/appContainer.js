@@ -328,7 +328,7 @@ import ConcernItemListContainer from "./concerns/concernItemListContainer";
 
 import ReportListContainer from "./reports/reportListContainer";
 
-import SettingListContainer from "./settings/settingListContainer";
+import AdminSettingListContainer from "./settings/admin/adminSettingListContainer";
 
 import FinancialListContainer from "./financials/list/financialListContainer";
 import FinanciaRetrieveContainer from "./financials/retrieve/financialRetrieveContainer";
@@ -413,7 +413,7 @@ class AppContainer extends React.Component {
                                     SETTINGS
                                     --------
                                 */}
-                                <Route path="/admin/settings" exact component={requiresAuth(SettingListContainer)} />
+                                <Route path="/admin/settings" exact component={requiresAuth(AdminSettingListContainer)} />
 
                                 {/*
                                     --------------------
