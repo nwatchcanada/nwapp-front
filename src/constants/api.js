@@ -36,6 +36,8 @@ export const NWAPP_SCORE_POINT_DETAIL_API_ENDPOINT = '/v1/score-point/<uuid>';
 export const NWAPP_AWARD_DETAIL_API_ENDPOINT = '/v1/award/<slug>';
 export const NWAPP_BADGE_DETAIL_API_ENDPOINT = '/v1/badge/<slug>';
 
+export const NWAPP_DISTRICT_LIST_API_ENDPOINT = '/v1/districts';
+export const NWAPP_DISTRICT_DETAIL_API_ENDPOINT = '/v1/district/<slug>';
 
 /**
  *  The full address of certain API endpoints from our backend server.

@@ -27,7 +27,7 @@ class RemoteListComponent extends Component {
             page, sizePerPage, totalSize,
 
             // Data
-            scorePointList,
+            districtList,
 
             // Everything else.
             onTableChange, isLoading
@@ -131,7 +131,7 @@ class RemoteListComponent extends Component {
             <BootstrapTable
                 bootstrap4
                 keyField='id'
-                data={ scorePointList }
+                data={ districtList }
                 columns={ columns }
                 defaultSorted={ defaultSorted }
                 striped
@@ -244,7 +244,7 @@ class AdminDistrictListComponent extends Component {
             page, sizePerPage, totalSize,
 
             // Data
-            scorePointList, member, slug,
+            districtList,
 
             // Everything else...
             flashMessage, onTableChange, isLoading
@@ -259,76 +259,30 @@ class AdminDistrictListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
-                        </li>
-                        <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/member/${slug}/operations`}>
-                                <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
+                            <Link to="/admin/settings">
+                                <i className="fas fa-cogs"></i>&nbsp;Setting
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-scroll"></i>&nbsp;Score Points
+                            <i className="fas fa-map"></i>&nbsp;Districts
                         </li>
                     </ol>
                 </nav>
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
-
-                {member.state === 'inactive' &&
-                    <div className="alert alert-info" role="alert">
-                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This member is archived and is read-only.
-                    </div>
-                }
-
-                <div className="row" id="mainNav">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey">
-                            <Link to={`/admin/member/${slug}`}>
-                                <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
-                            </Link>
-                        </div>
-                        <div id="step-2" className="st-grey">
-                            <Link to={`/admin/member/${slug}/full`}>
-                                <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
-                            </Link>
-                        </div>
-                        { /*
-                        <div id="step-3" className="st-grey">
-                            <Link to={`/admin/member/${slug}/orders`}>
-                                <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
-                            </Link>
-                        </div>
-                        */}
-                        <div id="step-4" className="st-grey">
-                            <Link to={`/admin/member/${slug}/comments`}>
-                                <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
-                            </Link>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <Link to={`/admin/member/${slug}/files`}>
-                                <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
-                            </Link>
-                        </div>
-                        <div id="step-6" className="st-grey active">
-                            <strong>
-                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
-                            </strong>
-                        </div>
-                    </div>
-                </div>
+                <h1><i className="fas fa-user"></i>&nbsp;Districts</h1>
 
                 <div className="row">
                     <div className="col-md-12">
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/member/${slug}/community/add-score-point`} className="d-block link-ndecor" title="Members">
+                                    <Link to={`/admin/settings/district/add/step-1`} className="d-block link-ndecor" title="Members">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
-                                <h4>Add Score</h4>
-                                <div className="text-muted">Add Score Points</div>
+                                <h4>Add District</h4>
+                                <div className="text-muted">Add District</div>
                             </div>
                         </section>
                     </div>
@@ -343,7 +297,7 @@ class AdminDistrictListComponent extends Component {
                             page={page}
                             sizePerPage={sizePerPage}
                             totalSize={totalSize}
-                            scorePointList={scorePointList}
+                            districtList={districtList}
                             onTableChange={onTableChange}
                             isLoading={isLoading}
                         />

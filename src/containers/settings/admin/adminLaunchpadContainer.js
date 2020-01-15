@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DistrictCreateStep1Component from "../../../../components/settings/districts/create/districtCreateStep1Component";
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../../constants/api';
+import AdminSettingLaunchpadComponent from "../../../components/settings/admin/adminLaunchpadComponent";
+import { clearFlashMessage } from "../../../actions/flashMessageActions";
 
 
-class DistrictCreateContainer extends Component {
+class AdminSettingLaunchpadContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
      */
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            typeOf: null,
-        }
-
-        this.onClick = this.onClick.bind(this);
-    }
 
     /**
      *  Component Life-cycle Management
@@ -40,6 +27,9 @@ class DistrictCreateContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
+
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
     }
 
     /**
@@ -47,29 +37,19 @@ class DistrictCreateContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback(profile) {
+        console.log(profile);
+    }
+
+    onFailedSubmissionCallback(errors) {
+        console.log(errors);
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onClick(e, typeOf) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Save to our browsers memory.
-        localStorage.setItem('nwapp-district-program', typeOf);
-
-        // Redirect to the next page.
-        if (typeOf === RESIDENCE_TYPE_OF) {
-            this.props.history.push("/settings/district/step-2-create-rez");
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            this.props.history.push("/settings/district/step-2-create-biz");
-        }
-        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
-            this.props.history.push("/settings/district/step-2-create-cc");
-        }
-    }
 
     /**
      *  Main render function
@@ -77,9 +57,26 @@ class DistrictCreateContainer extends Component {
      */
 
     render() {
+        const tableData = [{
+            'slug': 'Argyle',
+            'number': 1,
+            'name': 'Argyle',
+            'absoluteUrl': '/setting/argyle'
+        },{
+            'slug': 'byron',
+            'number': 2,
+            'name': 'Byron',
+            'absoluteUrl': '/setting/byron'
+        },{
+            'slug': 'carling',
+            'number': 3,
+            'name': 'Carling',
+            'absoluteUrl': '/setting/carling'
+        }];
         return (
-            <DistrictCreateStep1Component
-                onClick={this.onClick}
+            <AdminSettingLaunchpadComponent
+                tableData={tableData}
+                flashMessage={this.props.flashMessage}
             />
         );
     }
@@ -88,15 +85,20 @@ class DistrictCreateContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        flashMessage: store.flashMessageState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
+        }
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictCreateContainer);
+)(AdminSettingLaunchpadContainer);

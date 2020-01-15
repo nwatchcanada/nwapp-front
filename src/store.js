@@ -13,7 +13,8 @@ import {
     SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
     BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS, AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
     ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS,
-    STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS
+    STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS,
+    DISTRICT_LIST_SUCCESS, DISTRICT_DETAIL_SUCCESS,
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -35,6 +36,7 @@ import flashMessageReducer from "./reducers/flashMessageReducer";
 import { scorePointListReducer, scorePointDetailReducer } from "./reducers/scorePointReducers";
 import { badgeListReducer, badgeDetailReducer } from "./reducers/badgeReducers";
 import { awardListReducer, awardDetailReducer } from "./reducers/awardReducers";
+import { districtListReducer, districtDetailReducer } from "./reducers/districtReducers";
 
 // Combine Reducers
 const appReducer = combineReducers({
@@ -63,6 +65,7 @@ const appReducer = combineReducers({
     scorePointListState: scorePointListReducer, scorePointDetailState: scorePointDetailReducer,
     awardListState: awardListReducer, awardDetailState: awardDetailReducer,
     badgeListState: badgeListReducer, badgeDetailState: badgeDetailReducer,
+    districtListState: districtListReducer, districtDetailState: districtDetailReducer,
 });
 
 
@@ -100,7 +103,8 @@ const localStorageMiddleware = ({ getState }) => {
             SCORE_POINT_LIST_SUCCESS, SCORE_POINT_DETAIL_SUCCESS,
             BADGE_LIST_SUCCESS, BADGE_DETAIL_SUCCESS, AWARD_LIST_SUCCESS, AWARD_DETAIL_SUCCESS,
             ASSOCIATE_LIST_SUCCESS, ASSOCIATE_DETAIL_SUCCESS, ASSOCIATE_COMMENT_LIST_SUCCESS,
-            STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS
+            STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS,
+            DISTRICT_LIST_SUCCESS, DISTRICT_DETAIL_SUCCESS,
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))

@@ -6,10 +6,10 @@ import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
-} from '../../../../constants/api';
+} from '../../../../../constants/api';
 
 
-class DistrictCreateStep1Component extends Component {
+class AdminDistrictCreateStep1Component extends Component {
     render() {
         const { onClick } = this.props;
         return (
@@ -20,10 +20,10 @@ class DistrictCreateStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
+                           <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
+                            <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -103,7 +103,7 @@ class DistrictCreateStep1Component extends Component {
 
                 <div className="form-group">
 
-                    <Link to="/settings/districts" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                    <Link to="/admin/settings/districts" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                         <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>
                 </div>
@@ -113,4 +113,4 @@ class DistrictCreateStep1Component extends Component {
     }
 }
 
-export default DistrictCreateStep1Component;
+export default AdminDistrictCreateStep1Component;

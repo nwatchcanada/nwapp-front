@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import AdminDistrictListComponent from "../../../../../components/settings/admin/district/list/adminListComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullScorePointList, postScorePoint } from "../../../../../actions/scorePointActions";
+import { pullDistrictList } from "../../../../../actions/districtActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 
 
@@ -17,9 +17,7 @@ class AdminDistrictListContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { slug } = this.props.match.params;
         const parametersMap = new Map();
-        parametersMap.set("user", slug);
         // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
         parametersMap.set("o", "-created_at");
         this.state = {
@@ -35,7 +33,6 @@ class AdminDistrictListContainer extends Component {
             isLoading: true,
 
             // Everything else...
-            slug: slug,
             text: "",
             errors: {},
         }
@@ -73,7 +70,7 @@ class AdminDistrictListContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Get our data.
-        this.props.pullScorePointList(
+        this.props.pullDistrictList(
             this.state.page,
             this.state.sizePerPage,
             this.state.parametersMap,
@@ -131,7 +128,7 @@ class AdminDistrictListContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 // Get our data.
-                this.props.pullScorePointList(
+                this.props.pullDistrictList(
                     this.state.page,
                     this.state.sizePerPage,
                     this.state.parametersMap,
@@ -214,7 +211,7 @@ class AdminDistrictListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullScorePointList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullDistrictList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -224,7 +221,7 @@ class AdminDistrictListContainer extends Component {
             this.setState(
                 { page: page, sizePerPage:sizePerPage, isLoading: true, },
                 ()=>{
-                    this.props.pullScorePointList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullDistrictList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -241,7 +238,7 @@ class AdminDistrictListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullScorePointList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullDistrictList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
         }else {
@@ -255,15 +252,14 @@ class AdminDistrictListContainer extends Component {
      */
 
     render() {
-        const { isLoading, slug, text, errors } = this.state;
+        const { isLoading, text, errors } = this.state;
         const member = this.props.memberDetail ? this.props.memberDetail : {};
-        const scorePointList = this.props.scorePointList && this.props.scorePointList.results ? this.props.scorePointList.results : [];
+        const districtList = this.props.districtList && this.props.districtList.results ? this.props.districtList.results : [];
 
         return (
             <AdminDistrictListComponent
-                slug={slug}
                 member={member}
-                scorePointList={scorePointList}
+                districtList={districtList}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
                 errors={errors}
@@ -278,7 +274,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        scorePointList: store.scorePointListState,
+        districtList: store.districtListState,
         memberDetail: store.memberDetailState,
     };
 }
@@ -288,13 +284,10 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullScorePointList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+        pullDistrictList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
             dispatch(
-                pullScorePointList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+                pullDistrictList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
-        },
-        postScorePoint: (postData, successCallback, failedCallback) => {
-            dispatch(postScorePoint(postData, successCallback, failedCallback))
         },
     }
 }

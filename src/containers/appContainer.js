@@ -211,16 +211,18 @@ import AdminStaffCreateStep4Container from "./staffs/admin/create/adminCreateSte
 DISTRICTS
 ---------
 */
+
+import AdminSettingLaunchpadContainer from "./settings/admin/adminLaunchpadContainer";
 import AdminDistrictListContainer from "./settings/admin/district/list/adminListContainer";
-// import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
-// import DistrictSearchResultContainer from "./settings/districts/search/districtSearchResultContainer";
-// import DistrictCreateStepContainer from "./settings/districts/create/districtCreateStep1Container";
+import AdminDistrictCreateStep1Container from "./settings/admin/district/create/adminDistrictCreateStep1Container";
 // import DistrictCreateStep2ResidentialContainer from "./settings/districts/create/districtCreateStep2RezContainer";
 // import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
 // import DistrictCreateStep2BusinessContainer from "./settings/districts/create/districtCreateStep2BizContainer";
 // import DistrictCreateStep3BusinessContainer from "./settings/districts/create/districtCreateStep3BizContainer";
 // import DistrictCreateStep2CommunityCareContainer from "./settings/districts/create/districtCreateStep2ComContainer";
 // import DistrictCreateStep3CommunityCareContainer from "./settings/districts/create/districtCreateStep3ComContainer";
+// import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
+// import DistrictSearchResultContainer from "./settings/districts/search/districtSearchResultContainer";
 // import DistrictRetrieveBizContainer from "./settings/districts/retrieve/districtRetrieveBizContainer";
 // import DistrictRetrieveComContainer from "./settings/districts/retrieve/districtRetrieveComContainer";
 // import DistrictRetrieveRezContainer from "./settings/districts/retrieve/districtRetrieveRezContainer";
@@ -328,8 +330,6 @@ import ConcernItemListContainer from "./concerns/concernItemListContainer";
 
 import ReportListContainer from "./reports/reportListContainer";
 
-import AdminSettingListContainer from "./settings/admin/adminSettingListContainer";
-
 import FinancialListContainer from "./financials/list/financialListContainer";
 import FinanciaRetrieveContainer from "./financials/retrieve/financialRetrieveContainer";
 import FinanciaUpdateContainer from "./financials/update/financialUpdateContainer";
@@ -413,7 +413,7 @@ class AppContainer extends React.Component {
                                     SETTINGS
                                     --------
                                 */}
-                                <Route path="/admin/settings" exact component={requiresAuth(AdminSettingListContainer)} />
+                                <Route path="/admin/settings" exact component={requiresAuth(AdminSettingLaunchpadContainer)} />
 
                                 {/*
                                     --------------------
@@ -421,6 +421,8 @@ class AppContainer extends React.Component {
                                     --------------------
                                 */}
                                 <Route path="/admin/settings/districts" exact component={requiresAuth(AdminDistrictListContainer)} />
+                                <Route path="/admin/settings/district/add/step-1" exact component={requiresAuth(AdminDistrictCreateStep1Container)} />
+
 
                                 {/*
                                     -------
