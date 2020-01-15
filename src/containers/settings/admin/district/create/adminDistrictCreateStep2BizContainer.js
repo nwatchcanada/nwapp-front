@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictCreateStep2BizComponent from "../../../../components/settings/districts/create/districtCreateStep2BizComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateBusinessInput } from "../../../../validators/districtValidator";
+import AdminDistrictCreateStep2BizComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2BizComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { validateBusinessInput } from "../../../../../validators/districtValidator";
 
 
-class DistrictCreateStep2BusinessContainer extends Component {
+class AdminDistrictCreateStep2BusinessContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -144,7 +144,7 @@ class DistrictCreateStep2BusinessContainer extends Component {
     render() {
         const { name, description, websiteURL, logo, errors, isLoading } = this.state;
         return (
-            <DistrictCreateStep2BizComponent
+            <AdminDistrictCreateStep2BizComponent
                 name={name}
                 description={description}
                 websiteURL={websiteURL}
@@ -178,4 +178,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictCreateStep2BusinessContainer);
+)(AdminDistrictCreateStep2BusinessContainer);

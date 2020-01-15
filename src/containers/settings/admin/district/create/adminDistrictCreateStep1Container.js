@@ -64,10 +64,10 @@ class AdminDistrictCreateStep1Container extends Component {
             this.props.history.push("/admin/settings/district/add/step-2-rez");
         }
         else if (typeOf === BUSINESS_TYPE_OF) {
-            this.props.history.push("/admin/settings/district/step-2-create-biz");
+            this.props.history.push("/admin/settings/district/add/step-2-biz");
         }
         else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
-            this.props.history.push("/admin/settings/district/step-2-create-cc");
+            this.props.history.push("/admin/settings/district/add/step-2-cc");
         }
     }
 
