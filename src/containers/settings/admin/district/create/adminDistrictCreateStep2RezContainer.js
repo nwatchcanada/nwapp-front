@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminDistrictCreateStep2RezComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2RezComponent";
-import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateResidentialInput } from "../../../../../validators/districtValidator";
 
 
@@ -16,13 +15,13 @@ class AdminDistrictCreateStep2ResidentialContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: localStorage.getItem('nwapp-district-rez-name'),
-            description: localStorage.getItem('nwapp-district-rez-description'),
-            counselorName: localStorage.getItem('nwapp-district-rez-counselorName'),
-            counselorEmail: localStorage.getItem('nwapp-district-rez-counselorEmail'),
-            counselorPhone: localStorage.getItem('nwapp-district-rez-counselorPhone'),
-            image: localStorage.getItem('nwapp-district-rez-image'),
-            program: localStorage.getItem('nwapp-district-program'),
+            name: localStorage.getItem('nwapp-district-add-name'),
+            description: localStorage.getItem('nwapp-district-add-description'),
+            counselorName: localStorage.getItem('nwapp-district-add-counselorName'),
+            counselorEmail: localStorage.getItem('nwapp-district-add-counselorEmail'),
+            counselorPhone: localStorage.getItem('nwapp-district-add-counselorPhone'),
+            image: localStorage.getItem('nwapp-district-add-image'),
+            program: localStorage.getItem('nwapp-district-add-program'),
             errors: {},
             isLoading: false
         }
@@ -58,8 +57,7 @@ class AdminDistrictCreateStep2ResidentialContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "District has been successfully created.");
-        this.props.history.push("/settings/district/step-3-create-rez");
+        this.props.history.push("/admin/settings/district/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -83,7 +81,7 @@ class AdminDistrictCreateStep2ResidentialContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('nwapp-district-rez-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-district-add-'+[e.target.name], e.target.value);
     }
 
     onClick(e) {
@@ -110,7 +108,16 @@ class AdminDistrictCreateStep2ResidentialContainer extends Component {
      */
 
     render() {
-        const { name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.state;
+        const {
+            name,
+            description,
+            counselorName,
+            counselorEmail,
+            counselorPhone,
+            errors,
+            isLoading
+        } = this.state;
+
         return (
             <AdminDistrictCreateStep2RezComponent
                 name={name}
@@ -134,11 +141,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 

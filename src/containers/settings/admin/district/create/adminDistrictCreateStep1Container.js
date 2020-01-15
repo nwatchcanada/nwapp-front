@@ -57,7 +57,7 @@ class AdminDistrictCreateStep1Container extends Component {
         e.preventDefault();
 
         // Save to our browsers memory.
-        localStorage.setItem('nwapp-district-program', typeOf);
+        localStorage.setItem('nwapp-district-add-typeOf', typeOf);
 
         // Redirect to the next page.
         if (typeOf === RESIDENCE_TYPE_OF) {

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminDistrictCreateStep2ComComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2ComComponent";
-import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateCommunityCaresInput } from "../../../../../validators/districtValidator";
 
 
@@ -28,8 +27,8 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
             isLoading: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            name: localStorage.getItem('nwapp-district-com-name'),
-            description: localStorage.getItem('nwapp-district-com-description'),
+            name: localStorage.getItem('nwapp-district-add-name'),
+            description: localStorage.getItem('nwapp-district-add-description'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -63,8 +62,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        // this.props.setFlashMessage("success", "District has been successfully created.");
-        this.props.history.push("/settings/district/step-3-create-cc");
+        this.props.history.push("/admin/settings/district/add/step-3");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -88,7 +86,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('nwapp-district-com-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-district-add-'+[e.target.name], e.target.value);
     }
 
     onClick(e) {
@@ -134,11 +132,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
-    }
+    return {}
 }
 
 

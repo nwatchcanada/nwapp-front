@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminDistrictCreateStep2BizComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2BizComponent";
+import AdminDistrictCreateStep3Component from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep3Component";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { validateBusinessInput } from "../../../../../validators/districtValidator";
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from "../../../../../constants/api";
+import {
+    localStorageGetIntegerItem,
+    localStorageRemoveItemsContaining
+} from '../../../../../helpers/localStorageUtility';
 
 
-class AdminDistrictCreateStep2BusinessContainer extends Component {
+class AdminDistrictCreateStep3Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -15,21 +23,36 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
 
     constructor(props) {
         super(props);
+        const typeOf = localStorageGetIntegerItem('nwapp-district-add-typeOf');
+        let step2URL = "";
+        if (typeOf === RESIDENCE_TYPE_OF) {
+            step2URL = "/admin/settings/district/add/step-2-rez";
+        } else if (typeOf === BUSINESS_TYPE_OF) {
+            step2URL = "/admin/settings/district/add/step-2-biz";
+        } else {
+            step2URL = "/admin/settings/district/add/step-2-cc";
+        }
+        console.log("TypeOf", typeOf); // For debugging purposes only.
+        console.log("URL", step2URL); // For debugging purposes only.
+
         this.state = {
             name: localStorage.getItem('nwapp-district-add-name'),
             description: localStorage.getItem('nwapp-district-add-description'),
             websiteURL: localStorage.getItem('nwapp-district-add-websiteURL'),
             logo: JSON.parse(localStorage.getItem('nwapp-district-add-logo')),
+            counselorName: localStorage.getItem('nwapp-district-add-counselorName'),
+            counselorEmail: localStorage.getItem('nwapp-district-add-counselorEmail'),
+            counselorPhone: localStorage.getItem('nwapp-district-add-counselorPhone'),
+            image: localStorage.getItem('nwapp-district-add-image'),
+            typeOf: typeOf,
+            step2URL: step2URL,
             errors: {},
             isLoading: false
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
-        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
     }
 
     /**
@@ -57,8 +80,9 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        // this.props.setFlashMessage("success", "District has been successfully created.");
-        this.props.history.push("/admin/settings/district/add/step-3");
+        this.props.setFlashMessage("success", "District has been successfully created.");
+        // localStorageRemoveItemsContaining("nwapp-district-add-");
+        this.props.history.push("/admin/settings/districts");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -78,61 +102,12 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-        localStorage.setItem('nwapp-district-add-'+[e.target.name], e.target.value);
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateBusinessInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
-    }
-
-    /**
-     *  Special Thanks: https://react-dropzone.netlify.com/#previews
-     */
-    onDrop(acceptedFiles) {
-        const file = acceptedFiles[0];
-
-        // For debuging purposes only.
-        console.log("DEBUG | onDrop | file", file);
-
-        if (file !== undefined && file !== null) {
-            const fileWithPreview = Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            });
-
-            // For debugging purposes.
-            console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
-
-            // Save to local storage our OBJECT.
-            localStorage.setItem('nwapp-district-add-logo', JSON.stringify(fileWithPreview));
-
-            // Update our local state to update the GUI.
-            this.setState({
-                logo: fileWithPreview
-            })
-        }
-    }
-
-    onRemoveUploadClick(e) {
-        this.setState({
-            logo: null
-        })
+        this.onSuccessfulSubmissionCallback();
+        // this.onFailedSubmissionCallback(errors);
     }
 
 
@@ -142,19 +117,20 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
      */
 
     render() {
-        const { name, description, websiteURL, logo, errors, isLoading } = this.state;
+        const {
+            name, description, websiteURL, logo, errors, isLoading, step2URL
+        } = this.state;
         return (
-            <AdminDistrictCreateStep2BizComponent
+            <AdminDistrictCreateStep3Component
                 name={name}
                 description={description}
                 websiteURL={websiteURL}
                 logo={logo}
                 errors={errors}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
                 onDrop={this.onDrop}
                 isLoading={isLoading}
-                onRemoveUploadClick={this.onRemoveUploadClick}
+                step2URL={step2URL}
             />
         );
     }
@@ -178,4 +154,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminDistrictCreateStep2BusinessContainer);
+)(AdminDistrictCreateStep3Container);
