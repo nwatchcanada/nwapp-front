@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictCreateStep1RezComponent from "../../../../components/settings/districts/create/districtCreateStep2RezComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateResidentialInput } from "../../../../validators/districtValidator";
+import AdminDistrictCreateStep2RezComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2RezComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { validateResidentialInput } from "../../../../../validators/districtValidator";
 
 
-class DistrictCreateStep2ResidentialContainer extends Component {
+class AdminDistrictCreateStep2ResidentialContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -112,7 +112,7 @@ class DistrictCreateStep2ResidentialContainer extends Component {
     render() {
         const { name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.state;
         return (
-            <DistrictCreateStep1RezComponent
+            <AdminDistrictCreateStep2RezComponent
                 name={name}
                 description={description}
                 counselorName={counselorName}
@@ -145,4 +145,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictCreateStep2ResidentialContainer);
+)(AdminDistrictCreateStep2ResidentialContainer);

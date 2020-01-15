@@ -61,7 +61,7 @@ class AdminDistrictCreateStep1Container extends Component {
 
         // Redirect to the next page.
         if (typeOf === RESIDENCE_TYPE_OF) {
-            this.props.history.push("/admin/settings/district/step-2-create-rez");
+            this.props.history.push("/admin/settings/district/add/step-2-rez");
         }
         else if (typeOf === BUSINESS_TYPE_OF) {
             this.props.history.push("/admin/settings/district/step-2-create-biz");
