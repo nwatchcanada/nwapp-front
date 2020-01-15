@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictCreateStep2ComComponent from "../../../../components/settings/districts/create/districtCreateStep2ComComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateCommunityCaresInput } from "../../../../validators/districtValidator";
+import AdminDistrictCreateStep2ComComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2ComComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { validateCommunityCaresInput } from "../../../../../validators/districtValidator";
 
 
 class DistrictCreateStep2CommunityCareContainer extends Component {
@@ -116,7 +116,7 @@ class DistrictCreateStep2CommunityCareContainer extends Component {
     render() {
         const { name, description, errors } = this.state;
         return (
-            <DistrictCreateStep2ComComponent
+            <AdminDistrictCreateStep2ComComponent
                 name={name}
                 description={description}
                 errors={errors}

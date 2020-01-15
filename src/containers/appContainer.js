@@ -217,9 +217,9 @@ import AdminDistrictListContainer from "./settings/admin/district/list/adminList
 import AdminDistrictCreateStep1Container from "./settings/admin/district/create/adminDistrictCreateStep1Container";
 import AdminDistrictCreateStep2ResidentialContainer from "./settings/admin/district/create/adminDistrictCreateStep2RezContainer";
 import AdminDistrictCreateStep2BusinessContainer from "./settings/admin/district/create/adminDistrictCreateStep2BizContainer";
+import AdminDistrictCreateStep2CommunityCareContainer from "./settings/admin/district/create/adminDistrictCreateStep2ComContainer";
 // import DistrictCreateStep3ResidentialContainer from "./settings/districts/create/districtCreateStep3RezContainer";
 // import DistrictCreateStep3BusinessContainer from "./settings/districts/create/districtCreateStep3BizContainer";
-// import DistrictCreateStep2CommunityCareContainer from "./settings/districts/create/districtCreateStep2ComContainer";
 // import DistrictCreateStep3CommunityCareContainer from "./settings/districts/create/districtCreateStep3ComContainer";
 // import DistrictSearchContainer from "./settings/districts/search/districtSearchContainer";
 // import DistrictSearchResultContainer from "./settings/districts/search/districtSearchResultContainer";
@@ -420,6 +420,8 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/district/add/step-1" exact component={requiresAuth(AdminDistrictCreateStep1Container)} />
                                 <Route path="/admin/settings/district/add/step-2-rez" exact component={requiresAuth(AdminDistrictCreateStep2ResidentialContainer)} />
                                 <Route path="/admin/settings/district/add/step-2-biz" exact component={requiresAuth(AdminDistrictCreateStep2BusinessContainer)} />
+                                <Route path="/admin/settings/district/add/step-2-cc" exact component={requiresAuth(AdminDistrictCreateStep2CommunityCareContainer)} />
+
 
                                 {/*
                                     -------

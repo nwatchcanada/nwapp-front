@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
-import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 
 
-export default class DistrictCreateStep2ComComponent extends Component {
+export default class AdminDistrictCreateStep2ComComponent extends Component {
     render() {
         const {
             name, description, errors, onTextChange, isLoading, onClick
@@ -21,10 +21,10 @@ export default class DistrictCreateStep2ComComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
+                           <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
+                            <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -37,7 +37,7 @@ export default class DistrictCreateStep2ComComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/settings/district/step-1-create">
+                            <Link to="/admin/settings/district/add/step-1">
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
@@ -94,7 +94,7 @@ export default class DistrictCreateStep2ComComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/settings/district/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/settings/district/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
