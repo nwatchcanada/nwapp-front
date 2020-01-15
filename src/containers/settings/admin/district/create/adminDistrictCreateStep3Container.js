@@ -13,6 +13,8 @@ import {
     localStorageGetIntegerItem,
     localStorageRemoveItemsContaining
 } from '../../../../../helpers/localStorageUtility';
+import { postDistrict } from "../../../../../actions/districtAction";
+import { validateInput } from '../../../../../validators/districtValidator';
 
 
 class AdminDistrictCreateStep3Container extends Component {
@@ -32,8 +34,6 @@ class AdminDistrictCreateStep3Container extends Component {
         } else {
             step2URL = "/admin/settings/district/add/step-2-cc";
         }
-        console.log("TypeOf", typeOf); // For debugging purposes only.
-        console.log("URL", step2URL); // For debugging purposes only.
 
         this.state = {
             name: localStorage.getItem('nwapp-district-add-name'),
@@ -50,9 +50,23 @@ class AdminDistrictCreateStep3Container extends Component {
             isLoading: false
         }
 
+        this.getPostData = this.getPostData.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -78,16 +92,26 @@ class AdminDistrictCreateStep3Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(district) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "District has been successfully created.");
-        // localStorageRemoveItemsContaining("nwapp-district-add-");
-        this.props.history.push("/admin/settings/districts");
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                isLoading: false,
+            },
+            ()=>{
+                console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
+                console.log("onSuccessCallback | State (Post-Fetch):", this.state);
+                this.props.setFlashMessage("success", "District has been successfully created.");
+                // localStorageRemoveItemsContaining("nwapp-district-add-");
+                this.props.history.push("/admin/settings/districts");
+            }
+        )
     }
 
-    onFailedSubmissionCallback(errors) {
+    onFailureCallback(errors) {
         this.setState({
-            errors: errors
+            errors: errors,
+            isLoading: false,
         })
 
         // The following code will cause the screen to scroll to the top of
@@ -103,11 +127,36 @@ class AdminDistrictCreateStep3Container extends Component {
      */
 
     onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        this.onSuccessfulSubmissionCallback();
-        // this.onFailedSubmissionCallback(errors);
+        const { errors, isValid } = validateInput(this.state);
+        // console.log(errors, isValid); // For debugging purposes only.
+
+        if (isValid) {
+            this.setState({
+                errors: {},
+                isLoading: true,
+            }, ()=>{
+                // Once our state has been validated `client-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.postDistrict(
+                    this.getPostData(),
+                    this.onSuccessCallback,
+                    this.onFailureCallback
+                );
+            });
+        } else {
+            this.setState({
+                errors: errors,
+                isLoading: false,
+            });
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
+        }
     }
 
 
@@ -146,7 +195,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        postDistrict: (postData, successCallback, failedCallback) => {
+            dispatch(postDistrict(postData, successCallback, failedCallback))
+        },
     }
 }
 
