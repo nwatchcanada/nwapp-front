@@ -55,43 +55,24 @@ class RemoteListComponent extends Component {
             text: 'Type',
             sort: true,
             formatter: typeOfFormatter
-        },
-        {
+        },{
+            dataField: 'name',
+            text: 'Name',
+            sort: true,
+            // formatter: typeOfFormatter
+        },{
             dataField: 'description',
             text: 'Description',
             sort: false
         },{
-            dataField: 'amount',
-            text: 'Amount',
-            sort: false,
-            formatter: amountFormatter
-        },
-        {
             dataField: 'createdAt',
             text: 'Created At',
             sort: true,
             formatter: createdAtFormatter
         },
-        // {
-        //     dataField: 'fileUrl',
-        //     text: 'File',
-        //     sort: false,
-        //     formatter: fileFormatter
-        // },
-        // {
-        //     dataField: 'email',
-        //     text: 'Email',
-        //     sort: true,
-        //     formatter: emailFormatter,
-        // },{
-        //     dataField: 'slug',
-        //     text: 'Financials',
-        //     sort: false,
-        //     formatter: financialExternalLinkFormatter
-        // },
         {
-            dataField: 'uuid',
-            text: 'Archive?',
+            dataField: 'slug',
+            text: '',
             sort: false,
             formatter: detailLinkFormatter
         }
@@ -163,25 +144,17 @@ function statusFormatter(cell, row){
     }
 }
 
-function amountFormatter(cell, row){
-    if (row.isArchived === true) {
-        return <div style={{ color: 'red' }}>-&nbsp;{row.amount}</div>
-    } else {
-        return <div style={{ color: 'green' }}>+&nbsp;{row.amount}</div>
-    }
-}
-
 
 function typeOfFormatter(cell, row){
-    switch(row.typeOf) {
-        case 1: // Other
-            return <div><i className="fas fa-question-circle" style={{ color: 'blue' }}></i>&nbsp;{row.typeOfLabel}</div>;
+    switch(parseInt(row.typeOf)) {
+        case 1:
+            return <div><i className="fas fa-home" style={{ color: 'blue' }}></i>&nbsp;Residential</div>;
             break;
-        case 2: // Donation
-            return <div><i className="fas fa-donate" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
+        case 2:
+            return <div><i className="fas fa-building" style={{ color: 'green' }}></i>&nbsp;Business</div>;
             break;
         case 3: // Daily Usage
-            return <div><i className="fas fa-chart-bar" style={{ color: 'green' }}></i>&nbsp;{row.typeOfLabel}</div>;
+            return <div><i className="fas fa-university" style={{ color: 'green' }}></i>&nbsp;Community Cares</div>;
             break;
         default:
             return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
