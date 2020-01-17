@@ -178,7 +178,7 @@ function fileFormatter(cell, row){
             }
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             {row.isArchived === false &&
-                <Link to={`/admin/member/${row.user}/file/archive/${row.slug}`}>
+                <Link to={`/admin/district/${row.user}/file/archive/${row.slug}`}>
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             }
@@ -202,9 +202,15 @@ function detailLinkFormatter(cell, row){
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
-            <Link to={`/admin/member/${row.user}/community/score-point/archive/${row.uuid}`}>
-                View&nbsp;<i className="fas fa-chevron-right"></i>
-            </Link>
+            <div>
+
+                <Link to={`/admin/district/${row.user}/community/score-point/archive/${row.uuid}`} className="btn btn-success btn-xs">
+                    <i className="fas fa-edit"></i>&nbsp;Edit
+                </Link>&nbsp;&nbsp;
+                <Link to={`/admin/settings/district/operation/archive/${row.slug}`} className="btn btn-danger btn-xs">
+                    <i className="fas fa-archive"></i>&nbsp;Archive
+                </Link>
+            </div>
         )
     }
 }

@@ -336,7 +336,7 @@ export function putDistrictDetail(postData, successCallback, failedCallback) {
 //                                 DELETE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteDistrict(uuid, onSuccessCallback, onFailureCallback) {
+export function deleteDistrict(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -346,7 +346,7 @@ export function deleteDistrict(uuid, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = NWAPP_DISTRICT_DETAIL_API_ENDPOINT.replace("<uuid>", uuid);
+        const aURL = NWAPP_DISTRICT_DETAIL_API_ENDPOINT.replace("<slug>", slug);
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.

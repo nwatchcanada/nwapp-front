@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminDistrictArchiveComponent from "../../../../../components/members/admin/operations/scorePoint/adminScorePointArchiveComponent";
+import AdminDistrictArchiveComponent from "../../../../../components/settings/admin/district/operation/adminArchiveComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { deleteScorePoint } from "../../../../../actions/scorePointActions";
+import { deleteDistrict } from "../../../../../actions/districtActions";
 
 
-class AdminDistrictArchiveContainer extends Component {
+class AdminDistrictArchiveOperationContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -16,12 +16,12 @@ class AdminDistrictArchiveContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { slug, scorePointSlug } = this.props.match.params;
+        const { slug } = this.props.match.params;
+
         this.state = {
             isLoading: false,
-            member: slug,
+            district: slug,
             slug: slug,
-            scorePointSlug: scorePointSlug,
             errors: {},
         }
         this.onClick = this.onClick.bind(this);
@@ -61,8 +61,8 @@ class AdminDistrictArchiveContainer extends Component {
             ()=>{
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "Score points have been successfully archived.");
-                this.props.history.push("/admin/member/"+this.state.slug+"/community/score-points");
+                this.props.setFlashMessage("success", "District have been successfully archived.");
+                this.props.history.push("/admin/settings/districts");
             }
         )
     }
@@ -88,7 +88,7 @@ class AdminDistrictArchiveContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deleteScorePoint(this.state.scorePointSlug, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deleteDistrict(this.state.slug, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -99,11 +99,11 @@ class AdminDistrictArchiveContainer extends Component {
 
     render() {
         const { isLoading, slug, errors } = this.state;
-        const member = this.props.memberDetail ? this.props.memberDetail : {};
+        const district = this.props.districtDetail ? this.props.districtDetail : {};
         return (
             <AdminDistrictArchiveComponent
                 slug={slug}
-                member={member}
+                district={district}
                 isLoading={isLoading}
                 errors={errors}
                 onClick={this.onClick}
@@ -115,7 +115,7 @@ class AdminDistrictArchiveContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        memberDetail: store.memberDetailState,
+        districtDetail: store.districtDetailState,
     };
 }
 
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteScorePoint: (uuid, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteScorePoint(uuid, onSuccessCallback, onFailureCallback))
+        deleteDistrict: (slug, onSuccessCallback, onFailureCallback) => {
+            dispatch(deleteDistrict(slug, onSuccessCallback, onFailureCallback))
         },
     }
 }
@@ -134,4 +134,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminDistrictArchiveContainer);
+)(AdminDistrictArchiveOperationContainer);
