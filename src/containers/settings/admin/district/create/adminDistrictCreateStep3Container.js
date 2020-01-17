@@ -13,7 +13,7 @@ import {
     localStorageGetIntegerItem,
     localStorageRemoveItemsContaining
 } from '../../../../../helpers/localStorageUtility';
-import { postDistrict } from "../../../../../actions/districtAction";
+import { postDistrict } from "../../../../../actions/districtActions";
 import { validateInput } from '../../../../../validators/districtValidator';
 
 

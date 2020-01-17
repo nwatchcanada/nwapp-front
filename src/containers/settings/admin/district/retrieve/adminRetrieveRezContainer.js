@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminDistrictRetrieveRezComponent from "../../../../../components/settings/admin/district/retrieve/adminRetrieveRezComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
+import { pullDistrictDetail } from '../../../../../actions/districtActions';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminDistrictRetrieveRezContainer extends Component {
@@ -18,13 +23,22 @@ class AdminDistrictRetrieveRezContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const district = localStorageGetObjectItem("nwapp-admin-retrieve-district-"+slug.toString() );
+        const isLoading = isEmpty(district);
+
         // Update state.
         this.state = {
             slug: slug,
+            district: district,
+            isLoading: isLoading,
         }
 
         this.onBack = this.onBack.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
     }
 
     /**
@@ -32,33 +46,43 @@ class AdminDistrictRetrieveRezContainer extends Component {
      *------------------------------------------------------------
      */
 
-     componentDidMount() {
-         window.scrollTo(0, 0);  // Start the page at the top of the page.
-     }
+    componentDidMount() {
+        window.scrollTo(0, 0);  // Start the page at the top of the page.
+        this.props.pullDistrictDetail(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
+    }
 
-     componentWillUnmount() {
-         // This code will fix the "ReactJS & Redux: Can't perform a React state
-         // update on an unmounted component" issue as explained in:
-         // https://stackoverflow.com/a/53829700
-         this.setState = (state,callback)=>{
-             return;
-         };
+    componentWillUnmount() {
+        // This code will fix the "ReactJS & Redux: Can't perform a React state
+        // update on an unmounted component" issue as explained in:
+        // https://stackoverflow.com/a/53829700
+        this.setState = (state,callback)=>{
+            return;
+        };
 
-         // Clear any and all flash messages in our queue to be rendered.
-         this.props.clearFlashMessage();
-     }
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
+    }
 
     /**
      *  API callback functions
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, district: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
     }
 
-    onFailedSubmissionCallback(errors) {
-        console.log(errors);
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -84,22 +108,12 @@ class AdminDistrictRetrieveRezContainer extends Component {
      */
 
     render() {
-        const districtData = {
-            'slug': 'argyle-rez',
-            'icon': 'home',
-            'number': 1,
-            'name': 'Argyle (Rez)',
-            'description': 'This is a residential district.',
-            'counselorName': 'Bart Mika',
-            'counselorEmail': 'bart@mikasoftware.com',
-            'counselorPhone': '(111) 222-3333',
-            'absoluteUrl': '/settings/district-rez/argyle'
-        };
         return (
             <AdminDistrictRetrieveRezComponent
-                districtData={districtData}
+                districtData={this.props.district}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                isLoading={this.state.isLoading}
                 flashMessage={this.props.flashMessage}
             />
         );
@@ -108,7 +122,7 @@ class AdminDistrictRetrieveRezContainer extends Component {
 
 const mapStateToProps = function(store) {
     return {
-        user: store.userState,
+        district: store.districtDetailState,
         flashMessage: store.flashMessageState,
     };
 }
@@ -117,7 +131,10 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullDistrictDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullDistrictDetail(slug, successCallback, failedCallback))
+        },
     }
 }
 

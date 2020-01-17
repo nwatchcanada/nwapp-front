@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminDistrictRetrieveComComponent from "../../../../../components/settings/admin/district/retrieve/adminRetrieveComComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
+import { pullDistrictDetail } from '../../../../../actions/districtActions';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminDistrictRetrieveComContainer extends Component {
@@ -18,13 +23,22 @@ class AdminDistrictRetrieveComContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const district = localStorageGetObjectItem("nwapp-admin-retrieve-district-"+slug.toString() );
+        const isLoading = isEmpty(district);
+
         // Update state.
         this.state = {
             slug: slug,
+            district: district,
+            isLoading: isLoading,
         }
 
         this.onBack = this.onBack.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
     }
 
     /**
@@ -34,6 +48,11 @@ class AdminDistrictRetrieveComContainer extends Component {
 
      componentDidMount() {
          window.scrollTo(0, 0);  // Start the page at the top of the page.
+         this.props.pullDistrictDetail(
+             this.state.slug,
+             this.onSuccessCallback,
+             this.onFailureCallback
+         );
      }
 
      componentWillUnmount() {
@@ -53,12 +72,17 @@ class AdminDistrictRetrieveComContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, district: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
     }
 
-    onFailedSubmissionCallback(errors) {
-        console.log(errors);
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -84,19 +108,12 @@ class AdminDistrictRetrieveComContainer extends Component {
      */
 
     render() {
-        const districtData = {
-            'slug': 'Argyle',
-            'icon': 'university',
-            'number': 1,
-            'name': 'Argyle',
-            'description': 'This is a community cares district.',
-            'absoluteUrl': '/settings/district/argyle'
-        };
         return (
             <AdminDistrictRetrieveComComponent
-                districtData={districtData}
+                districtData={this.props.district}
                 onBack={this.onBack}
                 onClick={this.onClick}
+                isLoading={this.state.isLoading}
                 flashMessage={this.props.flashMessage}
             />
         );
@@ -105,7 +122,7 @@ class AdminDistrictRetrieveComContainer extends Component {
 
 const mapStateToProps = function(store) {
     return {
-        user: store.userState,
+        district: store.districtDetailState,
         flashMessage: store.flashMessageState,
     };
 }
@@ -114,7 +131,10 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullDistrictDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullDistrictDetail(slug, successCallback, failedCallback))
+        },
     }
 }
 

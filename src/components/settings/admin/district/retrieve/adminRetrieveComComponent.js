@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
+import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
 export default class AdminDistrictRetrieveComComponent extends Component {
     render() {
-        const { districtData, onClick, onBack, flashMessage } = this.props;
+        const { districtData, onClick, onBack, flashMessage, isLoading } = this.props;
         return (
             <div>
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">

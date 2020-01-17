@@ -186,7 +186,7 @@ export function postDistrict(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullDistrictDetail(id, onSuccessCallback, onFailureCallback) {
+export function pullDistrictDetail(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -196,7 +196,7 @@ export function pullDistrictDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = NWAPP_DISTRICT_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = NWAPP_DISTRICT_DETAIL_API_ENDPOINT.replace("<slug>", slug);
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
