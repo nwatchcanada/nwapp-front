@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { FlashMessageComponent } from "../../../flashMessageComponent";
+import { FlashMessageComponent } from "../../../../flashMessageComponent";
 
 
-class DistrictRetrieveBizComponent extends Component {
+export default class AdminDistrictRetrieveBizComponent extends Component {
     render() {
         const { districtData, onClick, onBack, flashMessage } = this.props;
         return (
@@ -15,10 +15,10 @@ class DistrictRetrieveBizComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
+                           <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
+                            <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-building"></i>&nbsp;{districtData.name}
@@ -88,5 +88,3 @@ class DistrictRetrieveBizComponent extends Component {
         );
     }
 }
-
-export default DistrictRetrieveBizComponent;

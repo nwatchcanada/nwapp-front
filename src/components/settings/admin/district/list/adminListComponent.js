@@ -201,12 +201,30 @@ function detailLinkFormatter(cell, row){
     if (row.isArchived === true) {
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
+        let viewButtonCode = "";
+        switch(parseInt(row.typeOf)) {
+            case 1:
+                viewButtonCode = <Link to={`/admin/settings/district/rez/${row.slug}`} className="btn btn-success btn-xs">
+                    <i className="fas fa-binoculars"></i>&nbsp;View
+                </Link>;
+                break;
+            case 2:
+                viewButtonCode = <Link to={`/admin/settings/district/biz/${row.slug}`} className="btn btn-success btn-xs">
+                    <i className="fas fa-binoculars"></i>&nbsp;View
+                </Link>;
+                break;
+            case 3:
+                viewButtonCode = <Link to={`/admin/settings/district/com/${row.slug}`} className="btn btn-success btn-xs">
+                    <i className="fas fa-binoculars"></i>&nbsp;View
+                </Link>;
+                break;
+            default:
+                viewButtonCode = "";
+                break;
+        }
         return (
             <div>
-
-                <Link to={`/admin/district/${row.user}/community/score-point/archive/${row.uuid}`} className="btn btn-success btn-xs">
-                    <i className="fas fa-edit"></i>&nbsp;Edit
-                </Link>&nbsp;&nbsp;
+                {viewButtonCode}&nbsp;&nbsp;
                 <Link to={`/admin/settings/district/operation/archive/${row.slug}`} className="btn btn-danger btn-xs">
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>

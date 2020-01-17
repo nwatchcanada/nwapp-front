@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DistrictRetrieveBizComponent from "../../../../components/settings/districts/retrieve/districtRetrieveBizComponent";
-import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import AdminDistrictRetrieveBizComponent from "../../../../../components/settings/admin/district/retrieve/adminRetrieveBizComponent";
+import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 
 
-class DistrictRetrieveBizContainer extends Component {
+class AdminDistrictRetrieveBizContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -69,7 +69,7 @@ class DistrictRetrieveBizContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/settings/districts/");
+        this.props.history.push("/admin/settings/districts/");
     }
 
     onClick(e) {
@@ -95,7 +95,7 @@ class DistrictRetrieveBizContainer extends Component {
             'absoluteUrl': '/settings/district-biz/argyle'
         };
         return (
-            <DistrictRetrieveBizComponent
+            <AdminDistrictRetrieveBizComponent
                 districtData={districtData}
                 onBack={this.onBack}
                 onClick={this.onClick}
@@ -124,4 +124,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictRetrieveBizContainer);
+)(AdminDistrictRetrieveBizContainer);

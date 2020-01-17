@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DistrictRetrieveRezComponent from "../../../../components/settings/districts/retrieve/districtRetrieveRezComponent";
-import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import AdminDistrictRetrieveRezComponent from "../../../../../components/settings/admin/district/retrieve/adminRetrieveRezComponent";
+import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 
 
-class DistrictRetrieveRezContainer extends Component {
+class AdminDistrictRetrieveRezContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -69,7 +69,7 @@ class DistrictRetrieveRezContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/settings/districts/");
+        this.props.history.push("/admin/settings/districts/");
     }
 
     onClick(e) {
@@ -96,7 +96,7 @@ class DistrictRetrieveRezContainer extends Component {
             'absoluteUrl': '/settings/district-rez/argyle'
         };
         return (
-            <DistrictRetrieveRezComponent
+            <AdminDistrictRetrieveRezComponent
                 districtData={districtData}
                 onBack={this.onBack}
                 onClick={this.onClick}
@@ -125,4 +125,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictRetrieveRezContainer);
+)(AdminDistrictRetrieveRezContainer);
