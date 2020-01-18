@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminDistrictUpdateRezComponent from "../../../../../components/settings/admin/district/update/adminUpdateRezComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { pullDistrictDetail } from '../../../../../actions/districtActions';
 import { validateResidentialInput } from "../../../../../validators/districtValidator";
+import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminDistrictUpdateRezContainer extends Component {
@@ -20,22 +26,29 @@ class AdminDistrictUpdateRezContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const district = localStorageGetObjectItem("nwapp-admin-retrieve-district-"+slug.toString() );
+        const isLoading = isEmpty(district);
+
         this.state = {
             slug: slug,
-            icon: null,
-            number: 0,
-            name: null,
-            description: null,
-            counselorName: null,
-            counselorEmail: null,
-            counselorPhone: null,
+            name: district.name,
+            description: district.description,
+            counselorName: district.counselorName,
+            counselorEmail: district.counselorEmail,
+            counselorPhone: district.counselorPhone,
             errors: {},
+            district: district,
+            isLoading: isLoading,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
     }
 
     /**
@@ -45,19 +58,11 @@ class AdminDistrictUpdateRezContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // THIS IS WHERE YOUR API SAVES THE DATA.
-        this.setState({
-            slug: 'argyle-rez',
-            icon: 'home',
-            number: 1,
-            name: 'Argyle (Rez)',
-            description: 'This is a residential district.',
-            counselorName: 'Bart Mika',
-            counselorEmail: 'bart@mikasoftware.com',
-            counselorPhone: '(111) 222-3333',
-            errors: {},
-        });
+        this.props.pullDistrictDetail(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -77,7 +82,7 @@ class AdminDistrictUpdateRezContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district-rez/"+this.state.slug);
+        this.props.history.push("/admin/settings/district/rez/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -90,6 +95,19 @@ class AdminDistrictUpdateRezContainer extends Component {
         // https://github.com/fisshy/react-scroll
         var scroll = Scroll.animateScroll;
         scroll.scrollToTop();
+    }
+
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, district: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
+    }
+
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -155,7 +173,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        pullDistrictDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullDistrictDetail(slug, successCallback, failedCallback))
+        },
     }
 }
 

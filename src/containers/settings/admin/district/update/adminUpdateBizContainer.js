@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminDistrictUpdateBizComponent from "../../../../../components/settings/admin/district/update/adminUpdateBizComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { pullDistrictDetail } from '../../../../../actions/districtActions';
 import { validateBusinessInput } from "../../../../../validators/districtValidator";
+import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminDistrictUpdateBizContainer extends Component {
@@ -20,14 +26,21 @@ class AdminDistrictUpdateBizContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const district = localStorageGetObjectItem("nwapp-admin-retrieve-district-"+slug.toString() );
+        const isLoading = isEmpty(district);
+
         this.state = {
             slug: slug,
-            name: null,
-            description: null,
-            websiteURL: null,
-            logo: null,
+            name: district.name,
+            description: district.description,
+            websiteURL: district.websiteURL,
+            logo: district.logoImage,
             errors: {},
-            isLoading: false
+            isLoading: false,
+            district: district,
+            isLoading: isLoading,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -35,6 +48,8 @@ class AdminDistrictUpdateBizContainer extends Component {
         this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
     }
 
     /**
@@ -44,17 +59,11 @@ class AdminDistrictUpdateBizContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // This is where the API updates the state.
-        this.setState({
-            'slug': 'argyle',
-            'icon': 'building',
-            'number': 1,
-            'name': 'Argyle (Biz)',
-            'description': 'This is a business district.',
-            'websiteURL': 'http://google.com',
-            'logo': 'https://o55.ca/wp-content/uploads/2018/02/O55_Logo-Rect.png',
-        });
+        this.props.pullDistrictDetail(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -74,7 +83,7 @@ class AdminDistrictUpdateBizContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district-biz/"+this.state.slug);
+        this.props.history.push("/admin/settings/district/biz/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -87,6 +96,19 @@ class AdminDistrictUpdateBizContainer extends Component {
         // https://github.com/fisshy/react-scroll
         var scroll = Scroll.animateScroll;
         scroll.scrollToTop();
+    }
+
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, district: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
+    }
+
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -173,7 +195,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        pullDistrictDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullDistrictDetail(slug, successCallback, failedCallback))
+        },
     }
 }
 

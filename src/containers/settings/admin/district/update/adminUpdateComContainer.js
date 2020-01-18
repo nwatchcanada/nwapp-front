@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminDistrictUpdateComComponent from "../../../../../components/settings/admin/district/update/adminUpdateComComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { pullDistrictDetail } from '../../../../../actions/districtActions';
 import { validateCommunityCaresInput } from "../../../../../validators/districtValidator";
+import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminDistrictUpdateComContainer extends Component {
@@ -20,6 +26,11 @@ class AdminDistrictUpdateComContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const district = localStorageGetObjectItem("nwapp-admin-retrieve-district-"+slug.toString() );
+        const isLoading = isEmpty(district);
+
         this.state = {
             // Save the slug.
             slug: slug,
@@ -32,20 +43,23 @@ class AdminDistrictUpdateComContainer extends Component {
             errors: {},
 
             // Variable used to lock buttons when makig submissions.
-            isLoading: false,
+            district: district,
+            isLoading: isLoading,
 
             // Variable used to indicate if the modal should appear.
             isShowingModal: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            name: null,
-            description: null,
+            name: district.name,
+            description: district.description,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
     }
 
     /**
@@ -55,28 +69,11 @@ class AdminDistrictUpdateComContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // THIS IS WHERE THE API GETS THE DATA ON INITIAL LOAD.
-        this.setState({
-            slug: 'Argyle',
-            icon: 'university',
-            number: 1,
-            name: 'Argyle',
-            description: 'This is a community cares district.',
-            streetsArray: [
-                {
-                    streetAddress: '240 First Street',
-                    streetNumber: '240',
-                    streetName: 'First',
-                    streetType: 'Street',
-                },{
-                    streetAddress: '51 Downtown Avenue',
-                    streetNumber: '51',
-                    streetName: 'Downtown',
-                    streetType: 'Avenue',
-                }
-            ]
-        })
+        this.props.pullDistrictDetail(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     };
 
     componentWillUnmount() {
@@ -96,7 +93,7 @@ class AdminDistrictUpdateComContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district-cc/"+this.state.slug);
+        this.props.history.push("/admin/settings/district/com/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -109,6 +106,19 @@ class AdminDistrictUpdateComContainer extends Component {
         // https://github.com/fisshy/react-scroll
         var scroll = Scroll.animateScroll;
         scroll.scrollToTop();
+    }
+
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, district: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
+    }
+
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -169,7 +179,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        pullDistrictDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullDistrictDetail(slug, successCallback, failedCallback))
+        },
     }
 }
 

@@ -6,7 +6,8 @@ import AdminDistrictRetrieveBizComponent from "../../../../../components/setting
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 import { pullDistrictDetail } from '../../../../../actions/districtActions';
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem
 } from '../../../../../helpers/localStorageUtility';
 
 
