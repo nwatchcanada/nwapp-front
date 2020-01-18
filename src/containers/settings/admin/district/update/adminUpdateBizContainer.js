@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictUpdateComComponent from "../../../../components/settings/districts/update/districtUpdateComComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateCommunityCaresInput } from "../../../../validators/districtValidator";
+import AdminDistrictUpdateBizComponent from "../../../../../components/settings/admin/district/update/adminUpdateBizComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { validateBusinessInput } from "../../../../../validators/districtValidator";
 
 
-class DistrictUpdateComContainer extends Component {
+class AdminDistrictUpdateBizContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -21,29 +21,18 @@ class DistrictUpdateComContainer extends Component {
         const { slug } = this.props.match.params;
 
         this.state = {
-            // Save the slug.
             slug: slug,
-
-            // DEVELOPERS NOTE: This variable is used as the main way to add
-            // GUI modification to the fields. Simply adding a key and the
-            // message will result in an error message displaying for that
-            // field. Please make sure the `name` in the HTML field equals
-            // the `name` dictonary key in this dictionary.
-            errors: {},
-
-            // Variable used to lock buttons when makig submissions.
-            isLoading: false,
-
-            // Variable used to indicate if the modal should appear.
-            isShowingModal: false,
-
-            // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: null,
             description: null,
+            websiteURL: null,
+            logo: null,
+            errors: {},
+            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -56,28 +45,17 @@ class DistrictUpdateComContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // THIS IS WHERE THE API GETS THE DATA ON INITIAL LOAD.
+        // This is where the API updates the state.
         this.setState({
-            slug: 'Argyle',
-            icon: 'university',
-            number: 1,
-            name: 'Argyle',
-            description: 'This is a community cares district.',
-            streetsArray: [
-                {
-                    streetAddress: '240 First Street',
-                    streetNumber: '240',
-                    streetName: 'First',
-                    streetType: 'Street',
-                },{
-                    streetAddress: '51 Downtown Avenue',
-                    streetNumber: '51',
-                    streetName: 'Downtown',
-                    streetType: 'Avenue',
-                }
-            ]
-        })
-    };
+            'slug': 'argyle',
+            'icon': 'building',
+            'number': 1,
+            'name': 'Argyle (Biz)',
+            'description': 'This is a business district.',
+            'websiteURL': 'http://google.com',
+            'logo': 'https://o55.ca/wp-content/uploads/2018/02/O55_Logo-Rect.png',
+        });
+    }
 
     componentWillUnmount() {
         // This code will fix the "ReactJS & Redux: Can't perform a React state
@@ -96,7 +74,7 @@ class DistrictUpdateComContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district-cc/"+this.state.slug);
+        this.props.history.push("/settings/district-biz/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -119,7 +97,7 @@ class DistrictUpdateComContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        });
+        })
     }
 
     onClick(e) {
@@ -127,7 +105,7 @@ class DistrictUpdateComContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateCommunityCaresInput(this.state);
+        const { errors, isValid } = validateBusinessInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -140,17 +118,43 @@ class DistrictUpdateComContainer extends Component {
     }
 
     /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onDrop | file", file);
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // For debugging purposes.
+        console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+
+        // Update our local state to update the GUI.
+        this.setState({
+            logo: fileWithPreview
+        })
+    }
+
+    /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { slug, name, description, errors, } = this.state;
+        const { slug, icon, number, name, description, websiteURL, logo, errors } = this.state;
         return (
-            <DistrictUpdateComComponent
+            <AdminDistrictUpdateBizComponent
                 slug={slug}
+                icon={icon}
+                number={number}
                 name={name}
                 description={description}
+                websiteURL={websiteURL}
+                logo={logo}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
@@ -177,4 +181,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictUpdateComContainer);
+)(AdminDistrictUpdateBizContainer);

@@ -99,7 +99,7 @@ class AdminDistrictRetrieveComContainer extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/settings/district-cc/"+this.state.slug+"/update");
+        this.props.history.push("/admin/settings/district/com/"+this.state.slug+"/update");
     }
 
     /**

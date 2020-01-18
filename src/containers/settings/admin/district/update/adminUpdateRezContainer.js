@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictUpdateBizComponent from "../../../../components/settings/districts/update/districtUpdateBizComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateBusinessInput } from "../../../../validators/districtValidator";
+import AdminDistrictUpdateRezComponent from "../../../../../components/settings/admin/district/update/adminUpdateRezComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { validateResidentialInput } from "../../../../../validators/districtValidator";
 
 
-class DistrictUpdateBizContainer extends Component {
+class AdminDistrictUpdateRezContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -22,17 +22,18 @@ class DistrictUpdateBizContainer extends Component {
 
         this.state = {
             slug: slug,
+            icon: null,
+            number: 0,
             name: null,
             description: null,
-            websiteURL: null,
-            logo: null,
+            counselorName: null,
+            counselorEmail: null,
+            counselorPhone: null,
             errors: {},
-            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -45,15 +46,17 @@ class DistrictUpdateBizContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // This is where the API updates the state.
+        // THIS IS WHERE YOUR API SAVES THE DATA.
         this.setState({
-            'slug': 'argyle',
-            'icon': 'building',
-            'number': 1,
-            'name': 'Argyle (Biz)',
-            'description': 'This is a business district.',
-            'websiteURL': 'http://google.com',
-            'logo': 'https://o55.ca/wp-content/uploads/2018/02/O55_Logo-Rect.png',
+            slug: 'argyle-rez',
+            icon: 'home',
+            number: 1,
+            name: 'Argyle (Rez)',
+            description: 'This is a residential district.',
+            counselorName: 'Bart Mika',
+            counselorEmail: 'bart@mikasoftware.com',
+            counselorPhone: '(111) 222-3333',
+            errors: {},
         });
     }
 
@@ -74,7 +77,7 @@ class DistrictUpdateBizContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district-biz/"+this.state.slug);
+        this.props.history.push("/settings/district-rez/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -105,7 +108,7 @@ class DistrictUpdateBizContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateBusinessInput(this.state);
+        const { errors, isValid } = validateResidentialInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -117,27 +120,6 @@ class DistrictUpdateBizContainer extends Component {
         }
     }
 
-    /**
-     *  Special Thanks: https://react-dropzone.netlify.com/#previews
-     */
-    onDrop(acceptedFiles) {
-        const file = acceptedFiles[0];
-
-        // For debuging purposes only.
-        console.log("DEBUG | onDrop | file", file);
-
-        const fileWithPreview = Object.assign(file, {
-            preview: URL.createObjectURL(file)
-        });
-
-        // For debugging purposes.
-        console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
-
-        // Update our local state to update the GUI.
-        this.setState({
-            logo: fileWithPreview
-        })
-    }
 
     /**
      *  Main render function
@@ -145,17 +127,17 @@ class DistrictUpdateBizContainer extends Component {
      */
 
     render() {
-        const { slug, icon, number, name, description, websiteURL, logo, errors } = this.state;
+        const { slug, name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.state;
         return (
-            <DistrictUpdateBizComponent
+            <AdminDistrictUpdateRezComponent
                 slug={slug}
-                icon={icon}
-                number={number}
                 name={name}
                 description={description}
-                websiteURL={websiteURL}
-                logo={logo}
+                counselorName={counselorName}
+                counselorEmail={counselorEmail}
+                counselorPhone={counselorPhone}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />
@@ -181,4 +163,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictUpdateBizContainer);
+)(AdminDistrictUpdateRezContainer);

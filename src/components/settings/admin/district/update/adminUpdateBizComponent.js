@@ -2,17 +2,16 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
-import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
-import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
+import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/bootstrapSingleImageUploadAndPreview";
 
 
-export default class DistrictUpdateComComponent extends Component {
+class AdminDistrictUpdateBizComponent extends Component {
     render() {
-        const {
-            slug, name, description, errors, onTextChange, isLoading, onClick,
-        } = this.props;
+        const { slug, name, description, websiteURL, logo, errors, onTextChange, isLoading, onClick, onDrop } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -27,8 +26,8 @@ export default class DistrictUpdateComComponent extends Component {
                             <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/settings/district-cc/${slug}`}>
-                                <i className="fas fa-university"></i>&nbsp;{name}
+                            <Link to={`/settings/district-biz/${slug}`}>
+                                <i className="fas fa-building"></i>&nbsp;{name}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -68,12 +67,31 @@ export default class DistrictUpdateComComponent extends Component {
                                 error={errors.description}
                             />
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.websiteURL}
+                                label="Website URL"
+                                onChange={onTextChange}
+                                value={websiteURL}
+                                name="websiteURL"
+                                type="text"
+                            />
+
+                            <BootstrapSingleImageUploadAndPreview
+                                error={errors.image}
+                                label="Logo"
+                                onDrop={onDrop}
+                                name="logo"
+                                fileObj={logo}
+                            />
+
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to="/settings/district/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                <Link to={`/settings/district-biz/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
 
@@ -85,3 +103,5 @@ export default class DistrictUpdateComComponent extends Component {
         );
     }
 }
+
+export default AdminDistrictUpdateBizComponent;

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import DistrictUpdateRezComponent from "../../../../components/settings/districts/update/districtUpdateRezComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateResidentialInput } from "../../../../validators/districtValidator";
+import AdminDistrictUpdateComComponent from "../../../../../components/settings/admin/district/update/adminUpdateComComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { validateCommunityCaresInput } from "../../../../../validators/districtValidator";
 
 
-class DistrictUpdateRezContainer extends Component {
+class AdminDistrictUpdateComContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -21,15 +21,25 @@ class DistrictUpdateRezContainer extends Component {
         const { slug } = this.props.match.params;
 
         this.state = {
+            // Save the slug.
             slug: slug,
-            icon: null,
-            number: 0,
+
+            // DEVELOPERS NOTE: This variable is used as the main way to add
+            // GUI modification to the fields. Simply adding a key and the
+            // message will result in an error message displaying for that
+            // field. Please make sure the `name` in the HTML field equals
+            // the `name` dictonary key in this dictionary.
+            errors: {},
+
+            // Variable used to lock buttons when makig submissions.
+            isLoading: false,
+
+            // Variable used to indicate if the modal should appear.
+            isShowingModal: false,
+
+            // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: null,
             description: null,
-            counselorName: null,
-            counselorEmail: null,
-            counselorPhone: null,
-            errors: {},
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -46,19 +56,28 @@ class DistrictUpdateRezContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // THIS IS WHERE YOUR API SAVES THE DATA.
+        // THIS IS WHERE THE API GETS THE DATA ON INITIAL LOAD.
         this.setState({
-            slug: 'argyle-rez',
-            icon: 'home',
+            slug: 'Argyle',
+            icon: 'university',
             number: 1,
-            name: 'Argyle (Rez)',
-            description: 'This is a residential district.',
-            counselorName: 'Bart Mika',
-            counselorEmail: 'bart@mikasoftware.com',
-            counselorPhone: '(111) 222-3333',
-            errors: {},
-        });
-    }
+            name: 'Argyle',
+            description: 'This is a community cares district.',
+            streetsArray: [
+                {
+                    streetAddress: '240 First Street',
+                    streetNumber: '240',
+                    streetName: 'First',
+                    streetType: 'Street',
+                },{
+                    streetAddress: '51 Downtown Avenue',
+                    streetNumber: '51',
+                    streetName: 'Downtown',
+                    streetType: 'Avenue',
+                }
+            ]
+        })
+    };
 
     componentWillUnmount() {
         // This code will fix the "ReactJS & Redux: Can't perform a React state
@@ -77,7 +96,7 @@ class DistrictUpdateRezContainer extends Component {
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
-        this.props.history.push("/settings/district-rez/"+this.state.slug);
+        this.props.history.push("/settings/district-cc/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -100,7 +119,7 @@ class DistrictUpdateRezContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
     }
 
     onClick(e) {
@@ -108,7 +127,7 @@ class DistrictUpdateRezContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialInput(this.state);
+        const { errors, isValid } = validateCommunityCaresInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -120,24 +139,19 @@ class DistrictUpdateRezContainer extends Component {
         }
     }
 
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { slug, name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.state;
+        const { slug, name, description, errors, } = this.state;
         return (
-            <DistrictUpdateRezComponent
+            <AdminDistrictUpdateComComponent
                 slug={slug}
                 name={name}
                 description={description}
-                counselorName={counselorName}
-                counselorEmail={counselorEmail}
-                counselorPhone={counselorPhone}
                 errors={errors}
-                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />
@@ -163,4 +177,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DistrictUpdateRezContainer);
+)(AdminDistrictUpdateComContainer);

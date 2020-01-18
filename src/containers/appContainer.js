@@ -223,6 +223,9 @@ import AdminDistrictArchiveOperationContainer from "./settings/admin/district/op
 import AdminDistrictRetrieveBizContainer from "./settings/admin/district/retrieve/adminRetrieveBizContainer";
 import AdminDistrictRetrieveComContainer from "./settings/admin/district/retrieve/adminRetrieveComContainer";
 import AdminDistrictRetrieveRezContainer from "./settings/admin/district/retrieve/adminRetrieveRezContainer";
+import AdminDistrictUpdateBizContainer from "./settings/admin/district/update/adminUpdateBizContainer";
+import AdminDistrictUpdateComContainer from "./settings/admin/district/update/adminUpdateComContainer";
+import AdminDistrictUpdateRezContainer from "./settings/admin/district/update/adminUpdateRezContainer";
 
 
 import WatchListContainer from "./watches/list/watchListContainer";
@@ -406,6 +409,9 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/district/biz/:slug" exact component={requiresAuth(AdminDistrictRetrieveBizContainer)} />
                                 <Route path="/admin/settings/district/com/:slug" exact component={requiresAuth(AdminDistrictRetrieveComContainer)} />
                                 <Route path="/admin/settings/district/rez/:slug" exact component={requiresAuth(AdminDistrictRetrieveRezContainer)} />
+                                <Route path="/admin/settings/district/biz/:slug/update" exact component={requiresAuth(AdminDistrictUpdateBizContainer)} />
+                                <Route path="/admin/settings/district/com/:slug/update" exact component={requiresAuth(AdminDistrictUpdateComContainer)} />
+                                <Route path="/admin/settings/district/rez/:slug/update" exact component={requiresAuth(AdminDistrictUpdateRezContainer)} />
 
 
 
