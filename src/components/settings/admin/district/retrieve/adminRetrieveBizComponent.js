@@ -62,12 +62,14 @@ export default class AdminDistrictRetrieveBizComponent extends Component {
                                     }
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row" className="bg-light">Logo</th>
-                                <td>
-                                    <img src={districtData.logo} alt="Logo" height="128" width="128" />
-                                </td>
-                            </tr>
+                            {districtData.logoImage &&
+                                <tr>
+                                    <th scope="row" className="bg-light">Logo</th>
+                                    <td>
+                                        <img src={districtData.logoImage} alt="Logo" height="128" width="128" />
+                                    </td>
+                                </tr>
+                            }
 
                             </tbody>
                         </table>

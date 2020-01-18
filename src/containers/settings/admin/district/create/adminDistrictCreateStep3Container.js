@@ -11,6 +11,7 @@ import {
 } from "../../../../../constants/api";
 import {
     localStorageGetIntegerItem,
+    localStorageSetObjectOrArrayItem,
     localStorageRemoveItemsContaining
 } from '../../../../../helpers/localStorageUtility';
 import { postDistrict } from "../../../../../actions/districtActions";
@@ -39,16 +40,20 @@ class AdminDistrictCreateStep3Container extends Component {
             name: localStorage.getItem('nwapp-district-add-name'),
             description: localStorage.getItem('nwapp-district-add-description'),
             websiteURL: localStorage.getItem('nwapp-district-add-websiteURL'),
-            logo: JSON.parse(localStorage.getItem('nwapp-district-add-logo')),
             counselorName: localStorage.getItem('nwapp-district-add-counselorName'),
             counselorEmail: localStorage.getItem('nwapp-district-add-counselorEmail'),
             counselorPhone: localStorage.getItem('nwapp-district-add-counselorPhone'),
-            image: localStorage.getItem('nwapp-district-add-image'),
             typeOf: typeOf,
             step2URL: step2URL,
             errors: {},
-            isLoading: false
+            isLoading: false,
+            uploadContent: localStorage.getItem('nwapp-district-add-file-upload-content'),
+            uploadFilename: localStorage.getItem('nwapp-district-add-file-upload-filename'),
         }
+
+        // localStorageSetObjectOrArrayItem('nwapp-district-add-file-upload-content', this.state.upload_content);
+        // localStorage.setItem("nwapp-district-add-file-upload-filename", this.state.upload_filename)
+
 
         this.getPostData = this.getPostData.bind(this);
         this.onClick = this.onClick.bind(this);
