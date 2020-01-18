@@ -4,7 +4,11 @@ import Scroll from 'react-scroll';
 
 import AdminDistrictCreateStep2BizComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2BizComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { validateBusinessInput } from "../../../../../validators/districtValidator";
+import { validateBusinessInput } from "../../../../../validators/districtValidator";import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
+
 
 
 class AdminDistrictCreateStep2BusinessContainer extends Component {
@@ -19,17 +23,23 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
             name: localStorage.getItem('nwapp-district-add-name'),
             description: localStorage.getItem('nwapp-district-add-description'),
             websiteURL: localStorage.getItem('nwapp-district-add-websiteURL'),
-            logo: JSON.parse(localStorage.getItem('nwapp-district-add-logo')),
             errors: {},
-            isLoading: false
+            isLoading: false,
+
+            // DJANGO-REACT UPLOAD: STEP 1 OF 5.
+            fileReader: new FileReader(), // 1 of 5 - (a)
+            file: localStorageGetObjectItem('nwapp-district-add-file'), // 1 of 4 - (b)
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
         this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+
+        // DJANGO-REACT UPLOAD: STEP 2 OF 5.
+        this.handleFile = this.handleFile.bind(this); // 2 of 5 - (a)
+        this.onDrop = this.onDrop.bind(this); // 2 of 5 - (b)
     }
 
     /**
@@ -103,6 +113,8 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
     }
 
     /**
+     *  DJANGO-REACT UPLOAD: STEP 3 OF 5.
+     *
      *  Special Thanks: https://react-dropzone.netlify.com/#previews
      */
     onDrop(acceptedFiles) {
@@ -120,19 +132,57 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
             console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
 
             // Save to local storage our OBJECT.
-            localStorage.setItem('nwapp-district-add-logo', JSON.stringify(fileWithPreview));
+            localStorageSetObjectOrArrayItem('nwapp-district-add-file', fileWithPreview);
 
             // Update our local state to update the GUI.
             this.setState({
-                logo: fileWithPreview
-            })
+                file: fileWithPreview
+            },()=>{
+
+                // DJANGO-REACT UPLOAD: STEP 4 OF 5.
+                // DEVELOPERS NOTE:
+                // (1) http://jsbin.com/piqiqecuxo/1/edit?js,console,output
+                // (2) https://stackoverflow.com/questions/51272255/how-to-use-filereader-in-react
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(this.state.file);
+                fileReader.onload = this.handleFile;
+                fileReader.onerror = function (error) {
+                    console.log('Error: ', error);
+                };
+                this.setState({
+                    fileReader: fileReader,
+                });
+
+            });
         }
     }
 
     onRemoveUploadClick(e) {
         this.setState({
-            logo: null
+            file: null
         })
+    }
+
+    /*
+     * DJANGO-REACT UPLOAD: STEP 5 OF 5.
+     */
+    handleFile(e) {
+        const content = this.state.fileReader.result;
+        console.log(this.state.fileReader);
+        this.setState({
+            errors: {},
+            isLoading: false,
+            upload_content: content,
+            upload_filename: this.state.file.name,
+            // upload_filename: this.state.fileReader
+        }, ()=>{
+            console.log("\n\n\n");
+            console.log(this.state);
+            console.log("\n\n\n");
+            // Save to local storage our OBJECT.
+            localStorageSetObjectOrArrayItem('nwapp-district-add-file-upload-content', this.state.upload_content);
+            localStorage.setItem("nwapp-district-add-file-upload-filename", this.state.upload_filename)
+        });
     }
 
 
@@ -142,13 +192,13 @@ class AdminDistrictCreateStep2BusinessContainer extends Component {
      */
 
     render() {
-        const { name, description, websiteURL, logo, errors, isLoading } = this.state;
+        const { name, description, websiteURL, file, errors, isLoading } = this.state;
         return (
             <AdminDistrictCreateStep2BizComponent
                 name={name}
                 description={description}
                 websiteURL={websiteURL}
-                logo={logo}
+                file={file}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

@@ -11,7 +11,7 @@ import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/boot
 
 class AdminDistrictCreateStep2BizComponent extends Component {
     render() {
-        const { name, description, websiteURL, logo, errors, onTextChange, isLoading, onClick, onDrop, onRemoveUploadClick } = this.props;
+        const { name, description, websiteURL, file, errors, onTextChange, isLoading, onClick, onDrop, onRemoveUploadClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -104,8 +104,8 @@ class AdminDistrictCreateStep2BizComponent extends Component {
                                 error={errors.image}
                                 label="Logo"
                                 onDrop={onDrop}
-                                name="logo"
-                                fileObj={logo}
+                                name="file"
+                                fileObj={file}
                                 onRemoveUploadClick={onRemoveUploadClick}
                             />
 
