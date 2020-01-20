@@ -332,7 +332,7 @@ export function putTag(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteTagDetail(id, onSuccessCallback, onFailureCallback) {
+export function deleteTag(id, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -355,7 +355,7 @@ export function deleteTagDetail(id, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("deleteTagDetail | Success:", profile); // For debugging purposes.
+            console.log("deleteTag | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
@@ -379,7 +379,7 @@ export function deleteTagDetail(id, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("deleteTagDetail | error:", errors); // For debuggin purposes only.
+                console.log(" | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
