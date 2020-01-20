@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminDistrictUpdateBizComponent from "../../../../../components/settings/admin/district/update/adminUpdateBizComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullDistrictDetail } from '../../../../../actions/districtActions';
+import { pullDistrictDetail, putDistrict } from '../../../../../actions/districtActions';
 import { validateBusinessInput } from "../../../../../validators/districtValidator";
 import {
     localStorageGetObjectItem,
@@ -43,12 +43,26 @@ class AdminDistrictUpdateBizContainer extends Component {
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.getPostData = this.getPostData.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -134,7 +148,13 @@ class AdminDistrictUpdateBizContainer extends Component {
                 isLoading: true,
                 error: {},
             },()=>{
-                this.onSuccessfulSubmissionCallback();
+                // Once our state has been validated `client-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.putDistrict(
+                    this.getPostData(),
+                    this.onSuccessfulSubmissionCallback,
+                    this.onFailureSubmissionCallback
+                );
             });
 
         // CASE 2 OF 2: Validation was a failure.
@@ -212,6 +232,9 @@ const mapDispatchToProps = dispatch => {
         },
         pullDistrictDetail: (slug, successCallback, failedCallback) => {
             dispatch(pullDistrictDetail(slug, successCallback, failedCallback))
+        },
+        putDistrict: (data, successCallback, failedCallback) => {
+            dispatch(putDistrict(data, successCallback, failedCallback))
         },
     }
 }

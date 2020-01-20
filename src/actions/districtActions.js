@@ -262,7 +262,7 @@ export function pullDistrictDetail(slug, onSuccessCallback, onFailureCallback) {
 //                                UPDATE                                      //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function putDistrictDetail(postData, successCallback, failedCallback) {
+export function putDistrict(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -280,7 +280,7 @@ export function putDistrictDetail(postData, successCallback, failedCallback) {
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(NWAPP_DISTRICT_DETAIL_API_ENDPOINT+postData.id+"/", buffer).then( (successResponse) => {
+        customAxios.put(NWAPP_DISTRICT_DETAIL_API_ENDPOINT.replace("<slug>", postData.slug), buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let device = camelizeKeys(responseData);
@@ -307,7 +307,7 @@ export function putDistrictDetail(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("putDistrictDetail | error:", errors); // For debuggin purposes only.
+                console.log("putDistrict | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
