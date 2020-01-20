@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
+// import 'moment-timezone';
 
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
@@ -31,6 +33,13 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-home"></i>&nbsp;{districtData.name}</h1>
+
+                {districtData.state === 'inactive' &&
+                    <div className="alert alert-info" role="alert">
+                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This districtData is archived and is read-only.
+                    </div>
+                }
+
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <table className="table table-bordered custom-cell-w">
@@ -65,6 +74,33 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                                     <th scope="row" className="bg-light">Counselor Phone</th>
                                     <td>{districtData.counselorPhone}</td>
                                 </tr>
+
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-server"></i>&nbsp;System
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Created At</th>
+                                    <td>
+                                        {districtData && <Moment format="MM/DD/YYYY hh:mm:ss a">{districtData.created}</Moment>}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Created By</th>
+                                    <td>{districtData.createdBy}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Modified At</th>
+                                    <td>
+                                        {districtData && <Moment format="MM/DD/YYYY hh:mm:ss a">{districtData.lastModified}</Moment>}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Modified By</th>
+                                    <td>{districtData.lastModifiedBy}</td>
+                                </tr>
+
                             </tbody>
                         </table>
 
