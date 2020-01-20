@@ -208,7 +208,9 @@ import AdminStaffCreateStep4Container from "./staffs/admin/create/adminCreateSte
 
 /*
 ---------
-DISTRICTS
+SETTINGS
+(*) DISTRICTS
+(*) TAGS
 ---------
 */
 
@@ -226,6 +228,7 @@ import AdminDistrictRetrieveRezContainer from "./settings/admin/district/retriev
 import AdminDistrictUpdateBizContainer from "./settings/admin/district/update/adminUpdateBizContainer";
 import AdminDistrictUpdateComContainer from "./settings/admin/district/update/adminUpdateComContainer";
 import AdminDistrictUpdateRezContainer from "./settings/admin/district/update/adminUpdateRezContainer";
+import AdminTagListContainer from "./settings/admin/tag/list/adminListContainer";
 
 
 import WatchListContainer from "./watches/list/watchListContainer";
@@ -413,6 +416,12 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/district/com/:slug/update" exact component={requiresAuth(AdminDistrictUpdateComContainer)} />
                                 <Route path="/admin/settings/district/rez/:slug/update" exact component={requiresAuth(AdminDistrictUpdateRezContainer)} />
 
+                                {/*
+                                    ---------------
+                                    SETTINGS - TAGS
+                                    ---------------
+                                */}
+                                <Route path="/admin/settings/tags" exact component={requiresAuth(AdminTagListContainer)} />
 
 
                                 {/*
