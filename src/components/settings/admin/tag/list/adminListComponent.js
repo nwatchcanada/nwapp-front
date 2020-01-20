@@ -216,13 +216,13 @@ class AdminTagListComponent extends Component {
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-map"></i>&nbsp;Tags
+                            <i className="fas fa-tags"></i>&nbsp;Tags
                         </li>
                     </ol>
                 </nav>
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;Tags</h1>
+                <h1><i className="fas fa-tags"></i>&nbsp;Tags</h1>
 
                 <div className="row">
                     <div className="col-md-12">

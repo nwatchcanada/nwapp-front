@@ -179,7 +179,7 @@ export function postTagDetail(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullTagDetail(id, onSuccessCallback, onFailureCallback) {
+export function pullTag(id, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -189,7 +189,7 @@ export function pullTagDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_TAG_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = WORKERY_TAG_DETAIL_API_ENDPOINT+id;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -202,7 +202,7 @@ export function pullTagDetail(id, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("pullTagDetail | Success:", profile); // For debugging purposes.
+            console.log("pullTag | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
@@ -226,7 +226,7 @@ export function pullTagDetail(id, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullTagDetail | error:", errors); // For debuggin purposes only.
+                console.log("pullTag | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -272,7 +272,7 @@ export function putTagDetail(postData, successCallback, failedCallback) {
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode(decamelizedData);
 
-        const aURL = WORKERY_TAG_DETAIL_API_ENDPOINT+postData.id+"/";
+        const aURL = WORKERY_TAG_DETAIL_API_ENDPOINT+postData.id;
         console.log("URL:", aURL);
 
         // Perform our API submission.
@@ -342,7 +342,7 @@ export function deleteTagDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_TAG_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = WORKERY_TAG_DETAIL_API_ENDPOINT+id;
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.

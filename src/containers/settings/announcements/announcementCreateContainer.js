@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import AnnouncementCreateComponent from "../../../components/settings/announcements/announcementCreateComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/tagValidator";
+import { validateInput } from "../../../validators/tagValidator";
 
 
 class AnnouncementCreateContainer extends Component {

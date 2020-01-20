@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import TagUpdateComponent from "../../../components/settings/tags/tagUpdateComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
-import validateInput from "../../../validators/tagValidator";
+import { validateInput } from "../../../validators/tagValidator";
 
 
 class TagUpdateContainer extends Component {

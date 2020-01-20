@@ -229,6 +229,8 @@ import AdminDistrictUpdateBizContainer from "./settings/admin/district/update/ad
 import AdminDistrictUpdateComContainer from "./settings/admin/district/update/adminUpdateComContainer";
 import AdminDistrictUpdateRezContainer from "./settings/admin/district/update/adminUpdateRezContainer";
 import AdminTagListContainer from "./settings/admin/tag/list/adminListContainer";
+import AdminTagRetrieveContainer from "./settings/admin/tag/retrieve/adminRetrieveContainer";
+import AdminTagUpdateContainer from "./settings/admin/tag/update/adminUpdateContainer";
 
 
 import WatchListContainer from "./watches/list/watchListContainer";
@@ -422,6 +424,8 @@ class AppContainer extends React.Component {
                                     ---------------
                                 */}
                                 <Route path="/admin/settings/tags" exact component={requiresAuth(AdminTagListContainer)} />
+                                <Route path="/admin/settings/tag/:id" exact component={requiresAuth(AdminTagRetrieveContainer)} />
+                                <Route path="/admin/settings/tag/:id/update" exact component={requiresAuth(AdminTagUpdateContainer)} />
 
 
                                 {/*
