@@ -105,7 +105,7 @@ export function pullHowHearList(page=1, sizePerPage=10, filtersMap=new Map(), on
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postHowHearDetail(postData, successCallback, failedCallback) {
+export function postHowHear(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -150,7 +150,7 @@ export function postHowHearDetail(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postHowHearDetail | error:", errors); // For debuggin purposes only.
+                console.log("postHowHear | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -179,7 +179,7 @@ export function postHowHearDetail(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullHowHearDetail(id, onSuccessCallback, onFailureCallback) {
+export function pullHowHear(id, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -189,7 +189,7 @@ export function pullHowHearDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT+id;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -202,7 +202,7 @@ export function pullHowHearDetail(id, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("pullHowHearDetail | Success:", profile); // For debugging purposes.
+            console.log("pullHowHear | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
@@ -226,7 +226,7 @@ export function pullHowHearDetail(id, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullHowHearDetail | error:", errors); // For debuggin purposes only.
+                console.log("pullHowHear | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -255,7 +255,7 @@ export function pullHowHearDetail(id, onSuccessCallback, onFailureCallback) {
 //                                UPDATE                                      //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function putHowHearDetail(postData, successCallback, failedCallback) {
+export function putHowHear(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -273,7 +273,7 @@ export function putHowHearDetail(postData, successCallback, failedCallback) {
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT+postData.id+"/", buffer).then( (successResponse) => {
+        customAxios.put(WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT+postData.id, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let device = camelizeKeys(responseData);
@@ -300,7 +300,7 @@ export function putHowHearDetail(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("putHowHearDetail | error:", errors); // For debuggin purposes only.
+                console.log("putHowHear | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -329,7 +329,7 @@ export function putHowHearDetail(postData, successCallback, failedCallback) {
 //                                 DELETE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteHowHearDetail(id, onSuccessCallback, onFailureCallback) {
+export function deleteHowHear(id, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -339,7 +339,7 @@ export function deleteHowHearDetail(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT+id+"/";
+        const aURL = WORKERY_HOW_HEAR_DETAIL_API_ENDPOINT+id;
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -352,7 +352,7 @@ export function deleteHowHearDetail(id, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("deleteHowHearDetail | Success:", profile); // For debugging purposes.
+            console.log("deleteHowHear | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
@@ -376,7 +376,7 @@ export function deleteHowHearDetail(id, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("deleteHowHearDetail | error:", errors); // For debuggin purposes only.
+                console.log("deleteHowHear | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

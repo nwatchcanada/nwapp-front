@@ -211,6 +211,7 @@ import AdminStaffCreateStep4Container from "./staffs/admin/create/adminCreateSte
 SETTINGS
 (*) DISTRICTS
 (*) TAGS
+(*) HOW HEAR
 ---------
 */
 
@@ -235,6 +236,14 @@ import AdminTagCreateStep1Container from "./settings/admin/tag/create/adminCreat
 import AdminTagCreateStep2Container from "./settings/admin/tag/create/adminCreateStep2Container";
 import AdminTagArchiveOperationContainer from "./settings/admin/tag/operation/adminArchiveContainer";
 
+import AdminHowHearListContainer from "./settings/admin/howHear/list/adminListContainer";
+import AdminHowHearRetrieveContainer from "./settings/admin/howHear/retrieve/adminRetrieveContainer";
+import AdminHowHearUpdateContainer from "./settings/admin/howHear/update/adminUpdateContainer";
+import AdminHowHearCreateStep1Container from "./settings/admin/howHear/create/adminCreateStep1Container";
+import AdminHowHearCreateStep2Container from "./settings/admin/howHear/create/adminCreateStep2Container";
+import AdminHowHearArchiveOperationContainer from "./settings/admin/howHear/operation/adminArchiveContainer";
+
+
 
 import WatchListContainer from "./watches/list/watchListContainer";
 import WatchCreateStepContainer from "./watches/create/watchCreateStep1Container";
@@ -252,27 +261,44 @@ import WatchUpdateContainer from "./watches/update/watchUpdateContainer";
 import WatchSearchContainer from "./watches/search/watchSearchContainer";
 import WatchSearchResultContainer from "./watches/search/watchSearchResultContainer";
 
-import TagsListContainer from "./settings/tags/list/tagListContainer";
-import TagDeleteContainer from "./settings/tags/tagDeleteContainer";
-import TagCreateContainer from "./settings/tags/tagCreateContainer";
-import TagUpdateContainer from "./settings/tags/tagUpdateContainer";
+// import TagsListContainer from "./settings/tags/list/tagListContainer";
+// import TagDeleteContainer from "./settings/tags/tagDeleteContainer";
+// import TagCreateContainer from "./settings/tags/tagCreateContainer";
+// import TagUpdateContainer from "./settings/tags/tagUpdateContainer";
+//
+// import HowHearsListContainer from "./settings/howHear/list/howHearListContainer";
+// import HowHearDeleteContainer from "./settings/howHear/howHearDeleteContainer";
+// import HowHearCreateContainer from "./settings/howHear/howHearCreateContainer";
+// // import HowHearUpdateContainer from "./settings/howHear/howHearUpdateContainer";
+//
+// import AnnouncementListContainer from "./settings/announcements/list/announcementListContainer";
+// import AnnouncementDeleteContainer from "./settings/announcements/announcementDeleteContainer";
+// import AnnouncementCreateContainer from "./settings/announcements/announcementCreateContainer";
+// import AnnouncementUpdateContainer from "./settings/announcements/announcementUpdateContainer";
+//
+// import ResourcesListContainer from "./settings/resources/list/resourceListContainer";
+// import ResourceDeleteContainer from "./settings/resources/resourceDeleteContainer";
+// import ResourceCreateContainer from "./settings/resources/resourceCreateContainer";
+// import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
 
-import HowHearsListContainer from "./settings/howHear/list/howHearListContainer";
-import HowHearDeleteContainer from "./settings/howHear/howHearDeleteContainer";
-import HowHearCreateContainer from "./settings/howHear/howHearCreateContainer";
-import HowHearUpdateContainer from "./settings/howHear/howHearUpdateContainer";
-
-import AnnouncementListContainer from "./settings/announcements/list/announcementListContainer";
-import AnnouncementDeleteContainer from "./settings/announcements/announcementDeleteContainer";
-import AnnouncementCreateContainer from "./settings/announcements/announcementCreateContainer";
-import AnnouncementUpdateContainer from "./settings/announcements/announcementUpdateContainer";
-
-import ResourcesListContainer from "./settings/resources/list/resourceListContainer";
-import ResourceDeleteContainer from "./settings/resources/resourceDeleteContainer";
-import ResourceCreateContainer from "./settings/resources/resourceCreateContainer";
-import ResourceUpdateContainer from "./settings/resources/resourceUpdateContainer";
-
-
+/**
+<Route path="/settings/tags" exact component={requiresAuth(TagsListContainer)} />
+<Route path="/settings/tag/add" exact component={requiresAuth(TagCreateContainer)} />
+<Route path="/settings/tag/:slug/delete" exact component={requiresAuth(TagDeleteContainer)} />
+<Route path="/settings/tag/:slug/update" exact component={requiresAuth(TagUpdateContainer)} />
+<Route path="/settings/how-hears" exact component={requiresAuth(HowHearsListContainer)} />
+<Route path="/settings/how-hears/add" exact component={requiresAuth(HowHearCreateContainer)} />
+<Route path="/settings/how-hear/:slug/delete" exact component={requiresAuth(HowHearDeleteContainer)} />
+<Route path="/settings/how-hear/:slug/update" exact component={requiresAuth(HowHearUpdateContainer)} />
+<Route path="/settings/announcements" exact component={requiresAuth(AnnouncementListContainer)} />
+<Route path="/settings/announcements/add" exact component={requiresAuth(AnnouncementCreateContainer)} />
+<Route path="/settings/announcement/:slug/delete" exact component={requiresAuth(AnnouncementDeleteContainer)} />
+<Route path="/settings/announcement/:slug/update" exact component={requiresAuth(AnnouncementUpdateContainer)} />
+<Route path="/settings/resources" exact component={requiresAuth(ResourcesListContainer)} />
+<Route path="/settings/resource/add" exact component={requiresAuth(ResourceCreateContainer)} />
+<Route path="/settings/resource/:slug/delete" exact component={requiresAuth(ResourceDeleteContainer)} />
+<Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
+*/
 
 import ItemListContainer from "./items/list/itemListContainer";
 import ItemSearchContainer from "./items/search/itemSearchContainer";
@@ -378,22 +404,6 @@ class AppContainer extends React.Component {
                                 <Route path="/organization/:schemaName/update" exact component={requiresAuth(SharedOrganizationUpdateContainer)} />
                                 <Route path="/dashboard-redirect/:accessToken/:refreshToken" exact component={TenantDashboardRedirectContainer} />
                                 <Route path="/dashboard" exact component={requiresAuth(DashboardContainer)} />
-                                <Route path="/settings/tags" exact component={requiresAuth(TagsListContainer)} />
-                                <Route path="/settings/tag/add" exact component={requiresAuth(TagCreateContainer)} />
-                                <Route path="/settings/tag/:slug/delete" exact component={requiresAuth(TagDeleteContainer)} />
-                                <Route path="/settings/tag/:slug/update" exact component={requiresAuth(TagUpdateContainer)} />
-                                <Route path="/settings/how-hears" exact component={requiresAuth(HowHearsListContainer)} />
-                                <Route path="/settings/how-hears/add" exact component={requiresAuth(HowHearCreateContainer)} />
-                                <Route path="/settings/how-hear/:slug/delete" exact component={requiresAuth(HowHearDeleteContainer)} />
-                                <Route path="/settings/how-hear/:slug/update" exact component={requiresAuth(HowHearUpdateContainer)} />
-                                <Route path="/settings/announcements" exact component={requiresAuth(AnnouncementListContainer)} />
-                                <Route path="/settings/announcements/add" exact component={requiresAuth(AnnouncementCreateContainer)} />
-                                <Route path="/settings/announcement/:slug/delete" exact component={requiresAuth(AnnouncementDeleteContainer)} />
-                                <Route path="/settings/announcement/:slug/update" exact component={requiresAuth(AnnouncementUpdateContainer)} />
-                                <Route path="/settings/resources" exact component={requiresAuth(ResourcesListContainer)} />
-                                <Route path="/settings/resource/add" exact component={requiresAuth(ResourceCreateContainer)} />
-                                <Route path="/settings/resource/:slug/delete" exact component={requiresAuth(ResourceDeleteContainer)} />
-                                <Route path="/settings/resource/:slug/update" exact component={requiresAuth(ResourceUpdateContainer)} />
 
                                 {/*
                                     --------
@@ -432,6 +442,19 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/tag/add/step-1" exact component={requiresAuth(AdminTagCreateStep1Container)} />
                                 <Route path="/admin/settings/tag/add/step-2" exact component={requiresAuth(AdminTagCreateStep2Container)} />
                                 <Route path="/admin/settings/tag/operation/archive/:id" exact component={requiresAuth(AdminTagArchiveOperationContainer)} />
+
+                                {/*
+                                    -------------------
+                                    SETTINGS - HOW HEAR
+                                    -------------------
+                                */}
+                                <Route path="/admin/settings/how-hears" exact component={requiresAuth(AdminHowHearListContainer)} />
+                                <Route path="/admin/settings/how-hear/:id" exact component={requiresAuth(AdminHowHearRetrieveContainer)} />
+                                <Route path="/admin/settings/how-hear/:id/update" exact component={requiresAuth(AdminHowHearUpdateContainer)} />
+                                <Route path="/admin/settings/how-hear/add/step-1" exact component={requiresAuth(AdminHowHearCreateStep1Container)} />
+                                <Route path="/admin/settings/how-hear/add/step-2" exact component={requiresAuth(AdminHowHearCreateStep2Container)} />
+                                <Route path="/admin/settings/how-hear/operation/archive/:id" exact component={requiresAuth(AdminHowHearArchiveOperationContainer)} />
+
 
 
                                 {/*
