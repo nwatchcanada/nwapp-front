@@ -255,7 +255,7 @@ export function pullTag(id, onSuccessCallback, onFailureCallback) {
 //                                UPDATE                                      //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function putTagDetail(postData, successCallback, failedCallback) {
+export function putTag(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -303,7 +303,7 @@ export function putTagDetail(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("putTagDetail | error:", errors); // For debuggin purposes only.
+                console.log("putTag | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

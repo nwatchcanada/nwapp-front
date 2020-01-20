@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminTagUpdateComponent from "../../../../../components/settings/admin/tag/update/adminUpdateComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullTag } from '../../../../../actions/tagActions';
+import { pullTag, putTag } from '../../../../../actions/tagActions';
 import { validateInput } from "../../../../../validators/tagValidator";
 import {
     localStorageGetObjectItem,
@@ -42,10 +42,24 @@ class AdminTagUpdateContainer extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.getPostData = this.getPostData.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
+        this.onFailureSubmissionCallback = this.onFailureSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -82,7 +96,7 @@ class AdminTagUpdateContainer extends Component {
         this.props.history.push("/admin/settings/tag/"+this.state.id);
     }
 
-    onFailedSubmissionCallback(errors) {
+    onFailureSubmissionCallback(errors) {
         this.setState({
             errors: errors
         })
@@ -129,13 +143,29 @@ class AdminTagUpdateContainer extends Component {
         if (isValid) {
             this.setState({
                 isLoading: true,
+                error: {},
             },()=>{
-                // this.onSuccessfulSubmissionCallback();
+                // Once our state has been validated `client-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.putTag(
+                    this.getPostData(),
+                    this.onSuccessfulSubmissionCallback,
+                    this.onFailureSubmissionCallback
+                );
             });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
-            this.onFailedSubmissionCallback(errors);
+            this.setState({
+                errors: errors,
+                isLoading: false,
+            });
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
         }
     }
 
@@ -174,6 +204,9 @@ const mapDispatchToProps = dispatch => {
         },
         pullTag: (id, successCallback, failedCallback) => {
             dispatch(pullTag(id, successCallback, failedCallback))
+        },
+        putTag: (data, successCallback, failedCallback) => {
+            dispatch(putTag(data, successCallback, failedCallback))
         },
     }
 }

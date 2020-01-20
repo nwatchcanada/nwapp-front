@@ -143,13 +143,23 @@ class AdminDistrictUpdateComContainer extends Component {
         if (isValid) {
             this.setState({
                 isLoading: true,
+                error: {},
             },()=>{
                 this.onSuccessfulSubmissionCallback();
             });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
-            this.onFailedSubmissionCallback(errors);
+            this.setState({
+                errors: errors,
+                isLoading: false,
+            });
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
         }
     }
 
