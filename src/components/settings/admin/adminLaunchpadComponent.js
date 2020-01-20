@@ -18,14 +18,14 @@ class AdminSettingLaunchpadComponent extends Component {
                                    <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                                 </li>
                                 <li className="breadcrumb-item active" aria-current="page">
-                                    <i className="fas fa-cogs"></i>&nbsp;Setting
+                                    <i className="fas fa-cogs"></i>&nbsp;Settings
                                 </li>
                             </ol>
                         </nav>
 
                         <FlashMessageComponent object={flashMessage} />
 
-                        <h1><i className="fas fa-cogs"></i>&nbsp;Setting</h1>
+                        <h1><i className="fas fa-cogs"></i>&nbsp;Settings</h1>
                         <div className="row">
                             <div className="col-md-12">
 
