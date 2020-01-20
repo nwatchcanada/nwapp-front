@@ -16,12 +16,12 @@ class AdminTagArchiveOperationContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { slug } = this.props.match.params;
+        const { id } = this.props.match.params;
 
         this.state = {
             isLoading: false,
-            tag: slug,
-            slug: slug,
+            tag: id,
+            id: id,
             errors: {},
         }
         this.onClick = this.onClick.bind(this);
@@ -88,7 +88,7 @@ class AdminTagArchiveOperationContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deleteTag(this.state.slug, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deleteTag(this.state.id, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -98,11 +98,11 @@ class AdminTagArchiveOperationContainer extends Component {
      */
 
     render() {
-        const { isLoading, slug, errors } = this.state;
+        const { isLoading, id, errors } = this.state;
         const tag = this.props.tagDetail ? this.props.tagDetail : {};
         return (
             <AdminTagArchiveComponent
-                slug={slug}
+                id={id}
                 tag={tag}
                 isLoading={isLoading}
                 errors={errors}
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteTag: (slug, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteTag(slug, onSuccessCallback, onFailureCallback))
+        deleteTag: (id, onSuccessCallback, onFailureCallback) => {
+            dispatch(deleteTag(id, onSuccessCallback, onFailureCallback))
         },
     }
 }
