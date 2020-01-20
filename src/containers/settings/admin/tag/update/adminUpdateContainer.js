@@ -127,7 +127,11 @@ class AdminTagUpdateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            this.setState({
+                isLoading: true,
+            },()=>{
+                // this.onSuccessfulSubmissionCallback();
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {

@@ -38,7 +38,6 @@ class AdminDistrictUpdateBizContainer extends Component {
             websiteURL: district.websiteURL,
             logo: district.logoImage,
             errors: {},
-            isLoading: false,
             district: district,
             isLoading: isLoading,
         }
@@ -131,7 +130,11 @@ class AdminDistrictUpdateBizContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            this.setState({
+                isLoading: true,
+            },()=>{
+                this.onSuccessfulSubmissionCallback();
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -167,7 +170,7 @@ class AdminDistrictUpdateBizContainer extends Component {
      */
 
     render() {
-        const { slug, icon, number, name, description, websiteURL, logo, errors } = this.state;
+        const { slug, icon, number, name, description, websiteURL, isLoading, logo, errors } = this.state;
         return (
             <AdminDistrictUpdateBizComponent
                 slug={slug}
@@ -177,6 +180,7 @@ class AdminDistrictUpdateBizContainer extends Component {
                 description={description}
                 websiteURL={websiteURL}
                 logo={logo}
+                isLoading={isLoading}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

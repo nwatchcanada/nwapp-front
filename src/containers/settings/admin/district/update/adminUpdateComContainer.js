@@ -141,7 +141,11 @@ class AdminDistrictUpdateComContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            this.setState({
+                isLoading: true,
+            },()=>{
+                this.onSuccessfulSubmissionCallback();
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -155,13 +159,14 @@ class AdminDistrictUpdateComContainer extends Component {
      */
 
     render() {
-        const { slug, name, description, errors, } = this.state;
+        const { slug, name, description, errors, isLoading } = this.state;
         return (
             <AdminDistrictUpdateComComponent
                 slug={slug}
                 name={name}
                 description={description}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />
