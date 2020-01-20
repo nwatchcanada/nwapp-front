@@ -232,6 +232,7 @@ import AdminTagListContainer from "./settings/admin/tag/list/adminListContainer"
 import AdminTagRetrieveContainer from "./settings/admin/tag/retrieve/adminRetrieveContainer";
 import AdminTagUpdateContainer from "./settings/admin/tag/update/adminUpdateContainer";
 import AdminTagCreateStep1Container from "./settings/admin/tag/create/adminCreateStep1Container";
+import AdminTagCreateStep2Container from "./settings/admin/tag/create/adminCreateStep2Container";
 
 
 import WatchListContainer from "./watches/list/watchListContainer";
@@ -428,6 +429,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/tag/:id" exact component={requiresAuth(AdminTagRetrieveContainer)} />
                                 <Route path="/admin/settings/tag/:id/update" exact component={requiresAuth(AdminTagUpdateContainer)} />
                                 <Route path="/admin/settings/tag/add/step-1" exact component={requiresAuth(AdminTagCreateStep1Container)} />
+                                <Route path="/admin/settings/tag/add/step-2" exact component={requiresAuth(AdminTagCreateStep2Container)} />
 
 
                                 {/*

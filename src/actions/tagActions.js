@@ -105,7 +105,7 @@ export function pullTagList(page=1, sizePerPage=10, filtersMap=new Map(), onSucc
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postTagDetail(postData, successCallback, failedCallback) {
+export function postTag(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -150,7 +150,7 @@ export function postTagDetail(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postTagDetail | error:", errors); // For debuggin purposes only.
+                console.log("postTag | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
