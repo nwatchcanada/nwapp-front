@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 /**
  *  Validator will validate the register form.
  */
-export default function validateInput(data) {
+export function validateInput(data) {
     let errors = {};
 
     if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "") {
