@@ -23,7 +23,7 @@ export default class AdminHowHearCreateStep1Component extends Component {
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/howHears"><i className="fas fa-tty"></i>&nbsp;HowHears</Link>
+                            <Link to="/admin/settings/how-hears"><i className="fas fa-tty"></i>&nbsp;HowHears</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -56,7 +56,7 @@ export default class AdminHowHearCreateStep1Component extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/admin/settings/howHears" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/settings/how-hears" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
