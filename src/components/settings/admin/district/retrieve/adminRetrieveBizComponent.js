@@ -37,7 +37,7 @@ export default class AdminDistrictRetrieveBizComponent extends Component {
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This districtData is archived and is read-only.
                     </div>
                 }
-                
+
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <table className="table table-bordered custom-cell-w">
@@ -62,9 +62,9 @@ export default class AdminDistrictRetrieveBizComponent extends Component {
                             <tr>
                                 <th scope="row" className="bg-light">Website URL</th>
                                 <td>
-                                    {districtData.websiteURL &&
-                                        <a href={districtData.websiteURL} target="_blank" rel="noopener noreferrer">
-                                            {districtData.websiteURL}&nbsp;<i className="fas fa-external-link-alt"></i>
+                                    {districtData.websiteUrl &&
+                                        <a href={districtData.websiteUrl} target="_blank" rel="noopener noreferrer">
+                                            {districtData.websiteUrl}&nbsp;<i className="fas fa-external-link-alt"></i>
                                         </a>
                                     }
                                 </td>

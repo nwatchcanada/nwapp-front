@@ -11,6 +11,7 @@ import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem
 } from '../../../../../helpers/localStorageUtility';
+import { BUSINESS_TYPE_OF } from '../../../../../constants/api';
 
 
 class AdminDistrictUpdateBizContainer extends Component {
@@ -32,10 +33,11 @@ class AdminDistrictUpdateBizContainer extends Component {
         const isLoading = isEmpty(district);
 
         this.state = {
+            typeOf: BUSINESS_TYPE_OF,
             slug: slug,
             name: district.name,
             description: district.description,
-            websiteURL: district.websiteURL,
+            websiteUrl: district.websiteUrl,
             logo: district.logoImage,
             errors: {},
             district: district,
@@ -59,6 +61,8 @@ class AdminDistrictUpdateBizContainer extends Component {
      */
     getPostData() {
         let postData = Object.assign({}, this.state);
+
+        postData.websiteUrl = this.state.websiteUrl;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -100,9 +104,7 @@ class AdminDistrictUpdateBizContainer extends Component {
     }
 
     onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -153,7 +155,7 @@ class AdminDistrictUpdateBizContainer extends Component {
                 this.props.putDistrict(
                     this.getPostData(),
                     this.onSuccessfulSubmissionCallback,
-                    this.onFailureSubmissionCallback
+                    this.onFailedSubmissionCallback
                 );
             });
 
@@ -200,7 +202,7 @@ class AdminDistrictUpdateBizContainer extends Component {
      */
 
     render() {
-        const { slug, icon, number, name, description, websiteURL, isLoading, logo, errors } = this.state;
+        const { slug, icon, number, name, description, websiteUrl, isLoading, logo, errors } = this.state;
         return (
             <AdminDistrictUpdateBizComponent
                 slug={slug}
@@ -208,7 +210,7 @@ class AdminDistrictUpdateBizContainer extends Component {
                 number={number}
                 name={name}
                 description={description}
-                websiteURL={websiteURL}
+                websiteUrl={websiteUrl}
                 logo={logo}
                 isLoading={isLoading}
                 errors={errors}

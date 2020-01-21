@@ -11,6 +11,7 @@ import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem
 } from '../../../../../helpers/localStorageUtility';
+import { RESIDENCE_TYPE_OF } from '../../../../../constants/api';
 
 
 class AdminDistrictUpdateRezContainer extends Component {
@@ -41,6 +42,7 @@ class AdminDistrictUpdateRezContainer extends Component {
             errors: {},
             district: district,
             isLoading: isLoading,
+            typeOf :RESIDENCE_TYPE_OF,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -100,9 +102,7 @@ class AdminDistrictUpdateRezContainer extends Component {
     }
 
     onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -153,7 +153,7 @@ class AdminDistrictUpdateRezContainer extends Component {
                 this.props.putDistrict(
                     this.getPostData(),
                     this.onSuccessfulSubmissionCallback,
-                    this.onFailureSubmissionCallback
+                    this.onFailedSubmissionCallback
                 );
             });
 

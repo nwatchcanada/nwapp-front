@@ -11,6 +11,7 @@ import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem
 } from '../../../../../helpers/localStorageUtility';
+import { COMMUNITY_CARES_TYPE_OF } from '../../../../../constants/api';
 
 
 class AdminDistrictUpdateComContainer extends Component {
@@ -52,6 +53,7 @@ class AdminDistrictUpdateComContainer extends Component {
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
             name: district.name,
             description: district.description,
+            typeOf: COMMUNITY_CARES_TYPE_OF,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -111,9 +113,7 @@ class AdminDistrictUpdateComContainer extends Component {
     }
 
     onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -164,7 +164,7 @@ class AdminDistrictUpdateComContainer extends Component {
                 this.props.putDistrict(
                     this.getPostData(),
                     this.onSuccessfulSubmissionCallback,
-                    this.onFailureSubmissionCallback
+                    this.onFailedSubmissionCallback
                 );
             });
 

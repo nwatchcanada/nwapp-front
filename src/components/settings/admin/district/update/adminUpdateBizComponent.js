@@ -11,7 +11,7 @@ import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/boot
 
 class AdminDistrictUpdateBizComponent extends Component {
     render() {
-        const { slug, name, description, websiteURL, logo, errors, onTextChange, isLoading, onClick, onDrop } = this.props;
+        const { slug, name, description, websiteUrl, logo, errors, onTextChange, isLoading, onClick, onDrop } = this.props;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -21,13 +21,13 @@ class AdminDistrictUpdateBizComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
+                           <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
+                            <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/settings/district-biz/${slug}`}>
+                            <Link to={`/admin/settings/district/biz/${slug}`}>
                                 <i className="fas fa-building"></i>&nbsp;{name}
                             </Link>
                         </li>
@@ -71,11 +71,11 @@ class AdminDistrictUpdateBizComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-success"
-                                error={errors.websiteURL}
+                                error={errors.websiteUrl}
                                 label="Website URL"
                                 onChange={onTextChange}
-                                value={websiteURL}
-                                name="websiteURL"
+                                value={websiteUrl}
+                                name="websiteUrl"
                                 type="text"
                             />
 
