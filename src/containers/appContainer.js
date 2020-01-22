@@ -250,7 +250,12 @@ import AdminAnnouncementCreateStep1Container from "./settings/admin/announcement
 import AdminAnnouncementCreateStep2Container from "./settings/admin/announcement/create/adminCreateStep2Container";
 import AdminAnnouncementArchiveOperationContainer from "./settings/admin/announcement/operation/adminArchiveContainer";
 
-
+import AdminResourceListContainer from "./settings/admin/resource/list/adminListContainer";
+import AdminResourceRetrieveContainer from "./settings/admin/resource/retrieve/adminRetrieveContainer";
+import AdminResourceUpdateContainer from "./settings/admin/resource/update/adminUpdateContainer";
+import AdminResourceCreateStep1Container from "./settings/admin/resource/create/adminCreateStep1Container";
+import AdminResourceCreateStep2Container from "./settings/admin/resource/create/adminCreateStep2Container";
+import AdminResourceArchiveOperationContainer from "./settings/admin/resource/operation/adminArchiveContainer";
 
 import WatchListContainer from "./watches/list/watchListContainer";
 import WatchCreateStepContainer from "./watches/create/watchCreateStep1Container";
@@ -461,6 +466,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/how-hear/add/step-1" exact component={requiresAuth(AdminHowHearCreateStep1Container)} />
                                 <Route path="/admin/settings/how-hear/add/step-2" exact component={requiresAuth(AdminHowHearCreateStep2Container)} />
                                 <Route path="/admin/settings/how-hear/operation/archive/:id" exact component={requiresAuth(AdminHowHearArchiveOperationContainer)} />
+
                                 {/*
                                     -----------------------
                                     SETTINGS - ANNOUNCEMENT
@@ -472,6 +478,18 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/announcement/add/step-1" exact component={requiresAuth(AdminAnnouncementCreateStep1Container)} />
                                 <Route path="/admin/settings/announcement/add/step-2" exact component={requiresAuth(AdminAnnouncementCreateStep2Container)} />
                                 <Route path="/admin/settings/announcement/operation/archive/:id" exact component={requiresAuth(AdminAnnouncementArchiveOperationContainer)} />
+
+                                {/*
+                                    -------------------
+                                    SETTINGS - RESOURCE
+                                    -------------------
+                                */}
+                                <Route path="/admin/settings/resources" exact component={requiresAuth(AdminResourceListContainer)} />
+                                <Route path="/admin/settings/resource/:id" exact component={requiresAuth(AdminResourceRetrieveContainer)} />
+                                <Route path="/admin/settings/resource/:id/update" exact component={requiresAuth(AdminResourceUpdateContainer)} />
+                                <Route path="/admin/settings/resource/add/step-1" exact component={requiresAuth(AdminResourceCreateStep1Container)} />
+                                <Route path="/admin/settings/resource/add/step-2" exact component={requiresAuth(AdminResourceCreateStep2Container)} />
+                                <Route path="/admin/settings/resource/operation/archive/:id" exact component={requiresAuth(AdminResourceArchiveOperationContainer)} />
 
 
 
