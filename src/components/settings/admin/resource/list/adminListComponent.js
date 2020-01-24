@@ -212,7 +212,7 @@ class AdminResourceListComponent extends Component {
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-bullhorn"></i>&nbsp;Resource
+                            <i className="fas fa-atlas"></i>&nbsp;Resource
                         </li>
                     </ol>
                 </nav>
