@@ -42,8 +42,8 @@ export const NWAPP_DISTRICT_DETAIL_API_ENDPOINT = '/v1/district/<slug>';
 export const WORKERY_ANNOUNCEMENT_LIST_API_ENDPOINT = '/v1/announcements';
 export const WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT = '/v1/announcement/';
 
-export const WORKERY_RESOURCE_LIST_API_ENDPOINT = '/v1/resources';
-export const WORKERY_RESOURCE_DETAIL_API_ENDPOINT = '/v1/resource/';
+export const WORKERY_RESOURCE_ITEM_LIST_API_ENDPOINT = '/v1/resource-items';
+export const WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT = '/v1/resource-item/';
 
 /**
  *  The full address of certain API endpoints from our backend server.

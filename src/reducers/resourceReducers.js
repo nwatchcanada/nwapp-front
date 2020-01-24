@@ -1,18 +1,18 @@
 import {
-    RESOURCE_LIST_REQUEST, RESOURCE_LIST_FAILURE, RESOURCE_LIST_SUCCESS,
-    RESOURCE_DETAIL_REQUEST, RESOURCE_DETAIL_FAILURE, RESOURCE_DETAIL_SUCCESS
+    RESOURCE_ITEM_LIST_REQUEST, RESOURCE_ITEM_LIST_FAILURE, RESOURCE_ITEM_LIST_SUCCESS,
+    RESOURCE_ITEM_DETAIL_REQUEST, RESOURCE_DETAIL_FAILURE, RESOURCE_DETAIL_SUCCESS
 } from '../constants/actionTypes';
 
 
 export const resourceListReducer = function(state = [], action = {}) {
     switch (action.type) {
-        case RESOURCE_LIST_REQUEST:
+        case RESOURCE_ITEM_LIST_REQUEST:
             return Object.assign({}, state, action.payload);
 
-        case RESOURCE_LIST_FAILURE:
+        case RESOURCE_ITEM_LIST_FAILURE:
             return Object.assign({}, state, action.payload);
 
-        case RESOURCE_LIST_SUCCESS:
+        case RESOURCE_ITEM_LIST_SUCCESS:
             return Object.assign({}, state, action.payload);
 
         default:
@@ -23,7 +23,7 @@ export const resourceListReducer = function(state = [], action = {}) {
 
 export const resourceDetailReducer = function(state = [], action = {}) {
     switch (action.type) {
-        case RESOURCE_DETAIL_REQUEST:
+        case RESOURCE_ITEM_DETAIL_REQUEST:
             return Object.assign({}, state, action.payload);
 
         case RESOURCE_DETAIL_FAILURE:

@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import AdminResourceArchiveComponent from "../../../../../components/settings/admin/resource/operation/adminArchiveComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { deleteResource } from "../../../../../actions/resourceActions";
+import { deleteResourceItem } from "../../../../../actions/resourceActions";
 
 
 class AdminResourceArchiveOperationContainer extends Component {
@@ -88,7 +88,7 @@ class AdminResourceArchiveOperationContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deleteResource(this.state.id, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deleteResourceItem(this.state.id, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteResource: (id, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteResource(id, onSuccessCallback, onFailureCallback))
+        deleteResourceItem: (id, onSuccessCallback, onFailureCallback) => {
+            dispatch(deleteResourceItem(id, onSuccessCallback, onFailureCallback))
         },
     }
 }

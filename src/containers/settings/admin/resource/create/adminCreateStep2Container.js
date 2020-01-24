@@ -15,7 +15,7 @@ import {
     localStorageGetObjectItem,
     localStorageRemoveItemsContaining
 } from '../../../../../helpers/localStorageUtility';
-import { postResource } from "../../../../../actions/resourceActions";
+import { postResourceItem } from "../../../../../actions/resourceActions";
 import { validateInput } from '../../../../../validators/resourceValidator';
 
 
@@ -145,7 +145,7 @@ class AdminResourceCreateStep2Container extends Component {
             }, ()=>{
                 // Once our state has been validated `client-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postResource(
+                this.props.postResourceItem(
                     this.getPostData(),
                     this.onSuccessCallback,
                     this.onFailureCallback
@@ -198,8 +198,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postResource: (postData, successCallback, failedCallback) => {
-            dispatch(postResource(postData, successCallback, failedCallback))
+        postResourceItem: (postData, successCallback, failedCallback) => {
+            dispatch(postResourceItem(postData, successCallback, failedCallback))
         },
     }
 }

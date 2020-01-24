@@ -16,7 +16,7 @@ import {
     STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS,
     DISTRICT_LIST_SUCCESS, DISTRICT_DETAIL_SUCCESS,
     ANNOUNCEMENT_LIST_SUCCESS, ANNOUNCEMENT_DETAIL_SUCCESS,
-    RESOURCE_LIST_SUCCESS, RESOURCE_DETAIL_SUCCESS,
+    RESOURCE_ITEM_LIST_SUCCESS, RESOURCE_DETAIL_SUCCESS,
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -112,7 +112,7 @@ const localStorageMiddleware = ({ getState }) => {
             STAFF_LIST_SUCCESS, STAFF_DETAIL_SUCCESS, STAFF_COMMENT_LIST_SUCCESS,
             DISTRICT_LIST_SUCCESS, DISTRICT_DETAIL_SUCCESS,
             ANNOUNCEMENT_LIST_SUCCESS, ANNOUNCEMENT_DETAIL_SUCCESS,
-            RESOURCE_LIST_SUCCESS, RESOURCE_DETAIL_SUCCESS,
+            RESOURCE_ITEM_LIST_SUCCESS, RESOURCE_DETAIL_SUCCESS,
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))

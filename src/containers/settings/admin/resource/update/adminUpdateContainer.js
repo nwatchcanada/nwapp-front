@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminResourceUpdateComponent from "../../../../../components/settings/admin/resource/update/adminUpdateComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullResource, putResource } from '../../../../../actions/resourceActions';
+import { pullResourceItem, putResourceItem } from '../../../../../actions/resourceActions';
 import { validateInput } from "../../../../../validators/resourceValidator";
 import {
     localStorageGetObjectItem,
@@ -68,7 +68,7 @@ class AdminResourceUpdateContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-        this.props.pullResource(
+        this.props.pullResourceItem(
             this.state.id,
             this.onSuccessCallback,
             this.onFailureCallback
@@ -146,7 +146,7 @@ class AdminResourceUpdateContainer extends Component {
             },()=>{
                 // Once our state has been validated `client-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.putResource(
+                this.props.putResourceItem(
                     this.getPostData(),
                     this.onSuccessfulSubmissionCallback,
                     this.onFailureSubmissionCallback
@@ -200,11 +200,11 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        pullResource: (id, successCallback, failedCallback) => {
-            dispatch(pullResource(id, successCallback, failedCallback))
+        pullResourceItem: (id, successCallback, failedCallback) => {
+            dispatch(pullResourceItem(id, successCallback, failedCallback))
         },
-        putResource: (data, successCallback, failedCallback) => {
-            dispatch(putResource(data, successCallback, failedCallback))
+        putResourceItem: (data, successCallback, failedCallback) => {
+            dispatch(putResourceItem(data, successCallback, failedCallback))
         },
     }
 }

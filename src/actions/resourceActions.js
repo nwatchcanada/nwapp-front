@@ -5,10 +5,10 @@ import isEmpty from 'lodash/isEmpty';
 import msgpack from 'msgpack-lite';
 
 import {
-    RESOURCE_LIST_REQUEST, RESOURCE_LIST_FAILURE, RESOURCE_LIST_SUCCESS,
-    RESOURCE_DETAIL_REQUEST, RESOURCE_DETAIL_FAILURE, RESOURCE_DETAIL_SUCCESS
+    RESOURCE_ITEM_LIST_REQUEST, RESOURCE_ITEM_LIST_FAILURE, RESOURCE_ITEM_LIST_SUCCESS,
+    RESOURCE_ITEM_DETAIL_REQUEST, RESOURCE_DETAIL_FAILURE, RESOURCE_DETAIL_SUCCESS
 } from '../constants/actionTypes';
-import { WORKERY_RESOURCE_LIST_API_ENDPOINT, WORKERY_RESOURCE_DETAIL_API_ENDPOINT } from '../constants/api';
+import { WORKERY_RESOURCE_ITEM_LIST_API_ENDPOINT, WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT } from '../constants/api';
 import getCustomAxios from '../helpers/customAxios';
 
 
@@ -16,11 +16,11 @@ import getCustomAxios from '../helpers/customAxios';
 //                                 LIST                                       //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullResourceList(page=1, sizePerPage=10, filtersMap=new Map(), onSuccessCallback=null, onFailureCallback=null) {
+export function pullResourceItemItemList(page=1, sizePerPage=10, filtersMap=new Map(), onSuccessCallback=null, onFailureCallback=null) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setResourceListRequest()
+            setResourceItemListRequest()
         );
 
         console.log(page, sizePerPage, filtersMap, onSuccessCallback, onFailureCallback);
@@ -30,7 +30,7 @@ export function pullResourceList(page=1, sizePerPage=10, filtersMap=new Map(), o
 
         // Generate the URL from the map.
         // Note: Learn about `Map` iteration via https://hackernoon.com/what-you-should-know-about-es6-maps-dc66af6b9a1e
-        let aURL = WORKERY_RESOURCE_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
+        let aURL = WORKERY_RESOURCE_ITEM_LIST_API_ENDPOINT+"?page="+page+"&page_size="+sizePerPage;
         filtersMap.forEach(
             (value, key) => {
                 let decamelizedkey = decamelize(key)
@@ -57,7 +57,7 @@ export function pullResourceList(page=1, sizePerPage=10, filtersMap=new Map(), o
             // Update the global state of the application to store our
             // user data for the application.
             store.dispatch(
-                setResourceListSuccess(data)
+                setResourceItemListSuccess(data)
             );
 
             // DEVELOPERS NOTE:
@@ -76,11 +76,11 @@ export function pullResourceList(page=1, sizePerPage=10, filtersMap=new Map(), o
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullResourceList | error:", errors); // For debuggin purposes only.
+                console.log("pullResourceItemItemList | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceListFailure({
+                    setResourceItemListFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -105,11 +105,11 @@ export function pullResourceList(page=1, sizePerPage=10, filtersMap=new Map(), o
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postResource(postData, successCallback, failedCallback) {
+export function postResourceItem(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
-            setResourceDetailRequest()
+            setResourceItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
@@ -123,7 +123,7 @@ export function postResource(postData, successCallback, failedCallback) {
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.post(WORKERY_RESOURCE_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
+        customAxios.post(WORKERY_RESOURCE_ITEM_LIST_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
@@ -139,7 +139,7 @@ export function postResource(postData, successCallback, failedCallback) {
             // Update the global state of the application to store our
             // user device for the application.
             store.dispatch(
-                setResourceDetailSuccess(device)
+                setResourceItemDetailSuccess(device)
             );
         }).catch( (exception) => {
             if (exception.response) {
@@ -150,11 +150,11 @@ export function postResource(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postResource | error:", errors); // For debuggin purposes only.
+                console.log("postResourceItem | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceDetailFailure({
+                    setResourceItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -179,17 +179,17 @@ export function postResource(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullResource(id, onSuccessCallback, onFailureCallback) {
+export function pullResourceItem(id, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setResourceDetailRequest()
+            setResourceItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_RESOURCE_DETAIL_API_ENDPOINT+id;
+        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+id;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -202,12 +202,12 @@ export function pullResource(id, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("pullResource | Success:", profile); // For debugging purposes.
+            console.log("pullResourceItem | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
             store.dispatch(
-                setResourceDetailSuccess(profile)
+                setResourceItemDetailSuccess(profile)
             );
 
             // DEVELOPERS NOTE:
@@ -226,11 +226,11 @@ export function pullResource(id, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullResource | error:", errors); // For debuggin purposes only.
+                console.log("pullResourceItem | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceDetailFailure({
+                    setResourceItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -255,11 +255,11 @@ export function pullResource(id, onSuccessCallback, onFailureCallback) {
 //                                UPDATE                                      //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function putResource(postData, successCallback, failedCallback) {
+export function putResourceItem(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
-            setResourceDetailRequest()
+            setResourceItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
@@ -272,7 +272,7 @@ export function putResource(postData, successCallback, failedCallback) {
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode(decamelizedData);
 
-        const aURL = WORKERY_RESOURCE_DETAIL_API_ENDPOINT+postData.id;
+        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+postData.id;
         console.log("URL:", aURL);
 
         // Perform our API submission.
@@ -288,7 +288,7 @@ export function putResource(postData, successCallback, failedCallback) {
             // Update the global state of the application to store our
             // user device for the application.
             store.dispatch(
-                setResourceDetailSuccess(device)
+                setResourceItemDetailSuccess(device)
             );
 
             // Run our success callback function.
@@ -303,11 +303,11 @@ export function putResource(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("putResource | error:", errors); // For debuggin purposes only.
+                console.log("putResourceItem | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceDetailFailure({
+                    setResourceItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -332,17 +332,17 @@ export function putResource(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteResource(id, onSuccessCallback, onFailureCallback) {
+export function deleteResourceItem(id, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setResourceDetailRequest()
+            setResourceItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_RESOURCE_DETAIL_API_ENDPOINT+id;
+        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+id;
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -355,12 +355,12 @@ export function deleteResource(id, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("deleteResource | Success:", profile); // For debugging purposes.
+            console.log("deleteResourceItem | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
             store.dispatch(
-                setResourceDetailSuccess(profile)
+                setResourceItemDetailSuccess(profile)
             );
 
             // DEVELOPERS NOTE:
@@ -383,7 +383,7 @@ export function deleteResource(id, onSuccessCallback, onFailureCallback) {
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceDetailFailure({
+                    setResourceItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -408,8 +408,8 @@ export function deleteResource(id, onSuccessCallback, onFailureCallback) {
 //                                REDUX ACTIONS                               //
 ////////////////////////////////////////////////////////////////////////////////
 
-export const setResourceListRequest = () => ({
-    type: RESOURCE_LIST_REQUEST,
+export const setResourceItemListRequest = () => ({
+    type: RESOURCE_ITEM_LIST_REQUEST,
     payload: {
         isAPIRequestRunning: true,
         page: 1,
@@ -418,20 +418,20 @@ export const setResourceListRequest = () => ({
 });
 
 
-export const setResourceListFailure = (info) => ({
-    type: RESOURCE_LIST_FAILURE,
+export const setResourceItemListFailure = (info) => ({
+    type: RESOURCE_ITEM_LIST_FAILURE,
     payload: info,
 });
 
 
-export const setResourceListSuccess = (info) => ({
-    type: RESOURCE_LIST_SUCCESS,
+export const setResourceItemListSuccess = (info) => ({
+    type: RESOURCE_ITEM_LIST_SUCCESS,
     payload: info,
 });
 
 
-export const setResourceDetailRequest = () => ({
-    type: RESOURCE_DETAIL_REQUEST,
+export const setResourceItemDetailRequest = () => ({
+    type: RESOURCE_ITEM_DETAIL_REQUEST,
     payload: {
         isAPIRequestRunning: true,
         errors: {}
@@ -439,13 +439,13 @@ export const setResourceDetailRequest = () => ({
 });
 
 
-export const setResourceDetailSuccess = resourceDetail => ({
+export const setResourceItemDetailSuccess = resourceDetail => ({
     type: RESOURCE_DETAIL_SUCCESS,
     payload: resourceDetail,
 });
 
 
-export const setResourceDetailFailure = resourceDetail => ({
+export const setResourceItemDetailFailure = resourceDetail => ({
     type: RESOURCE_DETAIL_FAILURE,
     payload: resourceDetail,
 });
@@ -459,7 +459,7 @@ export const setResourceDetailFailure = resourceDetail => ({
  * Utility function takes the API data and converts it to HTML dropdown
  * options which will be consumed by the `react-select` library elements.
  */
-export function getResourceReactSelectOptions(resourceList=[], selectName="resource") {
+export function getResourceItemReactSelectOptions(resourceList=[], selectName="resource") {
     const resourceOptions = [];
     const isNotProductionsEmpty = isEmpty(resourceList) === false;
     if (isNotProductionsEmpty) {
@@ -486,13 +486,13 @@ export function getResourceReactSelectOptions(resourceList=[], selectName="resou
  * from the API and returns the HTML dropdown selections which will be consumed
  * by the GUI powered by `react-select`.
  */
-export function getPickedResourceReactSelectOptions(resourceTargetsArray, resourceList=[], selectName="resource") {
+export function getPickedResourceItemReactSelectOptions(resourceTargetsArray, resourceList=[], selectName="resource") {
     const resourceOptions = [];
     if (isEmpty(resourceList) === false && isEmpty(resourceTargetsArray) === false) {
         const results = resourceList.results;
         const isResultsNotEmpty = results.length > 0;
-        // console.log("getPickedResourceReactSelectOptions | results:",results);
-        // console.log("getPickedResourceReactSelectOptions | isResultsNotEmpty:",isResultsNotEmpty);
+        // console.log("getPickedResourceItemReactSelectOptions | results:",results);
+        // console.log("getPickedResourceItemReactSelectOptions | isResultsNotEmpty:",isResultsNotEmpty);
         if (isResultsNotEmpty) {
             for (let i = 0; i < resourceTargetsArray.length; i++) {
                 let resourceTarget = resourceTargetsArray[i];

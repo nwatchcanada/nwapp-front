@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminResourceRetrieveComponent from "../../../../../components/settings/admin/resource/retrieve/adminRetrieveComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullResource } from '../../../../../actions/resourceActions';
+import { pullResourceItem } from '../../../../../actions/resourceActions';
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../../../helpers/localStorageUtility';
@@ -48,7 +48,7 @@ class AdminResourceRetrieveContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-        this.props.pullResource(
+        this.props.pullResourceItem(
             this.state.id,
             this.onSuccessCallback,
             this.onFailureCallback
@@ -132,8 +132,8 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullResource: (id, successCallback, failedCallback) => {
-            dispatch(pullResource(id, successCallback, failedCallback))
+        pullResourceItem: (id, successCallback, failedCallback) => {
+            dispatch(pullResourceItem(id, successCallback, failedCallback))
         },
     }
 }

@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import AdminResourceListComponent from "../../../../../components/settings/admin/resource/list/adminListComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullResourceList } from "../../../../../actions/resourceActions";
+import { pullResourceItemItemList } from "../../../../../actions/resourceActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 
 
@@ -70,7 +70,7 @@ class AdminResourceListContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Get our data.
-        this.props.pullResourceList(
+        this.props.pullResourceItemItemList(
             this.state.page,
             this.state.sizePerPage,
             this.state.parametersMap,
@@ -128,7 +128,7 @@ class AdminResourceListContainer extends Component {
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
                 // Get our data.
-                this.props.pullResourceList(
+                this.props.pullResourceItemItemList(
                     this.state.page,
                     this.state.sizePerPage,
                     this.state.parametersMap,
@@ -211,7 +211,7 @@ class AdminResourceListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullResourceList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullResourceItemItemList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -221,7 +221,7 @@ class AdminResourceListContainer extends Component {
             this.setState(
                 { page: page, sizePerPage:sizePerPage, isLoading: true, },
                 ()=>{
-                    this.props.pullResourceList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullResourceItemItemList(page, sizePerPage, this.state.parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
 
@@ -238,7 +238,7 @@ class AdminResourceListContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullResourceList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
+                    this.props.pullResourceItemItemList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessListCallback, this.onFailureListCallback);
                 }
             );
         }else {
@@ -284,9 +284,9 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullResourceList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+        pullResourceItemItemList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
             dispatch(
-                pullResourceList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+                pullResourceItemItemList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
         },
     }
