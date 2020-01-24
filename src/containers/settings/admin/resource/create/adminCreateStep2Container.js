@@ -12,6 +12,7 @@ import {
 import {
     localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
+    localStorageGetObjectItem,
     localStorageRemoveItemsContaining
 } from '../../../../../helpers/localStorageUtility';
 import { postResource } from "../../../../../actions/resourceActions";
@@ -28,7 +29,29 @@ class AdminResourceCreateStep2Container extends Component {
         super(props);
 
         this.state = {
+            // DEVELOPERS NOTE: This variable is used as the main way to add
+            // GUI modification to the fields. Simply adding a key and the
+            // message will result in an error message displaying for that
+            // field. Please make sure the `name` in the HTML field equals
+            // the `name` dictonary key in this dictionary.
+            errors: {},
+
+            // Variable used to lock buttons when makig submissions.
+            isLoading: false,
+
+            // ALL OUR GENERAL INFORMATION IS STORED HERE.
             text: localStorage.getItem('nwapp-resource-add-text'),
+
+            category: localStorageGetIntegerItem("nwapp-resource-add-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
+            typeOf: localStorageGetIntegerItem("nwapp-resource-add-typeOf"),
+            typeOfOption: localStorageGetObjectItem('nwapp-register-typeOfOption'),
+            name: localStorage.getItem('nwapp-resource-add-name'),
+            url: localStorage.getItem('nwapp-resource-add-url'),
+            embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
+            imageFile: null,
+            file: null,
+            description: localStorage.getItem('nwapp-resource-add-description'),
             errors: {},
             isLoading: false
         }

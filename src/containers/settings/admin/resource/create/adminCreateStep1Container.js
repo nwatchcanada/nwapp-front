@@ -5,6 +5,11 @@ import Scroll from 'react-scroll';
 import AdminResourceCreateStep1Component from "../../../../../components/settings/admin/resource/create/adminCreateStep1Component";
 import { validateInput } from "../../../../../validators/resourceValidator";
 import { RESOURCE_CATEGORY_CHOICES, RESOURCE_TYPE_OF_CHOICES } from "../../../../../constants/api";
+import {
+    localStorageGetIntegerItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetObjectItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminResourceCreateStep1Container extends Component {
@@ -30,17 +35,16 @@ class AdminResourceCreateStep1Container extends Component {
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
             text: localStorage.getItem('nwapp-resource-add-text'),
 
-
-            category: "",
-            categoryOption: {},
-            typeOf: "",
-            typeOfOption: {},
-            name: "",
-            url: "",
-            youTubeEmbedCode: "",
+            category: localStorageGetIntegerItem("nwapp-resource-add-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
+            typeOf: localStorageGetIntegerItem("nwapp-resource-add-typeOf"),
+            typeOfOption: localStorageGetObjectItem('nwapp-register-typeOfOption'),
+            name: localStorage.getItem('nwapp-resource-add-name'),
+            url: localStorage.getItem('nwapp-resource-add-url'),
+            embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
             imageFile: null,
             file: null,
-            description: "",
+            description: localStorage.getItem('nwapp-resource-add-description'),
             errors: {},
             isLoading: false
         }
@@ -81,6 +85,7 @@ class AdminResourceCreateStep1Container extends Component {
 
     onSuccessfulSubmissionCallback(resource) {
         this.setState({ errors: {}, isLoading: true, })
+        console.log("STATE:\n",this.state,"\n\n");
         this.props.history.push("/admin/settings/resource/add/step-2");
     }
 
@@ -115,6 +120,8 @@ class AdminResourceCreateStep1Container extends Component {
             optionKey: option,
         });
         console.log("optionKey", optionKey);
+        localStorage.setItem('nwapp-resource-add-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-resource-add-'+optionKey, option);
     }
 
     /**
@@ -210,7 +217,7 @@ class AdminResourceCreateStep1Container extends Component {
      */
 
     render() {
-        const { category, typeOf, name, url, youTubeEmbedCode, imageFile, file, description, errors } = this.state;
+        const { category, typeOf, name, url, embedCode, imageFile, file, description, errors } = this.state;
         return (
             <AdminResourceCreateStep1Component
                 category={category}
@@ -219,7 +226,7 @@ class AdminResourceCreateStep1Container extends Component {
                 typeOfOptions={RESOURCE_TYPE_OF_CHOICES}
                 name={name}
                 url={url}
-                youTubeEmbedCode={youTubeEmbedCode}
+                embedCode={embedCode}
                 imageFile={imageFile}
                 file={file}
                 description={description}

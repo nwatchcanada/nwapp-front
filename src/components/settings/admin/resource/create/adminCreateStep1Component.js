@@ -19,7 +19,7 @@ import {
 export default class AdminResourceCreateStep1Component extends Component {
     render() {
         const {
-            category, categoryOptions, typeOf, typeOfOptions, name, url, description, youTubeEmbedCode, errors,
+            category, categoryOptions, typeOf, typeOfOptions, name, url, description, embedCode, errors,
             imageFile, file,
             onTextChange, onSelectChange, isLoading, onClick,
             onImageDrop, onRemoveImageUploadClick,
@@ -90,7 +90,7 @@ export default class AdminResourceCreateStep1Component extends Component {
                             {isYouTubeVideoTypeOf &&
                                 <YouTubeVideoFormComponent
                                     name={name}
-                                    youTubeEmbedCode={youTubeEmbedCode}
+                                    embedCode={embedCode}
                                     description={description}
                                     errors={errors}
                                     onTextChange={onTextChange}
@@ -182,7 +182,7 @@ class LinkFormComponent extends Component {
 
 class YouTubeVideoFormComponent extends Component {
     render() {
-        const { name, youTubeEmbedCode, description, errors, onTextChange } = this.props;
+        const { name, embedCode, description, errors, onTextChange } = this.props;
         return (
             <div>
                 <BootstrapInput
@@ -196,15 +196,15 @@ class YouTubeVideoFormComponent extends Component {
                     type="text"
                 />
                 <BootstrapTextarea
-                    name="youTubeEmbedCode"
+                    name="embedCode"
                     borderColour="border-primary"
                     label="YouTube Embed Code (*)"
                     placeholder="Please set the YouTube embed code"
                     rows="5"
-                    value={youTubeEmbedCode}
+                    value={embedCode}
                     helpText="This is the embed code of the video."
                     onChange={onTextChange}
-                    error={errors.youTubeEmbedCode}
+                    error={errors.embedCode}
                 />
                 <BootstrapTextarea
                     name="description"

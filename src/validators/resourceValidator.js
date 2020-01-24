@@ -68,8 +68,8 @@ export function validateYouTubeVideoInput(data) {
     if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
-    if (data.youTubeEmbedCode === undefined || data.youTubeEmbedCode === null || data.youTubeEmbedCode === "") {
-        errors.youTubeEmbedCode = 'This field is required';
+    if (data.embedCode === undefined || data.embedCode === null || data.embedCode === "") {
+        errors.embedCode = 'This field is required';
     }
     if (data.description === undefined || data.description === null || data.description === "") {
         errors.description = 'This field is required';
