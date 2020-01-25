@@ -23,7 +23,7 @@ class AdminResourceCreateStep3Component extends Component {
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/resources"><i className="fas fa-bullhorn"></i>&nbsp;Resources</Link>
+                            <Link to="/admin/settings/resources"><i className="fas fa-atlas"></i>&nbsp;Resources</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add

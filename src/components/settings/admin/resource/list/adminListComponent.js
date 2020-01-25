@@ -218,7 +218,7 @@ class AdminResourceListComponent extends Component {
                 </nav>
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-bullhorn"></i>&nbsp;Resource</h1>
+                <h1><i className="fas fa-atlas"></i>&nbsp;Resource</h1>
 
                 <div className="row">
                     <div className="col-md-12">

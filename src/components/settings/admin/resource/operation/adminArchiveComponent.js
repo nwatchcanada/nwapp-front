@@ -35,7 +35,7 @@ export default class AdminResourceArchiveComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/admin/settings/resources">
-                                <i className="fas fa-bullhorn"></i>&nbsp;Resources
+                                <i className="fas fa-atlas"></i>&nbsp;Resources
                             </Link>
                         </li>
 
