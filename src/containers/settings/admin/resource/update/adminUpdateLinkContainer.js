@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminResourceUpdateLinkComponent from "../../../../../components/settings/admin/resource/update/adminUpdateLinkComponent";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { pullResourceItem, putResourceItem } from '../../../../../actions/resourceActions';
 import { validateInput } from "../../../../../validators/resourceValidator";
+import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 import {
     RESOURCE_CATEGORY_CHOICES,
     RESOURCE_TYPE_OF_CHOICES,
     LINK_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
-import {
-    localStorageGetIntegerItem,
-    localStorageSetObjectOrArrayItem,
-    localStorageGetObjectItem
-} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminResourceUpdateLinkContainer extends Component {
@@ -25,29 +27,50 @@ class AdminResourceUpdateLinkContainer extends Component {
     constructor(props) {
         super(props);
 
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const resource = localStorageGetObjectItem("nwapp-admin-retrieve-resource-"+slug.toString() );
+        const isLoading = isEmpty(resource);
+
         this.state = {
-            // DEVELOPERS NOTE: This variable is used as the main way to add
-            // GUI modification to the fields. Simply adding a key and the
-            // message will result in an error message displaying for that
-            // field. Please make sure the `name` in the HTML field equals
-            // the `name` dictonary key in this dictionary.
+            slug: slug,
+            typeOf: resource.typeOf,
+            category: resource.category,
+            name: resource.name,
+            externalUrl: resource.externalUrl,
+            description: resource.description,
+            embedCode: null,
+            isArchived: resource.isArchived,
             errors: {},
-
-            // Variable used to lock buttons when makig submissions.
-            isLoading: false,
-
-            // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            slug: this.props.resource.slug,
-            typeOf: LINK_RESOURCE_TYPE_OF,
-            category: this.props.resource.category,
-            name: this.props.resource.name,
-            externalUrl: this.props.resource.externalUrl,
-            description: this.props.resource.description,
+            resource: resource,
+            isLoading: isLoading,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.getPostData = this.getPostData.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
+        this.onFailureSubmissionCallback = this.onFailureSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -57,6 +80,11 @@ class AdminResourceUpdateLinkContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+        this.props.pullResourceItem(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -73,6 +101,48 @@ class AdminResourceUpdateLinkContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulSubmissionCallback(resource) {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Resource has been successfully updated.");
+        this.props.history.push("/admin/settings/resource/"+this.state.id);
+    }
+
+    onFailureSubmissionCallback(errors) {
+        this.setState({
+            errors: errors, isLoading: false,
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    onSuccessCallback(resource) {
+        console.log("onSuccessCallback |", resource);
+        this.setState({
+            isLoading: false,
+            resource: resource,
+            slug: resource.slug,
+            typeOf: resource.typeOf,
+            category: resource.category,
+            name: resource.name,
+            externalUrl: resource.externalUrl,
+            description: resource.description,
+            isArchived: resource.isArchived,
+            embedCode: null,
+        });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-resource-"+this.state.slug.toString(), resource);
+    }
+
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -81,8 +151,7 @@ class AdminResourceUpdateLinkContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        });
-        localStorage.setItem('nwapp-resource-add-'+[e.target.name], e.target.value);
+        })
     }
 
     onSelectChange(option) {
@@ -91,9 +160,6 @@ class AdminResourceUpdateLinkContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        console.log("optionKey", optionKey);
-        localStorage.setItem('nwapp-resource-add-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-resource-add-'+optionKey, option);
     }
 
     onClick(e) {
@@ -105,12 +171,25 @@ class AdminResourceUpdateLinkContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.setState({ errors: {}, isLoading: true, })
-            this.props.history.push("/admin/settings/resource/add/step-3");
+            this.setState({
+                isLoading: true,
+                error: {},
+            },()=>{
+                // Once our state has been validated `client-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.putResourceItem(
+                    this.getPostData(),
+                    this.onSuccessfulSubmissionCallback,
+                    this.onFailureSubmissionCallback
+                );
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
-            this.setState({ errors: errors, isLoading: false, });
+            this.setState({
+                errors: errors,
+                isLoading: false,
+            });
 
             // The following code will cause the screen to scroll to the top of
             // the page. Please see ``react-scroll`` for more information:
@@ -120,13 +199,14 @@ class AdminResourceUpdateLinkContainer extends Component {
         }
     }
 
+
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { slug, category, typeOf, name, externalUrl, description, errors } = this.state;
+        const { slug, typeOf, category, name, externalUrl, description, embedCode, errors, isLoading } = this.state;
         return (
             <AdminResourceUpdateLinkComponent
                 slug={slug}
@@ -136,7 +216,9 @@ class AdminResourceUpdateLinkContainer extends Component {
                 name={name}
                 externalUrl={externalUrl}
                 description={description}
+                embedCode={embedCode}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
@@ -153,7 +235,17 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
+        pullResourceItem: (slug, successCallback, failedCallback) => {
+            dispatch(pullResourceItem(slug, successCallback, failedCallback))
+        },
+        putResourceItem: (data, successCallback, failedCallback) => {
+            dispatch(putResourceItem(data, successCallback, failedCallback))
+        },
+    }
 }
 
 

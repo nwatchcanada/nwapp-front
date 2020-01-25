@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
+import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 
 
-export default class AdminResourceUpdateLinkComponent extends Component {
+class AdminResourceUpdateLinkComponent extends Component {
     render() {
         const {
             slug, category, categoryOptions, name, externalUrl, description, errors,
@@ -16,6 +17,7 @@ export default class AdminResourceUpdateLinkComponent extends Component {
         } = this.props;
         return (
             <main id="main" role="main">
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -25,7 +27,7 @@ export default class AdminResourceUpdateLinkComponent extends Component {
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/resources"><i className="fas fa-atlas"></i>&nbsp;Resources</Link>
+                            <Link to="/admin/settings/resources"><i className="fas fa-bullhorn"></i>&nbsp;Resources</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/settings/resource/${slug}`}>
@@ -38,11 +40,10 @@ export default class AdminResourceUpdateLinkComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1>Update Resource - Details</h1>
-
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
+                            <h1>Update Resource</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -107,3 +108,5 @@ export default class AdminResourceUpdateLinkComponent extends Component {
         );
     }
 }
+
+export default AdminResourceUpdateLinkComponent;

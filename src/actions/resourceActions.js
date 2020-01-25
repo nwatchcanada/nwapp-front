@@ -179,7 +179,7 @@ export function postResourceItem(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullResourceItem(id, onSuccessCallback, onFailureCallback) {
+export function pullResourceItem(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -189,7 +189,7 @@ export function pullResourceItem(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+id;
+        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+slug;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -272,7 +272,7 @@ export function putResourceItem(postData, successCallback, failedCallback) {
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode(decamelizedData);
 
-        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+postData.id;
+        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+postData.slug;
         console.log("URL:", aURL);
 
         // Perform our API submission.
@@ -332,7 +332,7 @@ export function putResourceItem(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteResourceItem(id, onSuccessCallback, onFailureCallback) {
+export function deleteResourceItem(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -342,7 +342,7 @@ export function deleteResourceItem(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+id;
+        const aURL = WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT+slug;
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
