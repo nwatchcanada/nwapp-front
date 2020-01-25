@@ -93,6 +93,15 @@ export default class AdminResourceRetrieveComponent extends Component {
                                     </tr>
                                 }
 
+                                {resourceData && resourceData.imageUrl &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Image</th>
+                                        <td>
+                                            <img src={resourceData.imageUrl} alt="Image" />
+                                        </td>
+                                    </tr>
+                                }
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-server"></i>&nbsp;System
