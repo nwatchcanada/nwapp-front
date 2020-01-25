@@ -25,18 +25,18 @@ export default class AdminResourceRetrieveComponent extends Component {
                             <Link to="/admin/settings/resources"><i className="fas fa-bullhorn"></i>&nbsp;Resources</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-resource"></i>&nbsp;{resourceData && resourceData.text}
+                            <i className="fas fa-resource"></i>&nbsp;{resourceData && resourceData.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-resource"></i>&nbsp;{resourceData && resourceData.text}</h1>
+                <h1><i className="fas fa-resource"></i>&nbsp;{resourceData && resourceData.name}</h1>
 
                 {resourceData.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
-                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This resourceData is archived and is read-only.
+                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This resource item is archived and is read-only.
                     </div>
                 }
 
@@ -48,11 +48,51 @@ export default class AdminResourceRetrieveComponent extends Component {
                                     <th scope="row" colSpan="2" className="text-light"><i className="fas fa-table"></i>&nbsp;Resource details</th>
                                 </tr>
 
-                                <tr>
-                                    <th scope="row" className="bg-light">Text</th>
-                                    <td>{resourceData.text}</td>
-                                </tr>
-                                
+                                {resourceData && resourceData.name &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Name</th>
+                                        <td>{resourceData.name}</td>
+                                    </tr>
+                                }
+
+                                {resourceData && resourceData.description &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Description</th>
+                                        <td>{resourceData.description}</td>
+                                    </tr>
+                                }
+
+
+                                {resourceData && resourceData.category &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Category</th>
+                                        <td>{resourceData.categoryLabel}</td>
+                                    </tr>
+                                }
+
+                                {resourceData && resourceData.typeOf &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Type</th>
+                                        <td>{resourceData.typeOfLabel}</td>
+                                    </tr>
+                                }
+
+                                {resourceData && resourceData.externalUrl &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">External URL</th>
+                                        <td>
+                                            <a href={resourceData.externalUrl} target="_blank">{resourceData.externalUrl}&nbsp;<i className="fas fa-external-link-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                                {resourceData && resourceData.embedCode &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">YouTube Video</th>
+                                        <td dangerouslySetInnerHTML={{__html:resourceData.embedCode}}></td>
+                                    </tr>
+                                }
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-server"></i>&nbsp;System

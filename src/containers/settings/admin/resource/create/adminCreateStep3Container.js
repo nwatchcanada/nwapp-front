@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminResourceCreateStep3Component from "../../../../../components/settings/admin/resource/create/adminCreateStep3Component";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
@@ -80,6 +81,13 @@ class AdminResourceCreateStep3Container extends Component {
      */
     getPostData() {
         let postData = Object.assign({}, this.state);
+
+        if (this.state.uploadContent === "" || this.state.uploadContent === undefined || isEmpty(this.state.uploadContent) ) {
+            postData.uploadContent = null;
+        }
+        if (this.state.uploadFilename === "" || this.state.uploadFilename === null || this.state.uploadFilename === undefined) {
+            postData.uploadFilename = null;
+        }
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);

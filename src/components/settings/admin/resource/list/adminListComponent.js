@@ -59,7 +59,7 @@ class RemoteListComponent extends Component {
             formatter: createdAtFormatter
         },
         {
-            dataField: 'id',
+            dataField: 'slug',
             text: '',
             sort: false,
             formatter: detailLinkFormatter
@@ -148,7 +148,7 @@ function fileFormatter(cell, row){
             }
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             {row.isArchived === false &&
-                <Link to={`/admin/settings/resource/${row.user}/file/archive/${row.id}`}>
+                <Link to={`/admin/settings/resource/${row.user}/file/archive/${row.slug}`}>
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             }
@@ -173,10 +173,10 @@ function detailLinkFormatter(cell, row){
     } else {
         return (
             <div>
-                <Link to={`/admin/settings/resource/${row.id}`} className="btn btn-success btn-xs">
+                <Link to={`/admin/settings/resource/${row.slug}`} className="btn btn-success btn-xs">
                     <i className="fas fa-binoculars"></i>&nbsp;View
                 </Link>;
-                <Link to={`/admin/settings/resource/operation/archive/${row.id}`} className="btn btn-danger btn-xs">
+                <Link to={`/admin/settings/resource/operation/archive/${row.slug}`} className="btn btn-danger btn-xs">
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             </div>
