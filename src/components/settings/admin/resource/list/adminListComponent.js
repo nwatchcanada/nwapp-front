@@ -50,8 +50,8 @@ class RemoteListComponent extends Component {
             }),
             formatter: statusFormatter
         },{
-            dataField: 'text',
-            text: 'Text',
+            dataField: 'name',
+            text: 'Name',
         },{
             dataField: 'createdAt',
             text: 'Created At',

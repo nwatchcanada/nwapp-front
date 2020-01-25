@@ -48,261 +48,87 @@ export default class AdminResourceCreateStep1Component extends Component {
                     </ol>
                 </nav>
 
+                <h1>Create Resource - Select Type</h1>
+
                 <div className="row">
-                    <div className="col-md-5 mx-auto mt-2">
-                        <form>
-                            <h1>Create New Resource</h1>
-                            <p>All fields which have the (*) symbol are required to be filled out.</p>
-
-                            <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Category (*)"
-                                name="category"
-                                defaultOptionLabel="Please select the category."
-                                options={categoryOptions}
-                                value={category}
-                                error={errors.category}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Type (*)"
-                                name="typeOf"
-                                defaultOptionLabel="Please select the type."
-                                options={typeOfOptions}
-                                value={typeOf}
-                                error={errors.typeOf}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            {isLinkTypeOf &&
-                                <LinkFormComponent
-                                    name={name}
-                                    externalUrl={externalUrl}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                />
-                            }
-                            {isYouTubeVideoTypeOf &&
-                                <YouTubeVideoFormComponent
-                                    name={name}
-                                    embedCode={embedCode}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                />
-                            }
-                            {isImageTypeOf &&
-                                <ImageFormComponent
-                                    name={name}
-                                    imageFile={imageFile}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                    onImageDrop={onImageDrop}
-                                    onRemoveImageUploadClick={onRemoveImageUploadClick}
-                                />
-                            }
-                            {isFileTypeOf &&
-                                <FileFormComponent
-                                    name={name}
-                                    file={file}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                    onFileDrop={onFileDrop}
-                                    onRemoveFileUploadClick={onRemoveFileUploadClick}
-                                />
-                            }
-
-                            <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Save
-                                </button>
-                                <Link to="/admin/settings/resources" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i> Back
-                                </Link>
-                            </div>
-
-                        </form>
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey active">
+                            <strong>
+                                <span className="num">1.</span><span className="">Type</span>
+                            </strong>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <span className="num">2.</span><span className="">Details</span>
+                        </div>
                     </div>
+                </div>
+
+                <div className="card-group row">
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-link fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Link</h3>
+                                <p className="card-text">Add a residential district</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, LINK_RESOURCE_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-film fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">YouTube Video</h3>
+                                <p className="card-text">Add a business district</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, YOUTUBE_VIDEO_RESOURCE_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-image fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Image</h3>
+                                <p className="card-text">Add a community cares district</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, IMAGE_RESOURCE_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-file fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">File</h3>
+                                <p className="card-text">Add a community cares district</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, FILE_RESOURCE_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="form-group">
+                    <Link to="/admin/settings/resources" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                    </Link>
                 </div>
 
             </main>
         );
     }
-}
-
-
-class LinkFormComponent extends Component {
-    render() {
-        const { name, externalUrl, description, errors, onTextChange } = this.props;
-        return (
-            <div>
-                <BootstrapInput
-                    inputClassName="form-control form-control-lg"
-                    borderColour="border-primary"
-                    error={errors.name}
-                    label="Name (*)"
-                    onChange={onTextChange}
-                    value={name}
-                    name="name"
-                    type="text"
-                />
-                <BootstrapInput
-                    inputClassName="form-control form-control-lg"
-                    borderColour="border-primary"
-                    error={errors.externalUrl}
-                    label="External URL (*)"
-                    onChange={onTextChange}
-                    value={externalUrl}
-                    name="externalUrl"
-                    type="text"
-                />
-                <BootstrapTextarea
-                    name="description"
-                    borderColour="border-primary"
-                    label="Description (*)"
-                    placeholder="Please set the link description"
-                    rows="5"
-                    value={description}
-                    helpText="This is the description of the link."
-                    onChange={onTextChange}
-                    error={errors.description}
-                />
-            </div>
-        );
-    };
-}
-
-
-class YouTubeVideoFormComponent extends Component {
-    render() {
-        const { name, embedCode, description, errors, onTextChange } = this.props;
-        return (
-            <div>
-                <BootstrapInput
-                    inputClassName="form-control form-control-lg"
-                    borderColour="border-primary"
-                    error={errors.name}
-                    label="Name (*)"
-                    onChange={onTextChange}
-                    value={name}
-                    name="name"
-                    type="text"
-                />
-                <BootstrapTextarea
-                    name="embedCode"
-                    borderColour="border-primary"
-                    label="YouTube Embed Code (*)"
-                    placeholder="Please set the YouTube embed code"
-                    rows="5"
-                    value={embedCode}
-                    helpText="This is the embed code of the video."
-                    onChange={onTextChange}
-                    error={errors.embedCode}
-                />
-                <BootstrapTextarea
-                    name="description"
-                    borderColour="border-primary"
-                    label="Description (*)"
-                    placeholder="Please set the link description"
-                    rows="5"
-                    value={description}
-                    helpText="This is the description of the link."
-                    onChange={onTextChange}
-                    error={errors.description}
-                />
-            </div>
-        );
-    };
-}
-
-
-class ImageFormComponent extends Component {
-    render() {
-        const {
-            name, imageFile, description, errors, onTextChange, onImageDrop, onRemoveImageUploadClick
-        } = this.props;
-        return (
-            <div>
-                <BootstrapInput
-                    inputClassName="form-control form-control-lg"
-                    borderColour="border-primary"
-                    error={errors.name}
-                    label="Name (*)"
-                    onChange={onTextChange}
-                    value={name}
-                    name="name"
-                    type="text"
-                />
-                <BootstrapSingleImageUploadAndPreview
-                    error={errors.imageFile}
-                    label="Image File (*)"
-                    onDrop={onImageDrop}
-                    name="imageFile"
-                    fileObj={imageFile}
-                    onRemoveUploadClick={onRemoveImageUploadClick}
-                />
-                <BootstrapTextarea
-                    name="description"
-                    borderColour="border-primary"
-                    label="Description (*)"
-                    placeholder="Please set the link description"
-                    rows="5"
-                    value={description}
-                    helpText="This is the description of the link."
-                    onChange={onTextChange}
-                    error={errors.description}
-                />
-            </div>
-        );
-    };
-}
-
-
-class FileFormComponent extends Component {
-    render() {
-        const {
-            name, file, description, errors, onTextChange,
-            onFileDrop, onRemoveFileUploadClick
-        } = this.props;
-        return (
-            <div>
-                <BootstrapInput
-                    inputClassName="form-control form-control-lg"
-                    borderColour="border-primary"
-                    error={errors.name}
-                    label="Name (*)"
-                    onChange={onTextChange}
-                    value={name}
-                    name="name"
-                    type="text"
-                />
-                <BootstrapSingleFileUploadAndPreview
-                    error={errors.file}
-                    label="File (*)"
-                    onDrop={onFileDrop}
-                    name="file"
-                    fileObj={file}
-                    onRemoveUploadClick={onRemoveFileUploadClick}
-                />
-                <BootstrapTextarea
-                    name="description"
-                    borderColour="border-primary"
-                    label="Description (*)"
-                    placeholder="Please set the link description"
-                    rows="5"
-                    value={description}
-                    helpText="This is the description of the link."
-                    onChange={onTextChange}
-                    error={errors.description}
-                />
-            </div>
-        );
-    };
 }

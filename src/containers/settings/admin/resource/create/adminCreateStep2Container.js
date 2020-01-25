@@ -3,20 +3,13 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminResourceCreateStep2Component from "../../../../../components/settings/admin/resource/create/adminCreateStep2Component";
-import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from "../../../../../constants/api";
+import { validateInput } from "../../../../../validators/resourceValidator";
+import { RESOURCE_CATEGORY_CHOICES, RESOURCE_TYPE_OF_CHOICES } from "../../../../../constants/api";
 import {
     localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
-    localStorageGetObjectItem,
-    localStorageRemoveItemsContaining
+    localStorageGetObjectItem
 } from '../../../../../helpers/localStorageUtility';
-import { postResourceItem } from "../../../../../actions/resourceActions";
-import { validateInput } from '../../../../../validators/resourceValidator';
 
 
 class AdminResourceCreateStep2Container extends Component {
@@ -56,23 +49,15 @@ class AdminResourceCreateStep2Container extends Component {
             isLoading: false
         }
 
-        this.getPostData = this.getPostData.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
+        this.onImageDrop = this.onImageDrop.bind(this);
+        this.onFileDrop = this.onFileDrop.bind(this);
+        this.onRemoveImageUploadClick = this.onRemoveImageUploadClick.bind(this);
+        this.onRemoveFileUploadClick = this.onRemoveFileUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessCallback = this.onSuccessCallback.bind(this);
-        this.onFailureCallback = this.onFailureCallback.bind(this);
-    }
-
-    /**
-     *  Utility function used to create the `postData` we will be submitting to
-     *  the API; as a result, this function will structure some dictionary key
-     *  items under different key names to support our API web-service's API.
-     */
-    getPostData() {
-        let postData = Object.assign({}, this.state);
-
-        // Finally: Return our new modified data.
-        console.log("getPostData |", postData);
-        return postData;
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -98,26 +83,15 @@ class AdminResourceCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessCallback(response) {
-        console.log("onSuccessCallback | State (Pre-Fetch):", this.state);
-        this.setState(
-            {
-                isLoading: false,
-            },
-            ()=>{
-                console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
-                console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "Resource has been successfully created.");
-                localStorageRemoveItemsContaining("nwapp-resource-add-");
-                this.props.history.push("/admin/settings/resources");
-            }
-        )
+    onSuccessfulSubmissionCallback(resource) {
+        this.setState({ errors: {}, isLoading: true, })
+        console.log("STATE:\n",this.state,"\n\n");
+        this.props.history.push("/admin/settings/resource/add/step-2");
     }
 
-    onFailureCallback(errors) {
+    onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors,
-            isLoading: false,
+            errors: errors
         })
 
         // The following code will cause the screen to scroll to the top of
@@ -132,39 +106,110 @@ class AdminResourceCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onClick(e) {
-        e.preventDefault();
+    onTextChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+        localStorage.setItem('nwapp-resource-add-'+[e.target.name], e.target.value);
+    }
 
-        const { errors, isValid } = validateInput(this.state);
-        // console.log(errors, isValid); // For debugging purposes only.
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        console.log("optionKey", optionKey);
+        localStorage.setItem('nwapp-resource-add-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-resource-add-'+optionKey, option);
+    }
 
-        if (isValid) {
-            this.setState({
-                errors: {},
-                isLoading: true,
-            }, ()=>{
-                // Once our state has been validated `client-side` then we will
-                // make an API request with the server to create our new production.
-                this.props.postResourceItem(
-                    this.getPostData(),
-                    this.onSuccessCallback,
-                    this.onFailureCallback
-                );
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onImageDrop(acceptedFiles) {
+        console.log("DEBUG | onImageDrop | acceptedFiles", acceptedFiles);
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onImageDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
             });
-        } else {
-            this.setState({
-                errors: errors,
-                isLoading: false,
-            });
 
-            // The following code will cause the screen to scroll to the top of
-            // the page. Please see ``react-scroll`` for more information:
-            // https://github.com/fisshy/react-scroll
-            var scroll = Scroll.animateScroll;
-            scroll.scrollToTop();
+            // For debugging purposes.
+            console.log("DEBUG | onImageDrop | fileWithPreview", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                imageFile: fileWithPreview
+            })
         }
     }
 
+    onRemoveImageUploadClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Clear image.
+        this.setState({
+            imageFile: null
+        })
+    }
+
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onFileDrop(acceptedFiles) {
+        console.log("DEBUG | onFileDrop | acceptedFiles", acceptedFiles);
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onFileDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
+
+            // For debugging purposes.
+            console.log("DEBUG | onFileDrop | fileWithPreview", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                file: fileWithPreview
+            })
+        }
+    }
+
+    onRemoveFileUploadClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Clear uploaded file.
+        this.setState({
+            file: null
+        })
+    }
+
+    onClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Perform client-side validation.
+        const { errors, isValid } = validateInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.onSuccessfulSubmissionCallback();
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailedSubmissionCallback(errors);
+        }
+    }
 
     /**
      *  Main render function
@@ -172,16 +217,27 @@ class AdminResourceCreateStep2Container extends Component {
      */
 
     render() {
-        const {
-            name, errors, isLoading
-        } = this.state;
+        const { category, typeOf, name, externalUrl, embedCode, imageFile, file, description, errors } = this.state;
         return (
             <AdminResourceCreateStep2Component
+                category={category}
+                categoryOptions={RESOURCE_CATEGORY_CHOICES}
+                typeOf={typeOf}
+                typeOfOptions={RESOURCE_TYPE_OF_CHOICES}
                 name={name}
+                externalUrl={externalUrl}
+                embedCode={embedCode}
+                imageFile={imageFile}
+                file={file}
+                description={description}
                 errors={errors}
+                onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
+                onImageDrop={this.onImageDrop}
+                onFileDrop={this.onFileDrop}
+                onRemoveImageUploadClick={this.onRemoveImageUploadClick}
+                onRemoveFileUploadClick={this.onRemoveFileUploadClick}
                 onClick={this.onClick}
-                onDrop={this.onDrop}
-                isLoading={isLoading}
             />
         );
     }
@@ -194,14 +250,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        },
-        postResourceItem: (postData, successCallback, failedCallback) => {
-            dispatch(postResourceItem(postData, successCallback, failedCallback))
-        },
-    }
+    return {}
 }
 
 

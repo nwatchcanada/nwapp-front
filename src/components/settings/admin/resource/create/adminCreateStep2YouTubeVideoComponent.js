@@ -16,19 +16,12 @@ import {
 } from "../../../../../constants/api";
 
 
-export default class AdminResourceCreateStep2Component extends Component {
+export default class AdminResourceCreateStep2YouTubeVideoComponent extends Component {
     render() {
         const {
-            category, categoryOptions, typeOf, typeOfOptions, name, externalUrl, description, embedCode, errors,
-            imageFile, file,
+            category, categoryOptions, name,  description, embedCode, errors,
             onTextChange, onSelectChange, isLoading, onClick,
-            onImageDrop, onRemoveImageUploadClick,
-            onFileDrop, onRemoveFileUploadClick
         } = this.props;
-        const isLinkTypeOf = typeOf === LINK_RESOURCE_TYPE_OF;
-        const isYouTubeVideoTypeOf = typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF;
-        const isImageTypeOf = typeOf === IMAGE_RESOURCE_TYPE_OF;
-        const isFileTypeOf = typeOf === FILE_RESOURCE_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -48,10 +41,26 @@ export default class AdminResourceCreateStep2Component extends Component {
                     </ol>
                 </nav>
 
+                <h1>Create Resource - Details</h1>
+
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <Link to="/admin/settings/resource/add/step-1">
+                                <span className="num">1.</span><span className="">Type</span>
+                            </Link>
+                        </div>
+                        <div id="step-2" className="st-grey active">
+                            <strong>
+                                <span className="num">2.</span><span className="">Details</span>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1>Create New Resource</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
@@ -67,61 +76,17 @@ export default class AdminResourceCreateStep2Component extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Type (*)"
-                                name="typeOf"
-                                defaultOptionLabel="Please select the type."
-                                options={typeOfOptions}
-                                value={typeOf}
-                                error={errors.typeOf}
-                                onSelectChange={onSelectChange}
+                            <YouTubeVideoFormComponent
+                                name={name}
+                                embedCode={embedCode}
+                                description={description}
+                                errors={errors}
+                                onTextChange={onTextChange}
                             />
-
-                            {isLinkTypeOf &&
-                                <LinkFormComponent
-                                    name={name}
-                                    externalUrl={externalUrl}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                />
-                            }
-                            {isYouTubeVideoTypeOf &&
-                                <YouTubeVideoFormComponent
-                                    name={name}
-                                    embedCode={embedCode}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                />
-                            }
-                            {isImageTypeOf &&
-                                <ImageFormComponent
-                                    name={name}
-                                    imageFile={imageFile}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                    onImageDrop={onImageDrop}
-                                    onRemoveImageUploadClick={onRemoveImageUploadClick}
-                                />
-                            }
-                            {isFileTypeOf &&
-                                <FileFormComponent
-                                    name={name}
-                                    file={file}
-                                    description={description}
-                                    errors={errors}
-                                    onTextChange={onTextChange}
-                                    onFileDrop={onFileDrop}
-                                    onRemoveFileUploadClick={onRemoveFileUploadClick}
-                                />
-                            }
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to="/admin/settings/resources" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back

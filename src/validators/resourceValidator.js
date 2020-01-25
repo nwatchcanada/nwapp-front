@@ -15,8 +15,6 @@ import {
 export function validateInput(data) {
     let errors = {};
 
-    console.log(data);
-
     if (data.category === undefined || data.category === null || data.category === "" || isNaN(data.category) ) {
         errors.category = 'This field is required';
     }
@@ -24,13 +22,13 @@ export function validateInput(data) {
         errors.typeOf = 'This field is required';
     } else {
         if (data.typeOf === LINK_RESOURCE_TYPE_OF) {
-            errors = validateLinkInput(data);
+            errors = validateLinkInput(data, errors);
         } else if (data.typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF) {
-            errors = validateYouTubeVideoInput(data);
+            errors = validateYouTubeVideoInput(data, errors);
         } else if (data.typeOf === IMAGE_RESOURCE_TYPE_OF) {
-            errors = validateImageInput(data);
+            errors = validateImageInput(data, errors);
         } else if (data.typeOf === FILE_RESOURCE_TYPE_OF) {
-            errors = validateFileInput(data);
+            errors = validateFileInput(data, errors);
         }
     }
 
@@ -44,9 +42,7 @@ export function validateInput(data) {
 /**
  *  Validator for the `Link` form in the `resource` objects of the system.
  */
-export function validateLinkInput(data) {
-    let errors = {};
-
+export function validateLinkInput(data, errors) {
     if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
@@ -64,9 +60,7 @@ export function validateLinkInput(data) {
 /**
  *  Validator for the `YouTube Video` form in the `resource` objects of the system.
  */
-export function validateYouTubeVideoInput(data) {
-    let errors = {};
-
+export function validateYouTubeVideoInput(data, errors) {
     if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
@@ -84,9 +78,7 @@ export function validateYouTubeVideoInput(data) {
 /**
  *  Validator for the `Image` form in the `resource` objects of the system.
  */
-export function validateImageInput(data) {
-    let errors = {};
-
+export function validateImageInput(data, errors) {
     if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
@@ -104,9 +96,7 @@ export function validateImageInput(data) {
 /**
  *  Validator for the `File` form in the `resource` objects of the system.
  */
-export function validateFileInput(data) {
-    let errors = {};
-
+export function validateFileInput(data, errors) {
     if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
