@@ -262,7 +262,7 @@ import AdminResourceCreateStep2FileContainer from "./settings/admin/resource/cre
 import AdminResourceCreateStep3Container from "./settings/admin/resource/create/adminCreateStep3Container";
 import AdminResourceArchiveOperationContainer from "./settings/admin/resource/operation/adminArchiveContainer";
 import AdminResourceUpdateLinkContainer from "./settings/admin/resource/update/adminUpdateLinkContainer";
-
+import AdminResourceUpdateYouTubeVideoContainer from "./settings/admin/resource/update/adminUpdateYouTubeVideoContainer";
 
 import WatchListContainer from "./watches/list/watchListContainer";
 import WatchCreateStepContainer from "./watches/create/watchCreateStep1Container";
@@ -462,6 +462,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/resource/add/step-2-file" exact component={requiresAuth(AdminResourceCreateStep2FileContainer)} />
                                 <Route path="/admin/settings/resource/add/step-3" exact component={requiresAuth(AdminResourceCreateStep3Container)} />
                                 <Route path="/admin/settings/resource/update-link/:slug" exact component={requiresAuth(AdminResourceUpdateLinkContainer)} />
+                                <Route path="/admin/settings/resource/update-yt-video/:slug" exact component={requiresAuth(AdminResourceUpdateYouTubeVideoContainer)} />
                                 <Route path="/admin/settings/resource/operation/archive/:slug" exact component={requiresAuth(AdminResourceArchiveOperationContainer)} />
 
 
