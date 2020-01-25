@@ -27,16 +27,16 @@ class AdminResourceRetrieveContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // The following code will extract our financial data from the local
         // storage if the financial data was previously saved.
-        const resource = localStorageGetObjectItem("nwapp-admin-retrieve-resource-"+id.toString() );
+        const resource = localStorageGetObjectItem("nwapp-admin-retrieve-resource-"+slug );
         const isLoading = isEmpty(resource);
 
         // Update state.
         this.state = {
-            id: id,
+            slug: slug,
             resource: resource,
             isLoading: isLoading,
         }
@@ -55,7 +55,7 @@ class AdminResourceRetrieveContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
         this.props.pullResourceItem(
-            this.state.id,
+            this.state.slug,
             this.onSuccessCallback,
             this.onFailureCallback
         );
@@ -84,7 +84,7 @@ class AdminResourceRetrieveContainer extends Component {
 
         // The following code will save the object to the browser's local
         // storage to be retrieved later more quickly.
-        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-resource-"+this.state.id.toString(), response);
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-resource-"+this.state.slug.toString(), response);
     }
 
     onFailureCallback(errors) {
@@ -148,8 +148,8 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullResourceItem: (id, successCallback, failedCallback) => {
-            dispatch(pullResourceItem(id, successCallback, failedCallback))
+        pullResourceItem: (slug, successCallback, failedCallback) => {
+            dispatch(pullResourceItem(slug, successCallback, failedCallback))
         },
     }
 }

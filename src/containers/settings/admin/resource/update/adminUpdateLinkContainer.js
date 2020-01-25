@@ -37,6 +37,7 @@ class AdminResourceUpdateLinkContainer extends Component {
         const isLoading = isEmpty(resource);
 
         this.state = {
+            typeOf: LINK_RESOURCE_TYPE_OF,
             slug: slug,
             typeOf: resource.typeOf,
             category: resource.category,
@@ -104,7 +105,7 @@ class AdminResourceUpdateLinkContainer extends Component {
     onSuccessfulSubmissionCallback(resource) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Resource has been successfully updated.");
-        this.props.history.push("/admin/settings/resource/"+this.state.id);
+        this.props.history.push("/admin/settings/resource/"+this.state.slug);
     }
 
     onFailureSubmissionCallback(errors) {
