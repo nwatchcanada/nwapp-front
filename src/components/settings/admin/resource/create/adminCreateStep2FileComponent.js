@@ -9,13 +9,13 @@ import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleFileUploadAndPreview } from "../../../../bootstrap/bootstrapSingleFileUploadAndPreview";
 
 
+
 export default class AdminResourceCreateStep2FileComponent extends Component {
     render() {
         const {
             category, categoryOptions, name, description, errors,
-            imageFile, file,
+            file, onDrop, onRemoveUploadClick,
             onTextChange, onSelectChange, isLoading, onClick,
-            onFileDrop, onRemoveFileUploadClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -71,14 +71,34 @@ export default class AdminResourceCreateStep2FileComponent extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
-                            <FileFormComponent
-                                name={name}
-                                imageFile={imageFile}
-                                description={description}
-                                errors={errors}
-                                onTextChange={onTextChange}
-                                onFileDrop={onFileDrop}
-                                onRemoveFileUploadClick={onRemoveFileUploadClick}
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.name}
+                                label="Name (*)"
+                                onChange={onTextChange}
+                                value={name}
+                                name="name"
+                                type="text"
+                            />
+                            <BootstrapSingleFileUploadAndPreview
+                                error={errors.file}
+                                label="File File (*)"
+                                onDrop={onDrop}
+                                name="file"
+                                fileObj={file}
+                                onRemoveUploadClick={onRemoveUploadClick}
+                            />
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please set the link description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the link."
+                                onChange={onTextChange}
+                                error={errors.description}
                             />
 
                             <div className="form-group">
@@ -97,46 +117,4 @@ export default class AdminResourceCreateStep2FileComponent extends Component {
             </main>
         );
     }
-}
-
-
-class FileFormComponent extends Component {
-    render() {
-        const {
-            name, imageFile, description, errors, onTextChange, onFileDrop, onRemoveFileUploadClick
-        } = this.props;
-        return (
-            <div>
-                <BootstrapInput
-                    inputClassName="form-control form-control-lg"
-                    borderColour="border-primary"
-                    error={errors.name}
-                    label="Name (*)"
-                    onChange={onTextChange}
-                    value={name}
-                    name="name"
-                    type="text"
-                />
-                <BootstrapSingleFileUploadAndPreview
-                    error={errors.imageFile}
-                    label="File File (*)"
-                    onDrop={onFileDrop}
-                    name="imageFile"
-                    fileObj={imageFile}
-                    onRemoveUploadClick={onRemoveFileUploadClick}
-                />
-                <BootstrapTextarea
-                    name="description"
-                    borderColour="border-primary"
-                    label="Description (*)"
-                    placeholder="Please set the link description"
-                    rows="5"
-                    value={description}
-                    helpText="This is the description of the link."
-                    onChange={onTextChange}
-                    error={errors.description}
-                />
-            </div>
-        );
-    };
 }

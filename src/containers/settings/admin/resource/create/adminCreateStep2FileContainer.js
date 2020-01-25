@@ -6,7 +6,7 @@ import AdminResourceCreateStep2FileComponent from "../../../../../components/set
 import { validateInput } from "../../../../../validators/resourceValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
-    FILE_RESOURCE_TYPE_OF
+    IMAGE_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
 import {
     localStorageGetIntegerItem,
@@ -39,19 +39,28 @@ class AdminResourceCreateStep2FileContainer extends Component {
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
             category: localStorageGetIntegerItem("nwapp-resource-add-category"),
             categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
-            typeOf: FILE_RESOURCE_TYPE_OF,
+            typeOf: IMAGE_RESOURCE_TYPE_OF,
             name: localStorage.getItem('nwapp-resource-add-name'),
+            // file: null,
             description: localStorage.getItem('nwapp-resource-add-description'),
-            file: localStorageGetObjectItem('nwapp-resource-add-file'),
-            uploadContent: localStorage.getItem('nwapp-resource-add-file-upload-content'),
-            uploadFilename: localStorage.getItem('nwapp-resource-add-file-upload-filename'),
+
+            // DJANGO-REACT UPLOAD: STEP 1 OF 5.
+            fileReader: new FileReader(), // 1 of 5 - (a)
+            file: localStorageGetObjectItem('nwapp-resource-add-file'), // 1 of 4 - (b)
+            upload_content: localStorageGetObjectItem('nwapp-resource-add-file-upload-content'),
+            upload_filename: localStorage.getItem("nwapp-resource-add-file-upload-filename"),
+            uploadContent: localStorageGetObjectItem('nwapp-resource-add-file-upload-content'),
+            uploadFilename: localStorage.getItem("nwapp-resource-add-file-upload-filename"),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-        this.onFileDrop = this.onFileDrop.bind(this);
-        this.onRemoveFileUploadClick = this.onRemoveFileUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
+
+        // DJANGO-REACT UPLOAD: STEP 2 OF 5.
+        this.handleFile = this.handleFile.bind(this); // 2 of 5 - (a)
+        this.onDrop = this.onDrop.bind(this); // 2 of 5 - (b)
+        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
     }
 
     /**
@@ -101,14 +110,15 @@ class AdminResourceCreateStep2FileContainer extends Component {
     }
 
     /**
+     *  DJANGO-REACT UPLOAD: STEP 3 OF 5.
+     *
      *  Special Thanks: https://react-dropzone.netlify.com/#previews
      */
-    onFileDrop(acceptedFiles) {
-        console.log("DEBUG | onFileDrop | acceptedFiles", acceptedFiles);
+    onDrop(acceptedFiles) {
         const file = acceptedFiles[0];
 
         // For debuging purposes only.
-        console.log("DEBUG | onFileDrop | file", file);
+        console.log("DEBUG | onDrop | file", file);
 
         if (file !== undefined && file !== null) {
             const fileWithPreview = Object.assign(file, {
@@ -116,23 +126,62 @@ class AdminResourceCreateStep2FileContainer extends Component {
             });
 
             // For debugging purposes.
-            console.log("DEBUG | onFileDrop | fileWithPreview", fileWithPreview);
+            console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+
+            // Save to local storage our OBJECT.
+            localStorageSetObjectOrArrayItem('nwapp-resource-add-file', fileWithPreview);
 
             // Update our local state to update the GUI.
             this.setState({
-                imageFile: fileWithPreview
-            })
+                file: fileWithPreview
+            },()=>{
+
+                // DJANGO-REACT UPLOAD: STEP 4 OF 5.
+                // DEVELOPERS NOTE:
+                // (1) http://jsbin.com/piqiqecuxo/1/edit?js,console,output
+                // (2) https://stackoverflow.com/questions/51272255/how-to-use-filereader-in-react
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(this.state.file);
+                fileReader.onload = this.handleFile;
+                fileReader.onerror = function (error) {
+                    console.log('Error: ', error);
+                };
+                this.setState({
+                    fileReader: fileReader,
+                });
+
+            });
         }
     }
 
-    onRemoveFileUploadClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Clear image.
+    onRemoveUploadClick(e) {
         this.setState({
-            imageFile: null
-        })
+            fileReader: new FileReader(),
+            file: null
+        });
+        localStorageRemoveItemsContaining("nwapp-resource-add-file-upload-");
+    }
+
+    /*
+     * DJANGO-REACT UPLOAD: STEP 5 OF 5.
+     */
+    handleFile(e) {
+        const content = this.state.fileReader.result;
+        console.log(this.state.fileReader);
+        this.setState({
+            errors: {},
+            isLoading: false,
+            upload_content: content,
+            upload_filename: this.state.file.name,
+            // upload_filename: this.state.fileReader
+        }, ()=>{
+            console.log("\n\n\n");
+            console.log(this.state);
+            console.log("\n\n\n");
+            // Save to local storage our OBJECT.
+            localStorageSetObjectOrArrayItem('nwapp-resource-add-file-upload-content', this.state.upload_content);
+            localStorage.setItem("nwapp-resource-add-file-upload-filename", this.state.upload_filename)
+        });
     }
 
     onClick(e) {
@@ -168,19 +217,19 @@ class AdminResourceCreateStep2FileContainer extends Component {
      */
 
     render() {
-        const { category, name, imageFile, description, errors } = this.state;
+        const { category, name, file, description, errors } = this.state;
         return (
             <AdminResourceCreateStep2FileComponent
                 category={category}
                 categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
-                imageFile={imageFile}
+                file={file}
                 description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                onFileDrop={this.onFileDrop}
-                onRemoveFileUploadClick={this.onRemoveFileUploadClick}
+                onDrop={this.onDrop}
+                onRemoveUploadClick={this.onRemoveUploadClick}
                 onClick={this.onClick}
             />
         );
