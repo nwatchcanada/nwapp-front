@@ -8,6 +8,12 @@ import { pullResourceItem } from '../../../../../actions/resourceActions';
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem
 } from '../../../../../helpers/localStorageUtility';
+import {
+    LINK_RESOURCE_TYPE_OF,
+    YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
+    IMAGE_RESOURCE_TYPE_OF,
+    FILE_RESOURCE_TYPE_OF
+} from "../../../../../constants/api";
 
 
 class AdminResourceRetrieveContainer extends Component {
@@ -99,7 +105,17 @@ class AdminResourceRetrieveContainer extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/admin/settings/resource/"+this.state.id+"/update");
+        if (this.props.resource.typeOf === LINK_RESOURCE_TYPE_OF) {
+            this.props.history.push("/admin/settings/resource/update-link/"+this.props.resource.slug);
+        } else if (this.props.resource.typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF) {
+            this.props.history.push("/admin/settings/resource/update-yt-video/"+this.props.resource.slug);
+        } else if (this.props.resource.typeOf === IMAGE_RESOURCE_TYPE_OF) {
+            this.props.history.push("/admin/settings/resource/update-image/"+this.props.resource.slug);
+        } else if (this.props.resource.typeOf === FILE_RESOURCE_TYPE_OF) {
+            this.props.history.push("/admin/settings/resource/update-file/"+this.props.resource.slug);
+        } else {
+            alert("Cannot find the matching type of...");
+        }
     }
 
     /**

@@ -230,6 +230,7 @@ import AdminDistrictRetrieveRezContainer from "./settings/admin/district/retriev
 import AdminDistrictUpdateBizContainer from "./settings/admin/district/update/adminUpdateBizContainer";
 import AdminDistrictUpdateComContainer from "./settings/admin/district/update/adminUpdateComContainer";
 import AdminDistrictUpdateRezContainer from "./settings/admin/district/update/adminUpdateRezContainer";
+
 import AdminTagListContainer from "./settings/admin/tag/list/adminListContainer";
 import AdminTagRetrieveContainer from "./settings/admin/tag/retrieve/adminRetrieveContainer";
 import AdminTagUpdateContainer from "./settings/admin/tag/update/adminUpdateContainer";
@@ -253,7 +254,6 @@ import AdminAnnouncementArchiveOperationContainer from "./settings/admin/announc
 
 import AdminResourceListContainer from "./settings/admin/resource/list/adminListContainer";
 import AdminResourceRetrieveContainer from "./settings/admin/resource/retrieve/adminRetrieveContainer";
-import AdminResourceUpdateContainer from "./settings/admin/resource/update/adminUpdateContainer";
 import AdminResourceCreateStep1Container from "./settings/admin/resource/create/adminCreateStep1Container";
 import AdminResourceCreateStep2LinkContainer from "./settings/admin/resource/create/adminCreateStep2LinkContainer";
 import AdminResourceCreateStep2YouTubeVideoContainer from "./settings/admin/resource/create/adminCreateStep2YouTubeVideoContainer";
@@ -261,7 +261,8 @@ import AdminResourceCreateStep2ImageContainer from "./settings/admin/resource/cr
 import AdminResourceCreateStep2FileContainer from "./settings/admin/resource/create/adminCreateStep2FileContainer";
 import AdminResourceCreateStep3Container from "./settings/admin/resource/create/adminCreateStep3Container";
 import AdminResourceArchiveOperationContainer from "./settings/admin/resource/operation/adminArchiveContainer";
-
+import AdminResourceUpdateContainer from "./settings/admin/resource/update/adminUpdateContainer";
+import AdminResourceUpdateLinkContainer from "./settings/admin/resource/update/adminUpdateLinkContainer";
 
 
 import WatchListContainer from "./watches/list/watchListContainer";
@@ -455,15 +456,14 @@ class AppContainer extends React.Component {
                                 */}
                                 <Route path="/admin/settings/resources" exact component={requiresAuth(AdminResourceListContainer)} />
                                 <Route path="/admin/settings/resource/:id" exact component={requiresAuth(AdminResourceRetrieveContainer)} />
-                                <Route path="/admin/settings/resource/:id/update" exact component={requiresAuth(AdminResourceUpdateContainer)} />
                                 <Route path="/admin/settings/resource/add/step-1" exact component={requiresAuth(AdminResourceCreateStep1Container)} />
                                 <Route path="/admin/settings/resource/add/step-2-link" exact component={requiresAuth(AdminResourceCreateStep2LinkContainer)} />
                                 <Route path="/admin/settings/resource/add/step-2-yt-video" exact component={requiresAuth(AdminResourceCreateStep2YouTubeVideoContainer)} />
                                 <Route path="/admin/settings/resource/add/step-2-image" exact component={requiresAuth(AdminResourceCreateStep2ImageContainer)} />
                                 <Route path="/admin/settings/resource/add/step-2-file" exact component={requiresAuth(AdminResourceCreateStep2FileContainer)} />
                                 <Route path="/admin/settings/resource/add/step-3" exact component={requiresAuth(AdminResourceCreateStep3Container)} />
+                                <Route path="/admin/settings/resource/update-link/:slug" exact component={requiresAuth(AdminResourceUpdateLinkContainer)} />
                                 <Route path="/admin/settings/resource/operation/archive/:id" exact component={requiresAuth(AdminResourceArchiveOperationContainer)} />
-
 
 
                                 {/*
