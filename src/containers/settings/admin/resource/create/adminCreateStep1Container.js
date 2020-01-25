@@ -40,7 +40,7 @@ class AdminResourceCreateStep1Container extends Component {
             typeOf: localStorageGetIntegerItem("nwapp-resource-add-typeOf"),
             typeOfOption: localStorageGetObjectItem('nwapp-register-typeOfOption'),
             name: localStorage.getItem('nwapp-resource-add-name'),
-            url: localStorage.getItem('nwapp-resource-add-url'),
+            externalUrl: localStorage.getItem('nwapp-resource-add-externalUrl'),
             embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
             imageFile: null,
             file: null,
@@ -217,7 +217,7 @@ class AdminResourceCreateStep1Container extends Component {
      */
 
     render() {
-        const { category, typeOf, name, url, embedCode, imageFile, file, description, errors } = this.state;
+        const { category, typeOf, name, externalUrl, embedCode, imageFile, file, description, errors } = this.state;
         return (
             <AdminResourceCreateStep1Component
                 category={category}
@@ -225,7 +225,7 @@ class AdminResourceCreateStep1Container extends Component {
                 typeOf={typeOf}
                 typeOfOptions={RESOURCE_TYPE_OF_CHOICES}
                 name={name}
-                url={url}
+                externalUrl={externalUrl}
                 embedCode={embedCode}
                 imageFile={imageFile}
                 file={file}

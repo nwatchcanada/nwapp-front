@@ -48,8 +48,8 @@ export function validateLinkInput(data) {
     if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
-    if (data.url === undefined || data.url === null ||  data.url === "") {
-        errors.url = 'This field is required';
+    if (data.externalUrl === undefined || data.externalUrl === null ||  data.externalUrl === "") {
+        errors.externalUrl = 'This field is required';
     }
     if (data.description === undefined || data.description === null || data.description === "") {
         errors.description = 'This field is required';

@@ -19,7 +19,7 @@ import {
 export default class AdminResourceCreateStep1Component extends Component {
     render() {
         const {
-            category, categoryOptions, typeOf, typeOfOptions, name, url, description, embedCode, errors,
+            category, categoryOptions, typeOf, typeOfOptions, name, externalUrl, description, embedCode, errors,
             imageFile, file,
             onTextChange, onSelectChange, isLoading, onClick,
             onImageDrop, onRemoveImageUploadClick,
@@ -81,7 +81,7 @@ export default class AdminResourceCreateStep1Component extends Component {
                             {isLinkTypeOf &&
                                 <LinkFormComponent
                                     name={name}
-                                    url={url}
+                                    externalUrl={externalUrl}
                                     description={description}
                                     errors={errors}
                                     onTextChange={onTextChange}
@@ -140,7 +140,7 @@ export default class AdminResourceCreateStep1Component extends Component {
 
 class LinkFormComponent extends Component {
     render() {
-        const { name, url, description, errors, onTextChange } = this.props;
+        const { name, externalUrl, description, errors, onTextChange } = this.props;
         return (
             <div>
                 <BootstrapInput
@@ -156,11 +156,11 @@ class LinkFormComponent extends Component {
                 <BootstrapInput
                     inputClassName="form-control form-control-lg"
                     borderColour="border-primary"
-                    error={errors.url}
-                    label="URL (*)"
+                    error={errors.externalUrl}
+                    label="External URL (*)"
                     onChange={onTextChange}
-                    value={url}
-                    name="url"
+                    value={externalUrl}
+                    name="externalUrl"
                     type="text"
                 />
                 <BootstrapTextarea

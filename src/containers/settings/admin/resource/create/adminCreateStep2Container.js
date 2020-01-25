@@ -47,7 +47,7 @@ class AdminResourceCreateStep2Container extends Component {
             typeOf: localStorageGetIntegerItem("nwapp-resource-add-typeOf"),
             typeOfOption: localStorageGetObjectItem('nwapp-register-typeOfOption'),
             name: localStorage.getItem('nwapp-resource-add-name'),
-            url: localStorage.getItem('nwapp-resource-add-url'),
+            externalUrl: localStorage.getItem('nwapp-resource-add-externalUrl'),
             embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
             imageFile: null,
             file: null,
