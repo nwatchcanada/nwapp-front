@@ -15,10 +15,12 @@ import {
 export function validateInput(data) {
     let errors = {};
 
-    if (data.category === undefined || data.category === null || data.category === "") {
+    console.log(data);
+
+    if (data.category === undefined || data.category === null || data.category === "" || isNaN(data.category) ) {
         errors.category = 'This field is required';
     }
-    if (data.typeOf === undefined || data.typeOf === null || data.typeOf === "") {
+    if (data.typeOf === undefined || data.typeOf === null || data.typeOf === "" || isNaN(data.typeOf) ) {
         errors.typeOf = 'This field is required';
     } else {
         if (data.typeOf === LINK_RESOURCE_TYPE_OF) {
