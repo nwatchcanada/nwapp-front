@@ -5,9 +5,10 @@ import Scroll from 'react-scroll';
 import AdminResourceCreateStep3Component from "../../../../../components/settings/admin/resource/create/adminCreateStep3Component";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
+    LINK_RESOURCE_TYPE_OF,
+    YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
+    IMAGE_RESOURCE_TYPE_OF,
+    FILE_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
 import {
     localStorageGetIntegerItem,
@@ -28,6 +29,19 @@ class AdminResourceCreateStep3Container extends Component {
     constructor(props) {
         super(props);
 
+        const typeOf = localStorageGetIntegerItem("nwapp-resource-add-typeOf");
+        let backURL = "";
+        if (typeOf === LINK_RESOURCE_TYPE_OF) {
+            backURL = "/admin/settings/resource/add/step-2-link";
+        } else if (typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF) {
+            backURL = "/admin/settings/resource/add/step-2-yt-video";
+        } else if (typeOf === IMAGE_RESOURCE_TYPE_OF) {
+            backURL = "/admin/settings/resource/add/step-2-image";
+        } else if (typeOf === FILE_RESOURCE_TYPE_OF) {
+            backURL = "/admin/settings/resource/add/step-2-file";
+        }
+
+
         this.state = {
             // DEVELOPERS NOTE: This variable is used as the main way to add
             // GUI modification to the fields. Simply adding a key and the
@@ -40,11 +54,10 @@ class AdminResourceCreateStep3Container extends Component {
             isLoading: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            text: localStorage.getItem('nwapp-resource-add-text'),
-
+            backURL: backURL,
             category: localStorageGetIntegerItem("nwapp-resource-add-category"),
             categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
-            typeOf: localStorageGetIntegerItem("nwapp-resource-add-typeOf"),
+            typeOf: typeOf,
             typeOfOption: localStorageGetObjectItem('nwapp-register-typeOfOption'),
             name: localStorage.getItem('nwapp-resource-add-name'),
             externalUrl: localStorage.getItem('nwapp-resource-add-externalUrl'),
@@ -52,8 +65,6 @@ class AdminResourceCreateStep3Container extends Component {
             imageFile: null,
             file: null,
             description: localStorage.getItem('nwapp-resource-add-description'),
-            errors: {},
-            isLoading: false
         }
 
         this.getPostData = this.getPostData.bind(this);
@@ -173,10 +184,11 @@ class AdminResourceCreateStep3Container extends Component {
 
     render() {
         const {
-            name, errors, isLoading
+            backURL, name, errors, isLoading
         } = this.state;
         return (
             <AdminResourceCreateStep3Component
+                backURL={backURL}
                 name={name}
                 errors={errors}
                 onClick={this.onClick}

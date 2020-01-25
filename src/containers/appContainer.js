@@ -258,6 +258,7 @@ import AdminResourceCreateStep1Container from "./settings/admin/resource/create/
 import AdminResourceCreateStep2LinkContainer from "./settings/admin/resource/create/adminCreateStep2LinkContainer";
 import AdminResourceCreateStep2YouTubeVideoContainer from "./settings/admin/resource/create/adminCreateStep2YouTubeVideoContainer";
 import AdminResourceCreateStep2ImageContainer from "./settings/admin/resource/create/adminCreateStep2ImageContainer";
+import AdminResourceCreateStep2FileContainer from "./settings/admin/resource/create/adminCreateStep2FileContainer";
 import AdminResourceCreateStep3Container from "./settings/admin/resource/create/adminCreateStep3Container";
 import AdminResourceArchiveOperationContainer from "./settings/admin/resource/operation/adminArchiveContainer";
 
@@ -459,6 +460,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/resource/add/step-2-link" exact component={requiresAuth(AdminResourceCreateStep2LinkContainer)} />
                                 <Route path="/admin/settings/resource/add/step-2-yt-video" exact component={requiresAuth(AdminResourceCreateStep2YouTubeVideoContainer)} />
                                 <Route path="/admin/settings/resource/add/step-2-image" exact component={requiresAuth(AdminResourceCreateStep2ImageContainer)} />
+                                <Route path="/admin/settings/resource/add/step-2-file" exact component={requiresAuth(AdminResourceCreateStep2FileContainer)} />
                                 <Route path="/admin/settings/resource/add/step-3" exact component={requiresAuth(AdminResourceCreateStep3Container)} />
                                 <Route path="/admin/settings/resource/operation/archive/:id" exact component={requiresAuth(AdminResourceArchiveOperationContainer)} />
 

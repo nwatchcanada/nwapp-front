@@ -3,15 +3,17 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
+import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
 class AdminResourceCreateStep3Component extends Component {
     render() {
         const {
-            errors, isLoading, onClick
+            backURL, errors, isLoading, onClick
         } = this.props;
         return (
             <main id="main" role="main">
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -42,7 +44,7 @@ class AdminResourceCreateStep3Component extends Component {
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>
-                            <Link to={`/admin/settings/resource/add/step-1`} className="btn btn-orange btn-lg  float-left">
+                            <Link to={backURL} className="btn btn-orange btn-lg  float-left">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                             &nbsp;&nbsp;&nbsp;
