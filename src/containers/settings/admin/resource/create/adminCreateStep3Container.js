@@ -41,7 +41,6 @@ class AdminResourceCreateStep3Container extends Component {
             backURL = "/admin/settings/resource/add/step-2-file";
         }
 
-
         this.state = {
             // DEVELOPERS NOTE: This variable is used as the main way to add
             // GUI modification to the fields. Simply adding a key and the
@@ -62,9 +61,10 @@ class AdminResourceCreateStep3Container extends Component {
             name: localStorage.getItem('nwapp-resource-add-name'),
             externalUrl: localStorage.getItem('nwapp-resource-add-externalUrl'),
             embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
-            imageFile: null,
-            file: null,
             description: localStorage.getItem('nwapp-resource-add-description'),
+            file: localStorageGetObjectItem('nwapp-resource-add-file'),
+            uploadContent: localStorageGetObjectItem('nwapp-resource-add-file-upload-content'),
+            uploadFilename: localStorage.getItem('nwapp-resource-add-file-upload-filename'),
         }
 
         this.getPostData = this.getPostData.bind(this);

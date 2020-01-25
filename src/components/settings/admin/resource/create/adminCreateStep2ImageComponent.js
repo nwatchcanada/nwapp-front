@@ -8,21 +8,15 @@ import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import { BootstrapSingleFileUploadAndPreview } from "../../../../bootstrap/bootstrapSingleFileUploadAndPreview";
-import {
-    LINK_RESOURCE_TYPE_OF,
-    YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
-    IMAGE_RESOURCE_TYPE_OF,
-    FILE_RESOURCE_TYPE_OF
-} from "../../../../../constants/api";
+
 
 
 export default class AdminResourceCreateStep2ImageComponent extends Component {
     render() {
         const {
             category, categoryOptions, name, description, errors,
-            imageFile, file,
+            file, onDrop, onRemoveUploadClick,
             onTextChange, onSelectChange, isLoading, onClick,
-            onImageDrop, onRemoveImageUploadClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -78,14 +72,34 @@ export default class AdminResourceCreateStep2ImageComponent extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
-                            <ImageFormComponent
-                                name={name}
-                                imageFile={imageFile}
-                                description={description}
-                                errors={errors}
-                                onTextChange={onTextChange}
-                                onImageDrop={onImageDrop}
-                                onRemoveImageUploadClick={onRemoveImageUploadClick}
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.name}
+                                label="Name (*)"
+                                onChange={onTextChange}
+                                value={name}
+                                name="name"
+                                type="text"
+                            />
+                            <BootstrapSingleImageUploadAndPreview
+                                error={errors.file}
+                                label="Image File (*)"
+                                onDrop={onDrop}
+                                name="file"
+                                fileObj={file}
+                                onRemoveUploadClick={onRemoveUploadClick}
+                            />
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please set the link description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the link."
+                                onChange={onTextChange}
+                                error={errors.description}
                             />
 
                             <div className="form-group">
@@ -104,46 +118,4 @@ export default class AdminResourceCreateStep2ImageComponent extends Component {
             </main>
         );
     }
-}
-
-
-class ImageFormComponent extends Component {
-    render() {
-        const {
-            name, imageFile, description, errors, onTextChange, onImageDrop, onRemoveImageUploadClick
-        } = this.props;
-        return (
-            <div>
-                <BootstrapInput
-                    inputClassName="form-control form-control-lg"
-                    borderColour="border-primary"
-                    error={errors.name}
-                    label="Name (*)"
-                    onChange={onTextChange}
-                    value={name}
-                    name="name"
-                    type="text"
-                />
-                <BootstrapSingleImageUploadAndPreview
-                    error={errors.imageFile}
-                    label="Image File (*)"
-                    onDrop={onImageDrop}
-                    name="imageFile"
-                    fileObj={imageFile}
-                    onRemoveUploadClick={onRemoveImageUploadClick}
-                />
-                <BootstrapTextarea
-                    name="description"
-                    borderColour="border-primary"
-                    label="Description (*)"
-                    placeholder="Please set the link description"
-                    rows="5"
-                    value={description}
-                    helpText="This is the description of the link."
-                    onChange={onTextChange}
-                    error={errors.description}
-                />
-            </div>
-        );
-    };
 }

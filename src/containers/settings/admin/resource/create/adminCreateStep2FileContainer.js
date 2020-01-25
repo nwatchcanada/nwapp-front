@@ -11,7 +11,8 @@ import {
 import {
     localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
-    localStorageGetObjectItem
+    localStorageGetObjectItem,
+    localStorageRemoveItemsContaining
 } from '../../../../../helpers/localStorageUtility';
 
 
@@ -40,10 +41,10 @@ class AdminResourceCreateStep2FileContainer extends Component {
             categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
             typeOf: FILE_RESOURCE_TYPE_OF,
             name: localStorage.getItem('nwapp-resource-add-name'),
-            imageFile: null,
             description: localStorage.getItem('nwapp-resource-add-description'),
-            errors: {},
-            isLoading: false
+            file: localStorageGetObjectItem('nwapp-resource-add-file'),
+            uploadContent: localStorage.getItem('nwapp-resource-add-file-upload-content'),
+            uploadFilename: localStorage.getItem('nwapp-resource-add-file-upload-filename'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);

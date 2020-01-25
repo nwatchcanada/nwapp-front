@@ -43,7 +43,6 @@ class AdminResourceCreateStep2YouTubeVideoContainer extends Component {
             name: localStorage.getItem('nwapp-resource-add-name'),
             embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
             description: localStorage.getItem('nwapp-resource-add-description'),
-            errors: {},
         }
 
         this.onTextChange = this.onTextChange.bind(this);

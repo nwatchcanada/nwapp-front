@@ -82,12 +82,14 @@ export function validateImageInput(data, errors) {
     if (data.name === undefined || data.name === null || data.name === "") {
         errors.name = 'This field is required';
     }
-    if (data.imageFile === undefined || data.imageFile === null || data.imageFile === "") {
-        errors.imageFile = 'This field is required';
+    if (data.file === undefined || data.file === null || data.file === "" || isEmpty(data.file) ) {
+        errors.file = 'This field is required';
     }
     if (data.description === undefined || data.description === null || data.description === "") {
         errors.description = 'This field is required';
     }
+
+    console.log(data);
 
     return errors
 }
