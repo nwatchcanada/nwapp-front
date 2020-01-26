@@ -16,12 +16,12 @@ class AdminResourceArchiveOperationContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         this.state = {
             isLoading: false,
-            resource: id,
-            id: id,
+            resource: slug,
+            slug: slug,
             errors: {},
         }
         this.onClick = this.onClick.bind(this);
@@ -88,7 +88,7 @@ class AdminResourceArchiveOperationContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deleteResourceItem(this.state.id, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deleteResourceItem(this.state.slug, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -98,11 +98,11 @@ class AdminResourceArchiveOperationContainer extends Component {
      */
 
     render() {
-        const { isLoading, id, errors } = this.state;
+        const { isLoading, slug, errors } = this.state;
         const resource = this.props.resourceDetail ? this.props.resourceDetail : {};
         return (
             <AdminResourceArchiveComponent
-                id={id}
+                slug={slug}
                 resource={resource}
                 isLoading={isLoading}
                 errors={errors}
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteResourceItem: (id, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteResourceItem(id, onSuccessCallback, onFailureCallback))
+        deleteResourceItem: (slug, onSuccessCallback, onFailureCallback) => {
+            dispatch(deleteResourceItem(slug, onSuccessCallback, onFailureCallback))
         },
     }
 }
