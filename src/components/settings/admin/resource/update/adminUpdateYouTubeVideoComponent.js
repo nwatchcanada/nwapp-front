@@ -12,7 +12,7 @@ import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 class AdminResourceUpdateYouTubeVideoComponent extends Component {
     render() {
         const {
-            slug, category, categoryOptions, name, externalUrl, description, errors,
+            slug, category, categoryOptions, name, embedCode, description, errors,
             onTextChange, onSelectChange, isLoading, onClick,
         } = this.props;
         return (
@@ -69,15 +69,16 @@ class AdminResourceUpdateYouTubeVideoComponent extends Component {
                                 name="name"
                                 type="text"
                             />
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
+                            <BootstrapTextarea
+                                name="embedCode"
                                 borderColour="border-primary"
-                                error={errors.externalUrl}
-                                label="External URL (*)"
+                                label="YouTube Embed Code (*)"
+                                placeholder="Please set the YouTube embed code"
+                                rows="5"
+                                value={embedCode}
+                                helpText="This is the embed code of the video."
                                 onChange={onTextChange}
-                                value={externalUrl}
-                                name="externalUrl"
-                                type="text"
+                                error={errors.embedCode}
                             />
                             <BootstrapTextarea
                                 name="description"

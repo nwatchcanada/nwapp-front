@@ -42,9 +42,8 @@ class AdminResourceUpdateYouTubeVideoContainer extends Component {
             typeOf: resource.typeOf,
             category: resource.category,
             name: resource.name,
-            externalUrl: resource.externalUrl,
+            embedCode: resource.embedCode,
             description: resource.description,
-            embedCode: null,
             isArchived: resource.isArchived,
             errors: {},
             resource: resource,
@@ -129,10 +128,9 @@ class AdminResourceUpdateYouTubeVideoContainer extends Component {
             typeOf: resource.typeOf,
             category: resource.category,
             name: resource.name,
-            externalUrl: resource.externalUrl,
+            embedCode: resource.embedCode,
             description: resource.description,
             isArchived: resource.isArchived,
-            embedCode: null,
         });
 
         // The following code will save the object to the browser's local
@@ -207,7 +205,7 @@ class AdminResourceUpdateYouTubeVideoContainer extends Component {
      */
 
     render() {
-        const { slug, typeOf, category, name, externalUrl, description, embedCode, errors, isLoading } = this.state;
+        const { slug, typeOf, category, name, embedCode, description, errors, isLoading } = this.state;
         return (
             <AdminResourceUpdateYouTubeVideoComponent
                 slug={slug}
@@ -215,9 +213,8 @@ class AdminResourceUpdateYouTubeVideoContainer extends Component {
                 category={category}
                 categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
-                externalUrl={externalUrl}
-                description={description}
                 embedCode={embedCode}
+                description={description}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}
