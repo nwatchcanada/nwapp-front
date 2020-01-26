@@ -102,6 +102,17 @@ export default class AdminResourceRetrieveComponent extends Component {
                                     </tr>
                                 }
 
+                                {resourceData && resourceData.fileUrl &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">File</th>
+                                        <td>
+                                            <a href={resourceData.fileUrl} target="_blank">
+                                                <i className="fas fa-cloud-download-alt"></i>&nbsp;Download now
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-server"></i>&nbsp;System
