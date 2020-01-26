@@ -275,7 +275,7 @@ class AdminWatchListComponent extends Component {
                         <section className="row text-center placeholders">
                             <div className="col-sm-6 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/admin/watches/add/step-1" className="d-block link-ndecor" title="Watches">
+                                    <Link to="/admin/watches/step-1-create" className="d-block link-ndecor" title="Watches">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>

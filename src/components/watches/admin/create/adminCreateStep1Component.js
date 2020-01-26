@@ -7,10 +7,18 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneInput";
 
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../../constants/api';
+
 
 export default class AdminWatchCreateStep1Component extends Component {
     render() {
-        const { firstName, lastName, email, phone, errors, onTextChange, isLoading, onClick } = this.props;
+        const {
+            firstName, lastName, email, phone, errors, onTextChange, isLoading, onClick
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -27,106 +35,88 @@ export default class AdminWatchCreateStep1Component extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-plus"></i>&nbsp;Add Watch</h1>
+                <h1>Create Watch - Select Type</h1>
 
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey active">
                             <strong>
-                                <span className="num">1.</span><span className="">Search</span>
+                                <span className="num">1.</span><span className="">Type</span>
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <span className="num">2.</span><span className="">Results</span>
+                            <span className="num">2.</span><span className="">Details</span>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Type</span>
+                            <span className="num">3.</span><span className="">Street Membership</span>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Contact</span>
+                            <span className="num">4.</span><span className="">Review</span>
+                        </div>
+                        { /* <div id="step-4" className="st-grey">
+                            <span className="num">4.</span><span className="">Skills Required</span>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Address</span>
+                            <span className="num">5.</span><span className="">Review</span>
                         </div>
-                        <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Watch</span>
-                        </div>
-                         <div id="step-7" className="st-grey">
-                            <span className="num">7.</span><span className="">Metrics</span>
-                        </div>
+                        */ }
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-md-5 mx-auto mt-2">
-                        <form>
-                            <h3>Search for existing watch:</h3>
-
-                            <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.firstName}
-                                label="First Name"
-                                onChange={onTextChange}
-                                value={firstName}
-                                name="firstName"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.lastName}
-                                label="Last Name"
-                                onChange={onTextChange}
-                                value={lastName}
-                                name="lastName"
-                                type="text"
-                            />
-
-                            <BootstrapTelephoneInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.phone}
-                                label="Phone"
-                                onChange={onTextChange}
-                                value={phone}
-                                name="phone"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.email}
-                                label="E-mail"
-                                onChange={onTextChange}
-                                value={email}
-                                name="email"
-                                type="text"
-                            />
-
-                            <div className="form-group">
-                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-search"></i>&nbsp;Search
-                                </button>
-                                <Link to="/admin/watches" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i> Back
-                                </Link>
+                <div className="card-group row">
+                    <div className="col-sm-4">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-home fa-3x"></i>
                             </div>
-
-                        </form>
+                            <div className="card-body">
+                                <h3 className="card-title">Residential</h3>
+                                <p className="card-text">Add a residential watch</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, RESIDENCE_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-4">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-building fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Business</h3>
+                                <p className="card-text">Add a business watch</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, BUSINESS_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-4">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-university fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Community Cares</h3>
+                                <p className="card-text">Add a community cares watch</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, COMMUNITY_CARES_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="col-md-12 text-center">
-                    <h3 className="p-2">- or -</h3>
 
-                    <a href="/admin/watches/add/step-3" role="button" className="btn btn-success btn-lg">
-                        Add New Watch&nbsp;<i class="fas fa-chevron-right"></i>
-                    </a>
+
+                <div className="form-group">
+
+                    <Link to="/admin/watches" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                    </Link>
                 </div>
+
+
             </main>
         );
     }
