@@ -29,7 +29,7 @@ export default class StaffDashboardComponent extends Component {
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="/watches" className="d-block link-ndecor" title="Area Coordinators">
+                                    <Link to="/admin/watches" className="d-block link-ndecor" title="Watches">
                                         <h1 className="circle-title">
                                             {activeWatchesCount && activeWatchesCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}
                                         </h1>

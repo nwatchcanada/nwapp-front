@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 
 import ActionConcernItemTaskStep2Component from "../../../components/tasks/actionConcernItem/actionConcernItemTaskStep2Component";
 import { validateTask3Step2Input } from "../../../validators/taskValidator";
-import { getAssociateReactSelectOptions } from '../../../actions/watchAction';
+import { getAssociateReactSelectOptions } from '../../../actions/watchActions';
 import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem,

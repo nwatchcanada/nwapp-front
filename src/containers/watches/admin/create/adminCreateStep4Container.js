@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ActionIncidentItemTaskStep2Component from "../../../components/tasks/actionIncidentItem/actionIncidentItemTaskStep2Component";
-import { validateTask4Step2Input } from "../../../validators/taskValidator";
-import { getAssociateReactSelectOptions } from '../../../actions/watchActions';
+import AdminWatchCreateStep4Component from "../../../../components/watchs/admin/create/adminCreateStep4Component";
+import { validateStep4CreateInput } from "../../../../validators/watchValidator";
 import {
-    localStorageGetObjectItem,
-    localStorageSetObjectOrArrayItem,
-    localStorageGetArrayItem,
-    localStorageGetIntegerItem
-} from '../../../helpers/localStorageUtility';
+    localStorageGetIntegerItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
 
 
-class TaskUpdateContainer extends Component {
+class AdminWatchCreateStep4Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -21,20 +17,21 @@ class TaskUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
-
         this.state = {
-            name: null,
+            typeOf: localStorageGetIntegerItem("nwapp-create-watch-typeOf"),
+            organizationName: localStorage.getItem("nwapp-create-watch-organizationName"),
+            organizationTypeOf: localStorageGetIntegerItem("nwapp-create-watch-organizationTypeOf"),
+            firstName: localStorage.getItem("nwapp-create-watch-firstName"),
+            lastName: localStorage.getItem("nwapp-create-watch-lastName"),
+            primaryPhone: localStorage.getItem("nwapp-create-watch-primaryPhone"),
+            // primaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-primaryPhoneTypeOf"),
+            secondaryPhone: localStorage.getItem("nwapp-create-watch-secondaryPhone"),
+            // secondaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-secondaryPhoneTypeOf"),
+            email: localStorage.getItem("nwapp-create-watch-email"),
+            isOkToEmail: localStorageGetIntegerItem("nwapp-create-watch-isOkToEmail"),
+            isOkToText: localStorageGetIntegerItem("nwapp-create-watch-isOkToText"),
             errors: {},
-            isLoading: false,
-            slug: slug,
-            willAction: localStorageGetIntegerItem("nwapp-task-4-willAction"),
-            comment: localStorage.getItem("nwapp-task-4-comment"),
-            reason: localStorageGetIntegerItem("nwapp-task-4-reason"),
-            reasonOther: localStorage.getItem("nwapp-task-4-reasonOther"),
+            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -68,9 +65,8 @@ class TaskUpdateContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(task) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/task/4/"+this.state.slug+"/step-3");
+    onSuccessfulSubmissionCallback(watch) {
+        this.props.history.push("/admin/watchs/add/step-5");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -93,8 +89,9 @@ class TaskUpdateContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        });
-        localStorage.setItem('nwapp-task-4-'+[e.target.name], e.target.value);
+        })
+        const key = "nwapp-create-watch-"+[e.target.name];
+        localStorage.setItem(key, e.target.value);
     }
 
     onSelectChange(option) {
@@ -102,42 +99,37 @@ class TaskUpdateContainer extends Component {
         this.setState({
             [option.selectName]: option.value,
             optionKey: option,
-        }, ()=> {
-            localStorage.setItem('nwapp-task-4-'+[option.selectName], option.value);
-            localStorage.setItem('nwapp-task-4-'+[option.selectName]+"-label", option.label);
-            localStorageSetObjectOrArrayItem('nwapp-task-4-'+optionKey, option);
-            // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
-            console.log("onSelectChange | state | post-save", this.state)
         });
+        localStorage.setItem('nwapp-create-watch-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-create-watch-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-create-watch-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
     onRadioChange(e) {
         // Get the values.
-        const storageValueKey = "nwapp-task-4-"+[e.target.name];
-        const storageLabelKey =  "nwapp-task-4-"+[e.target.name].toString()+"-label";
+        const storageValueKey = "nwapp-create-watch-"+[e.target.name];
+        const storageLabelKey =  "nwapp-create-watch-"+[e.target.name].toString()+"-label";
         const value = e.target.value;
         const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
         const storeValueKey = [e.target.name].toString();
         const storeLabelKey = [e.target.name].toString()+"Label";
 
         // Save the data.
-        this.setState({
-            [e.target.name]: parseInt(value),
-            storeLabelKey: label,
-        }, ()=> {
-            localStorage.setItem(storageValueKey, value) // Save to storage.
-            localStorage.setItem(storageLabelKey, label) // Save to storage.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+        localStorage.setItem(storageValueKey, value) // Save to storage.
+        localStorage.setItem(storageLabelKey, label) // Save to storage.
 
-            // For the debugging purposes only.
-            console.log("onRadioChange |", {
-                "STORE-VALUE-KEY": storageValueKey,
-                "STORE-VALUE": value,
-                "STORAGE-VALUE-KEY": storeValueKey,
-                "STORAGE-VALUE": value,
-                "STORAGE-LABEL-KEY": storeLabelKey,
-                "STORAGE-LABEL": label,
-            });
-        }); // Save to store.
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
+        });
     }
 
     onClick(e) {
@@ -145,7 +137,7 @@ class TaskUpdateContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateTask4Step2Input(this.state);
+        const { errors, isValid } = validateStep4CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -164,14 +156,21 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { willAction, comment, reason, reasonOther, errors, slug, } = this.state;
+        const {
+            typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, isOkToEmail, isOkToText, errors
+        } = this.state;
         return (
-            <ActionIncidentItemTaskStep2Component
-                slug={slug}
-                willAction={willAction}
-                comment={comment}
-                reason={reason}
-                reasonOther={reasonOther}
+            <AdminWatchCreateStep4Component
+                typeOf={typeOf}
+                organizationName={organizationName}
+                organizationTypeOf={organizationTypeOf}
+                firstName={firstName}
+                lastName={lastName}
+                primaryPhone={primaryPhone}
+                secondaryPhone={secondaryPhone}
+                email={email}
+                isOkToEmail={isOkToEmail}
+                isOkToText={isOkToText}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
@@ -196,4 +195,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TaskUpdateContainer);
+)(AdminWatchCreateStep4Container);

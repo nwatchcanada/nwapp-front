@@ -102,11 +102,11 @@ export const WORKERY_STAFF_ADDRESS_UPDATE_API_ENDPOINT = '/v1/staff/XXX/address'
 export const WORKERY_STAFF_METRICS_UPDATE_API_ENDPOINT = '/v1/staff/XXX/metrics';
 
 //TODO: PROCESS THE FOLLOWING
-export const WORKERY_WATCH_LIST_API_ENDPOINT = '/v1/watchs';
+export const WORKERY_WATCH_LIST_API_ENDPOINT = '/v1/watches';
 export const WORKERY_WATCH_DETAIL_API_ENDPOINT = '/v1/watch/';
-export const WORKERY_WATCH_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/watchs/operation/archive';
-export const NWAPP_WATCH_PROMOTE_OPERATION_API_ENDPOINT = '/v1/watchs/operation/promote';
-export const WORKERY_WATCH_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/watchs/operation/avatar';
+export const WORKERY_WATCH_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/watches/operation/archive';
+export const NWAPP_WATCH_PROMOTE_OPERATION_API_ENDPOINT = '/v1/watches/operation/promote';
+export const WORKERY_WATCH_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/watches/operation/avatar';
 export const WORKERY_WATCH_COMMENT_LIST_API_ENDPOINT = '/v1/watch-comments';
 export const WORKERY_WATCH_CONTACT_UPDATE_API_ENDPOINT = '/v1/watch/XXX/contact';
 export const WORKERY_WATCH_ADDRESS_UPDATE_API_ENDPOINT = '/v1/watch/XXX/address';

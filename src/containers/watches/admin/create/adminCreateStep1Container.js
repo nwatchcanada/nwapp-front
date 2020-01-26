@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AssignWatchAssociateTaskStep2Component from "../../../components/tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Component";
-import { validateTask1Step2Input } from "../../../validators/taskValidator";
-import { getAssociateReactSelectOptions } from '../../../actions/watchActions';
+import AdminWatchCreateStep1Component from "../../../../components/watchs/admin/create/adminCreateStep1Component";
+import { validateStep1CreateInput } from "../../../../validators/watchValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
-} from '../../../helpers/localStorageUtility';
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetIntegerItem
+} from '../../../../helpers/localStorageUtility';
 
 
-class TaskUpdateContainer extends Component {
+class AdminWatchCreateStep1Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -18,22 +19,16 @@ class TaskUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Since we are using the ``react-routes-dom`` library then we
-        // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
-
         this.state = {
-            name: null,
+            firstName: "",
+            lastName: "",
+            phone: "",
+            email: "",
             errors: {},
-            isLoading: false,
-            slug: slug,
-            associate: localStorage.getItem('nwapp-task-1-associate'),
-            associateOption: localStorageGetObjectItem('nwapp-task-1-associateOption'),
+            isLoading: false
         }
 
         this.onTextChange = this.onTextChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -46,17 +41,6 @@ class TaskUpdateContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        this.setState({
-            associateData: {
-                results: [
-                    {'slug': 'bob-page', 'name': 'Bob Page'},
-                    {'slug': 'walter-simons', 'name': 'Walter Simons'},
-                    {'slug': 'jc-denton', 'name': 'JC Denton'},
-                    {'slug': 'paul-denton', 'name': 'Paul Denton'}
-                ]
-            }
-        });
     }
 
     componentWillUnmount() {
@@ -73,9 +57,10 @@ class TaskUpdateContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(task) {
+    onSuccessfulSubmissionCallback(watch) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/task/1/"+this.state.slug+"/step-3");
+        localStorageSetObjectOrArrayItem("nwapp-create-watch-search-criteria", this.state);
+        this.props.history.push("/admin/watchs/add/step-2");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -98,19 +83,9 @@ class TaskUpdateContainer extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
-        })
-    }
-
-    onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            optionKey: option,
         });
-        localStorage.setItem('nwapp-task-1-'+[option.selectName], option.value);
-        localStorage.setItem('nwapp-task-1-'+[option.selectName]+"-label", option.label);
-        localStorageSetObjectOrArrayItem('nwapp-task-1-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+        const key = "nwapp-create-watch-"+[e.target.name];
+        localStorage.setItem(key, e.target.value);
     }
 
     onClick(e) {
@@ -118,7 +93,7 @@ class TaskUpdateContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateTask1Step2Input(this.state);
+        const { errors, isValid } = validateStep1CreateInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -137,15 +112,12 @@ class TaskUpdateContainer extends Component {
      */
 
     render() {
-        const { associate, associateData, errors, slug, } = this.state;
+        const { name, errors } = this.state;
         return (
-            <AssignWatchAssociateTaskStep2Component
-                slug={slug}
-                associate={associate}
-                associateOptions={getAssociateReactSelectOptions(associateData)}
+            <AdminWatchCreateStep1Component
+                name={name}
                 errors={errors}
                 onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );
@@ -159,11 +131,12 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TaskUpdateContainer);
+)(AdminWatchCreateStep1Container);
