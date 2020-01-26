@@ -17,6 +17,7 @@ import {
     DISTRICT_LIST_SUCCESS, DISTRICT_DETAIL_SUCCESS,
     ANNOUNCEMENT_LIST_SUCCESS, ANNOUNCEMENT_DETAIL_SUCCESS,
     RESOURCE_ITEM_LIST_SUCCESS, RESOURCE_DETAIL_SUCCESS,
+    WATCH_LIST_SUCCESS, WATCH_DETAIL_SUCCESS, WATCH_COMMENT_LIST_SUCCESS,
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -41,6 +42,8 @@ import { awardListReducer, awardDetailReducer } from "./reducers/awardReducers";
 import { districtListReducer, districtDetailReducer } from "./reducers/districtReducers";
 import { announcementListReducer, announcementDetailReducer } from "./reducers/announcementReducers";
 import { resourceListReducer, resourceDetailReducer } from "./reducers/resourceReducers";
+import { watchListReducer, watchDetailReducer} from "./reducers/watchReducers";
+import { watchCommentListReducer } from "./reducers/watchCommentReducers";
 
 // Combine Reducers
 const appReducer = combineReducers({
@@ -72,6 +75,9 @@ const appReducer = combineReducers({
     districtListState: districtListReducer, districtDetailState: districtDetailReducer,
     announcementListState: announcementListReducer, announcementDetailState: announcementDetailReducer,
     resourceListState: resourceListReducer, resourceDetailState: resourceDetailReducer,
+    watchListState: watchListReducer,
+    watchDetailState: watchDetailReducer,
+    watchCommentListState: watchCommentListReducer,
 });
 
 
@@ -113,6 +119,7 @@ const localStorageMiddleware = ({ getState }) => {
             DISTRICT_LIST_SUCCESS, DISTRICT_DETAIL_SUCCESS,
             ANNOUNCEMENT_LIST_SUCCESS, ANNOUNCEMENT_DETAIL_SUCCESS,
             RESOURCE_ITEM_LIST_SUCCESS, RESOURCE_DETAIL_SUCCESS,
+            WATCH_LIST_SUCCESS, WATCH_DETAIL_SUCCESS, WATCH_COMMENT_LIST_SUCCESS,
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))
