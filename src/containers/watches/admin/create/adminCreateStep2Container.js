@@ -9,7 +9,7 @@ import {
     localStorageGetArrayItem,
     localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
-import { validateStep1CreateInput } from "../../../../validators/watchValidator";
+import { validateStep2CreateInput } from "../../../../validators/watchValidator";
 import { getAssociateReactSelectOptions } from '../../../../actions/watchActions';
 import { pullDistrictList, getDistrictReactSelectOptions } from '../../../../actions/districtActions';
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
@@ -21,6 +21,7 @@ import {
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from "../../../../constants/api";
+
 
 
 class AdminWatchCreateStep2Container extends Component {
@@ -98,23 +99,6 @@ class AdminWatchCreateStep2Container extends Component {
      *  API callback functions
      *------------------------------------------------------------
      */
-
-    onSuccessfulSubmissionCallback(district) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-3-create");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
 
     onDistrictSuccessCallback(response) {
         console.log(response);
@@ -195,17 +179,24 @@ class AdminWatchCreateStep2Container extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // // Perform client-side validation.
-        // const { errors, isValid } = validateResidentialStep2Input(this.state);
-        //
-        // // CASE 1 OF 2: Validation passed successfully.
-        // if (isValid) {
-        //     this.onSuccessfulSubmissionCallback();
-        //
-        // // CASE 2 OF 2: Validation was a failure.
-        // } else {
-        //     this.onFailedSubmissionCallback(errors);
-        // }
+        // Perform client-side validation.
+        const { errors, isValid } = validateStep2CreateInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.setState({ errors: {}, isLoading: true, })
+            this.props.history.push("/admin/watches/step-3-create");
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.setState({ errors: errors });
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
+        }
     }
 
     /**
@@ -221,8 +212,9 @@ class AdminWatchCreateStep2Container extends Component {
         const districtOptions = getDistrictReactSelectOptions(this.props.districtList, "district");
         const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
 
-        console.log("districtOptions", districtOptions);
-        console.log("tagOptions", tagOptions);
+        // // For debugging purposes only.
+        // console.log("districtOptions", districtOptions);
+        // console.log("tagOptions", tagOptions);
 
         return (
             <AdminWatchCreateStep2Component

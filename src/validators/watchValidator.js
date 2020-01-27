@@ -11,6 +11,25 @@ import {
 } from '../constants/api';
 
 
+export function validateStep2CreateInput(data) {
+    let errors = {};
+
+    if (data.name === undefined || data.name === null || validator.isEmpty(data.name) || data.name === "" || data.name === "null") {
+        errors.name = 'This field is required';
+    }
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "" || data.description === "null") {
+        errors.description = 'This field is required';
+    }
+    if (data.district === undefined || data.district === null || validator.isEmpty(data.district) || data.district === "" || data.district === "null") {
+        errors.district = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 //                                 RESIDENTIAL                                //
 ////////////////////////////////////////////////////////////////////////////////

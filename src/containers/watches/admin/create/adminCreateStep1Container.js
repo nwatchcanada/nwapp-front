@@ -9,11 +9,6 @@ import {
     localStorageSetObjectOrArrayItem,
     localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from '../../../../constants/api';
 
 
 class AdminWatchCreateStep1Container extends Component {
@@ -68,15 +63,7 @@ class AdminWatchCreateStep1Container extends Component {
         localStorage.setItem('nwapp-watch-typeOf', typeOf);
 
         // Redirect to the next page.
-        if (typeOf === RESIDENCE_TYPE_OF) {
-            this.props.history.push("/admin/watches/step-2-create");
-        }
-        else if (typeOf === BUSINESS_TYPE_OF) {
-            this.props.history.push("/admin/watches/add/step-2-create");
-        }
-        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
-            this.props.history.push("/admin/watches/add/step-2-create");
-        }
+        this.props.history.push("/admin/watches/step-2-create");
     }
 
 
