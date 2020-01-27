@@ -4,13 +4,16 @@ import Scroll from 'react-scroll';
 
 import AdminWatchCreateStep2Component from "../../../../components/watches/admin/create/adminCreateStep2Component";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetArrayItem,
+    localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
 import { validateStep1CreateInput } from "../../../../validators/watchValidator";
 import { getAssociateReactSelectOptions } from '../../../../actions/watchActions';
-import { getDistrictReactSelectOptions } from '../../../../actions/districtActions';
+import { pullDistrictList, getDistrictReactSelectOptions } from '../../../../actions/districtActions';
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
-import { getTagReactSelectOptions } from "../../../../actions/tagActions";
+import { pullTagList, getTagReactSelectOptions } from "../../../../actions/tagActions";
 import {
     BASIC_STREET_TYPE_CHOICES,
     STREET_DIRECTION_CHOICES
@@ -27,12 +30,14 @@ class AdminWatchCreateStep2Container extends Component {
         super(props);
         this.state = {
             tags: localStorageGetArrayItem("nwapp-watch-tags"),
+            isTagLoading: true,
             name: localStorage.getItem('nwapp-watch-name'),
             description: localStorage.getItem('nwapp-watch-description'),
             associate: localStorage.getItem('nwapp-watch-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-associateOption'),
             district: localStorage.getItem('nwapp-watch-district'),
             districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
+            isDistrictLoading: true,
             errors: {},
         }
 
@@ -41,6 +46,10 @@ class AdminWatchCreateStep2Container extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
+        this.onDistrictSuccessCallback = this.onDistrictSuccessCallback.bind(this);
+        this.onDistrictFailureCallback = this.onDistrictFailureCallback.bind(this);
+        this.onTagSuccessCallback = this.onTagSuccessCallback.bind(this);
+        this.onTagFailureCallback = this.onTagFailureCallback.bind(this);
     }
 
     /**
@@ -50,6 +59,25 @@ class AdminWatchCreateStep2Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Get our data.
+        const parametersMap = new Map();
+        parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
+        parametersMap.set("o", "-created_at");
+        this.props.pullDistrictList(
+            1,
+            10000,
+            parametersMap,
+            this.onDistrictSuccessCallback,
+            this.onDistrictFailureCallback
+        );
+        this.props.pullTagList(
+            1,
+            10000,
+            parametersMap,
+            this.onTagSuccessCallback,
+            this.onTagFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -75,6 +103,44 @@ class AdminWatchCreateStep2Container extends Component {
         this.setState({
             errors: errors
         })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    onDistrictSuccessCallback(response) {
+        console.log(response);
+        this.setState({ isDistrictLoading: false, }, ()=>{
+            console.log("onDistrictSuccessCallback: Successfully loaded the districts list.");
+        });
+    }
+
+    onDistrictFailureCallback(errors) {
+        this.setState({ errors: errors, isDistrictLoading: false, }, ()=>{
+            console.log("onDistrictSuccessCallback: Failed loading the districts list.");
+        });
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    onTagSuccessCallback(response) {
+        console.log(response);
+        this.setState({ isTagLoading: false, }, ()=>{
+            console.log("onTagSuccessCallback: Successfully loaded the districts list.");
+        });
+    }
+
+    onTagFailureCallback(errors) {
+        this.setState({ errors: errors, isTagLoading: false, }, ()=>{
+            console.log("onTagSuccessCallback: Failed loading the districts list.");
+        });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -144,28 +210,25 @@ class AdminWatchCreateStep2Container extends Component {
 
     render() {
         const {
-            tags, name, description, district, errors
+            tags, isTagLoading, name, description, district, isDistrictLoading, errors
         } = this.state;
 
-        // const districtListObject = {
-        //     results: [
-        //         {'slug': 'wanchai', 'name': 'Wanchai Market'},
-        //         {'slug': 'versalife', 'name': 'VersaLife'},
-        //         {'slug': 'battery-park', 'name': 'Battery Park'},
-        //         {'slug': 'area-51', 'name': 'Area 51'}
-        //     ]
-        // }; // TODO: REPLACTE WITH API DATA.
-        //
-        // const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+        const districtOptions = getDistrictReactSelectOptions(this.props.districtList, "district");
+        const tagOptions = getTagReactSelectOptions(this.props.tagList, "tags");
+
+        console.log("districtOptions", districtOptions);
+        console.log("tagOptions", tagOptions);
 
         return (
             <AdminWatchCreateStep2Component
                 tags={tags}
-                // tagOptions={tagOptions}
+                isTagLoading={isTagLoading}
+                tagOptions={tagOptions}
                 name={name}
                 description={description}
                 district={district}
-                // districtOptions={getDistrictReactSelectOptions(districtListObject)}
+                isDistrictLoading={isDistrictLoading}
+                districtOptions={districtOptions}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
@@ -179,11 +242,24 @@ class AdminWatchCreateStep2Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        districtList: store.districtListState,
+        tagList: store.tagListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        pullDistrictList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullDistrictList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
+        pullTagList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullTagList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
+    }
 }
 
 

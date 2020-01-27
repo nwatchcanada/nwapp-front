@@ -14,9 +14,9 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchCreateStep2Component extends Component {
     render() {
         const {
-            tags, tagOptions, name, description, district, districtOptions,
-            errors, isLoading, onClick, onTextChange, onSelectChange,
-            onMultiChange,
+            tags, isTagLoading, tagOptions, name, description, district, isDistrictLoading,
+            districtOptions, errors, isLoading, onClick, onTextChange,
+            onSelectChange, onMultiChange,
         } = this.props;
         return (
             <main id="main" role="main">
@@ -96,6 +96,7 @@ export default class AdminWatchCreateStep2Component extends Component {
                                 value={district}
                                 error={errors.district}
                                 onSelectChange={onSelectChange}
+                                isLoading={isDistrictLoading}
                             />
 
                             <BootstrapMultipleSelect
@@ -107,6 +108,7 @@ export default class AdminWatchCreateStep2Component extends Component {
                                 selectedOptions={tags}
                                 error={errors.tags}
                                 onMultiChange={onMultiChange}
+                                isLoading={isTagLoading}
                             />
 
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

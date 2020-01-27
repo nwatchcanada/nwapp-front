@@ -469,17 +469,19 @@ export function getDistrictReactSelectOptions(districtList=[], selectName="distr
     if (isNotProductionsEmpty) {
         const results = districtList.results;
         const isResultsNotEmpty = isEmpty(results) === false;
+        // console.log(results);
         if (isResultsNotEmpty) {
             for (let i = 0; i < results.length; i++) {
                 let district = results[i];
                 districtOptions.push({
                     selectName: selectName,
-                    value: district.id,
-                    label: district.text
+                    value: district.slug, // NOTE: DO NOT USE `ID` BUT USE `SLUG`.
+                    label: district.name
                 });
                 // console.log("getDistrictReactSelectOptions", district);
             }
         }
     }
+    // console.log(districtOptions);
     return districtOptions;
 }
