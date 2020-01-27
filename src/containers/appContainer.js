@@ -277,15 +277,6 @@ import AdminWatchCreateStep1Container from "./watches/admin/create/adminCreateSt
 import AdminWatchCreateStep2Container from "./watches/admin/create/adminCreateStep2Container";
 import AdminWatchCreateStep3Container from "./watches/admin/create/adminCreateStep3Container";
 import AdminWatchCreateStep4Container from "./watches/admin/create/adminCreateStep4Container";
-// import WatchCreateStep2RezContainer from "./watches/create/rez/watchCreateStep2RezContainer";
-// import WatchCreateStep3RezContainer from "./watches/create/rez/watchCreateStep3RezContainer";
-// import WatchCreateStep4RezContainer from "./watches/create/rez/watchCreateStep4RezContainer";
-// import WatchCreateStep2BizContainer from "./watches/create/biz/watchCreateStep2BizContainer";
-// import WatchCreateStep3BizContainer from "./watches/create/biz/watchCreateStep3BizContainer";
-// import WatchCreateStep4BizContainer from "./watches/create/biz/watchCreateStep4BizContainer";
-// import WatchCreateStep2ComContainer from "./watches/create/com/watchCreateStep2ComContainer";
-// import WatchCreateStep3ComContainer from "./watches/create/com/watchCreateStep3ComContainer";
-// import WatchCreateStep4ComContainer from "./watches/create/com/watchCreateStep4ComContainer";
 // import WatchRetrieveContainer from "./watches/retrieve/watchRetrieveContainer";
 // import WatchUpdateContainer from "./watches/update/watchUpdateContainer";
 // import WatchSearchContainer from "./watches/search/watchSearchContainer";
@@ -293,15 +284,6 @@ import AdminWatchCreateStep4Container from "./watches/admin/create/adminCreateSt
 //
 // <Route path="/watches/search" exact component={requiresAuth(WatchSearchContainer)} />
 // <Route path="/watches/search-results" exact component={requiresAuth(WatchSearchResultContainer)} />
-// <Route path="/watches/step-2-create-rez" exact component={requiresAuth(WatchCreateStep2RezContainer)} />
-// <Route path="/watches/step-2-create-biz" exact component={requiresAuth(WatchCreateStep2BizContainer)} />
-// <Route path="/watches/step-2-create-cc" exact component={requiresAuth(WatchCreateStep2ComContainer)} />
-// <Route path="/watches/step-3-create-rez" exact component={requiresAuth(WatchCreateStep3RezContainer)} />
-// <Route path="/watches/step-3-create-biz" exact component={requiresAuth(WatchCreateStep3BizContainer)} />
-// <Route path="/watches/step-3-create-cc" exact component={requiresAuth(WatchCreateStep3ComContainer)} />
-// <Route path="/watches/step-4-create-rez" exact component={requiresAuth(WatchCreateStep4RezContainer)} />
-// <Route path="/watches/step-4-create-biz" exact component={requiresAuth(WatchCreateStep4BizContainer)} />
-// <Route path="/watches/step-4-create-cc" exact component={requiresAuth(WatchCreateStep4ComContainer)} />
 // <Route path="/watch/:slug" exact component={requiresAuth(WatchRetrieveContainer)} />
 // <Route path="/watch/:slug/update" exact component={requiresAuth(WatchUpdateContainer)} />
 

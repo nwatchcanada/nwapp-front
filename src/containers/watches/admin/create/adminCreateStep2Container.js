@@ -6,11 +6,15 @@ import AdminWatchCreateStep2Component from "../../../../components/watches/admin
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
+import { validateStep1CreateInput } from "../../../../validators/watchValidator";
 import { getAssociateReactSelectOptions } from '../../../../actions/watchActions';
 import { getDistrictReactSelectOptions } from '../../../../actions/districtActions';
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
-import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
+import {
+    BASIC_STREET_TYPE_CHOICES,
+    STREET_DIRECTION_CHOICES
+} from "../../../../constants/api";
 
 
 class AdminWatchCreateStep2Container extends Component {
@@ -22,13 +26,13 @@ class AdminWatchCreateStep2Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tags: localStorageGetArrayItem("nwapp-watch-rez-tags"),
-            name: localStorage.getItem('nwapp-watch-rez-name'),
-            description: localStorage.getItem('nwapp-watch-rez-description'),
-            associate: localStorage.getItem('nwapp-watch-rez-associate'),
-            associateOption: localStorageGetObjectItem('nwapp-watch-rez-associateOption'),
-            district: localStorage.getItem('nwapp-watch-rez-district'),
-            districtOption: localStorageGetObjectItem('nwapp-watch-rez-districtOption'),
+            tags: localStorageGetArrayItem("nwapp-watch-tags"),
+            name: localStorage.getItem('nwapp-watch-name'),
+            description: localStorage.getItem('nwapp-watch-description'),
+            associate: localStorage.getItem('nwapp-watch-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-watch-associateOption'),
+            district: localStorage.getItem('nwapp-watch-district'),
+            districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
             errors: {},
         }
 
@@ -46,22 +50,6 @@ class AdminWatchCreateStep2Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
-        this.setState({
-            tagsData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Health',
-                    slug: 'health'
-                },{
-                    name: 'Security',
-                    slug: 'security'
-                },{
-                    name: 'Fitness',
-                    slug: 'fitness'
-                }]
-            }
-        });
     }
 
     componentWillUnmount() {
@@ -80,7 +68,7 @@ class AdminWatchCreateStep2Container extends Component {
 
     onSuccessfulSubmissionCallback(district) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-3-create-rez");
+        this.props.history.push("/watches/step-3-create");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -104,7 +92,7 @@ class AdminWatchCreateStep2Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('nwapp-watch-rez-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-watch-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -113,8 +101,8 @@ class AdminWatchCreateStep2Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-watch-rez-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-watch-rez-'+optionKey, option);
+        localStorage.setItem('nwapp-watch-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-watch-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -128,7 +116,7 @@ class AdminWatchCreateStep2Container extends Component {
         });
 
         // // Set all the tags we have selected to the STORAGE.
-        const key = 'nwapp-watch-rez-' + args[1].name;
+        const key = 'nwapp-watch-' + args[1].name;
         localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
@@ -159,25 +147,25 @@ class AdminWatchCreateStep2Container extends Component {
             tags, name, description, district, errors
         } = this.state;
 
-        const districtListObject = {
-            results: [
-                {'slug': 'wanchai', 'name': 'Wanchai Market'},
-                {'slug': 'versalife', 'name': 'VersaLife'},
-                {'slug': 'battery-park', 'name': 'Battery Park'},
-                {'slug': 'area-51', 'name': 'Area 51'}
-            ]
-        }; // TODO: REPLACTE WITH API DATA.
-
-        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+        // const districtListObject = {
+        //     results: [
+        //         {'slug': 'wanchai', 'name': 'Wanchai Market'},
+        //         {'slug': 'versalife', 'name': 'VersaLife'},
+        //         {'slug': 'battery-park', 'name': 'Battery Park'},
+        //         {'slug': 'area-51', 'name': 'Area 51'}
+        //     ]
+        // }; // TODO: REPLACTE WITH API DATA.
+        //
+        // const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
             <AdminWatchCreateStep2Component
                 tags={tags}
-                tagOptions={tagOptions}
+                // tagOptions={tagOptions}
                 name={name}
                 description={description}
                 district={district}
-                districtOptions={getDistrictReactSelectOptions(districtListObject)}
+                // districtOptions={getDistrictReactSelectOptions(districtListObject)}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}

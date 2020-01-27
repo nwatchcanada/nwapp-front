@@ -53,16 +53,6 @@ export default class AdminWatchCreateStep2Component extends Component {
                         <div id="step-3" className="st-grey">
                             <span className="num">3.</span><span className="">Street Membership</span>
                         </div>
-                        <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Review</span>
-                        </div>
-                        { /* <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Skills Required</span>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Review</span>
-                        </div>
-                        */ }
                     </div>
                 </div>
 

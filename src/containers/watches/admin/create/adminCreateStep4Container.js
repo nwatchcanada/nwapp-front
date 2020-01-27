@@ -3,10 +3,19 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminWatchCreateStep4Component from "../../../../components/watches/admin/create/adminCreateStep4Component";
-import { validateStep4CreateInput } from "../../../../validators/watchValidator";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
-    localStorageGetIntegerItem, localStorageSetObjectOrArrayItem
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from "../../../../constants/api";
+import {
+    localStorageGetIntegerItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageRemoveItemsContaining
 } from '../../../../helpers/localStorageUtility';
+import { postHowHear } from "../../../../actions/howHearActions";
+import { validateInput } from '../../../../validators/howHearValidator';
 
 
 class AdminWatchCreateStep4Container extends Component {
@@ -17,29 +26,30 @@ class AdminWatchCreateStep4Container extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            typeOf: localStorageGetIntegerItem("nwapp-create-watch-typeOf"),
-            organizationName: localStorage.getItem("nwapp-create-watch-organizationName"),
-            organizationTypeOf: localStorageGetIntegerItem("nwapp-create-watch-organizationTypeOf"),
-            firstName: localStorage.getItem("nwapp-create-watch-firstName"),
-            lastName: localStorage.getItem("nwapp-create-watch-lastName"),
-            primaryPhone: localStorage.getItem("nwapp-create-watch-primaryPhone"),
-            // primaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-primaryPhoneTypeOf"),
-            secondaryPhone: localStorage.getItem("nwapp-create-watch-secondaryPhone"),
-            // secondaryPhoneTypeOf: localStorageGetIntegerItem("nwapp-create-client-secondaryPhoneTypeOf"),
-            email: localStorage.getItem("nwapp-create-watch-email"),
-            isOkToEmail: localStorageGetIntegerItem("nwapp-create-watch-isOkToEmail"),
-            isOkToText: localStorageGetIntegerItem("nwapp-create-watch-isOkToText"),
+            text: localStorage.getItem('nwapp-howHear-add-text'),
             errors: {},
             isLoading: false
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
-        this.onRadioChange = this.onRadioChange.bind(this);
+        this.getPostData = this.getPostData.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -65,13 +75,26 @@ class AdminWatchCreateStep4Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(watch) {
-        this.props.history.push("/admin/watchs/add/step-5");
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                isLoading: false,
+            },
+            ()=>{
+                console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
+                console.log("onSuccessCallback | State (Post-Fetch):", this.state);
+                this.props.setFlashMessage("success", "HowHear has been successfully created.");
+                localStorageRemoveItemsContaining("nwapp-howHear-add-");
+                this.props.history.push("/admin/settings/how-hears");
+            }
+        )
     }
 
-    onFailedSubmissionCallback(errors) {
+    onFailureCallback(errors) {
         this.setState({
-            errors: errors
+            errors: errors,
+            isLoading: false,
         })
 
         // The following code will cause the screen to scroll to the top of
@@ -86,66 +109,36 @@ class AdminWatchCreateStep4Container extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-        const key = "nwapp-create-watch-"+[e.target.name];
-        localStorage.setItem(key, e.target.value);
-    }
-
-    onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            optionKey: option,
-        });
-        localStorage.setItem('nwapp-create-watch-'+[option.selectName].toString(), option.value);
-        localStorage.setItem('nwapp-create-watch-'+[option.selectName].toString()+"Label", option.label);
-        localStorageSetObjectOrArrayItem('nnwapp-create-watch-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
-    }
-
-    onRadioChange(e) {
-        // Get the values.
-        const storageValueKey = "nwapp-create-watch-"+[e.target.name];
-        const storageLabelKey =  "nwapp-create-watch-"+[e.target.name].toString()+"-label";
-        const value = e.target.value;
-        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
-        const storeValueKey = [e.target.name].toString();
-        const storeLabelKey = [e.target.name].toString()+"Label";
-
-        // Save the data.
-        this.setState({ [e.target.name]: value, }); // Save to store.
-        this.setState({ storeLabelKey: label, }); // Save to store.
-        localStorage.setItem(storageValueKey, value) // Save to storage.
-        localStorage.setItem(storageLabelKey, label) // Save to storage.
-
-        // For the debugging purposes only.
-        console.log({
-            "STORE-VALUE-KEY": storageValueKey,
-            "STORE-VALUE": value,
-            "STORAGE-VALUE-KEY": storeValueKey,
-            "STORAGE-VALUE": value,
-            "STORAGE-LABEL-KEY": storeLabelKey,
-            "STORAGE-LABEL": label,
-        });
-    }
-
     onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateStep4CreateInput(this.state);
+        const { errors, isValid } = validateInput(this.state);
+        // console.log(errors, isValid); // For debugging purposes only.
 
-        // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
+            this.setState({
+                errors: {},
+                isLoading: true,
+            }, ()=>{
+                // Once our state has been validated `client-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.postHowHear(
+                    this.getPostData(),
+                    this.onSuccessCallback,
+                    this.onFailureCallback
+                );
+            });
         } else {
-            this.onFailedSubmissionCallback(errors);
+            this.setState({
+                errors: errors,
+                isLoading: false,
+            });
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
         }
     }
 
@@ -157,25 +150,15 @@ class AdminWatchCreateStep4Container extends Component {
 
     render() {
         const {
-            typeOf, organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, isOkToEmail, isOkToText, errors
+            name, errors, isLoading
         } = this.state;
         return (
             <AdminWatchCreateStep4Component
-                typeOf={typeOf}
-                organizationName={organizationName}
-                organizationTypeOf={organizationTypeOf}
-                firstName={firstName}
-                lastName={lastName}
-                primaryPhone={primaryPhone}
-                secondaryPhone={secondaryPhone}
-                email={email}
-                isOkToEmail={isOkToEmail}
-                isOkToText={isOkToText}
+                name={name}
                 errors={errors}
-                onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
-                onRadioChange={this.onRadioChange}
                 onClick={this.onClick}
+                onDrop={this.onDrop}
+                isLoading={isLoading}
             />
         );
     }
@@ -188,7 +171,14 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
+        postHowHear: (postData, successCallback, failedCallback) => {
+            dispatch(postHowHear(postData, successCallback, failedCallback))
+        },
+    }
 }
 
 
