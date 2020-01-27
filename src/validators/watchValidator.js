@@ -191,7 +191,7 @@ export function validateCommunityCaresModalSaveInput(data) {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-function validateModalSaveInput(data) {
+export function validateModalSaveInput(data) {
     let errors = {};
 
     if (data.streetNumberStart === undefined || data.streetNumberStart === null || validator.isEmpty(data.streetNumberStart) || data.streetNumberStart === "" || data.streetNumberStart === "null") {
@@ -203,7 +203,7 @@ function validateModalSaveInput(data) {
     if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "" || data.streetName === "null") {
         errors.streetName = 'This field is required';
     }
-    if (data.streetType === undefined || data.streetType === null || validator.isEmpty(data.streetType) || data.streetType === "" || data.streetType === "null") {
+    if (data.streetType === undefined || data.streetType === null || isNaN(data.streetType) || data.streetType === "" || data.streetType === "null") {
         errors.streetType = 'This field is required';
     } else {
         if (data.streetType === "Other") {

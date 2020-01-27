@@ -22,10 +22,10 @@ export default class AdminWatchCreateStep4Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/watches"><i className="fas fa-hat-wizard"></i>&nbsp;Staffs</Link>
+                            <Link to="/admin/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add Staff
+                            <i className="fas fa-plus"></i>&nbsp;Add
                         </li>
                     </ol>
                 </nav>
@@ -37,7 +37,7 @@ export default class AdminWatchCreateStep4Component extends Component {
 
                         <div className="jumbotron">
                             <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
-                            <p className="lead">This will promote our <strong>user</strong> to become a <strong>frontline staff</strong> member. If you want to create a <strong>management staff</strong> member then you will need to promote a staff member instead.</p>
+                            <p className="lead">This will create a watch.</p>
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>

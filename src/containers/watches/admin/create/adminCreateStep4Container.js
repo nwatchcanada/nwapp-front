@@ -28,7 +28,6 @@ class AdminWatchCreateStep4Container extends Component {
         super(props);
 
         this.state = {
-            text: localStorage.getItem('nwapp-howHear-add-text'),
             errors: {},
             isLoading: false
         }

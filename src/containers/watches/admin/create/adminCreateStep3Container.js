@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import {
-    validateResidentialStep3Input, validateResidentialModalSaveInput
+    validateResidentialStep3Input, validateModalSaveInput
 } from "../../../../validators/watchValidator";
 import AdminWatchCreateStep3Component from "../../../../components/watches/admin/create/adminCreateStep3Component";
 import {
@@ -25,16 +25,16 @@ class AdminWatchCreateStep3Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            streetMembership: localStorageGetArrayItem('nwapp-watch-rez-streetMembership'),
+            streetMembership: localStorageGetArrayItem('nwapp-watch-streetMembership'),
             errors: {},
             streetNumberStart: "",
             streetNumberFinish: "",
             streetName: "",
             streetType: "",
-            streetTypeOption: localStorageGetObjectItem('nwapp-watch-rez-streetTypeOption'),
+            streetTypeOption: localStorageGetObjectItem('nwapp-watch-streetTypeOption'),
             streetTypeOther: "",
             streetDirection: "",
-            streetDirectionOption: localStorageGetObjectItem('nwapp-watch-rez-streetDirectionOption'),
+            streetDirectionOption: localStorageGetObjectItem('nwapp-watch-streetDirectionOption'),
             showModal: false, // Variable used to indicate if the modal should appear.
         }
 
@@ -58,22 +58,6 @@ class AdminWatchCreateStep3Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
-        this.setState({
-            tagsData: {
-                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
-                    name: 'Health',
-                    slug: 'health'
-                },{
-                    name: 'Security',
-                    slug: 'security'
-                },{
-                    name: 'Fitness',
-                    slug: 'fitness'
-                }]
-            }
-        });
     }
 
     componentWillUnmount() {
@@ -90,22 +74,6 @@ class AdminWatchCreateStep3Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(district) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/watches/step-4-create-rez");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
 
     /**
      *  Event handling functions
@@ -116,7 +84,7 @@ class AdminWatchCreateStep3Container extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        localStorage.setItem('nwapp-watch-rez-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-watch-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -125,8 +93,8 @@ class AdminWatchCreateStep3Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-watch-rez-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-watch-rez-'+optionKey, option);
+        localStorage.setItem('nwapp-watch-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-watch-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -140,7 +108,7 @@ class AdminWatchCreateStep3Container extends Component {
         });
 
         // // Set all the tags we have selected to the STORAGE.
-        const key = 'nwapp-watch-rez-' + args[1].name;
+        const key = 'nwapp-watch-' + args[1].name;
         localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
@@ -153,11 +121,18 @@ class AdminWatchCreateStep3Container extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.onSuccessfulSubmissionCallback();
+            this.setState({ errors: {}, isLoading: true, });
+            this.props.history.push("/admin/watches/step-4-create");
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
-            this.onFailedSubmissionCallback(errors);
+            this.setState({ errors: errors, });
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
         }
     }
 
@@ -197,7 +172,7 @@ class AdminWatchCreateStep3Container extends Component {
                 });
 
                 // Save our table data.
-                localStorageSetObjectOrArrayItem("nwapp-watch-rez-streetMembership", filteredItems);
+                localStorageSetObjectOrArrayItem("nwapp-watch-streetMembership", filteredItems);
 
                 // Terminate our for-loop.
                 return;
@@ -210,7 +185,7 @@ class AdminWatchCreateStep3Container extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateResidentialModalSaveInput(this.state);
+        const { errors, isValid } = validateModalSaveInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -248,7 +223,7 @@ class AdminWatchCreateStep3Container extends Component {
             })
 
             // Save our table data.
-            localStorageSetObjectOrArrayItem("nwapp-watch-rez-streetMembership", a);
+            localStorageSetObjectOrArrayItem("nwapp-watch-streetMembership", a);
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
