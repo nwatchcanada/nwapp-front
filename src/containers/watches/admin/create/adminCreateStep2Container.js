@@ -4,12 +4,13 @@ import Scroll from 'react-scroll';
 
 import AdminWatchCreateStep2Component from "../../../../components/watches/admin/create/adminCreateStep2Component";
 import {
-    localStorageGetObjectItem,
-    localStorageSetObjectOrArrayItem,
-    localStorageGetIntegerItem
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
-import { pullWatchList } from "../../../../actions/watchActions";
-import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
+import { getAssociateReactSelectOptions } from '../../../../actions/watchActions';
+import { getDistrictReactSelectOptions } from '../../../../actions/districtActions';
+import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
+import { getTagReactSelectOptions } from "../../../../actions/tagActions";
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
 class AdminWatchCreateStep2Container extends Component {
@@ -21,38 +22,21 @@ class AdminWatchCreateStep2Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: localStorage.getItem("nwapp-create-watch-firstName"),
-            lastName: localStorage.getItem("nwapp-create-watch-lastName"),
-            email: localStorage.getItem("nwapp-create-watch-email"),
-            phone: localStorage.getItem("nwapp-create-watch-phone"),
-            isLoading: true,
+            tags: localStorageGetArrayItem("nwapp-watch-rez-tags"),
+            name: localStorage.getItem('nwapp-watch-rez-name'),
+            description: localStorage.getItem('nwapp-watch-rez-description'),
+            associate: localStorage.getItem('nwapp-watch-rez-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-watch-rez-associateOption'),
+            district: localStorage.getItem('nwapp-watch-rez-district'),
+            districtOption: localStorageGetObjectItem('nwapp-watch-rez-districtOption'),
             errors: {},
-            page: 1,
         }
 
+        // Page related.
+        this.onClick = this.onClick.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
-        this.onSuccessCallback = this.onSuccessCallback.bind(this);
-        this.onFailureCallback = this.onFailureCallback.bind(this);
-        this.getParametersMapFromState = this.getParametersMapFromState.bind(this);
-        this.onNextClick = this.onNextClick.bind(this);
-        this.onPreviousClick = this.onPreviousClick.bind(this);
-    }
-
-    getParametersMapFromState() {
-        const parametersMap = new Map();
-        if (this.state.firstName !== undefined && this.state.firstName !== null) {
-            parametersMap.set('firstName', this.state.firstName);
-        }
-        if (this.state.lastName !== undefined && this.state.lastName !== null) {
-            parametersMap.set('lastName', this.state.lastName);
-        }
-        if (this.state.email !== undefined && this.state.email !== null) {
-            parametersMap.set('email', this.state.email);
-        }
-        if (this.state.phone !== undefined && this.state.phone !== null) {
-            parametersMap.set('phone', this.state.phone);
-        }
-        return parametersMap;
+        this.onSelectChange = this.onSelectChange.bind(this);
+        this.onMultiChange = this.onMultiChange.bind(this);
     }
 
     /**
@@ -62,7 +46,22 @@ class AdminWatchCreateStep2Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-        this.props.pullWatchList(1, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+
+        // TODO: REPLACE THE FOLLOWING CODE WITH API ENDPOINT CALLING.
+        this.setState({
+            tagsData: {
+                results: [{ //TODO: REPLACE WITH API ENDPOINT DATA.
+                    name: 'Health',
+                    slug: 'health'
+                },{
+                    name: 'Security',
+                    slug: 'security'
+                },{
+                    name: 'Fitness',
+                    slug: 'fitness'
+                }]
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -79,25 +78,14 @@ class AdminWatchCreateStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessCallback(response) {
-        console.log("onSuccessCallback | State (Pre-Fetch):", this.state);
-        this.setState(
-            {
-                page: response.page,
-                totalSize: response.count,
-                isLoading: false,
-            },
-            ()=>{
-                console.log("onSuccessCallback | Fetched:",response); // For debugging purposes only.
-                console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-            }
-        )
+    onSuccessfulSubmissionCallback(district) {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.history.push("/watches/step-3-create-rez");
     }
 
-    onFailureCallback(errors) {
+    onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors,
-            isLoading: false
+            errors: errors
         })
 
         // The following code will cause the screen to scroll to the top of
@@ -115,35 +103,50 @@ class AdminWatchCreateStep2Container extends Component {
     onTextChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
+        })
+        localStorage.setItem('nwapp-watch-rez-'+[e.target.name], e.target.value);
+    }
+
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
         });
-        const key = "nwapp-create-watch-"+[e.target.name];
-        localStorage.setItem(key, e.target.value);
+        localStorage.setItem('nwapp-watch-rez-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-watch-rez-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
-    onNextClick(e) {
-        const page = this.state.page + 1;
-        this.setState(
-            {
-                page: page,
-                isLoading: true,
-            },
-            ()=>{
-                this.props.pullWatchList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
-            }
-        )
+    onMultiChange(...args) {
+        // Extract the select options from the parameter.
+        const selectedOptions = args[0];
+
+        // Set all the tags we have selected to the STORE.
+        this.setState({
+            tags: selectedOptions,
+        });
+
+        // // Set all the tags we have selected to the STORAGE.
+        const key = 'nwapp-watch-rez-' + args[1].name;
+        localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
-    onPreviousClick(e) {
-        const page = this.state.page - 1;
-        this.setState(
-            {
-                page: page,
-                isLoading: true,
-            },
-            ()=>{
-                this.props.pullWatchList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
-            }
-        )
+    onClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // // Perform client-side validation.
+        // const { errors, isValid } = validateResidentialStep2Input(this.state);
+        //
+        // // CASE 1 OF 2: Validation passed successfully.
+        // if (isValid) {
+        //     this.onSuccessfulSubmissionCallback();
+        //
+        // // CASE 2 OF 2: Validation was a failure.
+        // } else {
+        //     this.onFailedSubmissionCallback(errors);
+        // }
     }
 
     /**
@@ -152,23 +155,34 @@ class AdminWatchCreateStep2Container extends Component {
      */
 
     render() {
-        const { page, sizePerPage, totalSize, isLoading, errors } = this.state;
-        const watchs = (this.props.watchList && this.props.watchList.results) ? this.props.watchList.results : [];
-        const hasNext = this.props.watchList.next !== null;
-        const hasPrevious = this.props.watchList.previous !== null;
+        const {
+            tags, name, description, district, errors
+        } = this.state;
+
+        const districtListObject = {
+            results: [
+                {'slug': 'wanchai', 'name': 'Wanchai Market'},
+                {'slug': 'versalife', 'name': 'VersaLife'},
+                {'slug': 'battery-park', 'name': 'Battery Park'},
+                {'slug': 'area-51', 'name': 'Area 51'}
+            ]
+        }; // TODO: REPLACTE WITH API DATA.
+
+        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
+
         return (
             <AdminWatchCreateStep2Component
-                page={page}
-                sizePerPage={sizePerPage}
-                totalSize={totalSize}
-                watchs={watchs}
-                isLoading={isLoading}
+                tags={tags}
+                tagOptions={tagOptions}
+                name={name}
+                description={description}
+                district={district}
+                districtOptions={getDistrictReactSelectOptions(districtListObject)}
                 errors={errors}
+                onClick={this.onClick}
                 onTextChange={this.onTextChange}
-                hasNext={hasNext}
-                onNextClick={this.onNextClick}
-                hasPrevious={hasPrevious}
-                onPreviousClick={this.onPreviousClick}
+                onSelectChange={this.onSelectChange}
+                onMultiChange={this.onMultiChange}
             />
         );
     }
@@ -177,18 +191,11 @@ class AdminWatchCreateStep2Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        watchList: store.watchListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        pullWatchList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
-            dispatch(
-                pullWatchList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
-            )
-        },
-    }
+    return {}
 }
 
 

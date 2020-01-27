@@ -1,52 +1,25 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import ReactModal from 'react-modal';
 
-import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
-class CardComponent extends Component {
+export default class AdminWatchCreateStep2Component extends Component {
     render() {
-        const { watch, isLoading } = this.props;
-        return (
-            <div className="col-sm-3" id={watch.slug}>
-                <div className="card bg-light">
-                    <div className="card-body">
-                        <h5 className="card-title">
-                            <Link to={`/admin/watch/${watch.slug}`}>
-                                {watch.typeOf === 3 &&
-                                    <strong><i className="fas fa-building"></i>&nbsp;{watch.organizationName}</strong>
-                                }
-                                {watch.typeOf === 2 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{watch.firstName}&nbsp;{watch.lastName}</strong>
-                                }
-                                {watch.typeOf === 1 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{watch.firstName}&nbsp;{watch.lastName}</strong>
-                                }
-                            </Link>
-                        </h5>
-                        <p className="card-text">
-                            {watch.streetAddress}<br />
-                            {watch.locality}, {watch.region}, {watch.postalCode}<br />
-                            <a href={`email:${watch.email}`}>{watch.email}</a><br />
-                            <a href={`tel:${watch.primaryPhoneE164}`}>{watch.primaryPhoneNational}</a>
-                        </p>
-                        <Link to={`/admin/watch/${watch.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
-                            Select&nbsp;<i class="fas fa-chevron-right"></i>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default class WatchCreateStep2Component extends Component {
-    render() {
-        const { watches, isLoading, errors, hasNext, onNextClick, hasPrevious, onPreviousClick } = this.props;
+        const {
+            tags, tagOptions, name, description, district, districtOptions,
+            errors, isLoading, onClick, onTextChange, onSelectChange,
+            onMultiChange,
+        } = this.props;
         return (
             <main id="main" role="main">
-                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -61,71 +34,101 @@ export default class WatchCreateStep2Component extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-plus"></i>&nbsp;Add Watch</h1>
+                <h1>Create Watch - Details</h1>
 
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/admin/watches/add/step-1">
-                                <span className="num">1.</span><span className="">Search</span>
+                            <Link to="/admin/watches/step-1-create">
+                                <span className="num">1.</span><span className="">
+                                    Type
+                                </span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Results</span>
+                                <span className="num">2.</span><span className="">Details</span>
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Type</span>
+                            <span className="num">3.</span><span className="">Street Membership</span>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Contact</span>
+                            <span className="num">4.</span><span className="">Review</span>
+                        </div>
+                        { /* <div id="step-4" className="st-grey">
+                            <span className="num">4.</span><span className="">Skills Required</span>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Address</span>
+                            <span className="num">5.</span><span className="">Review</span>
                         </div>
-                        <div id="step-6" className="st-grey">
-                            <span className="num">6.</span><span className="">Watch</span>
-                        </div>
-                         <div id="step-7" className="st-grey">
-                            <span className="num">7.</span><span className="">Metrics</span>
-                        </div>
+                        */ }
                     </div>
                 </div>
 
-                <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Please select the watch.</h5>
-                </div>
+                <div className="col-md-5 mx-auto mt-2">
+                    <h3 className="pt-4 pb-2 text-center"><i className="fas fa-table"></i>&nbsp;Details</h3>
+                    <form id="residential-form" method="post" className="needs-validation" action="" noValidate>
+                        <div className="form-group">
 
-                <div className="card-group row">
-                    {watches && watches.map(
-                        (watch) => <CardComponent watch={watch} key={watch.id} isLoading={isLoading} />)
-                    }
-                </div>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
 
-                <div className="float-right">
-                    {hasPrevious &&
-                        <Link onClick={onPreviousClick}><i class="fas fa-arrow-circle-left"></i>&nbsp;Previous</Link>
-                    }&nbsp;&nbsp;
-                    {hasNext &&
-                        <Link onClick={onNextClick}>Next&nbsp;<i class="fas fa-arrow-circle-right"></i></Link>
-                    }
-                </div>
+                            <BootstrapErrorsProcessingAlert errors={errors} />
 
-                <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Would you like to add a NEW watch?</h5>
-                    <Link to="/admin/watches/add/step-1">
-            		    <button type="button" class="btn btn-lg btn-dark m-3">
-                            <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
-            		    </button>
-                    </Link>
-            		<Link to="/admin/watches/add/step-3">
-            		    <button type="button" class="btn btn-lg btn-success m-3">
-            		       <i class="fas fa-user"></i>&nbsp;Yes - add a new watch
-            		    </button>
-                    </Link>
-                </div>
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.name}
+                                label="Name (*)"
+                                onChange={onTextChange}
+                                value={name}
+                                name="name"
+                                type="text"
+                            />
 
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please describe your concern"
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            <BootstrapSingleSelect
+                                label="District (*)"
+                                name="district"
+                                defaultOptionLabel="Please select the residential district."
+                                options={districtOptions}
+                                value={district}
+                                error={errors.district}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            <BootstrapMultipleSelect
+                                borderColour="border-success"
+                                label="Tags"
+                                name="tags"
+                                defaultOptionLabel="Please select the tag."
+                                options={tagOptions}
+                                selectedOptions={tags}
+                                error={errors.tags}
+                                onMultiChange={onMultiChange}
+                            />
+
+                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                            </button>
+                            <Link to="/admin/watches/step-1-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                            </Link>
+                        </div>
+
+                    </form>
+                </div>
 
             </main>
         );
