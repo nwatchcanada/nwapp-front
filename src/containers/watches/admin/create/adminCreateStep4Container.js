@@ -14,8 +14,7 @@ import {
     localStorageSetObjectOrArrayItem,
     localStorageRemoveItemsContaining
 } from '../../../../helpers/localStorageUtility';
-import { postHowHear } from "../../../../actions/howHearActions";
-import { validateInput } from '../../../../validators/howHearValidator';
+import { postWatchDetail } from "../../../../actions/watchActions";
 
 
 class AdminWatchCreateStep4Container extends Component {
@@ -111,34 +110,18 @@ class AdminWatchCreateStep4Container extends Component {
     onClick(e) {
         e.preventDefault();
 
-        const { errors, isValid } = validateInput(this.state);
-        // console.log(errors, isValid); // For debugging purposes only.
-
-        if (isValid) {
-            this.setState({
-                errors: {},
-                isLoading: true,
-            }, ()=>{
-                // Once our state has been validated `client-side` then we will
-                // make an API request with the server to create our new production.
-                this.props.postHowHear(
-                    this.getPostData(),
-                    this.onSuccessCallback,
-                    this.onFailureCallback
-                );
-            });
-        } else {
-            this.setState({
-                errors: errors,
-                isLoading: false,
-            });
-
-            // The following code will cause the screen to scroll to the top of
-            // the page. Please see ``react-scroll`` for more information:
-            // https://github.com/fisshy/react-scroll
-            var scroll = Scroll.animateScroll;
-            scroll.scrollToTop();
-        }
+        this.setState({
+            errors: {},
+            isLoading: true,
+        }, ()=>{
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.postWatchDetail(
+                this.getPostData(),
+                this.onSuccessCallback,
+                this.onFailureCallback
+            );
+        });
     }
 
 
@@ -174,8 +157,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postHowHear: (postData, successCallback, failedCallback) => {
-            dispatch(postHowHear(postData, successCallback, failedCallback))
+        postWatchDetail: (postData, successCallback, failedCallback) => {
+            dispatch(postWatchDetail(postData, successCallback, failedCallback))
         },
     }
 }
