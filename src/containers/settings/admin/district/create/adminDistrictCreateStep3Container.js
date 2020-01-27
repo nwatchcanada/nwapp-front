@@ -107,7 +107,7 @@ class AdminDistrictCreateStep3Container extends Component {
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "District has been successfully created.");
-                // localStorageRemoveItemsContaining("nwapp-district-add-");
+                localStorageRemoveItemsContaining("nwapp-district-add-");
                 this.props.history.push("/admin/settings/districts");
             }
         )

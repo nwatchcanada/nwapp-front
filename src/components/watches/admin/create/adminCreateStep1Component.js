@@ -17,7 +17,7 @@ import {
 export default class AdminWatchCreateStep1Component extends Component {
     render() {
         const {
-            firstName, lastName, email, phone, errors, onTextChange, isLoading, onClick
+            errors, onClick
         } = this.props;
         return (
             <main id="main" role="main">

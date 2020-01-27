@@ -16,7 +16,10 @@ import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCo
 import { pullTagList, getTagReactSelectOptions } from "../../../../actions/tagActions";
 import {
     BASIC_STREET_TYPE_CHOICES,
-    STREET_DIRECTION_CHOICES
+    STREET_DIRECTION_CHOICES,
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
 } from "../../../../constants/api";
 
 
@@ -29,6 +32,7 @@ class AdminWatchCreateStep2Container extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            typeOf: localStorageGetIntegerItem("nwapp-watch-typeOf"),
             tags: localStorageGetArrayItem("nwapp-watch-tags"),
             isTagLoading: true,
             name: localStorage.getItem('nwapp-watch-name'),
@@ -64,19 +68,20 @@ class AdminWatchCreateStep2Container extends Component {
         const parametersMap = new Map();
         parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
         parametersMap.set("o", "-created_at");
-        this.props.pullDistrictList(
-            1,
-            10000,
-            parametersMap,
-            this.onDistrictSuccessCallback,
-            this.onDistrictFailureCallback
-        );
         this.props.pullTagList(
             1,
             10000,
             parametersMap,
             this.onTagSuccessCallback,
             this.onTagFailureCallback
+        );
+        parametersMap.set("type_of", this.state.typeOf);
+        this.props.pullDistrictList(
+            1,
+            10000,
+            parametersMap,
+            this.onDistrictSuccessCallback,
+            this.onDistrictFailureCallback
         );
     }
 
