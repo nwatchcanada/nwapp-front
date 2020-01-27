@@ -9,6 +9,11 @@ import {
     localStorageSetObjectOrArrayItem,
     localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
+import {
+    RESIDENCE_TYPE_OF,
+    BUSINESS_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../../constants/api';
 
 
 class AdminWatchCreateStep1Container extends Component {
@@ -30,8 +35,6 @@ class AdminWatchCreateStep1Container extends Component {
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -57,24 +60,6 @@ class AdminWatchCreateStep1Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(watch) {
-        this.setState({ errors: {}, isLoading: true, })
-        localStorageSetObjectOrArrayItem("nwapp-create-watch-search-criteria", this.state);
-        this.props.history.push("/admin/watchs/add/step-2");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -88,20 +73,22 @@ class AdminWatchCreateStep1Container extends Component {
         localStorage.setItem(key, e.target.value);
     }
 
-    onClick(e) {
+    onClick(e, typeOf) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateStep1CreateInput(this.state);
+        // Save to our browsers memory.
+        localStorage.setItem('nwapp-watch-add-typeOf', typeOf);
 
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
+        // Redirect to the next page.
+        if (typeOf === RESIDENCE_TYPE_OF) {
+            this.props.history.push("/admin/watches/step-2-create");
+        }
+        else if (typeOf === BUSINESS_TYPE_OF) {
+            this.props.history.push("/admin/watches/add/step-2-create");
+        }
+        else if (typeOf === COMMUNITY_CARES_TYPE_OF) {
+            this.props.history.push("/admin/watches/add/step-2-create");
         }
     }
 

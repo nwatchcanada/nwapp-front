@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminWatchCreateStep4Component from "../../../../components/watchs/admin/create/adminCreateStep4Component";
+import AdminWatchCreateStep4Component from "../../../../components/watches/admin/create/adminCreateStep4Component";
 import { validateStep4CreateInput } from "../../../../validators/watchValidator";
 import {
     localStorageGetIntegerItem, localStorageSetObjectOrArrayItem

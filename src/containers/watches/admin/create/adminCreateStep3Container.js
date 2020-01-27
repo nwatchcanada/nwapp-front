@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AdminWatchCreateStep3Component from "../../../../components/watchs/admin/create/adminCreateStep3Component";
+import AdminWatchCreateStep3Component from "../../../../components/watches/admin/create/adminCreateStep3Component";
 import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF } from '../../../../constants/api';
 
 

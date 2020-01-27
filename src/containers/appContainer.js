@@ -274,6 +274,9 @@ WATCHES
 */
 import AdminWatchListContainer from "./watches/admin/list/adminListContainer";
 import AdminWatchCreateStep1Container from "./watches/admin/create/adminCreateStep1Container";
+import AdminWatchCreateStep2Container from "./watches/admin/create/adminCreateStep2Container";
+import AdminWatchCreateStep3Container from "./watches/admin/create/adminCreateStep3Container";
+import AdminWatchCreateStep4Container from "./watches/admin/create/adminCreateStep4Container";
 // import WatchCreateStep2RezContainer from "./watches/create/rez/watchCreateStep2RezContainer";
 // import WatchCreateStep3RezContainer from "./watches/create/rez/watchCreateStep3RezContainer";
 // import WatchCreateStep4RezContainer from "./watches/create/rez/watchCreateStep4RezContainer";
@@ -656,6 +659,9 @@ class AppContainer extends React.Component {
                                 */
                                 <Route path="/admin/watches" exact component={requiresAuth(AdminWatchListContainer)} />
                                 <Route path="/admin/watches/step-1-create" exact component={requiresAuth(AdminWatchCreateStep1Container)} />
+                                <Route path="/admin/watches/step-2-create" exact component={requiresAuth(AdminWatchCreateStep2Container)} />
+                                <Route path="/admin/watches/step-3-create" exact component={requiresAuth(AdminWatchCreateStep3Container)} />
+                                <Route path="/admin/watches/step-4-create" exact component={requiresAuth(AdminWatchCreateStep4Container)} />
 
 
 
