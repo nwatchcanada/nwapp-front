@@ -12,9 +12,11 @@ import {
 import {
     localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
-    localStorageRemoveItemsContaining
+    localStorageRemoveItemsContaining,
+    localStorageGetArrayItem,
+    localStorageGetObjectItem
 } from '../../../../helpers/localStorageUtility';
-import { postWatchDetail } from "../../../../actions/watchActions";
+import { postWatch } from "../../../../actions/watchActions";
 
 
 class AdminWatchCreateStep4Container extends Component {
@@ -28,7 +30,17 @@ class AdminWatchCreateStep4Container extends Component {
 
         this.state = {
             errors: {},
-            isLoading: false
+            isLoading: false,
+
+            typeOf: localStorageGetIntegerItem("nwapp-watch-typeOf"),
+            tags: localStorageGetArrayItem("nwapp-watch-tags"),
+            name: localStorage.getItem('nwapp-watch-name'),
+            description: localStorage.getItem('nwapp-watch-description'),
+            associate: localStorage.getItem('nwapp-watch-associate'),
+            associateOption: localStorageGetObjectItem('nwapp-watch-associateOption'),
+            district: localStorage.getItem('nwapp-watch-district'),
+            districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
+            streetMembership: localStorageGetArrayItem('nwapp-watch-streetMembership'),
         }
 
         this.getPostData = this.getPostData.bind(this);
@@ -44,6 +56,14 @@ class AdminWatchCreateStep4Container extends Component {
      */
     getPostData() {
         let postData = Object.assign({}, this.state);
+
+        // (3) Tags - We need to only return our `id` values.
+        let idTags = [];
+        for (let i = 0; i < this.state.tags.length; i++) {
+            let tag = this.state.tags[i];
+            idTags.push(tag.value);
+        }
+        postData.tags = idTags;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -82,9 +102,9 @@ class AdminWatchCreateStep4Container extends Component {
             ()=>{
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "HowHear has been successfully created.");
-                localStorageRemoveItemsContaining("nwapp-howHear-add-");
-                this.props.history.push("/admin/settings/how-hears");
+                this.props.setFlashMessage("success", "Watch has been successfully created.");
+                localStorageRemoveItemsContaining("nwapp-watch-");
+                this.props.history.push("/admin/watches");
             }
         )
     }
@@ -116,7 +136,7 @@ class AdminWatchCreateStep4Container extends Component {
         }, ()=>{
             // Once our state has been validated `client-side` then we will
             // make an API request with the server to create our new production.
-            this.props.postWatchDetail(
+            this.props.postWatch(
                 this.getPostData(),
                 this.onSuccessCallback,
                 this.onFailureCallback
@@ -157,8 +177,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postWatchDetail: (postData, successCallback, failedCallback) => {
-            dispatch(postWatchDetail(postData, successCallback, failedCallback))
+        postWatch: (postData, successCallback, failedCallback) => {
+            dispatch(postWatch(postData, successCallback, failedCallback))
         },
     }
 }

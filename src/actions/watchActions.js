@@ -114,7 +114,7 @@ export function pullWatchList(page=1, sizePerPage=10, filtersMap=new Map(), onSu
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postWatchDetail(postData, onSuccessCallback, onFailureCallback) {
+export function postWatch(postData, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -163,7 +163,7 @@ export function postWatchDetail(postData, onSuccessCallback, onFailureCallback) 
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postWatchDetail | error:", errors); // For debuggin purposes only.
+                console.log("postWatch | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

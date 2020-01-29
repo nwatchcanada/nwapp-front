@@ -62,28 +62,14 @@ class RemoteListComponent extends Component {
         //     formatter: statusFormatter
         // },
         {
-            dataField: 'firstName',
-            text: 'First Name',
+            dataField: 'name',
+            text: 'Name',
             sort: true
         },{
-            dataField: 'lastName',
-            text: 'Last Name',
-            sort: true
-        },{
-            dataField: 'primaryPhoneNational',
-            text: 'Phone',
+            dataField: 'districtName',
+            text: 'District',
             sort: true,
-            formatter: telephoneFormatter
-        },{
-            dataField: 'email',
-            text: 'Email',
-            sort: true,
-            formatter: emailFormatter,
-        },{
-            dataField: 'roleId',
-            text: 'Role',
-            sort: true,
-            formatter: roleIdFormatter,
+            formatter: districtFormatter
         },{
             dataField: 'slug',
             text: 'Details',
@@ -92,7 +78,7 @@ class RemoteListComponent extends Component {
         }];
 
         const defaultSorted = [{
-            dataField: 'lastName',
+            dataField: 'name',
             order: 'asc'
         }];
 
@@ -186,40 +172,28 @@ function roleIdFormatter(cell, row){
 }
 
 
-// function statusFormatter(cell, row){
-//     switch(row.state) {
-//         case "active":
-//             return <i className="fas fa-check-circle" style={{ color: 'green' }}></i>;
-//             break;
-//         case "inactive":
-//             return <i className="fas fa-archive" style={{ color: 'blue' }}></i>;
-//             break;
-//         default:
-//         return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
-//             break;
-//     }
-// }
-
-
-function telephoneFormatter(cell, row){
-    return (
-        <a href={`tel:${row.primaryPhoneE164}`}>
-            {row.primaryPhoneNational}
-        </a>
-    )
-}
-
-
-function emailFormatter(cell, row){
-    if (row.email === undefined || row.email === null) {
-        return ("-");
-    } else {
-        return (
-            <a href={`mailto:${row.email}`}>
-                {row.email}
-            </a>
-        )
+function districtFormatter(cell, row){
+    let aURL = "";
+    switch(parseInt(row.typeOf)) {
+        case RESIDENCE_TYPE_OF:
+            aURL = "/admin/settings/district/rez/" + row.districtSlug;
+            break;
+        case BUSINESS_TYPE_OF:
+            aURL = "/admin/settings/district/biz/" + row.districtSlug;
+            break;
+        case COMMUNITY_CARES_TYPE_OF:
+            aURL = "/admin/settings/district/com/" + row.districtSlug;
+            break;
+        default:
+            break;
     }
+    return (
+        <div>
+            <a href={aURL} target="_blank">
+                {row.districtName}&nbsp;<i className="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    )
 }
 
 
