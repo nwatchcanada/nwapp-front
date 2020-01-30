@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import AdminWatchLiteRetrieveComponent from "../../../../components/watchs/admin/retrieve/adminLiteRetrieveComponent";
+import AdminWatchLiteRetrieveComponent from "../../../../components/watches/admin/retrieve/adminLiteRetrieveComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { pullWatchDetail } from '../../../../actions/watchActions';
 import {

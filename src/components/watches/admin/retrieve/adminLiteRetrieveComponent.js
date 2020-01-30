@@ -3,11 +3,33 @@ import { Link } from "react-router-dom";
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
+import {
+    RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF,
+} from "../../../../constants/api";
 
 
 export default class AdminWatchLiteRetrieveComponent extends Component {
     render() {
         const { slug, flashMessage, watch, isLoading } = this.props;
+
+        let aURL = "";
+        if (watch !== undefined && watch !== null) {
+            switch(parseInt(watch.typeOf)) {
+                case RESIDENCE_TYPE_OF:
+                    aURL = "/admin/settings/district/rez/" + watch.districtSlug;
+                    break;
+                case BUSINESS_TYPE_OF:
+                    aURL = "/admin/settings/district/biz/" + watch.districtSlug;
+                    break;
+                case COMMUNITY_CARES_TYPE_OF:
+                    aURL = "/admin/settings/district/com/" + watch.districtSlug;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -20,14 +42,14 @@ export default class AdminWatchLiteRetrieveComponent extends Component {
                             <Link to={`/admin/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}
+                            <i className="fas fa-user"></i>&nbsp;{watch && watch.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}</h1>
 
                 {watch.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
@@ -35,108 +57,52 @@ export default class AdminWatchLiteRetrieveComponent extends Component {
                     </div>
                 }
 
-                <div className="row">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey active">
-                            <strong>
-                                <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
-                            </strong>
-                        </div>
-                        <div id="step-2" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/full`}>
-                                <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
-                            </Link>
-                        </div>
-                        <div id="step-3" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/comments`}>
-                                <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
-                            </Link>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/files`}>
-                                <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
-                            </Link>
-                        </div>
-                        {/*
-                        <div id="step-6" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/community/score-points`}>
-                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
-                            </Link>
-                        </div>
-                        */}
-                        <div id="step-7" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/operations`}>
-                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
+                <div className="row mt-4 pt-3 mb-4 pb-2">
+                    <div className="col-md-10 mx-auto p-2">
 
-                <div className="row mt-0 pt-3 mb-4 pb-2">
-                    <div className="col-md-9 mx-auto rounded bg-light border p-2">
-                        <div className="row">
-                            <div className="col-sm-4">
-                                <Link to={`/admin/watch/${slug}/avatar`}>
-                                    {watch && watch.avatarUrl !== undefined && watch.avatarUrl !== null
-                                        ? <img src={watch.avatarUrl} className="img-fluid rounded" alt="Profile" id={`watch-avatar-${slug}`} />
-                                        : <img src="/img/placeholder.png" className="img-fluid rounded" alt="Profile" id={`avatar-placeholder`}/>
-                                    }
-                                    <p><i className="fas fa-edit"></i>Click here to change photo</p>
-                                </Link>
-                            </div>
+                        <h2>
+                            <i className="fas fa-table"></i>&nbsp;Watch Details
+                        </h2>
 
-                            <div className="col-sm-8 px-4 py-3">
-                                {watch && watch.organizationName &&
-                                    <h1>{watch.organizationName}</h1>
-                                }
-                                <h3>
-                                    {watch && watch.fullName}
-                                </h3>
-
-                                {watch && watch.address &&
-                                    <p className="text-muted">
-                                        <a href={watch.googleMapsUrl} target="_blank">{watch.address}&nbsp;<i className="fas fa-map-marker-alt"></i></a>
-                                    </p>
-                                }
-
-                                {watch && watch.email &&
-                                    <p>
-                                        <a href={`mailto:${watch.email}`}><i className="fas fa-envelope"></i>&nbsp;{watch.email}</a>
-                                    </p>
-                                }
-
-                                {watch && watch.primaryPhoneNational &&
-                                    <p>
-                                        <a href={`tel:${watch.primaryPhoneE164}`}>
-                                            <i className="fas fa-phone-square"></i>&nbsp;{watch.primaryPhoneNational}
+                        <table className="table table-bordered custom-cell-w">
+                            <tbody>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-table"></i>&nbsp;Information
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Name</th>
+                                    <td>{watch.name}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{watch.description}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">District</th>
+                                    <td>
+                                        <a href={aURL} target="_blank">
+                                            {watch && watch.districtName}&nbsp;<i className="fas fa-external-link-alt"></i>
                                         </a>
-                                    </p>
+                                    </td>
+                                </tr>
+                                {watch && watch.tags &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Tags</th>
+                                        <td>
+                                            {watch.tags && watch.tags.map(
+                                                (tag, i) => <TagItem tag={tag} key={i} />)
+                                            }
+                                        </td>
+                                    </tr>
                                 }
-                                <p className="m-0"><strong>Tags:</strong></p>
-                                {watch &&
-                                    <p>
-                                        {watch.tags && watch.tags.map(
-                                            (tag) => <TagItem tag={tag} key={tag.id} />)
-                                        }
-                                    </p>
-                                }
-                            </div>
-
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-                    {/*
-					<div className="col-sm-12 mx-auto text-center mt-4">
-						{watch.state === 'inactive'
-                            ? <button className="btn btn-orange btn-lg">
-                                <i className="fas fa-lock"></i>&nbsp;Add Job
-                              </button>
-                            : <Link className="btn btn-success btn-lg" onClick={onClientClick}>
-                                <i className="fas fa-plus"></i>&nbsp;Add Job
-                              </Link>
-                        }
-					</div>
-                    */}
                 </div>
+
+
 
 
             </div>

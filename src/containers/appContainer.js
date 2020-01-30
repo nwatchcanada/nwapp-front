@@ -277,7 +277,7 @@ import AdminWatchCreateStep1Container from "./watches/admin/create/adminCreateSt
 import AdminWatchCreateStep2Container from "./watches/admin/create/adminCreateStep2Container";
 import AdminWatchCreateStep3Container from "./watches/admin/create/adminCreateStep3Container";
 import AdminWatchCreateStep4Container from "./watches/admin/create/adminCreateStep4Container";
-// import WatchRetrieveContainer from "./watches/retrieve/watchRetrieveContainer";
+import AdminWatchLiteRetrieveContainer from "./watches/admin/retrieve/adminLiteRetrieveContainer";
 // import WatchUpdateContainer from "./watches/update/watchUpdateContainer";
 // import WatchSearchContainer from "./watches/search/watchSearchContainer";
 // import WatchSearchResultContainer from "./watches/search/watchSearchResultContainer";
@@ -644,6 +644,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/watches/step-2-create" exact component={requiresAuth(AdminWatchCreateStep2Container)} />
                                 <Route path="/admin/watches/step-3-create" exact component={requiresAuth(AdminWatchCreateStep3Container)} />
                                 <Route path="/admin/watches/step-4-create" exact component={requiresAuth(AdminWatchCreateStep4Container)} />
+                                <Route path="/admin/watch/:slug" exact component={requiresAuth(AdminWatchLiteRetrieveContainer)} />
 
 
 
