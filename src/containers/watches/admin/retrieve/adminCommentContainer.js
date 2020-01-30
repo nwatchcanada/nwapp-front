@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminWatchCommentComponent from "../../../../components/watchs/admin/retrieve/adminCommentComponent";
+import AdminWatchCommentComponent from "../../../../components/watches/admin/retrieve/adminCommentComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { pullWatchCommentList, postWatchComment } from "../../../../actions/watchCommentActions";
 import { validateInput } from "../../../../validators/commentValidator"

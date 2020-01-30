@@ -57,7 +57,27 @@ export default class AdminWatchLiteRetrieveComponent extends Component {
                     </div>
                 }
 
-                <div className="row mt-4 pt-3 mb-4 pb-2">
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey active">
+                            <strong>
+                                <span className="num"><i className="fas fa-table"></i>&nbsp;</span><span className="">Details</span>
+                            </strong>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <Link to={`/admin/watch/${slug}/comments`}>
+                                <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
+                            </Link>
+                        </div>
+                        <div id="step-7" className="st-grey">
+                            <Link to={`/admin/watch/${slug}/operations`}>
+                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
                     <div className="col-md-10 mx-auto p-2">
 
                         <h2>

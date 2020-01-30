@@ -34,14 +34,14 @@ export default class AdminWatchCommentComponent extends Component {
                             <Link to="/admin/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}
+                            <i className="fas fa-user"></i>&nbsp;{watch && watch.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}</h1>
 
                 {watch.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
@@ -56,35 +56,11 @@ export default class AdminWatchCommentComponent extends Component {
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
-                        <div id="step-2" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/full`}>
-                                <span className="num"><i className="fas fa-id-card"></i>&nbsp;</span><span className="">Details</span>
-                            </Link>
-                        </div>
-                        { /*
-                        <div id="step-3" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/orders`}>
-                                <span className="num"><i className="fas fa-wrench"></i>&nbsp;</span><span className="">Jobs</span>
-                            </Link>
-                        </div>
-                        */}
                         <div id="step-4" className="st-grey active">
                             <strong>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </strong>
                         </div>
-                        <div id="step-5" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/files`}>
-                                <span className="num"><i className="fas fa-cloud"></i>&nbsp;</span><span className="">Files</span>
-                            </Link>
-                        </div>
-                        {/*
-                        <div id="step-6" className="st-grey">
-                            <Link to={`/admin/watch/${slug}/community/score-points`}>
-                                <span className="num"><i className="fas fa-smile"></i>&nbsp;</span><span className="">Community</span>
-                            </Link>
-                        </div>
-                        */}
                         <div id="step-7" className="st-grey">
                             <Link to={`/admin/watch/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>

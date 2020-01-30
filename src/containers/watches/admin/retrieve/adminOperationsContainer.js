@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AdminWatchOperationsComponent from "../../../../components/watchs/admin/retrieve/adminOperationsComponent";
+import AdminWatchOperationsComponent from "../../../../components/watches/admin/retrieve/adminOperationsComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 
 
