@@ -73,11 +73,11 @@ export default class AdminWatchLiteRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Name</th>
-                                    <td>{watch.name}</td>
+                                    <td>{watch && watch.name}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{watch.description}</td>
+                                    <td>{watch && watch.description}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">District</th>
@@ -102,6 +102,18 @@ export default class AdminWatchLiteRetrieveComponent extends Component {
                     </div>
                 </div>
 
+                {watch && watch.streetMembership &&
+                    <div className="row">
+                        <div className="col-md-10 mx-auto">
+                            <h2>
+                                <i className="fas fa-road"></i>&nbsp;Street Membership
+                            </h2>
+
+                            <StreetMembershipTable streetMembership={watch.streetMembership} />
+                        </div>
+                    </div>
+                }
+
 
 
 
@@ -118,4 +130,78 @@ class TagItem extends Component {
             <span className="badge badge-info badge-lg" value={id}>{text}</span>
         );
     };
+}
+
+
+class StreetMembershipRow extends Component {
+    render() {
+        const { streetAddress, streetNumberStart, streetNumberEnd, streetName, streetTypeLabel, streetDirectionLabel } = this.props;
+        return (
+            <tr key={streetAddress}>
+                <td>
+                    {streetNumberStart}
+                </td>
+                <td>
+                    {streetNumberEnd}
+                </td>
+                <td>
+                    {streetName}
+                </td>
+                <td>
+                    {streetTypeLabel}
+                </td>
+                <td>
+                    {streetDirectionLabel}
+                </td>
+            </tr>
+        );
+    }
+}
+
+
+class StreetMembershipTable extends Component {
+    render() {
+        const { streetMembership } = this.props;
+
+        let elements = [];
+        if (streetMembership !== undefined && streetMembership !== null) {
+            for (let i = 0; i < streetMembership.length; i++) {
+                let rowData = streetMembership[i];
+                if (rowData !== null && rowData !== undefined) {
+                    elements.push(
+                        <StreetMembershipRow
+                            key={rowData.streetAddress}
+                            streetAddress={rowData.streetAddress}
+                            streetNumberStart={rowData.streetNumberStart}
+                            streetNumberEnd={rowData.streetNumberEnd}
+                            streetName={rowData.streetName}
+                            streetTypeLabel={rowData.streetTypeLabel}
+                            streetDirectionLabel={rowData.streetDirectionLabel}
+                        />
+                    );
+                }
+            }
+        }
+
+        return (
+            <div>
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Street # (Start)</th>
+                                <th>Street # (End)</th>
+                                <th>Street Name</th>
+                                <th>Street Type</th>
+                                <th>Direction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {elements}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
 }
