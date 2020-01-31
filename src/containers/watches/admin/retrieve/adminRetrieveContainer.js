@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import AdminWatchLiteRetrieveComponent from "../../../../components/watches/admin/retrieve/adminLiteRetrieveComponent";
+import AdminWatchRetrieveComponent from "../../../../components/watches/admin/retrieve/adminRetrieveComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { pullWatchDetail } from '../../../../actions/watchActions';
 import {
@@ -10,7 +10,7 @@ import {
 } from '../../../../helpers/localStorageUtility';
 
 
-class AdminWatchLiteRetrieveContainer extends Component {
+class AdminWatchRetrieveContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -106,7 +106,7 @@ class AdminWatchLiteRetrieveContainer extends Component {
         const { slug, isLoading } = this.state;
         const watch = isEmpty(this.state.watch) ? {} : this.state.watch;
         return (
-            <AdminWatchLiteRetrieveComponent
+            <AdminWatchRetrieveComponent
                 slug={slug}
                 watch={watch}
                 flashMessage={this.props.flashMessage}
@@ -139,4 +139,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminWatchLiteRetrieveContainer);
+)(AdminWatchRetrieveContainer);

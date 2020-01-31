@@ -8,7 +8,7 @@ import {
 } from "../../../../constants/api";
 
 
-export default class AdminWatchLiteRetrieveComponent extends Component {
+export default class AdminWatchRetrieveComponent extends Component {
     render() {
         const { slug, flashMessage, watch, isLoading } = this.props;
 

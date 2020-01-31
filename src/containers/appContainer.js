@@ -277,7 +277,7 @@ import AdminWatchCreateStep1Container from "./watches/admin/create/adminCreateSt
 import AdminWatchCreateStep2Container from "./watches/admin/create/adminCreateStep2Container";
 import AdminWatchCreateStep3Container from "./watches/admin/create/adminCreateStep3Container";
 import AdminWatchCreateStep4Container from "./watches/admin/create/adminCreateStep4Container";
-import AdminWatchLiteRetrieveContainer from "./watches/admin/retrieve/adminLiteRetrieveContainer";
+import AdminWatchRetrieveContainer from "./watches/admin/retrieve/adminRetrieveContainer";
 import AdminWatchCommentContainer from "./watches/admin/retrieve/adminCommentContainer";
 import AdminWatchOperationsContainer from "./watches/admin/retrieve/adminOperationsContainer";
 import AdminWatchUpdateContainer from "./watches/admin/update/adminUpdateContainer";
@@ -646,7 +646,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/watches/step-2-create" exact component={requiresAuth(AdminWatchCreateStep2Container)} />
                                 <Route path="/admin/watches/step-3-create" exact component={requiresAuth(AdminWatchCreateStep3Container)} />
                                 <Route path="/admin/watches/step-4-create" exact component={requiresAuth(AdminWatchCreateStep4Container)} />
-                                <Route path="/admin/watch/:slug" exact component={requiresAuth(AdminWatchLiteRetrieveContainer)} />
+                                <Route path="/admin/watch/:slug" exact component={requiresAuth(AdminWatchRetrieveContainer)} />
                                 <Route path="/admin/watch/:slug/comments" exact component={requiresAuth(AdminWatchCommentContainer)} />
                                 <Route path="/admin/watch/:slug/operations" exact component={requiresAuth(AdminWatchOperationsContainer)} />
                                 <Route path="/admin/watch/:slug/update" exact component={requiresAuth(AdminWatchUpdateContainer)} />
