@@ -108,8 +108,8 @@ export const WORKERY_WATCH_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/watches/operati
 export const NWAPP_WATCH_PROMOTE_OPERATION_API_ENDPOINT = '/v1/watches/operation/promote';
 export const WORKERY_WATCH_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/watches/operation/avatar';
 export const WORKERY_WATCH_COMMENT_LIST_API_ENDPOINT = '/v1/watch-comments';
-export const WORKERY_WATCH_CONTACT_UPDATE_API_ENDPOINT = '/v1/watch/XXX/contact';
-export const WORKERY_WATCH_ADDRESS_UPDATE_API_ENDPOINT = '/v1/watch/XXX/address';
+export const WORKERY_WATCH_INFORMATION_UPDATE_API_ENDPOINT = '/v1/watch/XXX/contact';
+export const WORKERY_WATCH_STREET_MEMBERSHIP_UPDATE_API_ENDPOINT = '/v1/watch/XXX/address';
 export const WORKERY_WATCH_METRICS_UPDATE_API_ENDPOINT = '/v1/watch/XXX/metrics';
 
 // TODO: DO SOMETHING WITH BELOW

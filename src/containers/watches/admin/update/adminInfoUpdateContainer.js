@@ -8,7 +8,7 @@ import { getAssociateReactSelectOptions } from '../../../../actions/watchActions
 import { pullDistrictList, getDistrictReactSelectOptions } from '../../../../actions/districtActions';
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
 import { pullTagList, getTagReactSelectOptions, getPickedTagReactSelectOptions } from "../../../../actions/tagActions";
-import { putWatch } from "../../../../actions/watchActions";
+import { putWatchInformation } from "../../../../actions/watchActions";
 import {
     BASIC_STREET_TYPE_CHOICES,
     STREET_DIRECTION_CHOICES,
@@ -253,9 +253,9 @@ const mapDispatchToProps = dispatch => {
                 pullTagList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
         },
-        putWatch: (data, onSuccessCallback, onFailureCallback) => {
+        putWatchInformation: (data, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                putWatch(data, onSuccessCallback, onFailureCallback)
+                putWatchInformation(data, onSuccessCallback, onFailureCallback)
             )
         },
     }

@@ -13,6 +13,7 @@ import { getAssociateReactSelectOptions } from '../../../../actions/watchActions
 import { getDistrictReactSelectOptions } from '../../../../actions/districtActions';
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
+import { putWatchStreetMembership } from "../../../../actions/watchActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
 
 
@@ -347,7 +348,13 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        putWatchStreetMembership: (data, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                putWatchStreetMembership(data, onSuccessCallback, onFailureCallback)
+            )
+        },
+    }
 }
 
 
