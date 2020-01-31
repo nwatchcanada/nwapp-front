@@ -9,7 +9,6 @@ import { validateInput } from "../../../../validators/watchValidator";
 import {
     RESIDENTIAL_CUSTOMER_TYPE_OF_ID, COMMERCIAL_CUSTOMER_TYPE_OF_ID
 } from '../../../../constants/api';
-import { getHowHearReactSelectOptions, pullHowHearList } from "../../../../actions/howHearActions";
 import { getTagReactSelectOptions, getPickedTagReactSelectOptions, pullTagList } from "../../../../actions/tagActions";
 import { putWatch } from "../../../../actions/watchActions";
 
@@ -27,40 +26,16 @@ class AdminWatchUpdateContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
-        // Map the API fields to our fields.
-        const isOkToEmail = this.props.watchDetail.isOkToEmail === true ? 1 : 0;
-        const isOkToText = this.props.watchDetail.isOkToText === true ? 1 : 0;
-
         this.state = {
             errors: {},
             isLoading: false,
             slug: slug,
-
-            // STEP 3
             typeOf: this.props.watchDetail.typeOf,
-
-            // STEP 4
-            organizationName: this.props.watchDetail.organizationName,
-            organizationTypeOf: this.props.watchDetail.organizationTypeOf,
-            firstName: this.props.watchDetail.firstName,
-            lastName: this.props.watchDetail.lastName,
-            organizationName: this.props.watchDetail.organizationName,
-            organizationTypeOf: this.props.watchDetail.organizationTypeOf,
-            firstName: this.props.watchDetail.firstName,
-            lastName: this.props.watchDetail.lastName,
-            primaryPhone: this.props.watchDetail.primaryPhoneNational,
-            primaryPhoneTypeOf: this.props.watchDetail.primaryPhoneTypeOf,
-            secondaryPhone: this.props.watchDetail.secondaryPhoneNational,
-            secondaryPhoneTypeOf: this.props.watchDetail.secondaryPhoneTypeOf,
-            email: this.props.watchDetail.email,
-            isOkToEmail: isOkToEmail,
-            isOkToText: isOkToText,
         }
 
         this.getPostData = this.getPostData.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-        this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailedCallback = this.onFailedCallback.bind(this);
@@ -74,22 +49,7 @@ class AdminWatchUpdateContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        // (6) Organization Type Of - This field may not be null, therefore make blank.
-        if (this.state.organizationTypeOf === undefined || this.state.organizationTypeOf === null) {
-            postData.organizationTypeOf = "";
-        }
 
-        if (this.state.organizationName === undefined || this.state.organizationName === null) {
-            postData.organizationName = "";
-        }
-
-        // (8) Telephone type: This field is required.;
-        if (this.state.primaryPhoneTypeOf === undefined || this.state.primaryPhoneTypeOf === null || this.state.primaryPhoneTypeOf === "") {
-            postData.primaryPhoneTypeOf = 1;
-        }
-        if (this.state.secondaryPhoneTypeOf === undefined || this.state.secondaryPhoneTypeOf === null || this.state.secondaryPhoneTypeOf === "") {
-            postData.secondaryPhoneTypeOf = 1;
-        }
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -105,7 +65,6 @@ class AdminWatchUpdateContainer extends Component {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
         // Fetch all our GUI drop-down options which are populated by the API.
-        this.props.pullHowHearList(1,1000);
         this.props.pullTagList(1,1000);
     }
 
@@ -126,7 +85,7 @@ class AdminWatchUpdateContainer extends Component {
     onSuccessCallback(watch) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Watch has been successfully updated.");
-        this.props.history.push("/admin/watch/"+this.state.slug+"/full");
+        this.props.history.push("/admin/watch/"+this.state.slug);
     }
 
     onFailedCallback(errors) {
@@ -182,19 +141,6 @@ class AdminWatchUpdateContainer extends Component {
         console.log([option.selectName], optionKey, "|",option); // For debugging purposes only.
     }
 
-    onRadioChange(e) {
-        // Get the values.
-        const storageValueKey = "nwapp-create-watch-"+[e.target.name];
-        const value = e.target.value;
-        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
-        const storeValueKey = [e.target.name].toString();
-        const storeLabelKey = [e.target.name].toString()+"-label";
-
-        // Save the data.
-        this.setState({ [e.target.name]: value, }); // Save to store.
-        localStorage.setItem(storageValueKey, value) // Save to storage.
-    }
-
     /**
      *  Main render function
      *------------------------------------------------------------
@@ -202,35 +148,12 @@ class AdminWatchUpdateContainer extends Component {
 
     render() {
         const {
-            errors, slug, isLoading,
-
-            // STEP 3
-            typeOf,
-
-            // STEP 4 - REZ
-            firstName, lastName, primaryPhone, primaryPhoneTypeOf, secondaryPhone, secondaryPhoneTypeOf, email, isOkToText, isOkToEmail,
-
-            // STEP 4 - BIZ
-            organizationName, organizationTypeOf,
+            errors, slug, isLoading, typeOf,
         } = this.state;
 
         return (
             <AdminWatchUpdateComponent
-                // STEP 3
                 typeOf={typeOf}
-
-                // STEP 4
-                organizationName={organizationName}
-                organizationTypeOf={organizationTypeOf}
-                firstName={firstName}
-                lastName={lastName}
-                primaryPhone={primaryPhone}
-                primaryPhoneTypeOf={primaryPhoneTypeOf}
-                secondaryPhone={secondaryPhone}
-                secondaryPhoneTypeOf={secondaryPhoneTypeOf}
-                email={email}
-                isOkToText={isOkToText}
-                isOkToEmail={isOkToEmail}
 
                 // EVERYTHING ELSE
                 isLoading={isLoading}
@@ -238,7 +161,6 @@ class AdminWatchUpdateContainer extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                onRadioChange={this.onRadioChange}
                 onClick={this.onClick}
             />
         );
@@ -249,7 +171,6 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         watchDetail: store.watchDetailState,
-        howHearList: store.howHearListState,
         tagList: store.tagListState,
     };
 }
@@ -258,11 +179,6 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        },
-        pullHowHearList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
-            dispatch(
-                pullHowHearList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
-            )
         },
         pullTagList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(

@@ -25,15 +25,8 @@ import {
 export default class AdminWatchUpdateComponent extends Component {
     render() {
         const {
-            // STEP 3
             typeOf,
-
-            // STEP 4
-            organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, isOkToText, isOkToEmail,
-
-            // EVERYTHING ELSE
-            slug, errors, isLoading, onClick, onTextChange, onRadioChange, onBillingCountryChange, onBillingRegionChange,
-            onMultiChange, onDateOfBirthChange, onSelectChange, onJoinDateChange,
+            slug, errors, isLoading, onClick, onTextChange
         } = this.props;
         return (
             <main id="main" role="main">
@@ -47,135 +40,33 @@ export default class AdminWatchUpdateComponent extends Component {
                             <Link to={`/admin/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/watch/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{firstName} {lastName}</Link>
+                            <Link to={`/admin/watch/${slug}`}><i className="fas fa-user"></i>&nbsp;</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-edit"></i>&nbsp;Update ()
+                            <i className="fas fa-edit"></i>&nbsp;Update Watch
                         </li>
                     </ol>
                 </nav>
 
                 <h1>
-                    <i className="fas fa-edit"></i>&nbsp;Edit Watch ()
+                    <i className="fas fa-edit"></i>&nbsp;Update Watch
                 </h1>
 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-edit"></i>&nbsp;Client  Form</h1>
+                            <h1><i className="fas fa-edit"></i>&nbsp;Update Watch</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            {typeOf === BUSINESS_TYPE_OF &&
-                                <div>
-                                    <BootstrapInput
-                                        inputClassName="form-control form-control-lg"
-                                        borderColour="border-primary"
-                                        error={errors.organizationName}
-                                        label="Company Name (*)"
-                                        onChange={onTextChange}
-                                        value={organizationName}
-                                        name="organizationName"
-                                        type="text"
-                                    />
-                                    <BootstrapSingleSelect
-                                        borderColour="border-primary"
-                                        label="Company Type (*)"
-                                        name="organizationTypeOf"
-                                        defaultOptionLabel="Please select a telephone type."
-                                        options={COMPANY_TYPE_OF_CHOICES}
-                                        value={organizationTypeOf}
-                                        error={errors.organizationTypeOf}
-                                        onSelectChange={onSelectChange}
-                                    />
-                                </div>
-                            }
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.firstName}
-                                label="First Name (*)"
-                                onChange={onTextChange}
-                                value={firstName}
-                                name="firstName"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.lastName}
-                                label="Last Name (*)"
-                                onChange={onTextChange}
-                                value={lastName}
-                                name="lastName"
-                                type="text"
-                            />
-
-                            <BootstrapTelephoneInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.primaryPhone}
-                                label="Primary Phone (*)"
-                                onChange={onTextChange}
-                                value={primaryPhone}
-                                name="primaryPhone"
-                                type="text"
-                            />
-
-                            <BootstrapTelephoneInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-success"
-                                error={errors.secondaryPhone}
-                                label="Secondary Phone"
-                                onChange={onTextChange}
-                                value={secondaryPhone}
-                                name="secondaryPhone"
-                                type="text"
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.email}
-                                label="Email (*)"
-                                onChange={onTextChange}
-                                value={email}
-                                name="email"
-                                type="text"
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.isOkToEmail}
-                                label="Ok to E-Mail? (*)"
-                                name="isOkToEmail"
-                                onChange={onRadioChange}
-                                selectedValue={isOkToEmail}
-                                options={IS_OK_TO_EMAIL_CHOICES}
-                                helpText='Selecting "yes" will result in client getting emails from our system.'
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.isOkToText}
-                                label="Ok to Text? (*)"
-                                name="isOkToText"
-                                onChange={onRadioChange}
-                                selectedValue={isOkToText}
-                                options={IS_OK_TO_TEXT_CHOICES}
-                                helpText='Selecting "yes" will result in client getting text-messages on their phone from our system.'
-                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/watch/${slug}/full`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/watch/${slug}`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
