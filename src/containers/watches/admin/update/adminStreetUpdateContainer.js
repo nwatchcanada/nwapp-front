@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import {
     validateResidentialStep3Input, validateModalSaveInput
 } from "../../../../validators/watchValidator";
-import AdminWatchCreateStep3Component from "../../../../components/watches/admin/create/adminCreateStep3Component";
+import AdminWatchStreetUpdateComponent from "../../../../components/watches/admin/update/adminStreetUpdateComponent";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
 } from '../../../../helpers/localStorageUtility';
@@ -24,11 +24,17 @@ class AdminWatchStreetUpdateContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
         this.state = {
-            streetMembership: localStorageGetArrayItem('nwapp-watch-streetMembership'),
+            slug: slug,
+            streetMembership: this.props.watchDetail.streetMembership,
             errors: {},
             streetNumberStart: "",
-            streetNumberFinish: "",
+            streetNumberEnd: "",
             streetName: "",
             streetType: "",
             streetTypeOption: localStorageGetObjectItem('nwapp-watch-streetTypeOption'),
@@ -196,14 +202,14 @@ class AdminWatchStreetUpdateContainer extends Component {
             if (this.state.streetDirection) {
                 streetAddress += " " + this.state.streetDirection;
             }
-            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
+            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberEnd;
 
             // Append our array.
             let a = this.state.streetMembership.slice(); //creates the clone of the state
             a.push({
                 streetAddress: streetAddress,
                 streetNumberStart: this.state.streetNumberStart,
-                streetNumberFinish: this.state.streetNumberFinish,
+                streetNumberEnd: this.state.streetNumberEnd,
                 streetName: this.state.streetName,
                 streetType: actualStreetType,
                 streetDirection: this.state.streetDirection,
@@ -215,7 +221,7 @@ class AdminWatchStreetUpdateContainer extends Component {
                 errors: {},
                 streetMembership: a,
                 streetNumberStart: "", // Clear fields.
-                streetNumberFinish: "",
+                streetNumberEnd: "",
                 streetName: "",
                 streetType: "",
                 streetTypeOther: "",
@@ -244,7 +250,7 @@ class AdminWatchStreetUpdateContainer extends Component {
             showModal: false,
             errors: {},
             streetNumberStart: "", // Clear fields.
-            streetNumberFinish: "",
+            streetNumberEnd: "",
             streetName: "",
             streetType: "",
             streetTypeOther: "",
@@ -260,10 +266,10 @@ class AdminWatchStreetUpdateContainer extends Component {
     render() {
         const {
             // Page related.
-            tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            slug, tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
+            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
         } = this.state;
 
         const associateListObject = {
@@ -295,7 +301,8 @@ class AdminWatchStreetUpdateContainer extends Component {
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
-            <AdminWatchCreateStep3Component
+            <AdminWatchStreetUpdateComponent
+                slug={slug}
                 tags={tags}
                 tagOptions={tagOptions}
                 name={name}
@@ -316,7 +323,7 @@ class AdminWatchStreetUpdateContainer extends Component {
                 onMultiChange={this.onMultiChange}
                 showModal={showModal}
                 streetNumberStart={streetNumberStart}
-                streetNumberFinish={streetNumberFinish}
+                streetNumberEnd={streetNumberEnd}
                 streetName={streetName}
                 streetType={streetType}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
@@ -335,6 +342,7 @@ class AdminWatchStreetUpdateContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        watchDetail: store.watchDetailState,
     };
 }
 

@@ -17,7 +17,7 @@ export default class AdminWatchCreateStep3Component extends Component {
             errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
 
             // Modal related.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
+            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
             showModal, onAddClick, onRemoveClick, onSaveClick, onCloseClick
         } = this.props;
         return (
@@ -71,7 +71,7 @@ export default class AdminWatchCreateStep3Component extends Component {
 
                             <AddModalComponent
                                 streetNumberStart={streetNumberStart}
-                                streetNumberFinish={streetNumberFinish}
+                                streetNumberEnd={streetNumberEnd}
                                 streetName={streetName}
                                 streetType={streetType}
                                 streetTypeOptions={streetTypeOptions}
@@ -112,14 +112,14 @@ export default class AdminWatchCreateStep3Component extends Component {
 
 class StreetMembershipRow extends Component {
     render() {
-        const { streetAddress, streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, onRemoveClick } = this.props;
+        const { streetAddress, streetNumberStart, streetNumberEnd, streetName, streetType, streetDirection, onRemoveClick } = this.props;
         return (
             <tr key={streetAddress}>
                 <td>
                     {streetNumberStart}
                 </td>
                 <td>
-                    {streetNumberFinish}
+                    {streetNumberEnd}
                 </td>
                 <td>
                     {streetName}
@@ -155,7 +155,7 @@ class StreetMembershipTable extends Component {
                             key={rowData.streetAddress}
                             streetAddress={rowData.streetAddress}
                             streetNumberStart={rowData.streetNumberStart}
-                            streetNumberFinish={rowData.streetNumberFinish}
+                            streetNumberEnd={rowData.streetNumberEnd}
                             streetName={rowData.streetName}
                             streetType={rowData.streetType}
                             streetDirection={rowData.streetDirection}
@@ -182,7 +182,7 @@ class StreetMembershipTable extends Component {
                         <thead>
                             <tr>
                                 <th>Street # (Start)</th>
-                                <th>Street # (Finish)</th>
+                                <th>Street # (End)</th>
                                 <th>Street Name</th>
                                 <th>Street Type</th>
                                 <th>Direction</th>
@@ -203,7 +203,7 @@ class StreetMembershipTable extends Component {
 class AddModalComponent extends Component {
     render() {
         const {
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
+            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
             showModal, onSaveClick, onCloseClick, onSelectChange } = this.props;
 
         // Apply our styling for our modal component.
@@ -254,11 +254,11 @@ class AddModalComponent extends Component {
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.streetNumberFinish}
-                                    label="Street Number Finish (*)"
+                                    error={errors.streetNumberEnd}
+                                    label="Street Number End (*)"
                                     onChange={onTextChange}
-                                    value={streetNumberFinish}
-                                    name="streetNumberFinish"
+                                    value={streetNumberEnd}
+                                    name="streetNumberEnd"
                                     type="text"
                                 />
 

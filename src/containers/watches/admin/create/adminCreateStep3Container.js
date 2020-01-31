@@ -28,7 +28,7 @@ class AdminWatchCreateStep3Container extends Component {
             streetMembership: localStorageGetArrayItem('nwapp-watch-streetMembership'),
             errors: {},
             streetNumberStart: "",
-            streetNumberFinish: "",
+            streetNumberEnd: "",
             streetName: "",
             streetType: "",
             streetTypeOption: localStorageGetObjectItem('nwapp-watch-streetTypeOption'),
@@ -196,14 +196,14 @@ class AdminWatchCreateStep3Container extends Component {
             if (this.state.streetDirection) {
                 streetAddress += " " + this.state.streetDirection;
             }
-            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberFinish;
+            streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberEnd;
 
             // Append our array.
             let a = this.state.streetMembership.slice(); //creates the clone of the state
             a.push({
                 streetAddress: streetAddress,
                 streetNumberStart: this.state.streetNumberStart,
-                streetNumberFinish: this.state.streetNumberFinish,
+                streetNumberEnd: this.state.streetNumberEnd,
                 streetName: this.state.streetName,
                 streetType: actualStreetType,
                 streetDirection: this.state.streetDirection,
@@ -215,7 +215,7 @@ class AdminWatchCreateStep3Container extends Component {
                 errors: {},
                 streetMembership: a,
                 streetNumberStart: "", // Clear fields.
-                streetNumberFinish: "",
+                streetNumberEnd: "",
                 streetName: "",
                 streetType: "",
                 streetTypeOther: "",
@@ -244,7 +244,7 @@ class AdminWatchCreateStep3Container extends Component {
             showModal: false,
             errors: {},
             streetNumberStart: "", // Clear fields.
-            streetNumberFinish: "",
+            streetNumberEnd: "",
             streetName: "",
             streetType: "",
             streetTypeOther: "",
@@ -263,7 +263,7 @@ class AdminWatchCreateStep3Container extends Component {
             tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
 
             // Modal relate.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOther, streetDirection, showModal,
+            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
         } = this.state;
 
         const associateListObject = {
@@ -316,7 +316,7 @@ class AdminWatchCreateStep3Container extends Component {
                 onMultiChange={this.onMultiChange}
                 showModal={showModal}
                 streetNumberStart={streetNumberStart}
-                streetNumberFinish={streetNumberFinish}
+                streetNumberEnd={streetNumberEnd}
                 streetName={streetName}
                 streetType={streetType}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}

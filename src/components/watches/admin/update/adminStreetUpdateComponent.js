@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import ReactModal from 'react-modal';
 
+import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
@@ -14,51 +15,33 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchStreetUpdateComponent extends Component {
     render() {
         const {
-            errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
+            slug, errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
 
             // Modal related.
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
+            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
             showModal, onAddClick, onRemoveClick, onSaveClick, onCloseClick
         } = this.props;
         return (
             <main id="main" role="main">
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
+                            <Link to={`/admin/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
+                        </li>
+                        <li className="breadcrumb-item" aria-current="page">
+                            <Link to={`/admin/watch/${slug}`}><i className="fas fa-user"></i>&nbsp;</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-plus"></i>&nbsp;Add
+                            <i className="fas fa-edit"></i>&nbsp;Update Watch
                         </li>
                     </ol>
                 </nav>
 
-                <h1>Create Watch - Details</h1>
-
-                <div className="row">
-                    <div className="step-navigation">
-                        <div id="step-1" className="st-grey">
-                            <Link to="/admin/watches/step-1-create">
-                                <span className="num">1.</span><span className="">
-                                    Type
-                                </span>
-                            </Link>
-                        </div>
-                        <div id="step-2" className="st-grey">
-                            <Link to="/admin/watches/step-2-create">
-                                <span className="num">2.</span><span className="">Details</span>
-                            </Link>
-                        </div>
-                        <div id="step-3" className="st-grey active">
-                            <strong>
-                                <span className="num">3.</span><span className="">Street Membership</span>
-                            </strong>
-                        </div>
-                    </div>
-                </div>
+                <h1>Update Watch - Details</h1>
 
                 <div className="col-md-5 mx-auto mt-2">
                     <h3 className="pt-4 pb-2 text-center"><i className="fas fa-road"></i>&nbsp;Street Membership</h3>
@@ -71,7 +54,7 @@ export default class AdminWatchStreetUpdateComponent extends Component {
 
                             <AddModalComponent
                                 streetNumberStart={streetNumberStart}
-                                streetNumberFinish={streetNumberFinish}
+                                streetNumberEnd={streetNumberEnd}
                                 streetName={streetName}
                                 streetType={streetType}
                                 streetTypeOptions={streetTypeOptions}
@@ -93,9 +76,9 @@ export default class AdminWatchStreetUpdateComponent extends Component {
                             />
 
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                <i className="fas fa-check-circle"></i>&nbsp;Save
                             </button>
-                            <Link to="/admin/watches/step-2-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            <Link to={`/admin/watch/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>
@@ -112,14 +95,14 @@ export default class AdminWatchStreetUpdateComponent extends Component {
 
 class StreetMembershipRow extends Component {
     render() {
-        const { streetAddress, streetNumberStart, streetNumberFinish, streetName, streetType, streetDirection, onRemoveClick } = this.props;
+        const { streetAddress, streetNumberStart, streetNumberEnd, streetName, streetType, streetDirection, onRemoveClick } = this.props;
         return (
             <tr key={streetAddress}>
                 <td>
                     {streetNumberStart}
                 </td>
                 <td>
-                    {streetNumberFinish}
+                    {streetNumberEnd}
                 </td>
                 <td>
                     {streetName}
@@ -155,7 +138,7 @@ class StreetMembershipTable extends Component {
                             key={rowData.streetAddress}
                             streetAddress={rowData.streetAddress}
                             streetNumberStart={rowData.streetNumberStart}
-                            streetNumberFinish={rowData.streetNumberFinish}
+                            streetNumberEnd={rowData.streetNumberEnd}
                             streetName={rowData.streetName}
                             streetType={rowData.streetType}
                             streetDirection={rowData.streetDirection}
@@ -182,7 +165,7 @@ class StreetMembershipTable extends Component {
                         <thead>
                             <tr>
                                 <th>Street # (Start)</th>
-                                <th>Street # (Finish)</th>
+                                <th>Street # (End)</th>
                                 <th>Street Name</th>
                                 <th>Street Type</th>
                                 <th>Direction</th>
@@ -203,7 +186,7 @@ class StreetMembershipTable extends Component {
 class AddModalComponent extends Component {
     render() {
         const {
-            streetNumberStart, streetNumberFinish, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
+            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
             showModal, onSaveClick, onCloseClick, onSelectChange } = this.props;
 
         // Apply our styling for our modal component.
@@ -254,11 +237,11 @@ class AddModalComponent extends Component {
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.streetNumberFinish}
-                                    label="Street Number Finish (*)"
+                                    error={errors.streetNumberEnd}
+                                    label="Street Number End (*)"
                                     onChange={onTextChange}
-                                    value={streetNumberFinish}
-                                    name="streetNumberFinish"
+                                    value={streetNumberEnd}
+                                    name="streetNumberEnd"
                                     type="text"
                                 />
 
