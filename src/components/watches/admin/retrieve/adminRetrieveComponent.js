@@ -89,6 +89,9 @@ export default class AdminWatchRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-table"></i>&nbsp;Information
+                                        <Link to={`/admin/watch/${slug}/update/info`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                            <i className="fas fa-edit"></i>&nbsp;
+                                        </Link>
                                     </th>
                                 </tr>
                                 <tr>
@@ -127,6 +130,9 @@ export default class AdminWatchRetrieveComponent extends Component {
                         <div className="col-md-10 mx-auto">
                             <h2>
                                 <i className="fas fa-road"></i>&nbsp;Street Membership
+                                <Link to={`/admin/watch/${slug}/update/street`} className="btn btn-success btn-sm  float-right pl-4 pr-4">
+                                    <i className="fas fa-edit"></i>&nbsp;
+                                </Link>
                             </h2>
 
                             <StreetMembershipTable streetMembership={watch.streetMembership} />

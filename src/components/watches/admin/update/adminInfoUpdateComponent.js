@@ -22,7 +22,7 @@ import {
 } from "../../../../constants/api";
 
 
-export default class AdminWatchUpdateComponent extends Component {
+export default class AdminWatchInfoUpdateComponent extends Component {
     render() {
         const {
             typeOf,

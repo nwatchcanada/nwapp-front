@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import * as moment from 'moment';
 
-import AdminWatchUpdateComponent from "../../../../components/watches/admin/update/adminUpdateComponent";
+import AdminWatchInfoUpdateComponent from "../../../../components/watches/admin/update/adminInfoUpdateComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateInput } from "../../../../validators/watchValidator";
 import {
@@ -13,7 +13,7 @@ import { getTagReactSelectOptions, getPickedTagReactSelectOptions, pullTagList }
 import { putWatch } from "../../../../actions/watchActions";
 
 
-class AdminWatchUpdateContainer extends Component {
+class AdminWatchInfoUpdateContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -152,7 +152,7 @@ class AdminWatchUpdateContainer extends Component {
         } = this.state;
 
         return (
-            <AdminWatchUpdateComponent
+            <AdminWatchInfoUpdateComponent
                 typeOf={typeOf}
 
                 // EVERYTHING ELSE
@@ -196,4 +196,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminWatchUpdateContainer);
+)(AdminWatchInfoUpdateContainer);
