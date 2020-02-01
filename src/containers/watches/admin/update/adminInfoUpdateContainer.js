@@ -9,6 +9,7 @@ import { pullDistrictList, getDistrictReactSelectOptions } from '../../../../act
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
 import { pullTagList, getTagReactSelectOptions, getPickedTagReactSelectOptions } from "../../../../actions/tagActions";
 import { putWatchInformation } from "../../../../actions/watchActions";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     BASIC_STREET_TYPE_CHOICES,
     STREET_DIRECTION_CHOICES,
@@ -58,6 +59,30 @@ class AdminWatchInfoUpdateContainer extends Component {
         this.onDistrictFailureCallback = this.onDistrictFailureCallback.bind(this);
         this.onTagSuccessCallback = this.onTagSuccessCallback.bind(this);
         this.onTagFailureCallback = this.onTagFailureCallback.bind(this);
+        this.getPostData = this.getPostData.bind(this);
+        this.onSuccessfulPutCallback = this.onSuccessfulPutCallback.bind(this);
+        this.onFailurePutCallback = this.onFailurePutCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // (3) Tags - We need to only return our `id` values.
+        let idTags = [];
+        for (let i = 0; i < this.state.tags.length; i++) {
+            let tag = this.state.tags[i];
+            idTags.push(tag.value);
+        }
+        postData.tags = idTags;
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -141,6 +166,24 @@ class AdminWatchInfoUpdateContainer extends Component {
         scroll.scrollToTop();
     }
 
+    onSuccessfulPutCallback(response) {
+        this.setState({ errors: {}, isLoading: false, });
+        this.props.setFlashMessage("success", "Watch has been successfully updated.");
+        this.props.history.push("/admin/watch/"+this.state.slug);
+    }
+
+    onFailurePutCallback(errors) {
+        this.setState({ errors: errors, isTagLoading: false, }, ()=>{
+            console.log("onFailurePutCallback: Failed putting watch details.");
+        });
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -179,8 +222,15 @@ class AdminWatchInfoUpdateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.setState({ errors: {}, isLoading: true, })
-            this.props.history.push("/admin/watch/"+this.state.slug);
+            this.setState({ errors: {}, isLoading: true, });
+
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.putWatchInformation(
+                this.getPostData(),
+                this.onSuccessfulPutCallback,
+                this.onFailurePutCallback
+            );
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -213,6 +263,7 @@ class AdminWatchInfoUpdateContainer extends Component {
 
         return (
             <AdminWatchInfoUpdateComponent
+                watchDetail={this.props.watchDetail}
                 slug={slug}
                 tags={tags}
                 isTagLoading={isTagLoading}
@@ -257,6 +308,9 @@ const mapDispatchToProps = dispatch => {
             dispatch(
                 putWatchInformation(data, onSuccessCallback, onFailureCallback)
             )
+        },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         },
     }
 }

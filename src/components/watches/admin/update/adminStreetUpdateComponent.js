@@ -15,7 +15,7 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchStreetUpdateComponent extends Component {
     render() {
         const {
-            slug, errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
+            watchDetail, slug, errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
 
             // Modal related.
             streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
@@ -33,7 +33,7 @@ export default class AdminWatchStreetUpdateComponent extends Component {
                             <Link to={`/admin/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/watch/${slug}`}><i className="fas fa-user"></i>&nbsp;</Link>
+                            <Link to={`/admin/watch/${slug}`}><i className="fas fa-user"></i>&nbsp;{watchDetail && watchDetail.name}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update Watch

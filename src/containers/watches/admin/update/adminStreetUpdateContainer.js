@@ -273,49 +273,17 @@ class AdminWatchStreetUpdateContainer extends Component {
             streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
         } = this.state;
 
-        const associateListObject = {
-            results: [
-                {'slug': 'bob-page', 'name': 'Bob Page'},
-                {'slug': 'jc-denton', 'name': 'JC Denton'},
-                {'slug': 'paul-denton', 'name': 'Paul Denton'},
-                {'slug': 'gunter-herman', 'name': 'Gunter Herman'}
-            ]
-        }; // TODO: REPLACTE WITH API DATA.
-
-        const districtListObject = {
-            results: [
-                {'slug': 'wanchai', 'name': 'Wanchai Market'},
-                {'slug': 'versalife', 'name': 'VersaLife'},
-                {'slug': 'battery-park', 'name': 'Battery Park'},
-                {'slug': 'area-51', 'name': 'Area 51'}
-            ]
-        }; // TODO: REPLACTE WITH API DATA.
-
-        const areaCoordinatorListObject = {
-            results: [
-                {'slug': 'tracer-tong', 'name': 'Tracer Tong'},
-                {'slug': 'icarus', 'name': 'Icarus'},
-                {'slug': 'datalus', 'name': 'Datalus'},
-            ]
-        }; // TODO: REPLACTE WITH API DATA.
-
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
 
         return (
             <AdminWatchStreetUpdateComponent
+                watchDetail={this.props.watchDetail}
                 slug={slug}
                 tags={tags}
                 tagOptions={tagOptions}
                 name={name}
                 description={description}
-                associate={associate}
-                associateOptions={getAssociateReactSelectOptions(associateListObject)}
                 district={district}
-                districtOptions={getDistrictReactSelectOptions(districtListObject)}
-                primaryAreaCoordinator={primaryAreaCoordinator}
-                primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
-                secondaryAreaCoordinator={secondaryAreaCoordinator}
-                secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
                 streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}

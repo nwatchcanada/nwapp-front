@@ -15,7 +15,7 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchInfoUpdateComponent extends Component {
     render() {
         const {
-            tags, isTagLoading, tagOptions, name, description, district, isDistrictLoading,
+            watchDetail, tags, isTagLoading, tagOptions, name, description, district, isDistrictLoading,
             districtOptions, errors, isLoading, onClick, onTextChange,
             onSelectChange, onMultiChange, slug, error
         } = this.props;
@@ -31,7 +31,7 @@ export default class AdminWatchInfoUpdateComponent extends Component {
                             <Link to={`/admin/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/watch/${slug}`}><i className="fas fa-user"></i>&nbsp;</Link>
+                            <Link to={`/admin/watch/${slug}`}><i className="fas fa-user"></i>&nbsp;{watchDetail.name}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update Watch
@@ -97,7 +97,7 @@ export default class AdminWatchInfoUpdateComponent extends Component {
                             />
 
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                <i className="fas fa-check-circle"></i>&nbsp;Save
                             </button>
                             <Link to={`/admin/watch/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
