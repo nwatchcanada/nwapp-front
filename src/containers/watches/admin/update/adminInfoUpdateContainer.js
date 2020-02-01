@@ -48,6 +48,7 @@ class AdminWatchInfoUpdateContainer extends Component {
             // districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
             isDistrictLoading: true,
             errors: {},
+            isLoading: false,
         }
 
         // Page related.
@@ -167,7 +168,7 @@ class AdminWatchInfoUpdateContainer extends Component {
     }
 
     onSuccessfulPutCallback(response) {
-        this.setState({ errors: {}, isLoading: false, });
+        this.setState({ errors: {}, });
         this.props.setFlashMessage("success", "Watch has been successfully updated.");
         this.props.history.push("/admin/watch/"+this.state.slug);
     }
@@ -251,7 +252,7 @@ class AdminWatchInfoUpdateContainer extends Component {
 
     render() {
         const {
-            slug, tags, isTagLoading, name, description, district, isDistrictLoading, errors
+            slug, tags, isTagLoading, name, description, district, isDistrictLoading, errors, isLoading
         } = this.state;
 
         const districtOptions = getDistrictReactSelectOptions(this.props.districtList, "district");
@@ -274,6 +275,7 @@ class AdminWatchInfoUpdateContainer extends Component {
                 isDistrictLoading={isDistrictLoading}
                 districtOptions={districtOptions}
                 errors={errors}
+                isLoading={isLoading}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
