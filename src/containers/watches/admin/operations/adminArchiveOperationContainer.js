@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import WatchArchiveOperationComponent from "../../../../components/watchs/admin/operations/adminArchiveOperationComponent";
+import AdminWatchArchiveOperationComponent from "../../../../components/watches/admin/operations/adminArchiveOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { postWatchDeactivationDetail } from "../../../../actions/watchActions";
 import { validateDeactivationInput } from "../../../../validators/watchValidator";
 
 
-class WatchArchiveOperationContainer extends Component {
+class AdminWatchArchiveOperationContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -154,7 +154,7 @@ class WatchArchiveOperationContainer extends Component {
         const { slug, errors, isLoading, reason, reasonOther } = this.state;
         const watch = this.props.watchDetail ? this.props.watchDetail : [];
         return (
-            <WatchArchiveOperationComponent
+            <AdminWatchArchiveOperationComponent
                 slug={slug}
                 errors={errors}
                 isLoading={isLoading}
@@ -194,4 +194,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(WatchArchiveOperationContainer);
+)(AdminWatchArchiveOperationContainer);

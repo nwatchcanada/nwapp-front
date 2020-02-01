@@ -15,7 +15,6 @@ import { MEMBER_ROLE_ID } from "../../../../constants/api";
 export default class AdminWatchOperationsComponent extends Component {
     render() {
         const { slug, watch, user, errors, flashMessage, isLoading, onAddJobClick } = this.props;
-        const isActiveState = watch.state === "active";
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -74,7 +73,7 @@ export default class AdminWatchOperationsComponent extends Component {
                     <div className="col-md-12">
                         <div className="card-group row">
 
-                            {isActiveState
+                            {watch && watch.isArchived === false
                                 ?<div className="col-sm-3 mb-4">
                                     <div className="card box-shadow text-center mx-auto h-100">
                                         <div className="card-custom-top-2">
@@ -85,7 +84,7 @@ export default class AdminWatchOperationsComponent extends Component {
                                             <p className="card-text">This will make the watch <strong>inactive</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
-                                            <Link to={`/admin/watch/${slug}/archive`} className="btn btn-success btn-lg">
+                                            <Link to={`/admin/watch/${slug}/operation/archive`} className="btn btn-success btn-lg">
                                                 Go&nbsp;<i className="fas fa-chevron-right"></i>
                                             </Link>
                                         </div>
