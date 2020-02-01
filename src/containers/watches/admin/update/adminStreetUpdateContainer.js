@@ -15,6 +15,7 @@ import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCo
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
 import { putWatchStreetMembership } from "../../../../actions/watchActions";
 import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 
 
 class AdminWatchStreetUpdateContainer extends Component {
@@ -34,14 +35,13 @@ class AdminWatchStreetUpdateContainer extends Component {
             slug: slug,
             streetMembership: this.props.watchDetail.streetMembership,
             errors: {},
+            isLoading: false,
             streetNumberStart: "",
             streetNumberEnd: "",
             streetName: "",
             streetType: "",
-            streetTypeOption: localStorageGetObjectItem('nwapp-watch-streetTypeOption'),
             streetTypeOther: "",
             streetDirection: "",
-            streetDirectionOption: localStorageGetObjectItem('nwapp-watch-streetDirectionOption'),
             showModal: false, // Variable used to indicate if the modal should appear.
         }
 
@@ -56,6 +56,30 @@ class AdminWatchStreetUpdateContainer extends Component {
         this.onRemoveClick = this.onRemoveClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
         this.onCloseClick = this.onCloseClick.bind(this);
+
+        // API related.
+        this.getPostData = this.getPostData.bind(this);
+        this.onSuccessfulPutCallback = this.onSuccessfulPutCallback.bind(this);
+        this.onFailurePutCallback = this.onFailurePutCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        postData.streetDirection = parseInt(this.state.streetDirection);
+        const streetDirection = parseInt(this.state.streetDirection);
+        if (streetDirection === undefined || streetDirection === null || streetDirection === "" || isNaN(streetDirection) ) {
+            postData.streetDirection = 0; // This will set it to be "-".
+        }
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -81,6 +105,23 @@ class AdminWatchStreetUpdateContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessfulPutCallback(response) {
+        this.setState({ errors: {}, });
+        this.props.setFlashMessage("success", "Watch has been successfully updated.");
+        this.props.history.push("/admin/watch/"+this.state.slug);
+    }
+
+    onFailurePutCallback(errors) {
+        this.setState({ errors: errors, isLoading: false, }, ()=>{
+            console.log("onFailurePutCallback: Failed putting watch details.");
+        });
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
 
     /**
      *  Event handling functions
@@ -129,7 +170,14 @@ class AdminWatchStreetUpdateContainer extends Component {
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.setState({ errors: {}, isLoading: true, });
-            this.props.history.push("/admin/watches/step-4-create");
+
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.putWatchStreetMembership(
+                this.getPostData(),
+                this.onSuccessfulPutCallback,
+                this.onFailurePutCallback
+            );
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
@@ -267,7 +315,7 @@ class AdminWatchStreetUpdateContainer extends Component {
     render() {
         const {
             // Page related.
-            slug, tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            slug, tags, name, description, associate, district, streetMembership, errors, isLoading,
 
             // Modal relate.
             streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
@@ -286,6 +334,7 @@ class AdminWatchStreetUpdateContainer extends Component {
                 district={district}
                 streetMembership={streetMembership}
                 errors={errors}
+                isLoading={isLoading}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
@@ -321,6 +370,9 @@ const mapDispatchToProps = dispatch => {
             dispatch(
                 putWatchStreetMembership(data, onSuccessCallback, onFailureCallback)
             )
+        },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         },
     }
 }

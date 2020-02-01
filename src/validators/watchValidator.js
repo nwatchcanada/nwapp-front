@@ -197,8 +197,8 @@ export function validateModalSaveInput(data) {
     if (data.streetNumberStart === undefined || data.streetNumberStart === null || validator.isEmpty(data.streetNumberStart) || data.streetNumberStart === "" || data.streetNumberStart === "null") {
         errors.streetNumberStart = 'This field is required';
     }
-    if (data.streetNumberFinish === undefined || data.streetNumberFinish === null || validator.isEmpty(data.streetNumberFinish) || data.streetNumberFinish === "" || data.streetNumberFinish === "null") {
-        errors.streetNumberFinish = 'This field is required';
+    if (data.streetNumberEnd === undefined || data.streetNumberEnd === null || validator.isEmpty(data.streetNumberEnd) || data.streetNumberEnd === "" || data.streetNumberEnd === "null") {
+        errors.streetNumberEnd = 'This field is required';
     }
     if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "" || data.streetName === "null") {
         errors.streetName = 'This field is required';
@@ -235,7 +235,7 @@ function hasDuplicateStreetAddress(data) {
             let isEqual = data.streetDirection === address.streetDirection;
             isEqual &= data.streetType === address.streetType;
             isEqual &= data.streetName === address.streetName;
-            isEqual &= data.streetNumberFinish === address.streetNumberFinish;
+            isEqual &= data.streetNumberEnd === address.streetNumberEnd;
             isEqual &= data.streetNumberStart === address.streetNumberStart;
             if (isEqual) {
                 return true;
