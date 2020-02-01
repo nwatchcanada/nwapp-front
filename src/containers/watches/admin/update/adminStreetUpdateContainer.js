@@ -6,9 +6,9 @@ import {
     validateResidentialStep3Input, validateModalSaveInput
 } from "../../../../validators/watchValidator";
 import AdminWatchStreetUpdateComponent from "../../../../components/watches/admin/update/adminStreetUpdateComponent";
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
-} from '../../../../helpers/localStorageUtility';
+// import {
+//     localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+// } from '../../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../../actions/watchActions';
 import { getDistrictReactSelectOptions } from '../../../../actions/districtActions';
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
@@ -141,8 +141,8 @@ class AdminWatchStreetUpdateContainer extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-watch-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-watch-'+optionKey, option);
+        // localStorage.setItem('nwapp-watch-'+[option.selectName], option.value);
+        // localStorageSetObjectOrArrayItem('nwapp-watch-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -155,9 +155,9 @@ class AdminWatchStreetUpdateContainer extends Component {
             tags: selectedOptions,
         });
 
-        // // Set all the tags we have selected to the STORAGE.
-        const key = 'nwapp-watch-' + args[1].name;
-        localStorageSetObjectOrArrayItem(key, selectedOptions);
+        // // // Set all the tags we have selected to the STORAGE.
+        // const key = 'nwapp-watch-' + args[1].name;
+        // localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
     onClick(e) {
@@ -227,7 +227,7 @@ class AdminWatchStreetUpdateContainer extends Component {
                 });
 
                 // Save our table data.
-                localStorageSetObjectOrArrayItem("nwapp-watch-streetMembership", filteredItems);
+                // localStorageSetObjectOrArrayItem("nwapp-watch-streetMembership", filteredItems);
 
                 // Terminate our for-loop.
                 return;
@@ -253,6 +253,9 @@ class AdminWatchStreetUpdateContainer extends Component {
             }
             streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberEnd;
 
+            // // For debugging purposes only.
+            // console.log("Street Address", streetAddress);
+
             // Append our array.
             let a = this.state.streetMembership.slice(); //creates the clone of the state
             a.push({
@@ -277,8 +280,8 @@ class AdminWatchStreetUpdateContainer extends Component {
                 streetDirection: "",
             })
 
-            // Save our table data.
-            localStorageSetObjectOrArrayItem("nwapp-watch-streetMembership", a);
+            // // Save our table data.
+            // localStorageSetObjectOrArrayItem("nwapp-watch-streetMembership", a);
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
