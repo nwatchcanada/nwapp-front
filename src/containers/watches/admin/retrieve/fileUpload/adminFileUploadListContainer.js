@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminWatchFileUploadListComponent from "../../../../../components/watchs/admin/retrieve/fileUpload/adminFileUploadListComponent";
+import AdminWatchFileUploadListComponent from "../../../../../components/watches/admin/retrieve/fileUpload/adminFileUploadListComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 import { pullPrivateFileUploadList, postPrivateFileUpload } from "../../../../../actions/privateFileUploadActions";
 import { validateInput } from "../../../../../validators/fileValidator"

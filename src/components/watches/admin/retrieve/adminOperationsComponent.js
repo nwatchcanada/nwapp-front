@@ -50,11 +50,18 @@ export default class AdminWatchOperationsComponent extends Component {
                                 <span className="num"><i className="fas fa-portrait"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>
-                        <div id="step-4" className="st-grey">
+                        <div id="step-2" className="st-grey">
                             <Link to={`/admin/watch/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>
+                        {/*
+                        <div id="step-3" className="st-grey">
+                            <Link to={`/admin/watch/${slug}/files`}>
+                                <span className="num"><i className="fas fa-cloud-download-alt"></i>&nbsp;</span><span className="">Files</span>
+                            </Link>
+                        </div>
+                        */}
                         <div id="step-7" className="st-grey active">
                             <strong>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>

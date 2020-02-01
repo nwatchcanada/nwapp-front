@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import OrderListComponent from "../../../../../components/watchs/admin/retrieve/fileUpload/adminFileUploadAddComponent";
+import OrderListComponent from "../../../../../components/watches/admin/retrieve/fileUpload/adminFileUploadAddComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postPrivateFileUpload } from "../../../../../actions/privateFileUploadActions";
 import { validateInput } from "../../../../../validators/fileValidator"
@@ -65,8 +65,8 @@ class AdminWatchFileUploadAddContainer extends Component {
         }
         postData.tags = idTags;
 
-        // (2) User
-        postData.user = this.state.slug;
+        // (2) Watch
+        postData.watch = this.state.slug;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
