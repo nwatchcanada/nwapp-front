@@ -158,6 +158,9 @@ class AdminMemberCreateStep8Container extends Component {
         //         therefore as a result we need to run this code.
         postData.under_18_years_household_count = isNaN(this.state.under18YearsHouseholdCount) ? 0 : this.state.under18YearsHouseholdCount;
 
+        // Assign our watch.
+        postData.watch = this.state.watchSlug;
+
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
         return postData;

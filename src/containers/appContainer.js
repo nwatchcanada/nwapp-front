@@ -74,6 +74,7 @@ import AdminMemberCreateStep7Container from "./members/admin/create/adminCreateS
 import AdminMemberCreateStep8Container from "./members/admin/create/adminCreateStep8Container";
 import AdminMemberContactUpdateContainer from "./members/admin/update/adminContactUpdateContainer";
 import AdminMemberAddressUpdateContainer from "./members/admin/update/adminAddressUpdateContainer";
+import AdminMemberWatchUpdateContainer from "./members/admin/update/adminWatchUpdateContainer";
 import AdminMemberMetricsUpdateContainer from "./members/admin/update/adminMetricsUpdateContainer";
 import AdminMemberAvatarUpdateOperationContainer from "./members/admin/operations/adminAvatarUpdateOperationContainer";
 import AdminMemberPromoteOperationStep1Container from "./members/admin/operations/adminPromoteOperationStep1Container";
@@ -510,6 +511,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/member/:slug/operations" exact component={requiresAuth(AdminMemberOperationsContainer)} />
                                 <Route path="/admin/member/:slug/update/contact" exact component={requiresAuth(AdminMemberContactUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/address" exact component={requiresAuth(AdminMemberAddressUpdateContainer)} />
+                                <Route path="/admin/member/:slug/update/watch" exact component={requiresAuth(AdminMemberWatchUpdateContainer)} />
                                 <Route path="/admin/member/:slug/update/metrics" exact component={requiresAuth(AdminMemberMetricsUpdateContainer)} />
                                 <Route path="/admin/member/:slug/avatar" exact component={requiresAuth(AdminMemberAvatarUpdateOperationContainer)} />
                                 <Route path="/admin/member/:slug/promote/step-1" exact component={requiresAuth(AdminMemberPromoteOperationStep1Container)} />
