@@ -4,12 +4,14 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminMemberWatchUpdateComponent from "../../../../components/members/admin/update/adminWatchUpdateComponent";
 import { localStorageGetIntegerItem } from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../../constants/api';
 import { pullWatchList } from '../../../../actions/watchActions';
+import { putMemberWatch } from '../../../../actions/memberActions';
 
 
 class AdminMemberCreateStep6Container extends Component {
@@ -56,6 +58,25 @@ class AdminMemberCreateStep6Container extends Component {
         }
         this.onSuccessfulGETCallback = this.onSuccessfulGETCallback.bind(this);
         this.onFailedGETCallback = this.onFailedGETCallback.bind(this);
+        this.onSuccessfulPUTCallback = this.onSuccessfulPUTCallback.bind(this);
+        this.onFailedPUTCallback = this.onFailedPUTCallback.bind(this);
+        this.getPostData = this.getPostData.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Assign our watch.
+        postData.watch = this.state.watchSlug;
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -119,6 +140,28 @@ class AdminMemberCreateStep6Container extends Component {
         this.setState({ isLoading: false });
     }
 
+    onSuccessfulPUTCallback(response) {
+        console.log("onSuccessfulPUTCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isLoading: false,
+            },
+            ()=>{
+                console.log("onSuccessfulPUTCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessfulPUTCallback | State (Post-Fetch):", this.state);
+                this.props.setFlashMessage("success", "Member has been successfully updated.");
+                this.props.history.push("/admin/member/"+response['slug']+"/full");
+            }
+        )
+    }
+
+    onFailedPUTCallback(errors) {
+        console.log(errors);
+        this.setState({ isLoading: false });
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -127,14 +170,19 @@ class AdminMemberCreateStep6Container extends Component {
     onTableRowClick(e, typeOf, slug, icon, name) {
         e.preventDefault();
         console.log(typeOf, slug, icon, name);
-        // this.setState({
-        //     isLoading: true
-        // });
-        // localStorage.setItem('nwapp-create-member-watch-typeOf', typeOf);
-        // localStorage.setItem('nwapp-create-member-watch-slug', slug);
-        // localStorage.setItem('nwapp-create-member-watch-icon', icon);
-        // localStorage.setItem('nwapp-create-member-watch-name', name);
-        // this.props.history.push("/admin/members/add/step-7");
+
+        this.setState({
+            errors: {},
+            isLoading: true,
+        }, ()=>{
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.putMemberWatch(
+                this.getPostData(),
+                this.onSuccessfulPUTCallback,
+                this.onFailedPUTCallback
+            );
+        });
     }
 
 
@@ -175,6 +223,12 @@ const mapDispatchToProps = dispatch => {
             dispatch(
                 pullWatchList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
+        },
+        putMemberWatch: (postData, successCallback, failedCallback) => {
+            dispatch(putMemberWatch(postData, successCallback, failedCallback))
+        },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         },
     }
 }

@@ -16,6 +16,7 @@ import {
     WORKERY_MEMBER_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT,
     WORKERY_MEMBER_CONTACT_UPDATE_API_ENDPOINT,
     WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT,
+    WORKERY_MEMBER_WATCH_UPDATE_API_ENDPOINT,
     WORKERY_MEMBER_METRICS_UPDATE_API_ENDPOINT
 } from '../constants/api';
 import getCustomAxios from '../helpers/customAxios';
@@ -362,6 +363,81 @@ export function putMemberAddressDetail(data, onSuccessCallback, onFailureCallbac
 
         // Perform our API submission.
         customAxios.put(WORKERY_MEMBER_ADDRESS_UPDATE_API_ENDPOINT.replace("XXX", data.slug), buffer).then( (successResponse) => {
+            // Decode our MessagePack (Buffer) into JS Object.
+            const responseData = msgpack.decode(Buffer(successResponse.data));
+            let member = camelizeKeys(responseData);
+
+            // Extra.
+            member['isAPIRequestRunning'] = false;
+            member['errors'] = {};
+
+            // Update the global state of the application to store our
+            // user member for the application.
+            store.dispatch(
+                setMemberDetailSuccess(member)
+            );
+
+            // DEVELOPERS NOTE:
+            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+            // OBJECT WE GOT FROM THE API.
+            if (onSuccessCallback) {
+                onSuccessCallback(member);
+            }
+
+        }).catch( (exception) => {
+            if (exception.response) {
+                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
+
+                // Decode our MessagePack (Buffer) into JS Object.
+                const responseData = msgpack.decode(Buffer(responseBinaryData));
+
+                let errors = camelizeKeys(responseData);
+
+                console.log("putMemberDetail | error:", errors); // For debuggin purposes only.
+
+                // Send our failure to the redux.
+                store.dispatch(
+                    setMemberDetailFailure({
+                        isAPIRequestRunning: false,
+                        errors: errors
+                    })
+                );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (onFailureCallback) {
+                    onFailureCallback(errors);
+                }
+            }
+
+        }).then( () => {
+            // Do nothing.
+        });
+
+    }
+}
+
+
+export function putMemberWatch(data, onSuccessCallback, onFailureCallback) {
+    return dispatch => {
+        // Change the global state to attempting to log in.
+        store.dispatch(
+            setMemberDetailRequest()
+        );
+
+        // Generate our app's Axios instance.
+        const customAxios = getCustomAxios();
+
+        // The following code will convert the `camelized` data into `snake case`
+        // data so our API endpoint will be able to read it.
+        let decamelizedData = decamelizeKeys(data);
+
+        // Encode from JS Object to MessagePack (Buffer)
+        var buffer = msgpack.encode(decamelizedData);
+
+        // Perform our API submission.
+        customAxios.put(WORKERY_MEMBER_WATCH_UPDATE_API_ENDPOINT.replace("XXX", data.slug), buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let member = camelizeKeys(responseData);
