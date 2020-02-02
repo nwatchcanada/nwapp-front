@@ -36,7 +36,7 @@ export default class AdminWatchOperationsComponent extends Component {
 
                 <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}</h1>
 
-                {watch.state === 'inactive' &&
+                {watch.isArchived === true &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This watch is archived and is read-only.
                     </div>
@@ -100,7 +100,7 @@ export default class AdminWatchOperationsComponent extends Component {
                                             <p className="card-text">This will make the watch <strong>active</strong>.</p>
                                         </div>
                                         <div className="card-footer bg-transparent border-0">
-                                            <Link to={`/admin/watch/${slug}/unarchive`} className="btn btn-success btn-lg">
+                                            <Link to={`/admin/watch/${slug}/operation/unarchive`} className="btn btn-success btn-lg">
                                                 Go&nbsp;<i className="fas fa-chevron-right"></i>
                                             </Link>
                                         </div>

@@ -47,7 +47,7 @@ class AdminWatchArchiveOperationContainer extends Component {
         let postData = Object.assign({}, this.state);
 
         postData.watch = this.props.watchDetail.slug;
-        postData.state = "inactive";
+        postData.isArchived = true;
         postData.deactivationReason = this.state.reason;
         postData.deactivationReasonOther = this.state.reasonOther;
 

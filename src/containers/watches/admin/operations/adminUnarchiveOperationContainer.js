@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminWatchUnarchiveOperationComponent from "../../../../components/watchs/admin/operations/adminUnarchiveOperationComponent";
+import AdminWatchUnarchiveOperationComponent from "../../../../components/watches/admin/operations/adminUnarchiveOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { postWatchDeactivationDetail } from "../../../../actions/watchActions";
 import { validateActivationInput } from "../../../../validators/watchValidator";
@@ -47,7 +47,7 @@ class AdminWatchUnarchiveOperationContainer extends Component {
         let postData = Object.assign({}, this.state);
 
         postData.watch = this.props.watchDetail.slug;
-        postData.state = "active";
+        postData.isArchived = false;
         postData.deactivationReason = 0; // NOT_SPECIFIED
         postData.deactivationReasonOther = ""
 
