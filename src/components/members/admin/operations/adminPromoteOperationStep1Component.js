@@ -82,7 +82,7 @@ export default class AdminMemberPromoteOperationStep1Component extends Component
                     <div className="col-sm-3">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
-                                <i className="fas fa-hat-wizard fa-3x"></i>
+                                <i className="fas fa-user-check fa-3x"></i>
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Frontline Staff</h3>
@@ -96,7 +96,7 @@ export default class AdminMemberPromoteOperationStep1Component extends Component
                     <div className="col-sm-3">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
-                                <i className="fas fa-hat-wizard fa-3x"></i>
+                                <i className="fas fa-user-check fa-3x"></i>
                             </div>
                             <div className="card-body">
                                 <h3 className="card-title">Management Staff</h3>

@@ -22,7 +22,7 @@ export default class AdminStaffDemoteOperationStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/staffs"><i className="fas fa-hat-wizard"></i>&nbsp;Staffs</Link>
+                            <Link to="/admin/staffs"><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/staff/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{staff && staff.fullName}</Link>
@@ -97,7 +97,7 @@ export default class AdminStaffDemoteOperationStep1Component extends Component {
                         <div className="col-sm-3">
                             <div className="card box-shadow text-center mx-auto">
                                 <div className="card-custom-top-2">
-                                    <i className="fas fa-hat-wizard fa-3x"></i>
+                                    <i className="fas fa-user-check fa-3x"></i>
                                 </div>
                                 <div className="card-body">
                                     <h3 className="card-title">Frontline Staff</h3>

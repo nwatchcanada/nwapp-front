@@ -44,7 +44,7 @@ export default class AdminStaffContactUpdateComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/staffs`}><i className="fas fa-hat-wizard"></i>&nbsp;Staffs</Link>
+                            <Link to={`/admin/staffs`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/staff/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{firstName} {lastName}</Link>

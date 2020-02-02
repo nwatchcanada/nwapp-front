@@ -199,10 +199,10 @@ function emailFormatter(cell, row){
 function roleIdFormatter(cell, row){
     switch(row.roleId) {
         case MANAGEMENT_ROLE_ID:
-            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Management Staff</div>;
+            return <div><i className="fas fa-user-check"></i>&nbsp;Management Staff</div>;
             break;
         case FRONTLINE_STAFF_ROLE_ID:
-            return <div><i className="fas fa-hat-wizard"></i>&nbsp;Frontline Staff</div>;
+            return <div><i className="fas fa-user-check"></i>&nbsp;Frontline Staff</div>;
             break;
         case ASSOCIATE_ROLE_ID:
             return <div><i className="fas fa-crown"></i>&nbsp;Associate</div>;
@@ -258,14 +258,14 @@ class AdminStaffListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-hat-wizard"></i>&nbsp;Staffs
+                            <i className="fas fa-user-check"></i>&nbsp;Staffs
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-hat-wizard"></i>&nbsp;Staffs</h1>
+                <h1><i className="fas fa-user-check"></i>&nbsp;Staffs</h1>
 
                 <div className="row">
                     <div className="col-md-12">
