@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminMemberCreateStep6Component from "../../../../components/members/admin/create/adminCreateStep6Component";
 import { localStorageGetIntegerItem } from '../../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     RESIDENCE_TYPE_OF,
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../../constants/api';
+import { pullWatchList } from '../../../../actions/watchActions';
 
 
 class AdminMemberCreateStep6Container extends Component {
@@ -19,12 +20,36 @@ class AdminMemberCreateStep6Container extends Component {
 
     constructor(props) {
         super(props);
+
+        // Force active users as per issue via https://github.com/over55/nwapp-front/issues/296
+        var parametersMap = new Map();
+        parametersMap.set("isArchived", false);
+
         this.state = {
+            // Pagination
+            page: 1,
+            sizePerPage: 1000,
+            totalSize: 0,
+
+            // Sorting, Filtering, & Searching
+            parametersMap: parametersMap,
+
+            // Overaly
+            isLoading: true,
+
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             watchSlug: localStorage.getItem('nwapp-create-member-watch-slug'),
             watchIcon: localStorage.getItem('nwapp-create-member-watch-icon'),
             watchName: localStorage.getItem('nwapp-create-member-watch-name'),
+
+            streetNumber: localStorage.getItem("nwapp-create-member-streetNumber"),
+            streetName: localStorage.getItem("nwapp-create-member-streetName"),
+            streetType: localStorageGetIntegerItem("nwapp-create-member-streetType"),
+            streetTypeOther: localStorage.getItem("nwapp-create-member-streetTypeOther"),
+            streetDirection: localStorageGetIntegerItem("nwapp-create-member-streetDirection"),
         }
+        this.onSuccessfulGETCallback = this.onSuccessfulGETCallback.bind(this);
+        this.onFailedGETCallback = this.onFailedGETCallback.bind(this);
     }
 
     /**
@@ -35,31 +60,20 @@ class AdminMemberCreateStep6Container extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // REPLACE THIS CODE WITH API CODE.
-        const tableData = [
-            {
-                typeOf: RESIDENCE_TYPE_OF,
-                slug: "argyle-watch",
-                icon: "home",
-                name: "Argyle Community Watch"
-            },{
-                typeOf: BUSINESS_TYPE_OF,
-                slug: "byron-watch",
-                icon: "building",
-                name: "Byron Business Watch"
-            },{
-                typeOf: COMMUNITY_CARES_TYPE_OF,
-                slug: "carling-watch",
-                icon: "university",
-                name: "Carling Retirement Centre Watch"
-            }
-        ];
+        // The following code will generate a `url parameter` specific to
+        // our API endpoint which will list all the nearest watches based
+        // on the specified address.
+        let nearbyAddress = this.state.streetNumber+","+this.state.streetName;
+        nearbyAddress += ","+this.state.streetType+","+this.state.streetTypeOther;
+        this.state.parametersMap.set("searchNearbyAddress", nearbyAddress);
 
-        // Set our state.
-        this.setState({
-            tableData: tableData,
-            isLoading: false,
-        });
+        this.props.pullWatchList(
+            this.state.page,
+            this.state.sizePerPage,
+            this.state.parametersMap,
+            this.onSuccessfulGETCallback,
+            this.onFailedGETCallback
+        );
 
         // Set our event handling.
         this.onTableRowClick = this.onTableRowClick.bind(this);
@@ -78,6 +92,26 @@ class AdminMemberCreateStep6Container extends Component {
      *  API callback functions
      *------------------------------------------------------------
      */
+
+    onSuccessfulGETCallback(response) {
+        console.log("onSuccessfulGETCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isLoading: false,
+            },
+            ()=>{
+                console.log("onSuccessfulGETCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessfulGETCallback | State (Post-Fetch):", this.state);
+            }
+        )
+    }
+
+    onFailedGETCallback(errors) {
+        console.log(errors);
+        this.setState({ isLoading: false });
+    }
 
     /**
      *  Event handling functions
@@ -103,10 +137,13 @@ class AdminMemberCreateStep6Container extends Component {
      */
 
     render() {
-        const { returnURL, tableData, isLoading } = this.state;
+        const {
+            returnURL, isLoading
+        } = this.state;
+        const watchItems = isEmpty(this.props.watchList) ? [] : this.props.watchList.results;
         return (
             <AdminMemberCreateStep6Component
-                tableData={tableData}
+                watchItems={watchItems}
                 returnURL={returnURL}
                 isLoading={isLoading}
                 onTableRowClick={this.onTableRowClick}
@@ -118,14 +155,17 @@ class AdminMemberCreateStep6Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        watchList: store.watchListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
+        pullWatchList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullWatchList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
     }
 }
 

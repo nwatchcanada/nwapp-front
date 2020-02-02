@@ -16,7 +16,7 @@ import {
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../../constants/api';
-import { postMemberDetail } from '../../../../actions/memberActions';
+import { postMember } from '../../../../actions/memberActions';
 import { validateStep8CreateInput } from '../../../../validators/memberValidator';
 
 
@@ -204,7 +204,7 @@ class AdminMemberCreateStep8Container extends Component {
             }, ()=>{
                 // Once our state has been validated `client-side` then we will
                 // make an API request with the server to create our new production.
-                this.props.postMemberDetail(
+                this.props.postMember(
                     this.getPostData(),
                     this.onSuccessCallback,
                     this.onFailureCallback
@@ -337,8 +337,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postMemberDetail: (postData, successCallback, failedCallback) => {
-            dispatch(postMemberDetail(postData, successCallback, failedCallback))
+        postMember: (postData, successCallback, failedCallback) => {
+            dispatch(postMember(postData, successCallback, failedCallback))
         },
     }
 }

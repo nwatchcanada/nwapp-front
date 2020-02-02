@@ -114,7 +114,7 @@ export function pullMemberList(page=1, sizePerPage=10, filtersMap=new Map(), onS
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postMemberDetail(postData, onSuccessCallback, onFailureCallback) {
+export function postMember(postData, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -163,7 +163,7 @@ export function postMemberDetail(postData, onSuccessCallback, onFailureCallback)
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postMemberDetail | error:", errors); // For debuggin purposes only.
+                console.log("postMember | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

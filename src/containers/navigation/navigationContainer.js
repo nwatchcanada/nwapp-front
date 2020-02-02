@@ -58,7 +58,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-watches",
         icon: "shield-alt",
         title: "Watches",
-        url: "/watches"
+        url: "/admin/watches"
     },{
         id: "full-items",
         icon: "map-pin",
@@ -133,7 +133,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-watches",
         icon: "shield-alt",
         title: "Watches",
-        url: "/watches"
+        url: "/admin/watches"
     },{
         id: "full-items",
         icon: "map-pin",
