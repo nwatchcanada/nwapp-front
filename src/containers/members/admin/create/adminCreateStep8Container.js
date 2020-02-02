@@ -77,7 +77,7 @@ class AdminMemberCreateStep8Container extends Component {
             anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-create-member-anotherHouseholdMemberRegistered-label"),
             anotherHouseholdMemberRegistered: localStorageGetIntegerItem("nwapp-create-member-anotherHouseholdMemberRegistered"),
             totalHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-totalHouseholdCount"),
-            under18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
+            over18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-over18YearsHouseholdCount"),
             organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-organizationEmployeeCount"),
             organizationFoundingYear: localStorageGetIntegerItem("nwapp-create-member-organizationFoundingYear"),
             errors: {},
@@ -156,7 +156,7 @@ class AdminMemberCreateStep8Container extends Component {
         // BUGFIX: When converting from camelCase to snake_case, there appears to
         //         be a problem with the "18_y" conversion as it saves it as "18y"
         //         therefore as a result we need to run this code.
-        postData.under_18_years_household_count = isNaN(this.state.under18YearsHouseholdCount) ? 0 : this.state.under18YearsHouseholdCount;
+        postData.over_18_years_household_count = isNaN(this.state.over18YearsHouseholdCount) ? 0 : this.state.over18YearsHouseholdCount;
 
         // Assign our watch.
         postData.watch = this.state.watchSlug;
@@ -268,7 +268,7 @@ class AdminMemberCreateStep8Container extends Component {
             streetNumber, streetName, streetType, streetTypeLabel, streetTypeOption, streetTypeOther, apartmentUnit, streetDirection, streetDirectionLabel, streetDirectionOption, postalCode,
             watchSlug, watchIcon, watchName,
             tags, yearOfBirth, gender, genderLabel, howDidYouHearLabel, howDidYouHear, howDidYouHearOther, meaningLabel, meaning, meaningOther, expectationLabel, expectation, expectationOther,
-            willingToVolunteerLabel, willingToVolunteer, anotherHouseholdMemberRegisteredLabel, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteerLabel, willingToVolunteer, anotherHouseholdMemberRegisteredLabel, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationType, organizationTypeOfLabel, isLoading
         } = this.state;
 
@@ -316,7 +316,7 @@ class AdminMemberCreateStep8Container extends Component {
                 anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
-                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                over18YearsHouseholdCount={over18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
                 organizationType={organizationType}

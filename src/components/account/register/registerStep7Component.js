@@ -19,7 +19,7 @@ export default class RegisterStep7Component extends Component {
             streetNumber, streetName, apartmentUnit, streetType, streetTypeOther, streetDirection, postalCode,
             watchSlug, watchIcon, watchName,
             tags, birthYear, genderLabel, howDidYouHear, howDidYouHearLabel, howDidYouHearOptions, howDidYouHearOther,
-            meaning, meaningLabel, meaningOther, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            meaning, meaningLabel, meaningOther, expectations, willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, over18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             agreement,
         } = this.props;
@@ -308,8 +308,8 @@ export default class RegisterStep7Component extends Component {
                                 }
                                 {showHouseholdCount &&
                                     <tr>
-                                        <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
-                                        <td>{under18YearsHouseholdCount}</td>
+                                        <th scope="row" className="bg-light">How many people (including yourself) over the age of 18 are in your household?</th>
+                                        <td>{over18YearsHouseholdCount}</td>
                                     </tr>
                                 }
                                 {isBizTypeOf &&

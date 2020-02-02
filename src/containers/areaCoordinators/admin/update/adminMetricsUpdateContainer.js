@@ -56,7 +56,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
             willingToVolunteer: this.props.areaCoordinatorDetail.willingToVolunteer,
             anotherHouseholdMemberRegistered: anotherHouseholdMemberRegistered,
             totalHouseholdCount: this.props.areaCoordinatorDetail.totalHouseholdCount,
-            under18YearsHouseholdCount: this.props.areaCoordinatorDetail.under18YearsHouseholdCount,
+            over18YearsHouseholdCount: this.props.areaCoordinatorDetail.over18YearsHouseholdCount,
             organizationEmployeeCount: this.props.areaCoordinatorDetail.organizationEmployeeCount,
             organizationFoundingYear: this.props.areaCoordinatorDetail.organizationFoundingYear,
             organizationTypeOf: this.props.areaCoordinatorDetail.organizationTypeOf,
@@ -136,7 +136,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
         // BUGFIX: When converting from camelCase to snake_case, there appears to
         //         be a problem with the "18_y" conversion as it saves it as "18y"
         //         therefore as a result we need to run this code.
-        postData.under_18_years_household_count = isNaN(this.state.under18YearsHouseholdCount) ? 0 : this.state.under18YearsHouseholdCount;
+        postData.over_18_years_household_count = isNaN(this.state.over18YearsHouseholdCount) ? 0 : this.state.over18YearsHouseholdCount;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -305,7 +305,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
         } = this.state;
@@ -349,7 +349,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={parseInt(anotherHouseholdMemberRegistered)}
                 totalHouseholdCount={totalHouseholdCount}
-                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                over18YearsHouseholdCount={over18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
                 organizationTypeOf={organizationTypeOf}

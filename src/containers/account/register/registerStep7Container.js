@@ -72,7 +72,7 @@ class RegisterStep7Container extends Component {
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-register-anotherHouseholdMemberRegistered")),
             anotherHouseholdMemberRegisteredLabel: localStorage.getItem("nwapp-register-anotherHouseholdMemberRegistered-label"),
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-register-totalHouseholdCount")),
-            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-register-under18YearsHouseholdCount")),
+            over18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-register-over18YearsHouseholdCount")),
             companyEmployeeCount: parseInt(localStorage.getItem("nwapp-register-companyEmployeeCount")),
             companyYearsInOperation: parseInt(localStorage.getItem("nwapp-register-companyYearsInOperation")),
             companyType: localStorage.getItem("nwapp-register-companyType"),
@@ -134,7 +134,7 @@ class RegisterStep7Container extends Component {
             streetNumber, streetName, streetType, streetTypeOption, streetTypeOther, streetDirection, streetDirectionOption,
             watchSlug, watchIcon, watchName,
             tags, birthYear, gender, genderLabel, howDidYouHear, howDidYouHearOther, howDidYouHearLabel, meaning, meaningLabel, meaningOther, expectations,
-            willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, willingToVolunteerLabel, anotherHouseholdMemberRegistered, anotherHouseholdMemberRegisteredLabel, totalHouseholdCount, over18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
         } = this.state;
 
@@ -179,7 +179,7 @@ class RegisterStep7Container extends Component {
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 anotherHouseholdMemberRegisteredLabel={anotherHouseholdMemberRegisteredLabel}
                 totalHouseholdCount={totalHouseholdCount}
-                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                over18YearsHouseholdCount={over18YearsHouseholdCount}
                 companyEmployeeCount={companyEmployeeCount}
                 companyYearsInOperation={companyYearsInOperation}
                 companyType={companyType}

@@ -183,8 +183,8 @@ export function validateInput(data) {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
-            if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
-                errors.under18YearsHouseholdCount = 'This field is required';
+            if (data.over18YearsHouseholdCount === undefined || data.over18YearsHouseholdCount === null || data.over18YearsHouseholdCount === "" || isNaN(data.over18YearsHouseholdCount) ) {
+                errors.over18YearsHouseholdCount = 'This field is required';
             }
         }
     }
@@ -408,8 +408,8 @@ export function validateStep7CreateInput(data) {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
-            if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
-                errors.under18YearsHouseholdCount = 'This field is required';
+            if (data.over18YearsHouseholdCount === undefined || data.over18YearsHouseholdCount === null || data.over18YearsHouseholdCount === "" || isNaN(data.over18YearsHouseholdCount) ) {
+                errors.over18YearsHouseholdCount = 'This field is required';
             }
         }
     }
@@ -529,8 +529,8 @@ export function validateStep8CreateInput(data) {
             if (data.totalHouseholdCount === undefined || data.totalHouseholdCount === null || data.totalHouseholdCount === "" || isNaN(data.totalHouseholdCount) ) {
                 errors.totalHouseholdCount = 'This field is required';
             }
-            if (data.under18YearsHouseholdCount === undefined || data.under18YearsHouseholdCount === null || data.under18YearsHouseholdCount === "" || isNaN(data.under18YearsHouseholdCount) ) {
-                errors.under18YearsHouseholdCount = 'This field is required';
+            if (data.over18YearsHouseholdCount === undefined || data.over18YearsHouseholdCount === null || data.over18YearsHouseholdCount === "" || isNaN(data.over18YearsHouseholdCount) ) {
+                errors.over18YearsHouseholdCount = 'This field is required';
             }
         }
     }

@@ -14,7 +14,7 @@ export default class AdminAssociateMetricUpdateComponent extends Component {
     render() {
         const {
             slug, associate, typeOf, isTagsLoading, tags, tagOptions, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -206,11 +206,11 @@ export default class AdminAssociateMetricUpdateComponent extends Component {
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.under18YearsHouseholdCount}
-                                        label="How many people in your household are under the age of 18? (*)"
+                                        error={errors.over18YearsHouseholdCount}
+                                        label="How many people (including yourself) over the age of 18 are in your household? (*)"
                                         onChange={onTextChange}
-                                        value={under18YearsHouseholdCount}
-                                        name="under18YearsHouseholdCount"
+                                        value={over18YearsHouseholdCount}
+                                        name="over18YearsHouseholdCount"
                                         type="number"
                                     />
                                 </div>

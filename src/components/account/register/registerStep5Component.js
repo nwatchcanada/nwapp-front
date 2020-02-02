@@ -14,7 +14,7 @@ export default class RegisterStep5Component extends Component {
     render() {
         const {
             typeOf, returnURL, tags, tagOptions, birthYear, gender, howDidYouHear, howDidYouHearOptions, howDidYouHearOther,
-            meaning, meaningOptions, meaningOther, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            meaning, meaningOptions, meaningOther, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             onRadioChange,  onMultiChange,
             errors, onTextChange, onSelectChange, isLoading, onClick
@@ -250,11 +250,11 @@ export default class RegisterStep5Component extends Component {
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
-                                        error={errors.under18YearsHouseholdCount}
-                                        label="How many people in your household are under the age of 18? (*)"
+                                        error={errors.over18YearsHouseholdCount}
+                                        label="How many people (including yourself) over the age of 18 are in your household? (*)"
                                         onChange={onTextChange}
-                                        value={under18YearsHouseholdCount}
-                                        name="under18YearsHouseholdCount"
+                                        value={over18YearsHouseholdCount}
+                                        name="over18YearsHouseholdCount"
                                         type="number"
                                     />
                                 </div>

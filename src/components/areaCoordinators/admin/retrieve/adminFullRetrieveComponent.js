@@ -237,8 +237,8 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                                 }
                                 {areaCoordinator && areaCoordinator.anotherHouseholdMemberRegistered === false &&
                                     <tr>
-                                        <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
-                                        <td>{areaCoordinator && areaCoordinator.under18YearsHouseholdCount}</td>
+                                        <th scope="row" className="bg-light">How many people (including yourself) over the age of 18 are in your household?</th>
+                                        <td>{areaCoordinator && areaCoordinator.over18YearsHouseholdCount}</td>
                                     </tr>
                                 }
                                 {areaCoordinator && areaCoordinator.organizationEmployeeCount &&

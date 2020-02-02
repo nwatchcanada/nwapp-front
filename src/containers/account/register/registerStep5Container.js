@@ -53,8 +53,8 @@ class RegisterStep5Container extends Component {
             willingToVolunteer: parseInt(localStorage.getItem("nwapp-register-member-willingToVolunteer")),
             anotherHouseholdMemberRegistered: parseInt(localStorage.getItem("nwapp-register-member-anotherHouseholdMemberRegistered")),
             totalHouseholdCount: parseInt(localStorage.getItem("nwapp-register-member-totalHouseholdCount")),
-            under18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-register-member-under18YearsHouseholdCount")),
-            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-register-member-under18YearsHouseholdCount")),
+            over18YearsHouseholdCount: parseInt(localStorage.getItem("nwapp-register-member-over18YearsHouseholdCount")),
+            companyEmployeeCount: parseInt(localStorage.getItem("nwapp-register-member-over18YearsHouseholdCount")),
             companyYearsInOperation: parseInt(localStorage.getItem("nwapp-register-member-companyYearsInOperation")),
             companyType: localStorage.getItem("nwapp-register-member-companyType"),
             errors: {},
@@ -262,7 +262,7 @@ class RegisterStep5Container extends Component {
     render() {
         const {
             typeOf, returnURL, tags, birthYear, gender, howDidYouHear, howDidYouHearOther, meaning, meaningOther, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             companyEmployeeCount, companyYearsInOperation, companyType,
             errors
         } = this.state;
@@ -296,7 +296,7 @@ class RegisterStep5Container extends Component {
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
-                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                over18YearsHouseholdCount={over18YearsHouseholdCount}
                 companyEmployeeCount={companyEmployeeCount}
                 companyYearsInOperation={companyYearsInOperation}
                 companyType={companyType}

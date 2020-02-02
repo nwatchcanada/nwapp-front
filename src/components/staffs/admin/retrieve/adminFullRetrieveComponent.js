@@ -237,8 +237,8 @@ export default class AdminStaffFullRetrieveComponent extends Component {
                                 }
                                 {staff && staff.anotherHouseholdMemberRegistered === false &&
                                     <tr>
-                                        <th scope="row" className="bg-light">How many people in your household are under the age of 18?</th>
-                                        <td>{staff && staff.under18YearsHouseholdCount}</td>
+                                        <th scope="row" className="bg-light">How many people (including yourself) over the age of 18 are in your household?</th>
+                                        <td>{staff && staff.over18YearsHouseholdCount}</td>
                                     </tr>
                                 }
                                 {staff && staff.organizationEmployeeCount &&

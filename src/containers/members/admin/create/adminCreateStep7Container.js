@@ -45,8 +45,8 @@ class AdminMemberCreateStep7Container extends Component {
             willingToVolunteer: localStorageGetIntegerItem("nwapp-create-member-willingToVolunteer"),
             anotherHouseholdMemberRegistered: localStorageGetIntegerItem("nwapp-create-member-anotherHouseholdMemberRegistered"),
             totalHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-totalHouseholdCount"),
-            under18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
-            organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-under18YearsHouseholdCount"),
+            over18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-over18YearsHouseholdCount"),
+            organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-over18YearsHouseholdCount"),
             organizationFoundingYear: localStorageGetIntegerItem("nwapp-create-member-organizationFoundingYear"),
             organizationTypeOf: localStorageGetIntegerItem("nwapp-create-member-organizationTypeOf"),
             errors: {},
@@ -221,7 +221,7 @@ class AdminMemberCreateStep7Container extends Component {
     render() {
         const {
             typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, under18YearsHouseholdCount,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             errors
         } = this.state;
@@ -263,7 +263,7 @@ class AdminMemberCreateStep7Container extends Component {
                 willingToVolunteer={willingToVolunteer}
                 anotherHouseholdMemberRegistered={anotherHouseholdMemberRegistered}
                 totalHouseholdCount={totalHouseholdCount}
-                under18YearsHouseholdCount={under18YearsHouseholdCount}
+                over18YearsHouseholdCount={over18YearsHouseholdCount}
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
                 organizationTypeOf={organizationTypeOf}
