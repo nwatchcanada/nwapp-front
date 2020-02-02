@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminWatchSearchComponent from "../../../../components/watchs/admin/search/adminSearchComponent";
+import AdminWatchSearchComponent from "../../../../components/watches/admin/search/adminSearchComponent";
 import { validateSearchInput } from "../../../../validators/watchValidator";
 import { localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
 
 
-class AdminWatchListContainer extends Component {
+class AdminWatchSearchContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -69,7 +69,7 @@ class AdminWatchListContainer extends Component {
 				if (isValid) {
 
 					localStorageSetObjectOrArrayItem('workery-search-watch-details', this.state);
-					this.props.history.push("/admin/watchs/search-results");
+					this.props.history.push("/admin/watches/search-results");
 
 
 				// CASE 2 OF 2: Validation was a failure.
@@ -105,7 +105,7 @@ class AdminWatchListContainer extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('workery-search-watch-details', this.state);
-                    this.props.history.push("/admin/watchs/search-results");
+                    this.props.history.push("/admin/watches/search-results");
 
 
             // CASE 2 OF 2: Validation was a failure.
@@ -132,7 +132,7 @@ class AdminWatchListContainer extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('workery-search-watch-details', this.state);
-                    this.props.history.push("/admin/watchs/search-results");
+                    this.props.history.push("/admin/watches/search-results");
 
 
             // CASE 2 OF 2: Validation was a failure.
@@ -188,4 +188,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminWatchListContainer);
+)(AdminWatchSearchContainer);

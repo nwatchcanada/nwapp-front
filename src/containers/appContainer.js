@@ -284,13 +284,9 @@ import AdminWatchInfoUpdateContainer from "./watches/admin/update/adminInfoUpdat
 import AdminWatchStreetUpdateContainer from "./watches/admin/update/adminStreetUpdateContainer";
 import AdminWatchArchiveOperationContainer from "./watches/admin/operations/adminArchiveOperationContainer";
 import AdminWatchUnarchiveOperationContainer from "./watches/admin/operations/adminUnarchiveOperationContainer";
-// import WatchSearchContainer from "./watches/search/watchSearchContainer";
-// import WatchSearchResultContainer from "./watches/search/watchSearchResultContainer";
-//
-// <Route path="/watches/search" exact component={requiresAuth(WatchSearchContainer)} />
-// <Route path="/watches/search-results" exact component={requiresAuth(WatchSearchResultContainer)} />
-// <Route path="/watch/:slug" exact component={requiresAuth(WatchRetrieveContainer)} />
-// <Route path="/watch/:slug/update" exact component={requiresAuth(WatchUpdateContainer)} />
+import AdminWatchSearchContainer from "./watches/admin/search/adminSearchContainer";
+import AdminWatchSearchResultContainer from "./watches/admin/search/adminSearchResultContainer";
+
 
 
 
@@ -656,7 +652,8 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/watch/:slug/operation/unarchive" exact component={requiresAuth(AdminWatchUnarchiveOperationContainer)} />
                                 <Route path="/admin/watch/:slug/update/info" exact component={requiresAuth(AdminWatchInfoUpdateContainer)} />
                                 <Route path="/admin/watch/:slug/update/street" exact component={requiresAuth(AdminWatchStreetUpdateContainer)} />
-
+                                <Route path="/admin/watches/search" exact component={requiresAuth(AdminWatchSearchContainer)} />
+                                <Route path="/admin/watches/search-results" exact component={requiresAuth(AdminWatchSearchResultContainer)} />
 
 
 

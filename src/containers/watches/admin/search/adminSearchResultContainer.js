@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import AdminWatchSearchResultComponent from "../../../../components/watchs/admin/search/adminSearchResultComponent";
+import AdminWatchSearchResultComponent from "../../../../components/watches/admin/search/adminSearchResultComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { pullWatchList } from "../../../../actions/watchActions";
 import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
@@ -172,7 +172,7 @@ class AdminWatchSearchResultContainer extends Component {
 
     render() {
         const { page, sizePerPage, totalSize, isLoading, errors } = this.state;
-        const watchs = (this.props.watchList && this.props.watchList.results) ? this.props.watchList.results : [];
+        const watches = (this.props.watchList && this.props.watchList.results) ? this.props.watchList.results : [];
         const hasNext = this.props.watchList.next !== null;
         const hasPrevious = this.props.watchList.previous !== null;
         return (
@@ -180,7 +180,7 @@ class AdminWatchSearchResultContainer extends Component {
                 page={page}
                 sizePerPage={sizePerPage}
                 totalSize={totalSize}
-                watchs={watchs}
+                watches={watches}
                 isLoading={isLoading}
                 errors={errors}
                 onWatchClick={this.onWatchClick}

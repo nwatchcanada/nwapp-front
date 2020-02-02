@@ -22,7 +22,6 @@ export default class AdminWatchSearchResultComponent extends Component {
         const {
             watches, isLoading, errors, hasNext, onNextClick, hasPrevious, onPreviousClick, onWatchClick
         } = this.props;
-        const hasNoWatches = watches.length <= 0;
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -51,7 +50,7 @@ export default class AdminWatchSearchResultComponent extends Component {
                             <i className="fas fa-list"></i>&nbsp;Search Results
                         </h2>
 
-                        {hasNoWatches
+                        {watches && watches.length <= 0
                             ?<div className="jumbotron">
                                 <h1 className="display-4">No Results Found</h1>
                                 <p className="lead">It appears nothing was found for your search results. Please try again by clicking below.</p>
@@ -95,21 +94,19 @@ class CardComponent extends Component {
                         <h5 className="card-title">
                             <Link to={`/admin/watch/${watch.slug}`}>
                                 {watch.typeOf === 3 &&
-                                    <strong><i className="fas fa-building"></i>&nbsp;{watch.organizationName}</strong>
+                                    <strong><i className="fas fa-building"></i>&nbsp;{watch.name}</strong>
                                 }
                                 {watch.typeOf === 2 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{watch.firstName}&nbsp;{watch.lastName}</strong>
+                                    <strong><i className="fas fa-home"></i>&nbsp;{watch.name}</strong>
                                 }
                                 {watch.typeOf === 1 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{watch.firstName}&nbsp;{watch.lastName}</strong>
+                                    <strong><i className="fas fa-home"></i>&nbsp;{watch.name}</strong>
                                 }
                             </Link>
                         </h5>
                         <p className="card-text">
-                            {watch.streetAddress}<br />
-                            {watch.locality}, {watch.region}, {watch.postalCode}<br />
-                            <a href={`email:${watch.email}`}>{watch.email}</a><br />
-                            <a href={`tel:${watch.primaryPhoneE164}`}>{watch.primaryPhoneNational}</a>
+                            District:&nbsp;<a href={`/admin/settings/district/${watch.districtTypeOfCode}/${watch.districtSlug}`} target="_blank">&nbsp;{watch.districtName}&nbsp;<i class="fas fa-external-link-alt"></i></a>
+                            <br />
                         </p>
                         <Link to={`/admin/watch/${watch.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
                             Select&nbsp;<i class="fas fa-chevron-right"></i>
