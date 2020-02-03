@@ -189,12 +189,38 @@ class AdminWatchCreateStep3Container extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+            // Get our `streetDirection` value and label.
+            let streetDirectionOverride;
+            let streetDirectionLabelOverride;
+            if (this.state.streetDirection === undefined || this.state.streetDirection === null || this.state.streetDirection === "" || isNaN(this.state.streetDirection)) {
+                streetDirectionOverride = 0;
+                streetDirectionLabelOverride = "-";
+            } else {
+                streetDirectionOverride = this.state.streetDirection;
+                streetDirectionLabelOverride = STREET_DIRECTION_CHOICES[this.state.streetDirection]['label'];
+            }
+
+            // Get our `streetType` value and label.
+            let streetTypeOverride;
+            let streetTypeLabelOverride;
+            let streetTypeChoice;
+            for (streetTypeChoice of BASIC_STREET_TYPE_CHOICES) {
+                if (this.state.streetType === streetTypeChoice['value']) {
+                    streetTypeOverride = streetTypeChoice['value'];
+                    streetTypeLabelOverride = streetTypeChoice['label'];
+                    break;
+                }
+            }
+
+            // Override `Other` option inside the `streetType`.
+            if (this.state.streetType === 1) {
+                streetTypeLabelOverride = this.state.streetTypeOther;
+            }
 
             // Generate our new address.
-            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
-            let streetAddress = this.state.streetName+" "+actualStreetType;
-            if (this.state.streetDirection) {
-                streetAddress += " " + this.state.streetDirection;
+            let streetAddress = this.state.streetName+" "+streetTypeLabelOverride;
+            if (streetDirectionOverride) {
+                streetAddress += " " + streetDirectionOverride;
             }
             streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberEnd;
 
@@ -205,8 +231,11 @@ class AdminWatchCreateStep3Container extends Component {
                 streetNumberStart: this.state.streetNumberStart,
                 streetNumberEnd: this.state.streetNumberEnd,
                 streetName: this.state.streetName,
-                streetType: actualStreetType,
-                streetDirection: this.state.streetDirection,
+                streetType: streetTypeOverride,
+                streetTypeLabel: streetTypeLabelOverride,
+                streetTypeOther: this.state.streetTypeOther,
+                streetDirection: streetDirectionOverride,
+                streetDirectionLabel: streetDirectionLabelOverride,
             });
 
             // Update the state.
@@ -218,8 +247,13 @@ class AdminWatchCreateStep3Container extends Component {
                 streetNumberEnd: "",
                 streetName: "",
                 streetType: "",
+                streetTypeLabel: "",
                 streetTypeOther: "",
                 streetDirection: "",
+                streetDirectionLabel: "",
+            },()=>{
+                // For debugging purposes only.
+                console.log("onSaveClick |",this.state.streetMembership);
             })
 
             // Save our table data.
@@ -260,54 +294,14 @@ class AdminWatchCreateStep3Container extends Component {
     render() {
         const {
             // Page related.
-            tags, name, description, associate, district, primaryAreaCoordinator, secondaryAreaCoordinator, streetMembership, errors,
+            streetMembership, errors,
 
             // Modal relate.
             streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
         } = this.state;
 
-        const associateListObject = {
-            results: [
-                {'slug': 'bob-page', 'name': 'Bob Page'},
-                {'slug': 'jc-denton', 'name': 'JC Denton'},
-                {'slug': 'paul-denton', 'name': 'Paul Denton'},
-                {'slug': 'gunter-herman', 'name': 'Gunter Herman'}
-            ]
-        }; // TODO: REPLACTE WITH API DATA.
-
-        const districtListObject = {
-            results: [
-                {'slug': 'wanchai', 'name': 'Wanchai Market'},
-                {'slug': 'versalife', 'name': 'VersaLife'},
-                {'slug': 'battery-park', 'name': 'Battery Park'},
-                {'slug': 'area-51', 'name': 'Area 51'}
-            ]
-        }; // TODO: REPLACTE WITH API DATA.
-
-        const areaCoordinatorListObject = {
-            results: [
-                {'slug': 'tracer-tong', 'name': 'Tracer Tong'},
-                {'slug': 'icarus', 'name': 'Icarus'},
-                {'slug': 'datalus', 'name': 'Datalus'},
-            ]
-        }; // TODO: REPLACTE WITH API DATA.
-
-        const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
-
         return (
             <AdminWatchCreateStep3Component
-                tags={tags}
-                tagOptions={tagOptions}
-                name={name}
-                description={description}
-                associate={associate}
-                associateOptions={getAssociateReactSelectOptions(associateListObject)}
-                district={district}
-                districtOptions={getDistrictReactSelectOptions(districtListObject)}
-                primaryAreaCoordinator={primaryAreaCoordinator}
-                primaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "primaryAreaCoordinator")}
-                secondaryAreaCoordinator={secondaryAreaCoordinator}
-                secondaryAreaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorListObject, "secondaryAreaCoordinator")}
                 streetMembership={streetMembership}
                 errors={errors}
                 onClick={this.onClick}

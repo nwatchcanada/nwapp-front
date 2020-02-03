@@ -112,16 +112,15 @@ export default class AdminWatchCreateStep3Component extends Component {
 
 class StreetMembershipRow extends Component {
     render() {
-        const { streetAddress, streetNumberStart, streetNumberEnd, streetName, streetType, streetDirection, onRemoveClick } = this.props;
-
-        // // Generate the `streetType` label.
-        // let streetTypeLabel;
-        // if (streetType === 2) {
-        //
-        // } else {
-        //     alert("NON 2")
-        // }
-
+        const {
+            streetAddress,
+            streetNumberStart,
+            streetNumberEnd,
+            streetName,
+            streetTypeLabel,
+            streetDirectionLabel,
+            onRemoveClick
+        } = this.props;
 
         return (
             <tr key={streetAddress}>
@@ -135,10 +134,10 @@ class StreetMembershipRow extends Component {
                     {streetName}
                 </td>
                 <td>
-                    {streetType}
+                    {streetTypeLabel}
                 </td>
                 <td>
-                    {streetDirection}
+                    {streetDirectionLabel}
                 </td>
                 <td>
                     <button type="button" className="btn btn-danger float-right" aria-label="prev" onClick={() => onRemoveClick(streetAddress)}>
@@ -160,6 +159,7 @@ class StreetMembershipTable extends Component {
             for (let i = 0; i < streetMembership.length; i++) {
                 let rowData = streetMembership[i];
                 if (rowData !== null && rowData !== undefined) {
+                    // console.log(rowData);
                     elements.push(
                         <StreetMembershipRow
                             key={rowData.streetAddress}
@@ -168,7 +168,9 @@ class StreetMembershipTable extends Component {
                             streetNumberEnd={rowData.streetNumberEnd}
                             streetName={rowData.streetName}
                             streetType={rowData.streetType}
+                            streetTypeLabel={rowData.streetTypeLabel}
                             streetDirection={rowData.streetDirection}
+                            streetDirectionLabel={rowData.streetDirectionLabel}
                             onRemoveClick={onRemoveClick}
                         />
                     );
@@ -226,8 +228,6 @@ class AddModalComponent extends Component {
             }
         };
 
-        const isOtherStreetTypeSelected = streetType === 'Other';
-
         return (
             <div>
                 <ReactModal
@@ -258,7 +258,7 @@ class AddModalComponent extends Component {
                                     onChange={onTextChange}
                                     value={streetNumberStart}
                                     name="streetNumberStart"
-                                    type="text"
+                                    type="number"
                                 />
 
                                 <BootstrapInput
@@ -269,7 +269,7 @@ class AddModalComponent extends Component {
                                     onChange={onTextChange}
                                     value={streetNumberEnd}
                                     name="streetNumberEnd"
-                                    type="text"
+                                    type="number"
                                 />
 
                                 <BootstrapInput
@@ -294,7 +294,7 @@ class AddModalComponent extends Component {
                                     onSelectChange={onSelectChange}
                                 />
 
-                                {isOtherStreetTypeSelected &&
+                                {streetType == 1 &&
                                     <BootstrapInput
                                         inputClassName="form-control form-control-lg"
                                         borderColour="border-primary"
