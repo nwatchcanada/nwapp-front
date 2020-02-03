@@ -24,9 +24,21 @@ class AdminMemberCreateStep5Container extends Component {
 
     constructor(props) {
         super(props);
-        
-        console.log("Tenant:", this.props.tenantDetail); // TODO: Process defaults.
-        console.log(this.props.user);
+
+        // Pre-assign the country, region and locality fields based on the
+        // tenant details from the user profile.
+        let country = localStorage.getItem("nwapp-create-member-country");
+        if (country === undefined || country === null || country === "") {
+            country = this.props.user.tenantCountry;
+        }
+        let region = localStorage.getItem("nwapp-create-member-region");
+        if (region === undefined || region === null || region === "") {
+            region = this.props.user.tenantRegion;
+        }
+        let locality = localStorage.getItem("nwapp-create-member-locality");
+        if (locality === undefined || locality === null || locality === "") {
+            locality = this.props.user.tenantLocality;
+        }
 
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
@@ -39,9 +51,9 @@ class AdminMemberCreateStep5Container extends Component {
             streetDirection: localStorageGetIntegerItem("nwapp-create-member-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
-            country: localStorage.getItem("nwapp-create-member-country"),
-            region: localStorage.getItem("nwapp-create-member-region"),
-            locality: localStorage.getItem("nwapp-create-member-locality"),
+            country: country,
+            region: region,
+            locality: locality,
             errors: {},
             isLoading: false
         }
