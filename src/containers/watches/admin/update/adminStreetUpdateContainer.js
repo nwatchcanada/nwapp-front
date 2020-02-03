@@ -40,8 +40,10 @@ class AdminWatchStreetUpdateContainer extends Component {
             streetNumberEnd: "",
             streetName: "",
             streetType: "",
+            streetTypeLabel: "",
             streetTypeOther: "",
             streetDirection: "",
+            streetDirectionLabel: "",
             showModal: false, // Variable used to indicate if the modal should appear.
         }
 
@@ -244,12 +246,38 @@ class AdminWatchStreetUpdateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+            // Get our `streetDirection` value and label.
+            let streetDirectionOverride;
+            let streetDirectionLabelOverride;
+            if (this.state.streetDirection === undefined || this.state.streetDirection === null || this.state.streetDirection === "" || isNaN(this.state.streetDirection)) {
+                streetDirectionOverride = 0;
+                streetDirectionLabelOverride = "-";
+            } else {
+                streetDirectionOverride = this.state.streetDirection;
+                streetDirectionLabelOverride = STREET_DIRECTION_CHOICES[this.state.streetDirection]['label'];
+            }
+
+            // Get our `streetType` value and label.
+            let streetTypeOverride;
+            let streetTypeLabelOverride;
+            let streetTypeChoice;
+            for (streetTypeChoice of BASIC_STREET_TYPE_CHOICES) {
+                if (this.state.streetType === streetTypeChoice['value']) {
+                    streetTypeOverride = streetTypeChoice['value'];
+                    streetTypeLabelOverride = streetTypeChoice['label'];
+                    break;
+                }
+            }
+
+            // Override `Other` option inside the `streetType`.
+            if (this.state.streetType === 1) {
+                streetTypeLabelOverride = this.state.streetTypeOther;
+            }
 
             // Generate our new address.
-            const actualStreetType = this.state.streetType === "Other" ? this.state.streetTypeOther : this.state.streetType;
-            let streetAddress = this.state.streetName+" "+actualStreetType;
-            if (this.state.streetDirection) {
-                streetAddress += " " + this.state.streetDirection;
+            let streetAddress = this.state.streetName+" "+streetTypeLabelOverride;
+            if (streetDirectionOverride) {
+                streetAddress += " " + streetDirectionOverride;
             }
             streetAddress += " from "+this.state.streetNumberStart+" to "+this.state.streetNumberEnd;
 
@@ -263,8 +291,11 @@ class AdminWatchStreetUpdateContainer extends Component {
                 streetNumberStart: this.state.streetNumberStart,
                 streetNumberEnd: this.state.streetNumberEnd,
                 streetName: this.state.streetName,
-                streetType: actualStreetType,
-                streetDirection: this.state.streetDirection,
+                streetType: streetTypeOverride,
+                streetTypeLabel: streetTypeLabelOverride,
+                streetTypeOther: this.state.streetTypeOther,
+                streetDirection: streetDirectionOverride,
+                streetDirectionLabel: streetDirectionLabelOverride,
             });
 
             // Update the state.
@@ -276,8 +307,10 @@ class AdminWatchStreetUpdateContainer extends Component {
                 streetNumberEnd: "",
                 streetName: "",
                 streetType: "",
+                streetTypeLabel: "",
                 streetTypeOther: "",
                 streetDirection: "",
+                streetDirectionLabel: "",
             })
 
             // // Save our table data.

@@ -18,7 +18,9 @@ export default class AdminWatchStreetUpdateComponent extends Component {
             watchDetail, slug, errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
 
             // Modal related.
-            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
+            streetNumberStart, streetNumberEnd, streetName,
+            streetType, streetTypeOptions, streetTypeOther,
+            streetDirection, streetDirectionOptions,
             showModal, onAddClick, onRemoveClick, onSaveClick, onCloseClick
         } = this.props;
         return (
@@ -95,7 +97,17 @@ export default class AdminWatchStreetUpdateComponent extends Component {
 
 class StreetMembershipRow extends Component {
     render() {
-        const { streetAddress, streetNumberStart, streetNumberEnd, streetName, streetType, streetDirection, onRemoveClick } = this.props;
+        const {
+            streetAddress,
+            streetNumberStart,
+            streetNumberEnd,
+            streetName,
+            streetType,
+            streetTypeLabel,
+            streetDirection,
+            streetDirectionLabel,
+            onRemoveClick
+        } = this.props;
         return (
             <tr key={streetAddress}>
                 <td>
@@ -107,11 +119,11 @@ class StreetMembershipRow extends Component {
                 <td>
                     {streetName}
                 </td>
-                <td>
-                    {streetType}
+                <td id={`street-type-${streetType}`}>
+                    {streetTypeLabel}
                 </td>
-                <td>
-                    {streetDirection}
+                <td id={`street-direction-${streetDirection}`}>
+                    {streetDirectionLabel}
                 </td>
                 <td>
                     <button type="button" className="btn btn-danger float-right" aria-label="prev" onClick={() => onRemoveClick(streetAddress)}>
@@ -141,7 +153,9 @@ class StreetMembershipTable extends Component {
                             streetNumberEnd={rowData.streetNumberEnd}
                             streetName={rowData.streetName}
                             streetType={rowData.streetType}
+                            streetTypeLabel={rowData.streetTypeLabel}
                             streetDirection={rowData.streetDirection}
+                            streetDirectionLabel={rowData.streetDirectionLabel}
                             onRemoveClick={onRemoveClick}
                         />
                     );
