@@ -82,6 +82,7 @@ export default class AdminWatchInfoUpdateComponent extends Component {
                                 error={errors.district}
                                 onSelectChange={onSelectChange}
                                 isLoading={isDistrictLoading}
+                                helpText="Pick the district this watch belongs to or <a href='/admin/settings/district/add/step-1' target='_blank'>create a district&nbsp;<i class='fas fa-external-link-alt'></i></a>"
                             />
 
                             <BootstrapMultipleSelect
