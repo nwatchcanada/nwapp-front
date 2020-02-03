@@ -24,6 +24,10 @@ class AdminMemberCreateStep5Container extends Component {
 
     constructor(props) {
         super(props);
+        
+        console.log("Tenant:", this.props.tenantDetail); // TODO: Process defaults.
+        console.log(this.props.user);
+
         this.state = {
             typeOf: localStorageGetIntegerItem("nwapp-create-member-typeOf"),
             apartmentUnit: localStorage.getItem("nwapp-create-member-apartmentUnit"),
@@ -184,6 +188,7 @@ class AdminMemberCreateStep5Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        tenantDetail: store.tenantDetailState,
     };
 }
 

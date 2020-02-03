@@ -30,6 +30,9 @@ class AdminMemberAddressUpdateContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        console.log("Tenant:", this.props.tenantDetail); // TODO: Process defaults.
+        console.log(this.props.user);
+
         this.state = {
             slug: slug,
             typeOf: this.props.memberDetail.typeOf,
