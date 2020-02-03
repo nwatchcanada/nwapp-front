@@ -75,39 +75,51 @@ export default class AdminMemberCreateStep6Component extends Component {
 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
-                        <form>
-                            <h2>
-                                <i className="fas fa-shield-alt"></i>&nbsp;Watch
-                            </h2>
+                        {watchItems && watchItems.length > 0
+                            ?<form>
+                                <h2>
+                                    <i className="fas fa-shield-alt"></i>&nbsp;Watch
+                                </h2>
 
-                            <BootstrapErrorsProcessingAlert errors={errors} />
+                                <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <p>According to the address you entered, you are eligable for the following watches, please select the watch which is appropriate for the member:</p>
+                                <p>According to the address you entered, you are eligable for the following watches, please select the watch which is appropriate for the member:</p>
 
-                            <div className="table-responsive">
-                                <table className="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Name</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {watchItems && watchItems.map(
-                                            (tableDatum, i) => <TableRow datum={tableDatum} key={i} onTableRowClick={onTableRowClick} isLoading={isLoading} />)
-                                        }
-                                    </tbody>
-                                </table>
+                                <div className="table-responsive">
+                                    <table className="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Name</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {watchItems && watchItems.map(
+                                                (tableDatum, i) => <TableRow datum={tableDatum} key={i} onTableRowClick={onTableRowClick} isLoading={isLoading} />)
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div className="form-group">
+                                    <Link to="/admin/members/add/step-5" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                    </Link>
+                                </div>
+
+                            </form>
+                            : <div className="jumbotron">
+                                <h1 className="display-4"><i className="fas fa-shield-alt"></i>&nbsp;Watches</h1>
+                                <p className="lead">There are no watches found. Either you entered the previous data incorrectly or the watch you are looking for needs to be created.</p>
+                                <p className="lead">To proceed, please either <a href="/admin/watches/step-1-create" target="_blank">create a new watch&nbsp;<i className="fas fa-external-link-alt"></i></a> or go back and fix the incorrect entry.</p>
+                                <p className="lead">
+                                    <Link className="btn btn-orange btn-lg" to="/admin/members/add/step-5">
+                                        <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                    </Link>
+                                </p>
                             </div>
-
-                            <div className="form-group">
-                                <Link to="/admin/members/add/step-5" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                                </Link>
-                            </div>
-
-                        </form>
+                        }
                     </div>
                 </div>
 

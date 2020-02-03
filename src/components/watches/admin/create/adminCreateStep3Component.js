@@ -113,6 +113,16 @@ export default class AdminWatchCreateStep3Component extends Component {
 class StreetMembershipRow extends Component {
     render() {
         const { streetAddress, streetNumberStart, streetNumberEnd, streetName, streetType, streetDirection, onRemoveClick } = this.props;
+
+        // // Generate the `streetType` label.
+        // let streetTypeLabel;
+        // if (streetType === 2) {
+        //
+        // } else {
+        //     alert("NON 2")
+        // }
+
+
         return (
             <tr key={streetAddress}>
                 <td>
