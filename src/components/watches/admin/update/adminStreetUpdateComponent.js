@@ -245,7 +245,7 @@ class AddModalComponent extends Component {
                                     onChange={onTextChange}
                                     value={streetNumberStart}
                                     name="streetNumberStart"
-                                    type="text"
+                                    type="number"
                                 />
 
                                 <BootstrapInput
@@ -256,7 +256,7 @@ class AddModalComponent extends Component {
                                     onChange={onTextChange}
                                     value={streetNumberEnd}
                                     name="streetNumberEnd"
-                                    type="text"
+                                    type="number"
                                 />
 
                                 <BootstrapInput
