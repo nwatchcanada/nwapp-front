@@ -34,7 +34,7 @@ export const BootstrapSingleFileUploadAndPreview = ({
                 return (
                   <div className="new-upload-ui" {...getRootProps()}>
                     <input {...getInputProps()} />
-					<i className="fal fa-cloud-upload-alt fa-4x"></i>
+					<i className="fas fa-cloud-upload-alt fa-4x"></i>
 					<small className="text-secondary d-block">
 						{!isDragActive && 'Click here or drop a file to upload!'}
 						{isDragActive && !isDragReject && "Drop it like it's hot!"}

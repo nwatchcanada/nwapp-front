@@ -419,13 +419,12 @@ export const CONCERN_TYPE_CHOICES = [
  */
 export const HEALTH_RESOURCE_CATEGORY = 2
 export const HOUSING_RESOURCE_CATEGORY = 3
-export const LONELINESS_RESOURCE_CATEGORY = 4
+export const SOCIAL_RESOURCE_CATEGORY = 4
 export const FOOD_AND_NUTRITION_RESOUCE_CATEGORY = 5
 export const EDUCATION_RESOURCE_CATEGORY = 6
-export const MUNICIPAL_RESOURCE_CATEGORY = 7
+export const GOVERNMENT_RESOURCE_CATEGORY = 7
 export const POLICE_RESOURCE_CATEGORY = 8
-export const FIRE_RESOURCE_CATEGORY = 9
-export const EMERGENCY_RESOURCE_CATEGORY = 10
+export const SAFETY_RESOURCE_CATEGORY = 9
 export const RESOURCE_CATEGORY_CHOICES = [
     {
         selectName: "category",
@@ -437,8 +436,8 @@ export const RESOURCE_CATEGORY_CHOICES = [
         label: "Housing"
     },{
         selectName: "category",
-        value: LONELINESS_RESOURCE_CATEGORY,
-        label: "Loneliness"
+        value: SOCIAL_RESOURCE_CATEGORY,
+        label: "Social"
     },{
         selectName: "category",
         value: FOOD_AND_NUTRITION_RESOUCE_CATEGORY,
@@ -449,20 +448,16 @@ export const RESOURCE_CATEGORY_CHOICES = [
         label: "Education"
     },{
         selectName: "category",
-        value: MUNICIPAL_RESOURCE_CATEGORY,
-        label: "Municipal"
+        value: GOVERNMENT_RESOURCE_CATEGORY,
+        label: "Government"
     },{
         selectName: "category",
         value: POLICE_RESOURCE_CATEGORY,
         label: "Police"
     },{
         selectName: "category",
-        value: FIRE_RESOURCE_CATEGORY,
-        label: "Fire"
-    },{
-        selectName: "category",
-        value: EMERGENCY_RESOURCE_CATEGORY,
-        label: "Emergency"
+        value: SAFETY_RESOURCE_CATEGORY,
+        label: "Safety"
     }
 ];
 
