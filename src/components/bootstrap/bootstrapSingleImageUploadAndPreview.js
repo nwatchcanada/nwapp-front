@@ -67,25 +67,24 @@ export const BootstrapSingleImageUploadAndPreview = ({
               }
             </Dropzone>
 
-			if (fileObj !== null) {
-				{ /* The follwoing code will render our stylized preview image. */ }
-				{fileObj &&
-					<div>
-						<div style={thumb}>
-							<img
-								src={fileObj.preview}
-								style={img}
-								alt={label}
-							/>
-						</div>
-						<br />
-						<button className="btn btn-danger btn-sm float-left" onClick={onRemoveUploadClick}>
-							<i className="fas fa-trash-alt"></i>&nbsp;Remove Upload
-						</button>
-						<br />
-					</div>
-				}
-			}
+            { /* The follwoing code will render our stylized preview image. */ }
+            {fileObj &&
+                <div>
+                    <div style={thumb}>
+                        <img
+                            src={fileObj.preview}
+                            style={img}
+                            alt={label}
+                        />
+                    </div>
+                    <br />
+                    <button className="btn btn-danger btn-sm float-left" onClick={onRemoveUploadClick}>
+                        <i className="fas fa-trash-alt"></i>&nbsp;Remove Upload
+                    </button>
+                    <br />
+                </div>
+            }
+
             { /* The following code will render the file name. */ }
             { /*
             <ul className="list-group mt-2">
