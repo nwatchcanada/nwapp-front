@@ -53,7 +53,7 @@ class AdminAnnouncementListContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        postData.about = this.state.id;
+        postData.about = this.state.slug;
         postData.extraText = this.state.text;
 
         // Finally: Return our new modified data.

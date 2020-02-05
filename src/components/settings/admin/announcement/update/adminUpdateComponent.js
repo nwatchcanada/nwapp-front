@@ -12,7 +12,7 @@ import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 class AdminAnnouncementUpdateComponent extends Component {
     render() {
         const {
-            id, text, errors, isLoading,
+            slug, text, errors, isLoading,
             onTextChange, onClick
         } = this.props;
         return (
@@ -30,7 +30,7 @@ class AdminAnnouncementUpdateComponent extends Component {
                             <Link to="/admin/settings/announcements"><i className="fas fa-bullhorn"></i>&nbsp;Announcements</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/settings/announcement/${id}`}>
+                            <Link to={`/admin/settings/announcement/${slug}`}>
                                 <i className="fas fa-announcement"></i>&nbsp;{text}
                             </Link>
                         </li>
@@ -63,7 +63,7 @@ class AdminAnnouncementUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/settings/announcement/${id}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/settings/announcement/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

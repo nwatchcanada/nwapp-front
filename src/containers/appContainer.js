@@ -453,11 +453,11 @@ class AppContainer extends React.Component {
                                     -----------------------
                                 */}
                                 <Route path="/admin/settings/announcements" exact component={requiresAuth(AdminAnnouncementListContainer)} />
-                                <Route path="/admin/settings/announcement/:id" exact component={requiresAuth(AdminAnnouncementRetrieveContainer)} />
-                                <Route path="/admin/settings/announcement/:id/update" exact component={requiresAuth(AdminAnnouncementUpdateContainer)} />
+                                <Route path="/admin/settings/announcement/:slug" exact component={requiresAuth(AdminAnnouncementRetrieveContainer)} />
+                                <Route path="/admin/settings/announcement/:slug/update" exact component={requiresAuth(AdminAnnouncementUpdateContainer)} />
                                 <Route path="/admin/settings/announcement/add/step-1" exact component={requiresAuth(AdminAnnouncementCreateStep1Container)} />
                                 <Route path="/admin/settings/announcement/add/step-2" exact component={requiresAuth(AdminAnnouncementCreateStep2Container)} />
-                                <Route path="/admin/settings/announcement/operation/archive/:id" exact component={requiresAuth(AdminAnnouncementArchiveOperationContainer)} />
+                                <Route path="/admin/settings/announcement/operation/archive/:slug" exact component={requiresAuth(AdminAnnouncementArchiveOperationContainer)} />
 
                                 {/*
                                     -------------------

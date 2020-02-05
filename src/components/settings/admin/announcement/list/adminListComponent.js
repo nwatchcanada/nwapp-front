@@ -59,7 +59,7 @@ class RemoteListComponent extends Component {
             formatter: createdAtFormatter
         },
         {
-            dataField: 'id',
+            dataField: 'slug',
             text: '',
             sort: false,
             formatter: detailLinkFormatter
@@ -99,13 +99,13 @@ class RemoteListComponent extends Component {
         return (
             <BootstrapTable
                 bootstrap4
-                keyField='id'
+                keyField='slug'
                 data={ announcementList }
                 columns={ columns }
                 defaultSorted={ defaultSorted }
                 striped
                 bordered={ false }
-                noDataIndication="There are no score points at the moment"
+                noDataIndication="There are no announcements at the moment"
                 remote
                 onTableChange={ onTableChange }
                 pagination={ paginationFactory(paginationOption) }
@@ -148,7 +148,7 @@ function fileFormatter(cell, row){
             }
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             {row.isArchived === false &&
-                <Link to={`/admin/settings/announcement/${row.user}/file/archive/${row.id}`}>
+                <Link to={`/admin/settings/announcement/${row.user}/file/archive/${row.slug}`}>
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             }
@@ -173,10 +173,10 @@ function detailLinkFormatter(cell, row){
     } else {
         return (
             <div>
-                <Link to={`/admin/settings/announcement/${row.id}`} className="btn btn-success btn-xs">
+                <Link to={`/admin/settings/announcement/${row.slug}`} className="btn btn-success btn-xs">
                     <i className="fas fa-binoculars"></i>&nbsp;View
                 </Link>;
-                <Link to={`/admin/settings/announcement/operation/archive/${row.id}`} className="btn btn-danger btn-xs">
+                <Link to={`/admin/settings/announcement/operation/archive/${row.slug}`} className="btn btn-danger btn-xs">
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             </div>

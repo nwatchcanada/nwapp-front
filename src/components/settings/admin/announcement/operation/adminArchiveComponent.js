@@ -18,7 +18,7 @@ import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPa
 export default class AdminAnnouncementArchiveComponent extends Component {
     render() {
         const {
-            isLoading, id, announcement, errors, onClick
+            isLoading, slug, announcement, errors, onClick
         } = this.props;
         return (
             <div>

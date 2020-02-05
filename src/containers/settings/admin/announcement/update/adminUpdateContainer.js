@@ -24,15 +24,15 @@ class AdminAnnouncementUpdateContainer extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         // The following code will extract our financial data from the local
         // storage if the financial data was previously saved.
-        const announcement = localStorageGetObjectItem("nwapp-admin-retrieve-announcement-"+id.toString() );
+        const announcement = localStorageGetObjectItem("nwapp-admin-retrieve-announcement-"+slug.toString() );
         const isLoading = isEmpty(announcement);
 
         this.state = {
-            id: id,
+            slug: slug,
             text: announcement.text,
             errors: {},
             announcement: announcement,
@@ -69,7 +69,7 @@ class AdminAnnouncementUpdateContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
         this.props.pullAnnouncement(
-            this.state.id,
+            this.state.slug,
             this.onSuccessCallback,
             this.onFailureCallback
         );
@@ -92,7 +92,7 @@ class AdminAnnouncementUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(announcement) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Announcement has been successfully updated.");
-        this.props.history.push("/admin/settings/announcement/"+this.state.id);
+        this.props.history.push("/admin/settings/announcement/"+this.state.slug);
     }
 
     onFailureSubmissionCallback(errors) {
@@ -113,7 +113,7 @@ class AdminAnnouncementUpdateContainer extends Component {
 
         // The following code will save the object to the browser's local
         // storage to be retrieved later more quickly.
-        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-announcement-"+this.state.id.toString(), response);
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-announcement-"+this.state.slug.toString(), response);
     }
 
     onFailureCallback(errors) {
@@ -175,10 +175,10 @@ class AdminAnnouncementUpdateContainer extends Component {
      */
 
     render() {
-        const { id, text, errors, isLoading } = this.state;
+        const { slug, text, errors, isLoading } = this.state;
         return (
             <AdminAnnouncementUpdateComponent
-                id={id}
+                slug={slug}
                 text={text}
                 errors={errors}
                 isLoading={isLoading}
@@ -200,8 +200,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        pullAnnouncement: (id, successCallback, failedCallback) => {
-            dispatch(pullAnnouncement(id, successCallback, failedCallback))
+        pullAnnouncement: (slug, successCallback, failedCallback) => {
+            dispatch(pullAnnouncement(slug, successCallback, failedCallback))
         },
         putAnnouncement: (data, successCallback, failedCallback) => {
             dispatch(putAnnouncement(data, successCallback, failedCallback))

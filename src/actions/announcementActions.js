@@ -179,7 +179,7 @@ export function postAnnouncement(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullAnnouncement(id, onSuccessCallback, onFailureCallback) {
+export function pullAnnouncement(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -189,7 +189,7 @@ export function pullAnnouncement(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT+id;
+        const aURL = WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT+slug;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -272,7 +272,7 @@ export function putAnnouncement(postData, successCallback, failedCallback) {
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode(decamelizedData);
 
-        const aURL = WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT+postData.id;
+        const aURL = WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT+postData.slug;
         console.log("URL:", aURL);
 
         // Perform our API submission.
@@ -332,7 +332,7 @@ export function putAnnouncement(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteAnnouncement(id, onSuccessCallback, onFailureCallback) {
+export function deleteAnnouncement(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -342,7 +342,7 @@ export function deleteAnnouncement(id, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT+id;
+        const aURL = WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT+slug;
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -470,7 +470,7 @@ export function getAnnouncementReactSelectOptions(announcementList=[], selectNam
                 let announcement = results[i];
                 announcementOptions.push({
                     selectName: selectName,
-                    value: announcement.id,
+                    value: announcement.slug,
                     label: announcement.text
                 });
                 // console.log(announcement);
@@ -498,10 +498,10 @@ export function getPickedAnnouncementReactSelectOptions(announcementTargetsArray
                 let announcementTarget = announcementTargetsArray[i];
                 for (let j = 0; j < results.length; j++) {
                     let announcementSearch = results[j];
-                    if (announcementSearch.id === announcementTarget.id) {
+                    if (announcementSearch.slug === announcementTarget.slug) {
                         announcementOptions.push({
                             selectName: selectName,
-                            value: announcementTarget.id,
+                            value: announcementTarget.slug,
                             label: announcementTarget.text
                         });
                         // console.log(announcementSearch);

@@ -3,12 +3,19 @@ import { Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
+import AnnouncementComponent from "./announcementComponent";
+
 
 export default class StaffDashboardComponent extends Component {
     render() {
         const { dashboardData } = this.props;
         const {
-            activeMembersCount, activeWatchesCount, activeAssociatesCount, activeTasksCount, latestTasks
+            activeMembersCount,
+            activeWatchesCount,
+            activeAssociatesCount,
+            activeTasksCount,
+            announcements,
+            latestTasks
         } = dashboardData;
         return (
             <div className="container-fluid">
@@ -62,16 +69,20 @@ export default class StaffDashboardComponent extends Component {
                             </div>
                         </section>
 
-                        <div className="jumbotron">
-                            <h1 className="display-4"><i className="fas fa-bullhorn"></i>&nbsp;Announcements</h1>
-                            <p className="lead">There are no announcements. Feel free to add one.</p>
+                        {announcements && announcements.length <= 0
+                            ? <div className="jumbotron">
+                                <h1 className="display-4"><i className="fas fa-bullhorn"></i>&nbsp;Announcements</h1>
+                                <p className="lead">There are no announcements. Feel free to add one.</p>
 
-                            <p className="lead">
-                                <Link className="btn btn-success btn-lg" to="/admin/settings/announcement/add/step-1">
-                                    <i className="fas fa-plus"></i>&nbsp;Add
-                                </Link>
-                            </p>
-                        </div>
+                                <p className="lead">
+                                    <Link className="btn btn-success btn-lg" to="/admin/settings/announcement/add/step-1">
+                                        <i className="fas fa-plus"></i>&nbsp;Add
+                                    </Link>
+                                </p>
+                            </div>
+                            : <AnnouncementComponent announcementItems={announcements} />
+                        }
+
                         {latestTasks && latestTasks.length > 0
                             ? <RecentTaskListComponent latestTasks={latestTasks} />
                             : <div className="jumbotron">

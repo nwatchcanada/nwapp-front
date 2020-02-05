@@ -16,12 +16,12 @@ class AdminAnnouncementArchiveOperationContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
 
         this.state = {
             isLoading: false,
-            announcement: id,
-            id: id,
+            announcement: slug,
+            slug: slug,
             errors: {},
         }
         this.onClick = this.onClick.bind(this);
@@ -88,7 +88,7 @@ class AdminAnnouncementArchiveOperationContainer extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({ isLoading: true }, ()=>{
-            this.props.deleteAnnouncement(this.state.id, this.onSuccessCallback, this.onFailureCallback);
+            this.props.deleteAnnouncement(this.state.slug, this.onSuccessCallback, this.onFailureCallback);
         });
     }
 
@@ -98,11 +98,11 @@ class AdminAnnouncementArchiveOperationContainer extends Component {
      */
 
     render() {
-        const { isLoading, id, errors } = this.state;
+        const { isLoading, slug, errors } = this.state;
         const announcement = this.props.announcementDetail ? this.props.announcementDetail : {};
         return (
             <AdminAnnouncementArchiveComponent
-                id={id}
+                slug={slug}
                 announcement={announcement}
                 isLoading={isLoading}
                 errors={errors}
@@ -124,8 +124,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteAnnouncement: (id, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteAnnouncement(id, onSuccessCallback, onFailureCallback))
+        deleteAnnouncement: (slug, onSuccessCallback, onFailureCallback) => {
+            dispatch(deleteAnnouncement(slug, onSuccessCallback, onFailureCallback))
         },
     }
 }
