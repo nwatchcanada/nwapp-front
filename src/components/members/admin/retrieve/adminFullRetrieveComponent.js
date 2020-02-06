@@ -270,6 +270,33 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                         <td>{member && member.organizationFoundingYear}</td>
                                     </tr>
                                 }
+                                <tr>
+                                    <th scope="row" className="bg-light">Do you identify as any of the following?</th>
+                                    <td>
+                                        <ul style={{ listStyleType: "none" }}>
+                                        {member && member.isAboriginal
+                                            ? <li><i className="fas fa-check-circle"></i>&nbsp;Aboriginal</li>
+                                            : <li><i className="fas fa-times-circle"></i>&nbsp;Aboriginal</li>
+                                        }
+                                        {member && member.isTransgender
+                                            ? <li><i className="fas fa-check-circle"></i>&nbsp;Transgender</li>
+                                            : <li><i className="fas fa-times-circle"></i>&nbsp;Transgender</li>
+                                        }
+                                        {member && member.isVisibleMinority
+                                            ? <li><i className="fas fa-check-circle"></i>&nbsp;Visible Minority</li>
+                                            : <li><i className="fas fa-times-circle"></i>&nbsp;Visible Minority</li>
+                                        }
+                                        {member && member.isDisabledOrHasBarriers
+                                            ? <li><i className="fas fa-check-circle"></i>&nbsp;Disabled or has Phyiscal Barriers</li>
+                                            : <li><i className="fas fa-times-circle"></i>&nbsp;Disabled or has Phyiscal Barriers</li>
+                                        }
+                                        {member && member.isOverFiftyFive
+                                            ? <li><i className="fas fa-check-circle"></i>&nbsp;Over 55+</li>
+                                            : <li><i className="fas fa-times-circle"></i>&nbsp;Over 55+</li>
+                                        }
+                                        </ul>
+                                    </td>
+                                </tr>
 
 
                                 <tr className="bg-dark">
