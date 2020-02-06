@@ -9,6 +9,7 @@ import {
     localStorageGetObjectItem,
     localStorageGetArrayItem,
     localStorageGetIntegerItem,
+    localStorageGetBooleanItem,
     localStorageRemoveItemsContaining
 } from '../../../../helpers/localStorageUtility';
 import {
@@ -80,6 +81,11 @@ class AdminMemberCreateStep8Container extends Component {
             over18YearsHouseholdCount: localStorageGetIntegerItem("nwapp-create-member-over18YearsHouseholdCount"),
             organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-organizationEmployeeCount"),
             organizationFoundingYear: localStorageGetIntegerItem("nwapp-create-member-organizationFoundingYear"),
+            isAboriginal: localStorageGetBooleanItem("nwapp-create-member-isAboriginal"),
+            isTransgender: localStorageGetBooleanItem("nwapp-create-member-isTransgender"),
+            isVisibleMinority: localStorageGetBooleanItem("nwapp-create-member-isVisibleMinority"),
+            isDisabledOrHasBarriers: localStorageGetBooleanItem("nwapp-create-member-isDisabledOrHasBarriers"),
+            isOverFiftyFive: localStorageGetBooleanItem("nwapp-create-member-isOverFiftyFive"),
             errors: {},
             isLoading: false
         }

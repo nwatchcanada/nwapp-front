@@ -30,14 +30,17 @@ class AdminMemberCreateStep5Container extends Component {
         let country = localStorage.getItem("nwapp-create-member-country");
         if (country === undefined || country === null || country === "") {
             country = this.props.user.tenantCountry;
+            localStorage.setItem("nwapp-create-member-country", country);
         }
         let region = localStorage.getItem("nwapp-create-member-region");
         if (region === undefined || region === null || region === "") {
             region = this.props.user.tenantRegion;
+            localStorage.setItem("nwapp-create-member-region", region);
         }
         let locality = localStorage.getItem("nwapp-create-member-locality");
         if (locality === undefined || locality === null || locality === "") {
             locality = this.props.user.tenantLocality;
+            localStorage.setItem("nwapp-create-member-locality", locality);
         }
 
         this.state = {

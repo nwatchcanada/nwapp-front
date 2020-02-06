@@ -6,6 +6,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
+import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
 import { BUSINESS_TYPE_OF, ORGANIZATION_TYPE_OF_CHOICES, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
 
@@ -17,7 +18,8 @@ export default class AdminMemberMetricUpdateComponent extends Component {
             isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
-            errors, onTextChange, onSelectChange, isLoading, onClick
+            errors, onTextChange, onSelectChange, isLoading, onClick,
+            isAboriginal, isTransgender, isVisibleMinority, isDisabledOrHasBarriers, isOverFiftyFive, onCheckboxChange
         } = this.props;
         const isBizTypeOf = typeOf === BUSINESS_TYPE_OF || typeOf === toString(BUSINESS_TYPE_OF);
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other' || howDidYouHear === '1' || howDidYouHear === 1;
@@ -253,6 +255,56 @@ export default class AdminMemberMetricUpdateComponent extends Component {
                                     />
                                 </div>
                             }
+
+                            <p className="border-bottom mb-3 pb-1 text-secondary">
+                                <i className="fas fa-globe"></i>&nbsp;Diversity
+                            </p>
+                            <strong>Do you identify as any of the following?</strong>
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isAboriginal}
+                                label="Aboriginal"
+                                onChange={onCheckboxChange}
+                                value={isAboriginal}
+                                name="isAboriginal"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isTransgender}
+                                label="Transgender individual"
+                                onChange={onCheckboxChange}
+                                value={isTransgender}
+                                name="isTransgender"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isVisibleMinority}
+                                label="Visible Minority"
+                                onChange={onCheckboxChange}
+                                value={isVisibleMinority}
+                                name="isVisibleMinority"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isDisabledOrHasBarriers}
+                                label="Individual with a disability or barrier"
+                                onChange={onCheckboxChange}
+                                value={isDisabledOrHasBarriers}
+                                name="isDisabledOrHasBarriers"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isOverFiftyFive}
+                                label="An individual Age 55+"
+                                onChange={onCheckboxChange}
+                                value={isOverFiftyFive}
+                                name="isOverFiftyFive"
+                            />
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

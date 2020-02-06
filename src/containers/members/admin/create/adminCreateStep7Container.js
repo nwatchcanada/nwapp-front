@@ -5,7 +5,11 @@ import Scroll from 'react-scroll';
 import AdminMemberCreateStep7Component from "../../../../components/members/admin/create/adminCreateStep7Component";
 import { validateStep7CreateInput } from "../../../../validators/memberValidator";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetArrayItem,
+    localStorageGetIntegerItem,
+    localStorageGetBooleanItem
 } from '../../../../helpers/localStorageUtility';
 import { getHowHearReactSelectOptions, pullHowHearList } from "../../../../actions/howHearActions";
 import { getMeaningReactSelectOptions, pullMeaningList } from "../../../../actions/meaningActions";
@@ -49,6 +53,11 @@ class AdminMemberCreateStep7Container extends Component {
             organizationEmployeeCount: localStorageGetIntegerItem("nwapp-create-member-over18YearsHouseholdCount"),
             organizationFoundingYear: localStorageGetIntegerItem("nwapp-create-member-organizationFoundingYear"),
             organizationTypeOf: localStorageGetIntegerItem("nwapp-create-member-organizationTypeOf"),
+            isAboriginal: localStorageGetBooleanItem("nwapp-create-member-isAboriginal"),
+            isTransgender: localStorageGetBooleanItem("nwapp-create-member-isTransgender"),
+            isVisibleMinority: localStorageGetBooleanItem("nwapp-create-member-isVisibleMinority"),
+            isDisabledOrHasBarriers: localStorageGetBooleanItem("nwapp-create-member-isDisabledOrHasBarriers"),
+            isOverFiftyFive: localStorageGetBooleanItem("nwapp-create-member-isOverFiftyFive"),
             errors: {},
             isLoading: false
         }
@@ -57,6 +66,7 @@ class AdminMemberCreateStep7Container extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -180,6 +190,13 @@ class AdminMemberCreateStep7Container extends Component {
         });
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-create-member-'+[e.target.name], e.target.checked);
+    }
+
     onMultiChange(...args) {
         // Extract the select options from the parameter.
         const selectedOptions = args[0];
@@ -267,8 +284,14 @@ class AdminMemberCreateStep7Container extends Component {
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
                 organizationTypeOf={organizationTypeOf}
+                isAboriginal={this.state.isAboriginal}
+                isTransgender={this.state.isTransgender}
+                isVisibleMinority={this.state.isVisibleMinority}
+                isDisabledOrHasBarriers={this.state.isDisabledOrHasBarriers}
+                isOverFiftyFive={this.state.isOverFiftyFive}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
+                onCheckboxChange={this.onCheckboxChange}
                 onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
             />

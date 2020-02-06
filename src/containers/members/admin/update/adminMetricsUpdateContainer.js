@@ -60,6 +60,11 @@ class AdminMemberMetricUpdateContainer extends Component {
             organizationEmployeeCount: this.props.memberDetail.organizationEmployeeCount,
             organizationFoundingYear: this.props.memberDetail.organizationFoundingYear,
             organizationTypeOf: this.props.memberDetail.organizationTypeOf,
+            isAboriginal: this.props.memberDetail.isAboriginal,
+            isTransgender: this.props.memberDetail.isTransgender,
+            isVisibleMinority: this.props.memberDetail.isVisibleMinority,
+            isDisabledOrHasBarriers: this.props.memberDetail.isDisabledOrHasBarriers,
+            isOverFiftyFive: this.props.memberDetail.isOverFiftyFive,
             errors: {},
             isLoading: false
         }
@@ -67,6 +72,7 @@ class AdminMemberMetricUpdateContainer extends Component {
         this.getPostData = this.getPostData.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -258,6 +264,12 @@ class AdminMemberMetricUpdateContainer extends Component {
         });
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+    }
+
     onMultiChange(...args) {
         // Extract the select options from the parameter.
         const selectedOptions = args[0];
@@ -307,7 +319,8 @@ class AdminMemberMetricUpdateContainer extends Component {
             typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
             willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
-            errors
+            errors,
+            isAboriginal, isTransgender, isVisibleMinority, isDisabledOrHasBarriers, isOverFiftyFive
         } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
@@ -353,8 +366,14 @@ class AdminMemberMetricUpdateContainer extends Component {
                 organizationEmployeeCount={organizationEmployeeCount}
                 organizationFoundingYear={organizationFoundingYear}
                 organizationTypeOf={organizationTypeOf}
+                isAboriginal={isAboriginal}
+                isTransgender={isTransgender}
+                isVisibleMinority={isVisibleMinority}
+                isDisabledOrHasBarriers={isDisabledOrHasBarriers}
+                isOverFiftyFive={isOverFiftyFive}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
+                onCheckboxChange={this.onCheckboxChange}
                 onMultiChange={this.onMultiChange}
                 onClick={this.onClick}
             />

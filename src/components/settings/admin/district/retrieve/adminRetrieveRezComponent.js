@@ -49,7 +49,7 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                                 </tr>
 
                                 <tr>
-                                    <th scope="row" className="bg-light">name</th>
+                                    <th scope="row" className="bg-light">Name</th>
                                     <td>{districtData.name}</td>
                                 </tr>
                                 <tr>

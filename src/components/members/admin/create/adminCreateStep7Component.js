@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
@@ -17,7 +18,8 @@ export default class AdminMemberCreateStep7Component extends Component {
             isMeaningLoading, meaning, meaningOptions, meaningOther, isExpectationLoading, expectation, expectationOptions, expectationOther, willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
             onRadioChange,  onMultiChange,
-            errors, onTextChange, onSelectChange, isLoading, onClick
+            errors, onTextChange, onSelectChange, isLoading, onClick,
+            isAboriginal, isTransgender, isVisibleMinority, isDisabledOrHasBarriers, isOverFiftyFive, onCheckboxChange
         } = this.props;
         const isOtherHowDidYouHearSelected = howDidYouHear === 'Other' || howDidYouHear === '1' || howDidYouHear === 1;
         const isOtherMeaningSelected = meaning === 'Other' || meaning === '1' || meaning === 1;
@@ -102,6 +104,56 @@ export default class AdminMemberCreateStep7Component extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <p className="border-bottom mb-3 pb-1 text-secondary">
+                                <i className="fas fa-globe"></i>&nbsp;Diversity
+                            </p>
+                            <strong>Do you identify as any of the following?</strong>
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isAboriginal}
+                                label="Aboriginal"
+                                onChange={onCheckboxChange}
+                                value={isAboriginal}
+                                name="isAboriginal"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isTransgender}
+                                label="Transgender individual"
+                                onChange={onCheckboxChange}
+                                value={isTransgender}
+                                name="isTransgender"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isVisibleMinority}
+                                label="Visible Minority"
+                                onChange={onCheckboxChange}
+                                value={isVisibleMinority}
+                                name="isVisibleMinority"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isDisabledOrHasBarriers}
+                                label="Individual with a disability or barrier"
+                                onChange={onCheckboxChange}
+                                value={isDisabledOrHasBarriers}
+                                name="isDisabledOrHasBarriers"
+                            />
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isOverFiftyFive}
+                                label="An individual Age 55+"
+                                onChange={onCheckboxChange}
+                                value={isOverFiftyFive}
+                                name="isOverFiftyFive"
+                            />
 
                             <p className="border-bottom mb-3 pb-1 text-secondary">
                                 <i className="fas fa-user-shield"></i>&nbsp;Personal Information
