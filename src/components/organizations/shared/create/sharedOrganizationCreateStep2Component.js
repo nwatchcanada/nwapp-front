@@ -6,16 +6,16 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect';
-import { BootstrapRegionSelect } from '../../../bootstrap/bootstrapRegionSelect';
+import { BootstrapProvinceSelect } from '../../../bootstrap/bootstrapRegionSelect';
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 
 
 class SharedOrganizationCreateStep2Component extends Component {
     render() {
         const {
-            schema, name, alternateName, description, country, region, locality, timezone, timezoneOptions,
+            schema, name, alternateName, description, country, province, city, timezone, timezoneOptions,
             streetNumber, streetName, apartmentUnit, streetType, streetTypeLabel, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionLabel, streetDirectionOptions, postalCode,
-            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onRegionChange, onClick, onBackClick
+            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onProvinceChange, onClick, onBackClick
         } = this.props;
         return (
             <div>
@@ -79,12 +79,12 @@ class SharedOrganizationCreateStep2Component extends Component {
                                         <td>{country}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" className="bg-light">Region</th>
-                                        <td>{region}</td>
+                                        <th scope="row" className="bg-light">Province</th>
+                                        <td>{province}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" className="bg-light">Locality</th>
-                                        <td>{locality}</td>
+                                        <th scope="row" className="bg-light">City</th>
+                                        <td>{city}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" className="bg-light">Street #</th>

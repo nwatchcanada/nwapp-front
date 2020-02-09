@@ -6,14 +6,14 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect'
-import { BootstrapRegionSelect } from '../../../bootstrap/bootstrapRegionSelect'
+import { BootstrapProvinceSelect } from '../../../bootstrap/bootstrapRegionSelect'
 
 
 class AdminMemberCreateStep5Component extends Component {
     render() {
         const {
-            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode, locality, region, country,
-            errors, onTextChange, onSelectChange, isLoading, onClick, onRegionChange, onCountryChange,
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode, city, province, country,
+            errors, onTextChange, onSelectChange, isLoading, onClick, onProvinceChange, onCountryChange,
         } = this.props;
 
         // Check to see if the street type is "other".
@@ -175,25 +175,25 @@ class AdminMemberCreateStep5Component extends Component {
                                 priorityOptions={["CA", "US", "MX"]}
                                 name="country"
                             />
-                            <BootstrapRegionSelect
+                            <BootstrapProvinceSelect
                                 inputClassName="form-control"
                                 borderColour="border-primary"
-                                error={errors.region}
+                                error={errors.province}
                                 label="Province / state (*)"
                                 country={country}
-                                value={region}
-                                onChange={onRegionChange}
-                                name="region"
+                                value={province}
+                                onChange={onProvinceChange}
+                                name="province"
                             />
 
                             <BootstrapInput
                                 inputClassName="form-control"
                                 borderColour="border-primary"
-                                error={errors.locality}
-                                label="Locality (*)"
+                                error={errors.city}
+                                label="City (*)"
                                 onChange={onTextChange}
-                                value={locality}
-                                name="locality"
+                                value={city}
+                                name="city"
                                 type="text"
                             />
 

@@ -323,11 +323,11 @@ export function validateStep5CreateInput(data) {
     if (data.country === undefined || data.country === null || validator.isEmpty(data.country) || data.country === "") {
         errors.country = 'This field is required';
     }
-    if (data.region === undefined || data.region === null || validator.isEmpty(data.region) || data.region === "") {
-        errors.region = 'This field is required';
+    if (data.province === undefined || data.province === null || validator.isEmpty(data.province) || data.province === "") {
+        errors.province = 'This field is required';
     }
-    if (data.locality === undefined || data.locality === null || validator.isEmpty(data.locality) || data.locality === "") {
-        errors.locality = 'This field is required';
+    if (data.city === undefined || data.city === null || validator.isEmpty(data.city) || data.city === "") {
+        errors.city = 'This field is required';
     }
 
     return {

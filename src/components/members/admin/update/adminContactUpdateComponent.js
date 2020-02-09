@@ -9,7 +9,7 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneInput";
 import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
 import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect'
-import { BootstrapRegionSelect } from '../../../bootstrap/bootstrapRegionSelect'
+import { BootstrapProvinceSelect } from '../../../bootstrap/bootstrapRegionSelect'
 import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
@@ -32,7 +32,7 @@ export default class AdminMemberContactUpdateComponent extends Component {
             organizationName, organizationTypeOf, firstName, lastName, primaryPhone, secondaryPhone, email, isOkToText, isOkToEmail,
 
             // EVERYTHING ELSE
-            slug, errors, isLoading, onClick, onTextChange, onRadioChange, onBillingCountryChange, onBillingRegionChange,
+            slug, errors, isLoading, onClick, onTextChange, onRadioChange, onBillingCountryChange, onBillingProvinceChange,
             onMultiChange, onDateOfBirthChange, onSelectChange, onJoinDateChange,
         } = this.props;
         return (

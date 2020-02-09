@@ -131,7 +131,7 @@ class CardComponent extends Component {
                         </h5>
                         <p className="card-text">
                             {member.streetAddress}<br />
-                            {member.locality}, {member.region}, {member.postalCode}<br />
+                            {member.city}, {member.province}, {member.postalCode}<br />
                             <a href={`email:${member.email}`}>{member.email}</a><br />
                             <a href={`tel:${member.primaryPhoneE164}`}>{member.primaryPhoneNational}</a>
                         </p>

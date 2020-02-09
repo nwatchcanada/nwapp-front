@@ -43,8 +43,8 @@ class AdminAssociateAddressUpdateContainer extends Component {
             // streetDirectionOption: this.props.associateDetail.streetDirectionOption,
             postalCode: this.props.associateDetail.postalCode,
             country: this.props.associateDetail.country,
-            region: this.props.associateDetail.region,
-            locality: this.props.associateDetail.locality,
+            province: this.props.associateDetail.province,
+            city: this.props.associateDetail.city,
             errors: {},
             isLoading: false
         }
@@ -54,7 +54,7 @@ class AdminAssociateAddressUpdateContainer extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
-        this.onRegionChange = this.onRegionChange.bind(this);
+        this.onProvinceChange = this.onProvinceChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -140,16 +140,16 @@ class AdminAssociateAddressUpdateContainer extends Component {
 
     onCountryChange(value) {
         if (value === null || value === undefined || value === '') {
-            this.setState({ country: null, region: null })
+            this.setState({ country: null, province: null })
         } else {
-            this.setState({ country: value, region: null })
+            this.setState({ country: value, province: null })
         }
         localStorage.setItem('nwapp-create-associate-country', value);
     }
 
-    onRegionChange(value) {
-        this.setState({ region: value });
-        localStorage.setItem('nwapp-create-associate-region', value);
+    onProvinceChange(value) {
+        this.setState({ province: value });
+        localStorage.setItem('nwapp-create-associate-province', value);
     }
 
     onClick(e) {
@@ -183,7 +183,7 @@ class AdminAssociateAddressUpdateContainer extends Component {
 
     render() {
         const {
-            slug, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, region, locality, errors
+            slug, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, province, city, errors
         } = this.state;
         return (
             <AdminAssociateAddressUpdateComponent
@@ -199,12 +199,12 @@ class AdminAssociateAddressUpdateContainer extends Component {
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
                 country={country}
-                region={region}
-                locality={locality}
+                province={province}
+                city={city}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                onRegionChange={this.onRegionChange}
+                onProvinceChange={this.onProvinceChange}
                 onCountryChange={this.onCountryChange}
                 onClick={this.onClick}
             />

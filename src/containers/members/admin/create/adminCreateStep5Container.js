@@ -25,22 +25,22 @@ class AdminMemberCreateStep5Container extends Component {
     constructor(props) {
         super(props);
 
-        // Pre-assign the country, region and locality fields based on the
+        // Pre-assign the country, province and city fields based on the
         // tenant details from the user profile.
         let country = localStorage.getItem("nwapp-create-member-country");
         if (country === undefined || country === null || country === "") {
             country = this.props.user.tenantCountry;
             localStorage.setItem("nwapp-create-member-country", country);
         }
-        let region = localStorage.getItem("nwapp-create-member-region");
-        if (region === undefined || region === null || region === "") {
-            region = this.props.user.tenantRegion;
-            localStorage.setItem("nwapp-create-member-region", region);
+        let province = localStorage.getItem("nwapp-create-member-province");
+        if (province === undefined || province === null || province === "") {
+            province = this.props.user.tenantProvince;
+            localStorage.setItem("nwapp-create-member-province", province);
         }
-        let locality = localStorage.getItem("nwapp-create-member-locality");
-        if (locality === undefined || locality === null || locality === "") {
-            locality = this.props.user.tenantLocality;
-            localStorage.setItem("nwapp-create-member-locality", locality);
+        let city = localStorage.getItem("nwapp-create-member-city");
+        if (city === undefined || city === null || city === "") {
+            city = this.props.user.tenantCity;
+            localStorage.setItem("nwapp-create-member-city", city);
         }
 
         this.state = {
@@ -55,8 +55,8 @@ class AdminMemberCreateStep5Container extends Component {
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-member-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-member-postalCode"),
             country: country,
-            region: region,
-            locality: locality,
+            province: province,
+            city: city,
             errors: {},
             isLoading: false
         }
@@ -65,7 +65,7 @@ class AdminMemberCreateStep5Container extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
-        this.onRegionChange = this.onRegionChange.bind(this);
+        this.onProvinceChange = this.onProvinceChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -136,16 +136,16 @@ class AdminMemberCreateStep5Container extends Component {
 
     onCountryChange(value) {
         if (value === null || value === undefined || value === '') {
-            this.setState({ country: null, region: null })
+            this.setState({ country: null, province: null })
         } else {
-            this.setState({ country: value, region: null })
+            this.setState({ country: value, province: null })
         }
         localStorage.setItem('nwapp-create-member-country', value);
     }
 
-    onRegionChange(value) {
-        this.setState({ region: value });
-        localStorage.setItem('nwapp-create-member-region', value);
+    onProvinceChange(value) {
+        this.setState({ province: value });
+        localStorage.setItem('nwapp-create-member-province', value);
     }
 
     onClick(e) {
@@ -173,7 +173,7 @@ class AdminMemberCreateStep5Container extends Component {
 
     render() {
         const {
-            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, region, locality, errors
+            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, province, city, errors
         } = this.state;
         return (
             <AdminMemberCreateStep5Component
@@ -187,12 +187,12 @@ class AdminMemberCreateStep5Container extends Component {
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
                 country={country}
-                region={region}
-                locality={locality}
+                province={province}
+                city={city}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                onRegionChange={this.onRegionChange}
+                onProvinceChange={this.onProvinceChange}
                 onCountryChange={this.onCountryChange}
                 onClick={this.onClick}
             />

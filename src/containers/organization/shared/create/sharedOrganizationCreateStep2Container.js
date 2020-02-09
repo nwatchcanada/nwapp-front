@@ -29,8 +29,8 @@ class SharedOrganizationCreateStep2Container extends Component {
             alternateName: localStorage.getItem("nwapp-create-tenant-alternateName"),
             description: localStorage.getItem("nwapp-create-tenant-description"),
             country: localStorage.getItem("nwapp-create-tenant-country"),
-            region: localStorage.getItem("nwapp-create-tenant-region"),
-            locality: localStorage.getItem("nwapp-create-tenant-locality"),
+            province: localStorage.getItem("nwapp-create-tenant-province"),
+            city: localStorage.getItem("nwapp-create-tenant-city"),
             streetNumber: localStorage.getItem("nwapp-create-tenant-streetNumber"),
             streetName: localStorage.getItem("nwapp-create-tenant-streetName"),
             streetType: localStorageGetIntegerItem("nwapp-create-tenant-streetType"),
@@ -51,11 +51,11 @@ class SharedOrganizationCreateStep2Container extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
-        this.onRegionChange = this.onRegionChange.bind(this);
+        this.onProvinceChange = this.onProvinceChange.bind(this);
         this.onBackClick = this.onBackClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
-        this.onRegionChange = this.onRegionChange.bind(this);
+        this.onProvinceChange = this.onProvinceChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -92,11 +92,11 @@ class SharedOrganizationCreateStep2Container extends Component {
         // Street Address: This field is required.
         postData.addressCountry = this.state.country;
 
-        // Address Region: This field is required.
-        postData.addressRegion = this.state.region
+        // Address Province: This field is required.
+        postData.addressProvince = this.state.province
 
-        // Address Locality: This field is required.
-        postData.addressLocality = this.state.locality;
+        // Address City: This field is required.
+        postData.addressCity = this.state.city;
 
         // Street Direction: Cannot be NaN.
         if (isNaN(this.state.streetDirection)) {
@@ -163,16 +163,16 @@ class SharedOrganizationCreateStep2Container extends Component {
 
     onCountryChange(value) {
         if (value === null || value === undefined || value === '') {
-            this.setState({ country: null, region: null })
+            this.setState({ country: null, province: null })
         } else {
-            this.setState({ country: value, region: null })
+            this.setState({ country: value, province: null })
         }
         localStorage.setItem('nwapp-create-tenant-country', value);
     }
 
-    onRegionChange(value) {
-        this.setState({ region: value });
-        localStorage.setItem('nwapp-create-tenant-region', value);
+    onProvinceChange(value) {
+        this.setState({ province: value });
+        localStorage.setItem('nwapp-create-tenant-province', value);
     }
 
     onClick(e) {
@@ -205,7 +205,7 @@ class SharedOrganizationCreateStep2Container extends Component {
 
     render() {
         const {
-            schema, name, alternateName, description, country, region, locality,
+            schema, name, alternateName, description, country, province, city,
             streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit, streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
             timezone, errors, isLoading
         } = this.state;
@@ -216,8 +216,8 @@ class SharedOrganizationCreateStep2Container extends Component {
                 alternateName={alternateName}
                 description={description}
                 country={country}
-                region={region}
-                locality={locality}
+                province={province}
+                city={city}
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
@@ -236,10 +236,10 @@ class SharedOrganizationCreateStep2Container extends Component {
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onCountryChange={this.onCountryChange}
-                onRegionChange={this.onRegionChange}
+                onProvinceChange={this.onProvinceChange}
                 onBackClick={this.onBackClick}
                 onCountryChange={this.onCountryChange}
-                onRegionChange={this.onRegionChange}
+                onProvinceChange={this.onProvinceChange}
                 onClick={this.onClick}
             />
         );

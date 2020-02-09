@@ -43,8 +43,8 @@ class AdminMemberAddressUpdateContainer extends Component {
             // streetDirectionOption: this.props.memberDetail.streetDirectionOption,
             postalCode: this.props.memberDetail.postalCode,
             country: this.props.memberDetail.country,
-            region: this.props.memberDetail.region,
-            locality: this.props.memberDetail.locality,
+            province: this.props.memberDetail.province,
+            city: this.props.memberDetail.city,
             errors: {},
             isLoading: false
         }
@@ -54,7 +54,7 @@ class AdminMemberAddressUpdateContainer extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
-        this.onRegionChange = this.onRegionChange.bind(this);
+        this.onProvinceChange = this.onProvinceChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -140,16 +140,16 @@ class AdminMemberAddressUpdateContainer extends Component {
 
     onCountryChange(value) {
         if (value === null || value === undefined || value === '') {
-            this.setState({ country: null, region: null })
+            this.setState({ country: null, province: null })
         } else {
-            this.setState({ country: value, region: null })
+            this.setState({ country: value, province: null })
         }
         localStorage.setItem('nwapp-create-member-country', value);
     }
 
-    onRegionChange(value) {
-        this.setState({ region: value });
-        localStorage.setItem('nwapp-create-member-region', value);
+    onProvinceChange(value) {
+        this.setState({ province: value });
+        localStorage.setItem('nwapp-create-member-province', value);
     }
 
     onClick(e) {
@@ -183,7 +183,7 @@ class AdminMemberAddressUpdateContainer extends Component {
 
     render() {
         const {
-            slug, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, region, locality, errors
+            slug, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, province, city, errors
         } = this.state;
         return (
             <AdminMemberAddressUpdateComponent
@@ -199,12 +199,12 @@ class AdminMemberAddressUpdateContainer extends Component {
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
                 country={country}
-                region={region}
-                locality={locality}
+                province={province}
+                city={city}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
-                onRegionChange={this.onRegionChange}
+                onProvinceChange={this.onProvinceChange}
                 onCountryChange={this.onCountryChange}
                 onClick={this.onClick}
             />

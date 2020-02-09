@@ -5,7 +5,7 @@ import shortid from "shortid";
 import { RegionDropdown } from 'react-country-region-selector';
 
 
-export const BootstrapRegionSelect = ({
+export const BootstrapProvinceSelect = ({
     name, label, placeholder, value, helpText, onChange, error,  borderColour = '', priorityOptions = [], country
 }) => {
     const id = shortid.generate();
@@ -29,7 +29,7 @@ export const BootstrapRegionSelect = ({
     )
 }
 
-BootstrapRegionSelect.propTypes = {
+BootstrapProvinceSelect.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
@@ -42,6 +42,6 @@ BootstrapRegionSelect.propTypes = {
     country: PropTypes.string,
 }
 
-// BootstrapRegionSelect.defaultProps = {
+// BootstrapProvinceSelect.defaultProps = {
 //     type: 'text'
 // }
