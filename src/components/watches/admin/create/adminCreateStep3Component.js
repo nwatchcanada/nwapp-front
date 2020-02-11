@@ -14,7 +14,7 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchCreateStep3Component extends Component {
     render() {
         const {
-            errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
+            errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership, isVirtual,
 
             // Modal related.
             streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions,
@@ -60,37 +60,27 @@ export default class AdminWatchCreateStep3Component extends Component {
                     </div>
                 </div>
 
-                <div className="col-md-5 mx-auto mt-2">
-                    <h3 className="pt-4 pb-2 text-center"><i className="fas fa-road"></i>&nbsp;Street Membership</h3>
-                    <form id="residential-form" method="post" className="needs-validation" action="" noValidate>
-                        <div className="form-group">
+                {isVirtual
+                    ? <div className="row pt-3 mb-4 pb-2">
+                        <div className="col-md-5 mx-auto p-2">
 
-                            <p>All fields which have the (*) symbol are required to be filled out.</p>
-
-                            <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <AddModalComponent
-                                streetNumberStart={streetNumberStart}
-                                streetNumberEnd={streetNumberEnd}
-                                streetName={streetName}
-                                streetType={streetType}
-                                streetTypeOptions={streetTypeOptions}
-                                streetTypeOther={streetTypeOther}
-                                streetDirection={streetDirection}
-                                streetDirectionOptions={streetDirectionOptions}
-                                onTextChange={onTextChange}
-                                onSelectChange={onSelectChange}
-                                errors={errors}
-                                showModal={showModal}
-                                onSaveClick={onSaveClick}
-                                onCloseClick={onCloseClick}
-                            />
-
-                            <StreetMembershipTable
-                               streetMembership={streetMembership}
-                               onAddClick={onAddClick}
-                               onRemoveClick={onRemoveClick}
-                            />
+                            <div className="jumbotron">
+                                <h1 className="display-4">
+                                    <i className="fas fa-vr-cardboard"></i>&nbsp;Virtual Watch
+                                </h1>
+                                <p className="lead">Please note that because you have selected the <strong>virtual watch</strong> checkbox then the street membership section is not necessary.</p>
+                                <hr />
+                                <p>Please click <strong>next</strong> to proceed or <strong>back</strong> to unselect the option.</p>
+                                {/*<p>
+                                <Link to={`/admin/watches/step-3-create`} className="btn btn-orange btn-lg  float-left">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                </Link>
+                                &nbsp;&nbsp;&nbsp;
+                                    <button className="btn btn-success btn-lg" disabled={isLoading} onClick={onClick}>
+                                        <i className="fas fa-check-circle"></i>&nbsp;Save
+                                    </button>
+                                </p>*/}
+                            </div>
 
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                 Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
@@ -98,11 +88,52 @@ export default class AdminWatchCreateStep3Component extends Component {
                             <Link to="/admin/watches/step-2-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
+
                         </div>
+                    </div>
+                    : <div className="col-md-5 mx-auto mt-2">
+                        <h3 className="pt-4 pb-2 text-center"><i className="fas fa-road"></i>&nbsp;Street Membership</h3>
+                        <form id="residential-form" method="post" className="needs-validation" action="" noValidate>
+                            <div className="form-group">
 
-                    </form>
-                </div>
+                                <p>All fields which have the (*) symbol are required to be filled out.</p>
 
+                                <BootstrapErrorsProcessingAlert errors={errors} />
+
+                                <AddModalComponent
+                                    streetNumberStart={streetNumberStart}
+                                    streetNumberEnd={streetNumberEnd}
+                                    streetName={streetName}
+                                    streetType={streetType}
+                                    streetTypeOptions={streetTypeOptions}
+                                    streetTypeOther={streetTypeOther}
+                                    streetDirection={streetDirection}
+                                    streetDirectionOptions={streetDirectionOptions}
+                                    onTextChange={onTextChange}
+                                    onSelectChange={onSelectChange}
+                                    errors={errors}
+                                    showModal={showModal}
+                                    onSaveClick={onSaveClick}
+                                    onCloseClick={onCloseClick}
+                                />
+
+                                <StreetMembershipTable
+                                   streetMembership={streetMembership}
+                                   onAddClick={onAddClick}
+                                   onRemoveClick={onRemoveClick}
+                                />
+
+                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                                <Link to="/admin/watches/step-2-create" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                </Link>
+                            </div>
+
+                        </form>
+                    </div>
+                }
             </main>
         );
     }

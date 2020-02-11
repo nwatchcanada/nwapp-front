@@ -47,6 +47,7 @@ class AdminWatchInfoUpdateContainer extends Component {
             district: this.props.watchDetail.districtSlug,
             // districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
             isDistrictLoading: true,
+            isVirtual: this.props.watchDetail.isVirtual,
             errors: {},
             isLoading: false,
         }
@@ -56,6 +57,7 @@ class AdminWatchInfoUpdateContainer extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onDistrictSuccessCallback = this.onDistrictSuccessCallback.bind(this);
         this.onDistrictFailureCallback = this.onDistrictFailureCallback.bind(this);
         this.onTagSuccessCallback = this.onTagSuccessCallback.bind(this);
@@ -214,6 +216,12 @@ class AdminWatchInfoUpdateContainer extends Component {
         });
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -252,7 +260,7 @@ class AdminWatchInfoUpdateContainer extends Component {
 
     render() {
         const {
-            slug, tags, isTagLoading, name, description, district, isDistrictLoading, errors, isLoading
+            slug, tags, isTagLoading, name, description, district, isDistrictLoading, isVirtual, errors, isLoading
         } = this.state;
 
         const districtOptions = getDistrictReactSelectOptions(this.props.districtList, "district");
@@ -273,6 +281,7 @@ class AdminWatchInfoUpdateContainer extends Component {
                 description={description}
                 district={district}
                 isDistrictLoading={isDistrictLoading}
+                isVirtual={isVirtual}
                 districtOptions={districtOptions}
                 errors={errors}
                 isLoading={isLoading}
@@ -280,6 +289,7 @@ class AdminWatchInfoUpdateContainer extends Component {
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onMultiChange={this.onMultiChange}
+                onCheckboxChange={this.onCheckboxChange}
             />
         );
     }

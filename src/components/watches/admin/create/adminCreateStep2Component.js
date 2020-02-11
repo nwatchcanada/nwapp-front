@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ReactModal from 'react-modal';
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
+import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
@@ -14,9 +14,9 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchCreateStep2Component extends Component {
     render() {
         const {
-            tags, isTagLoading, tagOptions, name, description, district, isDistrictLoading,
+            tags, isTagLoading, tagOptions, name, description, district, isDistrictLoading, isVirtual,
             districtOptions, errors, isLoading, onClick, onTextChange,
-            onSelectChange, onMultiChange,
+            onSelectChange, onMultiChange, onCheckboxChange
         } = this.props;
         return (
             <main id="main" role="main">
@@ -110,6 +110,17 @@ export default class AdminWatchCreateStep2Component extends Component {
                                 error={errors.tags}
                                 onMultiChange={onMultiChange}
                                 isLoading={isTagLoading}
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isVirtual}
+                                label="Is this a virtual watch?"
+                                onChange={onCheckboxChange}
+                                value={isVirtual}
+                                name="isVirtual"
+                                helpText="By selecting this field, the street membership will not be necessary."
                             />
 
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

@@ -117,6 +117,15 @@ export default class AdminWatchRetrieveComponent extends Component {
                                         </a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Virtual Watch</th>
+                                    <td>
+                                        {watch && watch.isVirtual
+                                            ?<div>Yes</div>
+                                            :<div>No</div>
+                                        }
+                                    </td>
+                                </tr>
                                 {watch && watch.tags &&
                                     <tr>
                                         <th scope="row" className="bg-light">Tags</th>

@@ -62,8 +62,10 @@ export function validateResidentialStep2Input(data) {
 export function validateResidentialStep3Input(data) {
     let errors = {};
 
-    if (data.streetMembership.length === 0) {
-        errors.streetMembership = 'Please add at minimum one entry';
+    if (data.isVirtualWatch === false) {
+        if (data.streetMembership.length === 0) {
+            errors.streetMembership = 'Please add at minimum one entry';
+        }    
     }
 
     return {

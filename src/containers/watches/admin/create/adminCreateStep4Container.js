@@ -14,7 +14,8 @@ import {
     localStorageSetObjectOrArrayItem,
     localStorageRemoveItemsContaining,
     localStorageGetArrayItem,
-    localStorageGetObjectItem
+    localStorageGetObjectItem,
+    localStorageGetBooleanItem
 } from '../../../../helpers/localStorageUtility';
 import { postWatch } from "../../../../actions/watchActions";
 
@@ -36,6 +37,7 @@ class AdminWatchCreateStep4Container extends Component {
             tags: localStorageGetArrayItem("nwapp-watch-tags"),
             name: localStorage.getItem('nwapp-watch-name'),
             description: localStorage.getItem('nwapp-watch-description'),
+            isVirtual: localStorageGetBooleanItem('nwapp-watch-isVirtual'),
             associate: localStorage.getItem('nwapp-watch-associate'),
             associateOption: localStorageGetObjectItem('nwapp-watch-associateOption'),
             district: localStorage.getItem('nwapp-watch-district'),
@@ -64,6 +66,7 @@ class AdminWatchCreateStep4Container extends Component {
             idTags.push(tag.value);
         }
         postData.tags = idTags;
+        postData.isVirtual = this.state.isVirtual;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);

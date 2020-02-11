@@ -7,7 +7,8 @@ import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem,
     localStorageGetArrayItem,
-    localStorageGetIntegerItem
+    localStorageGetIntegerItem,
+    localStorageGetBooleanItem
 } from '../../../../helpers/localStorageUtility';
 import { validateStep2CreateInput } from "../../../../validators/watchValidator";
 import { getAssociateReactSelectOptions } from '../../../../actions/watchActions';
@@ -43,6 +44,7 @@ class AdminWatchCreateStep2Container extends Component {
             district: localStorage.getItem('nwapp-watch-district'),
             districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
             isDistrictLoading: true,
+            isVirtual: localStorageGetBooleanItem('nwapp-watch-isVirtual'),
             errors: {},
         }
 
@@ -51,6 +53,7 @@ class AdminWatchCreateStep2Container extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onMultiChange = this.onMultiChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onDistrictSuccessCallback = this.onDistrictSuccessCallback.bind(this);
         this.onDistrictFailureCallback = this.onDistrictFailureCallback.bind(this);
         this.onTagSuccessCallback = this.onTagSuccessCallback.bind(this);
@@ -175,6 +178,13 @@ class AdminWatchCreateStep2Container extends Component {
         localStorageSetObjectOrArrayItem(key, selectedOptions);
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-watch-'+[e.target.name], e.target.checked);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -206,7 +216,7 @@ class AdminWatchCreateStep2Container extends Component {
 
     render() {
         const {
-            tags, isTagLoading, name, description, district, isDistrictLoading, errors
+            tags, isTagLoading, name, description, district, isDistrictLoading, isVirtual, errors
         } = this.state;
 
         const districtOptions = getDistrictReactSelectOptions(this.props.districtList, "district");
@@ -225,12 +235,14 @@ class AdminWatchCreateStep2Container extends Component {
                 description={description}
                 district={district}
                 isDistrictLoading={isDistrictLoading}
+                isVirtual={isVirtual}
                 districtOptions={districtOptions}
                 errors={errors}
                 onClick={this.onClick}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onMultiChange={this.onMultiChange}
+                onCheckboxChange={this.onCheckboxChange}
             />
         );
     }

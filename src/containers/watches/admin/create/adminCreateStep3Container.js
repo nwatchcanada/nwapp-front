@@ -7,7 +7,10 @@ import {
 } from "../../../../validators/watchValidator";
 import AdminWatchCreateStep3Component from "../../../../components/watches/admin/create/adminCreateStep3Component";
 import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem,
+    localStorageGetArrayItem,
+    localStorageGetBooleanItem
 } from '../../../../helpers/localStorageUtility';
 import { getAssociateReactSelectOptions } from '../../../../actions/watchActions';
 import { getDistrictReactSelectOptions } from '../../../../actions/districtActions';
@@ -36,6 +39,7 @@ class AdminWatchCreateStep3Container extends Component {
             streetDirection: "",
             streetDirectionOption: localStorageGetObjectItem('nwapp-watch-streetDirectionOption'),
             showModal: false, // Variable used to indicate if the modal should appear.
+            isVirtual: localStorageGetBooleanItem('nwapp-watch-isVirtual'),
         }
 
         // Page related.
@@ -294,7 +298,7 @@ class AdminWatchCreateStep3Container extends Component {
     render() {
         const {
             // Page related.
-            streetMembership, errors,
+            streetMembership, errors, isVirtual,
 
             // Modal relate.
             streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
@@ -317,6 +321,7 @@ class AdminWatchCreateStep3Container extends Component {
                 streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                isVirtual={isVirtual}
                 onAddClick={this.onAddClick}
                 onRemoveClick={this.onRemoveClick}
                 onSaveClick={this.onSaveClick}
