@@ -57,7 +57,7 @@ export function postLogout(user, onSuccessCallback, onFailureCallback) {
         const config = {
             baseURL: getPublicAPIBaseURL(),
             headers: {
-                'Authorization': "Bearer " + user.token,
+                'Authorization': "Bearer " + user.accessToken.token,
                 'Content-Type': 'application/msgpack;',
                 'Accept': 'application/msgpack',
             },
@@ -66,7 +66,7 @@ export function postLogout(user, onSuccessCallback, onFailureCallback) {
 
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode({
-            token: user.accessToken
+            token: user.accessToken.token,
         });
 
         axios.post(NWAPP_LOGOUT_API_URL, buffer, config).then( (successResponse) => {
