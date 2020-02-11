@@ -21,7 +21,6 @@ class LogoutContainer extends Component {
         super(props);
         this.state = {
             errors: {},
-            isLoading: true
         }
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -59,9 +58,10 @@ class LogoutContainer extends Component {
             localStorage.clear(); // Clear any remaining items.
 
             this.props.setFlashMessage("success", "You have successfully logged out.");
-            this.setState({
-                isLoading: false,
-            })
+
+            // Tell the state that we've successfully finished loading this page
+            // as a result we will redirect to the login page.
+            window.location = "/login";
         }
     }
 
@@ -80,9 +80,7 @@ class LogoutContainer extends Component {
 
         // Tell the state that we've successfully finished loading this page
         // as a result we will redirect to the login page.
-        this.setState({
-            isLoading: false,
-        });
+        window.location = "/login";
     }
 
     onFailedSubmissionCallback(errors) {
@@ -95,9 +93,7 @@ class LogoutContainer extends Component {
 
         // Tell the state that we've successfully finished loading this page
         // as a result we will redirect to the login page.
-        this.setState({
-            isLoading: false,
-        });
+        window.location = "/login";
     }
 
     /**
@@ -113,15 +109,10 @@ class LogoutContainer extends Component {
      */
 
     render() {
-        const { isLoading, errors } = this.state;
-        if (isLoading) {
-            return (
-                <TenantRedirectComponent errors={errors} />
-            );
-        } else {
-            return <Redirect to="/login" />;
-        }
-
+        const { errors } = this.state;
+        return (
+            <TenantRedirectComponent errors={errors} />
+        );
     }
 }
 
