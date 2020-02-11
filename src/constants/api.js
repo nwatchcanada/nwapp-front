@@ -12,7 +12,7 @@ export const NWAPP_API_BASE_PATH = '/api'
  *  The API web-services endpoints accessible from the public or tenant.
  */
 export const NWAPP_LOGIN_API_ENDPOINT = '/v1/public/login';
-export const NWAPP_LOGOUT_API_ENDPOINT = '/api/v1/public/logout';
+export const NWAPP_LOGOUT_API_ENDPOINT = '/v1/public/logout';
 export const NWAPP_REFRESH_TOKEN_API_ENDPOINT = '/v1/public/refresh-token';
 export const NWAPP_PROFILE_API_ENDPOINT = '/v1/public/profile';
 export const NWAPP_ORGANIZATION_LIST_API_ENDPOINT = '/v1/public/organizations';
@@ -127,13 +127,13 @@ export const NWAPP_PURCHASE_DEVICE_API_URL = process.env.REACT_APP_API_HOST+'/ap
  *  The type of choices we have for the `Production` API endpoint for the
  *  `type_of` field.
  */
-export const EXECUTIVE_ROLE_ID = 1
-export const MANAGEMENT_ROLE_ID = 2
-export const FRONTLINE_STAFF_ROLE_ID = 3
-export const ASSOCIATE_ROLE_ID = 4
-export const AREA_COORDINATOR_ROLE_ID = 5
-export const MEMBER_ROLE_ID = 6
-export const ANONYMOUS_ROLE_ID = 0
+export const EXECUTIVE_ROLE_ID = 1;
+export const MANAGEMENT_ROLE_ID = 2;
+export const FRONTLINE_STAFF_ROLE_ID = 3;
+export const ASSOCIATE_ROLE_ID = 4;
+export const AREA_COORDINATOR_ROLE_ID = 5;
+export const MEMBER_ROLE_ID = 6;
+export const ANONYMOUS_ROLE_ID = 0;
 export const GROUP_MEMBERSHIP_CHOICES = [
     {
         selectName: "group",

@@ -43,7 +43,7 @@ export const setLogoutFailure = payload => ({
 });
 
 
-export function postLogout(user) {
+export function postLogout(user, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -66,18 +66,12 @@ export function postLogout(user) {
 
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode({
-            token: user.token
+            token: user.accessToken
         });
 
         axios.post(NWAPP_LOGOUT_API_URL, buffer, config).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
-            const responseData = msgpack.decode(Buffer(successResponse.data));
-
-            let profile = camelizeKeys(responseData);
-
-            // Extra.
-            profile['isAPIRequestRunning'] = false;
-            profile['errors'] = {};
+            const responseData = successResponse.data;
 
             // Update the global state of the application to store our
             // user profile for the application.
@@ -85,12 +79,16 @@ export function postLogout(user) {
                 setLogoutSuccess()
             );
 
+            // DEVELOPERS NOTE:
+            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+            // OBJECT WE GOT FROM THE API.
+            if (onSuccessCallback) {
+                onSuccessCallback({});
+            }
+
         }).catch( (exception) => {
             if (exception.response) {
-                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
-
-                // Decode our MessagePack (Buffer) into JS Object.
-                const responseData = msgpack.decode(Buffer(responseBinaryData));
+                const responseData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
 
                 let errors = camelizeKeys(responseData);
 
@@ -101,6 +99,13 @@ export function postLogout(user) {
                         errors: errors
                     })
                 );
+
+                // DEVELOPERS NOTE:
+                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+                // OBJECT WE GOT FROM THE API.
+                if (onFailureCallback) {
+                    onFailureCallback(errors);
+                }
             }
         }).then( () => {
             // Do nothing.

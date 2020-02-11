@@ -44,7 +44,7 @@ class LogoutContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
         const { user } = this.props;
-        if (user !== undefined && user.token !== undefined && user.token !== null) {
+        if (user !== undefined && user.accessToken !== undefined && user.accessToken !== null) {
             // DEVELOPERS NOTE:
             // Regardless of any server related errors, the client browser will
             // automatically clear the storage pertaining to the user session.
@@ -84,18 +84,6 @@ class LogoutContainer extends Component {
             isLoading: false,
         });
     }
-
-    // onFailedSubmissionCallback(errors) {
-    //     this.setState({
-    //         errors: errors
-    //     })
-    //
-    //     // The following code will cause the screen to scroll to the top of
-    //     // the page. Please see ``react-scroll`` for more information:
-    //     // https://github.com/fisshy/react-scroll
-    //     var scroll = Scroll.animateScroll;
-    //     scroll.scrollToTop();
-    // }
 
     onFailedSubmissionCallback(errors) {
         // CLEAR THE LOCAL STORAGE IF WE SUCCESSFULLY LOGGED OUT!
