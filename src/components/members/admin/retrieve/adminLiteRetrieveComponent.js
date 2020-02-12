@@ -120,6 +120,16 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                                         }
                                     </p>
                                 }
+                                {member && member.badges && member.badges.length > 0 &&
+                                    <div>
+                                        <p className="m-0"><strong>Badges:</strong></p>
+                                        <p>
+                                            {member.badges && member.badges.map(
+                                                (badge) => <BadgeItem badge={badge} key={badge.uuid} />)
+                                            }
+                                        </p>
+                                    </div>
+                                }
                             </div>
 
                         </div>
@@ -150,6 +160,18 @@ class TagItem extends Component {
         const { id, text } = this.props.tag;
         return (
             <span className="badge badge-info badge-lg" value={id}>{text}</span>
+        );
+    };
+}
+
+
+class BadgeItem extends Component {
+    render() {
+        const { uuid, typeOfLabel, icon } = this.props.badge;
+        return (
+            <div>
+                <span className="badge badge-info badge-lg" value={uuid}><i className={`fas fa-${icon}`}></i>&nbsp;{typeOfLabel}</span>
+            </div>
         );
     };
 }

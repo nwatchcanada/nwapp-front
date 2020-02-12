@@ -298,6 +298,26 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                     </td>
                                 </tr>
 
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-share-alt"></i>&nbsp;Social Credit
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Badges</th>
+                                    <td>
+                                        {member && member.badges && member.badges.length > 0
+                                            ? <div>
+                                                {member.badges && member.badges.map(
+                                                    (badge) => <BadgeItem badge={badge} key={badge.uuid} />)
+                                                }
+                                            </div>
+                                            : <div>
+                                                -
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
 
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
@@ -344,6 +364,18 @@ class TagItem extends Component {
         const { id, text } = this.props.tag;
         return (
             <span className="badge badge-info badge-lg" value={id}>{text}</span>
+        );
+    };
+}
+
+
+class BadgeItem extends Component {
+    render() {
+        const { uuid, typeOfLabel, icon } = this.props.badge;
+        return (
+            <div>
+                <span className="badge badge-info badge-lg" value={uuid}><i className={`fas fa-${icon}`}></i>&nbsp;{typeOfLabel}</span>
+            </div>
         );
     };
 }
