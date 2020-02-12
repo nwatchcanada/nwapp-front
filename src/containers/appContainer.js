@@ -220,6 +220,8 @@ SETTINGS
 import AdminSettingLaunchpadContainer from "./settings/admin/adminLaunchpadContainer";
 
 import AdminDistrictListContainer from "./settings/admin/district/list/adminListContainer";
+import AdminDistrictSearchContainer from "./settings/admin/district/search/adminSearchContainer";
+import AdminDistrictSearchResultContainer from "./settings/admin/district/search/adminSearchResultContainer";
 import AdminDistrictCreateStep1Container from "./settings/admin/district/create/adminDistrictCreateStep1Container";
 import AdminDistrictCreateStep2ResidentialContainer from "./settings/admin/district/create/adminDistrictCreateStep2RezContainer";
 import AdminDistrictCreateStep2BusinessContainer from "./settings/admin/district/create/adminDistrictCreateStep2BizContainer";
@@ -356,7 +358,7 @@ class AppContainer extends React.Component {
                     <div className="d-flex align-items-stretch">
                         <main id="main" role="main">
                             <ScrollUpButton ContainerClassName="ScrollUpButtonCustomContainer" TransitionClassName="ScrollUpButtonCustomToggled" >
-								
+
 							</ScrollUpButton>
                             <Switch>
                                 /*
@@ -410,6 +412,8 @@ class AppContainer extends React.Component {
                                     --------------------
                                 */}
                                 <Route path="/admin/settings/districts" exact component={requiresAuth(AdminDistrictListContainer)} />
+                                <Route path="/admin/settings/district/search" exact component={requiresAuth(AdminDistrictSearchContainer)} />
+                                <Route path="/admin/settings/district/search-results" exact component={requiresAuth(AdminDistrictSearchResultContainer)} />
                                 <Route path="/admin/settings/district/add/step-1" exact component={requiresAuth(AdminDistrictCreateStep1Container)} />
                                 <Route path="/admin/settings/district/add/step-2-rez" exact component={requiresAuth(AdminDistrictCreateStep2ResidentialContainer)} />
                                 <Route path="/admin/settings/district/add/step-2-biz" exact component={requiresAuth(AdminDistrictCreateStep2BusinessContainer)} />

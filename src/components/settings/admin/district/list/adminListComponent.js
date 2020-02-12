@@ -270,16 +270,29 @@ class AdminDistrictListComponent extends Component {
                 <h1><i className="fas fa-user"></i>&nbsp;Districts</h1>
 
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/settings/district/add/step-1`} className="d-block link-ndecor" title="Members">
+                                    <Link to={`/admin/settings/district/add/step-1`} className="d-block link-ndecor" title="Add">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
-                                <h4>Add District</h4>
+                                <h4>Add</h4>
                                 <div className="text-muted">Add District</div>
+                            </div>
+                        </section>
+                    </div>
+                    <div className="col-md-6">
+                        <section className="row text-center placeholders">
+                            <div className="col-sm-12 placeholder">
+                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
+                                    <Link to={`/admin/settings/district/search`} className="d-block link-ndecor" title="Search">
+                                        <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
+                                    </Link>
+                                </div>
+                                <h4>Search</h4>
+                                <div className="text-muted">Search Districts</div>
                             </div>
                         </section>
                     </div>
