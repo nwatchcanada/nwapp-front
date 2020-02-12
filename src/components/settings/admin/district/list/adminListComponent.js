@@ -257,7 +257,7 @@ class AdminDistrictListComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/admin/settings">
-                                <i className="fas fa-cogs"></i>&nbsp;Setting
+                                <i className="fas fa-cogs"></i>&nbsp;Settings
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">

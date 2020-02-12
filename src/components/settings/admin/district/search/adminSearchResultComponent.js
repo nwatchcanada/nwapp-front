@@ -32,7 +32,10 @@ export default class AdminDistrictSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/admin/settings/districts`}><i className="fas fa-users"></i>&nbsp;Districts</Link>
+                           <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
+                        </li>
+                        <li className="breadcrumb-item">
+                           <Link to={`/admin/settings/districts`}><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/admin/settings/district/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
