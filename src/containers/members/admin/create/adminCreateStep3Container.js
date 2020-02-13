@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import AdminMemberCreateStep3Component from "../../../../components/members/admin/create/adminCreateStep3Component";
-import { BUSINESS_TYPE_OF, RESIDENCE_TYPE_OF } from '../../../../constants/api';
+import {
+    BUSINESS_TYPE_OF,
+    RESIDENCE_TYPE_OF,
+    COMMUNITY_CARES_TYPE_OF
+} from '../../../../constants/api';
 
 
 class AdminMemberCreateStep3Container extends Component {
@@ -13,8 +17,9 @@ class AdminMemberCreateStep3Container extends Component {
 
     constructor(props) {
         super(props);
-        this.onRezOrComClick = this.onRezOrComClick.bind(this);
+        this.onRezClick = this.onRezClick.bind(this);
         this.onBizClick = this.onBizClick.bind(this);
+        this.onComClick = this.onComClick.bind(this);
     }
 
     /**
@@ -45,7 +50,7 @@ class AdminMemberCreateStep3Container extends Component {
      *------------------------------------------------------------
      */
 
-    onRezOrComClick() {
+    onRezClick() {
         localStorage.setItem("nwapp-create-member-typeOf", RESIDENCE_TYPE_OF);
         this.props.history.push("/admin/members/add/step-4");
     }
@@ -55,6 +60,10 @@ class AdminMemberCreateStep3Container extends Component {
         this.props.history.push("/admin/members/add/step-4");
     }
 
+    onComClick() {
+        localStorage.setItem("nwapp-create-member-typeOf", COMMUNITY_CARES_TYPE_OF);
+        this.props.history.push("/admin/members/add/step-4");
+    }
 
     /**
      *  Main render function
@@ -65,7 +74,8 @@ class AdminMemberCreateStep3Container extends Component {
         return (
             <AdminMemberCreateStep3Component
                 onBizClick={this.onBizClick}
-                onRezOrComClick={this.onRezOrComClick}
+                onRezClick={this.onRezClick}
+                onComClick={this.onComClick}
             />
         );
     }

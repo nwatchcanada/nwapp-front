@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default class AdminMemberCreateStep3Component extends Component {
     render() {
-        const { onRezOrComClick, onBizClick } = this.props;
+        const { onRezClick, onBizClick, onComClick } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -63,21 +63,21 @@ export default class AdminMemberCreateStep3Component extends Component {
                 </h2>
 
                 <div className="card-group row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-4">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
                                 <i className="fas fa-home fa-3x"></i>
                             </div>
                             <div className="card-body">
-                                <h3 className="card-title">Residential / Community Cares</h3>
-                                <p className="card-text">Add a residential or community cares member</p>
-                                <Link onClick={onRezOrComClick} className="btn btn-success btn-lg">
+                                <h3 className="card-title">Residential</h3>
+                                <p className="card-text">Add a residential member</p>
+                                <Link onClick={onRezClick} className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-4">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
                                 <i className="fas fa-building fa-3x"></i>
@@ -86,6 +86,20 @@ export default class AdminMemberCreateStep3Component extends Component {
                                 <h3 className="card-title">Business</h3>
                                 <p className="card-text">Add a business member</p>
                                 <Link onClick={onBizClick} className="btn btn-success btn-lg">
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-4">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-university fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Community Cares</h3>
+                                <p className="card-text">Add a community cares member</p>
+                                <Link onClick={onComClick} className="btn btn-success btn-lg">
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </Link>
                             </div>

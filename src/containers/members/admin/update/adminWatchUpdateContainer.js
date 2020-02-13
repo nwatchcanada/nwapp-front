@@ -61,6 +61,7 @@ class AdminMemberCreateStep6Container extends Component {
         this.onSuccessfulPUTCallback = this.onSuccessfulPUTCallback.bind(this);
         this.onFailedPUTCallback = this.onFailedPUTCallback.bind(this);
         this.getPostData = this.getPostData.bind(this);
+        this.onTableRowClick = this.onTableRowClick.bind(this);
     }
 
     /**
@@ -90,7 +91,7 @@ class AdminMemberCreateStep6Container extends Component {
         // The following code will generate a `url parameter` specific to
         // our API endpoint which will list all the nearest watches based
         // on the specified address.
-        let nearbyAddress = this.state.streetNumber+","+this.state.streetName;
+        let nearbyAddress = this.state.typeOf+","+this.state.streetNumber+","+this.state.streetName;
         nearbyAddress += ","+this.state.streetType+","+this.state.streetTypeOther;
         this.state.parametersMap.set("searchNearbyAddress", nearbyAddress);
 
@@ -101,9 +102,6 @@ class AdminMemberCreateStep6Container extends Component {
             this.onSuccessfulGETCallback,
             this.onFailedGETCallback
         );
-
-        // Set our event handling.
-        this.onTableRowClick = this.onTableRowClick.bind(this);
     }
 
     componentWillUnmount() {
@@ -169,11 +167,13 @@ class AdminMemberCreateStep6Container extends Component {
 
     onTableRowClick(e, typeOf, slug, icon, name) {
         e.preventDefault();
-        console.log(typeOf, slug, icon, name);
+        console.log("onTableRowClick |", typeOf, slug, icon, name);
 
         this.setState({
             errors: {},
             isLoading: true,
+            watchSlug: slug,
+            watchName: name,
         }, ()=>{
             // Once our state has been validated `client-side` then we will
             // make an API request with the server to create our new production.

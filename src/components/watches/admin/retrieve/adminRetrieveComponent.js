@@ -141,7 +141,7 @@ export default class AdminWatchRetrieveComponent extends Component {
                     </div>
                 </div>
 
-                {watch && watch.streetMembership &&
+                {watch && watch.streetMembership && watch.isVirtual === false &&
                     <div className="row">
                         <div className="col-md-10 mx-auto">
                             <h2>
@@ -155,10 +155,6 @@ export default class AdminWatchRetrieveComponent extends Component {
                         </div>
                     </div>
                 }
-
-
-
-
             </div>
         );
     }
