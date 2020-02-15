@@ -45,6 +45,9 @@ export const WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT = '/v1/announcement/';
 export const WORKERY_RESOURCE_ITEM_LIST_API_ENDPOINT = '/v1/resource-items';
 export const WORKERY_RESOURCE_ITEM_DETAIL_API_ENDPOINT = '/v1/resource-item/';
 
+export const WORKERY_ITEM_TYPE_LIST_API_ENDPOINT = '/v1/item-types';
+export const WORKERY_ITEM_TYPE_DETAIL_API_ENDPOINT = '/v1/item-type/<slug>';
+
 /**
  *  The full address of certain API endpoints from our backend server.
  */
