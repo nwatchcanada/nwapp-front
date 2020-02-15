@@ -23,7 +23,7 @@ class AdminItemTypeCreateStep2Container extends Component {
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/itemTypes"><i className="fas fa-itemTypes"></i>&nbsp;ItemTypes</Link>
+                            <Link to="/admin/settings/item-types"><i className="fas fa-sliders-h"></i>&nbsp;Item Types</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -31,7 +31,7 @@ class AdminItemTypeCreateStep2Container extends Component {
                     </ol>
                 </nav>
 
-                <h1>Create ItemType</h1>
+                <h1>Create Item Type</h1>
 
                 <div className="row pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
@@ -44,7 +44,7 @@ class AdminItemTypeCreateStep2Container extends Component {
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>
-                            <Link to={`/admin/settings/itemType/add/step-1`} className="btn btn-orange btn-lg  float-left">
+                            <Link to={`/admin/settings/item-type/add/step-1`} className="btn btn-orange btn-lg  float-left">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                             &nbsp;&nbsp;&nbsp;

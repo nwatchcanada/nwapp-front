@@ -177,10 +177,10 @@ function detailLinkFormatter(cell, row){
     } else {
         return (
             <div>
-                <Link to={`/admin/settings/itemType/${row.id}`} className="btn btn-success btn-xs">
+                <Link to={`/admin/settings/item-type/${row.id}`} className="btn btn-success btn-xs">
                     <i className="fas fa-binoculars"></i>&nbsp;View
                 </Link>;
-                <Link to={`/admin/settings/itemType/operation/archive/${row.id}`} className="btn btn-danger btn-xs">
+                <Link to={`/admin/settings/item-type/operation/archive/${row.id}`} className="btn btn-danger btn-xs">
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             </div>
@@ -216,25 +216,25 @@ class AdminItemTypeListComponent extends Component {
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-itemTypes"></i>&nbsp;ItemTypes
+                            <i className="fas fa-sliders-h"></i>&nbsp;Item Types
                         </li>
                     </ol>
                 </nav>
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-itemTypes"></i>&nbsp;ItemTypes</h1>
+                <h1><i className="fas fa-sliders-h"></i>&nbsp;Item Types</h1>
 
                 <div className="row">
                     <div className="col-md-12">
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to={`/admin/settings/itemType/add/step-1`} className="d-block link-ndecor" title="Members">
+                                    <Link to={`/admin/settings/item-type/add/step-1`} className="d-block link-ndecor" title="Members">
                                         <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                     </Link>
                                 </div>
-                                <h4>Add ItemType</h4>
-                                <div className="text-muted">Add ItemType</div>
+                                <h4>Add Item Type</h4>
+                                <div className="text-muted">Add Item Type</div>
                             </div>
                         </section>
                     </div>

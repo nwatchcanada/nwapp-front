@@ -93,13 +93,13 @@ class AdminItemTypeRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/admin/settings/itemTypes/");
+        this.props.history.push("/admin/settings/item-types/");
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/admin/settings/itemType/"+this.state.id+"/update");
+        this.props.history.push("/admin/settings/item-type/"+this.state.id+"/update");
     }
 
     /**

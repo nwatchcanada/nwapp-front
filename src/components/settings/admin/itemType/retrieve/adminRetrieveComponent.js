@@ -22,7 +22,7 @@ export default class AdminItemTypeRetrieveComponent extends Component {
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/itemTypes"><i className="fas fa-itemTypes"></i>&nbsp;ItemTypes</Link>
+                            <Link to="/admin/settings/item-types"><i className="fas fa-sliders-h"></i>&nbsp;Item Types</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-itemType"></i>&nbsp;{itemTypeData && itemTypeData.text}
@@ -45,7 +45,7 @@ export default class AdminItemTypeRetrieveComponent extends Component {
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
                                 <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light"><i className="fas fa-table"></i>&nbsp;ItemType details</th>
+                                    <th scope="row" colSpan="2" className="text-light"><i className="fas fa-table"></i>&nbsp;Item Type details</th>
                                 </tr>
 
                                 <tr>

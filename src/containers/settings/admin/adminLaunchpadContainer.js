@@ -57,25 +57,8 @@ class AdminSettingLaunchpadContainer extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/setting/argyle'
-        },{
-            'slug': 'byron',
-            'number': 2,
-            'name': 'Byron',
-            'absoluteUrl': '/setting/byron'
-        },{
-            'slug': 'carling',
-            'number': 3,
-            'name': 'Carling',
-            'absoluteUrl': '/setting/carling'
-        }];
         return (
             <AdminSettingLaunchpadComponent
-                tableData={tableData}
                 flashMessage={this.props.flashMessage}
             />
         );

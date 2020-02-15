@@ -93,7 +93,7 @@ class AdminItemTypeUpdateContainer extends Component {
     onSuccessfulSubmissionCallback(itemType) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "ItemType has been successfully updated.");
-        this.props.history.push("/admin/settings/itemType/"+this.state.id);
+        this.props.history.push("/admin/settings/item-type/"+this.state.id);
     }
 
     onFailureSubmissionCallback(errors) {

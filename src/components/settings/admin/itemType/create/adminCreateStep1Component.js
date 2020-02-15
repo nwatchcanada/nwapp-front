@@ -24,7 +24,7 @@ export default class AdminItemTypeCreateStep1Component extends Component {
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/itemTypes"><i className="fas fa-itemTypes"></i>&nbsp;ItemTypes</Link>
+                            <Link to="/admin/settings/item-types"><i className="fas fa-sliders-h"></i>&nbsp;Item Types</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -32,7 +32,7 @@ export default class AdminItemTypeCreateStep1Component extends Component {
                     </ol>
                 </nav>
 
-                <h1>Create ItemType</h1>
+                <h1>Create Item Type</h1>
 
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
@@ -69,7 +69,7 @@ export default class AdminItemTypeCreateStep1Component extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/admin/settings/itemTypes" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/settings/item-types" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

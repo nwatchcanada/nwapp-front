@@ -87,7 +87,7 @@ class AdminItemTypeCreateStep2Container extends Component {
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "ItemType has been successfully created.");
                 localStorageRemoveItemsContaining("nwapp-itemType-add-");
-                this.props.history.push("/admin/settings/itemTypes");
+                this.props.history.push("/admin/settings/item-types");
             }
         )
     }

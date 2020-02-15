@@ -62,7 +62,7 @@ class AdminItemTypeArchiveOperationContainer extends Component {
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "ItemType have been successfully archived.");
-                this.props.history.push("/admin/settings/itemTypes");
+                this.props.history.push("/admin/settings/item-types");
             }
         )
     }

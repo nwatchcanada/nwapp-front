@@ -62,7 +62,7 @@ class AdminItemTypeCreateStep1Container extends Component {
 
     onSuccessfulSubmissionCallback(itemType) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/admin/settings/itemType/add/step-2");
+        this.props.history.push("/admin/settings/item-type/add/step-2");
     }
 
     onFailedSubmissionCallback(errors) {

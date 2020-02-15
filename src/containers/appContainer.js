@@ -214,6 +214,7 @@ SETTINGS
 (*) TAGS
 (*) HOW HEAR
 (*) RESOURCE
+(*) ITEM TYPE
 ---------
 */
 
@@ -269,6 +270,13 @@ import AdminResourceUpdateLinkContainer from "./settings/admin/resource/update/a
 import AdminResourceUpdateYouTubeVideoContainer from "./settings/admin/resource/update/adminUpdateYouTubeVideoContainer";
 import AdminResourceUpdateImageContainer from "./settings/admin/resource/update/adminUpdateImageContainer";
 import AdminResourceUpdateFileContainer from "./settings/admin/resource/update/adminUpdateFileContainer";
+
+import AdminItemTypeListContainer from "./settings/admin/itemType/list/adminListContainer";
+import AdminItemTypeRetrieveContainer from "./settings/admin/itemType/retrieve/adminRetrieveContainer";
+import AdminItemTypeUpdateContainer from "./settings/admin/itemType/update/adminUpdateContainer";
+import AdminItemTypeCreateStep1Container from "./settings/admin/itemType/create/adminCreateStep1Container";
+import AdminItemTypeCreateStep2Container from "./settings/admin/itemType/create/adminCreateStep2Container";
+import AdminItemTypeArchiveOperationContainer from "./settings/admin/itemType/operation/adminArchiveContainer";
 
 /*
 -------
@@ -481,6 +489,17 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/resource/update-image/:slug" exact component={requiresAuth(AdminResourceUpdateImageContainer)} />
                                 <Route path="/admin/settings/resource/update-file/:slug" exact component={requiresAuth(AdminResourceUpdateFileContainer)} />
                                 <Route path="/admin/settings/resource/operation/archive/:slug" exact component={requiresAuth(AdminResourceArchiveOperationContainer)} />
+                                {/*
+                                    --------------------
+                                    SETTINGS - ITEM TYPE
+                                    --------------------
+                                */}
+                                <Route path="/admin/settings/item-types" exact component={requiresAuth(AdminItemTypeListContainer)} />
+                                <Route path="/admin/settings/item-type/:id" exact component={requiresAuth(AdminItemTypeRetrieveContainer)} />
+                                <Route path="/admin/settings/item-type/:id/update" exact component={requiresAuth(AdminItemTypeUpdateContainer)} />
+                                <Route path="/admin/settings/item-type/add/step-1" exact component={requiresAuth(AdminItemTypeCreateStep1Container)} />
+                                <Route path="/admin/settings/item-type/add/step-2" exact component={requiresAuth(AdminItemTypeCreateStep2Container)} />
+                                <Route path="/admin/settings/item-type/operation/archive/:id" exact component={requiresAuth(AdminItemTypeArchiveOperationContainer)} />
 
 
                                 {/*
