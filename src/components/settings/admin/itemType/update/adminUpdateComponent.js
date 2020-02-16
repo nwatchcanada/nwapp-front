@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
-// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 
 
 class AdminItemTypeUpdateComponent extends Component {
     render() {
         const {
-            id, text, description, errors, isLoading,
-            onTextChange, onClick
+            slug, category, categoryOptions, text, description, errors, isLoading,
+            onTextChange, onSelectChange, onClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -30,7 +30,7 @@ class AdminItemTypeUpdateComponent extends Component {
                             <Link to="/admin/settings/item-types"><i className="fas fa-sliders-h"></i>&nbsp;Item Types</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/settings/item-type/${id}`}>
+                            <Link to={`/admin/settings/item-type/${slug}`}>
                                 <i className="fas fa-itemType"></i>&nbsp;{text}
                             </Link>
                         </li>
@@ -47,6 +47,17 @@ class AdminItemTypeUpdateComponent extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Category (*)"
+                                name="category"
+                                defaultOptionLabel="Please select the event type."
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.category}
+                                onSelectChange={onSelectChange}
+                            />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
@@ -75,7 +86,7 @@ class AdminItemTypeUpdateComponent extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
-                                <Link to={`/admin/settings/item-type/${id}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/settings/item-type/${slug}`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

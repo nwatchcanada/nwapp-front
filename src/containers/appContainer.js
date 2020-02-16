@@ -495,11 +495,11 @@ class AppContainer extends React.Component {
                                     --------------------
                                 */}
                                 <Route path="/admin/settings/item-types" exact component={requiresAuth(AdminItemTypeListContainer)} />
-                                <Route path="/admin/settings/item-type/:id" exact component={requiresAuth(AdminItemTypeRetrieveContainer)} />
-                                <Route path="/admin/settings/item-type/:id/update" exact component={requiresAuth(AdminItemTypeUpdateContainer)} />
+                                <Route path="/admin/settings/item-type/:slug" exact component={requiresAuth(AdminItemTypeRetrieveContainer)} />
+                                <Route path="/admin/settings/item-type/:slug/update" exact component={requiresAuth(AdminItemTypeUpdateContainer)} />
                                 <Route path="/admin/settings/item-type/add/step-1" exact component={requiresAuth(AdminItemTypeCreateStep1Container)} />
                                 <Route path="/admin/settings/item-type/add/step-2" exact component={requiresAuth(AdminItemTypeCreateStep2Container)} />
-                                <Route path="/admin/settings/item-type/operation/archive/:id" exact component={requiresAuth(AdminItemTypeArchiveOperationContainer)} />
+                                <Route path="/admin/settings/item-type/operation/archive/:slug" exact component={requiresAuth(AdminItemTypeArchiveOperationContainer)} />
 
 
                                 {/*

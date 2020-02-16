@@ -269,6 +269,25 @@ export const ITEM_TYPE_CHOICES = [
         label: "Information"
     }
 ];
+export const ITEM_TYPE_CATEGORY_CHOICES = [
+    {
+        selectName: "category",
+        value: INCIDENT_ITEM_TYPE_OF,
+        label: "Incident"
+    },{
+        selectName: "category",
+        value: EVENT_ITEM_TYPE_OF,
+        label: "Event"
+    },{
+        selectName: "category",
+        value: CONCERN_ITEM_TYPE_OF,
+        label: "Concern"
+    },{
+        selectName: "category",
+        value: INFORMATION_ITEM_TYPE_OF,
+        label: "Information"
+    }
+];
 
 
 /**
