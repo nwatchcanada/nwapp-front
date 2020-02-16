@@ -246,10 +246,10 @@ export const STREET_DIRECTION_CHOICES = [
 /**
  *  The item type of that we can use in the system.
  */
-export const INCIDENT_ITEM_TYPE_OF = 1
-export const EVENT_ITEM_TYPE_OF = 2
-export const CONCERN_ITEM_TYPE_OF = 3
-export const INFORMATION_ITEM_TYPE_OF = 4
+export const INCIDENT_ITEM_TYPE_OF = 2
+export const EVENT_ITEM_TYPE_OF = 3
+export const CONCERN_ITEM_TYPE_OF = 4
+export const INFORMATION_ITEM_TYPE_OF = 5
 export const ITEM_TYPE_CHOICES = [
     {
         selectName: "typeOf",

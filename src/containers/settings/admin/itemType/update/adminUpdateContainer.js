@@ -100,9 +100,7 @@ class AdminItemTypeUpdateContainer extends Component {
     }
 
     onFailureSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:

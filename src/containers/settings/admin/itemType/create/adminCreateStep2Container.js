@@ -93,10 +93,7 @@ class AdminItemTypeCreateStep2Container extends Component {
     }
 
     onFailureCallback(errors) {
-        this.setState({
-            errors: errors,
-            isLoading: false,
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
