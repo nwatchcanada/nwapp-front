@@ -178,7 +178,7 @@ function fileFormatter(cell, row){
             }
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             {row.isArchived === false &&
-                <Link to={`/admin/itemType/${row.user}/file/archive/${row.id}`}>
+                <Link to={`/admin/itemType/${row.user}/file/archive/${row.slug}`}>
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             }
@@ -203,10 +203,10 @@ function detailLinkFormatter(cell, row){
     } else {
         return (
             <div>
-                <Link to={`/admin/settings/item-type/${row.id}`} className="btn btn-success btn-xs">
+                <Link to={`/admin/settings/item-type/${row.slug}`} className="btn btn-success btn-xs">
                     <i className="fas fa-binoculars"></i>&nbsp;View
                 </Link>;
-                <Link to={`/admin/settings/item-type/operation/archive/${row.id}`} className="btn btn-danger btn-xs">
+                <Link to={`/admin/settings/item-type/operation/archive/${row.slug}`} className="btn btn-danger btn-xs">
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
             </div>

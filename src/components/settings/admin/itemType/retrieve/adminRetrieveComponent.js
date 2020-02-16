@@ -34,9 +34,9 @@ export default class AdminItemTypeRetrieveComponent extends Component {
 
                 <h1><i className="fas fa-itemType"></i>&nbsp;{itemTypeData && itemTypeData.text}</h1>
 
-                {itemTypeData.state === 'inactive' &&
+                {itemTypeData && itemTypeData.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
-                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This itemTypeData is archived and is read-only.
+                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This item type is archived and is read-only.
                     </div>
                 }
 
@@ -47,14 +47,17 @@ export default class AdminItemTypeRetrieveComponent extends Component {
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light"><i className="fas fa-table"></i>&nbsp;Item Type details</th>
                                 </tr>
-
+                                <tr>
+                                    <th scope="row" className="bg-light">Category</th>
+                                    <td>{itemTypeData && itemTypeData.categoryLabel}</td>
+                                </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Text</th>
-                                    <td>{itemTypeData.text}</td>
+                                    <td>{itemTypeData && itemTypeData.text}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{itemTypeData.description}</td>
+                                    <td>{itemTypeData && itemTypeData.description}</td>
                                 </tr>
 
                                 <tr className="bg-dark">
