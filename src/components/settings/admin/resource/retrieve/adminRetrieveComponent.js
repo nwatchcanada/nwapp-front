@@ -126,7 +126,7 @@ export default class AdminResourceRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Created By</th>
-                                    <td>{resourceData.createdBy}</td>
+                                    <td>{resourceData && resourceData.createdBy}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified At</th>
@@ -136,7 +136,7 @@ export default class AdminResourceRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified By</th>
-                                    <td>{resourceData.lastModifiedBy}</td>
+                                    <td>{resourceData && resourceData.lastModifiedBy}</td>
                                 </tr>
 
                             </tbody>

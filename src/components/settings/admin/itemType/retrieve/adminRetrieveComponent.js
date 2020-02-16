@@ -73,7 +73,7 @@ export default class AdminItemTypeRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Created By</th>
-                                    <td>{itemTypeData.createdBy}</td>
+                                    <td>{itemTypeData && itemTypeData.createdBy}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified At</th>
@@ -83,7 +83,7 @@ export default class AdminItemTypeRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified By</th>
-                                    <td>{itemTypeData.lastModifiedBy}</td>
+                                    <td>{itemTypeData && itemTypeData.lastModifiedBy}</td>
                                 </tr>
 
                             </tbody>

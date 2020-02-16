@@ -34,9 +34,9 @@ export default class AdminTagRetrieveComponent extends Component {
 
                 <h1><i className="fas fa-tag"></i>&nbsp;{tagData && tagData.text}</h1>
 
-                {tagData.state === 'inactive' &&
+                {tagData && tagData.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
-                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This tagData is archived and is read-only.
+                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This tag is archived and is read-only.
                     </div>
                 }
 
@@ -50,11 +50,11 @@ export default class AdminTagRetrieveComponent extends Component {
 
                                 <tr>
                                     <th scope="row" className="bg-light">Text</th>
-                                    <td>{tagData.text}</td>
+                                    <td>{tagData && tagData.text}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{tagData.description}</td>
+                                    <td>{tagData && tagData.description}</td>
                                 </tr>
 
                                 <tr className="bg-dark">
@@ -70,7 +70,7 @@ export default class AdminTagRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Created By</th>
-                                    <td>{tagData.createdBy}</td>
+                                    <td>{tagData && tagData.createdBy}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified At</th>
@@ -80,7 +80,7 @@ export default class AdminTagRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified By</th>
-                                    <td>{tagData.lastModifiedBy}</td>
+                                    <td>{tagData && tagData.lastModifiedBy}</td>
                                 </tr>
 
                             </tbody>

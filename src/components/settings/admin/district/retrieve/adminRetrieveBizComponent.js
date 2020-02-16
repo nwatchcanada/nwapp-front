@@ -23,18 +23,18 @@ export default class AdminDistrictRetrieveBizComponent extends Component {
                             <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-building"></i>&nbsp;{districtData.name}
+                            <i className="fas fa-building"></i>&nbsp;{districtData && districtData.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-building"></i>&nbsp;{districtData.name}</h1>
+                <h1><i className="fas fa-building"></i>&nbsp;{districtData && districtData.name}</h1>
 
-                {districtData.state === 'inactive' &&
+                {districtData && districtData.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
-                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This districtData is archived and is read-only.
+                        <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This district data is archived and is read-only.
                     </div>
                 }
 
@@ -49,11 +49,11 @@ export default class AdminDistrictRetrieveBizComponent extends Component {
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Name</th>
-                                <td>{districtData.name}</td>
+                                <td>{districtData && districtData.name}</td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Description</th>
-                                <td>{districtData.description}</td>
+                                <td>{districtData && districtData.description}</td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Type</th>
@@ -62,14 +62,14 @@ export default class AdminDistrictRetrieveBizComponent extends Component {
                             <tr>
                                 <th scope="row" className="bg-light">Website URL</th>
                                 <td>
-                                    {districtData.websiteUrl &&
+                                    {districtData && districtData.websiteUrl &&
                                         <a href={districtData.websiteUrl} target="_blank" rel="noopener noreferrer">
                                             {districtData.websiteUrl}&nbsp;<i className="fas fa-external-link-alt"></i>
                                         </a>
                                     }
                                 </td>
                             </tr>
-                            {districtData.logoImage &&
+                            {districtData && districtData.logoImage &&
                                 <tr>
                                     <th scope="row" className="bg-light">Logo</th>
                                     <td>

@@ -23,21 +23,21 @@ export default class AdminDistrictRetrieveComComponent extends Component {
                             <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-university"></i>&nbsp;{districtData.name}
+                            <i className="fas fa-university"></i>&nbsp;{districtData && districtData.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-university"></i>&nbsp;{districtData.name}</h1>
+                <h1><i className="fas fa-university"></i>&nbsp;{districtData && districtData.name}</h1>
 
                 {districtData.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This districtData is archived and is read-only.
                     </div>
                 }
-                
+
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <p><strong>Please confirm these details before adding the residential client:</strong></p>
@@ -48,11 +48,11 @@ export default class AdminDistrictRetrieveComComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Name</th>
-                                    <td>{districtData.name}</td>
+                                    <td>{districtData && districtData.name}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{districtData.description}</td>
+                                    <td>{districtData && districtData.description}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Type</th>

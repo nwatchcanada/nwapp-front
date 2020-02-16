@@ -25,16 +25,16 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                             <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-home"></i>&nbsp;{districtData.name}
+                            <i className="fas fa-home"></i>&nbsp;{districtData && districtData.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-home"></i>&nbsp;{districtData.name}</h1>
+                <h1><i className="fas fa-home"></i>&nbsp;{districtData && districtData.name}</h1>
 
-                {districtData.state === 'inactive' &&
+                {districtData && districtData.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This districtData is archived and is read-only.
                     </div>
@@ -50,11 +50,11 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
 
                                 <tr>
                                     <th scope="row" className="bg-light">Name</th>
-                                    <td>{districtData.name}</td>
+                                    <td>{districtData && districtData.name}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{districtData.description}</td>
+                                    <td>{districtData && districtData.description}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Type</th>
@@ -62,17 +62,17 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Counselor Name</th>
-                                    <td>{districtData.counselorName}</td>
+                                    <td>{districtData && districtData.counselorName}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Counselor Email</th>
                                     <td>
-                                        {districtData.counselorEmail}
+                                        {districtData && districtData.counselorEmail}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Counselor Phone</th>
-                                    <td>{districtData.counselorPhone}</td>
+                                    <td>{districtData && districtData.counselorPhone}</td>
                                 </tr>
 
                                 <tr className="bg-dark">
@@ -88,7 +88,7 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Created By</th>
-                                    <td>{districtData.createdBy}</td>
+                                    <td>{districtData && districtData.createdBy}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified At</th>
@@ -98,7 +98,7 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified By</th>
-                                    <td>{districtData.lastModifiedBy}</td>
+                                    <td>{districtData && districtData.lastModifiedBy}</td>
                                 </tr>
 
                             </tbody>

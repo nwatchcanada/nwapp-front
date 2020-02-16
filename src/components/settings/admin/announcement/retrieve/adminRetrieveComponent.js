@@ -50,9 +50,9 @@ export default class AdminAnnouncementRetrieveComponent extends Component {
 
                                 <tr>
                                     <th scope="row" className="bg-light">Text</th>
-                                    <td>{announcementData.text}</td>
+                                    <td>{announcementData && announcementData.text}</td>
                                 </tr>
-                                
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-server"></i>&nbsp;System
@@ -66,7 +66,7 @@ export default class AdminAnnouncementRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Created By</th>
-                                    <td>{announcementData.createdBy}</td>
+                                    <td>{announcementData && announcementData.createdBy}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified At</th>
@@ -76,7 +76,7 @@ export default class AdminAnnouncementRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified By</th>
-                                    <td>{announcementData.lastModifiedBy}</td>
+                                    <td>{announcementData && announcementData.lastModifiedBy}</td>
                                 </tr>
 
                             </tbody>

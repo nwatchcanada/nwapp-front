@@ -50,9 +50,9 @@ export default class AdminHowHearRetrieveComponent extends Component {
 
                                 <tr>
                                     <th scope="row" className="bg-light">Text</th>
-                                    <td>{howHearData.text}</td>
+                                    <td>{howHearData && howHearData.text}</td>
                                 </tr>
-                                
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-server"></i>&nbsp;System
@@ -66,7 +66,7 @@ export default class AdminHowHearRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Created By</th>
-                                    <td>{howHearData.createdBy}</td>
+                                    <td>{howHearData && howHearData.createdBy}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified At</th>
@@ -76,7 +76,7 @@ export default class AdminHowHearRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Modified By</th>
-                                    <td>{howHearData.lastModifiedBy}</td>
+                                    <td>{howHearData && howHearData.lastModifiedBy}</td>
                                 </tr>
 
                             </tbody>
