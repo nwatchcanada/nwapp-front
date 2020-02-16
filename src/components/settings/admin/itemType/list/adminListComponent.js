@@ -50,6 +50,11 @@ class RemoteListComponent extends Component {
             }),
             formatter: statusFormatter
         },{
+            dataField: 'category',
+            text: 'Category',
+            sort: true,
+            formatter: categoryFormatter
+        },{
             dataField: 'text',
             text: 'Text',
         },{
@@ -118,6 +123,27 @@ class RemoteListComponent extends Component {
                 // overlay={ overlayFactory({ spinner: true, styles: { overlay: (base) => ({...base, background: 'rgba(0, 128, 128, 0.5)'}) } }) }
             />
         );
+    }
+}
+
+
+function categoryFormatter(cell, row){
+    switch(row.category) {
+        case 2:
+            return <span><i className="fas fa-fire" style={{ color: 'red' }}></i></span>;
+            break;
+        case 3:
+            return <span><i className="fas fa-glass-cheers" style={{ color: 'green' }}></i></span>;
+            break;
+        case 4:
+            return <i className="fas fa-exclamation-circle" style={{ color: 'yellow' }}></i>;
+            break;
+        case 5:
+            return <i className="fas fa-info-circle" style={{ color: 'blue' }}></i>;
+            break;
+        default:
+            return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
+            break;
     }
 }
 
