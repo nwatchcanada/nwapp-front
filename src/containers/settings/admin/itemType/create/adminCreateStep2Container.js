@@ -4,11 +4,7 @@ import Scroll from 'react-scroll';
 
 import AdminItemTypeCreateStep2Component from "../../../../../components/settings/admin/itemType/create/adminCreateStep2Component";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import {
-    RESIDENCE_TYPE_OF,
-    BUSINESS_TYPE_OF,
-    COMMUNITY_CARES_TYPE_OF
-} from "../../../../../constants/api";
+import { ITEM_TYPE_CATEGORY_CHOICES } from "../../../../../constants/api";
 import {
     localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
@@ -28,6 +24,7 @@ class AdminItemTypeCreateStep2Container extends Component {
         super(props);
 
         this.state = {
+            category: localStorageGetIntegerItem('nwapp-itemType-add-category'),
             text: localStorage.getItem('nwapp-itemType-add-text'),
             description: localStorage.getItem('nwapp-itemType-add-description'),
             errors: {},
@@ -148,10 +145,11 @@ class AdminItemTypeCreateStep2Container extends Component {
 
     render() {
         const {
-            name, description, errors, isLoading
+            category, name, description, errors, isLoading
         } = this.state;
         return (
             <AdminItemTypeCreateStep2Component
+                category={category}
                 name={name}
                 description={description}
                 errors={errors}

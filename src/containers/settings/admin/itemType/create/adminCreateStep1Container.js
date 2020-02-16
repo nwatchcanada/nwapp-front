@@ -4,6 +4,9 @@ import Scroll from 'react-scroll';
 
 import AdminItemTypeCreateStep1Component from "../../../../../components/settings/admin/itemType/create/adminCreateStep1Component";
 import { validateInput } from "../../../../../validators/itemTypeValidator";
+import {
+    localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminItemTypeCreateStep1Container extends Component {
@@ -89,6 +92,18 @@ class AdminItemTypeCreateStep1Container extends Component {
         localStorage.setItem('nwapp-itemType-add-'+[e.target.name], e.target.value);
     }
 
+    onSelectChange(option) {
+        const optionKey = [option.selectName]+"Option";
+        this.setState({
+            [option.selectName]: option.value,
+            optionKey: option,
+        });
+        localStorage.setItem('nwapp-itemType-create-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-itemType-create-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-itemType-create-'+optionKey, option);
+        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -119,6 +134,7 @@ class AdminItemTypeCreateStep1Container extends Component {
                 description={description}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
             />
         );

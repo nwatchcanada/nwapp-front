@@ -6,12 +6,13 @@ import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapA
 // import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 
 
 export default class AdminItemTypeCreateStep1Component extends Component {
     render() {
         const {
-            text, description, errors, onTextChange, isLoading, onClick
+            category, categoryOptions, text, description, errors, onTextChange, onSelectChange, isLoading, onClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -41,6 +42,17 @@ export default class AdminItemTypeCreateStep1Component extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Category (*)"
+                                name="category"
+                                defaultOptionLabel="Please select the event type."
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.category}
+                                onSelectChange={onSelectChange}
+                            />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
