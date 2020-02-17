@@ -5,8 +5,10 @@ import Scroll from 'react-scroll';
 import AdminItemTypeCreateStep1Component from "../../../../../components/settings/admin/itemType/create/adminCreateStep1Component";
 import { validateInput } from "../../../../../validators/itemTypeValidator";
 import {
-    localStorageSetObjectOrArrayItem
+    localStorageSetObjectOrArrayItem,
+    localStorageGetIntegerItem
 } from '../../../../../helpers/localStorageUtility';
+import { ITEM_TYPE_CATEGORY_CHOICES } from "../../../../../constants/api";
 
 
 class AdminItemTypeCreateStep1Container extends Component {
@@ -30,11 +32,13 @@ class AdminItemTypeCreateStep1Container extends Component {
             isLoading: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
+            category: localStorageGetIntegerItem('nwapp-itemType-add-category'),
             text: localStorage.getItem('nwapp-itemType-add-text'),
             description: localStorage.getItem('nwapp-itemType-add-description'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -98,9 +102,9 @@ class AdminItemTypeCreateStep1Container extends Component {
             [option.selectName]: option.value,
             optionKey: option,
         });
-        localStorage.setItem('nwapp-itemType-create-'+[option.selectName].toString(), option.value);
-        localStorage.setItem('nwapp-itemType-create-'+[option.selectName].toString()+"Label", option.label);
-        localStorageSetObjectOrArrayItem('nnwapp-itemType-create-'+optionKey, option);
+        localStorage.setItem('nwapp-itemType-add-'+[option.selectName].toString(), option.value);
+        localStorage.setItem('nwapp-itemType-add-'+[option.selectName].toString()+"Label", option.label);
+        localStorageSetObjectOrArrayItem('nnwapp-itemType-add-'+optionKey, option);
         // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
     }
 
@@ -127,9 +131,11 @@ class AdminItemTypeCreateStep1Container extends Component {
      */
 
     render() {
-        const { text, description, errors } = this.state;
+        const { category, categoryOptions, text, description, errors } = this.state;
         return (
             <AdminItemTypeCreateStep1Component
+                category={category}
+                categoryOptions={ITEM_TYPE_CATEGORY_CHOICES}
                 text={text}
                 description={description}
                 errors={errors}
