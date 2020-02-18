@@ -8,7 +8,9 @@ import {
 } from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateConcernInput } from "../../../../validators/itemValidator";
-// CONCERN_ITEM_TYPE_OF
+import { OTHER_CONCERN_TYPE_OF, CONCERN_ITEM_TYPE_OF } from "../../../../constants/api";
+import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
+
 
 class ItemCreateStep2ConcernContainer extends Component {
     /**
@@ -18,6 +20,12 @@ class ItemCreateStep2ConcernContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        const parametersMap = new Map();
+        // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
+        parametersMap.set("o", "-created_at");
+        parametersMap.set("category", CONCERN_ITEM_TYPE_OF);
+
         this.onClick = this.onClick.bind(this);
     }
 
@@ -74,6 +82,7 @@ class ItemCreateStep2ConcernContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        itemTypeList: store.itemTypeListState,
     };
 }
 
@@ -81,7 +90,12 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        pullItemTypeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullItemTypeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
     }
 }
 

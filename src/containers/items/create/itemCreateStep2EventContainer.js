@@ -11,6 +11,7 @@ import {
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateEventInput } from "../../../validators/itemValidator";
 import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF, EVENT_ITEM_TYPE_OF } from "../../../constants/api";
+import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../actions/itemTypeActions";
 
 
 class ItemCreateStep2EventContainer extends Component {
@@ -21,11 +22,26 @@ class ItemCreateStep2EventContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        const parametersMap = new Map();
+        // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
+        parametersMap.set("o", "-created_at");
+        parametersMap.set("category", EVENT_ITEM_TYPE_OF);
+
         this.state = {
+            // Pagination
+            page: 1,
+            sizePerPage: 10000,
+            totalSize: 0,
+
+            // Sorting, Filtering, & Searching
+            parametersMap: parametersMap,
+
+            // The rest of the code..
             title: localStorage.getItem("nwapp-item-create-event-title"),
-            eventTypeOf:localStorageGetIntegerItem("nwapp-item-create-event-eventTypeOf"),
-            eventTypeOfOption: localStorageGetObjectItem('nwapp-item-create-event-eventTypeOfOption'),
-            eventTypeOfOther: localStorage.getItem("nwapp-item-create-event-eventTypeOfOther"),
+            category:localStorage.getItem("nwapp-item-create-event-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-event-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-event-categoryOther"),
             date: localStorageGetDateItem("nwapp-item-create-event-date"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
@@ -47,6 +63,8 @@ class ItemCreateStep2EventContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessListCallback = this.onSuccessListCallback.bind(this);
+        this.onFailureListCallback = this.onFailureListCallback.bind(this);
     }
 
     /**
@@ -56,6 +74,15 @@ class ItemCreateStep2EventContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Get our data.
+        this.props.pullItemTypeList(
+            this.state.page,
+            this.state.sizePerPage,
+            this.state.parametersMap,
+            this.onSuccessListCallback,
+            this.onFailureListCallback
+        );
     }
 
     componentWillUnmount() {
@@ -90,6 +117,27 @@ class ItemCreateStep2EventContainer extends Component {
         scroll.scrollToTop();
     }
 
+    onSuccessListCallback(response) {
+        console.log("onSuccessListCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isItemTypeLoading: false,
+                errors: []
+            },
+            ()=>{
+                console.log("onSuccessListCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessListCallback | State (Post-Fetch):", this.state);
+            }
+        )
+    }
+
+    onFailureListCallback(errors) {
+        console.log(errors);
+        this.setState({ isItemTypeLoading: false });
+    }
+
     /**
      *  Event handling functions
      *------------------------------------------------------------
@@ -104,15 +152,18 @@ class ItemCreateStep2EventContainer extends Component {
     }
 
     onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            optionKey: option,
-        });
-        localStorage.setItem('nwapp-item-create-event-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-item-create-event-'+optionKey, option);
-        // console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
-        // console.log(this.state);
+        const optionKey = [option.selectName].toString()+"Option";
+        this.setState(
+            {
+                [option.selectName]: option.value,
+                [optionKey]: option,
+            },
+            ()=>{
+                console.log(this.state);
+                localStorage.setItem('nwapp-item-create-event-'+[option.selectName], option.value);
+                localStorageSetObjectOrArrayItem('nwapp-item-create-event-'+optionKey, option);
+            }
+        );
     }
 
     onDateTimeChange(dateObj) {
@@ -238,10 +289,10 @@ class ItemCreateStep2EventContainer extends Component {
 
             // Save for convinence the event type depending on if the user
             // chose a standard option or the `other` option.
-            if (this.state.eventTypeOf.value === OTHER_EVENT_TYPE_OF) {
-                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.eventTypeOfOther);
+            if (this.state.category.value === OTHER_EVENT_TYPE_OF) {
+                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.categoryOther);
             } else {
-                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.eventTypeOfOption.label);
+                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.categoryOption.label);
             }
 
             this.onSuccessfulSubmissionCallback();
@@ -284,13 +335,22 @@ class ItemCreateStep2EventContainer extends Component {
      */
 
     render() {
-        const { title, eventTypeOf, eventTypeOfOther, date, description, logoPhoto, galleryPhotos, shownToWhom, canBePostedOnSocialMedia, errors } = this.state;
+        const {
+            title, category, categoryOther, date, description, logoPhoto, galleryPhotos, shownToWhom, canBePostedOnSocialMedia, errors
+        } = this.state;
+        const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
+
+        // For debugging purposes only.
+        // console.log(itemTypeListOptions);
+        // console.log("category |", category);
+        // console.log("categoryOptions |", itemTypeListOptions);
+
         return (
             <ItemCreateStep2EventComponent
                 title={title}
-                eventTypeOf={eventTypeOf}
-                eventTypeOfOptions={EVENT_TYPE_CHOICES}
-                eventTypeOfOther={eventTypeOfOther}
+                category={category}
+                categoryOptions={itemTypeListOptions}
+                categoryOther={categoryOther}
                 date={date}
                 description={description}
                 logoPhoto={logoPhoto}
@@ -315,6 +375,7 @@ class ItemCreateStep2EventContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        itemTypeList: store.itemTypeListState,
     };
 }
 
@@ -322,7 +383,12 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        pullItemTypeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullItemTypeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
     }
 }
 

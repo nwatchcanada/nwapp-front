@@ -20,13 +20,13 @@ import {
 class ItemCreateStep2EventComponent extends Component {
     render() {
         const {
-            title, eventTypeOf, eventTypeOfOptions, eventTypeOfOther, date, description, errors, isLoading,
+            title, category, categoryOptions, categoryOther, date, description, errors, isLoading,
             onClick,  onTextChange, onSelectChange, onDateTimeChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
             shownToWhom, canBePostedOnSocialMedia, onRadioChange,
         } = this.props;
-        const isOtherEventTypeOf = eventTypeOf === OTHER_EVENT_TYPE_OF;
+        const isOtherEventTypeOf = category === OTHER_EVENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -83,11 +83,11 @@ class ItemCreateStep2EventComponent extends Component {
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
                                 label="Event Type (*)"
-                                name="eventTypeOf"
+                                name="category"
                                 defaultOptionLabel="Please select the event type."
-                                options={eventTypeOfOptions}
-                                value={eventTypeOf}
-                                error={errors.eventTypeOf}
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.category}
                                 onSelectChange={onSelectChange}
                             />
 
@@ -95,11 +95,11 @@ class ItemCreateStep2EventComponent extends Component {
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.eventTypeOfOther}
+                                    error={errors.categoryOther}
                                     label="Event Type - Other (*)"
                                     onChange={onTextChange}
-                                    value={eventTypeOfOther}
-                                    name="eventTypeOfOther"
+                                    value={categoryOther}
+                                    name="categoryOther"
                                     type="text"
                                 />
                             }
