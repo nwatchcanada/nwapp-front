@@ -68,7 +68,7 @@ export default class AnnouncementComponent extends Component {
 
 function newsEditLinkFormatter(cell, row){
     return (
-        <Link to={`/admin/settings/announcement/${row.slug}`}>
+        <Link to={`/admin/settings/announcement/${row.slug}/update`}>
             <i class="fas fa-pencil-alt"></i>
         </Link>
     );
