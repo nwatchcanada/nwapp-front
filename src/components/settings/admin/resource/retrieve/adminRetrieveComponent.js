@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 // import 'moment-timezone';
+import DOMPurify from "dompurify";
 
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
@@ -89,7 +90,7 @@ export default class AdminResourceRetrieveComponent extends Component {
                                 {resourceData && resourceData.embedCode &&
                                     <tr>
                                         <th scope="row" className="bg-light">YouTube Video</th>
-                                        <td dangerouslySetInnerHTML={{__html:resourceData.embedCode}}></td>
+                                        <td dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(resourceData.embedCode) }}></td>
                                     </tr>
                                 }
 

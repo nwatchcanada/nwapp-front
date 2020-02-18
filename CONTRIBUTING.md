@@ -48,6 +48,7 @@ npm install --save react-bootstrap-table2-paginator
 npm install --save react-bootstrap-table2-filter
 npm install --save react-bootstrap-table2-overlay
 npm install --save react-bootstrap-table2-toolkit
+npm install --save dompurify
 ```
 
 ## What ``Chrome Plugins`` should I use?

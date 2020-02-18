@@ -3,6 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Select from 'react-select';
 import shortid from "shortid";
+import DOMPurify from "dompurify";
 
 
 /**
@@ -81,7 +82,7 @@ export const BootstrapSingleSelect = ({
                 styles={customStyles}
                 isLoading={isLoading}
             />
-            {helpText && <small id={shortid.generate()} className="form-text text-muted" dangerouslySetInnerHTML={{__html:helpText}}></small>}
+            {helpText && <small id={shortid.generate()} className="form-text text-muted" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(helpText) }}></small>}
             {error && <div className="invalid-feedback" style={{display: 'block'}}>{error}</div>}
         </div>
     )

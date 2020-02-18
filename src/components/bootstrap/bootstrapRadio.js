@@ -2,6 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import shortid from "shortid";
+import DOMPurify from "dompurify";
 
 
 /**
@@ -29,7 +30,7 @@ export const BootstrapRadio = ({
                 (optionDatum, i) => <RadioChoiceOption name={name} error={error} selectedValue={selectedValue} choiceOption={optionDatum} key={i+shortid.generate()} />)
             }
             {helpText &&
-                <small id={shortid.generate()} className="form-text text-muted" dangerouslySetInnerHTML={{ __html:helpText }}></small>
+                <small id={shortid.generate()} className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
             }
         </div>
     );
