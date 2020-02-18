@@ -3,6 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import shortid from "shortid";
 import { RegionDropdown } from 'react-country-region-selector';
+import DOMPurify from "dompurify";
 
 
 export const BootstrapProvinceSelect = ({
@@ -23,7 +24,7 @@ export const BootstrapProvinceSelect = ({
                 placeholder={placeholder}
                 country={country}
             />
-            <small id={helpID} className="form-text text-muted">{helpText}</small>
+            <small id={helpID} className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
             {error && <div className="invalid-feedback">{error}</div>}
         </div>
     )

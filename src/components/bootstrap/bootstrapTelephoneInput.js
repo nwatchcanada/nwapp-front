@@ -3,6 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import shortid from "shortid";
 import NumberFormat from 'react-number-format';
+import DOMPurify from "dompurify";
 
 
 /**
@@ -57,7 +58,7 @@ export const BootstrapTelephoneInput = ({
                 disabled={disabled}
             />
             */ }
-            <small id={helpID} className="form-text text-muted">{helpText}</small>
+            <small id={helpID} className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
             {error && <div className="invalid-feedback">{error}</div>}
         </div>
     )

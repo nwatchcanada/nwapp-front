@@ -2,6 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import shortid from "shortid";
+import DOMPurify from "dompurify";
 
 
 /**
@@ -31,7 +32,7 @@ export const BootstrapCheckbox = ({
         <div className={classnames(divClassName, { 'has-error': error })}>
             <input type="checkbox" id={id} name={name} onChange={onChange} checked={value} className={classnames(inputClassName, { 'is-invalid': error }, { 'border-success': !error && borderColour === 'border-success' }, { 'border-primary': !error && borderColour === 'border-primary' } )} />
             <label className="form-check-label" htmlFor={id}>{label}</label>
-            <small id={helpID} className="form-text text-muted">{helpText}</small>
+            <small id={helpID} className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
             {error && <div className="invalid-feedback">{error}</div>}
         </div>
     );

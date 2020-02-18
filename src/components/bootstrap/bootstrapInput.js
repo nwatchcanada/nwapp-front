@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import shortid from "shortid";
+import DOMPurify from "dompurify";
 
 
 /**
@@ -42,7 +43,7 @@ export const BootstrapInput = ({
                 onChange={onChange}
                 disabled={disabled}
             />
-            <small id={helpID} className="form-text text-muted">{helpText}</small>
+            <small id={helpID} className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
             {error && <div className="invalid-feedback">{error}</div>}
         </div>
     )

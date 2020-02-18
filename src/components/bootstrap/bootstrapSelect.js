@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import DOMPurify from "dompurify";
 
 
 export const BootstrapSelectOption = ({ label, value, selectedValues }) => {
@@ -51,7 +52,7 @@ export const BootstrapSelect = ({
                 {defaultOptionLabel&&<option>{defaultOptionLabel}</option>}
                 {elements}
             </select>
-            <small id={helpID} className="form-text text-muted">{helpText}</small>
+            <small id={helpID} className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
             {error && <div className="invalid-feedback">{error}</div>}
         </div>
     )

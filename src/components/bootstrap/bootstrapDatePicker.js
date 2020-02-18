@@ -2,6 +2,7 @@ import React from 'react';
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import classnames from 'classnames';
+import DOMPurify from "dompurify";
 
 
 export const BootstrapDatePicker = ({
@@ -29,7 +30,7 @@ export const BootstrapDatePicker = ({
                     </span>
                 </div>
             </div>
-            <small className="form-text text-muted">{helpText}</small>
+            <small className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
         </div>
     );
 }
