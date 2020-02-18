@@ -8,7 +8,7 @@ import {
 } from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateConcernInput } from "../../../../validators/itemValidator";
-
+// CONCERN_ITEM_TYPE_OF
 
 class ItemCreateStep2ConcernContainer extends Component {
     /**

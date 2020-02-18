@@ -5,7 +5,8 @@ import Scroll from 'react-scroll';
 import ItemCreateStep2IncidentComponent from "../../../../components/items/create/incident/itemCreateStep2IncidentComponent";
 import { localStorageGetIntegerItem, localStorageGetObjectItem, localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
 import { validateIncidentStep2Input } from "../../../../validators/itemValidator";
-import { OTHER_INCIDENT_TYPE_OF, INCIDENT_TYPE_CHOICES } from "../../../../constants/api";
+import { OTHER_INCIDENT_TYPE_OF, INCIDENT_ITEM_TYPE_OF } from "../../../../constants/api";
+import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
 
 
 class ItemCreateStep2IncidentContainer extends Component {
@@ -16,12 +17,28 @@ class ItemCreateStep2IncidentContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        const parametersMap = new Map();
+        // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
+        parametersMap.set("o", "-created_at");
+        parametersMap.set("category", INCIDENT_ITEM_TYPE_OF);
+
         this.state = {
-            incidentTypeOf:localStorageGetIntegerItem("nwapp-item-create-incident-incidentTypeOf"),
-            incidentTypeOfOption: localStorageGetObjectItem('nwapp-item-create-incident-incidentTypeOfOption'),
-            incidentTypeOfOther: localStorage.getItem("nwapp-item-create-incident-incidentTypeOfOther"),
+            // Pagination
+            page: 1,
+            sizePerPage: 10000,
+            totalSize: 0,
+
+            // Sorting, Filtering, & Searching
+            parametersMap: parametersMap,
+
+            // The rest of the code..
+            category:localStorage.getItem("nwapp-item-create-incident-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-incident-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-incident-categoryOther"),
             errors: {},
-            isLoading: false
+            isLoading: false,
+            isItemTypeLoading: true,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -29,6 +46,8 @@ class ItemCreateStep2IncidentContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessListCallback = this.onSuccessListCallback.bind(this);
+        this.onFailureListCallback = this.onFailureListCallback.bind(this);
     }
 
     /**
@@ -38,6 +57,15 @@ class ItemCreateStep2IncidentContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Get our data.
+        this.props.pullItemTypeList(
+            this.state.page,
+            this.state.sizePerPage,
+            this.state.parametersMap,
+            this.onSuccessListCallback,
+            this.onFailureListCallback
+        );
     }
 
     componentWillUnmount() {
@@ -53,6 +81,27 @@ class ItemCreateStep2IncidentContainer extends Component {
      *  API callback functions
      *------------------------------------------------------------
      */
+
+    onSuccessListCallback(response) {
+        console.log("onSuccessListCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isItemTypeLoading: false,
+                errors: []
+            },
+            ()=>{
+                console.log("onSuccessListCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessListCallback | State (Post-Fetch):", this.state);
+            }
+        )
+    }
+
+    onFailureListCallback(errors) {
+        console.log(errors);
+        this.setState({ isItemTypeLoading: false });
+    }
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
@@ -110,10 +159,10 @@ class ItemCreateStep2IncidentContainer extends Component {
         if (isValid) {
             // Save for convinence the incident type depending on if the user
             // chose a standard option or the `other` option.
-            if (this.state.incidentTypeOf === OTHER_INCIDENT_TYPE_OF) {
-                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.incidentTypeOfOther);
+            if (this.state.category === OTHER_INCIDENT_TYPE_OF) {
+                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.categoryOther);
             } else {
-                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.incidentTypeOfOption.label);
+                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.categoryOption.label);
             }
             this.onSuccessfulSubmissionCallback();
 
@@ -129,16 +178,24 @@ class ItemCreateStep2IncidentContainer extends Component {
      */
 
     render() {
-        const { incidentTypeOf, incidentTypeOfOther, errors } = this.state;
+        const { category, categoryOther, isItemTypeLoading, errors } = this.state;
+        const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
+
+        // For debugging purposes only.
+        // console.log(itemTypeListOptions);
+        // console.log("category |", category);
+        // console.log("categoryOptions |", itemTypeListOptions);
+
         return (
             <ItemCreateStep2IncidentComponent
-                incidentTypeOf={incidentTypeOf}
-                incidentTypeOfOptions={INCIDENT_TYPE_CHOICES}
-                incidentTypeOfOther={incidentTypeOfOther}
+                category={category}
+                categoryOptions={itemTypeListOptions}
+                categoryOther={categoryOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
+                isItemTypeLoading={isItemTypeLoading}
             />
         );
     }
@@ -147,11 +204,18 @@ class ItemCreateStep2IncidentContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        itemTypeList: store.itemTypeListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        pullItemTypeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullItemTypeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
+    }
 }
 
 

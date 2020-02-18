@@ -5,6 +5,7 @@ import Scroll from 'react-scroll';
 import ItemCreateStep2InformationComponent from "../../../components/items/create/itemCreateStep2InformationComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateInformationInput } from "../../../validators/itemValidator";
+// INFORMATION_ITEM_TYPE_OF
 
 
 class ItemCreateStep2InformationContainer extends Component {

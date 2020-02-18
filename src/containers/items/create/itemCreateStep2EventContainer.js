@@ -10,7 +10,7 @@ import {
 } from '../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateEventInput } from "../../../validators/itemValidator";
-import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF } from "../../../constants/api";
+import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF, EVENT_ITEM_TYPE_OF } from "../../../constants/api";
 
 
 class ItemCreateStep2EventContainer extends Component {

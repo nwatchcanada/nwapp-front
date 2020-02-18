@@ -16,16 +16,17 @@ import { OTHER_INCIDENT_TYPE_OF } from "../../../../constants/api";
 class ItemCreateStep2IncidentComponent extends Component {
     render() {
         const {
-            incidentTypeOf,
-            incidentTypeOfOptions,
-            incidentTypeOfOther,
+            category,
+            categoryOptions,
+            categoryOther,
             errors,
             onTextChange,
             onSelectChange,
             isLoading,
             onClick,
+            isItemTypeLoading,
         } = this.props;
-        const isOtherIncidentTypeOf = incidentTypeOf === OTHER_INCIDENT_TYPE_OF;
+        const isOtherIncidentTypeOf = category === OTHER_INCIDENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -76,24 +77,25 @@ class ItemCreateStep2IncidentComponent extends Component {
 
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                label="Incident Type (*)"
-                                name="incidentTypeOf"
-                                defaultOptionLabel="Please select the incident type."
-                                options={incidentTypeOfOptions}
-                                value={incidentTypeOf}
-                                error={errors.incidentTypeOf}
+                                label="Incident Category (*)"
+                                name="category"
+                                defaultOptionLabel="Please select the incident category."
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.category}
                                 onSelectChange={onSelectChange}
+                                isLoading={isItemTypeLoading}
                             />
 
                             {isOtherIncidentTypeOf &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.incidentTypeOfOther}
-                                    label="Incident Type - Other (*)"
+                                    error={errors.categoryOther}
+                                    label="Incident Category - Other (*)"
                                     onChange={onTextChange}
-                                    value={incidentTypeOfOther}
-                                    name="incidentTypeOfOther"
+                                    value={categoryOther}
+                                    name="categoryOther"
                                     type="text"
                                 />
                             }

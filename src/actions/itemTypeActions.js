@@ -470,7 +470,7 @@ export function getItemTypeReactSelectOptions(itemTypeList=[], selectName="itemT
                 let itemType = results[i];
                 itemTypeOptions.push({
                     selectName: selectName,
-                    value: itemType.id,
+                    value: itemType.slug,
                     label: itemType.text
                 });
                 // console.log(itemType);
