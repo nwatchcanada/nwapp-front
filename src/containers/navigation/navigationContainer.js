@@ -87,7 +87,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-reports",
         icon: "book",
         title: "Reports",
-        url: "/reports"
+        url: "/admin/reports"
     },{
         id: "full-staff",
         icon: "user-check",
@@ -157,7 +157,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-reports",
         icon: "book",
         title: "Reports",
-        url: "/reports"
+        url: "/admin/reports"
     },{
         id: "full-staff",
         icon: "user-check",

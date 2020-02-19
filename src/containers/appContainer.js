@@ -298,7 +298,19 @@ import AdminWatchUnarchiveOperationContainer from "./watches/admin/operations/ad
 import AdminWatchSearchContainer from "./watches/admin/search/adminSearchContainer";
 import AdminWatchSearchResultContainer from "./watches/admin/search/adminSearchResultContainer";
 
-
+/*
+-------
+REPORTS
+-------
+*/
+import ReportListContainer from "./reports/reportListContainer";
+import Report01Container from "./reports/report01Container";
+import Report02Container from "./reports/report02Container";
+import Report03Container from "./reports/report03Container";
+import Report04Container from "./reports/report04Container";
+import Report05Container from "./reports/report05Container";
+import Report06Container from "./reports/report06Container";
+import Report07Container from "./reports/report07Container";
 
 
 
@@ -342,8 +354,6 @@ import ActionIncidentItemTaskStep3Container from "./tasks/actionIncidentItem/act
 
 
 import ConcernItemListContainer from "./concerns/concernItemListContainer";
-
-import ReportListContainer from "./reports/reportListContainer";
 
 import FinancialListContainer from "./financials/list/financialListContainer";
 import FinanciaRetrieveContainer from "./financials/retrieve/financialRetrieveContainer";
@@ -680,6 +690,20 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/watches/search" exact component={requiresAuth(AdminWatchSearchContainer)} />
                                 <Route path="/admin/watches/search-results" exact component={requiresAuth(AdminWatchSearchResultContainer)} />
 
+                                /*
+                                -------
+                                REPORTS
+                                -------
+                                */
+                                <Route path="/admin/reports" exact component={requiresAuth(ReportListContainer)} />
+                                <Route path="/admin/report/1" exact component={requiresAuth(Report01Container)} />
+                                <Route path="/admin/report/2" exact component={requiresAuth(Report02Container)} />
+                                <Route path="/admin/report/3" exact component={requiresAuth(Report03Container)} />
+                                <Route path="/admin/report/4" exact component={requiresAuth(Report04Container)} />
+                                <Route path="/admin/report/5" exact component={requiresAuth(Report05Container)} />
+                                <Route path="/admin/report/6" exact component={requiresAuth(Report06Container)} />
+                                <Route path="/admin/report/7" exact component={requiresAuth(Report07Container)} />
+
 
 
 
@@ -728,7 +752,6 @@ class AppContainer extends React.Component {
                                 <Route path="/task/4/:slug/step-2" exact component={requiresAuth(ActionIncidentItemTaskStep2Container)} />
                                 <Route path="/task/4/:slug/step-3" exact component={requiresAuth(ActionIncidentItemTaskStep3Container)} />
                                 <Route path="/concerns" exact component={requiresAuth(ConcernItemListContainer)} />
-                                <Route path="/reports" exact component={requiresAuth(ReportListContainer)} />
 
                                 <Route path="/financials" exact component={requiresAuth(FinancialListContainer)} />
                                 <Route path="/financial/:slug" exact component={requiresAuth(FinanciaRetrieveContainer)} />
