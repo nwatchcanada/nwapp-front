@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapErrorsProcessingAlert } from "../../bootstrap/bootstrapAlert";
-import { BootstrapTextarea } from "../../bootstrap/bootstrapTextarea";
+import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 
 
 class ItemCreateStep2InformationComponent extends Component {
