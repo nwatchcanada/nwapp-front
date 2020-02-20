@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep3ConcernComponent from "../../../../components/items/create/concern/itemCreateStep3ConcernComponent";
-import {
-    localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
-} from '../../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateConcernInput } from "../../../../validators/itemValidator";
-import { CONCERN_TYPE_CHOICES, OTHER_CONCERN_TYPE_OF } from "../../../../constants/api";
+import { localStorageGetIntegerItem, localStorageGetObjectItem, localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
+import { validateConcernStep3Input } from "../../../../validators/itemValidator";
+import { OTHER_CONCERN_TYPE_OF, CONCERN_ITEM_TYPE_OF } from "../../../../constants/api";
+import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
 
 
 class ItemCreateStep3ConcernContainer extends Component {
@@ -19,25 +17,37 @@ class ItemCreateStep3ConcernContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        const parametersMap = new Map();
+        // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
+        parametersMap.set("o", "-created_at");
+        parametersMap.set("category", CONCERN_ITEM_TYPE_OF);
+
         this.state = {
-            title: localStorage.getItem("nwapp-item-create-concern-title"),
-            description: localStorage.getItem("nwapp-item-create-concern-description"),
-            location: localStorage.getItem("nwapp-item-create-concern-location"),
-            photos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
-            concernTypeOf:localStorageGetIntegerItem("nwapp-item-create-concern-concernTypeOf"),
-            concernTypeOfOption: CONCERN_TYPE_CHOICES,
-            concernTypeOfOther: localStorage.getItem("nwapp-item-create-concern-concernTypeOfOther"),
+            // Pagination
+            page: 1,
+            sizePerPage: 10000,
+            totalSize: 0,
+
+            // Sorting, Filtering, & Searching
+            parametersMap: parametersMap,
+
+            // The rest of the code..
+            category:localStorage.getItem("nwapp-item-create-concern-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-concern-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-concern-categoryOther"),
             errors: {},
-            isLoading: false
+            isLoading: false,
+            isItemTypeLoading: true,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessListCallback = this.onSuccessListCallback.bind(this);
+        this.onFailureListCallback = this.onFailureListCallback.bind(this);
     }
 
     /**
@@ -47,6 +57,15 @@ class ItemCreateStep3ConcernContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Get our data.
+        this.props.pullItemTypeList(
+            this.state.page,
+            this.state.sizePerPage,
+            this.state.parametersMap,
+            this.onSuccessListCallback,
+            this.onFailureListCallback
+        );
     }
 
     componentWillUnmount() {
@@ -63,9 +82,29 @@ class ItemCreateStep3ConcernContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessListCallback(response) {
+        console.log("onSuccessListCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isItemTypeLoading: false,
+                errors: []
+            },
+            ()=>{
+                console.log("onSuccessListCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessListCallback | State (Post-Fetch):", this.state);
+            }
+        )
+    }
+
+    onFailureListCallback(errors) {
+        console.log(errors);
+        this.setState({ isItemTypeLoading: false });
+    }
+
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Item has been successfully created.");
         this.props.history.push("/item/add/step-4-concern");
     }
 
@@ -82,7 +121,7 @@ class ItemCreateStep3ConcernContainer extends Component {
     }
 
     /**
-     *  Event handling functions
+     *  Concern handling functions
      *------------------------------------------------------------
      */
 
@@ -95,26 +134,36 @@ class ItemCreateStep3ConcernContainer extends Component {
     }
 
     onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            optionKey: option,
-        });
-        localStorage.setItem('nwapp-item-create-concern-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-item-create-concern-'+optionKey, option);
-        console.log([option.selectName], optionKey, "|", this.state); // For debugging purposes only.
-        // console.log(this.state);
+        const optionKey = [option.selectName].toString()+"Option";
+        this.setState(
+            {
+                [option.selectName]: option.value,
+                [optionKey]: option,
+            },
+            ()=>{
+                console.log(this.state);
+                localStorage.setItem('nwapp-item-create-concern-'+[option.selectName], option.value);
+                localStorageSetObjectOrArrayItem('nwapp-item-create-concern-'+optionKey, option);
+            }
+        );
     }
 
     onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
+        // Prconcern the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateConcernInput(this.state);
+        const { errors, isValid } = validateConcernStep3Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+            // Save for convinence the concern type depending on if the user
+            // chose a standard option or the `other` option.
+            if (this.state.category === OTHER_CONCERN_TYPE_OF) {
+                localStorage.setItem('nwapp-item-create-concern-pretty-concern-type', this.state.categoryOther);
+            } else {
+                localStorage.setItem('nwapp-item-create-concern-pretty-concern-type', this.state.categoryOption.label);
+            }
             this.onSuccessfulSubmissionCallback();
 
         // CASE 2 OF 2: Validation was a failure.
@@ -124,97 +173,29 @@ class ItemCreateStep3ConcernContainer extends Component {
     }
 
     /**
-     *  Special Thanks: https://react-dropzone.netlify.com/#previews
-     */
-    onDrop(acceptedFiles) {
-        const file = acceptedFiles[0];
-
-        // // For debuging purposes only.
-        // console.log("DEBUG | onDrop | file", file);
-
-        const fileWithPreview = Object.assign(file, {
-            preview: URL.createObjectURL(file)
-        });
-
-        // Append our array.
-        let a = this.state.photos.slice(); //creates the clone of the state
-        a.push(fileWithPreview);
-
-        // // For debugging purposes.
-        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
-        // console.log("DEBUG |", a, "\n");
-
-        // Update our local state to update the GUI.
-        this.setState({
-            photos: a
-        });
-
-        // Save our photos data.
-        localStorageSetObjectOrArrayItem("nwapp-item-create-concern-photos", a);
-    }
-
-    onRemoveUploadClick(e, name) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Iterate through all the photos.
-        const photos = this.state.photos;
-        for (let i = 0; i < photos.length; i++) {
-            let row = photos[i];
-
-            // // For debugging purposes only.
-            // console.log(row);
-            // console.log(photos);
-
-            if (row.name === name) {
-                //
-                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
-                //
-                const filteredPhotos = photos.slice(
-                    0, i
-                ).concat(
-                    photos.slice(
-                        i + 1, photos.length
-                    )
-                )
-
-                // Update our state with our NEW ARRAY which no longer has
-                // the item we deleted.
-                this.setState({
-                    photos: filteredPhotos
-                });
-
-                // Save our photos data.
-                localStorageSetObjectOrArrayItem("nwapp-item-create-concern-photos", filteredPhotos);
-
-                // Terminate our for-loop.
-                return;
-            }
-        }
-    }
-
-    /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { title, description, location, photos, concernTypeOf, concernTypeOfOther, errors } = this.state;
+        const { category, categoryOther, isItemTypeLoading, errors } = this.state;
+        const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
+
+        // For debugging purposes only.
+        // console.log(itemTypeListOptions);
+        // console.log("category |", category);
+        // console.log("categoryOptions |", itemTypeListOptions);
+
         return (
             <ItemCreateStep3ConcernComponent
-                title={title}
-                description={description}
-                location={location}
-                photos={photos}
-                concernTypeOf={concernTypeOf}
-                concernTypeOfOptions={CONCERN_TYPE_CHOICES}
-                concernTypeOfOther={concernTypeOfOther}
+                category={category}
+                categoryOptions={itemTypeListOptions}
+                categoryOther={categoryOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
-                onClick={this.onClick}
-                onDrop={this.onDrop}
-                onRemoveUploadClick={this.onRemoveUploadClick}
                 onSelectChange={this.onSelectChange}
+                onClick={this.onClick}
+                isItemTypeLoading={isItemTypeLoading}
             />
         );
     }
@@ -223,14 +204,17 @@ class ItemCreateStep3ConcernContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        itemTypeList: store.itemTypeListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
+        pullItemTypeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullItemTypeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
     }
 }
 

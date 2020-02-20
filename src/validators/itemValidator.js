@@ -19,7 +19,7 @@ export function validateInput(data) {
     if (data.typeOf === INCIDENT_ITEM_TYPE_OF) {
         return validateIncidentInput(data);
     } else if (data.typeOf === CONCERN_ITEM_TYPE_OF) {
-        return validateConcernInput(data);
+        return validateConcernStep4Input(data);
     } else if (data.typeOf === EVENT_ITEM_TYPE_OF) {
         return validateEventInput(data);
     } else if (data.typeOf === INFORMATION_ITEM_TYPE_OF) {
@@ -33,10 +33,32 @@ export function validateInput(data) {
 }
 
 
+
+export function validateConcernStep3Input(data) {
+    let errors = {};
+
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_CONCERN_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+
 /**
  *  Validator will validate the `concern` item.
  */
-export function validateConcernInput(data) {
+export function validateConcernStep4Input(data) {
     let errors = {};
 
     if (data.title === undefined || data.title === null || validator.isEmpty(data.title) || data.title === "") {

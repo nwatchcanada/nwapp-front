@@ -3,21 +3,30 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
-import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
-import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
+import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { OTHER_CONCERN_TYPE_OF } from "../../../../constants/api";
 
 
 class ItemCreateStep3ConcernComponent extends Component {
     render() {
         const {
-            title, description, location, errors, onTextChange, isLoading, onClick,
-            concernTypeOf, concernTypeOfOptions, onSelectChange, concernTypeOfOther,
-            photos, onDrop, onRemoveUploadClick
+            category,
+            categoryOptions,
+            categoryOther,
+            errors,
+            onTextChange,
+            onSelectChange,
+            isLoading,
+            onClick,
+            isItemTypeLoading,
         } = this.props;
-        const isOtherEventTypeOf = concernTypeOf === OTHER_CONCERN_TYPE_OF;
+        const isOtherIncidentTypeOf = category === OTHER_CONCERN_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -48,11 +57,11 @@ class ItemCreateStep3ConcernComponent extends Component {
                         </div>
                         <div id="step-3" className="st-grey active">
                             <strong>
-                                <span className="num">3.</span><span className="">Details</span>
+                                <span className="num">3.</span><span className="">Category</span>
                             </strong>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Review</span>
+                            <span className="num">4.</span><span className="">Details</span>
                         </div>
                     </div>
                 </div>
@@ -60,80 +69,39 @@ class ItemCreateStep3ConcernComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-exclamation-circle"></i>&nbsp;Concern Form</h1>
+                            <h1><i className="fas fa-sign"></i>&nbsp;Category Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.title}
-                                label="Title (*)"
-                                onChange={onTextChange}
-                                value={title}
-                                name="title"
-                                type="text"
-                            />
-
-                            <BootstrapTextarea
-                                name="description"
-                                borderColour="border-primary"
-                                label="Description (*)"
-                                placeholder="Please describe your concern"
-                                rows="5"
-                                value={description}
-                                helpText=""
-                                onChange={onTextChange}
-                                error={errors.description}
-                            />
-
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.location}
-                                label="Location (*)"
-                                onChange={onTextChange}
-                                value={location}
-                                name="location"
-                                type="text"
-                            />
-
-                            <BootstrapMultipleImageUploadAndPreview
-                                error={errors.photos}
-                                label="Photos"
-                                onDrop={onDrop}
-                                name="photos"
-                                filesArray={photos}
-                                onRemoveUploadClick={onRemoveUploadClick}
-                            />
-
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                label="Concern Type (*)"
-                                name="concernTypeOf"
-                                defaultOptionLabel="Please select the type of concern."
-                                options={concernTypeOfOptions}
-                                value={concernTypeOf}
-                                error={errors.concernTypeOf}
+                                label="Incident Category (*)"
+                                name="category"
+                                defaultOptionLabel="Please select the incident category."
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.category}
                                 onSelectChange={onSelectChange}
+                                isLoading={isItemTypeLoading}
                             />
-                            {isOtherEventTypeOf &&
+
+                            {isOtherIncidentTypeOf &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
-                                    error={errors.concernTypeOfOther}
-                                    label="Event Type - Other (*)"
+                                    error={errors.categoryOther}
+                                    label="Incident Category - Other (*)"
                                     onChange={onTextChange}
-                                    value={concernTypeOfOther}
-                                    name="concernTypeOfOther"
+                                    value={categoryOther}
+                                    name="categoryOther"
                                     type="text"
                                 />
                             }
 
                             <div className="form-group">
-                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={ (event)=>{onClick(event)} }>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to="/item/add/step-2-concern" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back

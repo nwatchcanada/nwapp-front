@@ -51,10 +51,7 @@ class ItemCreateStep1Component extends Component {
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <span className="num">2.</span><span className="">Details</span>
-                        </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
+                            <span className="num">2.</span><span className="">More...</span>
                         </div>
                     </div>
                 </div>

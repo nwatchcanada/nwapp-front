@@ -35,12 +35,10 @@ class ItemCreateStep2ConcernComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <strong>
-                                <span className="num">3.</span><span className="">Details</span>
-                            </strong>
+                            <span className="num">3.</span><span className="">Category</span>
                         </div>
                         <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Review</span>
+                            <span className="num">4.</span><span className="">Details</span>
                         </div>
                     </div>
                 </div>
@@ -51,7 +49,7 @@ class ItemCreateStep2ConcernComponent extends Component {
                             <h1><i className="fas fa-exclamation-circle"></i>&nbsp;Concern Form</h1>
                             <p>This section is for sending feedback to Neighbourhood Watch on its members and operations. Due to the number of messages, it may not be possible to respond personally to each one, but all messages will be read.</p>                            <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Proceed to Details&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back

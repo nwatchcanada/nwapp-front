@@ -3,36 +3,21 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { OTHER_CONCERN_TYPE_OF } from "../../../../constants/api";
 
 
-export default class ItemCreateStep3ConcernComponent extends Component {
+class ItemCreateStep4ConcernComponent extends Component {
     render() {
         const {
-            errors, isLoading, onClick,
-            concernTitle,
-            concernDescription,
-            concernLocation,
-            concernPhotos,
+            title, description, location, errors, onTextChange, isLoading, onClick,
+            concernTypeOf, concernTypeOfOptions, onSelectChange, concernTypeOfOther,
+            photos, onDrop, onRemoveUploadClick
         } = this.props;
-
-        // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
-        const thumb = {
-            display: 'inline-flex',
-            // borderRadius: 2,
-            // border: '1px solid #eaeaea',
-            marginBottom: 8,
-            marginRight: 8,
-            width: 100,
-            height: 100,
-            padding: 4,
-            boxSizing: 'border-box'
-        };
-        const img = {
-            display: 'block',
-            width: 'auto',
-            height: '100%'
-        };
-
+        const isOtherEventTypeOf = concernTypeOf === OTHER_CONCERN_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -63,78 +48,107 @@ export default class ItemCreateStep3ConcernComponent extends Component {
                         </div>
                         <div id="step-3" className="st-grey">
                             <Link to="/item/add/step-3-concern">
-                                <span className="num">3.</span><span className="">Details</span>
+                                <span className="num">3.</span><span className="">Category</span>
                             </Link>
                         </div>
                         <div id="step-4" className="st-grey active">
                             <strong>
-                                <span className="num">4.</span><span className="">Review</span>
+                                <span className="num">4.</span><span className="">Details</span>
                             </strong>
                         </div>
                     </div>
                 </div>
 
-                <div className="row mt-4 pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto p-2">
-                        <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before adding the item.</strong></p>
-                        <table className="table table-bordered custom-cell-w">
-                            <tbody>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-table"></i>&nbsp;Items details
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Type</th>
-                                    <td>Concern</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Title</th>
-                                    <td>{concernTitle}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Description</th>
-                                    <td>{concernDescription}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Location</th>
-                                    <td>{concernLocation}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Photos</th>
-                                    <td>
-                                        {concernPhotos && concernPhotos.map(
-                                            (photoObj, i) => <div key={i}>
-                                                <div style={thumb}>
-                                                    <img
-                                                        src={photoObj.preview}
-                                                        style={img}
-                                                        alt={photoObj.name}
-                                                    />
-                                                </div>
-                                                <br />
-                                            </div>
-                                        )}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div className="row">
+                    <div className="col-md-5 mx-auto mt-2">
                         <form>
-                        <div className="form-group">
-                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                <i className="fas fa-check-circle"></i>&nbsp;Save
-                            </button>
-                            <Link to="/item/add/step-3-concern" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </Link>
-                        </div>
+                            <h1><i className="fas fa-exclamation-circle"></i>&nbsp;Concern Form</h1>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.title}
+                                label="Title (*)"
+                                onChange={onTextChange}
+                                value={title}
+                                name="title"
+                                type="text"
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please describe your concern"
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.location}
+                                label="Location (*)"
+                                onChange={onTextChange}
+                                value={location}
+                                name="location"
+                                type="text"
+                            />
+
+                            <BootstrapMultipleImageUploadAndPreview
+                                error={errors.photos}
+                                label="Photos"
+                                onDrop={onDrop}
+                                name="photos"
+                                filesArray={photos}
+                                onRemoveUploadClick={onRemoveUploadClick}
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Concern Type (*)"
+                                name="concernTypeOf"
+                                defaultOptionLabel="Please select the type of concern."
+                                options={concernTypeOfOptions}
+                                value={concernTypeOf}
+                                error={errors.concernTypeOf}
+                                onSelectChange={onSelectChange}
+                            />
+                            {isOtherEventTypeOf &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.concernTypeOfOther}
+                                    label="Event Type - Other (*)"
+                                    onChange={onTextChange}
+                                    value={concernTypeOfOther}
+                                    name="concernTypeOfOther"
+                                    type="text"
+                                />
+                            }
+
+                            <div className="form-group">
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                                <Link to="/item/add/step-3-concern" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                </Link>
+                            </div>
+
                         </form>
                     </div>
                 </div>
-
 
             </main>
         );
     }
 }
+
+export default ItemCreateStep4ConcernComponent;
