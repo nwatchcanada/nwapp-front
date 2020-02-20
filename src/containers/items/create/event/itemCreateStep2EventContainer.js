@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep2EventComponent from "../../../components/items/create/itemCreateStep2EventComponent";
+import ItemCreateStep2EventComponent from "../../../../components/items/create/event/itemCreateStep2EventComponent";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem,
     localStorageGetDateItem, localStorageGetArrayItem,
     localStorageGetBooleanItem, localStorageGetIntegerItem
-} from '../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { validateEventInput } from "../../../validators/itemValidator";
-import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF, EVENT_ITEM_TYPE_OF } from "../../../constants/api";
-import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../actions/itemTypeActions";
+} from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
+import { validateEventInput } from "../../../../validators/itemValidator";
+import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF, EVENT_ITEM_TYPE_OF } from "../../../../constants/api";
+import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
 
 
 class ItemCreateStep2EventContainer extends Component {

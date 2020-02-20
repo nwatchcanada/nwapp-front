@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep3EventComponent from "../../../components/items/create/itemCreateStep3EventComponent";
+import ItemCreateStep3EventComponent from "../../../../components/items/create/event/itemCreateStep3EventComponent";
 // import ItemCreateStep3IncidentComponent from "../../../components/items/create/itemCreateStep3IncidentComponent";
-import ItemCreateStep3InformationComponent from "../../../components/items/create/itemCreateStep3InformationComponent";
+import ItemCreateStep3InformationComponent from "../../../../components/items/create/itemCreateStep3InformationComponent";
 import {
     localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem, localStorageGetIntegerItem
-} from '../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../actions/flashMessageActions";
+} from '../../../../helpers/localStorageUtility';
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
     CONCERN_ITEM_TYPE_OF,
     INFORMATION_ITEM_TYPE_OF
-} from "../../../constants/api";
+} from "../../../../constants/api";
 
 
-class ItemCreateStep3Container extends Component {
+class ItemCreateStep3EventContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -242,4 +242,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep3Container);
+)(ItemCreateStep3EventContainer);
