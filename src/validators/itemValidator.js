@@ -70,15 +70,6 @@ export function validateConcernStep4Input(data) {
     if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
         errors.location = 'This field is required';
     }
-    if (data.concernTypeOf === undefined || data.concernTypeOf === null || data.concernTypeOf === "" || isNaN(data.concernTypeOf) ) {
-        errors.concernTypeOf = 'This field is required';
-    } else {
-        if (data.concernTypeOf === OTHER_CONCERN_TYPE_OF) {
-            if (data.concernTypeOfOther === undefined || data.concernTypeOfOther === null || validator.isEmpty(data.concernTypeOfOther) || data.concernTypeOfOther === "") {
-                errors.concernTypeOfOther = 'This field is required';
-            }
-        }
-    }
 
     return {
         errors,

@@ -7,7 +7,6 @@ import {
     localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
 import { validateConcernStep4Input } from "../../../../validators/itemValidator";
-import { CONCERN_TYPE_CHOICES, OTHER_CONCERN_TYPE_OF } from "../../../../constants/api";
 
 
 class ItemCreateStep4ConcernContainer extends Component {
@@ -23,9 +22,6 @@ class ItemCreateStep4ConcernContainer extends Component {
             description: localStorage.getItem("nwapp-item-create-concern-description"),
             location: localStorage.getItem("nwapp-item-create-concern-location"),
             photos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
-            concernTypeOf:localStorageGetIntegerItem("nwapp-item-create-concern-concernTypeOf"),
-            concernTypeOfOption: CONCERN_TYPE_CHOICES,
-            concernTypeOfOther: localStorage.getItem("nwapp-item-create-concern-concernTypeOfOther"),
             errors: {},
             isLoading: false
         }
@@ -197,16 +193,13 @@ class ItemCreateStep4ConcernContainer extends Component {
      */
 
     render() {
-        const { title, description, location, photos, concernTypeOf, concernTypeOfOther, errors } = this.state;
+        const { title, description, location, photos, errors } = this.state;
         return (
             <ItemCreateStep4ConcernComponent
                 title={title}
                 description={description}
                 location={location}
                 photos={photos}
-                concernTypeOf={concernTypeOf}
-                concernTypeOfOptions={CONCERN_TYPE_CHOICES}
-                concernTypeOfOther={concernTypeOfOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}

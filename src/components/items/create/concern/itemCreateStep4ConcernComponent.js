@@ -14,10 +14,8 @@ class ItemCreateStep4ConcernComponent extends Component {
     render() {
         const {
             title, description, location, errors, onTextChange, isLoading, onClick,
-            concernTypeOf, concernTypeOfOptions, onSelectChange, concernTypeOfOther,
-            photos, onDrop, onRemoveUploadClick
+            onSelectChange, photos, onDrop, onRemoveUploadClick
         } = this.props;
-        const isOtherEventTypeOf = concernTypeOf === OTHER_CONCERN_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -109,29 +107,6 @@ class ItemCreateStep4ConcernComponent extends Component {
                                 filesArray={photos}
                                 onRemoveUploadClick={onRemoveUploadClick}
                             />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Concern Type (*)"
-                                name="concernTypeOf"
-                                defaultOptionLabel="Please select the type of concern."
-                                options={concernTypeOfOptions}
-                                value={concernTypeOf}
-                                error={errors.concernTypeOf}
-                                onSelectChange={onSelectChange}
-                            />
-                            {isOtherEventTypeOf &&
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.concernTypeOfOther}
-                                    label="Event Type - Other (*)"
-                                    onChange={onTextChange}
-                                    value={concernTypeOfOther}
-                                    name="concernTypeOfOther"
-                                    type="text"
-                                />
-                            }
 
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
