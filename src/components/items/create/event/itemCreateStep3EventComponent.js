@@ -1,37 +1,32 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import Moment from 'react-moment';
-// import 'moment-timezone';
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
+import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
+import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
+import {
+    OTHER_EVENT_TYPE_OF,
+    ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES,
+    ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES
+} from "../../../../constants/api";
 
 
-export default class ItemCreateStep3EventComponent extends Component {
+class ItemCreateStep3EventComponent extends Component {
     render() {
         const {
-            returnURL, errors, isLoading, onClick,
-            eventTitle, eventPrettyEventTypeOf, eventDate, eventDescription, logoPhoto, galleryPhotos, shownToWhomLabel, canBePostedOnSocialMediaLabel,
+            title, category, categoryOptions, categoryOther, date, description, errors, isLoading,
+            onClick,  onTextChange, onSelectChange, onDateTimeChange,
+            logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
+            galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
+            shownToWhom, canBePostedOnSocialMedia, onRadioChange,
         } = this.props;
-
-        // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
-        const thumb = {
-            display: 'inline-flex',
-            // borderRadius: 2,
-            // border: '1px solid #eaeaea',
-            marginBottom: 8,
-            marginRight: 8,
-            width: 100,
-            height: 100,
-            padding: 4,
-            boxSizing: 'border-box'
-        };
-        const img = {
-            display: 'block',
-            width: 'auto',
-            height: '100%'
-        };
-
+        const isOtherEventTypeOf = category === OTHER_EVENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -56,103 +51,138 @@ export default class ItemCreateStep3EventComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={returnURL}>
-                                <span className="num">2.</span><span className="">Details</span>
+                            <Link to="/item/add/step-2-event">
+                                <span className="num">2.</span><span className="">Categorize</span>
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey active">
                             <strong>
-                                <span className="num">3.</span><span className="">Review</span>
+                                <span className="num">2.</span><span className="">Details</span>
                             </strong>
                         </div>
                     </div>
                 </div>
 
-                <div className="row mt-4 pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto p-2">
-                        <BootstrapErrorsProcessingAlert errors={errors} />
-                        <p><strong>Please confirm these details before adding the item.</strong></p>
-                        <table className="table table-bordered custom-cell-w">
-                            <tbody>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-table"></i>&nbsp;Items details
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Type</th>
-                                    <td>Event</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Title</th>
-                                    <td>{eventTitle}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Event Type</th>
-                                    <td>{eventPrettyEventTypeOf}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Date</th>
-                                    <td><Moment format="YYYY/MM/DD">{eventDate}</Moment></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Description</th>
-                                    <td>{eventDescription}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Logo Photo</th>
-                                    <td>
-                                        <div style={thumb}>
-                                            <img
-                                                src={logoPhoto.preview}
-                                                style={img}
-                                                alt={logoPhoto.name}
-                                            />
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Gallery Photos</th>
-                                    <td>
-                                        {galleryPhotos && galleryPhotos.map(
-                                            (photoObj, i) => <div key={i}>
-                                                <div style={thumb}>
-                                                    <img
-                                                        src={photoObj.preview}
-                                                        style={img}
-                                                        alt={photoObj.name}
-                                                    />
-                                                </div>
-                                                <br />
-                                            </div>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">This event should be shown to whom?</th>
-                                    <td>{shownToWhomLabel}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">This event can be shared by others on social media?</th>
-                                    <td>{canBePostedOnSocialMediaLabel}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div className="row">
+                    <div className="col-md-5 mx-auto mt-2">
                         <form>
-                        <div className="form-group">
-                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                <i className="fas fa-check-circle"></i>&nbsp;Save
-                            </button>
-                            <Link to={returnURL} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </Link>
-                        </div>
+                            <h1><i className="fas fa-glass-cheers"></i>&nbsp;Event Form</h1>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.title}
+                                label="Title (*)"
+                                onChange={onTextChange}
+                                value={title}
+                                name="title"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Event Type (*)"
+                                name="category"
+                                defaultOptionLabel="Please select the event type."
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.category}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {isOtherEventTypeOf &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.categoryOther}
+                                    label="Event Type - Other (*)"
+                                    onChange={onTextChange}
+                                    value={categoryOther}
+                                    name="categoryOther"
+                                    type="text"
+                                />
+                            }
+                            <BootstrapDatePicker
+                                label="Date (*)"
+                                name="date"
+                                dateObj={date}
+                                onTimeChange={onDateTimeChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.date}
+                            />
+
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description (*)"
+                                placeholder="Please describe your event"
+                                rows="5"
+                                value={description}
+                                helpText=""
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            <BootstrapSingleImageUploadAndPreview
+                                error={errors.logoPhoto}
+                                label="Logo"
+                                onDrop={onLogoDrop}
+                                name="logoPhoto"
+                                fileObj={logoPhoto}
+                                onRemoveUploadClick={onLogoRemoveUploadClick}
+                            />
+
+                            <BootstrapMultipleImageUploadAndPreview
+                                error={errors.galleryPhotos}
+                                label="Gallery Photos"
+                                onDrop={onGalleryDrop}
+                                name="galleryPhotos"
+                                filesArray={galleryPhotos}
+                                onRemoveUploadClick={onGalleryRemoveUploadClick}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.shownToWhom}
+                                label="This event should be shown to whom? (*)"
+                                name="shownToWhom"
+                                onChange={onRadioChange}
+                                selectedValue={shownToWhom}
+                                options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
+                            />
+
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.canBePostedOnSocialMedia}
+                                label="This event can be shared by others on social media? (*)"
+                                name="canBePostedOnSocialMedia"
+                                onChange={onRadioChange}
+                                selectedValue={canBePostedOnSocialMedia}
+                                options={ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES}
+                            />
+
+                            <div className="form-group">
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                                <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                </Link>
+                            </div>
+
                         </form>
                     </div>
                 </div>
-
 
             </main>
         );
     }
 }
+
+export default ItemCreateStep3EventComponent;

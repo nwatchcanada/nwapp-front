@@ -10,21 +10,21 @@ import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
-import {
-    OTHER_EVENT_TYPE_OF,
-    ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES,
-    ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES
-} from "../../../../constants/api";
+import { OTHER_EVENT_TYPE_OF } from "../../../../constants/api";
 
 
 class ItemCreateStep2EventComponent extends Component {
     render() {
         const {
-            title, category, categoryOptions, categoryOther, date, description, errors, isLoading,
-            onClick,  onTextChange, onSelectChange, onDateTimeChange,
-            logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
-            galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
-            shownToWhom, canBePostedOnSocialMedia, onRadioChange,
+            category,
+            categoryOptions,
+            categoryOther,
+            errors,
+            onTextChange,
+            onSelectChange,
+            isLoading,
+            onClick,
+            isItemTypeLoading,
         } = this.props;
         const isOtherEventTypeOf = category === OTHER_EVENT_TYPE_OF;
         return (
@@ -52,11 +52,11 @@ class ItemCreateStep2EventComponent extends Component {
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Details</span>
+                                <span className="num">2.</span><span className="">Categorize</span>
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
+                            <span className="num">3.</span><span className="">Details</span>
                         </div>
                     </div>
                 </div>
@@ -64,31 +64,21 @@ class ItemCreateStep2EventComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-glass-cheers"></i>&nbsp;Event Form</h1>
+                            <h1><i className="fas fa-sign"></i>&nbsp;Category Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.title}
-                                label="Title (*)"
-                                onChange={onTextChange}
-                                value={title}
-                                name="title"
-                                type="text"
-                            />
-
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                label="Event Type (*)"
+                                label="Event Category (*)"
                                 name="category"
-                                defaultOptionLabel="Please select the event type."
+                                defaultOptionLabel="Please select the event category."
                                 options={categoryOptions}
                                 value={category}
                                 error={errors.category}
                                 onSelectChange={onSelectChange}
+                                isLoading={isItemTypeLoading}
                             />
 
                             {isOtherEventTypeOf &&
@@ -96,77 +86,16 @@ class ItemCreateStep2EventComponent extends Component {
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"
                                     error={errors.categoryOther}
-                                    label="Event Type - Other (*)"
+                                    label="Event Category - Other (*)"
                                     onChange={onTextChange}
                                     value={categoryOther}
                                     name="categoryOther"
                                     type="text"
                                 />
                             }
-                            <BootstrapDatePicker
-                                label="Date (*)"
-                                name="date"
-                                dateObj={date}
-                                onTimeChange={onDateTimeChange}
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.date}
-                            />
-
-                            <BootstrapTextarea
-                                name="description"
-                                borderColour="border-primary"
-                                label="Description (*)"
-                                placeholder="Please describe your event"
-                                rows="5"
-                                value={description}
-                                helpText=""
-                                onChange={onTextChange}
-                                error={errors.description}
-                            />
-
-                            <BootstrapSingleImageUploadAndPreview
-                                error={errors.logoPhoto}
-                                label="Logo"
-                                onDrop={onLogoDrop}
-                                name="logoPhoto"
-                                fileObj={logoPhoto}
-                                onRemoveUploadClick={onLogoRemoveUploadClick}
-                            />
-
-                            <BootstrapMultipleImageUploadAndPreview
-                                error={errors.galleryPhotos}
-                                label="Gallery Photos"
-                                onDrop={onGalleryDrop}
-                                name="galleryPhotos"
-                                filesArray={galleryPhotos}
-                                onRemoveUploadClick={onGalleryRemoveUploadClick}
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.shownToWhom}
-                                label="This event should be shown to whom? (*)"
-                                name="shownToWhom"
-                                onChange={onRadioChange}
-                                selectedValue={shownToWhom}
-                                options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.canBePostedOnSocialMedia}
-                                label="This event can be shared by others on social media? (*)"
-                                name="canBePostedOnSocialMedia"
-                                onChange={onRadioChange}
-                                selectedValue={canBePostedOnSocialMedia}
-                                options={ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES}
-                            />
 
                             <div className="form-group">
-                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={ (event)=>{onClick(event)} }>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">

@@ -78,6 +78,27 @@ export function validateConcernStep4Input(data) {
 }
 
 
+export function validateEventStep2Input(data) {
+    let errors = {};
+
+    // STEP 2
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_EVENT_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
 /**
  *  Validator will validate the `event` item.
  */
@@ -86,15 +107,6 @@ export function validateEventInput(data) {
 
     if (data.title === undefined || data.title === null || validator.isEmpty(data.title) || data.title === "") {
         errors.title = 'This field is required';
-    }
-    if (data.eventTypeOf === undefined || data.eventTypeOf === null || data.eventTypeOf === "" || isNaN(data.eventTypeOf) ) {
-        errors.eventTypeOf = 'This field is required';
-    } else {
-        if (data.eventTypeOf === OTHER_EVENT_TYPE_OF) {
-            if (data.eventTypeOfOther === undefined || data.eventTypeOfOther === null || validator.isEmpty(data.eventTypeOfOther) || data.eventTypeOfOther === "") {
-                errors.eventTypeOfOther = 'This field is required';
-            }
-        }
     }
     if (data.date === undefined || data.date === null || data.date === "") {
         errors.date = 'This field is required';
