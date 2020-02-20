@@ -333,6 +333,7 @@ import ItemCreateStep4IncidentContainer from "./items/create/incident/itemCreate
 import ItemCreateStep5IncidentContainer from "./items/create/incident/itemCreateStep5IncidentContainer";
 import ItemCreateStep2InformationContainer from "./items/create/information/itemCreateStep2InformationContainer";
 import ItemCreateStep3InformationContainer from "./items/create/information/itemCreateStep3InformationContainer";
+import ItemCreateStep4InformationContainer from "./items/create/information/itemCreateStep4InformationContainer";
 import ItemUpdateIncidentContainer from "./items/update/itemUpdateIncidentContainer";
 import ItemUpdateConcernContainer from "./items/update/itemUpdateConcernContainer";
 import ItemUpdateEventContainer from "./items/update/itemUpdateEventContainer";
@@ -734,6 +735,7 @@ class AppContainer extends React.Component {
                                 <Route path="/item/add/step-5-incident" exact component={requiresAuth(ItemCreateStep5IncidentContainer)} />
                                 <Route path="/item/add/step-2-information" exact component={requiresAuth(ItemCreateStep2InformationContainer)} />
                                 <Route path="/item/add/step-3-information" exact component={requiresAuth(ItemCreateStep3InformationContainer)} />
+                                <Route path="/item/add/step-4-information" exact component={requiresAuth(ItemCreateStep4InformationContainer)} />
                                 <Route path="/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
                                 <Route path="/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />

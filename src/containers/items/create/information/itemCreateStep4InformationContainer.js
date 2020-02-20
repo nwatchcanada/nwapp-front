@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep3InformationComponent from "../../../../components/items/create/information/itemCreateStep3InformationComponent";
+import ItemCreateStep4InformationComponent from "../../../../components/items/create/information/itemCreateStep4InformationComponent";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateInformationInput } from "../../../../validators/itemValidator";
 // INFORMATION_ITEM_TYPE_OF
 
 
-class ItemCreateStep3InformationContainer extends Component {
+class ItemCreateStep4InformationContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -21,7 +22,6 @@ class ItemCreateStep3InformationContainer extends Component {
             isLoading: false
         }
 
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -51,8 +51,9 @@ class ItemCreateStep3InformationContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(item) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-4-information");
+        this.setState({ errors: {}, isLoading: true, });
+        this.props.setFlashMessage("success", "Item has been successfully created.");
+        this.props.history.push("/items");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -71,14 +72,6 @@ class ItemCreateStep3InformationContainer extends Component {
      *  Event handling functions
      *------------------------------------------------------------
      */
-
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-        const key = "nwapp-item-create-information-"+[e.target.name];
-        localStorage.setItem(key, e.target.value)
-    }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
@@ -106,10 +99,9 @@ class ItemCreateStep3InformationContainer extends Component {
     render() {
         const { description, errors } = this.state;
         return (
-            <ItemCreateStep3InformationComponent
+            <ItemCreateStep4InformationComponent
                 description={description}
                 errors={errors}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
             />
         );
@@ -123,11 +115,15 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        }
+    }
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep3InformationContainer);
+)(ItemCreateStep4InformationContainer);
