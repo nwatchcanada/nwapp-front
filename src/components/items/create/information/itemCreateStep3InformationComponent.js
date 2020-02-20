@@ -32,13 +32,15 @@ class ItemCreateStep3InformationComponent extends Component {
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
-                        <div id="step-2" className="st-grey active">
-                            <strong>
-                                <span className="num">2.</span><span className="">Details</span>
-                            </strong>
+                        <div id="step-2" className="st-grey">
+                            <Link to="/item/add/step-2-information">
+                                <span className="num">2.</span><span className="">Categorize</span>
+                            </Link>
                         </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
+                        <div id="step-3" className="st-grey active">
+                            <strong>
+                                <span className="num">3.</span><span className="">Details</span>
+                            </strong>
                         </div>
                     </div>
                 </div>
@@ -65,9 +67,9 @@ class ItemCreateStep3InformationComponent extends Component {
 
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/item/add/step-2-information" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

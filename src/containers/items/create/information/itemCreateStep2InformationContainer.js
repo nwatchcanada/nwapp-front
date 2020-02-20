@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep2InformationComponent from "../../../../components/items/create/information/itemCreateStep2InformationComponent";
-import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { validateInformationInput } from "../../../../validators/itemValidator";
-// INFORMATION_ITEM_TYPE_OF
+import { localStorageGetIntegerItem, localStorageGetObjectItem, localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
+import { validateInformationStep2Input } from "../../../../validators/itemValidator";
+import { OTHER_INCIDENT_TYPE_OF, INFORMATION_ITEM_TYPE_OF } from "../../../../constants/api";
+import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
 
 
 class ItemCreateStep2InformationContainer extends Component {
@@ -16,16 +17,37 @@ class ItemCreateStep2InformationContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        const parametersMap = new Map();
+        // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
+        parametersMap.set("o", "-created_at");
+        parametersMap.set("category", INFORMATION_ITEM_TYPE_OF);
+
         this.state = {
-            description: localStorage.getItem("nwapp-item-create-information-description"),
+            // Pagination
+            page: 1,
+            sizePerPage: 10000,
+            totalSize: 0,
+
+            // Sorting, Filtering, & Searching
+            parametersMap: parametersMap,
+
+            // The rest of the code..
+            category:localStorage.getItem("nwapp-item-create-information-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-information-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-information-categoryOther"),
             errors: {},
-            isLoading: false
+            isLoading: false,
+            isItemTypeLoading: true,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessListCallback = this.onSuccessListCallback.bind(this);
+        this.onFailureListCallback = this.onFailureListCallback.bind(this);
     }
 
     /**
@@ -35,6 +57,15 @@ class ItemCreateStep2InformationContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+        // Get our data.
+        this.props.pullItemTypeList(
+            this.state.page,
+            this.state.sizePerPage,
+            this.state.parametersMap,
+            this.onSuccessListCallback,
+            this.onFailureListCallback
+        );
     }
 
     componentWillUnmount() {
@@ -51,9 +82,30 @@ class ItemCreateStep2InformationContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onSuccessListCallback(response) {
+        console.log("onSuccessListCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isItemTypeLoading: false,
+                errors: []
+            },
+            ()=>{
+                console.log("onSuccessListCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessListCallback | State (Post-Fetch):", this.state);
+            }
+        )
+    }
+
+    onFailureListCallback(errors) {
+        console.log(errors);
+        this.setState({ isItemTypeLoading: false });
+    }
+
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-3");
+        this.props.history.push("/item/add/step-3-information");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -69,7 +121,7 @@ class ItemCreateStep2InformationContainer extends Component {
     }
 
     /**
-     *  Event handling functions
+     *  Information handling functions
      *------------------------------------------------------------
      */
 
@@ -81,15 +133,37 @@ class ItemCreateStep2InformationContainer extends Component {
         localStorage.setItem(key, e.target.value)
     }
 
+    onSelectChange(option) {
+        const optionKey = [option.selectName].toString()+"Option";
+        this.setState(
+            {
+                [option.selectName]: option.value,
+                [optionKey]: option,
+            },
+            ()=>{
+                console.log(this.state);
+                localStorage.setItem('nwapp-item-create-information-'+[option.selectName], option.value);
+                localStorageSetObjectOrArrayItem('nwapp-item-create-information-'+optionKey, option);
+            }
+        );
+    }
+
     onClick(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
+        // Prinformation the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInformationInput(this.state);
+        const { errors, isValid } = validateInformationStep2Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+            // Save for convinence the information type depending on if the user
+            // chose a standard option or the `other` option.
+            if (this.state.category === OTHER_INCIDENT_TYPE_OF) {
+                localStorage.setItem('nwapp-item-create-information-pretty-information-type', this.state.categoryOther);
+            } else {
+                localStorage.setItem('nwapp-item-create-information-pretty-information-type', this.state.categoryOption.label);
+            }
             this.onSuccessfulSubmissionCallback();
 
         // CASE 2 OF 2: Validation was a failure.
@@ -98,20 +172,30 @@ class ItemCreateStep2InformationContainer extends Component {
         }
     }
 
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
-        const { description, errors } = this.state;
+        const { category, categoryOther, isItemTypeLoading, errors } = this.state;
+        const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
+
+        // For debugging purposes only.
+        // console.log(itemTypeListOptions);
+        // console.log("category |", category);
+        // console.log("categoryOptions |", itemTypeListOptions);
+
         return (
             <ItemCreateStep2InformationComponent
-                description={description}
+                category={category}
+                categoryOptions={itemTypeListOptions}
+                categoryOther={categoryOther}
                 errors={errors}
                 onTextChange={this.onTextChange}
+                onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
+                isItemTypeLoading={isItemTypeLoading}
             />
         );
     }
@@ -120,14 +204,17 @@ class ItemCreateStep2InformationContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        itemTypeList: store.itemTypeListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        }
+        pullItemTypeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
+            dispatch(
+                pullItemTypeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
     }
 }
 

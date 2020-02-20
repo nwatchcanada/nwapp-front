@@ -3,12 +3,30 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
+import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
+import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
+import { OTHER_INCIDENT_TYPE_OF } from "../../../../constants/api";
 
 
 class ItemCreateStep2InformationComponent extends Component {
     render() {
-        const { description, errors, onTextChange, isLoading, onClick } = this.props;
+        const {
+            category,
+            categoryOptions,
+            categoryOther,
+            errors,
+            onTextChange,
+            onSelectChange,
+            isLoading,
+            onClick,
+            isItemTypeLoading,
+        } = this.props;
+        const isOtherInformationTypeOf = category === OTHER_INCIDENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -34,11 +52,11 @@ class ItemCreateStep2InformationComponent extends Component {
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Details</span>
+                                <span className="num">2.</span><span className="">Categorize</span>
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
+                            <span className="num">3.</span><span className="">Details</span>
                         </div>
                     </div>
                 </div>
@@ -46,26 +64,39 @@ class ItemCreateStep2InformationComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-info-circle"></i>&nbsp;Information Form</h1>
+                            <h1><i className="fas fa-sign"></i>&nbsp;Category Form</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapTextarea
-                                name="description"
+                            <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                label="What information do you request? (*)"
-                                placeholder="Please write a description of what your rquest is."
-                                rows="5"
-                                value={description}
-                                helpText=""
-                                onChange={onTextChange}
-                                error={errors.description}
+                                label="Information Category (*)"
+                                name="category"
+                                defaultOptionLabel="Please select the information category."
+                                options={categoryOptions}
+                                value={category}
+                                error={errors.category}
+                                onSelectChange={onSelectChange}
+                                isLoading={isItemTypeLoading}
                             />
 
+                            {isOtherInformationTypeOf &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.categoryOther}
+                                    label="Information Category - Other (*)"
+                                    onChange={onTextChange}
+                                    value={categoryOther}
+                                    name="categoryOther"
+                                    type="text"
+                                />
+                            }
+
                             <div className="form-group">
-                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Proceed to Review&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={ (event)=>{onClick(event)} }>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                                 <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back

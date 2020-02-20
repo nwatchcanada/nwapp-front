@@ -234,6 +234,26 @@ export function validateIncidentStep4Input(data) {
 }
 
 
+export function validateInformationStep2Input(data) {
+    let errors = {};
+
+    // STEP 2
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_EVENT_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 
 /**
  *  Validator will validate the `information` item.
