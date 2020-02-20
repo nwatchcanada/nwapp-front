@@ -19,7 +19,7 @@ If you want a self-hosted solution using [*CentOS 7*](https://www.centos.org/), 
 
 ## License
 
-This library is licensed under the **BSD 3-Clause license**. See [LICENSE](LICENSE) for more information. Copyrighted ©2019 [Neighbourhood Watch London](https://nwlondon.ca/).
+This library is licensed under the **AGPLv3 license**. See [LICENSE](LICENSE) for more information. Copyrighted ©2019 [Neighbourhood Watch London](https://nwlondon.ca/).
 
 
 ## Contact
