@@ -8,7 +8,7 @@ import {
     localStorageGetDateItem, localStorageGetArrayItem,
     localStorageGetBooleanItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
-import { validateEventInput } from "../../../../validators/itemValidator";
+import { validateEventStep3Input } from "../../../../validators/itemValidator";
 import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF, EVENT_ITEM_TYPE_OF } from "../../../../constants/api";
 
 
@@ -23,13 +23,13 @@ class ItemCreateStep3EventContainer extends Component {
 
         this.state = {
             isAllDayEvent: localStorageGetBooleanItem("nwapp-item-create-event-date-isAllDayEvent"),
-            date: localStorageGetDateItem("nwapp-item-create-event-date"),
-            finishDate: localStorageGetDateItem("nwapp-item-create-event-finishDate"),
+            startDateTime: localStorageGetDateItem("nwapp-item-create-event-startDateTime"),
+            finishDateTime: localStorageGetDateItem("nwapp-item-create-event-finishDateTime"),
             errors: {},
             isLoading: false
         }
 
-        this.onDateTimeChange = this.onDateTimeChange.bind(this);
+        this.onStartDateTimeChange = this.onStartDateTimeChange.bind(this);
         this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onFinishDateTimeChange = this.onFinishDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -82,11 +82,11 @@ class ItemCreateStep3EventContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onDateTimeChange(dateObj) {
+    onStartDateTimeChange(dateObj) {
         this.setState({
-            date: dateObj,
+            startDateTime: dateObj,
         })
-        localStorageSetObjectOrArrayItem('nwapp-item-create-event-date', dateObj);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-event-startDateTime', dateObj);
     }
 
     onCheckboxChange(e) {
@@ -98,9 +98,9 @@ class ItemCreateStep3EventContainer extends Component {
 
     onFinishDateTimeChange(dateObj) {
         this.setState({
-            finishDate: dateObj,
+            finishDateTime: dateObj,
         })
-        localStorageSetObjectOrArrayItem('nwapp-item-create-event-finishDate', dateObj);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-event-finishDateTime', dateObj);
     }
 
     onClick(e) {
@@ -108,7 +108,7 @@ class ItemCreateStep3EventContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateEventInput(this.state);
+        const { errors, isValid } = validateEventStep3Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -126,15 +126,15 @@ class ItemCreateStep3EventContainer extends Component {
      */
 
     render() {
-        const { date, finishDate, errors } = this.state;
+        const { startDateTime, finishDateTime, errors } = this.state;
         return (
             <ItemCreateStep3EventComponent
-                date={date}
-                finishDate={finishDate}
+                startDateTime={startDateTime}
+                finishDateTime={finishDateTime}
                 isAllDayEvent={this.state.isAllDayEvent}
                 errors={errors}
                 onClick={this.onClick}
-                onDateTimeChange={this.onDateTimeChange}
+                onStartDateTimeChange={this.onStartDateTimeChange}
                 onCheckboxChange={this.onCheckboxChange}
                 onFinishDateTimeChange={this.onFinishDateTimeChange}
             />

@@ -98,6 +98,25 @@ export function validateEventStep2Input(data) {
     }
 }
 
+export function validateEventStep3Input(data) {
+    let errors = {};
+
+    if (data.startDateTime === undefined || data.startDateTime === null || data.startDateTime === "") {
+        errors.startDateTime = 'This field is required';
+    }
+
+    if (data.isAllDayEvent === false) {
+        if (data.finishDateTime === undefined || data.finishDateTime === null || data.finishDateTime === "") {
+            errors.finishDateTime = 'This field is required';
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 
 /**
  *  Validator will validate the `event` item.

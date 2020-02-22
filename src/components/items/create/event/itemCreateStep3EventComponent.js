@@ -10,9 +10,9 @@ import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 class ItemCreateStep3EventComponent extends Component {
     render() {
         const {
-            date, errors, isLoading, onClick, onDateTimeChange,
+            startDateTime, errors, isLoading, onClick, onStartDateTimeChange,
             isAllDayEvent, onCheckboxChange,
-            finishDate, onFinishDateTimeChange,
+            finishDateTime, onFinishDateTimeChange,
         } = this.props;
         return (
             <main id="main" role="main">
@@ -64,12 +64,12 @@ class ItemCreateStep3EventComponent extends Component {
                             <BootstrapDateTimePicker
                                 dateCaption="When will the event happen? (*)"
                                 timeCaption="Time"
-                                name="date"
-                                dateObj={date}
-                                onTimeChange={onDateTimeChange}
+                                name="startDateTime"
+                                dateObj={startDateTime}
+                                onTimeChange={onStartDateTimeChange}
                                 datePickerClassName="form-control form-control-lg border"
                                 divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.date}
+                                error={errors.startDateTime}
                                 placeholderText="Click to select a start date"
                             />
 
@@ -87,11 +87,11 @@ class ItemCreateStep3EventComponent extends Component {
                                 dateCaption="When will the event finish? (*)"
                                 timeCaption="Time"
                                 name="date"
-                                dateObj={isAllDayEvent ? null : finishDate}
+                                dateObj={isAllDayEvent ? null : finishDateTime}
                                 onTimeChange={onFinishDateTimeChange}
                                 datePickerClassName="form-control form-control-lg border"
                                 divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.finishDate}
+                                error={errors.finishDateTime}
                                 placeholderText="Click to select a finish date"
                                 disabled={isAllDayEvent}
                             />
