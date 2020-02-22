@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemSearchResultComponent from "../../../components/items/search/itemSearchResultComponent";
+import ItemSearchResultComponent from "../../../components/items/admin/search/itemSearchResultComponent";
 import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,

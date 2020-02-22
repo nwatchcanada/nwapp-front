@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep1Component from "../../../components/items/create/itemCreateStep1Component";
+import ItemCreateStep1Component from "../../../components/items/admin/create/itemCreateStep1Component";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
     INCIDENT_ITEM_TYPE_OF,

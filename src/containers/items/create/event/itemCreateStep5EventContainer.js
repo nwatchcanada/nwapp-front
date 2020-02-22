@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import * as moment from 'moment';
 
-import ItemCreateStep5EventComponent from "../../../../components/items/create/event/itemCreateStep5EventComponent";
+import ItemCreateStep5EventComponent from "../../../../components/items/admin/create/event/itemCreateStep5EventComponent";
 import {
     localStorageGetObjectItem,
     localStorageGetDateItem,

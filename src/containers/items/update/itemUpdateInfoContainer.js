@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemUpdateInfoComponent from "../../../components/items/update/itemUpdateInfoComponent";
+import ItemUpdateInfoComponent from "../../../components/items/admin/update/itemUpdateInfoComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import { validateInput } from "../../../validators/itemValidator";
 import {

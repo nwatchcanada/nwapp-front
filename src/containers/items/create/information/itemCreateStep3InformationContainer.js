@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep3InformationComponent from "../../../../components/items/create/information/itemCreateStep3InformationComponent";
+import ItemCreateStep3InformationComponent from "../../../../components/items/admin/create/information/itemCreateStep3InformationComponent";
 import { validateInformationInput } from "../../../../validators/itemValidator";
 // INFORMATION_ITEM_TYPE_OF
 

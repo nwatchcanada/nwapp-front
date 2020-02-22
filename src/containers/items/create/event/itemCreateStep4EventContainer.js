@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep4EventComponent from "../../../../components/items/create/event/itemCreateStep4EventComponent";
+import ItemCreateStep4EventComponent from "../../../../components/items/admin/create/event/itemCreateStep4EventComponent";
 import {
     localStorageGetObjectItem, localStorageSetObjectOrArrayItem,
     localStorageGetDateItem, localStorageGetArrayItem,

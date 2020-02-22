@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemListComponent from "../../../components/items/list/itemListComponent";
+import ItemListComponent from "../../../components/items/admin/list/itemListComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 import {
     INCIDENT_ITEM_TYPE_OF,

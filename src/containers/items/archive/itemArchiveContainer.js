@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemArchiveComponent from "../../../components/items/archive/itemArchiveComponent";
+import ItemArchiveComponent from "../../../components/items/admin/archive/itemArchiveComponent";
 import { setFlashMessage } from "../../../actions/flashMessageActions";
 import {
    INCIDENT_ITEM_TYPE_OF,

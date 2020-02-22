@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep4ConcernComponent from "../../../../components/items/create/concern/itemCreateStep4ConcernComponent";
+import ItemCreateStep4ConcernComponent from "../../../../components/items/admin/create/concern/itemCreateStep4ConcernComponent";
 import {
     localStorageSetObjectOrArrayItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';

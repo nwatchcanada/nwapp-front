@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
-import OrderListComponent from "../../../components/items/retrieve/itemCommentComponent";
+import OrderListComponent from "../../../components/items/admin/retrieve/itemCommentComponent";
 import { clearFlashMessage } from "../../../actions/flashMessageActions";
 // import { pullItemCommentList, postItemComment } from "../../../actions/itemCommentActions"; //TODO: UNCOMMENT
 import { validateInput } from "../../../validators/commentValidator"

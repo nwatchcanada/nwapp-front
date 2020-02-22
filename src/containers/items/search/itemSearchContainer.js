@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemSearchComponent from "../../../components/items/search/itemSearchComponent";
+import ItemSearchComponent from "../../../components/items/admin/search/itemSearchComponent";
 
 
 class ItemListContainer extends Component {

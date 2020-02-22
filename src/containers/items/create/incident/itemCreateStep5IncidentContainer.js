@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep5IncidentComponent from "../../../../components/items/create/incident/itemCreateStep5IncidentComponent";
+import ItemCreateStep5IncidentComponent from "../../../../components/items/admin/create/incident/itemCreateStep5IncidentComponent";
 import {
     localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';

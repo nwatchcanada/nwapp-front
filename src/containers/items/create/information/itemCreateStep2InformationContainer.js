@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep2InformationComponent from "../../../../components/items/create/information/itemCreateStep2InformationComponent";
+import ItemCreateStep2InformationComponent from "../../../../components/items/admin/create/information/itemCreateStep2InformationComponent";
 import { localStorageGetIntegerItem, localStorageGetObjectItem, localStorageSetObjectOrArrayItem } from '../../../../helpers/localStorageUtility';
 import { validateInformationStep2Input } from "../../../../validators/itemValidator";
 import { OTHER_INCIDENT_TYPE_OF, INFORMATION_ITEM_TYPE_OF } from "../../../../constants/api";

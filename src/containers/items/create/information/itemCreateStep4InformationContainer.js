@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep4InformationComponent from "../../../../components/items/create/information/itemCreateStep4InformationComponent";
+import ItemCreateStep4InformationComponent from "../../../../components/items/admin/create/information/itemCreateStep4InformationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateInformationInput } from "../../../../validators/itemValidator";
 // INFORMATION_ITEM_TYPE_OF
