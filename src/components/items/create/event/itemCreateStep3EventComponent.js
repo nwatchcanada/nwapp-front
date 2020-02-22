@@ -4,29 +4,13 @@ import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
-import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
-import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
-import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
-import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
-import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
-import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
-import {
-    OTHER_EVENT_TYPE_OF,
-    ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES,
-    ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES
-} from "../../../../constants/api";
 
 
 class ItemCreateStep3EventComponent extends Component {
     render() {
         const {
-            title, category, categoryOptions, categoryOther, date, description, errors, isLoading,
-            onClick,  onTextChange, onSelectChange, onDateTimeChange,
-            logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
-            galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
-            shownToWhom, canBePostedOnSocialMedia, onRadioChange,
+            date, errors, isLoading, onClick, onDateTimeChange,
         } = this.props;
-        const isOtherEventTypeOf = category === OTHER_EVENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -57,8 +41,11 @@ class ItemCreateStep3EventComponent extends Component {
                         </div>
                         <div id="step-3" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Details</span>
+                                <span className="num">3.</span><span className="">Date/Time</span>
                             </strong>
+                        </div>
+                        <div id="step-4" className="st-grey">
+                            <span className="num">4.</span><span className="">Details</span>
                         </div>
                     </div>
                 </div>
@@ -71,40 +58,6 @@ class ItemCreateStep3EventComponent extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapInput
-                                inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
-                                error={errors.title}
-                                label="Title (*)"
-                                onChange={onTextChange}
-                                value={title}
-                                name="title"
-                                type="text"
-                            />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Event Type (*)"
-                                name="category"
-                                defaultOptionLabel="Please select the event type."
-                                options={categoryOptions}
-                                value={category}
-                                error={errors.category}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            {isOtherEventTypeOf &&
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.categoryOther}
-                                    label="Event Type - Other (*)"
-                                    onChange={onTextChange}
-                                    value={categoryOther}
-                                    name="categoryOther"
-                                    type="text"
-                                />
-                            }
                             <BootstrapDatePicker
                                 label="Date (*)"
                                 name="date"
@@ -113,58 +66,6 @@ class ItemCreateStep3EventComponent extends Component {
                                 datePickerClassName="form-control form-control-lg border"
                                 divClassName="form-group p-0 col-md-7 mb-4"
                                 error={errors.date}
-                            />
-
-                            <BootstrapTextarea
-                                name="description"
-                                borderColour="border-primary"
-                                label="Description (*)"
-                                placeholder="Please describe your event"
-                                rows="5"
-                                value={description}
-                                helpText=""
-                                onChange={onTextChange}
-                                error={errors.description}
-                            />
-
-                            <BootstrapSingleImageUploadAndPreview
-                                error={errors.logoPhoto}
-                                label="Logo"
-                                onDrop={onLogoDrop}
-                                name="logoPhoto"
-                                fileObj={logoPhoto}
-                                onRemoveUploadClick={onLogoRemoveUploadClick}
-                            />
-
-                            <BootstrapMultipleImageUploadAndPreview
-                                error={errors.galleryPhotos}
-                                label="Gallery Photos"
-                                onDrop={onGalleryDrop}
-                                name="galleryPhotos"
-                                filesArray={galleryPhotos}
-                                onRemoveUploadClick={onGalleryRemoveUploadClick}
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.shownToWhom}
-                                label="This event should be shown to whom? (*)"
-                                name="shownToWhom"
-                                onChange={onRadioChange}
-                                selectedValue={shownToWhom}
-                                options={ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES}
-                            />
-
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
-                                borderColour="border-primary"
-                                error={errors.canBePostedOnSocialMedia}
-                                label="This event can be shared by others on social media? (*)"
-                                name="canBePostedOnSocialMedia"
-                                onChange={onRadioChange}
-                                selectedValue={canBePostedOnSocialMedia}
-                                options={ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES}
                             />
 
                             <div className="form-group">
