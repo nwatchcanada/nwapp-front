@@ -9,8 +9,6 @@ import {
     localStorageGetBooleanItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
 import { validateEventStep4Input } from "../../../../validators/itemValidator";
-import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF, EVENT_ITEM_TYPE_OF } from "../../../../constants/api";
-import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
 
 
 class ItemCreateStep4EventContainer extends Component {
@@ -22,25 +20,8 @@ class ItemCreateStep4EventContainer extends Component {
     constructor(props) {
         super(props);
 
-        const parametersMap = new Map();
-        // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
-        parametersMap.set("o", "-created_at");
-        parametersMap.set("category", EVENT_ITEM_TYPE_OF);
-
         this.state = {
-            // Pagination
-            page: 1,
-            sizePerPage: 10000,
-            totalSize: 0,
-
-            // Sorting, Filtering, & Searching
-            parametersMap: parametersMap,
-
-            // The rest of the code..
             title: localStorage.getItem("nwapp-item-create-event-title"),
-            category:localStorage.getItem("nwapp-item-create-event-category"),
-            categoryOption: localStorageGetObjectItem('nwapp-item-create-event-categoryOption'),
-            categoryOther: localStorage.getItem("nwapp-item-create-event-categoryOther"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
@@ -71,15 +52,6 @@ class ItemCreateStep4EventContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // Get our data.
-        this.props.pullItemTypeList(
-            this.state.page,
-            this.state.sizePerPage,
-            this.state.parametersMap,
-            this.onSuccessListCallback,
-            this.onFailureListCallback
-        );
     }
 
     componentWillUnmount() {
@@ -275,15 +247,6 @@ class ItemCreateStep4EventContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-
-            // Save for convinence the event type depending on if the user
-            // chose a standard option or the `other` option.
-            if (this.state.category.value === OTHER_EVENT_TYPE_OF) {
-                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.categoryOther);
-            } else {
-                localStorage.setItem('nwapp-item-create-event-pretty-event-type', this.state.categoryOption.label);
-            }
-
             this.onSuccessfulSubmissionCallback();
 
         // CASE 2 OF 2: Validation was a failure.
@@ -325,21 +288,18 @@ class ItemCreateStep4EventContainer extends Component {
 
     render() {
         const {
-            title, category, categoryOther, description, logoPhoto, galleryPhotos, shownToWhom, canBePostedOnSocialMedia, errors
+            title,
+            description,
+            logoPhoto,
+            galleryPhotos,
+            shownToWhom,
+            canBePostedOnSocialMedia,
+            errors
         } = this.state;
-        const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
-
-        // For debugging purposes only.
-        // console.log(itemTypeListOptions);
-        // console.log("category |", category);
-        // console.log("categoryOptions |", itemTypeListOptions);
 
         return (
             <ItemCreateStep4EventComponent
                 title={title}
-                category={category}
-                categoryOptions={itemTypeListOptions}
-                categoryOther={categoryOther}
                 description={description}
                 logoPhoto={logoPhoto}
                 galleryPhotos={galleryPhotos}
@@ -362,17 +322,11 @@ class ItemCreateStep4EventContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        itemTypeList: store.itemTypeListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        pullItemTypeList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => {
-            dispatch(
-                pullItemTypeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
-            )
-        },
     }
 }
 

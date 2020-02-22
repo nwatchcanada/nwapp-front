@@ -11,7 +11,6 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
 import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import {
-    OTHER_EVENT_TYPE_OF,
     ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES,
     ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES
 } from "../../../../constants/api";
@@ -20,13 +19,12 @@ import {
 class ItemCreateStep4EventComponent extends Component {
     render() {
         const {
-            title, category, categoryOptions, categoryOther, description, errors, isLoading,
+            title, description, errors, isLoading,
             onClick,  onTextChange, onSelectChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
             shownToWhom, canBePostedOnSocialMedia, onRadioChange,
         } = this.props;
-        const isOtherEventTypeOf = category === OTHER_EVENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -86,30 +84,6 @@ class ItemCreateStep4EventComponent extends Component {
                                 name="title"
                                 type="text"
                             />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Event Type (*)"
-                                name="category"
-                                defaultOptionLabel="Please select the event type."
-                                options={categoryOptions}
-                                value={category}
-                                error={errors.category}
-                                onSelectChange={onSelectChange}
-                            />
-
-                            {isOtherEventTypeOf &&
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.categoryOther}
-                                    label="Event Type - Other (*)"
-                                    onChange={onTextChange}
-                                    value={categoryOther}
-                                    name="categoryOther"
-                                    type="text"
-                                />
-                            }
 
                             <BootstrapTextarea
                                 name="description"
