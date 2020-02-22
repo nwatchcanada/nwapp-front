@@ -11,7 +11,8 @@ class ItemCreateStep3EventComponent extends Component {
     render() {
         const {
             date, errors, isLoading, onClick, onDateTimeChange,
-            isAllDayEvent, onCheckboxChange
+            isAllDayEvent, onCheckboxChange,
+            finishDate, onFinishDateTimeChange,
         } = this.props;
         return (
             <main id="main" role="main">
@@ -69,7 +70,7 @@ class ItemCreateStep3EventComponent extends Component {
                                 datePickerClassName="form-control form-control-lg border"
                                 divClassName="form-group p-0 col-md-7 mb-4"
                                 error={errors.date}
-                                placeholderText="Click to select a date"
+                                placeholderText="Click to select a start date"
                             />
 
                             <BootstrapCheckbox
@@ -80,6 +81,19 @@ class ItemCreateStep3EventComponent extends Component {
                                 onChange={onCheckboxChange}
                                 value={isAllDayEvent}
                                 name="isAllDayEvent"
+                            />
+
+                            <BootstrapDateTimePicker
+                                dateCaption="When will the event finish? (*)"
+                                timeCaption="Time"
+                                name="date"
+                                dateObj={isAllDayEvent ? null : finishDate}
+                                onTimeChange={onFinishDateTimeChange}
+                                datePickerClassName="form-control form-control-lg border"
+                                divClassName="form-group p-0 col-md-7 mb-4"
+                                error={errors.finishDate}
+                                placeholderText="Click to select a finish date"
+                                disabled={isAllDayEvent}
                             />
 
                             <div className="form-group">

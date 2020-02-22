@@ -24,12 +24,14 @@ class ItemCreateStep3EventContainer extends Component {
         this.state = {
             isAllDayEvent: localStorageGetBooleanItem("nwapp-item-create-event-date-isAllDayEvent"),
             date: localStorageGetDateItem("nwapp-item-create-event-date"),
+            finishDate: localStorageGetDateItem("nwapp-item-create-event-finishDate"),
             errors: {},
             isLoading: false
         }
 
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onCheckboxChange = this.onCheckboxChange.bind(this);
+        this.onFinishDateTimeChange = this.onFinishDateTimeChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -94,6 +96,13 @@ class ItemCreateStep3EventContainer extends Component {
         localStorage.setItem('nwapp-item-create-event-date-'+[e.target.name], e.target.checked);
     }
 
+    onFinishDateTimeChange(dateObj) {
+        this.setState({
+            finishDate: dateObj,
+        })
+        localStorageSetObjectOrArrayItem('nwapp-item-create-event-finishDate', dateObj);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -117,15 +126,17 @@ class ItemCreateStep3EventContainer extends Component {
      */
 
     render() {
-        const { date, errors } = this.state;
+        const { date, finishDate, errors } = this.state;
         return (
             <ItemCreateStep3EventComponent
                 date={date}
+                finishDate={finishDate}
                 isAllDayEvent={this.state.isAllDayEvent}
                 errors={errors}
                 onClick={this.onClick}
                 onDateTimeChange={this.onDateTimeChange}
                 onCheckboxChange={this.onCheckboxChange}
+                onFinishDateTimeChange={this.onFinishDateTimeChange}
             />
         );
     }
