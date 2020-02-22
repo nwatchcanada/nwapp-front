@@ -8,7 +8,7 @@ import {
     localStorageGetDateItem, localStorageGetArrayItem,
     localStorageGetBooleanItem, localStorageGetIntegerItem
 } from '../../../../helpers/localStorageUtility';
-import { validateEventInput } from "../../../../validators/itemValidator";
+import { validateEventStep4Input } from "../../../../validators/itemValidator";
 import { EVENT_TYPE_CHOICES, OTHER_EVENT_TYPE_OF, EVENT_ITEM_TYPE_OF } from "../../../../constants/api";
 import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
 
@@ -41,7 +41,6 @@ class ItemCreateStep4EventContainer extends Component {
             category:localStorage.getItem("nwapp-item-create-event-category"),
             categoryOption: localStorageGetObjectItem('nwapp-item-create-event-categoryOption'),
             categoryOther: localStorage.getItem("nwapp-item-create-event-categoryOther"),
-            date: localStorageGetDateItem("nwapp-item-create-event-date"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
@@ -54,7 +53,6 @@ class ItemCreateStep4EventContainer extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
-        this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onGalleryDrop = this.onGalleryDrop.bind(this);
         this.onGalleryRemoveUploadClick = this.onGalleryRemoveUploadClick.bind(this);
         this.onLogoDrop = this.onLogoDrop.bind(this);
@@ -162,13 +160,6 @@ class ItemCreateStep4EventContainer extends Component {
                 localStorageSetObjectOrArrayItem('nwapp-item-create-event-'+optionKey, option);
             }
         );
-    }
-
-    onDateTimeChange(dateObj) {
-        this.setState({
-            date: dateObj,
-        })
-        localStorageSetObjectOrArrayItem('nwapp-item-create-event-date', dateObj);
     }
 
     /**
@@ -280,7 +271,7 @@ class ItemCreateStep4EventContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateEventInput(this.state);
+        const { errors, isValid } = validateEventStep4Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
@@ -334,7 +325,7 @@ class ItemCreateStep4EventContainer extends Component {
 
     render() {
         const {
-            title, category, categoryOther, date, description, logoPhoto, galleryPhotos, shownToWhom, canBePostedOnSocialMedia, errors
+            title, category, categoryOther, description, logoPhoto, galleryPhotos, shownToWhom, canBePostedOnSocialMedia, errors
         } = this.state;
         const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
 
@@ -349,7 +340,6 @@ class ItemCreateStep4EventContainer extends Component {
                 category={category}
                 categoryOptions={itemTypeListOptions}
                 categoryOther={categoryOther}
-                date={date}
                 description={description}
                 logoPhoto={logoPhoto}
                 galleryPhotos={galleryPhotos}
@@ -364,7 +354,6 @@ class ItemCreateStep4EventContainer extends Component {
                 onGalleryDrop={this.onGalleryDrop}
                 onGalleryRemoveUploadClick={this.onGalleryRemoveUploadClick}
                 onClick={this.onClick}
-                onDateTimeChange={this.onDateTimeChange}
             />
         );
     }

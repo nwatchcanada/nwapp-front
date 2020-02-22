@@ -117,6 +117,31 @@ export function validateEventStep3Input(data) {
     }
 }
 
+/**
+ *  Validator will validate the `event` item.
+ */
+export function validateEventStep4Input(data) {
+    let errors = {};
+
+    if (data.title === undefined || data.title === null || validator.isEmpty(data.title) || data.title === "") {
+        errors.title = 'This field is required';
+    }
+    if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
+        errors.description = 'This field is required';
+    }
+    if (data.shownToWhom === undefined || data.shownToWhom === null || data.shownToWhom === "" || isNaN(data.shownToWhom) ) {
+        errors.shownToWhom = 'This field is required';
+    }
+    if (data.canBePostedOnSocialMedia === undefined || data.canBePostedOnSocialMedia === null || data.canBePostedOnSocialMedia === "" || isNaN(data.canBePostedOnSocialMedia) ) {
+        errors.canBePostedOnSocialMedia = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 
 /**
  *  Validator will validate the `event` item.

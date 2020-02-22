@@ -20,8 +20,8 @@ import {
 class ItemCreateStep4EventComponent extends Component {
     render() {
         const {
-            title, category, categoryOptions, categoryOther, date, description, errors, isLoading,
-            onClick,  onTextChange, onSelectChange, onDateTimeChange,
+            title, category, categoryOptions, categoryOther, description, errors, isLoading,
+            onClick,  onTextChange, onSelectChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
             shownToWhom, canBePostedOnSocialMedia, onRadioChange,
@@ -110,15 +110,6 @@ class ItemCreateStep4EventComponent extends Component {
                                     type="text"
                                 />
                             }
-                            <BootstrapDatePicker
-                                label="Date (*)"
-                                name="date"
-                                dateObj={date}
-                                onTimeChange={onDateTimeChange}
-                                datePickerClassName="form-control form-control-lg border"
-                                divClassName="form-group p-0 col-md-7 mb-4"
-                                error={errors.date}
-                            />
 
                             <BootstrapTextarea
                                 name="description"
