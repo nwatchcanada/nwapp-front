@@ -26,21 +26,13 @@ class ItemCreateStep5EventContainer extends Component {
 
         // Extract the type of container.
         const typeOf = parseInt(localStorage.getItem("nwapp-item-create-typeOf"));
-        let returnURL;
-        if (typeOf === INCIDENT_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-incident";
-        } else if (typeOf === EVENT_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-event";
-        } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-concern";
-        } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
-            returnURL = "/item/add/step-2-information";
-        }
 
         // Set the state.
         this.state = {
             typeOf: typeOf,
-            returnURL: returnURL,
+            category:localStorage.getItem("nwapp-item-create-event-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-event-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-event-categoryOther"),
 
             // Concern Type
             concernTitle: localStorage.getItem("nwapp-item-create-concern-title"),
@@ -148,7 +140,7 @@ class ItemCreateStep5EventContainer extends Component {
 
     render() {
         const {
-            typeOf, returnURL, errors,
+            typeOf, errors,
 
             // Concern Type
             concernTitle,
@@ -180,7 +172,6 @@ class ItemCreateStep5EventContainer extends Component {
         return (
             <ItemCreateStep5EventComponent
                 typeOf={typeOf}
-                returnURL={returnURL}
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
