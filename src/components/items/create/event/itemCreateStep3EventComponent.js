@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
-import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import { BootstrapDateTimePicker } from '../../../bootstrap/bootstrapDateTimePicker';
+import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 
 
 class ItemCreateStep3EventComponent extends Component {
     render() {
         const {
             date, errors, isLoading, onClick, onDateTimeChange,
+            isAllDayEvent, onCheckboxChange
         } = this.props;
         return (
             <main id="main" role="main">
@@ -53,19 +55,31 @@ class ItemCreateStep3EventComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-glass-cheers"></i>&nbsp;Event Form</h1>
+                            <h1><i className="fas fa-calendar"></i>&nbsp;Date/Start</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapDatePicker
-                                label="Date (*)"
+                            <BootstrapDateTimePicker
+                                dateCaption="When will the event happen? (*)"
+                                timeCaption="Time"
                                 name="date"
                                 dateObj={date}
                                 onTimeChange={onDateTimeChange}
                                 datePickerClassName="form-control form-control-lg border"
                                 divClassName="form-group p-0 col-md-7 mb-4"
                                 error={errors.date}
+                                placeholderText="Click to select a date"
+                            />
+
+                            <BootstrapCheckbox
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-success"
+                                error={errors.isAllDayEvent}
+                                label="Is all day event?"
+                                onChange={onCheckboxChange}
+                                value={isAllDayEvent}
+                                name="isAllDayEvent"
                             />
 
                             <div className="form-group">

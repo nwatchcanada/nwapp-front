@@ -22,12 +22,14 @@ class ItemCreateStep3EventContainer extends Component {
         super(props);
 
         this.state = {
+            isAllDayEvent: localStorageGetBooleanItem("nwapp-item-create-event-date-isAllDayEvent"),
             date: localStorageGetDateItem("nwapp-item-create-event-date"),
             errors: {},
             isLoading: false
         }
 
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -85,6 +87,13 @@ class ItemCreateStep3EventContainer extends Component {
         localStorageSetObjectOrArrayItem('nwapp-item-create-event-date', dateObj);
     }
 
+    onCheckboxChange(e) {
+        this.setState({
+            [e.target.name]: e.target.checked,
+        });
+        localStorage.setItem('nwapp-item-create-event-date-'+[e.target.name], e.target.checked);
+    }
+
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
@@ -95,7 +104,7 @@ class ItemCreateStep3EventContainer extends Component {
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.onSuccessfulSubmissionCallback();
-            
+
         // CASE 2 OF 2: Validation was a failure.
         } else {
             this.onFailedSubmissionCallback(errors);
@@ -112,9 +121,11 @@ class ItemCreateStep3EventContainer extends Component {
         return (
             <ItemCreateStep3EventComponent
                 date={date}
+                isAllDayEvent={this.state.isAllDayEvent}
                 errors={errors}
                 onClick={this.onClick}
                 onDateTimeChange={this.onDateTimeChange}
+                onCheckboxChange={this.onCheckboxChange}
             />
         );
     }
