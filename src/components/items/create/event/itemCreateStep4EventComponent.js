@@ -19,7 +19,7 @@ import {
 class ItemCreateStep4EventComponent extends Component {
     render() {
         const {
-            title, description, errors, isLoading,
+            title, description, externalURL, errors, isLoading,
             onClick,  onTextChange, onSelectChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
             galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
@@ -97,6 +97,18 @@ class ItemCreateStep4EventComponent extends Component {
                                 error={errors.description}
                             />
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.externalURL}
+                                label="External web address"
+                                onChange={onTextChange}
+                                value={externalURL}
+                                name="externalURL"
+                                type="text"
+                                helpText="If you would like people to visit an external website for this event, please fill it in here."
+                            />
+
                             <BootstrapSingleImageUploadAndPreview
                                 error={errors.logoPhoto}
                                 label="Logo"
@@ -104,6 +116,7 @@ class ItemCreateStep4EventComponent extends Component {
                                 name="logoPhoto"
                                 fileObj={logoPhoto}
                                 onRemoveUploadClick={onLogoRemoveUploadClick}
+                                helpText=""
                             />
 
                             <BootstrapMultipleImageUploadAndPreview

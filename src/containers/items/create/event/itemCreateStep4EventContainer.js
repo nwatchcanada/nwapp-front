@@ -23,6 +23,7 @@ class ItemCreateStep4EventContainer extends Component {
         this.state = {
             title: localStorage.getItem("nwapp-item-create-event-title"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
+            externalURL: localStorage.getItem("nwapp-item-create-event-externalURL"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
             galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
             shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
@@ -70,7 +71,7 @@ class ItemCreateStep4EventContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-4-event");
+        this.props.history.push("/item/add/step-5-event");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -290,6 +291,7 @@ class ItemCreateStep4EventContainer extends Component {
         const {
             title,
             description,
+            externalURL,
             logoPhoto,
             galleryPhotos,
             shownToWhom,
@@ -301,6 +303,7 @@ class ItemCreateStep4EventContainer extends Component {
             <ItemCreateStep4EventComponent
                 title={title}
                 description={description}
+                externalURL={externalURL}
                 logoPhoto={logoPhoto}
                 galleryPhotos={galleryPhotos}
                 shownToWhom={shownToWhom}
