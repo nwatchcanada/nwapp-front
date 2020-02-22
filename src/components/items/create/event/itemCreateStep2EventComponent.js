@@ -71,7 +71,7 @@ class ItemCreateStep2EventComponent extends Component {
 
                             <BootstrapSingleSelect
                                 borderColour="border-primary"
-                                label="Event Category (*)"
+                                label="What type of event would you like to add? (*)"
                                 name="category"
                                 defaultOptionLabel="Please select the event category."
                                 options={categoryOptions}
