@@ -7,7 +7,8 @@ import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
     CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
+    INFORMATION_ITEM_TYPE_OF,
+    COMMUNITY_NEWS_ITEM_TYPE_OF
 } from "../../../../constants/api";
 
 
@@ -108,6 +109,20 @@ class ItemCreateStep1Component extends Component {
                                 <h3 className="card-title">Information</h3>
                                 <p className="card-text">Add a resource</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, INFORMATION_ITEM_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-broadcast-tower fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Community News</h3>
+                                <p className="card-text">Add a community news item.</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, COMMUNITY_NEWS_ITEM_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>

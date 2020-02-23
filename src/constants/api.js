@@ -248,10 +248,11 @@ export const STREET_DIRECTION_CHOICES = [
 /**
  *  The item type of that we can use in the system.
  */
-export const INCIDENT_ITEM_TYPE_OF = 2
-export const EVENT_ITEM_TYPE_OF = 3
-export const CONCERN_ITEM_TYPE_OF = 4
-export const INFORMATION_ITEM_TYPE_OF = 5
+export const INCIDENT_ITEM_TYPE_OF = 2;
+export const EVENT_ITEM_TYPE_OF = 3;
+export const CONCERN_ITEM_TYPE_OF = 4;
+export const INFORMATION_ITEM_TYPE_OF = 5;
+export const COMMUNITY_NEWS_ITEM_TYPE_OF = 6;
 export const ITEM_TYPE_CHOICES = [
     {
         selectName: "typeOf",
@@ -269,6 +270,10 @@ export const ITEM_TYPE_CHOICES = [
         selectName: "typeOf",
         value: INFORMATION_ITEM_TYPE_OF,
         label: "Information"
+    },{
+        selectName: "typeOf",
+        value: COMMUNITY_NEWS_ITEM_TYPE_OF,
+        label: "Community News"
     }
 ];
 export const ITEM_TYPE_CATEGORY_CHOICES = [
@@ -288,6 +293,10 @@ export const ITEM_TYPE_CATEGORY_CHOICES = [
         selectName: "category",
         value: INFORMATION_ITEM_TYPE_OF,
         label: "Information"
+    },{
+        selectName: "category",
+        value: COMMUNITY_NEWS_ITEM_TYPE_OF,
+        label: "Community News"
     }
 ];
 

@@ -8,7 +8,8 @@ import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
     CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
+    INFORMATION_ITEM_TYPE_OF,
+    COMMUNITY_NEWS_ITEM_TYPE_OF
 } from "../../../../constants/api";
 
 
@@ -95,6 +96,10 @@ class ItemCreateStep1Container extends Component {
             this.props.history.push("/admin/item/add/step-2-concern");
         } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
             this.props.history.push("/admin/item/add/step-2-information");
+        } else if (typeOf === COMMUNITY_NEWS_ITEM_TYPE_OF) {
+            this.props.history.push("/admin/item/add/step-2-community-news");
+        } else {
+            alert("Could not find type-of with value: "+typeOf);
         }
     }
 
