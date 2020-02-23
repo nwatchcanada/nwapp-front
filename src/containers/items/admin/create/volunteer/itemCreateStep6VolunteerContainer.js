@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 // import * as moment from 'moment';
 
-import ItemCreateStep6CommunityNewsComponent from "../../../../../components/items/admin/create/communityNews/itemCreateStep6CommunityNewsComponent";
+import ItemCreateStep6IVolunteerComponent from "../../../../../components/items/admin/create/volunteer/itemCreateStep6VolunteerComponent";
 import {
     localStorageGetObjectItem,
     localStorageGetDateItem,
@@ -14,7 +14,7 @@ import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { postItem } from "../../../../../actions/itemActions";
 
 
-class ItemCreateStep6CommunityNewsContainer extends Component {
+class ItemCreateStep6IVolunteerContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -29,9 +29,9 @@ class ItemCreateStep6CommunityNewsContainer extends Component {
         // Set the state.
         this.state = {
             // Step 2
-            category:localStorage.getItem("nwapp-item-create-communityNews-category"),
-            categoryOption: localStorageGetObjectItem('nwapp-item-create-communityNews-categoryOption'),
-            categoryOther: localStorage.getItem("nwapp-item-create-communityNews-categoryOther"),
+            category:localStorage.getItem("nwapp-item-create-volunteer-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-volunteer-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-volunteer-categoryOther"),
 
             // Step 3
             whoNewsFor: localStorageGetIntegerItem("nwapp-item-create-community-news-whoNewsFor"),
@@ -148,7 +148,7 @@ class ItemCreateStep6CommunityNewsContainer extends Component {
             typeOf,
 
             // Step 2
-            prettyCommunityNewsTypeOf,
+            prettyIVolunteerTypeOf,
 
             // Step 3
             notifiedAuthorities,
@@ -168,12 +168,12 @@ class ItemCreateStep6CommunityNewsContainer extends Component {
         } = this.state;
 
         return (
-            <ItemCreateStep6CommunityNewsComponent
+            <ItemCreateStep6IVolunteerComponent
                 // Step 1
                 typeOf={typeOf}
 
                 // Step 2
-                prettyCommunityNewsTypeOf={prettyCommunityNewsTypeOf}
+                prettyIVolunteerTypeOf={prettyIVolunteerTypeOf}
 
                 // Step 3
                 notifiedAuthorities={notifiedAuthorities}
@@ -224,4 +224,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep6CommunityNewsContainer);
+)(ItemCreateStep6IVolunteerContainer);

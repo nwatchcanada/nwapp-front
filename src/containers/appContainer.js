@@ -332,6 +332,8 @@ import ItemCreateStep6CommunityNewsContainer from "./items/admin/create/communit
 import ItemCreateStep2VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep2VolunteerContainer";
 import ItemCreateStep3VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep3VolunteerContainer";
 import ItemCreateStep4VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep4VolunteerContainer";
+import ItemCreateStep5VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep5VolunteerContainer";
+import ItemCreateStep6VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep6VolunteerContainer";
 import ItemUpdateIncidentContainer from "./items/admin/update/itemUpdateIncidentContainer";
 import ItemUpdateConcernContainer from "./items/admin/update/itemUpdateConcernContainer";
 import ItemUpdateEventContainer from "./items/admin/update/itemUpdateEventContainer";
@@ -755,6 +757,8 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/add/step-2-volunteer" exact component={requiresAuth(ItemCreateStep2VolunteerContainer)} />
                                 <Route path="/admin/item/add/step-3-volunteer" exact component={requiresAuth(ItemCreateStep3VolunteerContainer)} />
                                 <Route path="/admin/item/add/step-4-volunteer" exact component={requiresAuth(ItemCreateStep4VolunteerContainer)} />
+                                <Route path="/admin/item/add/step-5-volunteer" exact component={requiresAuth(ItemCreateStep5VolunteerContainer)} />
+                                <Route path="/admin/item/add/step-6-volunteer" exact component={requiresAuth(ItemCreateStep6VolunteerContainer)} />
                                 <Route path="/admin/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/admin/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
                                 <Route path="/admin/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
