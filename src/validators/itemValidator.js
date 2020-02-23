@@ -335,3 +335,16 @@ export function validateCommunityNewsStep2Input(data) {
         isValid: isEmpty(errors)
     }
 }
+
+export function validateCommunityNewsStep3Input(data) {
+    let errors = {};
+
+    if (data.notifiedAuthorities === undefined || data.notifiedAuthorities === null || data.notifiedAuthorities === "" || isNaN(data.notifiedAuthorities) ) {
+        errors.notifiedAuthorities = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}

@@ -3,30 +3,21 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
-import { BootstrapDatePicker } from "../../../../bootstrap/bootstrapDatePicker";
-import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
-import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapRadio } from "../../../../bootstrap/bootstrapRadio";
-import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
-import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/bootstrapSingleImageUploadAndPreview";
-import { BootstrapMultipleImageUploadAndPreview } from "../../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
-import { OTHER_INCIDENT_TYPE_OF } from "../../../../../constants/api";
+import {
+    ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES,
+} from "../../../../../constants/api";
 
 
-class ItemCreateStep2CommunityNewsComponent extends Component {
+class ItemCreateStep3CommunityNewsComponent extends Component {
     render() {
         const {
-            category,
-            categoryOptions,
-            categoryOther,
+            notifiedAuthorities,
+            onRadioChange,
             errors,
-            onTextChange,
-            onSelectChange,
             isLoading,
             onClick,
-            isItemTypeLoading,
         } = this.props;
-        const isOtherCommunityNewsTypeOf = category === OTHER_INCIDENT_TYPE_OF;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -50,13 +41,15 @@ class ItemCreateStep2CommunityNewsComponent extends Component {
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
-                        <div id="step-2" className="st-grey active">
-                            <strong>
+                        <div id="step-2" className="st-grey">
+                            <Link to="/admin/item/add/step-2-community-news">
                                 <span className="num">2.</span><span className="">Categorize</span>
-                            </strong>
+                            </Link>
                         </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Reason</span>
+                        <div id="step-3" className="st-grey active">
+                            <strong>
+                                <span className="num">3.</span><span className="">Reason</span>
+                            </strong>
                         </div>
                         <div id="step-4" className="st-grey">
                             <span className="num">4.</span><span className="">Details</span>
@@ -75,36 +68,22 @@ class ItemCreateStep2CommunityNewsComponent extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapSingleSelect
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                label="Community News Category (*)"
-                                name="category"
-                                defaultOptionLabel="Please select the community news category."
-                                options={categoryOptions}
-                                value={category}
-                                error={errors.category}
-                                onSelectChange={onSelectChange}
-                                isLoading={isItemTypeLoading}
+                                error={errors.notifiedAuthorities}
+                                label="Have you notified the authorities of this Incident? (*)"
+                                name="notifiedAuthorities"
+                                onChange={onRadioChange}
+                                selectedValue={notifiedAuthorities}
+                                options={ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES}
                             />
-
-                            {isOtherCommunityNewsTypeOf &&
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.categoryOther}
-                                    label="CommunityNews Category - Other (*)"
-                                    onChange={onTextChange}
-                                    value={categoryOther}
-                                    name="categoryOther"
-                                    type="text"
-                                />
-                            }
 
                             <div className="form-group">
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={ (event)=>{onClick(event)} }>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/admin/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/item/add/step-2-community-news" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
@@ -118,4 +97,4 @@ class ItemCreateStep2CommunityNewsComponent extends Component {
     }
 }
 
-export default ItemCreateStep2CommunityNewsComponent;
+export default ItemCreateStep3CommunityNewsComponent;
