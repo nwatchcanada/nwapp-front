@@ -9,6 +9,7 @@ import {
    OTHER_EVENT_TYPE_OF,
    OTHER_INCIDENT_TYPE_OF,
    OTHER_CONCERN_TYPE_OF,
+   OTHER_COMMUNITY_NEWS_TYPE_OF,
 } from "../constants/api";
 
 
@@ -307,6 +308,26 @@ export function validateInformationInput(data) {
 
     if (data.description === undefined || data.description === null || validator.isEmpty(data.description) || data.description === "") {
         errors.description = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+export function validateCommunityNewsStep2Input(data) {
+    let errors = {};
+
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_COMMUNITY_NEWS_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
     }
 
     return {

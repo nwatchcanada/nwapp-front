@@ -305,6 +305,8 @@ export const ITEM_TYPE_CATEGORY_CHOICES = [
     }
 ];
 
+export const OTHER_COMMUNITY_NEWS_TYPE_OF = 1;
+
 
 /**
  *  The item type of that we can use in the system.
