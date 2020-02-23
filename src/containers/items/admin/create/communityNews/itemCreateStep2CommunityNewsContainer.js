@@ -20,7 +20,7 @@ class ItemCreateStep2CommunityNewsContainer extends Component {
 
         const parametersMap = new Map();
         // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
-        parametersMap.set("o", "-created_at");
+        parametersMap.set("o", "id");
         parametersMap.set("category", COMMUNITY_NEWS_ITEM_TYPE_OF);
 
         this.state = {
