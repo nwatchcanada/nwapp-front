@@ -31,6 +31,11 @@ class RemoteListComponent extends Component {
                 sort: false,
                 // formatter: textFormatter
             },{
+                dataField: 'createdAt',
+                text: 'Post Date',
+                sort: false,
+                formatter: createdAtFormatter
+            },{
                 dataField: 'slug',
                 text: 'Details',
                 sort: false,
@@ -99,10 +104,10 @@ function categoryFormatter(cell, row){
 }
 
 
-function textFormatter(cell, row){
-
-    // const policeCheckDateMoment = moment(this.state.policeCheckDate);
-    // postData.policeCheckDate = policeCheckDateMoment.format("YYYY-MM-DD")
+function createdAtFormatter(cell, row){
+    const createdAtMoment = moment(row.createdAt);
+    const createdAt = createdAtMoment.format("YYYY-MM-DD hh:mm:ss");
+    return createdAt;
 }
 
 

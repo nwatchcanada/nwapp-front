@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import * as moment from 'moment';
 
 import ItemCreateStep5IncidentComponent from "../../../../../components/items/admin/create/incident/itemCreateStep5IncidentComponent";
 import {
-    localStorageGetObjectItem, localStorageGetDateItem, localStorageGetArrayItem, localStorageGetIntegerItem
+    localStorageGetObjectItem,
+    localStorageGetDateItem,
+    localStorageGetArrayItem,
+    localStorageGetIntegerItem
 } from '../../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import {
@@ -13,6 +17,7 @@ import {
     CONCERN_ITEM_TYPE_OF,
     INFORMATION_ITEM_TYPE_OF
 } from "../../../../../constants/api";
+import { postItem } from "../../../../../actions/itemActions";
 
 
 class ItemCreateStep5IncidentContainer extends Component {
@@ -32,16 +37,13 @@ class ItemCreateStep5IncidentContainer extends Component {
             typeOf: typeOf,
 
             // Step 2
-            incidentTypeOf:localStorageGetIntegerItem("nwapp-item-create-incident-incidentTypeOf"),
-            incidentTypeOfOption: localStorageGetObjectItem('nwapp-item-create-incident-incidentTypeOfOption'),
-            incidentTypeOfOther: localStorage.getItem("nwapp-item-create-incident-incidentTypeOfOther"),
-            prettyIncidentTypeOf: localStorage.getItem('nwapp-item-create-incident-pretty-incident-type'),
+            category:localStorage.getItem("nwapp-item-create-incident-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-incident-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-incident-categoryOther"),
 
             // Step 3
             notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-notifiedAuthorities"),
             acceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-acceptAuthorityCooperation"),
-            notifiedAuthoritiesLabel: localStorage.getItem("nwapp-item-create-incident-notifiedAuthorities-label"),
-            acceptAuthorityCooperationLabel: localStorage.getItem("nwapp-item-create-incident-acceptAuthorityCooperation-label"),
 
             // Step 4
             title: localStorage.getItem("nwapp-item-create-incident-title"),
@@ -59,6 +61,22 @@ class ItemCreateStep5IncidentContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        const dateMoment = moment(this.state.date);
+        postData.date = dateMoment.format("YYYY-MM-DD")
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -117,8 +135,13 @@ class ItemCreateStep5IncidentContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Simply submit.
-        this.onSuccessfulSubmissionCallback();
+        // Once our state has been validated `client-side` then we will
+        // make an API request with the server to create our new production.
+        this.props.postItem(
+            this.getPostData(),
+            this.onSuccessfulSubmissionCallback,
+            this.onFailedSubmissionCallback
+        );
     }
 
 
@@ -198,7 +221,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        postItem: (postData, successCallback, failedCallback) => {
+            dispatch(postItem(postData, successCallback, failedCallback))
+        },
     }
 }
 

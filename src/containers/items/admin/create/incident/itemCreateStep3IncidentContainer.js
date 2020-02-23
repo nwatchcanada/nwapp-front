@@ -113,8 +113,10 @@ class ItemCreateStep3IncidentContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+            console.log("Selected Choice: ", this.state.acceptAuthorityCooperation );
+
             // CASE A OF B:
-            if (this.state.acceptAuthorityCooperation === 1) {
+            if (parseInt(this.state.acceptAuthorityCooperation) === 1) {
                 this.onSuccessfulSubmissionCallback();
 
             // CASE B OF B:
