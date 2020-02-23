@@ -395,3 +395,17 @@ export function validateVolunteerStep2Input(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+export function validateVolunteerStep3Input(data) {
+    let errors = {};
+
+    if (data.whoNewsFor === undefined || data.whoNewsFor === null || data.whoNewsFor === "" || isNaN(data.whoNewsFor) ) {
+        errors.whoNewsFor = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
