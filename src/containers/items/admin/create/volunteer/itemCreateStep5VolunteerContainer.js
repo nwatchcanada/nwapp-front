@@ -16,7 +16,7 @@ class ItemCreateStep5VolunteerContainer extends Component {
         super(props);
 
         this.state = {
-            externalURL: localStorage.getItem("nwapp-item-create-community-news-externalURL"),
+            externalURL: localStorage.getItem("nwapp-item-create-volunteer-externalURL"),
             errors: {},
             isLoading: false,
         }
@@ -59,7 +59,7 @@ class ItemCreateStep5VolunteerContainer extends Component {
          this.setState({
              [e.target.name]: e.target.value,
          });
-         const key = "nwapp-item-create-community-news-"+[e.target.name];
+         const key = "nwapp-item-create-volunteer-"+[e.target.name];
          localStorage.setItem(key, e.target.value)
      }
 
@@ -68,7 +68,7 @@ class ItemCreateStep5VolunteerContainer extends Component {
         // Prvolunteer the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        this.props.history.push("/admin/item/add/step-6-community-news");
+        this.props.history.push("/admin/item/add/step-6-volunteer");
     }
 
     /**

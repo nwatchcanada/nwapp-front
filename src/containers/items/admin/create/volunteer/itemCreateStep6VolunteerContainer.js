@@ -34,13 +34,13 @@ class ItemCreateStep6IVolunteerContainer extends Component {
             categoryOther: localStorage.getItem("nwapp-item-create-volunteer-categoryOther"),
 
             // Step 3
-            whoNewsFor: localStorageGetIntegerItem("nwapp-item-create-community-news-whoNewsFor"),
+            whoNewsFor: localStorageGetIntegerItem("nwapp-item-create-volunteer-whoNewsFor"),
 
             // Step 4
-            description: localStorage.getItem("nwapp-item-create-community-news-description"),
+            description: localStorage.getItem("nwapp-item-create-volunteer-description"),
 
             // Step 5
-            externalURL: localStorage.getItem("nwapp-item-create-community-news-externalURL"),
+            externalURL: localStorage.getItem("nwapp-item-create-volunteer-externalURL"),
 
             // Common
             typeOf: typeOf,

@@ -37,7 +37,7 @@ export default class ItemCreateStep6VolunteerComponent extends Component {
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>
-                            <Link to={`/admin/item/add/step-5-community-news`} className="btn btn-orange btn-lg  float-left">
+                            <Link to={`/admin/item/add/step-5-volunteer`} className="btn btn-orange btn-lg  float-left">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                             &nbsp;&nbsp;&nbsp;
