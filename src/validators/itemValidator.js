@@ -361,3 +361,16 @@ export function validateCommunityNewsStep4Input(data) {
         isValid: isEmpty(errors)
     }
 }
+
+export function validateCommunityNewsStep5Input(data) {
+    let errors = {};
+
+    if (data.description === undefined || data.description === null || data.description === "" ) {
+        errors.description = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}

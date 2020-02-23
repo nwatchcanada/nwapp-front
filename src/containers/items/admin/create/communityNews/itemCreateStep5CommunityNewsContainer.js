@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemCreateStep4CommunityNewsComponent from "../../../../../components/items/admin/create/communityNews/itemCreateStep4CommunityNewsComponent";
+import ItemCreateStep5CommunityNewsComponent from "../../../../../components/items/admin/create/communityNews/itemCreateStep5CommunityNewsComponent";
 import { localStorageGetIntegerItem, localStorageGetObjectItem, localStorageSetObjectOrArrayItem } from '../../../../../helpers/localStorageUtility';
-import { validateCommunityNewsStep4Input } from "../../../../../validators/itemValidator";
+import { validateCommunityNewsStep5Input } from "../../../../../validators/itemValidator";
 
 
-class ItemCreateStep4CommunityNewsContainer extends Component {
+class ItemCreateStep5CommunityNewsContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -70,12 +70,12 @@ class ItemCreateStep4CommunityNewsContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateCommunityNewsStep4Input(this.state);
+        const { errors, isValid } = validateCommunityNewsStep5Input(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.setState({ errors: {}, isLoading: true, })
-            this.props.history.push("/admin/item/add/step-5-community-news");
+            this.props.history.push("/admin/item/add/step-6-community-news");
 
         //     // Save for convinence the communityNews type depending on if the user
         //     // chose a standard option or the `other` option.
@@ -108,7 +108,7 @@ class ItemCreateStep4CommunityNewsContainer extends Component {
     render() {
         const { description, isLoading, errors } = this.state;
         return (
-            <ItemCreateStep4CommunityNewsComponent
+            <ItemCreateStep5CommunityNewsComponent
                 description={description}
                 onTextChange={this.onTextChange}
                 errors={errors}
@@ -135,4 +135,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep4CommunityNewsContainer);
+)(ItemCreateStep5CommunityNewsContainer);
