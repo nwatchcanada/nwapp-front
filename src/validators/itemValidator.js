@@ -348,3 +348,16 @@ export function validateCommunityNewsStep3Input(data) {
         isValid: isEmpty(errors)
     }
 }
+
+export function validateCommunityNewsStep4Input(data) {
+    let errors = {};
+
+    if (data.whoNewsFor === undefined || data.whoNewsFor === null || data.whoNewsFor === "" || isNaN(data.whoNewsFor) ) {
+        errors.whoNewsFor = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
