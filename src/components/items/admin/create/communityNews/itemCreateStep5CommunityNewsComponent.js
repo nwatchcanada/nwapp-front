@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
-import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
+import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import {
     WHO_NEWS_FOR_CHOICES,
 } from "../../../../../constants/api";
@@ -12,7 +12,7 @@ import {
 class ItemCreateStep5CommunityNewsComponent extends Component {
     render() {
         const {
-            description,
+            externalURL,
             onTextChange,
             errors,
             isLoading,
@@ -58,7 +58,7 @@ class ItemCreateStep5CommunityNewsComponent extends Component {
                         </div>
                         <div id="step-5" className="st-grey active">
                             <strong>
-                                <span className="num">5.</span><span className="">Review</span>
+                                <span className="num">5.</span><span className="">Link</span>
                             </strong>
                         </div>
                     </div>
@@ -67,21 +67,21 @@ class ItemCreateStep5CommunityNewsComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-sign"></i>&nbsp;Category Form</h1>
+                            <h1><i className="fas fa-external-link-alt"></i>&nbsp;External Link</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapTextarea
-                                name="description"
-                                borderColour="border-primary"
-                                label="Please type in the news item: (*)"
-                                placeholder="Please describe your concern"
-                                rows="5"
-                                value={description}
-                                helpText="250 characters"
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.externalURL}
+                                label="Where can people learn more?"
                                 onChange={onTextChange}
-                                error={errors.description}
+                                value={externalURL}
+                                name="externalURL"
+                                type="text"
+                                helpText="If you would like people to visit an external website for this news, please fill it in here."
                             />
 
                             <div className="form-group">

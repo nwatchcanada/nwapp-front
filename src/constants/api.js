@@ -672,17 +672,17 @@ export const ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES = [
 
 export const ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES = [
     {
-        id: 'shownToWhom-gp-choice',
+        id: 'shownToWhom-choice-1',
         name: "shownToWhom",
         value: 1,
         label: "General Public"
     },{
-        id: 'shownToWhom-anm-choice',
+        id: 'shownToWhom-choice-2',
         name: "shownToWhom",
         value: 2,
         label: "All NWL Members"
     },{
-        id: 'shownToWhom-mwas-choice',
+        id: 'shownToWhom-choice-3',
         name: "shownToWhom",
         value: 3,
         label: "My Watch Area"
@@ -723,17 +723,17 @@ export const ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES = [
 
 export const WHO_NEWS_FOR_CHOICES = [
     {
-        id: 'whoNewsFor-t-choice',
+        id: 'whoNewsFor-choice-1',
         name: "whoNewsFor",
         value: 1,
         label: "My City"
     },{
-        id: 'whoNewsFor-t-choice',
+        id: 'whoNewsFor-choice-2',
         name: "whoNewsFor",
         value: 2,
         label: "My District"
     },{
-        id: 'whoNewsFor-f-choice',
+        id: 'whoNewsFor-choice-3',
         name: "whoNewsFor",
         value: 3,
         label: "My Watch"

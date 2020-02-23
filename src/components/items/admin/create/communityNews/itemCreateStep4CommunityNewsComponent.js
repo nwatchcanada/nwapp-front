@@ -57,7 +57,7 @@ class ItemCreateStep4CommunityNewsComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Review</span>
+                            <span className="num">5.</span><span className="">Link</span>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ class ItemCreateStep4CommunityNewsComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-sign"></i>&nbsp;Category Form</h1>
+                            <h1><i className="fas fa-keyboard"></i>&nbsp;Details</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
