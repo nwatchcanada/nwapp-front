@@ -409,3 +409,16 @@ export function validateVolunteerStep3Input(data) {
         isValid: isEmpty(errors)
     }
 }
+
+export function validateVolunteerStep4Input(data) {
+    let errors = {};
+
+    if (data.description === undefined || data.description === null || data.description === "" ) {
+        errors.description = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
