@@ -253,6 +253,7 @@ export const EVENT_ITEM_TYPE_OF = 3;
 export const CONCERN_ITEM_TYPE_OF = 4;
 export const INFORMATION_ITEM_TYPE_OF = 5;
 export const COMMUNITY_NEWS_ITEM_TYPE_OF = 6;
+export const VOLUNTEER_ITEM_TYPE_OF = 7;
 export const ITEM_TYPE_CHOICES = [
     {
         selectName: "typeOf",
@@ -274,6 +275,10 @@ export const ITEM_TYPE_CHOICES = [
         selectName: "typeOf",
         value: COMMUNITY_NEWS_ITEM_TYPE_OF,
         label: "Community News"
+    },{
+        selectName: "typeOf",
+        value: VOLUNTEER_ITEM_TYPE_OF,
+        label: "Volunteer"
     }
 ];
 export const ITEM_TYPE_CATEGORY_CHOICES = [
