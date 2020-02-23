@@ -12,7 +12,9 @@ import {
     INCIDENT_ITEM_TYPE_OF,
     EVENT_ITEM_TYPE_OF,
     CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
+    INFORMATION_ITEM_TYPE_OF,
+    COMMUNITY_NEWS_ITEM_TYPE_OF,
+    VOLUNTEER_ITEM_TYPE_OF
 } from "../../../../constants/api";
 
 
@@ -96,6 +98,12 @@ function categoryFormatter(cell, row){
             break;
         case INFORMATION_ITEM_TYPE_OF:
             return <div><i className="fas fa-info-circle"></i>&nbsp;Information</div>;
+            break;
+        case COMMUNITY_NEWS_ITEM_TYPE_OF:
+            return <div><i className="fas fa-broadcast-tower"></i>&nbsp;Community News</div>;
+            break;
+        case VOLUNTEER_ITEM_TYPE_OF:
+            return <div><i className="fas fa-user-friends"></i>&nbsp;Volunteer</div>;
             break;
         default:
             return <div><i className="fas fa-question"></i>&nbsp;Unknown</div>;
