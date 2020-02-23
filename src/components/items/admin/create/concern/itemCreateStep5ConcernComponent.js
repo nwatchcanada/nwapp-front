@@ -18,7 +18,7 @@ export default class ItemCreateStep5ConcernComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -37,7 +37,7 @@ export default class ItemCreateStep5ConcernComponent extends Component {
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>
-                            <Link to={`/item/add/step-4-concern`} className="btn btn-orange btn-lg  float-left">
+                            <Link to={`/admin/item/add/step-4-concern`} className="btn btn-orange btn-lg  float-left">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                             &nbsp;&nbsp;&nbsp;

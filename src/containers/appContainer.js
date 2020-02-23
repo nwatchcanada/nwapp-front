@@ -314,7 +314,7 @@ import Report07Container from "./reports/report07Container";
 
 
 
-import ItemListContainer from "./items/admin/list/itemListContainer";
+import AdminItemListContainer from "./items/admin/list/itemListContainer";
 import ItemSearchContainer from "./items/admin/search/itemSearchContainer";
 import ItemSearchResultContainer from "./items/admin/search/itemSearchResultContainer";
 import ItemRetrieveContainer from "./items/admin/retrieve/itemRetrieveContainer";
@@ -356,9 +356,6 @@ import ActionConcernItemTaskStep3Container from "./tasks/actionConcernItem/actio
 import ActionIncidentItemTaskStep1Container from "./tasks/actionIncidentItem/actionIncidentItemTaskStep1Container";
 import ActionIncidentItemTaskStep2Container from "./tasks/actionIncidentItem/actionIncidentItemTaskStep2Container";
 import ActionIncidentItemTaskStep3Container from "./tasks/actionIncidentItem/actionIncidentItemTaskStep3Container";
-
-
-import ConcernItemListContainer from "./concerns/concernItemListContainer";
 
 import FinancialListContainer from "./financials/list/financialListContainer";
 import FinanciaRetrieveContainer from "./financials/retrieve/financialRetrieveContainer";
@@ -711,41 +708,43 @@ class AppContainer extends React.Component {
 
 
 
-
-
+                                /*
+                                -----
+                                ITEMS
+                                -----
+                                */
+                                <Route path="/admin/items" exact component={requiresAuth(AdminItemListContainer)} />
+                                <Route path="/admin/items/search" exact component={requiresAuth(ItemSearchContainer)} />
+                                <Route path="/admin/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />
+                                <Route path="/admin/item/add/step-1" exact component={requiresAuth(ItemCreateStep1Container)} />
+                                <Route path="/admin/item/add/step-2-concern" exact component={requiresAuth(ItemCreateStep2ConcernContainer)} />
+                                <Route path="/admin/item/add/step-3-concern" exact component={requiresAuth(ItemCreateStep3ConcernContainer)} />
+                                <Route path="/admin/item/add/step-4-concern" exact component={requiresAuth(ItemCreateStep4ConcernContainer)} />
+                                <Route path="/admin/item/add/step-5-concern" exact component={requiresAuth(ItemCreateStep5ConcernContainer)} />
+                                <Route path="/admin/item/add/step-2-event" exact component={requiresAuth(ItemCreateStep2EventContainer)} />
+                                <Route path="/admin/item/add/step-3-event" exact component={requiresAuth(ItemCreateStep3EventContainer)} />
+                                <Route path="/admin/item/add/step-4-event" exact component={requiresAuth(ItemCreateStep4EventContainer)} />
+                                <Route path="/admin/item/add/step-5-event" exact component={requiresAuth(ItemCreateStep5EventContainer)} />
+                                <Route path="/admin/item/add/step-2-incident" exact component={requiresAuth(ItemCreateStep2IncidentContainer)} />
+                                <Route path="/admin/item/add/step-3-incident" exact component={requiresAuth(ItemCreateStep3IncidentContainer)} />
+                                <Route path="/admin/item/add/step-4-incident" exact component={requiresAuth(ItemCreateStep4IncidentContainer)} />
+                                <Route path="/admin/item/add/step-5-incident" exact component={requiresAuth(ItemCreateStep5IncidentContainer)} />
+                                <Route path="/admin/item/add/step-2-information" exact component={requiresAuth(ItemCreateStep2InformationContainer)} />
+                                <Route path="/admin/item/add/step-3-information" exact component={requiresAuth(ItemCreateStep3InformationContainer)} />
+                                <Route path="/admin/item/add/step-4-information" exact component={requiresAuth(ItemCreateStep4InformationContainer)} />
+                                <Route path="/admin/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
+                                <Route path="/admin/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
+                                <Route path="/admin/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
+                                <Route path="/admin/item/:slug/update-concern" exact component={requiresAuth(ItemUpdateConcernContainer)} />
+                                <Route path="/admin/item/:slug/update-event" exact component={requiresAuth(ItemUpdateEventContainer)} />
+                                <Route path="/admin/item/:slug/update-info" exact component={requiresAuth(ItemUpdateInfoContainer)} />
+                                <Route path="/admin/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
 
                                 /*
                                 -------------
                                 TODO: PROCESS
                                 -------------
                                 */
-                                <Route path="/items" exact component={requiresAuth(ItemListContainer)} />
-                                <Route path="/items/search" exact component={requiresAuth(ItemSearchContainer)} />
-                                <Route path="/items/search-results" exact component={requiresAuth(ItemSearchResultContainer)} />
-                                <Route path="/item/add/step-1" exact component={requiresAuth(ItemCreateStep1Container)} />
-                                <Route path="/item/add/step-2-concern" exact component={requiresAuth(ItemCreateStep2ConcernContainer)} />
-                                <Route path="/item/add/step-3-concern" exact component={requiresAuth(ItemCreateStep3ConcernContainer)} />
-                                <Route path="/item/add/step-4-concern" exact component={requiresAuth(ItemCreateStep4ConcernContainer)} />
-                                <Route path="/item/add/step-5-concern" exact component={requiresAuth(ItemCreateStep5ConcernContainer)} />
-                                <Route path="/item/add/step-2-event" exact component={requiresAuth(ItemCreateStep2EventContainer)} />
-                                <Route path="/item/add/step-3-event" exact component={requiresAuth(ItemCreateStep3EventContainer)} />
-                                <Route path="/item/add/step-4-event" exact component={requiresAuth(ItemCreateStep4EventContainer)} />
-                                <Route path="/item/add/step-5-event" exact component={requiresAuth(ItemCreateStep5EventContainer)} />
-                                <Route path="/item/add/step-2-incident" exact component={requiresAuth(ItemCreateStep2IncidentContainer)} />
-                                <Route path="/item/add/step-3-incident" exact component={requiresAuth(ItemCreateStep3IncidentContainer)} />
-                                <Route path="/item/add/step-4-incident" exact component={requiresAuth(ItemCreateStep4IncidentContainer)} />
-                                <Route path="/item/add/step-5-incident" exact component={requiresAuth(ItemCreateStep5IncidentContainer)} />
-                                <Route path="/item/add/step-2-information" exact component={requiresAuth(ItemCreateStep2InformationContainer)} />
-                                <Route path="/item/add/step-3-information" exact component={requiresAuth(ItemCreateStep3InformationContainer)} />
-                                <Route path="/item/add/step-4-information" exact component={requiresAuth(ItemCreateStep4InformationContainer)} />
-                                <Route path="/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
-                                <Route path="/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
-                                <Route path="/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
-                                <Route path="/item/:slug/update-concern" exact component={requiresAuth(ItemUpdateConcernContainer)} />
-                                <Route path="/item/:slug/update-event" exact component={requiresAuth(ItemUpdateEventContainer)} />
-                                <Route path="/item/:slug/update-info" exact component={requiresAuth(ItemUpdateInfoContainer)} />
-                                <Route path="/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
-
                                 <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
                                 <Route path="/tasks/search" exact component={requiresAuth(TaskSearchContainer)} />
                                 <Route path="/tasks/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
@@ -761,7 +760,6 @@ class AppContainer extends React.Component {
                                 <Route path="/task/4/:slug/step-1" exact component={requiresAuth(ActionIncidentItemTaskStep1Container)} />
                                 <Route path="/task/4/:slug/step-2" exact component={requiresAuth(ActionIncidentItemTaskStep2Container)} />
                                 <Route path="/task/4/:slug/step-3" exact component={requiresAuth(ActionIncidentItemTaskStep3Container)} />
-                                <Route path="/concerns" exact component={requiresAuth(ConcernItemListContainer)} />
 
                                 <Route path="/financials" exact component={requiresAuth(FinancialListContainer)} />
                                 <Route path="/financial/:slug" exact component={requiresAuth(FinanciaRetrieveContainer)} />

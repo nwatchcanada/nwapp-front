@@ -65,11 +65,11 @@ class ItemListContainer extends Component {
     }
 
     onSearchClick() {
-        this.props.history.push("/items/search-results");
+        this.props.history.push("/admin/items/search-results");
     }
 
     onAdvancedSearchClick() {
-        this.props.history.push("/items/search-results");
+        this.props.history.push("/admin/items/search-results");
     }
 
     /**

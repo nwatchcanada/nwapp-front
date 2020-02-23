@@ -162,20 +162,20 @@ class ItemRetrieveContainer extends Component {
     onBack(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/items/");
+        this.props.history.push("/admin/items/");
     }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
         if (this.state.itemData.typeOf === INCIDENT_ITEM_TYPE_OF) {
-            this.props.history.push("/item/"+this.state.itemData.slug+"/update-incidence");
+            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-incidence");
         } else if (this.state.itemData.typeOf === EVENT_ITEM_TYPE_OF) {
-            this.props.history.push("/item/"+this.state.itemData.slug+"/update-event");
+            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-event");
         } else if (this.state.itemData.typeOf === CONCERN_ITEM_TYPE_OF) {
-            this.props.history.push("/item/"+this.state.itemData.slug+"/update-concern");
+            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-concern");
         }  else if (this.state.itemData.typeOf === INFORMATION_ITEM_TYPE_OF) {
-            this.props.history.push("/item/"+this.state.itemData.slug+"/update-info");
+            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-info");
         } else {
             alert("ERROR: DID NOT FIND");
         }
@@ -184,7 +184,7 @@ class ItemRetrieveContainer extends Component {
     onArchiveClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/item/"+this.state.slug+"/archive");
+        this.props.history.push("/admin/item/"+this.state.slug+"/archive");
     }
 
     /**

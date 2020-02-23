@@ -35,7 +35,7 @@ class ItemCreateStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -117,7 +117,7 @@ class ItemCreateStep1Component extends Component {
 
                 <div className="form-group">
 
-                    <Link to="/items" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                    <Link to="/admin/items" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                         <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                     </Link>
                 </div>

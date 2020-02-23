@@ -58,7 +58,7 @@ class ItemCreateStep3IncidentContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-4-incident");
+        this.props.history.push("/admin/item/add/step-4-incident");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -140,7 +140,7 @@ class ItemCreateStep3IncidentContainer extends Component {
     onAgreeModalClick(e) {
         e.preventDefault();
         this.props.setFlashMessage("danger", "Incident item has been aborted.");
-        this.props.history.push("/items");
+        this.props.history.push("/admin/items");
     }
 
     /**

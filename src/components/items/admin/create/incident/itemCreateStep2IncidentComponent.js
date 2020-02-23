@@ -35,7 +35,7 @@ class ItemCreateStep2IncidentComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -46,7 +46,7 @@ class ItemCreateStep2IncidentComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/item/add/step-1">
+                            <Link to="/admin/item/add/step-1">
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
@@ -104,7 +104,7 @@ class ItemCreateStep2IncidentComponent extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={ (event)=>{onClick(event)} }>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

@@ -42,7 +42,7 @@ export default class ItemRetrieveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-map-pin"></i>&nbsp;Argyle
@@ -62,7 +62,7 @@ export default class ItemRetrieveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/item/${slug}/comments`}>
+                            <Link to={`/admin/item/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
                         </div>

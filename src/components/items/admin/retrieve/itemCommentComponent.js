@@ -31,7 +31,7 @@ export default class ItemCommentComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-map-pin"></i>&nbsp;{item && item.fullName}
@@ -52,7 +52,7 @@ export default class ItemCommentComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/item/${slug}`}>
+                            <Link to={`/admin/item/${slug}`}>
                                 <span className="num"><i className="fas fa-map-pin"></i>&nbsp;</span><span className="">Summary</span>
                             </Link>
                         </div>

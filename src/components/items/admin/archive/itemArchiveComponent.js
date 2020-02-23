@@ -13,10 +13,10 @@ export default class ItemArchiveComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Item</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Item</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/item/${itemData.slug}`}>
+                            <Link to={`/admin/item/${itemData.slug}`}>
                                 <i className="fas fa-map-pin"></i>&nbsp;{itemData.name}
                             </Link>
                         </li>

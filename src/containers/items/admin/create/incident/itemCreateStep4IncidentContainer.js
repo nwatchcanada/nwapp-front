@@ -62,7 +62,7 @@ class ItemCreateStep4IncidentContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-5-incident");
+        this.props.history.push("/admin/item/add/step-5-incident");
     }
 
     onFailedSubmissionCallback(errors) {

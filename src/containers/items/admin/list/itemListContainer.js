@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
-import ItemListComponent from "../../../../components/items/admin/list/itemListComponent";
+import AdminItemListComponent from "../../../../components/items/admin/list/itemListComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import {
     INCIDENT_ITEM_TYPE_OF,
@@ -9,9 +10,11 @@ import {
     CONCERN_ITEM_TYPE_OF,
     INFORMATION_ITEM_TYPE_OF
 } from "../../../../constants/api";
+import { pullItemList } from "../../../../actions/itemActions";
+import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
 
 
-class ItemListContainer extends Component {
+class AdminItemListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -19,12 +22,26 @@ class ItemListContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        // Force active users as per issue via https://github.com/over55/nwapp-front/issues/296
+        var parametersMap = new Map();
+        parametersMap.set("state", "active");
+
         this.state = {
-            filter: "active",
-            items: [],
+            // Pagination
+            page: 1,
+            sizePerPage: STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION,
+            totalSize: 0,
+
+            // Sorting, Filtering, & Searching
+            parametersMap: parametersMap,
+
+            // Overaly
+            isLoading: true,
         }
-        this.onFilterClick = this.onFilterClick.bind(this);
-        this.filterItems = this.filterItems.bind(this);
+        // this.onTableChange = this.onTableChange.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -35,43 +52,16 @@ class ItemListContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // Load from API...
-        const items = [{
-            'slug': 'argyle',
-            'icon': 'fire',
-            'number': 1,
-            'name': 'Argyle',
-            'typeOf': INCIDENT_ITEM_TYPE_OF,
-            'state': 'active',
-            'absoluteUrl': '/item/argyle'
-        },{
-            'slug': 'byron',
-            'icon': 'glass-cheers',
-            'number': 2,
-            'name': 'Byron',
-            'typeOf': EVENT_ITEM_TYPE_OF,
-            'state': 'active',
-            'absoluteUrl': '/item/byron'
-        },{
-            'slug': 'carling',
-            'icon': 'exclamation-circle',
-            'number': 3,
-            'name': 'Carling',
-            'typeOf': CONCERN_ITEM_TYPE_OF,
-            'state': 'active',
-            'absoluteUrl': '/item/carling'
-        },{
-            'slug': 'darlyn',
-            'icon': 'info-circle',
-            'number': 4,
-            'name': 'Darlyn',
-            'typeOf': INFORMATION_ITEM_TYPE_OF,
-            'state': 'active',
-            'absoluteUrl': '/item/darlyn'
-        }];
-        this.setState({
-            items: items,
-        });
+        // Copy the `parametersMap` that we already have.
+        var parametersMap = this.state.parametersMap;
+
+        this.props.pullItemList(
+            this.state.page,
+            this.state.sizePerPage,
+            parametersMap,
+            this.onSuccessfulSubmissionCallback,
+            this.onFailedSubmissionCallback
+        );
     }
 
     componentWillUnmount() {
@@ -93,10 +83,16 @@ class ItemListContainer extends Component {
 
     onSuccessfulSubmissionCallback(profile) {
         console.log(profile);
+        this.setState({
+            isLoading: false,
+        });
     }
 
     onFailedSubmissionCallback(errors) {
         console.log(errors);
+        this.setState({
+            isLoading: false,
+        });
     }
 
     /**
@@ -104,41 +100,27 @@ class ItemListContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onFilterClick(e, filter) {
-        e.preventDefault();
-        this.setState({
-            filter: filter,
-        })
-    }
-
-    filterItems() {
-        let filteredItems = [];
-        if (this.state.items === undefined || this.state.items === null) {
-            return [];
-        }
-        for (let i = 0; i < this.state.items.length; i++) {
-            let item = this.state.items[i];
-            if (item.state === this.state.filter) {
-                filteredItems.push(item);
-            }
-        }
-        return filteredItems;
-    }
-
-
     /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
+        const { page, sizePerPage, totalSize, isLoading } = this.state;
+        const itemsResponse = this.props.itemList;
+        const items = !isEmpty(itemsResponse) && !isEmpty(itemsResponse.results)
+            ? itemsResponse.results
+            : [];
 
         return (
-            <ItemListComponent
-                filter={this.state.filter}
-                onFilterClick={this.onFilterClick}
-                items={this.filterItems()}
+            <AdminItemListComponent
+                page={page}
+                sizePerPage={sizePerPage}
+                totalSize={totalSize}
+                items={items}
+                onTableChange={this.onTableChange}
                 flashMessage={this.props.flashMessage}
+                isLoading={isLoading}
             />
         );
     }
@@ -148,6 +130,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
+        itemList: store.itemListState,
     };
 }
 
@@ -155,7 +138,12 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullItemList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullItemList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
     }
 }
 
@@ -163,4 +151,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemListContainer);
+)(AdminItemListContainer);

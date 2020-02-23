@@ -59,7 +59,7 @@ class ItemCreateStep1Container extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/items");
+        this.props.history.push("/admin/items");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -88,13 +88,13 @@ class ItemCreateStep1Container extends Component {
 
         // Redirect to the type of item it is.
         if (typeOf === INCIDENT_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-incident");
+            this.props.history.push("/admin/item/add/step-2-incident");
         } else if (typeOf === EVENT_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-event");
+            this.props.history.push("/admin/item/add/step-2-event");
         } else if (typeOf === CONCERN_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-concern");
+            this.props.history.push("/admin/item/add/step-2-concern");
         } else if (typeOf === INFORMATION_ITEM_TYPE_OF) {
-            this.props.history.push("/item/add/step-2-information");
+            this.props.history.push("/admin/item/add/step-2-information");
         }
     }
 

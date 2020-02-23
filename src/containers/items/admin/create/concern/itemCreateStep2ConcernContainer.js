@@ -62,7 +62,7 @@ class ItemCreateStep2ConcernContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        this.props.history.push("/item/add/step-3-concern");
+        this.props.history.push("/admin/item/add/step-3-concern");
     }
 
     /**

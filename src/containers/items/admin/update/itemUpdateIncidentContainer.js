@@ -105,7 +105,7 @@ class ItemUpdateIncidentContainer extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Item has been successfully updated.");
-        this.props.history.push("/item/"+this.state.slug);
+        this.props.history.push("/admin/item/"+this.state.slug);
     }
 
     onFailedSubmissionCallback(errors) {

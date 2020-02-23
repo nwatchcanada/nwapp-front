@@ -105,7 +105,7 @@ class ItemCreateStep2InformationContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-3-information");
+        this.props.history.push("/admin/item/add/step-3-information");
     }
 
     onFailedSubmissionCallback(errors) {

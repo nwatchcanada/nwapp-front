@@ -113,7 +113,7 @@ class ItemCreateStep5Container extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/items");
+        this.props.history.push("/admin/items");
     }
 
     onFailedSubmissionCallback(errors) {

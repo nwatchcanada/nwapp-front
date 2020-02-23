@@ -67,7 +67,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-items",
         icon: "map-pin",
         title: "Items",
-        url: "/items"
+        url: "/admin/items"
     },{
         id: "full-tasks",
         icon: "tasks",
@@ -142,7 +142,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-items",
         icon: "map-pin",
         title: "Items",
-        url: "/items"
+        url: "/admin/items"
     },{
         id: "full-tasks",
         icon: "tasks",
@@ -214,7 +214,7 @@ const AUTH_AREA_COORDINATOR_MENU_DATA = [
         id: "full-items",
         icon: "map-pin",
         title: "Items",
-        url: "/items"
+        url: "/admin/items"
     },{
         id: "full-watches",
         icon: "shield-alt",

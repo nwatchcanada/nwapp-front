@@ -33,7 +33,7 @@ class ItemCreateStep4EventComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -44,17 +44,17 @@ class ItemCreateStep4EventComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/item/add/step-1">
+                            <Link to="/admin/item/add/step-1">
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to="/item/add/step-2-event">
+                            <Link to="/admin/item/add/step-2-event">
                                 <span className="num">2.</span><span className="">Categorize</span>
                             </Link>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <Link to="/item/add/step-3-event">
+                            <Link to="/admin/item/add/step-3-event">
                                 <span className="num">3.</span><span className="">Date/Time</span>
                             </Link>
                         </div>
@@ -154,7 +154,7 @@ class ItemCreateStep4EventComponent extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/item/add/step-3-event" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/item/add/step-3-event" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

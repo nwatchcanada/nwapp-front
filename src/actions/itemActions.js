@@ -8,7 +8,10 @@ import {
     ITEM_LIST_REQUEST, ITEM_LIST_FAILURE, ITEM_LIST_SUCCESS,
     ITEM_DETAIL_REQUEST, ITEM_DETAIL_FAILURE, ITEM_DETAIL_SUCCESS
 } from '../constants/actionTypes';
-import { WORKERY_ITEM_LIST_API_ENDPOINT, WORKERY_ITEM_DETAIL_API_ENDPOINT } from '../constants/api';
+import {
+    WORKERY_ITEM_LIST_API_ENDPOINT,
+    WORKERY_ITEM_DETAIL_API_ENDPOINT,
+} from '../constants/api';
 import getCustomAxios from '../helpers/customAxios';
 
 
@@ -23,7 +26,7 @@ export function pullItemList(page=1, sizePerPage=10, filtersMap=new Map(), onSuc
             setItemListRequest()
         );
 
-        console.log(page, sizePerPage, filtersMap, onSuccessCallback, onFailureCallback);
+        // console.log(page, sizePerPage, filtersMap, onSuccessCallback, onFailureCallback);
 
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
@@ -105,7 +108,7 @@ export function pullItemList(page=1, sizePerPage=10, filtersMap=new Map(), onSuc
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postItem(postData, successCallback, failedCallback) {
+export function postItem(postData, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -127,20 +130,24 @@ export function postItem(postData, successCallback, failedCallback) {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
 
-            let device = camelizeKeys(responseData);
+            let item = camelizeKeys(responseData);
 
             // Extra.
-            device['isAPIRequestRunning'] = false;
-            device['errors'] = {};
-
-            // Run our success callback function.
-            successCallback(device);
+            item['isAPIRequestRunning'] = false;
+            item['errors'] = {};
 
             // Update the global state of the application to store our
-            // user device for the application.
+            // user item for the application.
             store.dispatch(
-                setItemDetailSuccess(device)
+                setItemDetailSuccess(item)
             );
+
+            // DEVELOPERS NOTE:
+            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+            // OBJECT WE GOT FROM THE API.
+            if (onSuccessCallback) {
+                onSuccessCallback(item);
+            }
         }).catch( (exception) => {
             if (exception.response) {
                 const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
@@ -163,8 +170,8 @@ export function postItem(postData, successCallback, failedCallback) {
                 // DEVELOPERS NOTE:
                 // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
                 // OBJECT WE GOT FROM THE API.
-                if (failedCallback) {
-                    failedCallback(errors);
+                if (onFailureCallback) {
+                    onFailureCallback(errors);
                 }
             }
 
@@ -179,7 +186,7 @@ export function postItem(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullItem(slug, onSuccessCallback, onFailureCallback) {
+export function pullItemDetail(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -189,32 +196,32 @@ export function pullItem(slug, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_ITEM_DETAIL_API_ENDPOINT.replace("<slug>", slug);
+        const aURL = WORKERY_ITEM_DETAIL_API_ENDPOINT+slug;
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             // console.log(successResult); // For debugging purposes.
 
-            let profile = camelizeKeys(responseData);
+            let item = camelizeKeys(responseData);
 
             // Extra.
-            profile['isAPIRequestRunning'] = false;
-            profile['errors'] = {};
+            item['isAPIRequestRunning'] = false;
+            item['errors'] = {};
 
-            console.log("pullItem | Success:", profile); // For debugging purposes.
+            console.log("pullItemDetail | Success:", item); // For debugging purposes.
 
             // Update the global state of the application to store our
-            // user profile for the application.
+            // user item for the application.
             store.dispatch(
-                setItemDetailSuccess(profile)
+                setItemDetailSuccess(item)
             );
 
             // DEVELOPERS NOTE:
             // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
             // OBJECT WE GOT FROM THE API.
             if (onSuccessCallback) {
-                onSuccessCallback(profile);
+                onSuccessCallback(item);
             }
 
         }).catch( (exception) => { // ERROR
@@ -226,7 +233,7 @@ export function pullItem(slug, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullItem | error:", errors); // For debuggin purposes only.
+                console.log("pullItemDetail | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -255,7 +262,12 @@ export function pullItem(slug, onSuccessCallback, onFailureCallback) {
 //                                UPDATE                                      //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function putItem(postData, successCallback, failedCallback) {
+
+////////////////////////////////////////////////////////////////////////////////
+//                                   DELETE                                   //
+////////////////////////////////////////////////////////////////////////////////
+
+export function deleteItemDetail(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -265,34 +277,28 @@ export function putItem(postData, successCallback, failedCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        // The following code will convert the `camelized` data into `snake case`
-        // data so our API endpoint will be able to read it.
-        let decamelizedData = decamelizeKeys(postData);
-
-        // Encode from JS Object to MessagePack (Buffer)
-        var buffer = msgpack.encode(decamelizedData);
-
-        const aURL = WORKERY_ITEM_DETAIL_API_ENDPOINT.replace("<slug>", postData.slug);
-        console.log("URL:", aURL);
-
         // Perform our API submission.
-        customAxios.put(aURL, buffer).then( (successResponse) => {
+        customAxios.delete(WORKERY_ITEM_DETAIL_API_ENDPOINT + slug).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
-            let device = camelizeKeys(responseData);
+            let item = camelizeKeys(responseData);
 
             // Extra.
-            device['isAPIRequestRunning'] = false;
-            device['errors'] = {};
+            item['isAPIRequestRunning'] = false;
+            item['errors'] = {};
 
             // Update the global state of the application to store our
-            // user device for the application.
+            // user item for the application.
             store.dispatch(
-                setItemDetailSuccess(device)
+                setItemDetailSuccess(item)
             );
 
-            // Run our success callback function.
-            successCallback(device);
+            // DEVELOPERS NOTE:
+            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
+            // OBJECT WE GOT FROM THE API.
+            if (onSuccessCallback) {
+                onSuccessCallback(item);
+            }
 
         }).catch( (exception) => {
             if (exception.response) {
@@ -303,83 +309,7 @@ export function putItem(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("putItem | error:", errors); // For debuggin purposes only.
-
-                // Send our failure to the redux.
-                store.dispatch(
-                    setItemDetailFailure({
-                        isAPIRequestRunning: false,
-                        errors: errors
-                    })
-                );
-
-                // DEVELOPERS NOTE:
-                // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
-                // OBJECT WE GOT FROM THE API.
-                if (failedCallback) {
-                    failedCallback(errors);
-                }
-            }
-
-        }).then( () => {
-            // Do nothing.
-        });
-
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//                                RETRIEVE                                    //
-////////////////////////////////////////////////////////////////////////////////
-
-export function deleteItem(slug, onSuccessCallback, onFailureCallback) {
-    return dispatch => {
-        // Change the global state to attempting to fetch latest user details.
-        store.dispatch(
-            setItemDetailRequest()
-        );
-
-        // Generate our app's Axios instance.
-        const customAxios = getCustomAxios();
-
-        const aURL = WORKERY_ITEM_DETAIL_API_ENDPOINT.replace("<slug>", slug);
-
-        customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
-            // Decode our MessagePack (Buffer) into JS Object.
-            const responseData = msgpack.decode(Buffer(successResponse.data));
-            // console.log(successResult); // For debugging purposes.
-
-            let profile = camelizeKeys(responseData);
-
-            // Extra.
-            profile['isAPIRequestRunning'] = false;
-            profile['errors'] = {};
-
-            console.log("deleteItem | Success:", profile); // For debugging purposes.
-
-            // Update the global state of the application to store our
-            // user profile for the application.
-            store.dispatch(
-                setItemDetailSuccess(profile)
-            );
-
-            // DEVELOPERS NOTE:
-            // IF A CALLBACK FUNCTION WAS SET THEN WE WILL RETURN THE JSON
-            // OBJECT WE GOT FROM THE API.
-            if (onSuccessCallback) {
-                onSuccessCallback(profile);
-            }
-
-        }).catch( (exception) => { // ERROR
-            if (exception.response) {
-                const responseBinaryData = exception.response.data; // <=--- NOTE: https://github.com/axios/axios/issues/960
-
-                // Decode our MessagePack (Buffer) into JS Object.
-                const responseData = msgpack.decode(Buffer(responseBinaryData));
-
-                let errors = camelizeKeys(responseData);
-
-                console.log(" | error:", errors); // For debuggin purposes only.
+                console.log("putItemDetail | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
@@ -397,12 +327,16 @@ export function deleteItem(slug, onSuccessCallback, onFailureCallback) {
                 }
             }
 
-        }).then( () => { // FINALLY
+        }).then( () => {
             // Do nothing.
         });
 
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+//                               OPERATIONS                                   //
+////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                REDUX ACTIONS                               //
@@ -451,6 +385,7 @@ export const setItemDetailFailure = itemDetail => ({
 });
 
 
+
 ////////////////////////////////////////////////////////////////////////////////
 //                                 UTILITY                                    //
 ////////////////////////////////////////////////////////////////////////////////
@@ -471,47 +406,11 @@ export function getItemReactSelectOptions(itemList=[], selectName="item") {
                 itemOptions.push({
                     selectName: selectName,
                     value: item.slug,
-                    label: item.text
+                    label: item.fullName
                 });
                 // console.log(item);
             }
         }
-    }
-    return itemOptions;
-}
-
-
-/**
- * Utlity function takes an array of `Item` primary keys and the `Items` results
- * from the API and returns the HTML dropdown selections which will be consumed
- * by the GUI powered by `react-select`.
- */
-export function getPickedItemReactSelectOptions(itemTargetsArray, itemList=[], selectName="item") {
-    const itemOptions = [];
-    if (isEmpty(itemList) === false && isEmpty(itemTargetsArray) === false) {
-        const results = itemList.results;
-        const isResultsNotEmpty = results.length > 0;
-        // console.log("getPickedItemReactSelectOptions | results:",results);
-        // console.log("getPickedItemReactSelectOptions | isResultsNotEmpty:",isResultsNotEmpty);
-        if (isResultsNotEmpty) {
-            for (let i = 0; i < itemTargetsArray.length; i++) {
-                let itemTarget = itemTargetsArray[i];
-                for (let j = 0; j < results.length; j++) {
-                    let itemSearch = results[j];
-                    if (itemSearch.id === itemTarget.id) {
-                        itemOptions.push({
-                            selectName: selectName,
-                            value: itemTarget.id,
-                            label: itemTarget.text
-                        });
-                        // console.log(itemSearch);
-                    } // end IF
-
-                } //end FOR
-
-            } // end FOR
-
-        } // end IF
     }
     return itemOptions;
 }

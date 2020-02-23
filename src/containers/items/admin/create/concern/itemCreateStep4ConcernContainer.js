@@ -60,7 +60,7 @@ class ItemCreateStep4ConcernContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-5-concern");
+        this.props.history.push("/admin/item/add/step-5-concern");
     }
 
     onFailedSubmissionCallback(errors) {

@@ -62,7 +62,7 @@ class ItemCreateStep3EventContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/item/add/step-4-event");
+        this.props.history.push("/admin/item/add/step-4-event");
     }
 
     onFailedSubmissionCallback(errors) {
