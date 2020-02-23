@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
-import { BootstrapRadio } from "../../../../bootstrap/bootstrapRadio";
+import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import {
     WHO_NEWS_FOR_CHOICES,
 } from "../../../../../constants/api";
@@ -12,8 +12,8 @@ import {
 class ItemCreateStep4CommunityNewsComponent extends Component {
     render() {
         const {
-            whoNewsFor,
-            onRadioChange,
+            description,
+            onTextChange,
             errors,
             isLoading,
             onClick,
@@ -70,15 +70,16 @@ class ItemCreateStep4CommunityNewsComponent extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapRadio
-                                inputClassName="form-check-input form-check-input-lg"
+                            <BootstrapTextarea
+                                name="description"
                                 borderColour="border-primary"
-                                error={errors.whoNewsFor}
-                                label="Who is this for? (*)"
-                                name="whoNewsFor"
-                                onChange={onRadioChange}
-                                selectedValue={whoNewsFor}
-                                options={WHO_NEWS_FOR_CHOICES}
+                                label="Please type in the news item: (*)"
+                                placeholder="Please describe your concern"
+                                rows="5"
+                                value={description}
+                                helpText="250 characters"
+                                onChange={onTextChange}
+                                error={errors.description}
                             />
 
                             <div className="form-group">

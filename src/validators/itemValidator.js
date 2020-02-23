@@ -352,8 +352,8 @@ export function validateCommunityNewsStep3Input(data) {
 export function validateCommunityNewsStep4Input(data) {
     let errors = {};
 
-    if (data.whoNewsFor === undefined || data.whoNewsFor === null || data.whoNewsFor === "" || isNaN(data.whoNewsFor) ) {
-        errors.whoNewsFor = 'This field is required';
+    if (data.description === undefined || data.description === null || data.description === "" ) {
+        errors.description = 'This field is required';
     }
 
     return {

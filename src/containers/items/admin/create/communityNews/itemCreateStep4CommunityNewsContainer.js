@@ -17,12 +17,12 @@ class ItemCreateStep4CommunityNewsContainer extends Component {
         super(props);
 
         this.state = {
-            whoNewsFor: localStorageGetIntegerItem("nwapp-item-create-community-news-whoNewsFor"),
+            description: localStorage.getItem("nwapp-item-create-community-news-description"),
             errors: {},
             isLoading: false,
         }
 
-        this.onRadioChange = this.onRadioChange.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -56,31 +56,13 @@ class ItemCreateStep4CommunityNewsContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onRadioChange(e) {
-        // Get the values.
-        const storageValueKey = "nwapp-item-create-community-news-"+[e.target.name];
-        const storageLabelKey =  "nwapp-item-create-community-news-"+[e.target.name].toString()+"-label";
-        const value = e.target.value;
-        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
-        const storeValueKey = [e.target.name].toString();
-        const storeLabelKey = [e.target.name].toString()+"Label";
-
-        // Save the data.
-        this.setState({ [e.target.name]: value, }); // Save to store.
-        this.setState({ storeLabelKey: label, }); // Save to store.
-        localStorage.setItem(storageValueKey, value) // Save to storage.
-        localStorage.setItem(storageLabelKey, label) // Save to storage.
-
-        // For the debugging purposes only.
-        console.log({
-            "STORE-VALUE-KEY": storageValueKey,
-            "STORE-VALUE": value,
-            "STORAGE-VALUE-KEY": storeValueKey,
-            "STORAGE-VALUE": value,
-            "STORAGE-LABEL-KEY": storeLabelKey,
-            "STORAGE-LABEL": label,
-        });
-    }
+     onTextChange(e) {
+         this.setState({
+             [e.target.name]: e.target.value,
+         });
+         const key = "nwapp-item-create-incident-"+[e.target.name];
+         localStorage.setItem(key, e.target.value)
+     }
 
 
     onClick(e) {
@@ -124,11 +106,11 @@ class ItemCreateStep4CommunityNewsContainer extends Component {
      */
 
     render() {
-        const { whoNewsFor, isLoading, errors } = this.state;
+        const { description, isLoading, errors } = this.state;
         return (
             <ItemCreateStep4CommunityNewsComponent
-                whoNewsFor={whoNewsFor}
-                onRadioChange={this.onRadioChange}
+                description={description}
+                onTextChange={this.onTextChange}
                 errors={errors}
                 onClick={this.onClick}
                 isLoading={isLoading}
