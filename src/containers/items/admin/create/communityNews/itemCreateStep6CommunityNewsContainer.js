@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 import ItemCreateStep6IncidentComponent from "../../../../../components/items/admin/create/communityNews/itemCreateStep6CommunityNewsComponent";
 import {
@@ -11,12 +11,6 @@ import {
     localStorageGetIntegerItem
 } from '../../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import {
-    INCIDENT_ITEM_TYPE_OF,
-    EVENT_ITEM_TYPE_OF,
-    CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
-} from "../../../../../constants/api";
 import { postItem } from "../../../../../actions/itemActions";
 
 
@@ -34,24 +28,22 @@ class ItemCreateStep6IncidentContainer extends Component {
 
         // Set the state.
         this.state = {
-            typeOf: typeOf,
-
             // Step 2
-            category:localStorage.getItem("nwapp-item-create-incident-category"),
-            categoryOption: localStorageGetObjectItem('nwapp-item-create-incident-categoryOption'),
-            categoryOther: localStorage.getItem("nwapp-item-create-incident-categoryOther"),
+            category:localStorage.getItem("nwapp-item-create-communityNews-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-communityNews-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-communityNews-categoryOther"),
 
             // Step 3
-            notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-notifiedAuthorities"),
-            acceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-acceptAuthorityCooperation"),
+            whoNewsFor: localStorageGetIntegerItem("nwapp-item-create-community-news-whoNewsFor"),
 
             // Step 4
-            title: localStorage.getItem("nwapp-item-create-incident-title"),
-            date: localStorageGetDateItem("nwapp-item-create-incident-date"),
-            description: localStorage.getItem("nwapp-item-create-incident-description"),
-            location: localStorage.getItem("nwapp-item-create-incident-location"),
-            photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
+            description: localStorage.getItem("nwapp-item-create-community-news-description"),
 
+            // Step 5
+            externalURL: localStorage.getItem("nwapp-item-create-community-news-externalURL"),
+
+            // Common
+            typeOf: typeOf,
             errors: {},
             isLoading: false
         }
@@ -71,8 +63,8 @@ class ItemCreateStep6IncidentContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        const dateMoment = moment(this.state.date);
-        postData.date = dateMoment.format("YYYY-MM-DD")
+        // const dateMoment = moment(this.state.date);
+        // postData.date = dateMoment.format("YYYY-MM-DD")
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
