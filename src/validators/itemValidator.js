@@ -10,6 +10,7 @@ import {
    OTHER_INCIDENT_TYPE_OF,
    OTHER_CONCERN_TYPE_OF,
    OTHER_COMMUNITY_NEWS_TYPE_OF,
+   OTHER_VOLUNTEER_TYPE_OF
 } from "../constants/api";
 
 
@@ -336,6 +337,7 @@ export function validateCommunityNewsStep2Input(data) {
     }
 }
 
+
 export function validateCommunityNewsStep3Input(data) {
     let errors = {};
 
@@ -367,6 +369,25 @@ export function validateCommunityNewsStep5Input(data) {
 
     if (data.description === undefined || data.description === null || data.description === "" ) {
         errors.description = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+export function validateVolunteerStep2Input(data) {
+    let errors = {};
+
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_VOLUNTEER_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
     }
 
     return {

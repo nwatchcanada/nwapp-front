@@ -305,13 +305,14 @@ export const ITEM_TYPE_CATEGORY_CHOICES = [
     }
 ];
 
+export const OTHER_EVENT_TYPE_OF = 1;
 export const OTHER_COMMUNITY_NEWS_TYPE_OF = 1;
+export const OTHER_VOLUNTEER_TYPE_OF = 1;
 
 
 /**
  *  The item type of that we can use in the system.
  */
-export const OTHER_EVENT_TYPE_OF = 1;
 export const GARAGE_SALE_EVENT_TYPE_OF = 2;
 export const GATHERING_EVENT_TYPE_OF = 3;
 export const SPORTS_ITEM_TYPE_OF = 4;

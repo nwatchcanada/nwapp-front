@@ -299,21 +299,10 @@ import AdminWatchSearchContainer from "./watches/admin/search/adminSearchContain
 import AdminWatchSearchResultContainer from "./watches/admin/search/adminSearchResultContainer";
 
 /*
--------
-REPORTS
--------
+----
+ITEM
+----
 */
-import ReportListContainer from "./reports/reportListContainer";
-import Report01Container from "./reports/report01Container";
-import Report02Container from "./reports/report02Container";
-import Report03Container from "./reports/report03Container";
-import Report04Container from "./reports/report04Container";
-import Report05Container from "./reports/report05Container";
-import Report06Container from "./reports/report06Container";
-import Report07Container from "./reports/report07Container";
-
-
-
 import AdminItemListContainer from "./items/admin/list/itemListContainer";
 import ItemSearchContainer from "./items/admin/search/itemSearchContainer";
 import ItemSearchResultContainer from "./items/admin/search/itemSearchResultContainer";
@@ -340,11 +329,30 @@ import ItemCreateStep3CommunityNewsContainer from "./items/admin/create/communit
 import ItemCreateStep4CommunityNewsContainer from "./items/admin/create/communityNews/itemCreateStep4CommunityNewsContainer";
 import ItemCreateStep5CommunityNewsContainer from "./items/admin/create/communityNews/itemCreateStep5CommunityNewsContainer";
 import ItemCreateStep6CommunityNewsContainer from "./items/admin/create/communityNews/itemCreateStep6CommunityNewsContainer";
+import ItemCreateStep2VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep2VolunteerContainer";
 import ItemUpdateIncidentContainer from "./items/admin/update/itemUpdateIncidentContainer";
 import ItemUpdateConcernContainer from "./items/admin/update/itemUpdateConcernContainer";
 import ItemUpdateEventContainer from "./items/admin/update/itemUpdateEventContainer";
 import ItemUpdateInfoContainer from "./items/admin/update/itemUpdateInfoContainer";
 import ItemArchiveContainer from "./items/admin/archive/itemArchiveContainer";
+
+
+
+/*
+-------
+REPORTS
+-------
+*/
+import ReportListContainer from "./reports/reportListContainer";
+import Report01Container from "./reports/report01Container";
+import Report02Container from "./reports/report02Container";
+import Report03Container from "./reports/report03Container";
+import Report04Container from "./reports/report04Container";
+import Report05Container from "./reports/report05Container";
+import Report06Container from "./reports/report06Container";
+import Report07Container from "./reports/report07Container";
+
+
 
 import TaskListContainer from "./tasks/list/taskListContainer";
 import TaskSearchContainer from "./tasks/search/taskSearchContainer";
@@ -742,6 +750,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/add/step-4-community-news" exact component={requiresAuth(ItemCreateStep4CommunityNewsContainer)} />
                                 <Route path="/admin/item/add/step-5-community-news" exact component={requiresAuth(ItemCreateStep5CommunityNewsContainer)} />
                                 <Route path="/admin/item/add/step-6-community-news" exact component={requiresAuth(ItemCreateStep6CommunityNewsContainer)} />
+                                <Route path="/admin/item/add/step-2-volunteer" exact component={requiresAuth(ItemCreateStep2VolunteerContainer)} />
                                 <Route path="/admin/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/admin/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
                                 <Route path="/admin/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
