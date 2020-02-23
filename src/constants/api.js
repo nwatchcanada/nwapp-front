@@ -721,6 +721,26 @@ export const ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES = [
 ];
 
 
+export const WHO_NEWS_FOR_CHOICES = [
+    {
+        id: 'whoNewsFor-t-choice',
+        name: "whoNewsFor",
+        value: 1,
+        label: "My City"
+    },{
+        id: 'whoNewsFor-t-choice',
+        name: "whoNewsFor",
+        value: 2,
+        label: "My District"
+    },{
+        id: 'whoNewsFor-f-choice',
+        name: "whoNewsFor",
+        value: 3,
+        label: "My Watch"
+    }
+];
+
+
 export const ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES = [
     {
         id: 'acceptAuthorityCooperation-t-choice',

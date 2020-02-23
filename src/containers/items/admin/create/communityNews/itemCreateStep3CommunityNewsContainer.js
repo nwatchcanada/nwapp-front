@@ -17,7 +17,7 @@ class ItemCreateStep3CommunityNewsContainer extends Component {
         super(props);
 
         this.state = {
-            notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-community-news-notifiedAuthorities"),
+            whoNewsFor: localStorageGetIntegerItem("nwapp-item-create-community-news-whoNewsFor"),
             errors: {},
             isLoading: false,
         }
@@ -124,10 +124,10 @@ class ItemCreateStep3CommunityNewsContainer extends Component {
      */
 
     render() {
-        const { notifiedAuthorities, isLoading, errors } = this.state;
+        const { whoNewsFor, isLoading, errors } = this.state;
         return (
             <ItemCreateStep3CommunityNewsComponent
-                notifiedAuthorities={notifiedAuthorities}
+                whoNewsFor={whoNewsFor}
                 onRadioChange={this.onRadioChange}
                 errors={errors}
                 onClick={this.onClick}

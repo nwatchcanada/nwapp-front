@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapRadio } from "../../../../bootstrap/bootstrapRadio";
 import {
-    ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES,
+    WHO_NEWS_FOR_CHOICES,
 } from "../../../../../constants/api";
 
 
 class ItemCreateStep3CommunityNewsComponent extends Component {
     render() {
         const {
-            notifiedAuthorities,
+            whoNewsFor,
             onRadioChange,
             errors,
             isLoading,
@@ -48,7 +48,7 @@ class ItemCreateStep3CommunityNewsComponent extends Component {
                         </div>
                         <div id="step-3" className="st-grey active">
                             <strong>
-                                <span className="num">3.</span><span className="">Reason</span>
+                                <span className="num">3.</span><span className="">Who</span>
                             </strong>
                         </div>
                         <div id="step-4" className="st-grey">
@@ -71,12 +71,12 @@ class ItemCreateStep3CommunityNewsComponent extends Component {
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.notifiedAuthorities}
-                                label="Have you notified the authorities of this Incident? (*)"
-                                name="notifiedAuthorities"
+                                error={errors.whoNewsFor}
+                                label="Who is this for? (*)"
+                                name="whoNewsFor"
                                 onChange={onRadioChange}
-                                selectedValue={notifiedAuthorities}
-                                options={ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES}
+                                selectedValue={whoNewsFor}
+                                options={WHO_NEWS_FOR_CHOICES}
                             />
 
                             <div className="form-group">
