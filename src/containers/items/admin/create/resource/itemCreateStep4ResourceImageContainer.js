@@ -192,6 +192,7 @@ class ItemCreateStep4ResourceImageContainer extends Component {
         if (isValid) {
             this.setState({ errors: {}, isLoading: true, })
             console.log("STATE:\n",this.state,"\n\n");
+            localStorage.setItem("nwapp-resource-add-returnURL", "/admin/item/add/step-4-resource-image");
             this.props.history.push("/admin/item/add/step-5-resource");
 
         // CASE 2 OF 2: Validation was a failure.
