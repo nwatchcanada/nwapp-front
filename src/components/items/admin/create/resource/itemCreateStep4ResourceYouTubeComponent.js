@@ -16,7 +16,7 @@ import {
 } from "../../../../../constants/api";
 
 
-export default class AdminResourceCreateStep2YouTubeVideoComponent extends Component {
+export default class ItemCreateStep4ResourceYouTubeComponent extends Component {
     render() {
         const {
             category, categoryOptions, name,  description, embedCode, errors,

@@ -10,7 +10,7 @@ import { BootstrapSingleFileUploadAndPreview } from "../../../../bootstrap/boots
 
 
 
-export default class ItemCreateStep4ResourceFileContainer extends Component {
+export default class ItemCreateStep4ResourceFileComponent extends Component {
     render() {
         const {
             category, categoryOptions, name, description, errors,

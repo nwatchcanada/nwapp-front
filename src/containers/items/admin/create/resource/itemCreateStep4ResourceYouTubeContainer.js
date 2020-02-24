@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminResourceCreateStep2YouTubeVideoComponent from "../../../../../components/settings/admin/resource/create/adminCreateStep2YouTubeVideoComponent";
+import ItemCreateStep4ResourceYouTubeComponent from "../../../../../components/items/admin/create/resource/itemCreateStep4ResourceYouTubeComponent";
 import { validateInput } from "../../../../../validators/resourceValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
@@ -131,7 +131,7 @@ class ItemCreateStep4ResourceYouTubeContainer extends Component {
     render() {
         const { category, typeOf, name, embedCode, description, errors } = this.state;
         return (
-            <AdminResourceCreateStep2YouTubeVideoComponent
+            <ItemCreateStep4ResourceYouTubeComponent
                 category={category}
                 categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}

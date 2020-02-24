@@ -11,7 +11,7 @@ import { BootstrapSingleFileUploadAndPreview } from "../../../../bootstrap/boots
 
 
 
-export default class ItemCreateStep4ResourceImageContainer extends Component {
+export default class ItemCreateStep4ResourceImageComponent extends Component {
     render() {
         const {
             category, categoryOptions, name, description, errors,

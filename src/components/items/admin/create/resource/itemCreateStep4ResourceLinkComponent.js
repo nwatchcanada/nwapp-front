@@ -8,7 +8,7 @@ import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 
 
-export default class AdminResourceCreateStep2LinkComponent extends Component {
+export default class ItemCreateStep4ResourceLinkComponent extends Component {
     render() {
         const {
             category, categoryOptions, name, externalUrl, description, errors,

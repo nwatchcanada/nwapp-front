@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminResourceCreateStep2LinkComponent from "../../../../../components/settings/admin/resource/create/adminCreateStep2LinkComponent";
+import ItemCreateStep4ResourceLinkComponent from "../../../../../components/items/admin/create/resource/itemCreateStep4ResourceLinkComponent";
 import { validateInput } from "../../../../../validators/resourceValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
@@ -128,7 +128,7 @@ class ItemCreateStep4ResourceLinkContainer extends Component {
     render() {
         const { category, typeOf, name, externalUrl, description, errors } = this.state;
         return (
-            <AdminResourceCreateStep2LinkComponent
+            <ItemCreateStep4ResourceLinkComponent
                 typeOf={typeOf}
                 category={category}
                 categoryOptions={RESOURCE_CATEGORY_CHOICES}

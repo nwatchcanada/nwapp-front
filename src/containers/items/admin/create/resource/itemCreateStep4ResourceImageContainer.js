@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminResourceCreateStep2ImageComponent from "../../../../../components/settings/admin/resource/create/adminCreateStep2ImageComponent";
+import ItemCreateStep4ResourceImageComponent from "../../../../../components/items/admin/create/resource/itemCreateStep4ResourceImageComponent";
 import { validateInput } from "../../../../../validators/resourceValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
@@ -16,7 +16,7 @@ import {
 } from '../../../../../helpers/localStorageUtility';
 
 
-class AdminResourceCreateStep2ImageContainer extends Component {
+class ItemCreateStep4ResourceImageContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -219,7 +219,7 @@ class AdminResourceCreateStep2ImageContainer extends Component {
     render() {
         const { category, name, file, description, errors } = this.state;
         return (
-            <AdminResourceCreateStep2ImageComponent
+            <ItemCreateStep4ResourceImageComponent
                 category={category}
                 categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
@@ -250,4 +250,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminResourceCreateStep2ImageContainer);
+)(ItemCreateStep4ResourceImageContainer);

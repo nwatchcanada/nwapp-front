@@ -16,7 +16,7 @@ import {
 } from '../../../../../helpers/localStorageUtility';
 
 
-class AdminResourceCreateStep2FileContainer extends Component {
+class ItemCreateStep4ResourceFileContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -250,4 +250,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminResourceCreateStep2FileContainer);
+)(ItemCreateStep4ResourceFileContainer);
