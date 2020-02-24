@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep4ResourceLinkComponent from "../../../../../components/items/admin/create/resource/itemCreateStep4ResourceLinkComponent";
-import { validateInput } from "../../../../../validators/resourceValidator";
+import { validateResourceStep4LinkInput } from "../../../../../validators/itemValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
     RESOURCE_TYPE_OF_CHOICES,
@@ -98,7 +98,7 @@ class ItemCreateStep4ResourceLinkContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateResourceStep4LinkInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

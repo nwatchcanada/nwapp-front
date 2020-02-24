@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep4ResourceFileComponent from "../../../../../components/items/admin/create/resource/itemCreateStep4ResourceFileComponent";
-import { validateInput } from "../../../../../validators/resourceValidator";
+import { validateResourceStep4FileInput } from "../../../../../validators/itemValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
     IMAGE_RESOURCE_TYPE_OF
@@ -186,7 +186,7 @@ class ItemCreateStep4ResourceFileContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateResourceStep4FileInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {

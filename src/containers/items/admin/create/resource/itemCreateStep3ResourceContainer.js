@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep3ResourceComponent from "../../../../../components/items/admin/create/resource/itemCreateStep3ResourceComponent";
-import { validateInput } from "../../../../../validators/resourceValidator";
 import {
     LINK_RESOURCE_TYPE_OF,
     YOUTUBE_VIDEO_RESOURCE_TYPE_OF,

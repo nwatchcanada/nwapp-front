@@ -443,3 +443,61 @@ export function validateResourceStep2Input(data) {
         isValid: isEmpty(errors)
     }
 }
+
+
+export function validateResourceStep4LinkInput(data) {
+    let errors = {};
+
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_RESOURCE_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+export function validateResourceStep4FileInput(data) {
+    let errors = {};
+
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_RESOURCE_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+export function validateResourceStep4ImageInput(data) {
+    let errors = {};
+
+    if (data.category === undefined || data.category === null || data.category === "" ) {
+        errors.category = 'This field is required';
+    } else {
+        if (data.category === OTHER_RESOURCE_TYPE_OF) {
+            // if (data.location === undefined || data.location === null || validator.isEmpty(data.location) || data.location === "") {
+            //     errors.location = 'This field is required';
+            // }
+        }
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
