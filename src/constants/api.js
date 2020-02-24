@@ -302,6 +302,10 @@ export const ITEM_TYPE_CATEGORY_CHOICES = [
         selectName: "category",
         value: COMMUNITY_NEWS_ITEM_TYPE_OF,
         label: "Community News"
+    },{
+        selectName: "category",
+        value: VOLUNTEER_ITEM_TYPE_OF,
+        label: "Volunteer"
     }
 ];
 
