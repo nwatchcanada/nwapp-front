@@ -25,11 +25,8 @@ export default class ItemCreateStep4ResourceImageComponent extends Component {
                         <li className="breadcrumb-item">
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
-                        <li className="breadcrumb-item">
-                           <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
-                        </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/resources"><i className="fas fa-atlas"></i>&nbsp;Resources</Link>
+                            <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add
@@ -37,19 +34,32 @@ export default class ItemCreateStep4ResourceImageComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1>Create Resource - Details</h1>
+                { /* <h1>Create Resource - Details</h1> */ }
 
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/admin/settings/resource/add/step-1">
+                            <Link to="/admin/item/add/step-1">
                                 <span className="num">1.</span><span className="">Type</span>
                             </Link>
                         </div>
-                        <div id="step-2" className="st-grey active">
+                        <div id="step-2" className="st-grey">
+                            <Link to="/admin/item/add/step-2-resource">
+                                <span className="num">2.</span><span className="">Categorize</span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <Link to="/admin/item/add/step-3-resource">
+                                <span className="num">3.</span><span className="">Format</span>
+                            </Link>
+                        </div>
+                        <div id="step-4" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Details</span>
+                                <span className="num">4.</span><span className="">Details</span>
                             </strong>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>
