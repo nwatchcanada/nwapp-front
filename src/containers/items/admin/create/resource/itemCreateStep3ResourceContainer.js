@@ -22,7 +22,7 @@ class ItemCreateStep3ResourceContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            typeOf: localStorageGetIntegerItem("nwapp-resource-add-typeOf"),
+            typeOf: localStorageGetIntegerItem("nwapp-item-create-resource-typeOf"),
         };
         this.onClick = this.onClick.bind(this);
     }
@@ -60,20 +60,20 @@ class ItemCreateStep3ResourceContainer extends Component {
         e.preventDefault();
 
         // Save to our browsers memory.
-        localStorage.setItem('nwapp-resource-add-typeOf', typeOf);
+        localStorage.setItem('nwapp-item-create-resource-typeOf', typeOf);
 
         // Redirect to the next page.
         if (typeOf === LINK_RESOURCE_TYPE_OF) {
-            this.props.history.push("/admin/settings/resource/add/step-2-link");
+            this.props.history.push("/admin/item/add/step-4-resource-link");
         }
         else if (typeOf === YOUTUBE_VIDEO_RESOURCE_TYPE_OF) {
-            this.props.history.push("/admin/settings/resource/add/step-2-yt-video");
+            this.props.history.push("/admin/item/add/step-4-resource-youtube");
         }
         else if (typeOf === IMAGE_RESOURCE_TYPE_OF) {
-            this.props.history.push("/admin/settings/resource/add/step-2-image");
+            this.props.history.push("/admin/item/add/step-4-resource-image");
         }
         else if (typeOf === FILE_RESOURCE_TYPE_OF) {
-            this.props.history.push("/admin/settings/resource/add/step-2-file");
+            this.props.history.push("/admin/item/add/step-4-resource-file");
         }
     }
 

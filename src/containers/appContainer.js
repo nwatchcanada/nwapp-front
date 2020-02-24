@@ -336,6 +336,10 @@ import ItemCreateStep5VolunteerContainer from "./items/admin/create/volunteer/it
 import ItemCreateStep6VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep6VolunteerContainer";
 import ItemCreateStep2ResourceContainer from "./items/admin/create/resource/itemCreateStep2ResourceContainer";
 import ItemCreateStep3ResourceContainer from "./items/admin/create/resource/itemCreateStep3ResourceContainer";
+import ItemCreateStep4ResourceLinkContainer from "./items/admin/create/resource/itemCreateStep4ResourceLinkContainer";
+import ItemCreateStep4ResourceYouTubeContainer from "./items/admin/create/resource/itemCreateStep4ResourceYouTubeContainer";
+import ItemCreateStep4ResourceImageContainer from "./items/admin/create/resource/itemCreateStep4ResourceImageContainer";
+import ItemCreateStep4ResourceFileContainer from "./items/admin/create/resource/itemCreateStep4ResourceFileContainer";
 import ItemUpdateIncidentContainer from "./items/admin/update/itemUpdateIncidentContainer";
 import ItemUpdateConcernContainer from "./items/admin/update/itemUpdateConcernContainer";
 import ItemUpdateEventContainer from "./items/admin/update/itemUpdateEventContainer";
@@ -763,6 +767,10 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/add/step-6-volunteer" exact component={requiresAuth(ItemCreateStep6VolunteerContainer)} />
                                 <Route path="/admin/item/add/step-2-resource" exact component={requiresAuth(ItemCreateStep2ResourceContainer)} />
                                 <Route path="/admin/item/add/step-3-resource" exact component={requiresAuth(ItemCreateStep3ResourceContainer)} />
+                                <Route path="/admin/item/add/step-4-resource-file" exact component={requiresAuth(ItemCreateStep4ResourceFileContainer)} />
+                                <Route path="/admin/item/add/step-4-resource-image" exact component={requiresAuth(ItemCreateStep4ResourceImageContainer)} />
+                                <Route path="/admin/item/add/step-4-resource-youtube" exact component={requiresAuth(ItemCreateStep4ResourceYouTubeContainer)} />
+                                <Route path="/admin/item/add/step-4-resource-link" exact component={requiresAuth(ItemCreateStep4ResourceLinkContainer)} />
                                 <Route path="/admin/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/admin/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
                                 <Route path="/admin/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
