@@ -335,6 +335,7 @@ import ItemCreateStep4VolunteerContainer from "./items/admin/create/volunteer/it
 import ItemCreateStep5VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep5VolunteerContainer";
 import ItemCreateStep6VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep6VolunteerContainer";
 import ItemCreateStep2ResourceContainer from "./items/admin/create/resource/itemCreateStep2ResourceContainer";
+import ItemCreateStep3ResourceContainer from "./items/admin/create/resource/itemCreateStep3ResourceContainer";
 import ItemUpdateIncidentContainer from "./items/admin/update/itemUpdateIncidentContainer";
 import ItemUpdateConcernContainer from "./items/admin/update/itemUpdateConcernContainer";
 import ItemUpdateEventContainer from "./items/admin/update/itemUpdateEventContainer";
@@ -761,6 +762,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/add/step-5-volunteer" exact component={requiresAuth(ItemCreateStep5VolunteerContainer)} />
                                 <Route path="/admin/item/add/step-6-volunteer" exact component={requiresAuth(ItemCreateStep6VolunteerContainer)} />
                                 <Route path="/admin/item/add/step-2-resource" exact component={requiresAuth(ItemCreateStep2ResourceContainer)} />
+                                <Route path="/admin/item/add/step-3-resource" exact component={requiresAuth(ItemCreateStep3ResourceContainer)} />
                                 <Route path="/admin/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/admin/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
                                 <Route path="/admin/item/:slug/update-incidence" exact component={requiresAuth(ItemUpdateIncidentContainer)} />
