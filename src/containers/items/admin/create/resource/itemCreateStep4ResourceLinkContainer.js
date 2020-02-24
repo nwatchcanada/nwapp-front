@@ -103,7 +103,7 @@ class ItemCreateStep4ResourceLinkContainer extends Component {
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.setState({ errors: {}, isLoading: true, })
-            this.props.history.push("/admin/settings/resource/add/step-3");
+            this.props.history.push("/admin/item/add/step-5-resource");
 
         // CASE 2 OF 2: Validation was a failure.
         } else {

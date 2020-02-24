@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep4ResourceYouTubeComponent from "../../../../../components/items/admin/create/resource/itemCreateStep4ResourceYouTubeComponent";
-import { validateInput } from "../../../../../validators/resourceValidator";
+import { validateResourceStep4YouTubeInput } from "../../../../../validators/itemValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
     RESOURCE_TYPE_OF_CHOICES,
@@ -98,13 +98,13 @@ class ItemCreateStep4ResourceYouTubeContainer extends Component {
         e.preventDefault();
 
         // Perform client-side validation.
-        const { errors, isValid } = validateInput(this.state);
+        const { errors, isValid } = validateResourceStep4YouTubeInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.setState({ errors: {}, isLoading: true, })
             console.log("STATE:\n",this.state,"\n\n");
-            this.props.history.push("/admin/settings/resource/add/step-3");
+            this.props.history.push("/admin/item/add/step-5-resource");
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
