@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import AdminResourceCreateStep2FileComponent from "../../../../../components/settings/admin/resource/create/adminCreateStep2FileComponent";
+import ItemCreateStep4ResourceFileComponent from "../../../../../components/items/admin/create/resource/itemCreateStep4ResourceFileComponent";
 import { validateInput } from "../../../../../validators/resourceValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
@@ -219,7 +219,7 @@ class ItemCreateStep4ResourceFileContainer extends Component {
     render() {
         const { category, name, file, description, errors } = this.state;
         return (
-            <AdminResourceCreateStep2FileComponent
+            <ItemCreateStep4ResourceFileComponent
                 category={category}
                 categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
