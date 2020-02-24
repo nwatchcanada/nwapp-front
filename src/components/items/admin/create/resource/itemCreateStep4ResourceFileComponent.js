@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
-import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleFileUploadAndPreview } from "../../../../bootstrap/bootstrapSingleFileUploadAndPreview";
@@ -13,7 +12,7 @@ import { BootstrapSingleFileUploadAndPreview } from "../../../../bootstrap/boots
 export default class ItemCreateStep4ResourceFileComponent extends Component {
     render() {
         const {
-            category, categoryOptions, name, description, errors,
+            name, description, errors,
             file, onDrop, onRemoveUploadClick,
             onTextChange, onSelectChange, isLoading, onClick,
         } = this.props;
@@ -69,17 +68,6 @@ export default class ItemCreateStep4ResourceFileComponent extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Category (*)"
-                                name="category"
-                                defaultOptionLabel="Please select the category."
-                                options={categoryOptions}
-                                value={category}
-                                error={errors.category}
-                                onSelectChange={onSelectChange}
-                            />
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"

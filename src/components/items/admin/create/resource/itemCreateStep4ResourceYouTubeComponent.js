@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
-import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/bootstrapSingleImageUploadAndPreview";
@@ -19,7 +18,7 @@ import {
 export default class ItemCreateStep4ResourceYouTubeComponent extends Component {
     render() {
         const {
-            category, categoryOptions, name,  description, embedCode, errors,
+            name, description, embedCode, errors,
             onTextChange, onSelectChange, isLoading, onClick,
         } = this.props;
         return (
@@ -74,17 +73,6 @@ export default class ItemCreateStep4ResourceYouTubeComponent extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Category (*)"
-                                name="category"
-                                defaultOptionLabel="Please select the category."
-                                options={categoryOptions}
-                                value={category}
-                                error={errors.category}
-                                onSelectChange={onSelectChange}
-                            />
 
                             <YouTubeVideoFormComponent
                                 name={name}

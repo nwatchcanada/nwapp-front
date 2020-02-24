@@ -10,7 +10,6 @@ import {
     YOUTUBE_VIDEO_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
 import {
-    localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
     localStorageGetObjectItem
 } from '../../../../../helpers/localStorageUtility';
@@ -37,8 +36,6 @@ class ItemCreateStep4ResourceYouTubeContainer extends Component {
             isLoading: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            category: localStorageGetIntegerItem("nwapp-resource-add-category"),
-            categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
             typeOf: YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
             name: localStorage.getItem('nwapp-resource-add-name'),
             embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
@@ -129,11 +126,9 @@ class ItemCreateStep4ResourceYouTubeContainer extends Component {
      */
 
     render() {
-        const { category, typeOf, name, embedCode, description, errors } = this.state;
+        const { typeOf, name, embedCode, description, errors } = this.state;
         return (
             <ItemCreateStep4ResourceYouTubeComponent
-                category={category}
-                categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
                 embedCode={embedCode}
                 description={description}

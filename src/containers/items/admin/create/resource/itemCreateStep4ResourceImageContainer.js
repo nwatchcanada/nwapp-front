@@ -9,7 +9,6 @@ import {
     IMAGE_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
 import {
-    localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
     localStorageGetObjectItem,
     localStorageRemoveItemsContaining
@@ -37,8 +36,6 @@ class ItemCreateStep4ResourceImageContainer extends Component {
             isLoading: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            category: localStorageGetIntegerItem("nwapp-resource-add-category"),
-            categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
             typeOf: IMAGE_RESOURCE_TYPE_OF,
             name: localStorage.getItem('nwapp-resource-add-name'),
             // file: null,
@@ -217,11 +214,9 @@ class ItemCreateStep4ResourceImageContainer extends Component {
      */
 
     render() {
-        const { category, name, file, description, errors } = this.state;
+        const { name, file, description, errors } = this.state;
         return (
             <ItemCreateStep4ResourceImageComponent
-                category={category}
-                categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
                 file={file}
                 description={description}

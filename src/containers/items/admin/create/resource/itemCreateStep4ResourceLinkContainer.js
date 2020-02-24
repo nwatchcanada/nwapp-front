@@ -10,7 +10,6 @@ import {
     LINK_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
 import {
-    localStorageGetIntegerItem,
     localStorageSetObjectOrArrayItem,
     localStorageGetObjectItem
 } from '../../../../../helpers/localStorageUtility';
@@ -38,8 +37,6 @@ class ItemCreateStep4ResourceLinkContainer extends Component {
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
             typeOf: LINK_RESOURCE_TYPE_OF,
-            category: localStorageGetIntegerItem("nwapp-resource-add-category"),
-            categoryOption: localStorageGetObjectItem('nwapp-register-categoryOption'),
             name: localStorage.getItem('nwapp-resource-add-name'),
             externalUrl: localStorage.getItem('nwapp-resource-add-externalUrl'),
             description: localStorage.getItem('nwapp-resource-add-description'),
@@ -126,12 +123,10 @@ class ItemCreateStep4ResourceLinkContainer extends Component {
      */
 
     render() {
-        const { category, typeOf, name, externalUrl, description, errors } = this.state;
+        const { typeOf, name, externalUrl, description, errors } = this.state;
         return (
             <ItemCreateStep4ResourceLinkComponent
                 typeOf={typeOf}
-                category={category}
-                categoryOptions={RESOURCE_CATEGORY_CHOICES}
                 name={name}
                 externalUrl={externalUrl}
                 description={description}

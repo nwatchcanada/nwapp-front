@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
-import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 
@@ -11,7 +10,7 @@ import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 export default class ItemCreateStep4ResourceLinkComponent extends Component {
     render() {
         const {
-            category, categoryOptions, name, externalUrl, description, errors,
+            name, externalUrl, description, errors,
             onTextChange, onSelectChange, isLoading, onClick,
         } = this.props;
         return (
@@ -66,17 +65,6 @@ export default class ItemCreateStep4ResourceLinkComponent extends Component {
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
-
-                            <BootstrapSingleSelect
-                                borderColour="border-primary"
-                                label="Category (*)"
-                                name="category"
-                                defaultOptionLabel="Please select the category."
-                                options={categoryOptions}
-                                value={category}
-                                error={errors.category}
-                                onSelectChange={onSelectChange}
-                            />
 
                             <LinkFormComponent
                                 name={name}
