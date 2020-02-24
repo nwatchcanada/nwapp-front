@@ -10,7 +10,8 @@ import {
     CONCERN_ITEM_TYPE_OF,
     INFORMATION_ITEM_TYPE_OF,
     COMMUNITY_NEWS_ITEM_TYPE_OF,
-    VOLUNTEER_ITEM_TYPE_OF
+    VOLUNTEER_ITEM_TYPE_OF,
+    RESOURCE_ITEM_TYPE_OF
 } from "../../../../constants/api";
 
 
@@ -101,6 +102,8 @@ class ItemCreateStep1Container extends Component {
             this.props.history.push("/admin/item/add/step-2-community-news");
         } else if (typeOf === VOLUNTEER_ITEM_TYPE_OF) {
             this.props.history.push("/admin/item/add/step-2-volunteer");
+        } else if (typeOf === RESOURCE_ITEM_TYPE_OF) {
+            this.props.history.push("/admin/item/add/step-2-resource");
         } else {
             alert("Could not find type-of with value: "+typeOf);
         }

@@ -254,6 +254,7 @@ export const CONCERN_ITEM_TYPE_OF = 4;
 export const INFORMATION_ITEM_TYPE_OF = 5;
 export const COMMUNITY_NEWS_ITEM_TYPE_OF = 6;
 export const VOLUNTEER_ITEM_TYPE_OF = 7;
+export const RESOURCE_ITEM_TYPE_OF = 8;
 export const ITEM_TYPE_CHOICES = [
     {
         selectName: "typeOf",
@@ -279,6 +280,10 @@ export const ITEM_TYPE_CHOICES = [
         selectName: "typeOf",
         value: VOLUNTEER_ITEM_TYPE_OF,
         label: "Volunteer"
+    },{
+        selectName: "typeOf",
+        value: RESOURCE_ITEM_TYPE_OF,
+        label: "Resource"
     }
 ];
 export const ITEM_TYPE_CATEGORY_CHOICES = [
@@ -306,12 +311,17 @@ export const ITEM_TYPE_CATEGORY_CHOICES = [
         selectName: "category",
         value: VOLUNTEER_ITEM_TYPE_OF,
         label: "Volunteer"
+    },{
+        selectName: "category",
+        value: RESOURCE_ITEM_TYPE_OF,
+        label: "Resource"
     }
 ];
 
 export const OTHER_EVENT_TYPE_OF = 1;
 export const OTHER_COMMUNITY_NEWS_TYPE_OF = 1;
 export const OTHER_VOLUNTEER_TYPE_OF = 1;
+export const OTHER_RESOURCE_TYPE_OF = 1;
 
 
 /**
