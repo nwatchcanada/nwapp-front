@@ -37,9 +37,9 @@ class ItemCreateStep4ResourceYouTubeContainer extends Component {
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
             typeOf: YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
-            name: localStorage.getItem('nwapp-resource-add-name'),
-            embedCode: localStorage.getItem('nwapp-resource-add-embedCode'),
-            description: localStorage.getItem('nwapp-resource-add-description'),
+            name: localStorage.getItem('nwapp-item-create-resource-name'),
+            embedCode: localStorage.getItem('nwapp-item-create-resource-embedCode'),
+            description: localStorage.getItem('nwapp-item-create-resource-description'),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -79,7 +79,7 @@ class ItemCreateStep4ResourceYouTubeContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('nwapp-resource-add-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-item-create-resource-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -89,8 +89,8 @@ class ItemCreateStep4ResourceYouTubeContainer extends Component {
             optionKey: option,
         });
         console.log("optionKey", optionKey);
-        localStorage.setItem('nwapp-resource-add-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-resource-add-'+optionKey, option);
+        localStorage.setItem('nwapp-item-create-resource-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-resource-'+optionKey, option);
     }
 
     onClick(e) {

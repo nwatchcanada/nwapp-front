@@ -21,7 +21,7 @@ class ItemCreateStep3ResourceContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            typeOf: localStorageGetIntegerItem("nwapp-item-create-resource-typeOf"),
+            typeOf: localStorageGetIntegerItem("nwapp-item-create-resource-formatType"),
         };
         this.onClick = this.onClick.bind(this);
     }
@@ -59,7 +59,7 @@ class ItemCreateStep3ResourceContainer extends Component {
         e.preventDefault();
 
         // Save to our browsers memory.
-        localStorage.setItem('nwapp-item-create-resource-typeOf', typeOf);
+        localStorage.setItem('nwapp-item-create-resource-formatType', typeOf);
 
         // Redirect to the next page.
         if (typeOf === LINK_RESOURCE_TYPE_OF) {

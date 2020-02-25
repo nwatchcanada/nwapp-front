@@ -37,17 +37,17 @@ class ItemCreateStep4ResourceImageContainer extends Component {
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
             typeOf: IMAGE_RESOURCE_TYPE_OF,
-            name: localStorage.getItem('nwapp-resource-add-name'),
+            name: localStorage.getItem('nwapp-item-create-resource-name'),
             // file: null,
-            description: localStorage.getItem('nwapp-resource-add-description'),
+            description: localStorage.getItem('nwapp-item-create-resource-description'),
 
             // DJANGO-REACT UPLOAD: STEP 1 OF 5.
             fileReader: new FileReader(), // 1 of 5 - (a)
-            file: localStorageGetObjectItem('nwapp-resource-add-file'), // 1 of 4 - (b)
-            upload_content: localStorageGetObjectItem('nwapp-resource-add-file-upload-content'),
-            upload_filename: localStorage.getItem("nwapp-resource-add-file-upload-filename"),
-            uploadContent: localStorageGetObjectItem('nwapp-resource-add-file-upload-content'),
-            uploadFilename: localStorage.getItem("nwapp-resource-add-file-upload-filename"),
+            file: localStorageGetObjectItem('nwapp-item-create-resource-file'), // 1 of 4 - (b)
+            upload_content: localStorageGetObjectItem('nwapp-item-create-resource-file-upload-content'),
+            upload_filename: localStorage.getItem("nwapp-item-create-resource-file-upload-filename"),
+            uploadContent: localStorageGetObjectItem('nwapp-item-create-resource-file-upload-content'),
+            uploadFilename: localStorage.getItem("nwapp-item-create-resource-file-upload-filename"),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -92,7 +92,7 @@ class ItemCreateStep4ResourceImageContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        localStorage.setItem('nwapp-resource-add-'+[e.target.name], e.target.value);
+        localStorage.setItem('nwapp-item-create-resource-'+[e.target.name], e.target.value);
     }
 
     onSelectChange(option) {
@@ -102,8 +102,8 @@ class ItemCreateStep4ResourceImageContainer extends Component {
             optionKey: option,
         });
         console.log("optionKey", optionKey);
-        localStorage.setItem('nwapp-resource-add-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-resource-add-'+optionKey, option);
+        localStorage.setItem('nwapp-item-create-resource-'+[option.selectName], option.value);
+        localStorageSetObjectOrArrayItem('nwapp-item-create-resource-'+optionKey, option);
     }
 
     /**
@@ -126,7 +126,7 @@ class ItemCreateStep4ResourceImageContainer extends Component {
             console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
 
             // Save to local storage our OBJECT.
-            localStorageSetObjectOrArrayItem('nwapp-resource-add-file', fileWithPreview);
+            localStorageSetObjectOrArrayItem('nwapp-item-create-resource-file', fileWithPreview);
 
             // Update our local state to update the GUI.
             this.setState({
@@ -156,7 +156,7 @@ class ItemCreateStep4ResourceImageContainer extends Component {
             fileReader: new FileReader(),
             file: null
         });
-        localStorageRemoveItemsContaining("nwapp-resource-add-file-upload-");
+        localStorageRemoveItemsContaining("nwapp-item-create-resource-file-upload-");
     }
 
     /*
@@ -176,8 +176,8 @@ class ItemCreateStep4ResourceImageContainer extends Component {
             console.log(this.state);
             console.log("\n\n\n");
             // Save to local storage our OBJECT.
-            localStorageSetObjectOrArrayItem('nwapp-resource-add-file-upload-content', this.state.upload_content);
-            localStorage.setItem("nwapp-resource-add-file-upload-filename", this.state.upload_filename)
+            localStorageSetObjectOrArrayItem('nwapp-item-create-resource-file-upload-content', this.state.upload_content);
+            localStorage.setItem("nwapp-item-create-resource-file-upload-filename", this.state.upload_filename)
         });
     }
 

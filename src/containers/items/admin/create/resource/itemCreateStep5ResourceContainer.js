@@ -12,10 +12,10 @@ import {
 } from '../../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import {
-    INCIDENT_ITEM_TYPE_OF,
-    EVENT_ITEM_TYPE_OF,
-    CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
+    LINK_RESOURCE_TYPE_OF,
+    YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
+    IMAGE_RESOURCE_TYPE_OF,
+    FILE_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
 import { postItem } from "../../../../../actions/itemActions";
 
@@ -29,13 +29,11 @@ class ItemCreateStep5ResourceContainer extends Component {
     constructor(props) {
         super(props);
 
-        // Extract the type of container.
-        const typeOf = parseInt(localStorage.getItem("nwapp-item-create-typeOf"));
-
         // Set the state.
         this.state = {
-            typeOf: typeOf,
-            returnURL: localStorage.getItem("nwapp-item-create-resource-returnURL"), 
+            // Common
+            typeOf: localStorageGetIntegerItem("nwapp-item-create-typeOf"),
+            returnURL: localStorage.getItem("nwapp-item-create-resource-returnURL"),
 
             // Step 2
             category:localStorage.getItem("nwapp-item-create-resource-category"),
@@ -43,15 +41,18 @@ class ItemCreateStep5ResourceContainer extends Component {
             categoryOther: localStorage.getItem("nwapp-item-create-resource-categoryOther"),
 
             // Step 3
-            notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-resource-notifiedAuthorities"),
-            acceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-resource-acceptAuthorityCooperation"),
+            formatType: localStorageGetIntegerItem("nwapp-item-create-resource-formatType"),
 
-            // Step 4
-            title: localStorage.getItem("nwapp-item-create-resource-title"),
-            date: localStorageGetDateItem("nwapp-item-create-resource-date"),
-            description: localStorage.getItem("nwapp-item-create-resource-description"),
-            location: localStorage.getItem("nwapp-item-create-resource-location"),
-            photos: localStorageGetArrayItem("nwapp-item-create-resource-photos"),
+            // Step 4 - Link
+            name: localStorage.getItem('nwapp-item-create-resource-name'),
+            externalUrl: localStorage.getItem('nwapp-item-create-resource-externalUrl'),
+            description: localStorage.getItem('nwapp-item-create-resource-description'),
+
+            // // Step 4
+            // date: localStorageGetDateItem("nwapp-item-create-resource-date"),
+            // description: localStorage.getItem("nwapp-item-create-resource-description"),
+            // location: localStorage.getItem("nwapp-item-create-resource-location"),
+            // photos: localStorageGetArrayItem("nwapp-item-create-resource-photos"),
 
             errors: {},
             isLoading: false
@@ -72,8 +73,12 @@ class ItemCreateStep5ResourceContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        const dateMoment = moment(this.state.date);
-        postData.date = dateMoment.format("YYYY-MM-DD")
+        if (this.state.typeOf === LINK_RESOURCE_TYPE_OF) {
+            postData.title = this.state.name;
+        }
+
+        // const dateMoment = moment(this.state.date);
+        // postData.date = dateMoment.format("YYYY-MM-DD")
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -174,14 +179,14 @@ class ItemCreateStep5ResourceContainer extends Component {
             photos,
 
             // All
-            errors
+            errors,
+            isLoading
         } = this.state;
 
         return (
             <ItemCreateStep5ResourceComponent
                 // Step 1
                 typeOf={typeOf}
-                returnURL={returnURL}
 
                 // Step 2
                 prettyResourceTypeOf={prettyResourceTypeOf}
@@ -201,6 +206,8 @@ class ItemCreateStep5ResourceContainer extends Component {
 
                 // All
                 errors={errors}
+                returnURL={returnURL}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
 
