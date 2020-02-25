@@ -103,7 +103,7 @@ class ItemCreateStep4ResourceLinkContainer extends Component {
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.setState({ errors: {}, isLoading: true, })
-            localStorage.setItem("nwapp-resource-add-returnURL", "/admin/item/add/step-4-resource-link");
+            localStorage.setItem("nwapp-item-create-resource-returnURL", "/admin/item/add/step-4-resource-link");
             this.props.history.push("/admin/item/add/step-5-resource");
 
         // CASE 2 OF 2: Validation was a failure.

@@ -35,6 +35,7 @@ class ItemCreateStep5ResourceContainer extends Component {
         // Set the state.
         this.state = {
             typeOf: typeOf,
+            returnURL: localStorage.getItem("nwapp-item-create-resource-returnURL"), 
 
             // Step 2
             category:localStorage.getItem("nwapp-item-create-resource-category"),
@@ -154,6 +155,7 @@ class ItemCreateStep5ResourceContainer extends Component {
         const {
             // Step 1
             typeOf,
+            returnURL,
 
             // Step 2
             prettyResourceTypeOf,
@@ -179,6 +181,7 @@ class ItemCreateStep5ResourceContainer extends Component {
             <ItemCreateStep5ResourceComponent
                 // Step 1
                 typeOf={typeOf}
+                returnURL={returnURL}
 
                 // Step 2
                 prettyResourceTypeOf={prettyResourceTypeOf}
