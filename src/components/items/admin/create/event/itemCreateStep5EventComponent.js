@@ -2,16 +2,17 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
+import { BootstrapMultipleImageUploadAndPreview } from "../../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 
 
-export default class ItemCreateStep5EventComponent extends Component {
+class ItemCreateStep5EventComponent extends Component {
     render() {
-        const { errors, onClick, isLoading } = this.props;
+        const {
+            errors,isLoading, onClick, photos, onDrop, onRemoveUploadClick
+        } = this.props;
         return (
             <main id="main" role="main">
-                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -26,32 +27,69 @@ export default class ItemCreateStep5EventComponent extends Component {
                     </ol>
                 </nav>
 
-                <div className="row pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto p-2">
-
-                        <BootstrapErrorsProcessingAlert errors={errors} />
-
-                        <div className="jumbotron">
-                            <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
-                            <p className="lead">This will promote our area coordinator.</p>
-                            <hr />
-                            <p>Please click <strong>save</strong> to proceed.</p>
-                            <p>
-                            <Link to={`/admin/item/add/step-4-event`} className="btn btn-orange btn-lg  float-left">
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey">
+                            <Link to="/admin/item/add/step-1">
+                                <span className="num">1.</span><span className="">Type</span>
                             </Link>
-                            &nbsp;&nbsp;&nbsp;
-                                <button className="btn btn-success btn-lg" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Save
-                                </button>
-                            </p>
                         </div>
-
+                        <div id="step-2" className="st-grey">
+                            <Link to="/admin/item/add/step-2-event">
+                                <span className="num">2.</span><span className="">Categorize</span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <Link to="/admin/item/add/step-3-event">
+                                <span className="num">3.</span><span className="">Authorities</span>
+                            </Link>
+                        </div>
+                        <div id="step-4" className="st-grey">
+                            <Link to="/admin/item/add/step-4-event">
+                                <span className="num">4.</span><span className="">Details</span>
+                            </Link>
+                        </div>
+                        <div id="step-5" className="st-grey active">
+                            <strong>
+                                <span className="num">5.</span><span className="">Photo(s)</span>
+                            </strong>
+                        </div>
                     </div>
                 </div>
 
+                <div className="row">
+                    <div className="col-md-5 mx-auto mt-2">
+                        <form>
+                            <h1><i className="fas fa-glass-cheers"></i>&nbsp;Event Form</h1>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
+
+                            <BootstrapErrorsProcessingAlert errors={errors} />
+
+                            <BootstrapMultipleImageUploadAndPreview
+                                error={errors.photos}
+                                label="Photos"
+                                onDrop={onDrop}
+                                name="photos"
+                                filesArray={photos}
+                                onRemoveUploadClick={onRemoveUploadClick}
+                            />
+
+                            <div className="form-group">
+                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                                <Link to="/admin/item/add/step-4-event" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                </Link>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
 
             </main>
         );
     }
 }
+
+export default ItemCreateStep5EventComponent;

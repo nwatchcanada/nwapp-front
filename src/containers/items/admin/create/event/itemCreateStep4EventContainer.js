@@ -25,7 +25,6 @@ class ItemCreateStep4EventContainer extends Component {
             description: localStorage.getItem("nwapp-item-create-event-description"),
             externalURL: localStorage.getItem("nwapp-item-create-event-externalURL"),
             logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
-            galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
             shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
             canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
             errors: {},
@@ -35,8 +34,6 @@ class ItemCreateStep4EventContainer extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
-        this.onGalleryDrop = this.onGalleryDrop.bind(this);
-        this.onGalleryRemoveUploadClick = this.onGalleryRemoveUploadClick.bind(this);
         this.onLogoDrop = this.onLogoDrop.bind(this);
         this.onLogoRemoveUploadClick = this.onLogoRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -138,76 +135,6 @@ class ItemCreateStep4EventContainer extends Component {
     /**
      *  Special Thanks: https://react-dropzone.netlify.com/#previews
      */
-    onGalleryDrop(acceptedFiles) {
-        const file = acceptedFiles[0];
-
-        // // For debuging purposes only.
-        // console.log("DEBUG | onDrop | file", file);
-
-        const fileWithPreview = Object.assign(file, {
-            preview: URL.createObjectURL(file)
-        });
-
-        // Append our array.
-        let a = this.state.galleryPhotos.slice(); //creates the clone of the state
-        a.push(fileWithPreview);
-
-        // // For debugging purposes.
-        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
-        // console.log("DEBUG |", a, "\n");
-
-        // Update our local state to update the GUI.
-        this.setState({
-            galleryPhotos: a
-        })
-
-        // Save our photos data.
-        localStorageSetObjectOrArrayItem("nwapp-item-create-event-galleryPhotos", a);
-    }
-
-    onGalleryRemoveUploadClick(e, name) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-
-        // Iterate through all the photos.
-        const photos = this.state.galleryPhotos;
-        for (let i = 0; i < photos.length; i++) {
-            let row = photos[i];
-
-            // // For debugging purposes only.
-            // console.log(row);
-            // console.log(photos);
-
-            if (row.name === name) {
-                //
-                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
-                //
-                const filteredPhotos = photos.slice(
-                    0, i
-                ).concat(
-                    photos.slice(
-                        i + 1, photos.length
-                    )
-                )
-
-                // Update our state with our NEW ARRAY which no longer has
-                // the item we deleted.
-                this.setState({
-                    galleryPhotos: filteredPhotos
-                });
-
-                // Save our table data.
-                localStorageSetObjectOrArrayItem("nwapp-item-create-event-galleryPhotos", filteredPhotos);
-
-                // Terminate our for-loop.
-                return;
-            }
-        }
-    }
-
-    /**
-     *  Special Thanks: https://react-dropzone.netlify.com/#previews
-     */
     onLogoDrop(acceptedFiles) {
         const file = acceptedFiles[0];
 
@@ -293,7 +220,6 @@ class ItemCreateStep4EventContainer extends Component {
             description,
             externalURL,
             logoPhoto,
-            galleryPhotos,
             shownToWhom,
             canBePostedOnSocialMedia,
             errors
@@ -305,7 +231,6 @@ class ItemCreateStep4EventContainer extends Component {
                 description={description}
                 externalURL={externalURL}
                 logoPhoto={logoPhoto}
-                galleryPhotos={galleryPhotos}
                 shownToWhom={shownToWhom}
                 canBePostedOnSocialMedia={canBePostedOnSocialMedia}
                 errors={errors}
@@ -314,8 +239,6 @@ class ItemCreateStep4EventContainer extends Component {
                 onRadioChange={this.onRadioChange}
                 onLogoDrop={this.onLogoDrop}
                 onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
-                onGalleryDrop={this.onGalleryDrop}
-                onGalleryRemoveUploadClick={this.onGalleryRemoveUploadClick}
                 onClick={this.onClick}
             />
         );

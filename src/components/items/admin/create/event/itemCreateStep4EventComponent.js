@@ -9,7 +9,6 @@ import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSele
 import { BootstrapRadio } from "../../../../bootstrap/bootstrapRadio";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/bootstrapSingleImageUploadAndPreview";
-import { BootstrapMultipleImageUploadAndPreview } from "../../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import {
     ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES,
     ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES
@@ -22,7 +21,6 @@ class ItemCreateStep4EventComponent extends Component {
             title, description, externalURL, errors, isLoading,
             onClick,  onTextChange, onSelectChange,
             logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
-            galleryPhotos, onGalleryDrop, onGalleryRemoveUploadClick,
             shownToWhom, canBePostedOnSocialMedia, onRadioChange,
         } = this.props;
         return (
@@ -62,6 +60,9 @@ class ItemCreateStep4EventComponent extends Component {
                             <strong>
                                 <span className="num">4.</span><span className="">Details</span>
                             </strong>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Photo(s)</span>
                         </div>
                     </div>
                 </div>
@@ -117,15 +118,6 @@ class ItemCreateStep4EventComponent extends Component {
                                 fileObj={logoPhoto}
                                 onRemoveUploadClick={onLogoRemoveUploadClick}
                                 helpText=""
-                            />
-
-                            <BootstrapMultipleImageUploadAndPreview
-                                error={errors.galleryPhotos}
-                                label="Gallery Photos"
-                                onDrop={onGalleryDrop}
-                                name="galleryPhotos"
-                                filesArray={galleryPhotos}
-                                onRemoveUploadClick={onGalleryRemoveUploadClick}
                             />
 
                             <BootstrapRadio

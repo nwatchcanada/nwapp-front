@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
-import * as moment from 'moment';
 
 import ItemCreateStep5EventComponent from "../../../../../components/items/admin/create/event/itemCreateStep5EventComponent";
 import {
-    localStorageGetObjectItem,
-    localStorageGetDateItem,
-    localStorageGetArrayItem,
-    localStorageGetIntegerItem,
-    localStorageGetBooleanItem
+    // localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import {
-    INCIDENT_ITEM_TYPE_OF,
-    EVENT_ITEM_TYPE_OF,
-    CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
-} from "../../../../../constants/api";
-import { postItem } from "../../../../../actions/itemActions";
+import convertBinaryFileToBase64String from "../../../../../helpers/base64Helper";
 
 
 class ItemCreateStep5EventContainer extends Component {
@@ -29,86 +18,17 @@ class ItemCreateStep5EventContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Extract the type of container.
-        const typeOf = parseInt(localStorage.getItem("nwapp-item-create-typeOf"));
-
-        // Set the state.
         this.state = {
-            typeOf: typeOf,
-
-            // Event
-            eventCategory:localStorage.getItem("nwapp-item-create-event-category"),
-            eventCategoryOption: localStorageGetObjectItem('nwapp-item-create-event-categoryOption'),
-            eventCategoryOther: localStorage.getItem("nwapp-item-create-event-categoryOther"),
-            isAllDayEvent: localStorageGetBooleanItem("nwapp-item-create-event-date-isAllDayEvent"),
-            startDateTime: localStorageGetDateItem("nwapp-item-create-event-startDateTime"),
-            finishDateTime: localStorageGetDateItem("nwapp-item-create-event-finishDateTime"),
-            eventTitle: localStorage.getItem("nwapp-item-create-event-title"),
-            eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
-            eventExternalURL: localStorage.getItem("nwapp-item-create-event-externalURL"),
-            logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
-            galleryPhotos: localStorageGetArrayItem("nwapp-item-create-event-galleryPhotos"),
-            shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
-            canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
-
-            // // Concern Type
-            // concernTitle: localStorage.getItem("nwapp-item-create-concern-title"),
-            // concernDescription: localStorage.getItem("nwapp-item-create-concern-description"),
-            // concernLocation: localStorage.getItem("nwapp-item-create-concern-location"),
-            // concernPhotos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
-            //
-            // // Incident
-            // title: localStorage.getItem("nwapp-item-create-incident-title"),
-            // date: localStorageGetDateItem("nwapp-item-create-incident-date"),
-            // description: localStorage.getItem("nwapp-item-create-incident-description"),
-            // location: localStorage.getItem("nwapp-item-create-incident-location"),
-            // photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
-            //
-            // // Information
-            // informationDescription: localStorage.getItem("nwapp-item-create-information-description"),
-
             errors: {},
-            isLoading: false
+            photos: localStorageGetArrayItem("nwapp-item-create-event-photos"),
+            base64Photos: localStorageGetArrayItem("nwapp-item-create-event-base64Photos"),
         }
 
-        // Set the functions.
-        this.onTextChange = this.onTextChange.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.onDropSaveAsBase64ContentCallback = this.onDropSaveAsBase64ContentCallback.bind(this);
+        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+        this.runGarbageCollectionOnBase64PhotosOnLocalStorage = this.runGarbageCollectionOnBase64PhotosOnLocalStorage.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
-    }
-
-    /**
-     *  Utility function used to create the `postData` we will be submitting to
-     *  the API; as a result, this function will structure some dictionary key
-     *  items under different key names to support our API web-service's API.
-     */
-    getPostData() {
-        let postData = Object.assign({}, this.state);
-
-        if (this.state.typeOf === EVENT_ITEM_TYPE_OF) {
-            postData.category = this.state.eventCategory;
-            postData.categoryOption = this.state.eventCategoryOption;
-            postData.eventCategoryOther = this.state.eventCategoryOther;
-            delete postData["eventCategory"];
-            delete postData["eventCategoryOption"];
-            delete postData["eventCategoryOther"];
-
-            const startDateTimeMoment = moment(this.state.startDateTime);
-            postData.startDateTime = startDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
-
-            const finishDateTimeMoment = moment(this.state.finishDateTime);
-            postData.finishDateTime = finishDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
-
-            postData.title = this.state.eventTitle;
-            postData.description = this.state.eventDescription;
-            postData.externalURL = this.state.eventExternalURL;
-        }
-
-        // Finally: Return our new modified data.
-        console.log("getPostData |", postData);
-        return postData;
     }
 
     /**
@@ -134,44 +54,133 @@ class ItemCreateStep5EventContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(item) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/admin/items");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({ errors: errors, isLoading: false, });
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Once our state has been validated `client-side` then we will
-        // make an API request with the server to create our new production.
-        this.props.postItem(
-            this.getPostData(),
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
+        this.runGarbageCollectionOnBase64PhotosOnLocalStorage();
+
+        this.setState({ errors: {}, })
+        this.props.history.push("/admin/item/add/step-6-event");
+    }
+
+    onDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        let a = this.state.base64Photos.slice(); //creates the clone of the state
+        a.push({ // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        });
+        this.setState({ // Update our local state to update the GUI.
+            base64Photos: a
+        })
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-base64Photos", a);
+    }
+
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        //
+        convertBinaryFileToBase64String(
+            file,
+            this.onDropSaveAsBase64ContentCallback,
+            function(error) {
+                alert(error);
+            }
         );
+
+        // // For debuging purposes only.
+        // console.log("DEBUG | onDrop | file", file);
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // Append our array.
+        let a = this.state.photos.slice(); //creates the clone of the state
+        a.push(fileWithPreview);
+
+        // // For debugging purposes.
+        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+        // console.log("DEBUG |", a, "\n");
+
+        // Update our local state to update the GUI.
+        this.setState({
+            photos: a
+        })
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-photos", a);
+    }
+
+    onRemoveUploadClick(e, name) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Iterate through all the photos.
+        const photos = this.state.photos;
+        for (let i = 0; i < photos.length; i++) {
+            let row = photos[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(photos);
+
+            if (row.name === name) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredPhotos = photos.slice(
+                    0, i
+                ).concat(
+                    photos.slice(
+                        i + 1, photos.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    photos: filteredPhotos
+                });
+
+                // Save our table data.
+                localStorageSetObjectOrArrayItem("nwapp-item-create-event-photos", filteredPhotos);
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
+    }
+
+    /**
+     *  Function will iterate through the `photos` array and the `base64Photos`
+     *  array and update the `localStorage` to have the `base64Photos` saved
+     *  which belong to the `photos` array. If any `base64Photos` do not exist
+     *  in `photos` array then the `base64Photos` will not be saved.
+     */
+    runGarbageCollectionOnBase64PhotosOnLocalStorage() {
+        let base64Photo;
+        let binPhoto;
+        let newBase64Photos = [];
+        for (base64Photo of this.state.base64Photos) {
+            for (binPhoto of this.state.photos) {
+                if (binPhoto.path === base64Photo.fileName) {
+                    newBase64Photos.push(base64Photo);
+                    break;
+                }
+            }
+        }
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-base64Photos", newBase64Photos);
     }
 
 
@@ -181,51 +190,14 @@ class ItemCreateStep5EventContainer extends Component {
      */
 
     render() {
-        const {
-            typeOf, errors,
-
-            // Concern Type
-            concernTitle,
-            concernDescription,
-            concernLocation,
-            concernPhotos,
-
-            // Event
-            eventTitle,
-            eventPrettyEventTypeOf,
-            eventDate,
-            eventDescription,
-            logoPhoto,
-            galleryPhotos,
-            shownToWhomLabel,
-            canBePostedOnSocialMediaLabel,
-
-            // Incident
-            title,
-            date,
-            description,
-            location,
-            photos,
-
-            // Information
-            informationDescription
-        } = this.state;
-
+        const { photos, errors } = this.state;
         return (
             <ItemCreateStep5EventComponent
-                typeOf={typeOf}
+                photos={photos}
                 errors={errors}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
-
-                eventTitle={eventTitle}
-                eventPrettyEventTypeOf={eventPrettyEventTypeOf}
-                eventDate={eventDate}
-                eventDescription={eventDescription}
-                logoPhoto={logoPhoto}
-                galleryPhotos={galleryPhotos}
-                shownToWhomLabel={shownToWhomLabel}
-                canBePostedOnSocialMediaLabel={canBePostedOnSocialMediaLabel}
+                onDrop={this.onDrop}
+                onRemoveUploadClick={this.onRemoveUploadClick}
             />
         );
     }
@@ -238,14 +210,7 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        },
-        postItem: (postData, successCallback, failedCallback) => {
-            dispatch(postItem(postData, successCallback, failedCallback))
-        },
-    }
+    return {}
 }
 
 
