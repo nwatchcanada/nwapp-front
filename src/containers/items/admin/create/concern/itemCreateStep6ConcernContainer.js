@@ -1,27 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
-import ItemCreateStep6EventComponent from "../../../../../components/items/admin/create/event/itemCreateStep6EventComponent";
+import ItemCreateStep6ConcernComponent from "../../../../../components/items/admin/create/concern/itemCreateStep6ConcernComponent";
 import {
     localStorageGetObjectItem,
     localStorageGetDateItem,
     localStorageGetArrayItem,
-    localStorageGetIntegerItem,
-    localStorageGetBooleanItem
+    localStorageGetIntegerItem
 } from '../../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import {
-    INCIDENT_ITEM_TYPE_OF,
-    EVENT_ITEM_TYPE_OF,
-    CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
-} from "../../../../../constants/api";
 import { postItem } from "../../../../../actions/itemActions";
 
 
-class ItemCreateStep6EventContainer extends Component {
+class ItemCreateStep6ConcernContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -30,50 +23,30 @@ class ItemCreateStep6EventContainer extends Component {
     constructor(props) {
         super(props);
 
-        // Extract the type of container.
-        const typeOf = parseInt(localStorage.getItem("nwapp-item-create-typeOf"));
-
         // Set the state.
         this.state = {
-            typeOf: typeOf,
+            // STEP 2
+            typeOf: localStorageGetIntegerItem("nwapp-item-create-typeOf"),
 
-            // Event
-            eventCategory:localStorage.getItem("nwapp-item-create-event-category"),
-            eventCategoryOption: localStorageGetObjectItem('nwapp-item-create-event-categoryOption'),
-            eventCategoryOther: localStorage.getItem("nwapp-item-create-event-categoryOther"),
-            isAllDayEvent: localStorageGetBooleanItem("nwapp-item-create-event-date-isAllDayEvent"),
-            startDateTime: localStorageGetDateItem("nwapp-item-create-event-startDateTime"),
-            finishDateTime: localStorageGetDateItem("nwapp-item-create-event-finishDateTime"),
-            eventTitle: localStorage.getItem("nwapp-item-create-event-title"),
-            eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
-            eventExternalURL: localStorage.getItem("nwapp-item-create-event-externalURL"),
-            logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
-            photos: localStorageGetArrayItem("nwapp-item-create-event-base64Photos"),
-            shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
-            canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
+            // STEP 3
+            category:localStorage.getItem("nwapp-item-create-concern-category"),
+            categoryOption: localStorageGetObjectItem('nwapp-item-create-concern-categoryOption'),
+            categoryOther: localStorage.getItem("nwapp-item-create-concern-categoryOther"),
 
-            // // Concern Type
-            // concernTitle: localStorage.getItem("nwapp-item-create-concern-title"),
-            // concernDescription: localStorage.getItem("nwapp-item-create-concern-description"),
-            // concernLocation: localStorage.getItem("nwapp-item-create-concern-location"),
-            // concernPhotos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
-            //
-            // // Incident
-            // title: localStorage.getItem("nwapp-item-create-incident-title"),
-            // date: localStorageGetDateItem("nwapp-item-create-incident-date"),
-            // description: localStorage.getItem("nwapp-item-create-incident-description"),
-            // location: localStorage.getItem("nwapp-item-create-incident-location"),
-            // photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
-            //
-            // // Information
-            // informationDescription: localStorage.getItem("nwapp-item-create-information-description"),
+            // STEP 4
+            title: localStorage.getItem("nwapp-item-create-concern-title"),
+            description: localStorage.getItem("nwapp-item-create-concern-description"),
+            location: localStorage.getItem("nwapp-item-create-concern-location"),
 
+            // STEP 5
+            photos: localStorageGetArrayItem("nwapp-item-create-concern-base64Photos"),
+
+            // COMMON
             errors: {},
             isLoading: false
         }
 
         // Set the functions.
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -87,24 +60,8 @@ class ItemCreateStep6EventContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        if (this.state.typeOf === EVENT_ITEM_TYPE_OF) {
-            postData.category = this.state.eventCategory;
-            postData.categoryOption = this.state.eventCategoryOption;
-            postData.eventCategoryOther = this.state.eventCategoryOther;
-            delete postData["eventCategory"];
-            delete postData["eventCategoryOption"];
-            delete postData["eventCategoryOther"];
-
-            const startDateTimeMoment = moment(this.state.startDateTime);
-            postData.startDateTime = startDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
-
-            const finishDateTimeMoment = moment(this.state.finishDateTime);
-            postData.finishDateTime = finishDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
-
-            postData.title = this.state.eventTitle;
-            postData.description = this.state.eventDescription;
-            postData.externalURL = this.state.eventExternalURL;
-        }
+        // const dateMoment = moment(this.state.date);
+        // postData.date = dateMoment.format("YYYY-MM-DD")
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -141,7 +98,9 @@ class ItemCreateStep6EventContainer extends Component {
     }
 
     onFailedSubmissionCallback(errors) {
-        this.setState({ errors: errors, isLoading: false, });
+        this.setState({
+            errors: errors
+        })
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -154,12 +113,6 @@ class ItemCreateStep6EventContainer extends Component {
      *  Event handling functions
      *------------------------------------------------------------
      */
-
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
@@ -182,7 +135,7 @@ class ItemCreateStep6EventContainer extends Component {
 
     render() {
         const {
-            typeOf, errors,
+            typeOf, returnURL, errors,
 
             // Concern Type
             concernTitle,
@@ -196,6 +149,7 @@ class ItemCreateStep6EventContainer extends Component {
             eventDate,
             eventDescription,
             logoPhoto,
+            galleryPhotos,
             shownToWhomLabel,
             canBePostedOnSocialMediaLabel,
 
@@ -211,19 +165,16 @@ class ItemCreateStep6EventContainer extends Component {
         } = this.state;
 
         return (
-            <ItemCreateStep6EventComponent
+            <ItemCreateStep6ConcernComponent
                 typeOf={typeOf}
+                returnURL={returnURL}
                 errors={errors}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
 
-                eventTitle={eventTitle}
-                eventPrettyEventTypeOf={eventPrettyEventTypeOf}
-                eventDate={eventDate}
-                eventDescription={eventDescription}
-                logoPhoto={logoPhoto}
-                shownToWhomLabel={shownToWhomLabel}
-                canBePostedOnSocialMediaLabel={canBePostedOnSocialMediaLabel}
+                concernTitle={concernTitle}
+                concernDescription={concernDescription}
+                concernLocation={concernLocation}
+                concernPhotos={concernPhotos}
             />
         );
     }
@@ -250,4 +201,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep6EventContainer);
+)(ItemCreateStep6ConcernContainer);

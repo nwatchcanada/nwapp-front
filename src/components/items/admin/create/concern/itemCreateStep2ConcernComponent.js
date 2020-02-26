@@ -40,6 +40,9 @@ class ItemCreateStep2ConcernComponent extends Component {
                         <div id="step-4" className="st-grey">
                             <span className="num">4.</span><span className="">Details</span>
                         </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Photo(s)</span>
+                        </div>
                     </div>
                 </div>
 

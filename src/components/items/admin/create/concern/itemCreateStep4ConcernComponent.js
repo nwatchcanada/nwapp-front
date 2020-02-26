@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
-import { BootstrapMultipleImageUploadAndPreview } from "../../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 import { OTHER_CONCERN_TYPE_OF } from "../../../../../constants/api";
 
@@ -14,7 +13,7 @@ class ItemCreateStep4ConcernComponent extends Component {
     render() {
         const {
             title, description, location, errors, onTextChange, isLoading, onClick,
-            onSelectChange, photos, onDrop, onRemoveUploadClick
+            onSelectChange
         } = this.props;
         return (
             <main id="main" role="main">
@@ -53,6 +52,9 @@ class ItemCreateStep4ConcernComponent extends Component {
                             <strong>
                                 <span className="num">4.</span><span className="">Details</span>
                             </strong>
+                        </div>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Photo(s)</span>
                         </div>
                     </div>
                 </div>
@@ -97,15 +99,6 @@ class ItemCreateStep4ConcernComponent extends Component {
                                 value={location}
                                 name="location"
                                 type="text"
-                            />
-
-                            <BootstrapMultipleImageUploadAndPreview
-                                error={errors.photos}
-                                label="Photos"
-                                onDrop={onDrop}
-                                name="photos"
-                                filesArray={photos}
-                                onRemoveUploadClick={onRemoveUploadClick}
                             />
 
                             <div className="form-group">
