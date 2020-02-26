@@ -8,6 +8,7 @@ import {
     localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../../../helpers/localStorageUtility';
 import { validateIncidentStep4Input } from "../../../../../validators/itemValidator";
+import convertBinaryFileToBase64String from "../../../../../helpers/base64Helper";
 
 
 class ItemCreateStep4IncidentContainer extends Component {
@@ -26,12 +27,15 @@ class ItemCreateStep4IncidentContainer extends Component {
             errors: {},
             isLoading: false,
             photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
+            base64Photos: localStorageGetArrayItem("nwapp-item-create-incident-base64Photos"),
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onDateTimeChange = this.onDateTimeChange.bind(this);
         this.onDrop = this.onDrop.bind(this);
+        this.onDropSaveAsBase64ContentCallback = this.onDropSaveAsBase64ContentCallback.bind(this);
         this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+        this.runGarbageCollectionOnBase64PhotosOnLocalStorage = this.runGarbageCollectionOnBase64PhotosOnLocalStorage.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -118,6 +122,7 @@ class ItemCreateStep4IncidentContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
+            this.runGarbageCollectionOnBase64PhotosOnLocalStorage();
             this.onSuccessfulSubmissionCallback();
 
         // CASE 2 OF 2: Validation was a failure.
@@ -126,11 +131,34 @@ class ItemCreateStep4IncidentContainer extends Component {
         }
     }
 
+    onDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        let a = this.state.base64Photos.slice(); //creates the clone of the state
+        a.push({ // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        });
+        this.setState({ // Update our local state to update the GUI.
+            base64Photos: a
+        })
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-incident-base64Photos", a);
+    }
+
     /**
      *  Special Thanks: https://react-dropzone.netlify.com/#previews
      */
     onDrop(acceptedFiles) {
         const file = acceptedFiles[0];
+
+        //
+        convertBinaryFileToBase64String(
+            file,
+            this.onDropSaveAsBase64ContentCallback,
+            function(error) {
+                alert(error);
+            }
+        );
 
         // // For debuging purposes only.
         // console.log("DEBUG | onDrop | file", file);
@@ -194,6 +222,27 @@ class ItemCreateStep4IncidentContainer extends Component {
                 return;
             }
         }
+    }
+
+    /**
+     *  Function will iterate through the `photos` array and the `base64Photos`
+     *  array and update the `localStorage` to have the `base64Photos` saved
+     *  which belong to the `photos` array. If any `base64Photos` do not exist
+     *  in `photos` array then the `base64Photos` will not be saved.
+     */
+    runGarbageCollectionOnBase64PhotosOnLocalStorage() {
+        let base64Photo;
+        let binPhoto;
+        let newBase64Photos = [];
+        for (base64Photo of this.state.base64Photos) {
+            for (binPhoto of this.state.photos) {
+                if (binPhoto.path === base64Photo.fileName) {
+                    newBase64Photos.push(base64Photo);
+                    break;
+                }
+            }
+        }
+        localStorageSetObjectOrArrayItem("nwapp-item-create-incident-base64Photos", newBase64Photos);
     }
 
 

@@ -50,7 +50,7 @@ class ItemCreateStep5IncidentContainer extends Component {
             date: localStorageGetDateItem("nwapp-item-create-incident-date"),
             description: localStorage.getItem("nwapp-item-create-incident-description"),
             location: localStorage.getItem("nwapp-item-create-incident-location"),
-            photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
+            photos: localStorageGetArrayItem("nwapp-item-create-incident-base64Photos"),
 
             errors: {},
             isLoading: false
@@ -103,14 +103,14 @@ class ItemCreateStep5IncidentContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(item) {
-        this.setState({ errors: {}, isLoading: true, })
+        this.setState({ errors: {}, isLoading: false, })
         this.props.setFlashMessage("success", "Item has been successfully created.");
         this.props.history.push("/admin/items");
     }
 
     onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors
+            errors: errors, isLoading: false,
         })
 
         // The following code will cause the screen to scroll to the top of
@@ -135,13 +135,17 @@ class ItemCreateStep5IncidentContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Once our state has been validated `client-side` then we will
-        // make an API request with the server to create our new production.
-        this.props.postItem(
-            this.getPostData(),
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
-        );
+        this.setState({
+            isLoading: true,
+        }, ()=> {
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.postItem(
+                this.getPostData(),
+                this.onSuccessfulSubmissionCallback,
+                this.onFailedSubmissionCallback
+            );
+        });
     }
 
 
@@ -172,7 +176,8 @@ class ItemCreateStep5IncidentContainer extends Component {
             photos,
 
             // All
-            errors
+            errors,
+            isLoading
         } = this.state;
 
         return (
@@ -200,6 +205,7 @@ class ItemCreateStep5IncidentContainer extends Component {
                 errors={errors}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
+                isLoading={isLoading}
 
                 title={title}
                 date={date}
