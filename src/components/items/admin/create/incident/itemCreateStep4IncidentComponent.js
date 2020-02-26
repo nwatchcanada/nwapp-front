@@ -6,14 +6,12 @@ import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapA
 import { BootstrapDatePicker } from "../../../../bootstrap/bootstrapDatePicker";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
-import { BootstrapMultipleImageUploadAndPreview } from "../../../../bootstrap/bootstrapMultipleImageUploadAndPreview";
 
 
 class ItemCreateStep4IncidentComponent extends Component {
     render() {
         const {
             title, date, description, location, errors, onTextChange, isLoading, onClick, onDateTimeChange,
-            photos, onDrop, onRemoveUploadClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -53,8 +51,8 @@ class ItemCreateStep4IncidentComponent extends Component {
                                 <span className="num">4.</span><span className="">Details</span>
                             </strong>
                         </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Review</span>
+                        <div id="step-5" className="st-grey">
+                            <span className="num">5.</span><span className="">Photo(s)</span>
                         </div>
                     </div>
                 </div>
@@ -109,15 +107,6 @@ class ItemCreateStep4IncidentComponent extends Component {
                                 value={location}
                                 name="location"
                                 type="text"
-                            />
-
-                            <BootstrapMultipleImageUploadAndPreview
-                                error={errors.photos}
-                                label="Photos"
-                                onDrop={onDrop}
-                                name="photos"
-                                filesArray={photos}
-                                onRemoveUploadClick={onRemoveUploadClick}
                             />
 
                             <div className="form-group">

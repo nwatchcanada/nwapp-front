@@ -321,6 +321,7 @@ import ItemCreateStep2IncidentContainer from "./items/admin/create/incident/item
 import ItemCreateStep3IncidentContainer from "./items/admin/create/incident/itemCreateStep3IncidentContainer";
 import ItemCreateStep4IncidentContainer from "./items/admin/create/incident/itemCreateStep4IncidentContainer";
 import ItemCreateStep5IncidentContainer from "./items/admin/create/incident/itemCreateStep5IncidentContainer";
+import ItemCreateStep6IncidentContainer from "./items/admin/create/incident/itemCreateStep6IncidentContainer";
 import ItemCreateStep2InformationContainer from "./items/admin/create/information/itemCreateStep2InformationContainer";
 import ItemCreateStep3InformationContainer from "./items/admin/create/information/itemCreateStep3InformationContainer";
 import ItemCreateStep4InformationContainer from "./items/admin/create/information/itemCreateStep4InformationContainer";
@@ -753,6 +754,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/add/step-3-incident" exact component={requiresAuth(ItemCreateStep3IncidentContainer)} />
                                 <Route path="/admin/item/add/step-4-incident" exact component={requiresAuth(ItemCreateStep4IncidentContainer)} />
                                 <Route path="/admin/item/add/step-5-incident" exact component={requiresAuth(ItemCreateStep5IncidentContainer)} />
+                                <Route path="/admin/item/add/step-6-incident" exact component={requiresAuth(ItemCreateStep6IncidentContainer)} />
                                 <Route path="/admin/item/add/step-2-information" exact component={requiresAuth(ItemCreateStep2InformationContainer)} />
                                 <Route path="/admin/item/add/step-3-information" exact component={requiresAuth(ItemCreateStep3InformationContainer)} />
                                 <Route path="/admin/item/add/step-4-information" exact component={requiresAuth(ItemCreateStep4InformationContainer)} />
