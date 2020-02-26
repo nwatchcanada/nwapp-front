@@ -99,7 +99,7 @@ class ItemCreateStep6ConcernContainer extends Component {
 
     onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors
+            errors: errors, isLoading: false,
         })
 
         // The following code will cause the screen to scroll to the top of
@@ -118,13 +118,17 @@ class ItemCreateStep6ConcernContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Once our state has been validated `client-side` then we will
-        // make an API request with the server to create our new production.
-        this.props.postItem(
-            this.getPostData(),
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
-        );
+        this.setState({
+            isLoading: true,
+        }, ()=>{
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.postItem(
+                this.getPostData(),
+                this.onSuccessfulSubmissionCallback,
+                this.onFailedSubmissionCallback
+            );
+        });
     }
 
 
@@ -135,7 +139,7 @@ class ItemCreateStep6ConcernContainer extends Component {
 
     render() {
         const {
-            typeOf, returnURL, errors,
+            typeOf, returnURL, errors, isLoading,
 
             // Concern Type
             concernTitle,
@@ -170,6 +174,7 @@ class ItemCreateStep6ConcernContainer extends Component {
                 returnURL={returnURL}
                 errors={errors}
                 onClick={this.onClick}
+                isLoading={isLoading}
 
                 concernTitle={concernTitle}
                 concernDescription={concernDescription}
