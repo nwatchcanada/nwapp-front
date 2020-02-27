@@ -45,7 +45,7 @@ export default class ItemCreateStep3ResourceComponent extends Component {
                     </ol>
                 </nav>
 
-                {/* <h1>Create Resource - Select Type</h1> */}
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Resource Item</h1>
 
                 <div className="row">
                     <div className="step-navigation">

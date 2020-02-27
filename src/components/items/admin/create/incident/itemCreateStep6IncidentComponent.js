@@ -26,6 +26,8 @@ export default class ItemCreateStep6IncidentComponent extends Component {
                     </ol>
                 </nav>
 
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Incident Item</h1>
+
                 <div className="row pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
 

@@ -29,7 +29,7 @@ export default class ItemCreateStep4ResourceLinkComponent extends Component {
                     </ol>
                 </nav>
 
-                { /* <h1>Create Resource - Details</h1> */ }
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Resource Item</h1>
 
                 <div className="row">
                     <div className="step-navigation">

@@ -6,9 +6,9 @@ import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPa
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 
 
-export default class ItemCreateStep5ResourceComponent extends Component {
+export default class ItemCreateStep7VolunteerComponent extends Component {
     render() {
-        const { returnURL, errors, onClick, isLoading } = this.props;
+        const { errors, onClick, isLoading } = this.props;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -26,7 +26,7 @@ export default class ItemCreateStep5ResourceComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-plus"></i>&nbsp;Add Resource Item</h1>
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Volunteer Item</h1>
 
                 <div className="row pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
@@ -39,7 +39,7 @@ export default class ItemCreateStep5ResourceComponent extends Component {
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>
-                            <Link to={returnURL} className="btn btn-orange btn-lg  float-left">
+                            <Link to={`/admin/item/add/step-6-volunteer`} className="btn btn-orange btn-lg  float-left">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                             &nbsp;&nbsp;&nbsp;

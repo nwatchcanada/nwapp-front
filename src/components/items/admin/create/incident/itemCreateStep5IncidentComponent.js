@@ -27,6 +27,8 @@ class ItemCreateStep5IncidentComponent extends Component {
                     </ol>
                 </nav>
 
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Incident Item</h1>
+
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
@@ -60,7 +62,7 @@ class ItemCreateStep5IncidentComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-fire"></i>&nbsp;Incident Form</h1>
+                            <h1><i className="fas fa-images"></i>&nbsp;Photo Gallery</h1>
                             <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />

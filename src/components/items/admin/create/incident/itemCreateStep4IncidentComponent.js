@@ -29,6 +29,8 @@ class ItemCreateStep4IncidentComponent extends Component {
                     </ol>
                 </nav>
 
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Incident Item</h1>
+
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">

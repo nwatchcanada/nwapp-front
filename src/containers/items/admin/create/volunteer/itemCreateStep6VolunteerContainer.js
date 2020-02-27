@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
-// import * as moment from 'moment';
 
-import ItemCreateStep6IVolunteerComponent from "../../../../../components/items/admin/create/volunteer/itemCreateStep6VolunteerComponent";
+import ItemCreateStep6VolunteerComponent from "../../../../../components/items/admin/create/volunteer/itemCreateStep6VolunteerComponent";
 import {
-    localStorageGetObjectItem,
-    localStorageGetDateItem,
-    localStorageGetArrayItem,
-    localStorageGetIntegerItem
+    // localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem, localStorageGetDateItem, localStorageGetArrayItem
 } from '../../../../../helpers/localStorageUtility';
-import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { postItem } from "../../../../../actions/itemActions";
+import convertBinaryFileToBase64String from "../../../../../helpers/base64Helper";
 
 
-class ItemCreateStep6IVolunteerContainer extends Component {
+class ItemCreateStep6VolunteerContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -22,53 +18,17 @@ class ItemCreateStep6IVolunteerContainer extends Component {
 
     constructor(props) {
         super(props);
-
-        // Extract the type of container.
-        const typeOf = parseInt(localStorage.getItem("nwapp-item-create-typeOf"));
-
-        // Set the state.
         this.state = {
-            // Step 2
-            category:localStorage.getItem("nwapp-item-create-volunteer-category"),
-            categoryOption: localStorageGetObjectItem('nwapp-item-create-volunteer-categoryOption'),
-            categoryOther: localStorage.getItem("nwapp-item-create-volunteer-categoryOther"),
-
-            // Step 3
-            whoNewsFor: localStorageGetIntegerItem("nwapp-item-create-volunteer-whoNewsFor"),
-
-            // Step 4
-            description: localStorage.getItem("nwapp-item-create-volunteer-description"),
-
-            // Step 5
-            externalURL: localStorage.getItem("nwapp-item-create-volunteer-externalURL"),
-
-            // Common
-            typeOf: typeOf,
             errors: {},
-            isLoading: false
+            photos: localStorageGetArrayItem("nwapp-item-create-volunteer-photos"),
+            base64Photos: localStorageGetArrayItem("nwapp-item-create-volunteer-base64Photos"),
         }
 
-        // Set the functions.
-        this.onTextChange = this.onTextChange.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.onDropSaveAsBase64ContentCallback = this.onDropSaveAsBase64ContentCallback.bind(this);
+        this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+        this.runGarbageCollectionOnBase64PhotosOnLocalStorage = this.runGarbageCollectionOnBase64PhotosOnLocalStorage.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
-    }
-
-    /**
-     *  Utility function used to create the `postData` we will be submitting to
-     *  the API; as a result, this function will structure some dictionary key
-     *  items under different key names to support our API web-service's API.
-     */
-    getPostData() {
-        let postData = Object.assign({}, this.state);
-
-        // const dateMoment = moment(this.state.date);
-        // postData.date = dateMoment.format("YYYY-MM-DD")
-
-        // Finally: Return our new modified data.
-        console.log("getPostData |", postData);
-        return postData;
     }
 
     /**
@@ -94,46 +54,133 @@ class ItemCreateStep6IVolunteerContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(item) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.setFlashMessage("success", "Item has been successfully created.");
-        this.props.history.push("/admin/items");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Once our state has been validated `client-side` then we will
-        // make an API request with the server to create our new production.
-        this.props.postItem(
-            this.getPostData(),
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
+        this.runGarbageCollectionOnBase64PhotosOnLocalStorage();
+
+        this.setState({ errors: {}, })
+        this.props.history.push("/admin/item/add/step-7-volunteer");
+    }
+
+    onDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        let a = this.state.base64Photos.slice(); //creates the clone of the state
+        a.push({ // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        });
+        this.setState({ // Update our local state to update the GUI.
+            base64Photos: a
+        })
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-volunteer-base64Photos", a);
+    }
+
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        //
+        convertBinaryFileToBase64String(
+            file,
+            this.onDropSaveAsBase64ContentCallback,
+            function(error) {
+                alert(error);
+            }
         );
+
+        // // For debuging purposes only.
+        // console.log("DEBUG | onDrop | file", file);
+
+        const fileWithPreview = Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        });
+
+        // Append our array.
+        let a = this.state.photos.slice(); //creates the clone of the state
+        a.push(fileWithPreview);
+
+        // // For debugging purposes.
+        // console.log("DEBUG | onDrop | fileWithPreview", fileWithPreview);
+        // console.log("DEBUG |", a, "\n");
+
+        // Update our local state to update the GUI.
+        this.setState({
+            photos: a
+        })
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-volunteer-photos", a);
+    }
+
+    onRemoveUploadClick(e, name) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Iterate through all the photos.
+        const photos = this.state.photos;
+        for (let i = 0; i < photos.length; i++) {
+            let row = photos[i];
+
+            // // For debugging purposes only.
+            // console.log(row);
+            // console.log(photos);
+
+            if (row.name === name) {
+                //
+                // Special thanks: https://flaviocopes.com/how-to-remove-item-from-array/
+                //
+                const filteredPhotos = photos.slice(
+                    0, i
+                ).concat(
+                    photos.slice(
+                        i + 1, photos.length
+                    )
+                )
+
+                // Update our state with our NEW ARRAY which no longer has
+                // the item we deleted.
+                this.setState({
+                    photos: filteredPhotos
+                });
+
+                // Save our table data.
+                localStorageSetObjectOrArrayItem("nwapp-item-create-volunteer-photos", filteredPhotos);
+
+                // Terminate our for-loop.
+                return;
+            }
+        }
+    }
+
+    /**
+     *  Function will iterate through the `photos` array and the `base64Photos`
+     *  array and update the `localStorage` to have the `base64Photos` saved
+     *  which belong to the `photos` array. If any `base64Photos` do not exist
+     *  in `photos` array then the `base64Photos` will not be saved.
+     */
+    runGarbageCollectionOnBase64PhotosOnLocalStorage() {
+        let base64Photo;
+        let binPhoto;
+        let newBase64Photos = [];
+        for (base64Photo of this.state.base64Photos) {
+            for (binPhoto of this.state.photos) {
+                if (binPhoto.path === base64Photo.fileName) {
+                    newBase64Photos.push(base64Photo);
+                    break;
+                }
+            }
+        }
+        localStorageSetObjectOrArrayItem("nwapp-item-create-volunteer-base64Photos", newBase64Photos);
     }
 
 
@@ -143,61 +190,14 @@ class ItemCreateStep6IVolunteerContainer extends Component {
      */
 
     render() {
-        const {
-            // Step 1
-            typeOf,
-
-            // Step 2
-            prettyIVolunteerTypeOf,
-
-            // Step 3
-            notifiedAuthorities,
-            notifiedAuthoritiesLabel,
-            acceptAuthorityCooperation,
-            acceptAuthorityCooperationLabel,
-
-            // Step 4
-            title,
-            date,
-            description,
-            location,
-            photos,
-
-            // All
-            errors
-        } = this.state;
-
+        const { photos, errors } = this.state;
         return (
-            <ItemCreateStep6IVolunteerComponent
-                // Step 1
-                typeOf={typeOf}
-
-                // Step 2
-                prettyIVolunteerTypeOf={prettyIVolunteerTypeOf}
-
-                // Step 3
-                notifiedAuthorities={notifiedAuthorities}
-                notifiedAuthoritiesLabel={notifiedAuthoritiesLabel}
-                acceptAuthorityCooperation={acceptAuthorityCooperation}
-                acceptAuthorityCooperationLabel={acceptAuthorityCooperationLabel}
-
-                // Step 4
-                title={title}
-                date={date}
-                description={description}
-                location={location}
+            <ItemCreateStep6VolunteerComponent
                 photos={photos}
-
-                // All
                 errors={errors}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
-
-                title={title}
-                date={date}
-                description={description}
-                location={location}
-                photos={photos}
+                onDrop={this.onDrop}
+                onRemoveUploadClick={this.onRemoveUploadClick}
             />
         );
     }
@@ -210,18 +210,11 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
-        },
-        postItem: (postData, successCallback, failedCallback) => {
-            dispatch(postItem(postData, successCallback, failedCallback))
-        },
-    }
+    return {}
 }
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemCreateStep6IVolunteerContainer);
+)(ItemCreateStep6VolunteerContainer);

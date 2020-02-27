@@ -43,6 +43,8 @@ class ItemCreateStep2VolunteerComponent extends Component {
                     </ol>
                 </nav>
 
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Volunteer Item</h1>
+
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
@@ -56,13 +58,16 @@ class ItemCreateStep2VolunteerComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Authorities</span>
+                            <span className="num">3.</span><span className="">Who</span>
                         </div>
                         <div id="step-4" className="st-grey">
                             <span className="num">4.</span><span className="">Details</span>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Review</span>
+                            <span className="num">5.</span><span className="">Link</span>
+                        </div>
+                        <div id="step-6" className="st-grey">
+                            <span className="num">6.</span><span className="">Photo(s)</span>
                         </div>
                     </div>
                 </div>
