@@ -9,6 +9,7 @@ import {
     localStorageGetBooleanItem, localStorageGetIntegerItem
 } from '../../../../../helpers/localStorageUtility';
 import { validateEventStep4Input } from "../../../../../validators/itemValidator";
+import convertBinaryFileToBase64String from "../../../../../helpers/base64Helper";
 
 
 class ItemCreateStep4EventContainer extends Component {
@@ -24,7 +25,8 @@ class ItemCreateStep4EventContainer extends Component {
             title: localStorage.getItem("nwapp-item-create-event-title"),
             description: localStorage.getItem("nwapp-item-create-event-description"),
             externalURL: localStorage.getItem("nwapp-item-create-event-externalURL"),
-            logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
+            eventLogoImage: localStorageGetArrayItem("nwapp-item-create-event-eventLogoImage"),
+            base64EventLogoImage: localStorageGetArrayItem("nwapp-item-create-event-base64EventLogoImage"),
             shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
             canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
             errors: {},
@@ -35,6 +37,7 @@ class ItemCreateStep4EventContainer extends Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onLogoDrop = this.onLogoDrop.bind(this);
+        this.onLogoDropSaveAsBase64ContentCallback = this.onLogoDropSaveAsBase64ContentCallback.bind(this);
         this.onLogoRemoveUploadClick = this.onLogoRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
@@ -132,6 +135,20 @@ class ItemCreateStep4EventContainer extends Component {
         );
     }
 
+    onLogoDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        const base64EventLogoImage = { // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        };
+
+        this.setState({ // Update our local state to update the GUI.
+            base64EventLogoImage: base64EventLogoImage
+        });
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-base64EventLogoImage", base64EventLogoImage);
+    }
+
     /**
      *  Special Thanks: https://react-dropzone.netlify.com/#previews
      */
@@ -146,24 +163,32 @@ class ItemCreateStep4EventContainer extends Component {
                 preview: URL.createObjectURL(file)
             });
 
+            convertBinaryFileToBase64String(
+                file,
+                this.onLogoDropSaveAsBase64ContentCallback,
+                function(error) {
+                    alert(error);
+                }
+            );
+
             // For debugging purposes.
             console.log("DEBUG | onLogoDrop | fileWithPreview", fileWithPreview);
 
             // Save to local storage our OBJECT.
-            localStorageSetObjectOrArrayItem("nwapp-item-create-event-logoPhoto", fileWithPreview);
+            localStorageSetObjectOrArrayItem("nwapp-item-create-event-eventLogoImage", fileWithPreview);
 
             // Update our local state to update the GUI.
             this.setState({
-                logoPhoto: fileWithPreview
-            })
+                eventLogoImage: fileWithPreview
+            });
         }
     }
 
     onLogoRemoveUploadClick(e) {
         this.setState({
-            logoPhoto: null
+            eventLogoImage: null
         })
-        localStorageSetObjectOrArrayItem("nwapp-item-create-event-logoPhoto", null);
+        localStorageSetObjectOrArrayItem("nwapp-item-create-event-eventLogoImage", null);
     }
 
     onClick(e) {
@@ -219,7 +244,7 @@ class ItemCreateStep4EventContainer extends Component {
             title,
             description,
             externalURL,
-            logoPhoto,
+            eventLogoImage,
             shownToWhom,
             canBePostedOnSocialMedia,
             errors
@@ -230,7 +255,7 @@ class ItemCreateStep4EventContainer extends Component {
                 title={title}
                 description={description}
                 externalURL={externalURL}
-                logoPhoto={logoPhoto}
+                eventLogoImage={eventLogoImage}
                 shownToWhom={shownToWhom}
                 canBePostedOnSocialMedia={canBePostedOnSocialMedia}
                 errors={errors}

@@ -43,7 +43,7 @@ class ItemCreateStep5EventComponent extends Component {
                         </div>
                         <div id="step-3" className="st-grey">
                             <Link to="/admin/item/add/step-3-event">
-                                <span className="num">3.</span><span className="">Authorities</span>
+                                <span className="num">3.</span><span className="">Date/Time</span>
                             </Link>
                         </div>
                         <div id="step-4" className="st-grey">

@@ -47,7 +47,7 @@ class ItemCreateStep6EventContainer extends Component {
             eventTitle: localStorage.getItem("nwapp-item-create-event-title"),
             eventDescription: localStorage.getItem("nwapp-item-create-event-description"),
             eventExternalURL: localStorage.getItem("nwapp-item-create-event-externalURL"),
-            logoPhoto: localStorageGetArrayItem("nwapp-item-create-event-logoPhoto"),
+            eventLogoImage: localStorageGetArrayItem("nwapp-item-create-event-base64EventLogoImage"),
             photos: localStorageGetArrayItem("nwapp-item-create-event-base64Photos"),
             shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
             canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
@@ -195,7 +195,7 @@ class ItemCreateStep6EventContainer extends Component {
             eventPrettyEventTypeOf,
             eventDate,
             eventDescription,
-            logoPhoto,
+            eventLogoImage,
             shownToWhomLabel,
             canBePostedOnSocialMediaLabel,
 
@@ -221,7 +221,7 @@ class ItemCreateStep6EventContainer extends Component {
                 eventPrettyEventTypeOf={eventPrettyEventTypeOf}
                 eventDate={eventDate}
                 eventDescription={eventDescription}
-                logoPhoto={logoPhoto}
+                eventLogoImage={eventLogoImage}
                 shownToWhomLabel={shownToWhomLabel}
                 canBePostedOnSocialMediaLabel={canBePostedOnSocialMediaLabel}
             />

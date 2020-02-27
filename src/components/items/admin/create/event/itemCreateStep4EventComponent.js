@@ -20,7 +20,7 @@ class ItemCreateStep4EventComponent extends Component {
         const {
             title, description, externalURL, errors, isLoading,
             onClick,  onTextChange, onSelectChange,
-            logoPhoto, onLogoDrop, onLogoRemoveUploadClick,
+            eventLogoImage, onLogoDrop, onLogoRemoveUploadClick,
             shownToWhom, canBePostedOnSocialMedia, onRadioChange,
         } = this.props;
         return (
@@ -113,11 +113,11 @@ class ItemCreateStep4EventComponent extends Component {
                             />
 
                             <BootstrapSingleImageUploadAndPreview
-                                error={errors.logoPhoto}
+                                error={errors.eventLogoImage}
                                 label="Logo"
                                 onDrop={onLogoDrop}
-                                name="logoPhoto"
-                                fileObj={logoPhoto}
+                                name="eventLogoImage"
+                                fileObj={eventLogoImage}
                                 onRemoveUploadClick={onLogoRemoveUploadClick}
                                 helpText=""
                             />
