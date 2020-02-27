@@ -43,23 +43,19 @@ class ItemCreateStep5ResourceContainer extends Component {
             // Step 3
             formatType: localStorageGetIntegerItem("nwapp-item-create-resource-formatType"),
 
-            // Step 4 - Link
+            // Step 4 - Details
             name: localStorage.getItem('nwapp-item-create-resource-name'),
             externalUrl: localStorage.getItem('nwapp-item-create-resource-externalUrl'),
             description: localStorage.getItem('nwapp-item-create-resource-description'),
+            resourceImage: localStorageGetArrayItem("nwapp-item-create-resource-base64Image"),
+            resourceFile: localStorageGetArrayItem("nwapp-item-create-resource-base64File"),
 
-            // // Step 4
-            // date: localStorageGetDateItem("nwapp-item-create-resource-date"),
-            // description: localStorage.getItem("nwapp-item-create-resource-description"),
-            // location: localStorage.getItem("nwapp-item-create-resource-location"),
-            // photos: localStorageGetArrayItem("nwapp-item-create-resource-photos"),
-
+            // All
             errors: {},
             isLoading: false
         }
 
         // Set the functions.
-        this.onTextChange = this.onTextChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
@@ -115,9 +111,7 @@ class ItemCreateStep5ResourceContainer extends Component {
     }
 
     onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -131,23 +125,22 @@ class ItemCreateStep5ResourceContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
 
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Once our state has been validated `client-side` then we will
-        // make an API request with the server to create our new production.
-        this.props.postItem(
-            this.getPostData(),
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
-        );
+        this.setState({
+            isLoading: true,
+        }, ()=>{
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.postItem(
+                this.getPostData(),
+                this.onSuccessfulSubmissionCallback,
+                this.onFailedSubmissionCallback
+            );
+        });
     }
 
 
@@ -208,7 +201,6 @@ class ItemCreateStep5ResourceContainer extends Component {
                 errors={errors}
                 returnURL={returnURL}
                 isLoading={isLoading}
-                onTextChange={this.onTextChange}
                 onClick={this.onClick}
 
                 title={title}

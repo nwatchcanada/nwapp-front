@@ -11,8 +11,10 @@ import {
 import {
     localStorageSetObjectOrArrayItem,
     localStorageGetObjectItem,
-    localStorageRemoveItemsContaining
+    localStorageRemoveItemsContaining,
+    localStorageGetArrayItem
 } from '../../../../../helpers/localStorageUtility';
+import convertBinaryFileToBase64String from "../../../../../helpers/base64Helper";
 
 
 class ItemCreateStep4ResourceImageContainer extends Component {
@@ -44,6 +46,7 @@ class ItemCreateStep4ResourceImageContainer extends Component {
             // DJANGO-REACT UPLOAD: STEP 1 OF 5.
             fileReader: new FileReader(), // 1 of 5 - (a)
             file: localStorageGetObjectItem('nwapp-item-create-resource-file'), // 1 of 4 - (b)
+            base64Image: localStorageGetArrayItem("nwapp-item-create-resource-base64Image"),
             upload_content: localStorageGetObjectItem('nwapp-item-create-resource-file-upload-content'),
             upload_filename: localStorage.getItem("nwapp-item-create-resource-file-upload-filename"),
             uploadContent: localStorageGetObjectItem('nwapp-item-create-resource-file-upload-content'),
@@ -58,6 +61,7 @@ class ItemCreateStep4ResourceImageContainer extends Component {
         this.handleFile = this.handleFile.bind(this); // 2 of 5 - (a)
         this.onDrop = this.onDrop.bind(this); // 2 of 5 - (b)
         this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+        this.onDropSaveAsBase64ContentCallback = this.onDropSaveAsBase64ContentCallback.bind(this);
     }
 
     /**
@@ -106,6 +110,20 @@ class ItemCreateStep4ResourceImageContainer extends Component {
         localStorageSetObjectOrArrayItem('nwapp-item-create-resource-'+optionKey, option);
     }
 
+    onDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        const base64Image = { // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        };
+
+        this.setState({ // Update our local state to update the GUI.
+            base64Image: base64Image
+        });
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-resource-base64Image", base64Image);
+    }
+
     /**
      *  DJANGO-REACT UPLOAD: STEP 3 OF 5.
      *
@@ -116,6 +134,14 @@ class ItemCreateStep4ResourceImageContainer extends Component {
 
         // For debuging purposes only.
         console.log("DEBUG | onDrop | file", file);
+
+        convertBinaryFileToBase64String(
+            file,
+            this.onDropSaveAsBase64ContentCallback,
+            function(error) {
+                alert(error);
+            }
+        );
 
         if (file !== undefined && file !== null) {
             const fileWithPreview = Object.assign(file, {
