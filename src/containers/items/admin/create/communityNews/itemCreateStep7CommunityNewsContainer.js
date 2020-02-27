@@ -128,13 +128,18 @@ class ItemCreateStep7CommunityNewsContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Once our state has been validated `client-side` then we will
-        // make an API request with the server to create our new production.
-        this.props.postItem(
-            this.getPostData(),
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
-        );
+        // Set state to be loading and make the submission to the API webserver.
+        this.setState({
+            isLoading: true,
+        }, ()=> {
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.postItem(
+                this.getPostData(),
+                this.onSuccessfulSubmissionCallback,
+                this.onFailedSubmissionCallback
+            );
+        });
     }
 
 
