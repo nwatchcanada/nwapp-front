@@ -332,6 +332,7 @@ import ItemCreateStep3CommunityNewsContainer from "./items/admin/create/communit
 import ItemCreateStep4CommunityNewsContainer from "./items/admin/create/communityNews/itemCreateStep4CommunityNewsContainer";
 import ItemCreateStep5CommunityNewsContainer from "./items/admin/create/communityNews/itemCreateStep5CommunityNewsContainer";
 import ItemCreateStep6CommunityNewsContainer from "./items/admin/create/communityNews/itemCreateStep6CommunityNewsContainer";
+import ItemCreateStep7CommunityNewsContainer from "./items/admin/create/communityNews/itemCreateStep7CommunityNewsContainer";
 import ItemCreateStep2VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep2VolunteerContainer";
 import ItemCreateStep3VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep3VolunteerContainer";
 import ItemCreateStep4VolunteerContainer from "./items/admin/create/volunteer/itemCreateStep4VolunteerContainer";
@@ -767,6 +768,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/add/step-4-community-news" exact component={requiresAuth(ItemCreateStep4CommunityNewsContainer)} />
                                 <Route path="/admin/item/add/step-5-community-news" exact component={requiresAuth(ItemCreateStep5CommunityNewsContainer)} />
                                 <Route path="/admin/item/add/step-6-community-news" exact component={requiresAuth(ItemCreateStep6CommunityNewsContainer)} />
+                                <Route path="/admin/item/add/step-7-community-news" exact component={requiresAuth(ItemCreateStep7CommunityNewsContainer)} />
                                 <Route path="/admin/item/add/step-2-volunteer" exact component={requiresAuth(ItemCreateStep2VolunteerContainer)} />
                                 <Route path="/admin/item/add/step-3-volunteer" exact component={requiresAuth(ItemCreateStep3VolunteerContainer)} />
                                 <Route path="/admin/item/add/step-4-volunteer" exact component={requiresAuth(ItemCreateStep4VolunteerContainer)} />

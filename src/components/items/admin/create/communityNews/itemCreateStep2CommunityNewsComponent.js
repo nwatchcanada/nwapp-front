@@ -64,6 +64,9 @@ class ItemCreateStep2CommunityNewsComponent extends Component {
                         <div id="step-5" className="st-grey">
                             <span className="num">5.</span><span className="">Link</span>
                         </div>
+                        <div id="step-6" className="st-grey">
+                            <span className="num">6.</span><span className="">Photo(s)</span>
+                        </div>
                     </div>
                 </div>
 
