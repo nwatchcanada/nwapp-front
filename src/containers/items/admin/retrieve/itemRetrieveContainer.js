@@ -37,6 +37,8 @@ class ItemRetrieveContainer extends Component {
 
         this.onClick = this.onClick.bind(this);
         this.onArchiveClick = this.onArchiveClick.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
     }
 
     /**
