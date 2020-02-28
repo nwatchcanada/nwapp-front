@@ -52,22 +52,6 @@ class ItemCreateStep6EventContainer extends Component {
             shownToWhom: localStorageGetIntegerItem("nwapp-item-create-event-shownToWhom"),
             canBePostedOnSocialMedia: localStorageGetIntegerItem("nwapp-item-create-event-canBePostedOnSocialMedia"),
 
-            // // Concern Type
-            // concernTitle: localStorage.getItem("nwapp-item-create-concern-title"),
-            // concernDescription: localStorage.getItem("nwapp-item-create-concern-description"),
-            // concernLocation: localStorage.getItem("nwapp-item-create-concern-location"),
-            // concernPhotos: localStorageGetArrayItem("nwapp-item-create-concern-photos"),
-            //
-            // // Incident
-            // title: localStorage.getItem("nwapp-item-create-incident-title"),
-            // date: localStorageGetDateItem("nwapp-item-create-incident-date"),
-            // description: localStorage.getItem("nwapp-item-create-incident-description"),
-            // location: localStorage.getItem("nwapp-item-create-incident-location"),
-            // photos: localStorageGetArrayItem("nwapp-item-create-incident-photos"),
-            //
-            // // Information
-            // informationDescription: localStorage.getItem("nwapp-item-create-information-description"),
-
             errors: {},
             isLoading: false
         }
@@ -182,7 +166,7 @@ class ItemCreateStep6EventContainer extends Component {
 
     render() {
         const {
-            typeOf, errors,
+            typeOf, errors, isLoading,
 
             // Concern Type
             concernTitle,
@@ -214,6 +198,7 @@ class ItemCreateStep6EventContainer extends Component {
             <ItemCreateStep6EventComponent
                 typeOf={typeOf}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onClick={this.onClick}
 
