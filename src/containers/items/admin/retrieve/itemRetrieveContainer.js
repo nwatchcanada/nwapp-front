@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import ItemRetrieveComponent from "../../../../components/items/admin/retrieve/itemRetrieveComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import { pullItem } from '../../../../actions/itemActions';
 import {
-   INCIDENT_ITEM_TYPE_OF,
-   EVENT_ITEM_TYPE_OF,
-   CONCERN_ITEM_TYPE_OF,
-   INFORMATION_ITEM_TYPE_OF
-} from "../../../../constants/api";
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
 
 
 class ItemRetrieveContainer extends Component {
@@ -24,13 +23,18 @@ class ItemRetrieveContainer extends Component {
         // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const item = localStorageGetObjectItem("nwapp-admin-retrieve-item-"+slug.toString() );
+        const isLoading = isEmpty(item);
+
         // Update state.
         this.state = {
             slug: slug,
-            itemData: {}
+            item: item,
+            isLoading: isLoading,
         }
 
-        this.onBack = this.onBack.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onArchiveClick = this.onArchiveClick.bind(this);
     }
@@ -42,91 +46,11 @@ class ItemRetrieveContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        //TODO: REPLACE THIS CODE WITH API FETCHING CODE.
-        const itemsArray = [{
-            'typeOf': INCIDENT_ITEM_TYPE_OF,
-            'icon': 'fire',
-            'slug': 'argyle',
-            'prettyIncidentTypeOf': 'Assault',
-            'notifiedAuthoritiesLabel': 'Yes',
-            'acceptAuthorityCooperationLabel': 'Yes',
-            'number': 1,
-            'name': 'Argyle',
-            'description': 'This is the description for argyle.',
-            'location': 'London',
-            'photos': [
-                {
-                    'path': 'Test File #1',
-                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
-                },{
-                    'path': 'Test File #2',
-                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
-                }
-            ],
-            'absoluteUrl': '/item/argyle'
-        },{
-            'typeOf': EVENT_ITEM_TYPE_OF,
-            'icon': 'glass-cheers',
-            'slug': 'byron',
-            'number': 2,
-            'name': 'Byron',
-            'description': 'This is the description for byron.',
-            'eventPrettyEventTypeOf': "Garage Sale",
-            'logoPhoto': {
-                'path': 'Test File #1',
-                'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
-            },
-            'galleryPhotos': [
-                {
-                    'path': 'Test File #1',
-                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
-                },{
-                    'path': 'Test File #2',
-                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
-                }
-            ],
-            'shownToWhom': 1,
-            'shownToWhomLabel': "General Public",
-            'canBePostedOnSocialMedia': 1,
-            'canBePostedOnSocialMediaLabel': "Yes",
-            'absoluteUrl': '/item/byron'
-        },{
-            'typeOf': CONCERN_ITEM_TYPE_OF,
-            'icon': 'exclamation-circle',
-            'slug': 'carling',
-            'number': 3,
-            'name': 'Carling',
-            'description': 'This is the description for carling.',
-            'location': 'London',
-            'photos': [
-                {
-                    'path': 'Test File #1',
-                    'preview': 'http://www.nwapp.ca/img/nwl-logo.png',
-                },{
-                    'path': 'Test File #2',
-                    'preview': 'https://nwapp.ca/img/nwl-compressed-logo.png',
-                }
-            ],
-            'absoluteUrl': '/item/carling'
-        },{
-            'typeOf': INFORMATION_ITEM_TYPE_OF,
-            'icon': 'info-circle',
-            'slug': 'darlyn',
-            'number': 4,
-            'name': null,
-            'description': 'What is the contact information for my area coordinator, I need to speak with her, this is in regards to a private matter.',
-            'absoluteUrl': '/item/darlyn'
-        }];
-        for (let i = 0; i < itemsArray.length; i++) {
-            const itemData = itemsArray[i];
-            if (itemData['slug'] === this.state.slug) {
-                this.setState({
-                    'itemData': itemData
-                });
-                console.log("componentDidMount | itemData:", itemData);
-            }
-        }
+        this.props.pullItem(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -146,39 +70,28 @@ class ItemRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
-    }
+     onSuccessCallback(response) {
+         console.log("onSuccessCallback |", response);
+         this.setState({ isLoading: false, item: response, });
 
-    onFailedSubmissionCallback(errors) {
-        console.log(errors);
-    }
+         // The following code will save the object to the browser's local
+         // storage to be retrieved later more quickly.
+         localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-item-"+this.state.slug.toString(), response);
+     }
+
+     onFailureCallback(errors) {
+         console.log("onFailureCallback | errors:", errors);
+     }
 
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
 
-    onBack(e) {
-        // Prevent the default HTML form submit code to run on the browser side.
-        e.preventDefault();
-        this.props.history.push("/admin/items/");
-    }
-
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        if (this.state.itemData.typeOf === INCIDENT_ITEM_TYPE_OF) {
-            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-incidence");
-        } else if (this.state.itemData.typeOf === EVENT_ITEM_TYPE_OF) {
-            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-event");
-        } else if (this.state.itemData.typeOf === CONCERN_ITEM_TYPE_OF) {
-            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-concern");
-        }  else if (this.state.itemData.typeOf === INFORMATION_ITEM_TYPE_OF) {
-            this.props.history.push("/admin/item/"+this.state.itemData.slug+"/update-info");
-        } else {
-            alert("ERROR: DID NOT FIND");
-        }
+
     }
 
     onArchiveClick(e) {
@@ -193,14 +106,14 @@ class ItemRetrieveContainer extends Component {
      */
 
     render() {
-
+        const { slug, isLoading } = this.state;
+        const item = isEmpty(this.state.item) ? {} : this.state.item;
         return (
             <ItemRetrieveComponent
-                itemData={this.state.itemData}
-                onBack={this.onBack}
-                onClick={this.onClick}
-                onArchiveClick={this.onArchiveClick}
+                slug={slug}
+                item={item}
                 flashMessage={this.props.flashMessage}
+                isLoading={isLoading}
             />
         );
     }
@@ -209,6 +122,7 @@ class ItemRetrieveContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        item: store.itemDetailState,
         flashMessage: store.flashMessageState,
     };
 }
@@ -217,7 +131,10 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullItem: (slug, successCallback, failedCallback) => {
+            dispatch(pullItem(slug, successCallback, failedCallback))
+        },
     }
 }
 

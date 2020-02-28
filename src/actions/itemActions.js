@@ -186,7 +186,7 @@ export function postItem(postData, onSuccessCallback, onFailureCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullItemDetail(slug, onSuccessCallback, onFailureCallback) {
+export function pullItem(slug, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
@@ -196,7 +196,7 @@ export function pullItemDetail(slug, onSuccessCallback, onFailureCallback) {
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_ITEM_DETAIL_API_ENDPOINT+slug;
+        const aURL = WORKERY_ITEM_DETAIL_API_ENDPOINT.replace("<slug>", slug);
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -209,7 +209,7 @@ export function pullItemDetail(slug, onSuccessCallback, onFailureCallback) {
             item['isAPIRequestRunning'] = false;
             item['errors'] = {};
 
-            console.log("pullItemDetail | Success:", item); // For debugging purposes.
+            console.log("pullItem | Success:", item); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user item for the application.
@@ -233,7 +233,7 @@ export function pullItemDetail(slug, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullItemDetail | error:", errors); // For debuggin purposes only.
+                console.log("pullItem | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(

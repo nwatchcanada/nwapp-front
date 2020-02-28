@@ -14,7 +14,7 @@ import {
 
 export default class ItemRetrieveComponent extends Component {
     render() {
-        const { itemData, onClick, onBack, onArchiveClick, flashMessage, slug } = this.props;
+        const { item, onClick, onArchiveClick, flashMessage, slug } = this.props;
 
         // COPIED FROM: /components/boostrap/bootstrapMultipleImageUploadAndPreview.js
         const thumb = {
@@ -34,6 +34,8 @@ export default class ItemRetrieveComponent extends Component {
             height: '100%'
         };
 
+        console.log(item);
+
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -45,14 +47,14 @@ export default class ItemRetrieveComponent extends Component {
                             <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-map-pin"></i>&nbsp;Argyle
+                            <i className="fas fa-map-pin"></i>&nbsp;{item && item.title}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-map-pin"></i>&nbsp;Argyle</h1>
+                <h1><i className="fas fa-map-pin"></i>&nbsp;{item && item.title}</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -81,55 +83,56 @@ export default class ItemRetrieveComponent extends Component {
                                         </button>
                                     </th>
                                 </tr>
+{/*
                                 <tr>
                                     <th scope="row" className="bg-light">Type</th>
                                     <td>
-                                        <PrettyIcon typeOf={itemData.typeOf} />&nbsp;<PrettyTypeOf typeOf={itemData.typeOf} />
+                                        <PrettyIcon typeOf={item.typeOf} />&nbsp;<PrettyTypeOf typeOf={item.typeOf} />
                                     </td>
                                 </tr>
-                                {itemData.name &&
+                                {item.name &&
                                     <tr>
                                         <th scope="row" className="bg-light">Name</th>
-                                        <td>{itemData.name}</td>
+                                        <td>{item.name}</td>
                                     </tr>
                                 }
-                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                {item.typeOf === EVENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Event Type</th>
-                                        <td>{itemData.eventPrettyEventTypeOf}</td>
+                                        <td>{item.eventPrettyEventTypeOf}</td>
                                     </tr>
                                 }
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{itemData.description}</td>
+                                    <td>{item.description}</td>
                                 </tr>
-                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                {item.typeOf === EVENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Date</th>
                                         <td>
-                                            <Moment format="YYYY/MM/DD">{itemData.date}</Moment>
+                                            <Moment format="YYYY/MM/DD">{item.date}</Moment>
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                {item.typeOf === EVENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Logo Photo</th>
                                         <td>
                                             <div style={thumb}>
                                                 <img
-                                                    src={itemData.logoPhoto.preview}
+                                                    src={item.logoPhoto.preview}
                                                     style={img}
-                                                    alt={itemData.logoPhoto.name}
+                                                    alt={item.logoPhoto.name}
                                                 />
                                             </div>
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                {item.typeOf === EVENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Gallery Photos</th>
                                         <td>
-                                            {itemData.galleryPhotos && itemData.galleryPhotos.map(
+                                            {item.galleryPhotos && item.galleryPhotos.map(
                                                 (photoObj, i) => <div key={i}>
                                                     <div style={thumb}>
                                                         <img
@@ -144,61 +147,61 @@ export default class ItemRetrieveComponent extends Component {
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                {item.typeOf === EVENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">This event should be shown to whom?</th>
-                                        <td>{itemData.shownToWhomLabel}</td>
+                                        <td>{item.shownToWhomLabel}</td>
                                     </tr>
                                 }
-                                {itemData.typeOf === EVENT_ITEM_TYPE_OF &&
+                                {item.typeOf === EVENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">This event can be shared by others on social media?</th>
-                                        <td>{itemData.canBePostedOnSocialMediaLabel}</td>
+                                        <td>{item.canBePostedOnSocialMediaLabel}</td>
                                     </tr>
                                 }
-                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Category</th>
                                         <td>
-                                            {itemData.prettyIncidentTypeOf}
+                                            {item.prettyIncidentTypeOf}
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Notified Authorities</th>
                                         <td>
-                                            {itemData.notifiedAuthoritiesLabel}
+                                            {item.notifiedAuthoritiesLabel}
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Accept Authority Cooperation</th>
                                         <td>
-                                            {itemData.acceptAuthorityCooperationLabel}
+                                            {item.acceptAuthorityCooperationLabel}
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Date</th>
                                         <td>
-                                            <Moment format="YYYY/MM/DD">{itemData.date}</Moment>
+                                            <Moment format="YYYY/MM/DD">{item.date}</Moment>
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Location</th>
-                                        <td>{itemData.location}</td>
+                                        <td>{item.location}</td>
                                     </tr>
                                 }
-                                {itemData.typeOf === INCIDENT_ITEM_TYPE_OF &&
+                                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Photos</th>
                                         <td>
-                                            {itemData.photos && itemData.photos.map(
+                                            {item.photos && item.photos.map(
                                                 (photoObj, i) => <div key={i}>
                                                     <div style={thumb}>
                                                         <img
@@ -213,17 +216,17 @@ export default class ItemRetrieveComponent extends Component {
                                         </td>
                                     </tr>
                                 }
-                                {itemData.typeOf === CONCERN_ITEM_TYPE_OF &&
+                                {item.typeOf === CONCERN_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Location</th>
-                                        <td>{itemData.location}</td>
+                                        <td>{item.location}</td>
                                     </tr>
                                 }
-                                {itemData.typeOf === CONCERN_ITEM_TYPE_OF &&
+                                {item.typeOf === CONCERN_ITEM_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Photos</th>
                                         <td>
-                                            {itemData.photos && itemData.photos.map(
+                                            {item.photos && item.photos.map(
                                                 (photoObj, i) => <div key={i}>
                                                     <div style={thumb}>
                                                         <img
@@ -238,6 +241,7 @@ export default class ItemRetrieveComponent extends Component {
                                         </td>
                                     </tr>
                                 }
+                                */}
                             </tbody>
                         </table>
 
@@ -246,9 +250,9 @@ export default class ItemRetrieveComponent extends Component {
                             <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
                                 <i className="fas fa-edit"></i>&nbsp;Edit
                             </button>
-                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onBack}>
+                            <Link className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" to="/admin/items">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </button>
+                            </Link>
                         </div>
 
                     </div>
