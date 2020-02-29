@@ -68,6 +68,7 @@ class ItemCreateStep7CommunityNewsContainer extends Component {
 
         // const dateMoment = moment(this.state.date);
         // postData.date = dateMoment.format("YYYY-MM-DD")
+        postData.whoNewsFor = parseInt(this.state.whoNewsFor);
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);

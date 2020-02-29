@@ -5,13 +5,14 @@ import Moment from 'react-moment';
 
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import {
-   INCIDENT_ITEM_TYPE_OF, EVENT_ITEM_TYPE_OF, CONCERN_ITEM_TYPE_OF, INFORMATION_ITEM_TYPE_OF
+   INCIDENT_ITEM_TYPE_OF, EVENT_ITEM_TYPE_OF, CONCERN_ITEM_TYPE_OF, INFORMATION_ITEM_TYPE_OF,
+   COMMUNITY_NEWS_ITEM_TYPE_OF
 } from "../../../../constants/api";
 import ItemIncidentRetrieveComponent from "./itemIncidentRetrieveComponent";
 import ItemEventRetrieveComponent from "./itemEventRetrieveComponent";
 import ItemConcernRetrieveComponent from "./itemConcernRetrieveComponent";
 import ItemInformationRetrieveComponent from "./itemInformationRetrieveComponent";
-
+import ItemCommunityNewsRetrieveComponent from "./itemCommunityNewsRetrieveComponent";
 
 export default class ItemRetrieveComponent extends Component {
     render() {
@@ -27,14 +28,13 @@ export default class ItemRetrieveComponent extends Component {
                             <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-map-pin"></i>&nbsp;Information Item Details
-                        </li>
+                            <i className="fas fa-map-pin"></i>&nbsp;Details</li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-map-pin"></i>&nbsp;Information Item Details</h1>
+                <h1><i className="fas fa-map-pin"></i>&nbsp;Details</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -65,6 +65,9 @@ export default class ItemRetrieveComponent extends Component {
                             }
                             {item && item.typeOfCategory === INFORMATION_ITEM_TYPE_OF &&
                                 <ItemInformationRetrieveComponent item={item} />
+                            }
+                            {item && item.typeOfCategory === COMMUNITY_NEWS_ITEM_TYPE_OF &&
+                                <ItemCommunityNewsRetrieveComponent item={item} />
                             }
                         </table>
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">

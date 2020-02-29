@@ -740,17 +740,17 @@ export const WHO_NEWS_FOR_CHOICES = [
     {
         id: 'whoNewsFor-choice-1',
         name: "whoNewsFor",
-        value: 1,
+        value: 2,
         label: "My City"
     },{
         id: 'whoNewsFor-choice-2',
         name: "whoNewsFor",
-        value: 2,
+        value: 3,
         label: "My District"
     },{
         id: 'whoNewsFor-choice-3',
         name: "whoNewsFor",
-        value: 3,
+        value: 4,
         label: "My Watch"
     }
 ];
