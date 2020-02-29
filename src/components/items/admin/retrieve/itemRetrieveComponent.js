@@ -9,13 +9,12 @@ import {
 } from "../../../../constants/api";
 import ItemIncidentRetrieveComponent from "./itemIncidentRetrieveComponent";
 import ItemEventRetrieveComponent from "./itemEventRetrieveComponent";
+import ItemConcernRetrieveComponent from "./itemConcernRetrieveComponent";
+
 
 export default class ItemRetrieveComponent extends Component {
     render() {
         const { item, onClick, onArchiveClick, flashMessage, slug } = this.props;
-
-
-
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -59,6 +58,9 @@ export default class ItemRetrieveComponent extends Component {
                             }
                             {item && item.typeOfCategory === EVENT_ITEM_TYPE_OF &&
                                 <ItemEventRetrieveComponent item={item} />
+                            }
+                            {item && item.typeOfCategory === CONCERN_ITEM_TYPE_OF &&
+                                <ItemConcernRetrieveComponent item={item} />
                             }
                         </table>
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
