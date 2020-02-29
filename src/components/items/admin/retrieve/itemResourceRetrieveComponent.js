@@ -65,6 +65,12 @@ export default function ItemResourceRetrieveComponent({ item }) {
                 <th scope="row" className="bg-light">Description</th>
                 <td>{item.description}</td>
             </tr>
+            <tr>
+                <th scope="row" className="bg-light">External Web Address</th>
+                <td>
+                    <a href={item && item.externalUrl} target="_blank">View&nbsp;<i className="fas fa-external-link-alt"></i></a>
+                </td>
+            </tr>
         </tbody>
     );
 }
