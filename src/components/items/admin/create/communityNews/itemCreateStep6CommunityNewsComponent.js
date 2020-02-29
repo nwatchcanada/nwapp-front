@@ -52,7 +52,9 @@ class ItemCreateStep6CommunityNewsComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Link</span>
+                            <Link to="/admin/item/add/step-5-community-news">
+                                <span className="num">5.</span><span className="">Link</span>
+                            </Link>
                         </div>
                         <div id="step-6" className="st-grey active">
                             <strong>
@@ -83,7 +85,7 @@ class ItemCreateStep6CommunityNewsComponent extends Component {
                                 <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to="/admin/item/add/step-4-community-news" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to="/admin/item/add/step-5-community-news" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>

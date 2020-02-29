@@ -40,7 +40,7 @@ class ItemCreateStep7CommunityNewsContainer extends Component {
             description: localStorage.getItem("nwapp-item-create-community-news-description"),
 
             // Step 5
-            externalURL: localStorage.getItem("nwapp-item-create-community-news-externalURL"),
+            externalUrl: localStorage.getItem("nwapp-item-create-community-news-externalURL"),
 
             // Step 6
             photos: localStorageGetArrayItem("nwapp-item-create-community-news-base64Photos"),
