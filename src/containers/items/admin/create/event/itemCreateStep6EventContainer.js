@@ -71,24 +71,26 @@ class ItemCreateStep6EventContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        if (this.state.typeOf === EVENT_ITEM_TYPE_OF) {
-            postData.category = this.state.eventCategory;
-            postData.categoryOption = this.state.eventCategoryOption;
-            postData.eventCategoryOther = this.state.eventCategoryOther;
-            delete postData["eventCategory"];
-            delete postData["eventCategoryOption"];
-            delete postData["eventCategoryOther"];
+        postData.category = this.state.eventCategory;
+        postData.categoryOption = this.state.eventCategoryOption;
+        postData.eventCategoryOther = this.state.eventCategoryOther;
+        delete postData["eventCategory"];
+        delete postData["eventCategoryOption"];
+        delete postData["eventCategoryOther"];
 
-            const startDateTimeMoment = moment(this.state.startDateTime);
-            postData.startDateTime = startDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
+        const startDateTimeMoment = moment(this.state.startDateTime);
+        postData.startDateTime = startDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
 
-            const finishDateTimeMoment = moment(this.state.finishDateTime);
-            postData.finishDateTime = finishDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
+        const finishDateTimeMoment = moment(this.state.finishDateTime);
+        postData.finishDateTime = finishDateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
 
-            postData.title = this.state.eventTitle;
-            postData.description = this.state.eventDescription;
-            postData.externalURL = this.state.eventExternalURL;
-        }
+        postData.title = this.state.eventTitle;
+        postData.description = this.state.eventDescription;
+        postData.externalUrl = this.state.eventExternalURL;
+
+        delete postData["eventTitle"];
+        delete postData["eventDescription"];
+        delete postData["eventExternalURL"];
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
