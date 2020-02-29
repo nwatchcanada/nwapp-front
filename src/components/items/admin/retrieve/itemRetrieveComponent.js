@@ -10,6 +10,7 @@ import {
 import ItemIncidentRetrieveComponent from "./itemIncidentRetrieveComponent";
 import ItemEventRetrieveComponent from "./itemEventRetrieveComponent";
 import ItemConcernRetrieveComponent from "./itemConcernRetrieveComponent";
+import ItemInformationRetrieveComponent from "./itemInformationRetrieveComponent";
 
 
 export default class ItemRetrieveComponent extends Component {
@@ -26,14 +27,14 @@ export default class ItemRetrieveComponent extends Component {
                             <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-map-pin"></i>&nbsp;{item && item.title}
+                            <i className="fas fa-map-pin"></i>&nbsp;Information Item Details
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-map-pin"></i>&nbsp;{item && item.title}</h1>
+                <h1><i className="fas fa-map-pin"></i>&nbsp;Information Item Details</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -61,6 +62,9 @@ export default class ItemRetrieveComponent extends Component {
                             }
                             {item && item.typeOfCategory === CONCERN_ITEM_TYPE_OF &&
                                 <ItemConcernRetrieveComponent item={item} />
+                            }
+                            {item && item.typeOfCategory === INFORMATION_ITEM_TYPE_OF &&
+                                <ItemInformationRetrieveComponent item={item} />
                             }
                         </table>
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">

@@ -44,6 +44,12 @@ export default function ItemConcernRetrieveComponent({ item }) {
                     <ItemIconHelper typeOf={item && item.typeOfCategory} />&nbsp;<ItemTypeOfLabelHelper typeOf={item && item.typeOfCategory} />
                 </td>
             </tr>
+            <tr>
+                <th scope="row" className="bg-light">Category</th>
+                <td>
+                    {item && item.typeOfText}
+                </td>
+            </tr>
 
             {/* AUTHORITIES FORM */}
 {/*

@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep4InformationComponent from "../../../../../components/items/admin/create/information/itemCreateStep4InformationComponent";
+import { localStorageGetIntegerItem } from '../../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateInformationInput } from "../../../../../validators/itemValidator";
+import { postItem } from "../../../../../actions/itemActions";
 // INFORMATION_ITEM_TYPE_OF
 
 
@@ -17,6 +19,8 @@ class ItemCreateStep4InformationContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            typeOf: localStorageGetIntegerItem("nwapp-item-create-typeOf"),
+            category:localStorage.getItem("nwapp-item-create-information-category"),
             description: localStorage.getItem("nwapp-item-create-information-description"),
             errors: {},
             isLoading: false
@@ -25,6 +29,19 @@ class ItemCreateStep4InformationContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -77,17 +94,17 @@ class ItemCreateStep4InformationContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // Perform client-side validation.
-        const { errors, isValid } = validateInformationInput(this.state);
-
-        // CASE 1 OF 2: Validation passed successfully.
-        if (isValid) {
-            this.onSuccessfulSubmissionCallback();
-
-        // CASE 2 OF 2: Validation was a failure.
-        } else {
-            this.onFailedSubmissionCallback(errors);
-        }
+        this.setState({
+            isLoading: true,
+        }, ()=> {
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.postItem(
+                this.getPostData(),
+                this.onSuccessfulSubmissionCallback,
+                this.onFailedSubmissionCallback
+            );
+        });
     }
 
 
@@ -118,7 +135,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
-        }
+        },
+        postItem: (postData, successCallback, failedCallback) => {
+            dispatch(postItem(postData, successCallback, failedCallback))
+        },
     }
 }
 
