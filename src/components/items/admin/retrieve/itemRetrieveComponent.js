@@ -8,13 +8,13 @@ import {
    INCIDENT_ITEM_TYPE_OF, EVENT_ITEM_TYPE_OF, CONCERN_ITEM_TYPE_OF, INFORMATION_ITEM_TYPE_OF
 } from "../../../../constants/api";
 import ItemIncidentRetrieveComponent from "./itemIncidentRetrieveComponent";
-
+import ItemEventRetrieveComponent from "./itemEventRetrieveComponent";
 
 export default class ItemRetrieveComponent extends Component {
     render() {
         const { item, onClick, onArchiveClick, flashMessage, slug } = this.props;
 
-        
+
 
         return (
             <div>
@@ -56,6 +56,9 @@ export default class ItemRetrieveComponent extends Component {
                         <table className="table table-bordered custom-cell-w">
                             {item && item.typeOfCategory === INCIDENT_ITEM_TYPE_OF &&
                                 <ItemIncidentRetrieveComponent item={item} />
+                            }
+                            {item && item.typeOfCategory === EVENT_ITEM_TYPE_OF &&
+                                <ItemEventRetrieveComponent item={item} />
                             }
                         </table>
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
