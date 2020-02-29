@@ -2,7 +2,9 @@ import React from "react";
 import Moment from 'react-moment';
 // import 'moment-timezone';
 
-import { ItemIconHelper, ItemTypeOfLabelHelper } from "../../../../constants/helper";
+import {
+    ItemIconHelper, ItemTypeOfLabelHelper, ItemShownToWhomLabelHelper
+} from "../../../../constants/helper";
 
 
 export default function ItemEventRetrieveComponent({ item }) {
@@ -56,15 +58,24 @@ export default function ItemEventRetrieveComponent({ item }) {
                 </th>
             </tr>
             <tr>
-                <th scope="row" className="bg-light">TODO</th>
+                <th scope="row" className="bg-light">When will the event happen?</th>
                 <td>
-
+                    <Moment format="YYYY/MM/DD">{item.startAt}</Moment>
                 </td>
             </tr>
             <tr>
-                <th scope="row" className="bg-light">TODO</th>
+                <th scope="row" className="bg-light">When will the event finish?</th>
                 <td>
-
+                    <Moment format="YYYY/MM/DD">{item.finishAt}</Moment>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" className="bg-light">Is all day event?</th>
+                <td>
+                    {item && item.isAllDayEvent
+                        ? "Yes"
+                        : "No"
+                    }
                 </td>
             </tr>
 
@@ -86,23 +97,31 @@ export default function ItemEventRetrieveComponent({ item }) {
             </tr>
             <tr>
                 <th scope="row" className="bg-light">Description</th>
-                <td>{item.description}</td>
+                <td>{item && item.description}</td>
             </tr>
             <tr>
                 <th scope="row" className="bg-light">External Web Address</th>
-                <td>{item.externalUrl}</td>
+                <td>{item && item.externalUrl}</td>
             </tr>
             <tr>
-                <th scope="row" className="bg-light">Date</th>
+                <th scope="row" className="bg-light">Logo</th>
                 <td>
-                    <Moment format="YYYY/MM/DD">{item.date}</Moment>
+                    <img src={item && item.eventLogoImage && item.eventLogoImage.fileUrl} alt="Logo Image" />
                 </td>
             </tr>
-
-            {/*<tr>
-                <th scope="row" className="bg-light">Location</th>
-                <td>{item.location}</td>
-            </tr>*/}
+            <tr>
+                <th scope="row" className="bg-light">This event should be shown to whom?</th>
+                <td><ItemShownToWhomLabelHelper shownToWhomId={item && item.shownToWhom} /></td>
+            </tr>
+            <tr>
+                <th scope="row" className="bg-light">This event can be shared by others on social media?</th>
+                <td>
+                    {item && item.canBePostedOnSocialMedia
+                        ? "Yes"
+                        : "No"
+                    }
+                </td>
+            </tr>
 
             {/* PHOTOS */}
 

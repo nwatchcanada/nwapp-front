@@ -5,7 +5,8 @@ import {
    INCIDENT_ITEM_TYPE_OF,
    EVENT_ITEM_TYPE_OF,
    CONCERN_ITEM_TYPE_OF,
-   INFORMATION_ITEM_TYPE_OF
+   INFORMATION_ITEM_TYPE_OF,
+   ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES
 } from "./api";
 
 
@@ -36,4 +37,15 @@ export const ItemIconHelper = ({ typeOf }) => {
     } else {
         return null;
     }
+}
+
+
+export const ItemShownToWhomLabelHelper = ({ shownToWhomId }) => {
+    let option;
+    for (option of ITEM_EVENT_SHOULD_BE_SHOWN_TO_CHOICES) {
+        if (option.value === parseInt(shownToWhomId)) {
+            return option.label;
+        }
+    }
+    return null;
 }
