@@ -40,7 +40,7 @@ class ItemCreateStep7VolunteerContainer extends Component {
             description: localStorage.getItem("nwapp-item-create-volunteer-description"),
 
             // Step 5
-            externalURL: localStorage.getItem("nwapp-item-create-volunteer-externalURL"),
+            externalUrl: localStorage.getItem("nwapp-item-create-volunteer-externalURL"),
 
             // Step 6
             photos: localStorageGetArrayItem("nwapp-item-create-volunteer-base64Photos"),

@@ -79,7 +79,7 @@ class ItemCreateStep4VolunteerComponent extends Component {
                                 name="description"
                                 borderColour="border-primary"
                                 label="Describe the volunteer post: (*)"
-                                placeholder="Please describe your concern"
+                                placeholder="Please describe your volunteer opportunity."
                                 rows="5"
                                 value={description}
                                 helpText="250 characters"

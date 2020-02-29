@@ -6,13 +6,15 @@ import Moment from 'react-moment';
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import {
    INCIDENT_ITEM_TYPE_OF, EVENT_ITEM_TYPE_OF, CONCERN_ITEM_TYPE_OF, INFORMATION_ITEM_TYPE_OF,
-   COMMUNITY_NEWS_ITEM_TYPE_OF
+   COMMUNITY_NEWS_ITEM_TYPE_OF, VOLUNTEER_ITEM_TYPE_OF
 } from "../../../../constants/api";
 import ItemIncidentRetrieveComponent from "./itemIncidentRetrieveComponent";
 import ItemEventRetrieveComponent from "./itemEventRetrieveComponent";
 import ItemConcernRetrieveComponent from "./itemConcernRetrieveComponent";
 import ItemInformationRetrieveComponent from "./itemInformationRetrieveComponent";
 import ItemCommunityNewsRetrieveComponent from "./itemCommunityNewsRetrieveComponent";
+import ItemVolunteerRetrieveComponent from "./itemVolunteerRetrieveComponent";
+
 
 export default class ItemRetrieveComponent extends Component {
     render() {
@@ -68,6 +70,9 @@ export default class ItemRetrieveComponent extends Component {
                             }
                             {item && item.typeOfCategory === COMMUNITY_NEWS_ITEM_TYPE_OF &&
                                 <ItemCommunityNewsRetrieveComponent item={item} />
+                            }
+                            {item && item.typeOfCategory === VOLUNTEER_ITEM_TYPE_OF &&
+                                <ItemVolunteerRetrieveComponent item={item} />
                             }
                         </table>
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
