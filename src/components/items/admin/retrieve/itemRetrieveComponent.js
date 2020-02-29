@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import {
    INCIDENT_ITEM_TYPE_OF, EVENT_ITEM_TYPE_OF, CONCERN_ITEM_TYPE_OF, INFORMATION_ITEM_TYPE_OF,
-   COMMUNITY_NEWS_ITEM_TYPE_OF, VOLUNTEER_ITEM_TYPE_OF
+   COMMUNITY_NEWS_ITEM_TYPE_OF, VOLUNTEER_ITEM_TYPE_OF, RESOURCE_ITEM_TYPE_OF
 } from "../../../../constants/api";
 import ItemIncidentRetrieveComponent from "./itemIncidentRetrieveComponent";
 import ItemEventRetrieveComponent from "./itemEventRetrieveComponent";
@@ -14,6 +14,7 @@ import ItemConcernRetrieveComponent from "./itemConcernRetrieveComponent";
 import ItemInformationRetrieveComponent from "./itemInformationRetrieveComponent";
 import ItemCommunityNewsRetrieveComponent from "./itemCommunityNewsRetrieveComponent";
 import ItemVolunteerRetrieveComponent from "./itemVolunteerRetrieveComponent";
+import ItemResourceRetrieveComponent from "./itemResourceRetrieveComponent";
 
 
 export default class ItemRetrieveComponent extends Component {
@@ -74,6 +75,9 @@ export default class ItemRetrieveComponent extends Component {
                             {item && item.typeOfCategory === VOLUNTEER_ITEM_TYPE_OF &&
                                 <ItemVolunteerRetrieveComponent item={item} />
                             }
+                            {item && item.typeOfCategory === RESOURCE_ITEM_TYPE_OF &&
+                                <ItemResourceRetrieveComponent item={item} />
+                            }
                         </table>
                         <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
                             {/* <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
@@ -90,138 +94,3 @@ export default class ItemRetrieveComponent extends Component {
         );
     }
 }
-
-
-{/*
-                <tr>
-                    <th scope="row" className="bg-light">Type</th>
-                    <td>
-                        <PrettyIcon typeOf={item.typeOf} />&nbsp;<PrettyTypeOf typeOf={item.typeOf} />
-                    </td>
-                </tr>
-                {item.name &&
-                    <tr>
-                        <th scope="row" className="bg-light">Name</th>
-                        <td>{item.name}</td>
-                    </tr>
-                }
-                {item.typeOf === EVENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Event Type</th>
-                        <td>{item.eventPrettyEventTypeOf}</td>
-                    </tr>
-                }
-
-                {item.typeOf === EVENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Date</th>
-                        <td>
-                            <Moment format="YYYY/MM/DD">{item.date}</Moment>
-                        </td>
-                    </tr>
-                }
-                {item.typeOf === EVENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Logo Photo</th>
-                        <td>
-                            <div style={thumb}>
-                                <img
-                                    src={item.logoPhoto.preview}
-                                    style={img}
-                                    alt={item.logoPhoto.name}
-                                />
-                            </div>
-                        </td>
-                    </tr>
-                }
-                {item.typeOf === EVENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Gallery Photos</th>
-                        <td>
-                            {item.galleryPhotos && item.galleryPhotos.map(
-                                (photoObj, i) => <div key={i}>
-                                    <div style={thumb}>
-                                        <img
-                                            src={photoObj.preview}
-                                            style={img}
-                                            alt={photoObj.name}
-                                        />
-                                    </div>
-                                    <br />
-                                </div>
-                            )}
-                        </td>
-                    </tr>
-                }
-                {item.typeOf === EVENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">This event should be shown to whom?</th>
-                        <td>{item.shownToWhomLabel}</td>
-                    </tr>
-                }
-                {item.typeOf === EVENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">This event can be shared by others on social media?</th>
-                        <td>{item.canBePostedOnSocialMediaLabel}</td>
-                    </tr>
-                }
-                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Category</th>
-                        <td>
-                            {item.prettyIncidentTypeOf}
-                        </td>
-                    </tr>
-                }
-                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Notified Authorities</th>
-                        <td>
-                            {item.notifiedAuthoritiesLabel}
-                        </td>
-                    </tr>
-                }
-                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Accept Authority Cooperation</th>
-                        <td>
-                            {item.acceptAuthorityCooperationLabel}
-                        </td>
-                    </tr>
-                }
-                {item.typeOf === INCIDENT_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Date</th>
-                        <td>
-                            <Moment format="YYYY/MM/DD">{item.date}</Moment>
-                        </td>
-                    </tr>
-                }
-
-
-                {item.typeOf === CONCERN_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Location</th>
-                        <td>{item.location}</td>
-                    </tr>
-                }
-                {item.typeOf === CONCERN_ITEM_TYPE_OF &&
-                    <tr>
-                        <th scope="row" className="bg-light">Photos</th>
-                        <td>
-                            {item.photos && item.photos.map(
-                                (photoObj, i) => <div key={i}>
-                                    <div style={thumb}>
-                                        <img
-                                            src={photoObj.preview}
-                                            style={img}
-                                            alt={photoObj.name}
-                                        />
-                                    </div>
-                                    <br />
-                                </div>
-                            )}
-                        </td>
-                    </tr>
-                }
-                */}
