@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
+import isEmpty from 'lodash/isEmpty';
 
 import ItemCategoryUpdateComponent from "../../../../components/items/admin/update/itemCategoryUpdateComponent";
 import { validateIncidentStep2Input } from "../../../../validators/itemValidator";
 import { OTHER_INCIDENT_TYPE_OF, INCIDENT_ITEM_TYPE_OF } from "../../../../constants/api";
 import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
+import { localStorageGetObjectItem } from '../../../../helpers/localStorageUtility';
 
 
 class ItemCategoryUpdateContainer extends Component {
@@ -17,10 +19,18 @@ class ItemCategoryUpdateContainer extends Component {
     constructor(props) {
         super(props);
 
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
+        const { slug } = this.props.match.params;
+
+        // The following code will extract our data from the local
+        // storage if the data was previously saved.
+        const item = localStorageGetObjectItem("nwapp-admin-retrieve-item-"+slug.toString() );
+
         const parametersMap = new Map();
         // parametersMap.set("is_archived", 3); // 3 = TRUE | 2 = FALSE
         parametersMap.set("o", "-created_at");
-        parametersMap.set("category", INCIDENT_ITEM_TYPE_OF);
+        parametersMap.set("category", item.typeOfCategory);
 
         this.state = {
             // Pagination
@@ -31,13 +41,14 @@ class ItemCategoryUpdateContainer extends Component {
             // Sorting, Filtering, & Searching
             parametersMap: parametersMap,
 
-            // The rest of the code..
-            // category:localStorage.getItem("nwapp-item-create-incident-category"),
-            // categoryOption: localStorageGetObjectItem('nwapp-item-create-incident-categoryOption'),
-            // categoryOther: localStorage.getItem("nwapp-item-create-incident-categoryOther"),
+            // The rest of the code.
+            slug: slug,
+            category: item.typeOfSlug,
+            categoryOther: item.categoryOther,
             errors: {},
             isLoading: false,
             isItemTypeLoading: true,
+            item: item,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -104,7 +115,7 @@ class ItemCategoryUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/admin/item/add/step-3-incident");
+        this.props.history.push("/admin/item/"+item.slug);
     }
 
     onFailedSubmissionCallback(errors) {
@@ -175,7 +186,8 @@ class ItemCategoryUpdateContainer extends Component {
      */
 
     render() {
-        const { category, categoryOther, isItemTypeLoading, errors } = this.state;
+        const { slug, category, categoryOther, isItemTypeLoading, errors } = this.state;
+        const item = isEmpty(this.state.item) ? {} : this.state.item;
         const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
 
         // For debugging purposes only.
@@ -185,6 +197,7 @@ class ItemCategoryUpdateContainer extends Component {
 
         return (
             <ItemCategoryUpdateComponent
+                slug={slug}
                 category={category}
                 categoryOptions={itemTypeListOptions}
                 categoryOther={categoryOther}
@@ -201,6 +214,7 @@ class ItemCategoryUpdateContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        item: store.itemDetailState,
         itemTypeList: store.itemTypeListState,
     };
 }
