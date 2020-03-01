@@ -347,6 +347,12 @@ import ItemCreateStep4ResourceImageContainer from "./items/admin/create/resource
 import ItemCreateStep4ResourceFileContainer from "./items/admin/create/resource/itemCreateStep4ResourceFileContainer";
 import ItemCreateStep5ResourceContainer from "./items/admin/create/resource/itemCreateStep5ResourceContainer";
 import ItemCategoryUpdateComponent from "./items/admin/update/itemCategoryUpdateContainer";
+import ItemAuthoritiesUpdateComponent from "./items/admin/update/itemAuthoritiesUpdateContainer";
+import ItemDateStartUpdateComponent from "./items/admin/update/itemDateStartUpdateContainer";
+import ItemReachUpdateComponent from "./items/admin/update/itemReachUpdateContainer";
+import ItemDetailsUpdateComponent from "./items/admin/update/itemDetailsUpdateContainer";
+import ItemExternalLinkUpdateComponent from "./items/admin/update/itemExternalLinkUpdateContainer";
+import ItemPhotosUpdateComponent from "./items/admin/update/itemPhotosUpdateContainer";
 import ItemArchiveContainer from "./items/admin/archive/itemArchiveContainer";
 
 
@@ -783,6 +789,12 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/admin/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
                                 <Route path="/admin/item/:slug/update-category" exact component={requiresAuth(ItemCategoryUpdateComponent)} />
+                                <Route path="/admin/item/:slug/update-authorities" exact component={requiresAuth(ItemAuthoritiesUpdateComponent)} />
+                                <Route path="/admin/item/:slug/update-date-start" exact component={requiresAuth(ItemDateStartUpdateComponent)} />
+                                <Route path="/admin/item/:slug/update-reach" exact component={requiresAuth(ItemReachUpdateComponent)} />
+                                <Route path="/admin/item/:slug/update-details" exact component={requiresAuth(ItemDetailsUpdateComponent)} />
+                                <Route path="/admin/item/:slug/update-external-link" exact component={requiresAuth(ItemExternalLinkUpdateComponent)} />
+                                <Route path="/admin/item/:slug/update-photos" exact component={requiresAuth(ItemPhotosUpdateComponent)} />
                                 <Route path="/admin/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
 
                                 /*

@@ -57,7 +57,7 @@ export default function ItemIncidentRetrieveComponent({ item }) {
             <tr className="bg-dark">
                 <th scope="row" colSpan="2" className="text-light">
                     <i className="fas fa-user-secret"></i>&nbsp;Authorities Form
-                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-authorities-form`}>
+                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-authorities`}>
                         <i className="fas fa-edit"></i>
                     </Link>
                 </th>
