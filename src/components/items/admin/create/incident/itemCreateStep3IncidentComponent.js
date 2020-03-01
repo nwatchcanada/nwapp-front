@@ -14,7 +14,7 @@ import {
 class ItemCreateStep3IncidentComponent extends Component {
     render() {
         const {
-            notifiedAuthorities, acceptAuthorityCooperation,
+            hasNotifiedAuthorities, hasAcceptAuthorityCooperation,
             errors,
             onRadioChange,
             isLoading,
@@ -128,22 +128,22 @@ class ItemCreateStep3IncidentComponent extends Component {
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.notifiedAuthorities}
+                                error={errors.hasNotifiedAuthorities}
                                 label="Have you notified the authorities of this Incident? (*)"
-                                name="notifiedAuthorities"
+                                name="hasNotifiedAuthorities"
                                 onChange={onRadioChange}
-                                selectedValue={notifiedAuthorities}
+                                selectedValue={hasNotifiedAuthorities}
                                 options={ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES}
                             />
 
                             <BootstrapRadio
                                 inputClassName="form-check-input form-check-input-lg"
                                 borderColour="border-primary"
-                                error={errors.acceptAuthorityCooperation}
+                                error={errors.hasAcceptAuthorityCooperation}
                                 label="Please note that Neighbourhood Watch London cooperates with local authorities, and if requested by the police or a court order, a copy of this report will be made available to them. Do you wish to proceed? (*)"
-                                name="acceptAuthorityCooperation"
+                                name="hasAcceptAuthorityCooperation"
                                 onChange={onRadioChange}
-                                selectedValue={acceptAuthorityCooperation}
+                                selectedValue={hasAcceptAuthorityCooperation}
                                 options={ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES}
                             />
 

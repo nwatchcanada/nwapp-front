@@ -21,13 +21,14 @@ export const BootstrapRadio = ({
     name,
     label = "Please select either option.",
     helpText = null,
+    disabled = false,
 }) => {
     const id = shortid.generate();
     return (
         <div className="form-group mt-2 mb-4 font-weight-bold" id={id} onChange={ (event)=>{ onChange(event) }  }>
             <p className="mb-1">{label}</p>
             {options && options.map(
-                (optionDatum, i) => <RadioChoiceOption name={name} error={error} selectedValue={selectedValue} choiceOption={optionDatum} key={i+shortid.generate()} />)
+                (optionDatum, i) => <RadioChoiceOption name={name} error={error} selectedValue={selectedValue} choiceOption={optionDatum} key={i+shortid.generate()} disabled={disabled} />)
             }
             {helpText &&
                 <small id={shortid.generate()} className="form-text text-muted" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(helpText) }}></small>
@@ -37,7 +38,7 @@ export const BootstrapRadio = ({
 }
 
 export const RadioChoiceOption = ({
-    name, selectedValue, error, choiceOption, borderColour
+    name, selectedValue, error, choiceOption, borderColour, disabled
 }) => {
 
     // Select the selected value.
@@ -52,7 +53,7 @@ export const RadioChoiceOption = ({
     //   for more details see this link via // Note: https://stackoverflow.com/a/20383295.
     return (
         <div className={classnames('form-radio custom-control custom-radio', { 'has-error': error })}>
-            <input data-label={choiceOption.label} defaultChecked={defaultChecked} type="radio" id={choiceOption.id} name={name} value={choiceOption.value} className={classnames('custom-control-input form-check-input', { 'is-invalid': error })} required />
+            <input data-label={choiceOption.label} defaultChecked={defaultChecked} type="radio" id={choiceOption.id} name={name} value={choiceOption.value} className={classnames('custom-control-input form-check-input', { 'is-invalid': error })} disabled={disabled} required />
             <label className="custom-control-label form-check-label" htmlFor={choiceOption.id}>
                 {choiceOption.label}
             </label>

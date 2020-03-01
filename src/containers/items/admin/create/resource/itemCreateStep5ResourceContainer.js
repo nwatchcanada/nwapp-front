@@ -162,10 +162,10 @@ class ItemCreateStep5ResourceContainer extends Component {
             prettyResourceTypeOf,
 
             // Step 3
-            notifiedAuthorities,
-            notifiedAuthoritiesLabel,
-            acceptAuthorityCooperation,
-            acceptAuthorityCooperationLabel,
+            hasNotifiedAuthorities,
+            hasNotifiedAuthoritiesLabel,
+            hasAcceptAuthorityCooperation,
+            hasAcceptAuthorityCooperationLabel,
 
             // Step 4
             title,
@@ -188,10 +188,10 @@ class ItemCreateStep5ResourceContainer extends Component {
                 prettyResourceTypeOf={prettyResourceTypeOf}
 
                 // Step 3
-                notifiedAuthorities={notifiedAuthorities}
-                notifiedAuthoritiesLabel={notifiedAuthoritiesLabel}
-                acceptAuthorityCooperation={acceptAuthorityCooperation}
-                acceptAuthorityCooperationLabel={acceptAuthorityCooperationLabel}
+                hasNotifiedAuthorities={hasNotifiedAuthorities}
+                hasNotifiedAuthoritiesLabel={hasNotifiedAuthoritiesLabel}
+                hasAcceptAuthorityCooperation={hasAcceptAuthorityCooperation}
+                hasAcceptAuthorityCooperationLabel={hasAcceptAuthorityCooperationLabel}
 
                 // Step 4
                 title={title}

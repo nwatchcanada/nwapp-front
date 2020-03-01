@@ -65,13 +65,19 @@ export default function ItemIncidentRetrieveComponent({ item }) {
             <tr>
                 <th scope="row" className="bg-light">Have you notified the authorities of this Incident? </th>
                 <td>
-                    {item && item.hasNotifiedAuthorities}
+                    {item && item.hasNotifiedAuthorities
+                        ? "Yes"
+                        : "No"
+                    }
                 </td>
             </tr>
             <tr>
                 <th scope="row" className="bg-light">Please note that Neighbourhood Watch London cooperates with local authorities, and if requested by the police or a court order, a copy of this report will be made available to them. Do you wish to proceed?</th>
                 <td>
-                    {item && item.hasAcceptAuthorityCooperation}
+                    {item && item.hasAcceptAuthorityCooperation
+                        ? "Yes"
+                        : "No"
+                    }
                 </td>
             </tr>
 

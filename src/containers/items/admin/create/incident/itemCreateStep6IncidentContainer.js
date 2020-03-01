@@ -43,8 +43,8 @@ class ItemCreateStep6IncidentContainer extends Component {
             categoryOther: localStorage.getItem("nwapp-item-create-incident-categoryOther"),
 
             // Step 3
-            notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-notifiedAuthorities"),
-            acceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-acceptAuthorityCooperation"),
+            hasNotifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-hasNotifiedAuthorities"),
+            hasAcceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-hasAcceptAuthorityCooperation"),
 
             // Step 4
             title: localStorage.getItem("nwapp-item-create-incident-title"),
@@ -165,10 +165,10 @@ class ItemCreateStep6IncidentContainer extends Component {
             prettyIncidentTypeOf,
 
             // Step 3
-            notifiedAuthorities,
-            notifiedAuthoritiesLabel,
-            acceptAuthorityCooperation,
-            acceptAuthorityCooperationLabel,
+            hasNotifiedAuthorities,
+            hasNotifiedAuthoritiesLabel,
+            hasAcceptAuthorityCooperation,
+            hasAcceptAuthorityCooperationLabel,
 
             // Step 4
             title,
@@ -191,10 +191,10 @@ class ItemCreateStep6IncidentContainer extends Component {
                 prettyIncidentTypeOf={prettyIncidentTypeOf}
 
                 // Step 3
-                notifiedAuthorities={notifiedAuthorities}
-                notifiedAuthoritiesLabel={notifiedAuthoritiesLabel}
-                acceptAuthorityCooperation={acceptAuthorityCooperation}
-                acceptAuthorityCooperationLabel={acceptAuthorityCooperationLabel}
+                hasNotifiedAuthorities={hasNotifiedAuthorities}
+                hasNotifiedAuthoritiesLabel={hasNotifiedAuthoritiesLabel}
+                hasAcceptAuthorityCooperation={hasAcceptAuthorityCooperation}
+                hasAcceptAuthorityCooperationLabel={hasAcceptAuthorityCooperationLabel}
 
                 // Step 4
                 title={title}

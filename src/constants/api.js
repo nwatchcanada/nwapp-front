@@ -51,6 +51,7 @@ export const WORKERY_ITEM_TYPE_DETAIL_API_ENDPOINT = '/v1/item-type/<slug>';
 export const WORKERY_ITEM_LIST_API_ENDPOINT = '/v1/items';
 export const WORKERY_ITEM_DETAIL_API_ENDPOINT = '/v1/item/<slug>';
 export const WORKERY_ITEM_CATEGORY_UPDATE_API_ENDPOINT = '/v1/item/<slug>/update-category';
+export const WORKERY_ITEM_AUTHORITIES_UPDATE_API_ENDPOINT = '/v1/item/<slug>/update-authorities';
 
 /**
  *  The full address of certain API endpoints from our backend server.
@@ -725,13 +726,13 @@ export const ITEM_EVENT_CAN_BE_SHOWN_ON_SOCIAL_MEDIA_CHOICES = [
 
 export const ITEM_INCIDENT_NOTIFY_AUTHORITIES_CHOICES = [
     {
-        id: 'notifiedAuthorities-t-choice',
-        name: "notifiedAuthorities",
+        id: 'hasNotifiedAuthorities-t-choice',
+        name: "hasNotifiedAuthorities",
         value: 1,
         label: "Yes"
     },{
-        id: 'notifiedAuthorities-f-choice',
-        name: "notifiedAuthorities",
+        id: 'hasNotifiedAuthorities-f-choice',
+        name: "hasNotifiedAuthorities",
         value: 0,
         label: "No"
     }
@@ -760,13 +761,13 @@ export const WHO_NEWS_FOR_CHOICES = [
 
 export const ITEM_INCIDENT_ACCEPT_AUTHORITY_COOPERATION_CHOICES = [
     {
-        id: 'acceptAuthorityCooperation-t-choice',
-        name: "acceptAuthorityCooperation",
+        id: 'hasAcceptAuthorityCooperation-t-choice',
+        name: "hasAcceptAuthorityCooperation",
         value: 1,
         label: "Yes"
     },{
-        id: 'acceptAuthorityCooperation-f-choice',
-        name: "acceptAuthorityCooperation",
+        id: 'hasAcceptAuthorityCooperation-f-choice',
+        name: "hasAcceptAuthorityCooperation",
         value: 0,
         label: "No"
     }

@@ -160,10 +160,10 @@ class ItemCreateStep7CommunityNewsContainer extends Component {
             prettyCommunityNewsTypeOf,
 
             // Step 3
-            notifiedAuthorities,
-            notifiedAuthoritiesLabel,
-            acceptAuthorityCooperation,
-            acceptAuthorityCooperationLabel,
+            hasNotifiedAuthorities,
+            hasNotifiedAuthoritiesLabel,
+            hasAcceptAuthorityCooperation,
+            hasAcceptAuthorityCooperationLabel,
 
             // Step 4
             title,
@@ -186,10 +186,10 @@ class ItemCreateStep7CommunityNewsContainer extends Component {
                 prettyCommunityNewsTypeOf={prettyCommunityNewsTypeOf}
 
                 // Step 3
-                notifiedAuthorities={notifiedAuthorities}
-                notifiedAuthoritiesLabel={notifiedAuthoritiesLabel}
-                acceptAuthorityCooperation={acceptAuthorityCooperation}
-                acceptAuthorityCooperationLabel={acceptAuthorityCooperationLabel}
+                hasNotifiedAuthorities={hasNotifiedAuthorities}
+                hasNotifiedAuthoritiesLabel={hasNotifiedAuthoritiesLabel}
+                hasAcceptAuthorityCooperation={hasAcceptAuthorityCooperation}
+                hasAcceptAuthorityCooperationLabel={hasAcceptAuthorityCooperationLabel}
 
                 // Step 4
                 title={title}

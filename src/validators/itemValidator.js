@@ -193,11 +193,11 @@ export function validateIncidentInput(data) {
     }
 
     // STEP 3
-    if (data.notifiedAuthorities === undefined || data.notifiedAuthorities === null || data.notifiedAuthorities === "" || isNaN(data.notifiedAuthorities) ) {
-        errors.notifiedAuthorities = 'This field is required';
+    if (data.hasNotifiedAuthorities === undefined || data.hasNotifiedAuthorities === null || data.hasNotifiedAuthorities === "" || isNaN(data.hasNotifiedAuthorities) ) {
+        errors.hasNotifiedAuthorities = 'This field is required';
     }
-    if (data.acceptAuthorityCooperation === undefined || data.acceptAuthorityCooperation === null || data.acceptAuthorityCooperation === "" || isNaN(data.acceptAuthorityCooperation) ) {
-        errors.acceptAuthorityCooperation = 'This field is required';
+    if (data.hasAcceptAuthorityCooperation === undefined || data.hasAcceptAuthorityCooperation === null || data.hasAcceptAuthorityCooperation === "" || isNaN(data.hasAcceptAuthorityCooperation) ) {
+        errors.hasAcceptAuthorityCooperation = 'This field is required';
     }
 
     // STEP 4
@@ -244,11 +244,11 @@ export function validateIncidentStep2Input(data) {
 export function validateIncidentStep3Input(data) {
     let errors = {};
 
-    if (data.notifiedAuthorities === undefined || data.notifiedAuthorities === null || data.notifiedAuthorities === "" || isNaN(data.notifiedAuthorities) ) {
-        errors.notifiedAuthorities = 'This field is required';
+    if (data.hasNotifiedAuthorities === undefined || data.hasNotifiedAuthorities === null || data.hasNotifiedAuthorities === "" || isNaN(data.hasNotifiedAuthorities) ) {
+        errors.hasNotifiedAuthorities = 'This field is required';
     }
-    if (data.acceptAuthorityCooperation === undefined || data.acceptAuthorityCooperation === null || data.acceptAuthorityCooperation === "" || isNaN(data.acceptAuthorityCooperation) ) {
-        errors.acceptAuthorityCooperation = 'This field is required';
+    if (data.hasAcceptAuthorityCooperation === undefined || data.hasAcceptAuthorityCooperation === null || data.hasAcceptAuthorityCooperation === "" || isNaN(data.hasAcceptAuthorityCooperation) ) {
+        errors.hasAcceptAuthorityCooperation = 'This field is required';
     }
 
     return {

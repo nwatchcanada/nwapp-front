@@ -21,8 +21,8 @@ class ItemCreateStep3IncidentContainer extends Component {
             showModal: false,
             errors: {},
             isLoading: false,
-            notifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-notifiedAuthorities"),
-            acceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-acceptAuthorityCooperation"),
+            hasNotifiedAuthorities: localStorageGetIntegerItem("nwapp-item-create-incident-hasNotifiedAuthorities"),
+            hasAcceptAuthorityCooperation: localStorageGetIntegerItem("nwapp-item-create-incident-hasAcceptAuthorityCooperation"),
         }
 
         this.onRadioChange = this.onRadioChange.bind(this);
@@ -113,10 +113,10 @@ class ItemCreateStep3IncidentContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            console.log("Selected Choice: ", this.state.acceptAuthorityCooperation );
+            console.log("Selected Choice: ", this.state.hasAcceptAuthorityCooperation );
 
             // CASE A OF B:
-            if (parseInt(this.state.acceptAuthorityCooperation) === 1) {
+            if (parseInt(this.state.hasAcceptAuthorityCooperation) === 1) {
                 this.onSuccessfulSubmissionCallback();
 
             // CASE B OF B:
@@ -151,11 +151,11 @@ class ItemCreateStep3IncidentContainer extends Component {
      */
 
     render() {
-        const { notifiedAuthorities, acceptAuthorityCooperation, showModal, errors } = this.state;
+        const { hasNotifiedAuthorities, hasAcceptAuthorityCooperation, showModal, errors } = this.state;
         return (
             <ItemCreateStep3IncidentComponent
-                notifiedAuthorities={notifiedAuthorities}
-                acceptAuthorityCooperation={acceptAuthorityCooperation}
+                hasNotifiedAuthorities={hasNotifiedAuthorities}
+                hasAcceptAuthorityCooperation={hasAcceptAuthorityCooperation}
                 onRadioChange={this.onRadioChange}
                 errors={errors}
                 onClick={this.onClick}
