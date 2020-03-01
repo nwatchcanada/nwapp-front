@@ -9,7 +9,8 @@ import {
     localStorageGetDateItem,
     localStorageGetArrayItem,
     localStorageGetIntegerItem,
-    localStorageGetBooleanItem
+    localStorageGetBooleanItem,
+    localStorageRemoveItemsContaining
 } from '../../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import {
@@ -123,6 +124,7 @@ class ItemCreateStep6EventContainer extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Item has been successfully created.");
+        localStorageRemoveItemsContaining("nwapp-item-create-event-");
         this.props.history.push("/admin/items");
     }
 

@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import ItemCreateStep4InformationComponent from "../../../../../components/items/admin/create/information/itemCreateStep4InformationComponent";
-import { localStorageGetIntegerItem } from '../../../../../helpers/localStorageUtility';
+import {
+    localStorageGetIntegerItem, localStorageRemoveItemsContaining
+} from '../../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { validateInformationInput } from "../../../../../validators/itemValidator";
 import { postItem } from "../../../../../actions/itemActions";
@@ -70,6 +72,7 @@ class ItemCreateStep4InformationContainer extends Component {
     onSuccessfulSubmissionCallback(item) {
         this.setState({ errors: {}, isLoading: true, });
         this.props.setFlashMessage("success", "Item has been successfully created.");
+        localStorageRemoveItemsContaining("nwapp-item-create-information-");
         this.props.history.push("/admin/items");
     }
 
