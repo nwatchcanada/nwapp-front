@@ -5,8 +5,10 @@ import isEmpty from 'lodash/isEmpty';
 
 import ItemCategoryUpdateComponent from "../../../../components/items/admin/update/itemCategoryUpdateComponent";
 import { validateIncidentStep2Input } from "../../../../validators/itemValidator";
+import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { OTHER_INCIDENT_TYPE_OF, INCIDENT_ITEM_TYPE_OF } from "../../../../constants/api";
 import { pullItemTypeList, getItemTypeReactSelectOptions } from "../../../../actions/itemTypeActions";
+import { putItemCategory } from "../../../../actions/itemActions";
 import { localStorageGetObjectItem } from '../../../../helpers/localStorageUtility';
 
 
@@ -54,10 +56,24 @@ class ItemCategoryUpdateContainer extends Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
         this.onSuccessListCallback = this.onSuccessListCallback.bind(this);
         this.onFailureListCallback = this.onFailureListCallback.bind(this);
+        this.getPostData = this.getPostData.bind(this);
+        this.onSuccessfulPutCallback = this.onSuccessfulPutCallback.bind(this);
+        this.onFailurePutCallback = this.onFailurePutCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -113,15 +129,14 @@ class ItemCategoryUpdateContainer extends Component {
         this.setState({ isItemTypeLoading: false });
     }
 
-    onSuccessfulSubmissionCallback(item) {
+    onSuccessfulPutCallback(item) {
         this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/admin/item/"+item.slug);
+        this.props.setFlashMessage("success", "Item has been successfully updated.");
+        this.props.history.push("/admin/item/"+this.state.slug);
     }
 
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+    onFailurePutCallback(errors) {
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -165,18 +180,17 @@ class ItemCategoryUpdateContainer extends Component {
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            // Save for convinence the incident type depending on if the user
-            // chose a standard option or the `other` option.
-            if (this.state.category === OTHER_INCIDENT_TYPE_OF) {
-                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.categoryOther);
-            } else {
-                localStorage.setItem('nwapp-item-create-incident-pretty-incident-type', this.state.categoryOption.label);
-            }
-            this.onSuccessfulSubmissionCallback();
+            this.setState({ errors: {}, isLoading: true, }, ()=>{
+                this.props.putItemCategory(
+                    this.getPostData(),
+                    this.onSuccessfulPutCallback,
+                    this.onFailurePutCallback
+                );
+            });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
-            this.onFailedSubmissionCallback(errors);
+            this.onFailurePutCallback(errors);
         }
     }
 
@@ -186,7 +200,7 @@ class ItemCategoryUpdateContainer extends Component {
      */
 
     render() {
-        const { slug, category, categoryOther, isItemTypeLoading, errors } = this.state;
+        const { slug, category, categoryOther, isItemTypeLoading, errors, isLoading } = this.state;
         const item = isEmpty(this.state.item) ? {} : this.state.item;
         const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
 
@@ -206,6 +220,7 @@ class ItemCategoryUpdateContainer extends Component {
                 onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
                 isItemTypeLoading={isItemTypeLoading}
+                isLoading={isLoading}
             />
         );
     }
@@ -225,6 +240,14 @@ const mapDispatchToProps = dispatch => {
             dispatch(
                 pullItemTypeList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
             )
+        },
+        putItemCategory: (data, onSuccessfulPutCallback, onFailurePutCallback) => {
+            dispatch(
+                putItemCategory(data, onSuccessfulPutCallback, onFailurePutCallback)
+            )
+        },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
         },
     }
 }

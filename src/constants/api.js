@@ -50,6 +50,8 @@ export const WORKERY_ITEM_TYPE_DETAIL_API_ENDPOINT = '/v1/item-type/<slug>';
 
 export const WORKERY_ITEM_LIST_API_ENDPOINT = '/v1/items';
 export const WORKERY_ITEM_DETAIL_API_ENDPOINT = '/v1/item/<slug>';
+export const WORKERY_ITEM_CATEGORY_UPDATE_API_ENDPOINT = '/v1/item/<slug>/update-category';
+
 /**
  *  The full address of certain API endpoints from our backend server.
  */
