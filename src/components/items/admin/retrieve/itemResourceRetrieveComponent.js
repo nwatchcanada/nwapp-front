@@ -79,6 +79,9 @@ export default function ItemResourceRetrieveComponent({ item }) {
             {item && item.formatType === IMAGE_RESOURCE_TYPE_OF &&
                 <ImageItemComponent item={item} />
             }
+            {item && item.formatType === FILE_RESOURCE_TYPE_OF &&
+                <FileItemComponent item={item} />
+            }
         </tbody>
     );
 }
@@ -168,6 +171,44 @@ export function ImageItemComponent({ item }) {
                     src={item && item.resourceImage && item.resourceImage.fileUrl}
                     alt={item && item.resourceImage && item.resourceImage.title}
                 />
+            </td>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">Description</th>
+            <td>{item && item.description}</td>
+        </tr>
+    );
+    return elements;
+}
+
+
+export function FileItemComponent({ item }) {
+    const elements = [];
+    elements.push(
+        <tr className="bg-dark">
+            <th scope="row" colSpan="2" className="text-light">
+                <i className="fas fa-table"></i>&nbsp;Details
+                <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-details`}>
+                    <i className="fas fa-edit"></i>
+                </Link>
+            </th>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">Title</th>
+            <td>{item && item.title}</td>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">File</th>
+            <td>
+                <a href={item && item.resourceFile && item.resourceFile.fileUrl} target="_blank">
+                    {item && item.resourceFile && item.resourceFile.title}
+                </a>
             </td>
         </tr>
     );

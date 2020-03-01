@@ -6,13 +6,14 @@ import ItemCreateStep4ResourceFileComponent from "../../../../../components/item
 import { validateResourceStep4FileInput } from "../../../../../validators/itemValidator";
 import {
     RESOURCE_CATEGORY_CHOICES,
-    IMAGE_RESOURCE_TYPE_OF
+    FILE_RESOURCE_TYPE_OF
 } from "../../../../../constants/api";
 import {
     localStorageSetObjectOrArrayItem,
     localStorageGetObjectItem,
-    localStorageRemoveItemsContaining
+    localStorageGetArrayItem
 } from '../../../../../helpers/localStorageUtility';
+import convertBinaryFileToBase64String from "../../../../../helpers/base64Helper";
 
 
 class ItemCreateStep4ResourceFileContainer extends Component {
@@ -36,7 +37,7 @@ class ItemCreateStep4ResourceFileContainer extends Component {
             isLoading: false,
 
             // ALL OUR GENERAL INFORMATION IS STORED HERE.
-            typeOf: IMAGE_RESOURCE_TYPE_OF,
+            typeOf: FILE_RESOURCE_TYPE_OF,
             name: localStorage.getItem('nwapp-item-create-resource-name'),
             // file: null,
             description: localStorage.getItem('nwapp-item-create-resource-description'),
@@ -44,6 +45,7 @@ class ItemCreateStep4ResourceFileContainer extends Component {
             // DJANGO-REACT UPLOAD: STEP 1 OF 5.
             fileReader: new FileReader(), // 1 of 5 - (a)
             file: localStorageGetObjectItem('nwapp-item-create-resource-file'), // 1 of 4 - (b)
+            base64File: localStorageGetArrayItem("nwapp-item-create-resource-base64File"),
             upload_content: localStorageGetObjectItem('nwapp-item-create-resource-file-upload-content'),
             upload_filename: localStorage.getItem("nwapp-item-create-resource-file-upload-filename"),
             uploadContent: localStorageGetObjectItem('nwapp-item-create-resource-file-upload-content'),
@@ -58,6 +60,7 @@ class ItemCreateStep4ResourceFileContainer extends Component {
         this.handleFile = this.handleFile.bind(this); // 2 of 5 - (a)
         this.onDrop = this.onDrop.bind(this); // 2 of 5 - (b)
         this.onRemoveUploadClick = this.onRemoveUploadClick.bind(this);
+        this.onDropSaveAsBase64ContentCallback = this.onDropSaveAsBase64ContentCallback.bind(this);
     }
 
     /**
@@ -106,6 +109,20 @@ class ItemCreateStep4ResourceFileContainer extends Component {
         localStorageSetObjectOrArrayItem('nwapp-item-create-resource-'+optionKey, option);
     }
 
+    onDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        const base64File = { // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        };
+
+        this.setState({ // Update our local state to update the GUI.
+            base64File: base64File
+        });
+
+        // Save our photos data.
+        localStorageSetObjectOrArrayItem("nwapp-item-create-resource-base64File", base64File);
+    }
+
     /**
      *  DJANGO-REACT UPLOAD: STEP 3 OF 5.
      *
@@ -116,6 +133,14 @@ class ItemCreateStep4ResourceFileContainer extends Component {
 
         // For debuging purposes only.
         console.log("DEBUG | onDrop | file", file);
+
+        convertBinaryFileToBase64String(
+            file,
+            this.onDropSaveAsBase64ContentCallback,
+            function(error) {
+                alert(error);
+            }
+        );
 
         if (file !== undefined && file !== null) {
             const fileWithPreview = Object.assign(file, {
@@ -156,7 +181,6 @@ class ItemCreateStep4ResourceFileContainer extends Component {
             fileReader: new FileReader(),
             file: null
         });
-        localStorageRemoveItemsContaining("nwapp-item-create-resource-file-upload-");
     }
 
     /*
