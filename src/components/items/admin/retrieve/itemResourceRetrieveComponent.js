@@ -4,7 +4,9 @@ import React from "react";
 import DOMPurify from "dompurify";
 import { Link } from "react-router-dom";
 
-import { ItemIconHelper, ItemTypeOfLabelHelper } from "../../../../constants/helper";
+import {
+    ItemIconHelper, ItemTypeOfLabelHelper, ItemFormatTypeLabelHelper, ItemFormatTypeIconHelper
+} from "../../../../constants/helper";
 import {
     LINK_RESOURCE_TYPE_OF,
     YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
@@ -56,6 +58,13 @@ export default function ItemResourceRetrieveComponent({ item }) {
                 <th scope="row" className="bg-light">Category</th>
                 <td>
                     {item && item.typeOfText}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" className="bg-light">Format Type</th>
+                <td>
+                    <ItemFormatTypeIconHelper formatTypeId={item && item.formatType} />&nbsp;
+                    <ItemFormatTypeLabelHelper formatTypeId={item && item.formatType} />
                 </td>
             </tr>
 
