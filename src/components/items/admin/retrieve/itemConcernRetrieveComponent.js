@@ -1,6 +1,7 @@
 import React from "react";
 // import Moment from 'react-moment';
 // import 'moment-timezone';
+import { Link } from "react-router-dom";
 
 import { ItemIconHelper, ItemTypeOfLabelHelper } from "../../../../constants/helper";
 
@@ -33,9 +34,9 @@ export default function ItemConcernRetrieveComponent({ item }) {
             <tr className="bg-dark">
                 <th scope="row" colSpan="2" className="text-light">
                     <i className="fas fa-sign"></i>&nbsp;Category
-                    <button className="btn btn-success btn-sm  float-right pl-4 pr-4" onClick={null}>
+                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-category`}>
                         <i className="fas fa-edit"></i>
-                    </button>
+                    </Link>
                 </th>
             </tr>
             <tr>
@@ -79,9 +80,9 @@ export default function ItemConcernRetrieveComponent({ item }) {
             <tr className="bg-dark">
                 <th scope="row" colSpan="2" className="text-light">
                     <i className="fas fa-table"></i>&nbsp;Details
-                    <button className="btn btn-success btn-sm  float-right pl-4 pr-4" onClick={null}>
+                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-details`}>
                         <i className="fas fa-edit"></i>
-                    </button>
+                    </Link>
                 </th>
             </tr>
             <tr>
@@ -110,9 +111,9 @@ export default function ItemConcernRetrieveComponent({ item }) {
             <tr className="bg-dark">
                 <th scope="row" colSpan="2" className="text-light">
                     <i className="fas fa-images"></i>&nbsp;Photo(s)
-                    <button className="btn btn-success btn-sm  float-right pl-4 pr-4" onClick={null}>
+                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-photos`}>
                         <i className="fas fa-edit"></i>
-                    </button>
+                    </Link>
                 </th>
             </tr>
             <tr>
