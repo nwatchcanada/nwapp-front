@@ -47,6 +47,7 @@ class ItemCreateStep5ResourceContainer extends Component {
             name: localStorage.getItem('nwapp-item-create-resource-name'),
             externalUrl: localStorage.getItem('nwapp-item-create-resource-externalUrl'),
             description: localStorage.getItem('nwapp-item-create-resource-description'),
+            embedCode: localStorage.getItem('nwapp-item-create-resource-embedCode'),
             resourceImage: localStorageGetArrayItem("nwapp-item-create-resource-base64Image"),
             resourceFile: localStorageGetArrayItem("nwapp-item-create-resource-base64File"),
 
