@@ -66,6 +66,9 @@ export default function ItemResourceRetrieveComponent({ item }) {
             {item && item.formatType === YOUTUBE_VIDEO_RESOURCE_TYPE_OF &&
                 <YouTubeItemComponent item={item} />
             }
+            {item && item.formatType === IMAGE_RESOURCE_TYPE_OF &&
+                <ImageItemComponent item={item} />
+            }
         </tbody>
     );
 }
@@ -86,7 +89,7 @@ export function LinkItemComponent({ item }) {
     elements.push(
         <tr>
             <th scope="row" className="bg-light">Description</th>
-            <td>{item.description}</td>
+            <td>{item && item.description}</td>
         </tr>
     );
     elements.push(
@@ -99,7 +102,6 @@ export function LinkItemComponent({ item }) {
     );
     return elements;
 }
-
 
 
 export function YouTubeItemComponent({ item }) {
@@ -117,14 +119,52 @@ export function YouTubeItemComponent({ item }) {
     elements.push(
         <tr>
             <th scope="row" className="bg-light">Title</th>
-            <td>{item.title}</td>
+            <td>{item && item.title}</td>
         </tr>
     );
     elements.push(
         <tr>
             <th scope="row" className="bg-light">YouTube Video</th>
-            <td dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item && item.embedCode, {ADD_TAGS: ['iframe']}) }}>
+            <td dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item && item.embedCode, {ADD_TAGS: ['iframe']}) }}></td>
+        </tr>
+    );
+    return elements;
+}
+
+
+export function ImageItemComponent({ item }) {
+    const elements = [];
+    elements.push(
+        <tr className="bg-dark">
+            <th scope="row" colSpan="2" className="text-light">
+                <i className="fas fa-table"></i>&nbsp;Details
+                <button className="btn btn-success btn-sm  float-right pl-4 pr-4" onClick={null}>
+                    <i className="fas fa-edit"></i>
+                </button>
+            </th>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">Title</th>
+            <td>{item && item.title}</td>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">Image</th>
+            <td>
+                <img
+                    src={item && item.resourceImage && item.resourceImage.fileUrl}
+                    alt={item && item.resourceImage && item.resourceImage.title}
+                />
             </td>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">Description</th>
+            <td>{item && item.description}</td>
         </tr>
     );
     return elements;
