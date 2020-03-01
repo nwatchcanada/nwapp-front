@@ -175,7 +175,7 @@ class ItemPhotosUpdateContainer extends Component {
      */
 
     render() {
-        const { category, categoryOther, isItemTypeLoading, errors } = this.state;
+        const { category, categoryOther, isItemTypeLoading, errors, isLoading } = this.state;
         const itemTypeListOptions = getItemTypeReactSelectOptions(this.props.itemTypeList, "category");
 
         // For debugging purposes only.
@@ -193,6 +193,7 @@ class ItemPhotosUpdateContainer extends Component {
                 onSelectChange={this.onSelectChange}
                 onClick={this.onClick}
                 isItemTypeLoading={isItemTypeLoading}
+                isLoading={isLoading}
             />
         );
     }
