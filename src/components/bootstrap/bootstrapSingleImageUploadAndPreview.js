@@ -68,11 +68,31 @@ export const BootstrapSingleImageUploadAndPreview = ({
             </Dropzone>
 
             { /* The follwoing code will render our stylized preview image. */ }
-            {fileObj &&
+
+            { /* Local Version */ }
+            {fileObj && fileObj.preview &&
                 <div>
                     <div style={thumb}>
                         <img
                             src={fileObj.preview}
+                            style={img}
+                            alt={label}
+                        />
+                    </div>
+                    <br />
+                    <button className="btn btn-danger btn-sm float-left" onClick={onRemoveUploadClick}>
+                        <i className="fas fa-trash-alt"></i>&nbsp;Remove Upload
+                    </button>
+                    <br />
+                </div>
+            }
+
+            { /* Remote Version */ }
+            {fileObj && fileObj.fileUrl &&
+                <div>
+                    <div style={thumb}>
+                        <img
+                            src={fileObj.fileUrl}
                             style={img}
                             alt={label}
                         />

@@ -66,6 +66,12 @@ class EventItemDetailUpdateContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
+        // Override our image with our new image.
+        if (this.state.base64EventLogoImage !== undefined && this.state.base64EventLogoImage !== null) {
+            postData.eventLogoImage = this.state.base64EventLogoImage;
+            delete postData["base64EventLogoImage"];
+        }
+
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
         return postData;
@@ -100,9 +106,7 @@ class EventItemDetailUpdateContainer extends Component {
     }
 
     onFailurePutCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -279,7 +283,8 @@ class EventItemDetailUpdateContainer extends Component {
             eventLogoImage,
             shownToWhom,
             canBePostedOnSocialMedia,
-            errors
+            errors,
+            isLoading
         } = this.state;
 
         return (
@@ -298,6 +303,7 @@ class EventItemDetailUpdateContainer extends Component {
                 onLogoDrop={this.onLogoDrop}
                 onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
                 onClick={this.onClick}
+                isLoading={isLoading}
             />
         );
     }
