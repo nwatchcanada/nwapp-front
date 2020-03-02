@@ -352,6 +352,7 @@ import ItemDateStartUpdateComponent from "./items/admin/update/details/incidentI
 import IncidentItemDetailUpdateContainer from "./items/admin/update/details/incidentItemDetailUpdateContainer";
 import EventItemDetailUpdateContainer from "./items/admin/update/details/eventItemDetailUpdateContainer";
 import ConcernItemDetailUpdateContainer from "./items/admin/update/details/concernItemDetailUpdateContainer";
+import InformationItemDetailUpdateContainer from "./items/admin/update/details/informationItemDetailUpdateContainer";
 import ItemReachUpdateComponent from "./items/admin/update/itemReachUpdateContainer";
 import ItemDetailsUpdateComponent from "./items/admin/update/itemDetailsUpdateContainer";
 import ItemExternalLinkUpdateComponent from "./items/admin/update/itemExternalLinkUpdateContainer";
@@ -799,6 +800,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/:slug/update-incident-details" exact component={requiresAuth(IncidentItemDetailUpdateContainer)} />
                                 <Route path="/admin/item/:slug/update-event-details" exact component={requiresAuth(EventItemDetailUpdateContainer)} />
                                 <Route path="/admin/item/:slug/update-concern-details" exact component={requiresAuth(ConcernItemDetailUpdateContainer)} />
+                                <Route path="/admin/item/:slug/update-information-details" exact component={requiresAuth(InformationItemDetailUpdateContainer)} />
                                 <Route path="/admin/item/:slug/update-external-link" exact component={requiresAuth(ItemExternalLinkUpdateComponent)} />
                                 <Route path="/admin/item/:slug/update-photos" exact component={requiresAuth(ItemPhotosUpdateComponent)} />
                                 <Route path="/admin/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
