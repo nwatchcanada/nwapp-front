@@ -3,11 +3,22 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import * as moment from 'moment';
 
-import ItemDetailsUpdateComponent from "../../../../components/items/admin/update/itemDetailsUpdateComponent";
+import ItemDetailIncidentUpdateComponent from "../../../../components/items/admin/update/itemDetailIncidentUpdateComponent";
+import ItemDetailEventUpdateComponent from "../../../../components/items/admin/update/itemDetailEventUpdateComponent";
 import { localStorageGetObjectItem } from '../../../../helpers/localStorageUtility';
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 import { validateIncidentStep4Input } from "../../../../validators/itemValidator";
 import { putItemDetail } from "../../../../actions/itemActions";
+import convertBinaryFileToBase64String from "../../../../helpers/base64Helper";
+import {
+    INCIDENT_ITEM_TYPE_OF,
+    EVENT_ITEM_TYPE_OF,
+    CONCERN_ITEM_TYPE_OF,
+    INFORMATION_ITEM_TYPE_OF,
+    COMMUNITY_NEWS_ITEM_TYPE_OF,
+    VOLUNTEER_ITEM_TYPE_OF,
+    RESOURCE_ITEM_TYPE_OF
+ } from "../../../../constants/api";
 
 
 class ItemDetailsUpdateContainer extends Component {
@@ -32,16 +43,23 @@ class ItemDetailsUpdateContainer extends Component {
             errors: {},
             isLoading: false,
             item: item,
-
-            title: item.title,
-            date: new Date(item.date),
-            description: item.description,
-            location: item.location,
+            typeOf: item.typeOfCategory,
+            title: item.title,                                       // Incident | Event |
+            date: new Date(item.date),                               // Incident | xxxxx |
+            description: item.description,                           // Incident | Event |
+            location: item.location,                                 // Incident | xxxxx |
+            externalURL: item.externalURL,                           // xxxxxxxx | Event |
+            eventLogoImage: item.eventLogoImage,                     // xxxxxxxx | Event |
+            shownToWhom: item.shownToWhom,                           // xxxxxxxx | Event |
+            canBePostedOnSocialMedia: item.canBePostedOnSocialMedia, // xxxxxxxx | Event |
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-        this.onDateTimeChange = this.onDateTimeChange.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
+        this.onLogoDrop = this.onLogoDrop.bind(this);
+        this.onLogoDropSaveAsBase64ContentCallback = this.onLogoDropSaveAsBase64ContentCallback.bind(this);
+        this.onLogoRemoveUploadClick = this.onLogoRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulPutCallback = this.onSuccessfulPutCallback.bind(this);
         this.onFailurePutCallback = this.onFailurePutCallback.bind(this);
@@ -135,8 +153,6 @@ class ItemDetailsUpdateContainer extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        const key = "nwapp-item-create-incident-"+[e.target.name];
-        localStorage.setItem(key, e.target.value)
     }
 
     onSelectChange(option) {
@@ -155,6 +171,79 @@ class ItemDetailsUpdateContainer extends Component {
     onDateTimeChange(dateObj) {
         this.setState({
             date: dateObj,
+        });
+    }
+
+    onLogoDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        const base64EventLogoImage = { // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        };
+
+        this.setState({ // Update our local state to update the GUI.
+            base64EventLogoImage: base64EventLogoImage
+        });
+    }
+
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onLogoDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onLogoDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
+
+            convertBinaryFileToBase64String(
+                file,
+                this.onLogoDropSaveAsBase64ContentCallback,
+                function(error) {
+                    alert(error);
+                }
+            );
+
+            // For debugging purposes.
+            console.log("DEBUG | onLogoDrop | fileWithPreview", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                eventLogoImage: fileWithPreview
+            });
+        }
+    }
+
+    onLogoRemoveUploadClick(e) {
+        this.setState({
+            eventLogoImage: null
+        });
+    }
+
+    onRadioChange(e) {
+        // Get the values.
+        const storageValueKey = "nwapp-item-create-event-"+[e.target.name];
+        const storageLabelKey =  "nwapp-item-create-event-"+[e.target.name].toString()+"-label";
+        const value = e.target.value;
+        const label = e.target.dataset.label; // Note: 'dataset' is a react data via https://stackoverflow.com/a/20383295
+        const storeValueKey = [e.target.name].toString();
+        const storeLabelKey = [e.target.name].toString()+"Label";
+
+        // Save the data.
+        this.setState({ [e.target.name]: value, }); // Save to store.
+        this.setState({ storeLabelKey: label, }); // Save to store.
+
+        // For the debugging purposes only.
+        console.log({
+            "STORE-VALUE-KEY": storageValueKey,
+            "STORE-VALUE": value,
+            "STORAGE-VALUE-KEY": storeValueKey,
+            "STORAGE-VALUE": value,
+            "STORAGE-LABEL-KEY": storeLabelKey,
+            "STORAGE-LABEL": label,
         });
     }
 
@@ -187,22 +276,63 @@ class ItemDetailsUpdateContainer extends Component {
      */
 
     render() {
-        const { title, date, description, location, slug, errors, isLoading } = this.state;
-        return (
-            <ItemDetailsUpdateComponent
-                slug={slug}
-                errors={errors}
-                onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
-                onDateTimeChange={this.onDateTimeChange}
-                onClick={this.onClick}
-                isLoading={isLoading}
-                title={title}
-                date={date}
-                description={description}
-                location={location}
-            />
-        );
+        const {
+            typeOf, title, date, description, location, slug, errors, isLoading,
+            externalURL,
+            eventLogoImage,
+            shownToWhom,
+            canBePostedOnSocialMedia,
+        } = this.state;
+        if (typeOf === INCIDENT_ITEM_TYPE_OF) {
+            return (
+                <ItemDetailIncidentUpdateComponent
+                    slug={slug}
+                    errors={errors}
+                    typeOf={typeOf}
+                    onTextChange={this.onTextChange}
+                    onSelectChange={this.onSelectChange}
+                    onRadioChange={this.onRadioChange}
+                    onLogoDrop={this.onLogoDrop}
+                    onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
+                    onDateTimeChange={this.onDateTimeChange}
+                    onClick={this.onClick}
+                    isLoading={isLoading}
+                    title={title}
+                    date={date}
+                    description={description}
+                    location={location}
+                    externalURL={externalURL}
+                    eventLogoImage={eventLogoImage}
+                    shownToWhom={shownToWhom}
+                    canBePostedOnSocialMedia={canBePostedOnSocialMedia}
+                />
+            );
+        }
+        else if (typeOf === EVENT_ITEM_TYPE_OF) {
+            return (
+                <ItemDetailEventUpdateComponent
+                    slug={slug}
+                    errors={errors}
+                    typeOf={typeOf}
+                    onTextChange={this.onTextChange}
+                    onSelectChange={this.onSelectChange}
+                    onRadioChange={this.onRadioChange}
+                    onLogoDrop={this.onLogoDrop}
+                    onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
+                    onClick={this.onClick}
+                    isLoading={isLoading}
+                    title={title}
+                    description={description}
+                    externalURL={externalURL}
+                    eventLogoImage={eventLogoImage}
+                    shownToWhom={shownToWhom}
+                    canBePostedOnSocialMedia={canBePostedOnSocialMedia}
+                />
+            );
+        } else {
+            return null;
+        }
+
     }
 }
 

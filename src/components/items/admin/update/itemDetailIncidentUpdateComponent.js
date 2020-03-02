@@ -14,7 +14,7 @@ import { BootstrapMultipleImageUploadAndPreview } from "../../../bootstrap/boots
 import { OTHER_INCIDENT_TYPE_OF } from "../../../../constants/api";
 
 
-class ItemDetailsUpdateComponent extends Component {
+export default class ItemDetailIncidentUpdateComponent extends Component {
     render() {
         const {
             slug,
@@ -120,5 +120,3 @@ class ItemDetailsUpdateComponent extends Component {
         );
     }
 }
-
-export default ItemDetailsUpdateComponent;
