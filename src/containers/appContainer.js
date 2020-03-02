@@ -348,7 +348,8 @@ import ItemCreateStep4ResourceFileContainer from "./items/admin/create/resource/
 import ItemCreateStep5ResourceContainer from "./items/admin/create/resource/itemCreateStep5ResourceContainer";
 import ItemCategoryUpdateComponent from "./items/admin/update/itemCategoryUpdateContainer";
 import ItemAuthoritiesUpdateComponent from "./items/admin/update/itemAuthoritiesUpdateContainer";
-import ItemDateStartUpdateComponent from "./items/admin/update/itemDateStartUpdateContainer";
+import ItemDateStartUpdateComponent from "./items/admin/update/details/incidentItemDetailUpdateContainer";
+import IncidentItemDetailUpdateContainer from "./items/admin/update/details/incidentItemDetailUpdateContainer";
 import ItemReachUpdateComponent from "./items/admin/update/itemReachUpdateContainer";
 import ItemDetailsUpdateComponent from "./items/admin/update/itemDetailsUpdateContainer";
 import ItemExternalLinkUpdateComponent from "./items/admin/update/itemExternalLinkUpdateContainer";
@@ -793,6 +794,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/:slug/update-date-start" exact component={requiresAuth(ItemDateStartUpdateComponent)} />
                                 <Route path="/admin/item/:slug/update-reach" exact component={requiresAuth(ItemReachUpdateComponent)} />
                                 <Route path="/admin/item/:slug/update-details" exact component={requiresAuth(ItemDetailsUpdateComponent)} />
+                                <Route path="/admin/item/:slug/update-incident-details" exact component={requiresAuth(IncidentItemDetailUpdateContainer)} />
                                 <Route path="/admin/item/:slug/update-external-link" exact component={requiresAuth(ItemExternalLinkUpdateComponent)} />
                                 <Route path="/admin/item/:slug/update-photos" exact component={requiresAuth(ItemPhotosUpdateComponent)} />
                                 <Route path="/admin/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
