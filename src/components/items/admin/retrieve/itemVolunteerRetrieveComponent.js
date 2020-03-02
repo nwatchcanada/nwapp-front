@@ -83,17 +83,6 @@ export default function ItemVolunteerRetrieveComponent({ item }) {
                 <th scope="row" className="bg-light">Description</th>
                 <td>{item && item.description}</td>
             </tr>
-
-            {/* LINK */}
-
-            <tr className="bg-dark">
-                <th scope="row" colSpan="2" className="text-light">
-                    <i className="fas fa-external-link-alt"></i>&nbsp;Link
-                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-external-link`}>
-                        <i className="fas fa-edit"></i>
-                    </Link>
-                </th>
-            </tr>
             <tr>
                 <th scope="row" className="bg-light">Choice</th>
                 <td>{item && item.externalUrl}</td>
