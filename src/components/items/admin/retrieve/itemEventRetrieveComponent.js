@@ -54,7 +54,7 @@ export default function ItemEventRetrieveComponent({ item }) {
                 </td>
             </tr>
 
-            {/* AUTHORITIES FORM */}
+            {/* DATE START FORM */}
 
             <tr className="bg-dark">
                 <th scope="row" colSpan="2" className="text-light">
@@ -91,7 +91,7 @@ export default function ItemEventRetrieveComponent({ item }) {
             <tr className="bg-dark">
                 <th scope="row" colSpan="2" className="text-light">
                     <i className="fas fa-table"></i>&nbsp;Details
-                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-details`}>
+                    <Link className="btn btn-success btn-sm float-right pl-4 pr-4" to={`/admin/item/${item && item.slug}/update-event-details`}>
                         <i className="fas fa-edit"></i>
                     </Link>
                 </th>
