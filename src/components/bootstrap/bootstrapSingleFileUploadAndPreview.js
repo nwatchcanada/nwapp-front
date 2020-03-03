@@ -71,11 +71,26 @@ export const BootstrapSingleFileUploadAndPreview = ({
             */ }
 
             { /* The following code will render the file name. */ }
-            {fileObj &&
+            {fileObj && fileObj.preview &&
                 <ul className="list-group mt-2">
                     {fileObj &&
                         <li className="list-group-item list-group-item-success">
                             {fileObj.name}
+                            <button className="btn btn-danger btn-sm float-right" onClick={onRemoveUploadClick}>
+                                <i className="fas fa-trash-alt"></i>&nbsp;Remove Upload
+                            </button>
+                            <br />
+                        </li>
+                    }
+                </ul>
+            }
+
+            { /* Remote Version */ }
+            {fileObj && fileObj.fileUrl &&
+                <ul className="list-group mt-2">
+                    {fileObj &&
+                        <li className="list-group-item list-group-item-success">
+                            {fileObj.title}
                             <button className="btn btn-danger btn-sm float-right" onClick={onRemoveUploadClick}>
                                 <i className="fas fa-trash-alt"></i>&nbsp;Remove Upload
                             </button>
