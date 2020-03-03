@@ -109,7 +109,7 @@ export function LinkItemComponent({ item }) {
         <tr>
             <th scope="row" className="bg-light">External Web Address</th>
             <td>
-                <a href={item && item.externalUrl} target="_blank">View&nbsp;<i className="fas fa-external-link-alt"></i></a>
+                <a href={item && item.externalUrl} target="_blank">{item && item.externalUrl}&nbsp;<i className="fas fa-external-link-alt"></i></a>
             </td>
         </tr>
     );
