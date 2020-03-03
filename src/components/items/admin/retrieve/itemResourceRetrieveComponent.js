@@ -101,6 +101,12 @@ export function LinkItemComponent({ item }) {
     );
     elements.push(
         <tr>
+            <th scope="row" className="bg-light">Title</th>
+            <td>{item && item.title}</td>
+        </tr>
+    );
+    elements.push(
+        <tr>
             <th scope="row" className="bg-light">Description</th>
             <td>{item && item.description}</td>
         </tr>
