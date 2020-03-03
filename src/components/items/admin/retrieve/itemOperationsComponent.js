@@ -35,7 +35,7 @@ export default class AdminItemOperationsComponent extends Component {
 
                 <h1><i className="fas fa-map-pin"></i>&nbsp;Details</h1>
 
-                {item.state === 'inactive' &&
+                {item && item.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This item is archived and is read-only.
                     </div>

@@ -4,8 +4,8 @@ import Scroll from 'react-scroll';
 
 import ItemArchiveOperationComponent from "../../../../components/items/admin/operations/itemArchiveOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-// import { postItemDeactivationDetail } from "../../../../actions/itemActions";
-// import { validateDeactivationInput } from "../../../../validators/itemValidator";
+import { postItemDeactivationDetail } from "../../../../actions/itemActions";
+import { validateDeactivationInput } from "../../../../validators/itemValidator";
 
 
 class ItemArchiveOperationContainer extends Component {
@@ -82,7 +82,7 @@ class ItemArchiveOperationContainer extends Component {
 
     onSuccessCallback(response) {
         console.log("onSuccessCallback | Fetched:", response);
-        this.props.setFlashMessage("success", "Item has been successfully deactivated.");
+        this.props.setFlashMessage("success", "Item has been successfully archived.");
         this.props.history.push("/admin/item/"+this.props.itemDetail.slug+"/operations");
     }
 
@@ -116,23 +116,23 @@ class ItemArchiveOperationContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // // Perform item-side validation.
-        // const { errors, isValid } = validateDeactivationInput(this.state);
-        //
-        // // CASE 1 OF 2: Validation passed successfully.
-        // if (isValid) {
-        //     // this.setState({ isLoading: true, errors: [], }, ()=>{
-        //     //     this.props.postItemDeactivationDetail(
-        //     //         this.getPostData(),
-        //     //         this.onSuccessCallback,
-        //     //         this.onFailureCallback,
-        //     //     );
-        //     // });
-        //
-        // // CASE 2 OF 2: Validation was a failure.
-        // } else {
-        //     this.onFailureCallback(errors);
-        // }
+        // Perform item-side validation.
+        const { errors, isValid } = validateDeactivationInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.setState({ isLoading: true, errors: [], }, ()=>{
+                this.props.postItemDeactivationDetail(
+                    this.getPostData(),
+                    this.onSuccessCallback,
+                    this.onFailureCallback,
+                );
+            });
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailureCallback(errors);
+        }
     }
 
     onSelectChange(option) {
@@ -182,11 +182,11 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        // postItemDeactivationDetail: (postData, onSuccessCallback, onFailureCallback) => {
-        //     dispatch(
-        //         postItemDeactivationDetail(postData, onSuccessCallback, onFailureCallback)
-        //     )
-        // },
+        postItemDeactivationDetail: (postData, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                postItemDeactivationDetail(postData, onSuccessCallback, onFailureCallback)
+            )
+        },
     }
 }
 
