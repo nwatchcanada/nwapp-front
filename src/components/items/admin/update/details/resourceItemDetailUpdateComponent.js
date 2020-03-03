@@ -29,17 +29,17 @@ export default class ResourceItemDetailUpdateComponent extends Component {
             description,
             externalUrl,
             resourceImage,
-            file,
+            resourceFile,
             slug,
             errors,
             isLoading,
             onTextChange,
             onSelectChange,
             onClick,
-            onDrop,
-            onRemoveUploadClick,
             onImageDrop,
-            onImageRemoveUploadClick
+            onImageRemoveUploadClick,
+            onFileDrop,
+            onFileRemoveUploadClick
         } = this.props;
 
         return (
@@ -132,12 +132,12 @@ export default class ResourceItemDetailUpdateComponent extends Component {
                             }
                             {formatType === FILE_RESOURCE_TYPE_OF &&
                                 <BootstrapSingleFileUploadAndPreview
-                                    error={errors.file}
+                                    error={errors.resourceFile}
                                     label="File (*)"
-                                    onDrop={onDrop}
-                                    name="file"
-                                    fileObj={file}
-                                    onRemoveUploadClick={onRemoveUploadClick}
+                                    onDrop={onFileDrop}
+                                    name="resourceFile"
+                                    fileObj={resourceFile}
+                                    onRemoveUploadClick={onFileRemoveUploadClick}
                                 />
                             }
 

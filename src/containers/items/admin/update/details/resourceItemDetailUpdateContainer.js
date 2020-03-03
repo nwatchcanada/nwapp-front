@@ -48,7 +48,7 @@ class ResourceItemDetailUpdateContainer extends Component {
             description: item.description,
             externalUrl: item.externalUrl,
             resourceImage: item.resourceImage,
-            file: item.resourceFile,
+            resourceFile: item.resourceFile,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -57,6 +57,9 @@ class ResourceItemDetailUpdateContainer extends Component {
         this.onImageDrop = this.onImageDrop.bind(this);
         this.onImageDropSaveAsBase64ContentCallback = this.onImageDropSaveAsBase64ContentCallback.bind(this);
         this.onImageRemoveUploadClick = this.onImageRemoveUploadClick.bind(this);
+        this.onFileDrop = this.onFileDrop.bind(this);
+        this.onFileDropSaveAsBase64ContentCallback = this.onFileDropSaveAsBase64ContentCallback.bind(this);
+        this.onFileRemoveUploadClick = this.onFileRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulPutCallback = this.onSuccessfulPutCallback.bind(this);
         this.onFailurePutCallback = this.onFailurePutCallback.bind(this);
@@ -77,6 +80,7 @@ class ResourceItemDetailUpdateContainer extends Component {
         // postData.date = dateMoment.format("YYYY-MM-DD")
 
         postData.resourceImage = this.state.base64Image;
+        postData.resourceFile = this.state.base64File;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -216,6 +220,59 @@ class ResourceItemDetailUpdateContainer extends Component {
         });
     }
 
+    ////////////
+
+    onFileDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        const base64File = { // Save our base64 string.
+            fileName: fileName,
+            data: base64Content
+        };
+
+        this.setState({ // Update our local state to update the GUI.
+            base64File: base64File
+        });
+    }
+
+    /**
+     *  Special Thanks: https://react-dropzone.netlify.com/#previews
+     */
+    onFileDrop(acceptedFiles) {
+        const file = acceptedFiles[0];
+
+        // For debuging purposes only.
+        console.log("DEBUG | onFileDrop | file", file);
+
+        if (file !== undefined && file !== null) {
+            const fileWithPreview = Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            });
+
+            convertBinaryFileToBase64String(
+                file,
+                this.onFileDropSaveAsBase64ContentCallback,
+                function(error) {
+                    alert(error);
+                }
+            );
+
+            // For debugging purposes.
+            console.log("DEBUG | onFileDrop | fileWithPreview", fileWithPreview);
+
+            // Update our local state to update the GUI.
+            this.setState({
+                resourceFile: fileWithPreview
+            });
+        }
+    }
+
+    onFileRemoveUploadClick(e) {
+        this.setState({
+            resourceFile: null
+        });
+    }
+
+    ////////////
+
     onRadioChange(e) {
         // Get the values.
         const storageValueKey = "nwapp-item-create-event-"+[e.target.name];
@@ -267,7 +324,7 @@ class ResourceItemDetailUpdateContainer extends Component {
             description,
             externalUrl,
             resourceImage,
-            file,
+            resourceFile,
             slug,
             errors,
             isLoading
@@ -283,12 +340,14 @@ class ResourceItemDetailUpdateContainer extends Component {
                 description={description}
                 externalUrl={externalUrl}
                 resourceImage={resourceImage}
-                file={file}
+                resourceFile={resourceFile}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
                 onImageDrop={this.onImageDrop}
                 onImageRemoveUploadClick={this.onImageRemoveUploadClick}
+                onFileDrop={this.onFileDrop}
+                onFileRemoveUploadClick={this.onFileRemoveUploadClick}
                 onClick={this.onClick}
                 isLoading={isLoading}
             />
