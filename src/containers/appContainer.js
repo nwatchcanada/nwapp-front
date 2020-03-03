@@ -308,6 +308,7 @@ import ItemSearchContainer from "./items/admin/search/itemSearchContainer";
 import ItemSearchResultContainer from "./items/admin/search/itemSearchResultContainer";
 import ItemRetrieveContainer from "./items/admin/retrieve/itemRetrieveContainer";
 import ItemCommentContainer from "./items/admin/retrieve/itemCommentContainer";
+import AdminItemOperationsContainer from "./items/admin/retrieve/itemOperationsContainer";
 import ItemCreateStep1Container from "./items/admin/create/itemCreateStep1Container";
 import ItemCreateStep2ConcernContainer from "./items/admin/create/concern/itemCreateStep2ConcernContainer";
 import ItemCreateStep3ConcernContainer from "./items/admin/create/concern/itemCreateStep3ConcernContainer";
@@ -795,6 +796,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/add/step-5-resource" exact component={requiresAuth(ItemCreateStep5ResourceContainer)} />
                                 <Route path="/admin/item/:slug" exact component={requiresAuth(ItemRetrieveContainer)} />
                                 <Route path="/admin/item/:slug/comments" exact component={requiresAuth(ItemCommentContainer)} />
+                                <Route path="/admin/item/:slug/operations" exact component={requiresAuth(AdminItemOperationsContainer)} />
                                 <Route path="/admin/item/:slug/update-category" exact component={requiresAuth(ItemCategoryUpdateComponent)} />
                                 <Route path="/admin/item/:slug/update-authorities" exact component={requiresAuth(ItemAuthoritiesUpdateComponent)} />
                                 <Route path="/admin/item/:slug/update-date-start" exact component={requiresAuth(ItemDateStartUpdateComponent)} />
