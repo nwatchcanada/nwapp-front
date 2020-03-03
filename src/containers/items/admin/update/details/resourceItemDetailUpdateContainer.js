@@ -79,8 +79,12 @@ class ResourceItemDetailUpdateContainer extends Component {
         // const dateMoment = moment(this.state.date);
         // postData.date = dateMoment.format("YYYY-MM-DD")
 
-        postData.resourceImage = this.state.base64Image;
-        postData.resourceFile = this.state.base64File;
+        if (this.state.base64Image != undefined && this.state.base64Image != null) {
+            postData.resourceImage = this.state.base64Image;
+        }
+        if (this.state.base64File != undefined && this.state.base64File != null) {
+            postData.resourceFile = this.state.base64File;
+        }
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
