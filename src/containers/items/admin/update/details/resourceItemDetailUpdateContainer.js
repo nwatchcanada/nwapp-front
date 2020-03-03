@@ -47,16 +47,16 @@ class ResourceItemDetailUpdateContainer extends Component {
             embedCode: item.embedCode,
             description: item.description,
             externalUrl: item.externalUrl,
-            image: item.image,
-            file: item.file,
+            resourceImage: item.resourceImage,
+            file: item.resourceFile,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
-        this.onLogoDrop = this.onLogoDrop.bind(this);
-        this.onLogoDropSaveAsBase64ContentCallback = this.onLogoDropSaveAsBase64ContentCallback.bind(this);
-        this.onLogoRemoveUploadClick = this.onLogoRemoveUploadClick.bind(this);
+        this.onImageDrop = this.onImageDrop.bind(this);
+        this.onImageDropSaveAsBase64ContentCallback = this.onImageDropSaveAsBase64ContentCallback.bind(this);
+        this.onImageRemoveUploadClick = this.onImageRemoveUploadClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSuccessfulPutCallback = this.onSuccessfulPutCallback.bind(this);
         this.onFailurePutCallback = this.onFailurePutCallback.bind(this);
@@ -73,8 +73,10 @@ class ResourceItemDetailUpdateContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        const dateMoment = moment(this.state.date);
-        postData.date = dateMoment.format("YYYY-MM-DD")
+        // const dateMoment = moment(this.state.date);
+        // postData.date = dateMoment.format("YYYY-MM-DD")
+
+        postData.resourceImage = this.state.base64Image;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -165,25 +167,25 @@ class ResourceItemDetailUpdateContainer extends Component {
         );
     }
 
-    onLogoDropSaveAsBase64ContentCallback(base64Content, fileName) {
-        const base64EventLogoImage = { // Save our base64 string.
+    onImageDropSaveAsBase64ContentCallback(base64Content, fileName) {
+        const base64Image = { // Save our base64 string.
             fileName: fileName,
             data: base64Content
         };
 
         this.setState({ // Update our local state to update the GUI.
-            base64EventLogoImage: base64EventLogoImage
+            base64Image: base64Image
         });
     }
 
     /**
      *  Special Thanks: https://react-dropzone.netlify.com/#previews
      */
-    onLogoDrop(acceptedFiles) {
+    onImageDrop(acceptedFiles) {
         const file = acceptedFiles[0];
 
         // For debuging purposes only.
-        console.log("DEBUG | onLogoDrop | file", file);
+        console.log("DEBUG | onImageDrop | file", file);
 
         if (file !== undefined && file !== null) {
             const fileWithPreview = Object.assign(file, {
@@ -192,25 +194,25 @@ class ResourceItemDetailUpdateContainer extends Component {
 
             convertBinaryFileToBase64String(
                 file,
-                this.onLogoDropSaveAsBase64ContentCallback,
+                this.onImageDropSaveAsBase64ContentCallback,
                 function(error) {
                     alert(error);
                 }
             );
 
             // For debugging purposes.
-            console.log("DEBUG | onLogoDrop | fileWithPreview", fileWithPreview);
+            console.log("DEBUG | onImageDrop | fileWithPreview", fileWithPreview);
 
             // Update our local state to update the GUI.
             this.setState({
-                eventLogoImage: fileWithPreview
+                resourceImage: fileWithPreview
             });
         }
     }
 
-    onLogoRemoveUploadClick(e) {
+    onImageRemoveUploadClick(e) {
         this.setState({
-            eventLogoImage: null
+            resourceImage: null
         });
     }
 
@@ -258,7 +260,17 @@ class ResourceItemDetailUpdateContainer extends Component {
 
     render() {
         const {
-            typeOf, formatType, title, embedCode, description, externalUrl, image, file, slug, errors, isLoading,
+            typeOf,
+            formatType,
+            title,
+            embedCode,
+            description,
+            externalUrl,
+            resourceImage,
+            file,
+            slug,
+            errors,
+            isLoading
         } = this.state;
         return (
             <ResourceItemDetailUpdateComponent
@@ -270,13 +282,13 @@ class ResourceItemDetailUpdateContainer extends Component {
                 embedCode={embedCode}
                 description={description}
                 externalUrl={externalUrl}
-                image={image}
+                resourceImage={resourceImage}
                 file={file}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onRadioChange={this.onRadioChange}
-                onLogoDrop={this.onLogoDrop}
-                onLogoRemoveUploadClick={this.onLogoRemoveUploadClick}
+                onImageDrop={this.onImageDrop}
+                onImageRemoveUploadClick={this.onImageRemoveUploadClick}
                 onClick={this.onClick}
                 isLoading={isLoading}
             />

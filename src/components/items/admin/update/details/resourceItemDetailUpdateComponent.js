@@ -22,11 +22,24 @@ import {
 export default class ResourceItemDetailUpdateComponent extends Component {
     render() {
         const {
-            typeOf, formatType, title, embedCode, description, externalUrl, image, file, slug, errors, isLoading,
+            typeOf,
+            formatType,
+            title,
+            embedCode,
+            description,
+            externalUrl,
+            resourceImage,
+            file,
+            slug,
+            errors,
+            isLoading,
             onTextChange,
             onSelectChange,
             onClick,
-            onDrop, onRemoveUploadClick,
+            onDrop,
+            onRemoveUploadClick,
+            onImageDrop,
+            onImageRemoveUploadClick
         } = this.props;
 
         return (
@@ -109,18 +122,18 @@ export default class ResourceItemDetailUpdateComponent extends Component {
 
                             {formatType === IMAGE_RESOURCE_TYPE_OF &&
                                 <BootstrapSingleImageUploadAndPreview
-                                    error={errors.file}
+                                    error={errors.resourceImage}
                                     label="Image File (*)"
-                                    onDrop={onDrop}
-                                    name="file"
-                                    fileObj={file}
-                                    onRemoveUploadClick={onRemoveUploadClick}
+                                    onDrop={onImageDrop}
+                                    name="resourceImage"
+                                    fileObj={resourceImage}
+                                    onRemoveUploadClick={onImageRemoveUploadClick}
                                 />
                             }
                             {formatType === FILE_RESOURCE_TYPE_OF &&
                                 <BootstrapSingleFileUploadAndPreview
                                     error={errors.file}
-                                    label="File File (*)"
+                                    label="File (*)"
                                     onDrop={onDrop}
                                     name="file"
                                     fileObj={file}
