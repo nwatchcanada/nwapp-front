@@ -34,14 +34,14 @@ export default class ItemCommentComponent extends Component {
                             <Link to="/admin/items"><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-map-pin"></i>&nbsp;{item && item.fullName}
+                            <i className="fas fa-map-pin"></i>&nbsp;Details
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{item && item.fullName}</h1>
+                <h1><i className="fas fa-map-pin"></i>&nbsp;Details</h1>
 
                 {item && item.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

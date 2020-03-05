@@ -4,8 +4,8 @@ import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
 import OrderListComponent from "../../../../components/items/admin/retrieve/itemCommentComponent";
-import { clearFlashMessage } from "../../../../actions/flashMessageActions";
-// import { pullItemCommentList, postItemComment } from "../../../../actions/itemCommentActions"; //TODO: UNCOMMENT
+import { clearFlashMessage, setFlashMessage } from "../../../../actions/flashMessageActions";
+import { pullItemCommentList, postItemComment } from "../../../../actions/itemCommentActions"; //TODO: UNCOMMENT
 import { validateInput } from "../../../../validators/commentValidator"
 
 
@@ -17,9 +17,9 @@ class ItemCommentContainer extends Component {
 
     constructor(props) {
         super(props);
-        const { id } = this.props.match.params;
+        const { slug } = this.props.match.params;
         const parametersMap = new Map();
-        parametersMap.set("about", id);
+        parametersMap.set("about", slug);
         parametersMap.set("o", "-created_at");
         this.state = {
             // Pagination
@@ -35,7 +35,7 @@ class ItemCommentContainer extends Component {
             isLoading: false,  //TODO: DELETE
 
             // Everything else...
-            id: id,
+            slug: slug,
             text: "",
             errors: {},
         }
@@ -56,7 +56,8 @@ class ItemCommentContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        postData.about = this.state.id;
+        postData.about = this.state.slug;
+        postData.item = this.state.slug;
         postData.extraText = this.state.text;
 
         // Finally: Return our new modified data.
@@ -72,14 +73,14 @@ class ItemCommentContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // // Get our data.
-        // this.props.pullItemCommentList( //TODO: UNCOMMENT
-        //     this.state.page,
-        //     this.state.sizePerPage,
-        //     this.state.parametersMap,
-        //     this.onSuccessListCallback,
-        //     this.onFailureListCallback
-        // );
+        // Get our data.
+        this.props.pullItemCommentList( //TODO: UNCOMMENT
+            this.state.page,
+            this.state.sizePerPage,
+            this.state.parametersMap,
+            this.onSuccessListCallback,
+            this.onFailureListCallback
+        );
     }
 
     componentWillUnmount() {
@@ -130,14 +131,15 @@ class ItemCommentContainer extends Component {
             ()=>{
                 console.log("onSuccessPostCallback | Fetched:",response); // For debugging purposes only.
                 console.log("onSuccessPostCallback | State (Post-Fetch):", this.state);
+                this.props.setFlashMessage("success", "Comment has been successfully posted.");
                 // // Get our data.
-                // this.props.pullItemCommentList( //TODO: UNCOMMENT
-                //     this.state.page,
-                //     this.state.sizePerPage,
-                //     this.state.parametersMap,
-                //     this.onSuccessListCallback,
-                //     this.onFailureListCallback
-                // );
+                this.props.pullItemCommentList(
+                    this.state.page,
+                    this.state.sizePerPage,
+                    this.state.parametersMap,
+                    this.onSuccessListCallback,
+                    this.onFailureListCallback
+                );
             }
         )
     }
@@ -176,13 +178,13 @@ class ItemCommentContainer extends Component {
                 var scroll = Scroll.animateScroll;
                 scroll.scrollToTop();
 
-                // // Once our state has been validated `item-side` then we will
-                // // make an API request with the server to create our new production.
-                // this.props.postItemComment( //TODO: UNCOMMENT
-                //     this.getPostData(),
-                //     this.onSuccessPostCallback,
-                //     this.onFailurePostCallback
-                // );
+                // Once our state has been validated `item-side` then we will
+                // make an API request with the server to create our new production.
+                this.props.postItemComment( //TODO: UNCOMMENT
+                    this.getPostData(),
+                    this.onSuccessPostCallback,
+                    this.onFailurePostCallback
+                );
             });
         } else {
             this.setState({
@@ -204,12 +206,12 @@ class ItemCommentContainer extends Component {
      */
 
     render() {
-        const { isLoading, id, text, errors } = this.state;
+        const { isLoading, slug, text, errors } = this.state;
         const item = this.props.itemDetail ? this.props.itemDetail : {};
         const itemComments = this.props.itemCommentList ? this.props.itemCommentList.results : [];
         return (
             <OrderListComponent
-                id={id}
+                slug={slug}
                 text={text}
                 item={item}
                 itemComments={itemComments}
@@ -237,14 +239,17 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        // pullItemCommentList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => { //TODO: UNCOMMENT
-        //     dispatch(
-        //         pullItemCommentList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
-        //     )
-        // },
-        // postItemComment: (postData, successCallback, failedCallback) => {
-        //     dispatch(postItemComment(postData, successCallback, failedCallback))
-        // },
+        pullItemCommentList: (page, sizePerPage, map, onSuccessListCallback, onFailureListCallback) => { //TODO: UNCOMMENT
+            dispatch(
+                pullItemCommentList(page, sizePerPage, map, onSuccessListCallback, onFailureListCallback)
+            )
+        },
+        postItemComment: (postData, successCallback, failedCallback) => {
+            dispatch(postItemComment(postData, successCallback, failedCallback))
+        },
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
     }
 }
 
