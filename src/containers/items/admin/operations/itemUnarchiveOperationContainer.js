@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import ItemArchiveOperationComponent from "../../../../components/items/admin/operations/itemArchiveOperationComponent";
+import ItemUnarchiveOperationComponent from "../../../../components/items/admin/operations/itemUnarchiveOperationComponent";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-// import { postItemDeactivationDetail } from "../../../../actions/itemActions";
-// import { validateActivationInput } from "../../../../validators/itemValidator";
+import { postItemDeactivationDetail } from "../../../../actions/itemActions";
+import { validateActivationInput } from "../../../../validators/itemValidator";
 
 
 class AdminItemUnarchiveOperationContainer extends Component {
@@ -116,23 +116,23 @@ class AdminItemUnarchiveOperationContainer extends Component {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
-        // // Perform item-side validation.
-        // const { errors, isValid } = validateActivationInput(this.state);
-        //
-        // // CASE 1 OF 2: Validation passed successfully.
-        // if (isValid) {
-        //     // this.setState({ isLoading: true, errors: [], }, ()=>{
-        //     //     this.props.postItemDeactivationDetail(
-        //     //         this.getPostData(),
-        //     //         this.onSuccessCallback,
-        //     //         this.onFailureCallback,
-        //     //     );
-        //     // });
-        //
-        // // CASE 2 OF 2: Validation was a failure.
-        // } else {
-        //     this.onFailureCallback(errors);
-        // }
+        // Perform item-side validation.
+        const { errors, isValid } = validateActivationInput(this.state);
+
+        // CASE 1 OF 2: Validation passed successfully.
+        if (isValid) {
+            this.setState({ isLoading: true, errors: [], }, ()=>{
+                this.props.postItemDeactivationDetail(
+                    this.getPostData(),
+                    this.onSuccessCallback,
+                    this.onFailureCallback,
+                );
+            });
+
+        // CASE 2 OF 2: Validation was a failure.
+        } else {
+            this.onFailureCallback(errors);
+        }
     }
 
     onSelectChange(option) {
@@ -154,7 +154,7 @@ class AdminItemUnarchiveOperationContainer extends Component {
         const { slug, errors, isLoading, reason, reasonOther } = this.state;
         const item = this.props.itemDetail ? this.props.itemDetail : [];
         return (
-            <ItemArchiveOperationComponent
+            <ItemUnarchiveOperationComponent
                 slug={slug}
                 errors={errors}
                 isLoading={isLoading}
@@ -182,11 +182,11 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        // postItemDeactivationDetail: (postData, onSuccessCallback, onFailureCallback) => {
-        //     dispatch(
-        //         postItemDeactivationDetail(postData, onSuccessCallback, onFailureCallback)
-        //     )
-        // },
+        postItemDeactivationDetail: (postData, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                postItemDeactivationDetail(postData, onSuccessCallback, onFailureCallback)
+            )
+        },
     }
 }
 

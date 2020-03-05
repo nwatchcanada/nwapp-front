@@ -20,13 +20,13 @@ export default class AdminItemUnarchiveOperationComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/items`}><i className="fas fa-users"></i>&nbsp;Items</Link>
+                            <Link to={`/admin/items`}><i className="fas fa-map-pin"></i>&nbsp;Items</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/item/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{item && item.fullName}</Link>
+                            <Link to={`/admin/item/${slug}/operations`}><i className="fas fa-map-pin"></i>&nbsp;Details</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-box-open"></i>&nbsp;Unarchive
+                            <i className="fas fa-archive"></i>&nbsp;Unarchive
                         </li>
                     </ol>
                 </nav>
