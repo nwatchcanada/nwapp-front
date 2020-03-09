@@ -130,21 +130,21 @@ class AdminTaskItemListContainer extends Component {
             ////
             //// DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
             ////
-            // console.log(type, filters); // For debugging purposes only.
-            // if (filters.state === undefined) {
-            //     parametersMap.delete("state");
-            // } else {
-            //     const filterVal = filters.state.filterVal;
-            //     parametersMap.set("state", filterVal);
-            // }
-            // this.setState(
-            //     { parametersMap: parametersMap, isLoading: true, },
-            //     ()=>{
-            //         // STEP 3:
-            //         // SUBMIT TO OUR API.
-            //         this.props.pullTaskItemList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
-            //     }
-            // );
+            console.log("onTableChange | filter", type, filters); // For debugging purposes only.
+            if (filters.state === undefined) {
+                parametersMap.delete("state");
+            } else {
+                const filterVal = filters.state.filterVal;
+                parametersMap.set("state", filterVal);
+            }
+            this.setState(
+                { parametersMap: parametersMap, isLoading: true, },
+                ()=>{
+                    // STEP 3:
+                    // SUBMIT TO OUR API.
+                    this.props.pullTaskItemList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
         }else {
             alert("Unsupported feature detected!!"+type);
         }

@@ -13,7 +13,15 @@ import {
    LINK_RESOURCE_TYPE_OF,
    YOUTUBE_VIDEO_RESOURCE_TYPE_OF,
    IMAGE_RESOURCE_TYPE_OF,
-   FILE_RESOURCE_TYPE_OF
+   FILE_RESOURCE_TYPE_OF,
+   TASK_ITEM_TYPE_OF_ASSIGN_AREA_COORDINATOR_TO_WATCH,
+   TASK_ITEM_TYPE_OF_ASSIGN_ASSOCIATE_TO_WATCH,
+   TASK_ITEM_TYPE_OF_ASSIGN_ASSOCIATE_TO_DISTRICT,
+   TASK_ITEM_TYPE_OF_ACTION_INCIDENT_ITEM,
+   TASK_ITEM_TYPE_OF_ACTION_CONCERNT_ITEM,
+   TASK_ITEM_STATE_UNASSIGNED,
+   TASK_ITEM_STATE_PENDING,
+   TASK_ITEM_STATE_CLOSED
 } from "./api";
 
 
@@ -95,6 +103,44 @@ export const ItemFormatTypeIconHelper = ({ formatTypeId }) => {
         return <i className="fas fa-image"></i>;
     } else if (formatTypeId === FILE_RESOURCE_TYPE_OF) {
         return <i className="fas fa-file"></i>;
+    } else {
+        return null;
+    }
+}
+
+
+/*
+ * See:
+ * https://github.com/nwatchcanada/nwapp-back/blob/master/nwapp/tenant_foundation/models/task_item.py
+ */
+export const TaskItemTypeOfLabelHelper = ({ typeOfId }) => {
+    if (typeOfId === TASK_ITEM_TYPE_OF_ASSIGN_AREA_COORDINATOR_TO_WATCH) {
+        return "Assign Area Coordinator to Watch";
+    } else if (typeOfId === TASK_ITEM_TYPE_OF_ASSIGN_ASSOCIATE_TO_WATCH) {
+        return "Assign Associate to Watch";
+    } else if (typeOfId === TASK_ITEM_TYPE_OF_ASSIGN_ASSOCIATE_TO_DISTRICT) {
+        return "Assign Associate to District";
+    } else if (typeOfId === TASK_ITEM_TYPE_OF_ACTION_INCIDENT_ITEM) {
+        return "Action a NW concern item";
+    } else if (typeOfId === TASK_ITEM_TYPE_OF_ACTION_CONCERNT_ITEM) {
+        return "Action a NW item item";
+    } else {
+        return null;
+    }
+}
+
+
+/*
+ * See:
+ * https://github.com/nwatchcanada/nwapp-back/blob/master/nwapp/tenant_foundation/models/task_item.py
+ */
+export const TaskItemStateLabelHelper = ({ stateId }) => {
+    if (stateId === TASK_ITEM_STATE_UNASSIGNED) {
+        return "Unassigned";
+    } else if (stateId === TASK_ITEM_STATE_PENDING) {
+        return "Pending";
+    } else if (stateId === TASK_ITEM_STATE_CLOSED) {
+        return "Closed";
     } else {
         return null;
     }

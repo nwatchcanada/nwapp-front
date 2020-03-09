@@ -19,6 +19,9 @@ import {
     AREA_COORDINATOR_ROLE_ID,
     MEMBER_ROLE_ID
 } from "../../../../constants/api";
+import {
+    TaskItemTypeOfLabelHelper, TaskItemStateLabelHelper
+} from "../../../../constants/helper";
 
 
 const customTotal = (from, to, size) => (
@@ -45,54 +48,35 @@ class RemoteListComponent extends Component {
         // };
 
         const columns = [{
-            dataField: 'icon',
-            text: '',
-            sort: false,
-            formatter: iconFormatter
+            dataField: 'typeOf',
+            text: 'Type',
+            sort: true,
+            formatter: typeOfFormatter
         },
-        // {
-        //     dataField: 'state',
-        //     text: 'Status',
-        //     sort: false,
-        //     // filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
-        //     //     options: selectOptions,
-        //     //     defaultValue: 1,
-        //     //     withoutEmptyOption: true
-        //     // }),
-        //     formatter: statusFormatter
-        // },
         {
-            dataField: 'firstName',
-            text: 'First Name',
+            dataField: 'state',
+            text: 'Status',
+            sort: false,
+            // filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            //     options: selectOptions,
+            //     defaultValue: 1,
+            //     withoutEmptyOption: true
+            // }),
+            formatter: statusFormatter
+        },
+        {
+            dataField: 'dueDate',
+            text: 'Due Date',
             sort: true
         },{
-            dataField: 'lastName',
-            text: 'Last Name',
-            sort: true
-        },{
-            dataField: 'primaryPhoneNational',
-            text: 'Phone',
-            sort: true,
-            formatter: telephoneFormatter
-        },{
-            dataField: 'email',
-            text: 'Email',
-            sort: true,
-            formatter: emailFormatter,
-        },{
-            dataField: 'roleId',
-            text: 'Role',
-            sort: true,
-            formatter: roleIdFormatter,
-        },{
-            dataField: 'slug',
+            dataField: 'uuid',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
         }];
 
         const defaultSorted = [{
-            dataField: 'lastName',
+            dataField: 'dueDate',
             order: 'asc'
         }];
 
@@ -143,21 +127,8 @@ class RemoteListComponent extends Component {
 }
 
 
-function iconFormatter(cell, row){
-    switch(row.typeOf) {
-        case BUSINESS_TYPE_OF:
-            return <i className="fas fa-building"></i>;
-            break;
-        case RESIDENCE_TYPE_OF:
-            return <i className="fas fa-home"></i>;
-            break;
-        case COMMUNITY_CARES_TYPE_OF:
-            return <i className="fas fa-university"></i>;
-            break;
-        default:
-            return <i className="fas fa-question"></i>;
-            break;
-    }
+function typeOfFormatter(cell, row){
+    return <TaskItemTypeOfLabelHelper typeOfId={row.typeOf} />;
 }
 
 
@@ -186,19 +157,9 @@ function roleIdFormatter(cell, row){
 }
 
 
-// function statusFormatter(cell, row){
-//     switch(row.state) {
-//         case "active":
-//             return <i className="fas fa-check-circle" style={{ color: 'green' }}></i>;
-//             break;
-//         case "inactive":
-//             return <i className="fas fa-archive" style={{ color: 'blue' }}></i>;
-//             break;
-//         default:
-//         return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
-//             break;
-//     }
-// }
+function statusFormatter(cell, row){
+    return <TaskItemStateLabelHelper stateId={row.state} /> 
+}
 
 
 function telephoneFormatter(cell, row){
@@ -283,7 +244,7 @@ class AdminTaskItemListComponent extends Component {
                                 <h4>Search</h4>
                                 <span className="text-muted">Search TaskItems</span>
                             </div>
-                            
+
                         </section>
                     </div>
                 </div>

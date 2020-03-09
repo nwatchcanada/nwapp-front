@@ -969,3 +969,18 @@ export const BADGE_TYPE_OF_CHOICES = [
         label: "Other (Please specify)"
     }
 ];
+
+/*
+ *-----------
+ * TASK ITEM
+ *-----------
+ */
+export const TASK_ITEM_TYPE_OF_ASSIGN_AREA_COORDINATOR_TO_WATCH = 1
+export const TASK_ITEM_TYPE_OF_ASSIGN_ASSOCIATE_TO_WATCH = 2
+export const TASK_ITEM_TYPE_OF_ASSIGN_ASSOCIATE_TO_DISTRICT = 3
+export const TASK_ITEM_TYPE_OF_ACTION_INCIDENT_ITEM = 4
+export const TASK_ITEM_TYPE_OF_ACTION_CONCERNT_ITEM = 5
+
+export const TASK_ITEM_STATE_UNASSIGNED = 1
+export const TASK_ITEM_STATE_PENDING = 2
+export const TASK_ITEM_STATE_CLOSED = 3
