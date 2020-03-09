@@ -383,7 +383,7 @@ import Report07Container from "./reports/report07Container";
 
 
 
-import TaskListContainer from "./tasks/list/taskListContainer";
+import AdminTaskItemListContainer from "./taskItems/admin/list/taskListContainer";
 import TaskSearchContainer from "./tasks/search/taskSearchContainer";
 import TaskSearchResultContainer from "./tasks/search/taskSearchResultContainer";
 import AssignWatchAssociateTaskStep1Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Container";
@@ -822,7 +822,7 @@ class AppContainer extends React.Component {
                                 TODO: PROCESS
                                 -------------
                                 */
-                                <Route path="/tasks" exact component={requiresAuth(TaskListContainer)} />
+                                <Route path="/tasks" exact component={requiresAuth(AdminTaskItemListContainer)} />
                                 <Route path="/tasks/search" exact component={requiresAuth(TaskSearchContainer)} />
                                 <Route path="/tasks/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
                                 <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
