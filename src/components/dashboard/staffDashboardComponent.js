@@ -103,12 +103,12 @@ class RecentTaskListComponent extends Component {
         const { latestTasks } = this.props;
 
         const columns = [{
-            dataField: 'watchName',
-            text: 'Watch Name',
+            dataField: 'typeOfLabel',
+            text: 'Type',
             sort: false
         },{
-            dataField: 'prettyTypeOf',
-            text: 'Type',
+            dataField: 'dueDate',
+            text: 'Due Date',
             sort: false
         },{
             dataField: 'slug',
@@ -144,23 +144,8 @@ class RecentTaskListComponent extends Component {
 
 
 function recentTaskLinkFormatter(cell, row){
-    // DEVELOPERS NOTE:
-    // WE ARE ASSIGNING AN ID TO THE URL. THIS IS WHERE WE NEED TO ADD MORE IDS
-    // IF HAVE MORE DIFFERENT TYPES.
-    let typeOfID = 0;
-    switch(row.typeOf) {
-        case "unassigned-watch-associate":
-            typeOfID = 1;
-            break;
-        case "unassigned-watch-area-coordinator":
-            typeOfID = 2;
-            break;
-        default:
-           typeOfID = 0;
-           break;
-    }
     return (
-        <Link to={`/task/${typeOfID}/${row.slug}/step-1`}>
+        <Link to={`/task/${row.typeOf}/${row.uuid}/step-1`}>
             View&nbsp;<i className="fas fa-chevron-right"></i>
         </Link>
     )
