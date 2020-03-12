@@ -388,7 +388,7 @@ TASK ITEMS
 ----------
 */
 import AdminTaskItemListContainer from "./taskItems/admin/list/taskListContainer";
-import AdminTaskSearchContainer from "./taskItems/admin/search/taskSearchContainer";
+import AdminTaskSearchContainer from "./taskItems/admin/search/searchContainer";
 import AdminTaskSearchResultContainer from "./taskItems/admin/search/taskSearchResultContainer";
 
 /*
