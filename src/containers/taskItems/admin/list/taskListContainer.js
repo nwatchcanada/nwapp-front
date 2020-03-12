@@ -137,6 +137,14 @@ class AdminTaskItemListContainer extends Component {
                 const filterVal = filters.state.filterVal;
                 parametersMap.set("state", filterVal);
             }
+
+            if (filters.typeOf === undefined) {
+                parametersMap.delete("typeOf");
+            } else {
+                const filterVal = filters.typeOf.filterVal;
+                parametersMap.set("typeOf", filterVal);
+            }
+
             this.setState(
                 { parametersMap: parametersMap, isLoading: true, },
                 ()=>{

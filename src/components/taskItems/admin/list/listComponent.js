@@ -42,26 +42,42 @@ class RemoteListComponent extends Component {
             onTableChange, isLoading
         } = this.props;
 
-        // const selectOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
-        //     "active": 'Active',
-        //     "inactive": 'Archived',
-        // };
+        const selectStateOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            0: 'All',
+            1: 'Unassigned',
+            2: 'Pending',
+            3: 'Closed',
+        };
+
+        const selectTypeOfOptions = {
+            0: 'All',
+            1: 'Assign Area Coordinator to Watch',
+            2: 'Assign Associate to Watch',
+            3: 'Assign Associate to District',
+            4: 'Action a NW concern item',
+            5: 'Action a NW item item',
+        };
 
         const columns = [{
             dataField: 'typeOf',
             text: 'Type',
             sort: true,
+            filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+                options: selectTypeOfOptions,
+                defaultValue: 0,
+                withoutEmptyOption: true
+            }),
             formatter: typeOfFormatter
         },
         {
             dataField: 'state',
             text: 'Status',
             sort: false,
-            // filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
-            //     options: selectOptions,
-            //     defaultValue: 1,
-            //     withoutEmptyOption: true
-            // }),
+            filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+                options: selectStateOptions,
+                defaultValue: 0,
+                withoutEmptyOption: true
+            }),
             formatter: statusFormatter
         },
         {
