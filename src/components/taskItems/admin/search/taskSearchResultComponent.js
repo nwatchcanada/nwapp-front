@@ -4,7 +4,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-import { FlashMessageComponent } from "../../flashMessageComponent";
+import { FlashMessageComponent } from "../../../flashMessageComponent";
 
 
 class ListComponent extends Component {
@@ -88,7 +88,7 @@ function externalLinkFormatter(cell, row){
 }
 
 
-class TaskSearchResultComponent extends Component {
+class AdminTaskSearchResultComponent extends Component {
     render() {
         const { results, flashMessage } = this.props;
         return (
@@ -129,4 +129,4 @@ class TaskSearchResultComponent extends Component {
     }
 }
 
-export default TaskSearchResultComponent;
+export default AdminTaskSearchResultComponent;

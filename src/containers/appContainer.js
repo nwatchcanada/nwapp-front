@@ -382,10 +382,20 @@ import Report06Container from "./reports/report06Container";
 import Report07Container from "./reports/report07Container";
 
 
-
+/*
+----------
+TASK ITEMS
+----------
+*/
 import AdminTaskItemListContainer from "./taskItems/admin/list/taskListContainer";
-import TaskSearchContainer from "./tasks/search/taskSearchContainer";
-import TaskSearchResultContainer from "./tasks/search/taskSearchResultContainer";
+import AdminTaskSearchContainer from "./taskItems/admin/search/taskSearchContainer";
+import AdminTaskSearchResultContainer from "./taskItems/admin/search/taskSearchResultContainer";
+
+/*
+----------
+TODO
+----------
+*/
 import AssignWatchAssociateTaskStep1Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Container";
 import AssignWatchAssociateTaskStep2Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Container";
 import AssignWatchAssociateTaskStep3Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep3Container";
@@ -817,7 +827,15 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/:slug/update-photos" exact component={requiresAuth(ItemPhotosUpdateComponent)} />
                                 <Route path="/admin/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
 
+
+                                /*
+                                ----------
+                                TASK ITEMS
+                                ----------
+                                */
                                 <Route path="/admin/tasks" exact component={requiresAuth(AdminTaskItemListContainer)} />
+                                <Route path="/admin/tasks/search" exact component={requiresAuth(AdminTaskSearchContainer)} />
+                                <Route path="/admin/tasks/search-results" exact component={requiresAuth(AdminTaskSearchResultContainer)} />
 
 
                                 /*
@@ -825,9 +843,7 @@ class AppContainer extends React.Component {
                                 TODO: PROCESS
                                 -------------
                                 */
-                                
-                                <Route path="/tasks/search" exact component={requiresAuth(TaskSearchContainer)} />
-                                <Route path="/tasks/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
+
                                 <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
                                 <Route path="/task/1/:slug/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />
                                 <Route path="/task/1/:slug/step-3" exact component={requiresAuth(AssignWatchAssociateTaskStep3Container)} />

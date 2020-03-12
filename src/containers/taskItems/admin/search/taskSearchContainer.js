@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TaskSearchResultComponent from "../../../components/tasks/search/taskSearchResultComponent";
+import AdminTaskSearchComponent from "../../../../components/taskItems/admin/search/taskSearchComponent";
 
 
-class TaskSearchResultContainer extends Component {
+class AdminTaskListContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
      */
 
     constructor(props) {
-        super(props);
+        super(props)
+
         this.state = {
-            results: [],
+            advancedSearchActive: false,
+            errors: {},
         }
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
+        this.onSearchClick = this.onSearchClick.bind(this);
+        this.onAdvancedSearchClick = this.onAdvancedSearchClick.bind(this);
     }
 
     /**
@@ -26,33 +29,6 @@ class TaskSearchResultContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // Load from API...
-        const results = [{
-            'slug': 'argyle-task-1',
-            'dueDate': "July 20, 2019",
-            'taskName': "Assign Associate to Watch",
-            "watchName": "Argyle",
-            "category": "unassigned",
-            "typeOf": "unassigned-watch-associate",
-        },{
-            'slug': 'byron-task-1',
-            'dueDate': "April 10, 2019",
-            'taskName': "Assign Area Coordinator to Watch",
-            "watchName": "Byron",
-            "category": "unassigned",
-            "typeOf": "unassigned-watch-area-coordinator",
-        },{
-            'slug': 'carling-task-1',
-            'dueDate': "January 2, 2019",
-            'taskName': "Assign Area Coordinator to Watch",
-            "watchName": "Carling",
-            "category": "unassigned",
-            "typeOf": "unassigned-watch-associate",
-        }];
-        this.setState({
-            results: results,
-        });
     }
 
     componentWillUnmount() {
@@ -82,6 +58,19 @@ class TaskSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onAdvancedSearchPanelToggle() {
+        this.setState({
+            advancedSearchActive: !this.state.advancedSearchActive
+        });
+    }
+
+    onSearchClick() {
+        this.props.history.push("/admin/tasks/search-results");
+    }
+
+    onAdvancedSearchClick() {
+        this.props.history.push("/admin/tasks/search-results");
+    }
 
     /**
      *  Main render function
@@ -90,8 +79,12 @@ class TaskSearchResultContainer extends Component {
 
     render() {
         return (
-            <TaskSearchResultComponent
-                results={this.state.results}
+            <AdminTaskSearchComponent
+                advancedSearchActive={this.state.advancedSearchActive}
+                onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
+                onSearchClick={this.onSearchClick}
+                onAdvancedSearchClick={this.onAdvancedSearchClick}
+                errors={this.state.errors}
             />
         );
     }
@@ -112,4 +105,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TaskSearchResultContainer);
+)(AdminTaskListContainer);
