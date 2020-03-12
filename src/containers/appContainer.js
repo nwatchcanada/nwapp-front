@@ -387,7 +387,7 @@ import Report07Container from "./reports/report07Container";
 TASK ITEMS
 ----------
 */
-import AdminTaskItemListContainer from "./taskItems/admin/list/taskListContainer";
+import AdminTaskItemListContainer from "./taskItems/admin/list/listContainer";
 import AdminTaskSearchContainer from "./taskItems/admin/search/searchContainer";
 import AdminTaskSearchResultContainer from "./taskItems/admin/search/taskSearchResultContainer";
 
