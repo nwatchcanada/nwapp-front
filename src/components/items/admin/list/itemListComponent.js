@@ -1,118 +1,147 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 import * as moment from 'moment';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
+// import overlayFactory from 'react-bootstrap-table2-overlay';
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import {
-    INCIDENT_ITEM_TYPE_OF,
-    EVENT_ITEM_TYPE_OF,
-    CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF,
-    COMMUNITY_NEWS_ITEM_TYPE_OF,
-    VOLUNTEER_ITEM_TYPE_OF,
-    RESOURCE_ITEM_TYPE_OF
+    RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF,
+    MANAGEMENT_ROLE_ID,
+    FRONTLINE_STAFF_ROLE_ID,
+    ASSOCIATE_ROLE_ID,
+    AREA_COORDINATOR_ROLE_ID,
+    MEMBER_ROLE_ID
 } from "../../../../constants/api";
+import {
+    ItemTypeOfLabelHelper, ItemStateLabelHelper, ItemIconHelper
+} from "../../../../constants/helper";
+
+
+const customTotal = (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">&nbsp;Showing { from } to { to } of { size } Results</span>
+);
 
 
 class RemoteListComponent extends Component {
     render() {
-        const { items } = this.props;
-        const columns = [
-            {
-                dataField: 'category',
-                text: 'Category',
-                sort: false,
-                formatter: categoryFormatter
-            },{
-                dataField: 'text',
-                text: 'Title / Text',
-                sort: false,
-                // formatter: textFormatter
-            },{
-                dataField: 'createdAt',
-                text: 'Post Date',
-                sort: false,
-                formatter: createdAtFormatter
-            },{
-                dataField: 'slug',
-                text: 'Details',
-                sort: false,
-                formatter: detailLinkFormatter
-            }
-        ];
+        const {
+            // Pagination
+            page, sizePerPage, totalSize,
+
+            // Data
+            items,
+
+            // Everything else.
+            onTableChange, isLoading
+        } = this.props;
+
+        const selectCategoryOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            0: 'All',
+            2: 'Incident',
+            3: 'Event',
+            4: 'Concern',
+            5: 'Information',
+            6: 'Community News',
+            7: 'Volunteer',
+            8: 'Resource',
+        };
+
+        const columns = [{
+            dataField: 'category',
+            text: 'Category',
+            sort: false,
+            filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+                options: selectCategoryOptions,
+                defaultValue: 0,
+                withoutEmptyOption: true
+            }),
+            formatter: categoryFormatter
+        },{
+            dataField: 'text',
+            text: 'Title / Text',
+            sort: false,
+            // formatter: textFormatter
+        },{
+            dataField: 'createdAt',
+            text: 'Post Date',
+            sort: false,
+            formatter: createdAtFormatter
+        },{
+            dataField: 'slug',
+            text: 'Details',
+            sort: false,
+            formatter: detailLinkFormatter
+        }];
+
+        const defaultSorted = [{
+            dataField: 'dueDate',
+            order: 'asc'
+        }];
+
+        const paginationOption = {
+            page: page,
+            sizePerPage: sizePerPage,
+            totalSize: totalSize,
+            sizePerPageList: [{
+                text: '25', value: 25
+            }, {
+                text: '50', value: 50
+            }, {
+                text: '100', value: 100
+            }, {
+                text: 'All', value: totalSize
+            }],
+            showTotal: true,
+            paginationTotalRenderer: customTotal,
+            firstPageText: 'First',
+            prePageText: 'Back',
+            nextPageText: 'Next',
+            lastPageText: 'Last',
+            nextPageTitle: 'First page',
+            prePageTitle: 'Pre page',
+            firstPageTitle: 'Next page',
+            lastPageTitle: 'Last page',
+        };
 
         return (
-            <div className="row">
-                <div className="col-md-12">
-                    <h2>
-                        <i className="fas fa-check"></i>&nbsp;Active Items
-                    </h2>
-
-                    <BootstrapTable
-                        bootstrap4
-                        keyField='slug'
-                        data={ items }
-                        columns={ columns }
-                        striped
-                        bordered={ false }
-                        pagination={ paginationFactory() }
-                        noDataIndication="There are no active items at the moment"
-                    />
-
-                </div>
-            </div>
+            <BootstrapTable
+                bootstrap4
+                keyField='id'
+                data={ items }
+                columns={ columns }
+                defaultSorted={ defaultSorted }
+                striped
+                bordered={ false }
+                noDataIndication="There are no items at the moment"
+                remote
+                onTableChange={ onTableChange }
+                pagination={ paginationFactory(paginationOption) }
+                filter={ filterFactory() }
+                loading={ isLoading }
+                // overlay={ overlayFactory({ spinner: true, styles: { overlay: (base) => ({...base, background: 'rgba(0, 128, 128, 0.5)'}) } }) }
+            />
         );
     }
 }
 
 
-function statusFormatter(cell, row){
-    switch(row.state) {
-        case "active":
-            return <i className="fas fa-check-circle" style={{ color: 'green' }}></i>;
-            break;
-        case "archived":
-            return <i className="fas fa-archive" style={{ color: 'blue' }}></i>;
-            break;
-        default:
-            return <i className="fas fa-question-circle" style={{ color: 'blue' }}></i>;
-            break;
-    }
-}
-
-
 function categoryFormatter(cell, row){
-    switch(row.category) {
-        case INCIDENT_ITEM_TYPE_OF:
-            return <div><i className="fas fa-fire"></i>&nbsp;Incident</div>;
-            break;
-        case EVENT_ITEM_TYPE_OF:
-            return <div><i className="fas fa-glass-cheers"></i>&nbsp;Event</div>;
-            break;
-        case CONCERN_ITEM_TYPE_OF:
-            return <div><i className="fas fa-exclamation-circle"></i>&nbsp;Concern</div>;
-            break;
-        case INFORMATION_ITEM_TYPE_OF:
-            return <div><i className="fas fa-info-circle"></i>&nbsp;Information</div>;
-            break;
-        case COMMUNITY_NEWS_ITEM_TYPE_OF:
-            return <div><i className="fas fa-broadcast-tower"></i>&nbsp;Community News</div>;
-            break;
-        case VOLUNTEER_ITEM_TYPE_OF:
-            return <div><i className="fas fa-user-friends"></i>&nbsp;Volunteer</div>;
-            break;
-        case RESOURCE_ITEM_TYPE_OF:
-            return <div><i className="fas fa-atlas"></i>&nbsp;Resource</div>;
-            break;
-        default:
-            return <div><i className="fas fa-question"></i>&nbsp;Unknown</div>;
-            break;
-    }
+    return (
+        <div>
+            <ItemIconHelper
+                typeOf={row.category}
+            />&nbsp;
+            <ItemTypeOfLabelHelper typeOf={row.category} />
+        </div>
+    );
 }
 
 
@@ -132,9 +161,71 @@ function detailLinkFormatter(cell, row){
 }
 
 
-export default class AdminItemListComponent extends Component {
+function roleIdFormatter(cell, row){
+    switch(row.roleId) {
+        case MANAGEMENT_ROLE_ID:
+            return <div><i className="fas fa-user-check"></i>&nbsp;Management Staff</div>;
+            break;
+        case FRONTLINE_STAFF_ROLE_ID:
+            return <div><i className="fas fa-user-check"></i>&nbsp;Frontline Staff</div>;
+            break;
+        case ASSOCIATE_ROLE_ID:
+            return <div><i className="fas fa-crown"></i>&nbsp;Associate</div>;
+            break;
+        case AREA_COORDINATOR_ROLE_ID:
+            return <div><i className="fas fa-horse-head"></i>&nbsp;Area Coordinator</div>;
+            break;
+        case MEMBER_ROLE_ID:
+            return <div><i className="fas fa-users"></i>&nbsp;Item</div>;
+            break;
+        default:
+            return <i className="fas fa-question"></i>;
+            break;
+    }
+}
+
+
+// function statusFormatter(cell, row){
+//     return <ItemStateLabelHelper stateId={row.state} />
+// }
+
+
+function telephoneFormatter(cell, row){
+    return (
+        <a href={`tel:${row.primaryPhoneE164}`}>
+            {row.primaryPhoneNational}
+        </a>
+    )
+}
+
+
+function emailFormatter(cell, row){
+    if (row.email === undefined || row.email === null) {
+        return ("-");
+    } else {
+        return (
+            <a href={`mailto:${row.email}`}>
+                {row.email}
+            </a>
+        )
+    }
+}
+
+
+class AdminItemListComponent extends Component {
     render() {
-        const { items, flashMessage, isLoading } = this.props;
+        const {
+            // Pagination
+            page, sizePerPage, totalSize,
+
+            // Data
+            itemList,
+
+            // Everything else...
+            flashMessage, onTableChange, isLoading
+        } = this.props;
+
+        const items = itemList && itemList.results ? itemList.results : [];
 
         return (
             <div>
@@ -145,28 +236,20 @@ export default class AdminItemListComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-map-pin"></i>&nbsp;Items
+                            <i className="fas fa-tasks"></i>&nbsp; Items
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-map-pin"></i>&nbsp;Items</h1>
+                <h1><i className="fas fa-tasks"></i>&nbsp; Items</h1>
 
                 <div className="row">
                     <div className="col-md-12">
                         <section className="row text-center placeholders">
-                            <div className="col-sm-6 placeholder">
-                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/admin/item/add/step-1" className="d-block link-ndecor" title="Clients">
-                                        <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
-                                    </Link>
-                                </div>
-                                <h4>Add</h4>
-                                <div className="text-muted">Add Items</div>
-                            </div>
-                            <div className="col-sm-6 placeholder">
+
+                            <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
                                     <Link to="/admin/items/search" className="d-block link-ndecor" title="Search">
                                         <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
@@ -175,13 +258,29 @@ export default class AdminItemListComponent extends Component {
                                 <h4>Search</h4>
                                 <span className="text-muted">Search Items</span>
                             </div>
+
                         </section>
                     </div>
                 </div>
 
-                <RemoteListComponent items={items} />
-
+                <div className="row">
+                    <div className="col-md-12">
+                        <h2>
+                            <i className="fas fa-table"></i>&nbsp;List
+                        </h2>
+                        <RemoteListComponent
+                            page={page}
+                            sizePerPage={sizePerPage}
+                            totalSize={totalSize}
+                            items={items}
+                            onTableChange={onTableChange}
+                            isLoading={isLoading}
+                        />
+                    </div>
+                </div>
             </div>
         );
     }
 }
+
+export default AdminItemListComponent;

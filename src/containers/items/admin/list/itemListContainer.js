@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import isEmpty from 'lodash/isEmpty';
+import { camelizeKeys, decamelize } from 'humps';
 
 import AdminItemListComponent from "../../../../components/items/admin/list/itemListComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
-import {
-    INCIDENT_ITEM_TYPE_OF,
-    EVENT_ITEM_TYPE_OF,
-    CONCERN_ITEM_TYPE_OF,
-    INFORMATION_ITEM_TYPE_OF
-} from "../../../../constants/api";
 import { pullItemList } from "../../../../actions/itemActions";
 import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
 
@@ -39,7 +33,7 @@ class AdminItemListContainer extends Component {
             // Overaly
             isLoading: true,
         }
-        // this.onTableChange = this.onTableChange.bind(this);
+        this.onTableChange = this.onTableChange.bind(this);
         this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
         this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
@@ -51,17 +45,6 @@ class AdminItemListContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        // Copy the `parametersMap` that we already have.
-        var parametersMap = this.state.parametersMap;
-
-        this.props.pullItemList(
-            this.state.page,
-            this.state.sizePerPage,
-            parametersMap,
-            this.onSuccessfulSubmissionCallback,
-            this.onFailedSubmissionCallback
-        );
     }
 
     componentWillUnmount() {
@@ -81,18 +64,24 @@ class AdminItemListContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
-        this.setState({
-            isLoading: false,
-        });
+    onSuccessfulSubmissionCallback(response) {
+        console.log("onSuccessfulSubmissionCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isLoading: false,
+            },
+            ()=>{
+                console.log("onSuccessfulSubmissionCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessfulSubmissionCallback | State (Post-Fetch):", this.state);
+            }
+        )
     }
 
     onFailedSubmissionCallback(errors) {
         console.log(errors);
-        this.setState({
-            isLoading: false,
-        });
+        this.setState({ isLoading: false });
     }
 
     /**
@@ -101,23 +90,87 @@ class AdminItemListContainer extends Component {
      */
 
     /**
+     *  Function takes the user interactions made with the table and perform
+     *  remote API calls to update the table based on user selection.
+     */
+    onTableChange(type, { sortField, sortOrder, data, page, sizePerPage, filters }) {
+        // Copy the `parametersMap` that we already have.
+        var parametersMap = this.state.parametersMap;
+
+        if (type === "sort") {
+            console.log(type, sortField, sortOrder); // For debugging purposes only.
+
+            if (sortOrder === "asc") {
+                parametersMap.set('o', decamelize(sortField));
+            }
+            if (sortOrder === "desc") {
+                parametersMap.set('o', "-"+decamelize(sortField));
+            }
+
+            this.setState(
+                { parametersMap: parametersMap, isLoading: true, },
+                ()=>{
+                    // STEP 3:
+                    // SUBMIT TO OUR API.
+                    this.props.pullItemList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
+
+        } else if (type === "pagination") {
+            console.log(type, page, sizePerPage); // For debugging purposes only.
+
+            this.setState(
+                { page: page, sizePerPage:sizePerPage, isLoading: true, },
+                ()=>{
+                    this.props.pullItemList(page, sizePerPage, this.state.parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
+
+        } else if (type === "filter") {
+            ////
+            //// DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            ////
+            console.log("onTableChange | filter", type, filters); // For debugging purposes only.
+            if (filters.state === undefined) {
+                parametersMap.delete("state");
+            } else {
+                const filterVal = filters.state.filterVal;
+                parametersMap.set("state", filterVal);
+            }
+
+            if (filters.category === undefined) {
+                parametersMap.delete("category");
+            } else {
+                const filterVal = filters.category.filterVal;
+                parametersMap.set("category", filterVal);
+            }
+
+            this.setState(
+                { parametersMap: parametersMap, isLoading: true, },
+                ()=>{
+                    // STEP 3:
+                    // SUBMIT TO OUR API.
+                    this.props.pullItemList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
+        }else {
+            alert("Unsupported feature detected!!"+type);
+        }
+    }
+
+    /**
      *  Main render function
      *------------------------------------------------------------
      */
 
     render() {
         const { page, sizePerPage, totalSize, isLoading } = this.state;
-        const itemsResponse = this.props.itemList;
-        const items = !isEmpty(itemsResponse) && !isEmpty(itemsResponse.results)
-            ? itemsResponse.results
-            : [];
-
         return (
             <AdminItemListComponent
                 page={page}
                 sizePerPage={sizePerPage}
                 totalSize={totalSize}
-                items={items}
+                itemList={this.props.itemList}
                 onTableChange={this.onTableChange}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
