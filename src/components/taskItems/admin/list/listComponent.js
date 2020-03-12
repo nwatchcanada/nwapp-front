@@ -158,7 +158,7 @@ function roleIdFormatter(cell, row){
 
 
 function statusFormatter(cell, row){
-    return <TaskItemStateLabelHelper stateId={row.state} /> 
+    return <TaskItemStateLabelHelper stateId={row.state} />
 }
 
 
@@ -189,7 +189,7 @@ function detailLinkFormatter(cell, row){
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
-            <Link to={`/admin/taskItem/${row.slug}`}>
+            <Link to={`/admin/task/${row.typeOf}/${row.uuid}/step-1`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )

@@ -4,6 +4,10 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 import AnnouncementComponent from "./announcementComponent";
+import {
+    TaskItemTypeOfLabelHelper,
+    TaskItemStateLabelHelper
+} from "../../constants/helper";
 
 
 export default class StaffDashboardComponent extends Component {
@@ -58,7 +62,7 @@ export default class StaffDashboardComponent extends Component {
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
-                                    <Link to="/tasks" className="d-block link-ndecor" title="Items">
+                                    <Link to="/admin/tasks" className="d-block link-ndecor" title="Items">
                                         <h1 className="circle-title">
                                             {activeTasksCount && activeTasksCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}
                                         </h1>
@@ -103,15 +107,21 @@ class RecentTaskListComponent extends Component {
         const { latestTasks } = this.props;
 
         const columns = [{
-            dataField: 'typeOfLabel',
+            dataField: 'typeOf',
             text: 'Type',
-            sort: false
+            sort: false,
+            formatter: taskItemTypeOfFormatter
+        },{
+            dataField: 'state',
+            text: 'Status',
+            sort: false,
+            formatter: taskItemStatusFormatter
         },{
             dataField: 'dueDate',
             text: 'Due Date',
             sort: false
         },{
-            dataField: 'slug',
+            dataField: 'uuid',
             text: '',
             sort: false,
             formatter: recentTaskLinkFormatter
@@ -134,7 +144,7 @@ class RecentTaskListComponent extends Component {
                         noDataIndication="There are no recent tasks at the moment"
                     />
 
-                    <Link to="/tasks" className="float-right">See more&nbsp;<i className="fas fa-chevron-right"></i></Link>
+                    <Link to="/admin/tasks" className="float-right">See more&nbsp;<i className="fas fa-chevron-right"></i></Link>
 
                 </div>
             </div>
@@ -143,9 +153,19 @@ class RecentTaskListComponent extends Component {
 }
 
 
+function taskItemTypeOfFormatter(cell, row){
+    return <TaskItemTypeOfLabelHelper typeOfId={row.typeOf} />;
+}
+
+
+function taskItemStatusFormatter(cell, row){
+    return <TaskItemStateLabelHelper stateId={row.state} />
+}
+
+
 function recentTaskLinkFormatter(cell, row){
     return (
-        <Link to={`/task/${row.typeOf}/${row.uuid}/step-1`}>
+        <Link to={`/admin/task/${row.typeOf}/${row.uuid}/step-1`}>
             View&nbsp;<i className="fas fa-chevron-right"></i>
         </Link>
     )

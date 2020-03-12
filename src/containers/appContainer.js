@@ -817,12 +817,15 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/item/:slug/update-photos" exact component={requiresAuth(ItemPhotosUpdateComponent)} />
                                 <Route path="/admin/item/:slug/archive" exact component={requiresAuth(ItemArchiveContainer)} />
 
+                                <Route path="/admin/tasks" exact component={requiresAuth(AdminTaskItemListContainer)} />
+
+
                                 /*
                                 -------------
                                 TODO: PROCESS
                                 -------------
                                 */
-                                <Route path="/tasks" exact component={requiresAuth(AdminTaskItemListContainer)} />
+                                
                                 <Route path="/tasks/search" exact component={requiresAuth(TaskSearchContainer)} />
                                 <Route path="/tasks/search-results" exact component={requiresAuth(TaskSearchResultContainer)} />
                                 <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
