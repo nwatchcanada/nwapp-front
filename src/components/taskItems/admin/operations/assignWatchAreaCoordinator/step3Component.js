@@ -76,7 +76,7 @@ export default class AssignWatchAreaCoordinatorTaskStep3Component extends Compon
                             </div>
                             :<div className="card-group row">
                                 {areaCoordinators && areaCoordinators.map(
-                                    (areaCoordinator) => <CardComponent areaCoordinator={areaCoordinator} key={areaCoordinator.id} isLoading={isLoading} onAreaCoordinatorClick={onAreaCoordinatorClick} />)
+                                    (areaCoordinator) => <CardComponent areaCoordinator={areaCoordinator} key={areaCoordinator.slug} isLoading={isLoading} onAreaCoordinatorClick={onAreaCoordinatorClick} />)
                                 }
                             </div>
                         }
@@ -107,7 +107,7 @@ export default class AssignWatchAreaCoordinatorTaskStep3Component extends Compon
 
 class CardComponent extends Component {
     render() {
-        const { areaCoordinator, isLoading } = this.props;
+        const { areaCoordinator, isLoading, onAreaCoordinatorClick } = this.props;
         return (
             <div className="col-sm-3" id={areaCoordinator.slug}>
                 <div className="card bg-light">
@@ -131,9 +131,9 @@ class CardComponent extends Component {
                             <a href={`email:${areaCoordinator.email}`}>{areaCoordinator.email}</a><br />
                             <a href={`tel:${areaCoordinator.primaryPhoneE164}`}>{areaCoordinator.primaryPhoneNational}</a>
                         </p>
-                        <Link to={`/admin/area-coordinator/${areaCoordinator.slug}`} type="button" className="btn btn-primary btn-lg btn-block" disabled={isLoading}>
+                        <button className="btn btn-primary btn-lg btn-block" disabled={isLoading} onClick={(event, slug)=>{ onAreaCoordinatorClick(event, areaCoordinator.slug) }}>
                             Select&nbsp;<i class="fas fa-chevron-right"></i>
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -143,11 +143,12 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
      *------------------------------------------------------------
      */
 
-    onAreaCoordinatorClick(e, areaCoordinatorId, areaCoordinatorGivenName, areaCoordinatorLastName) {
+    onAreaCoordinatorClick(e, areaCoordinatorSlug) {
         this.setState(
             { isLoading: true },
             ()=>{
-                this.props.history.push("/admin/area-coordinator/"+areaCoordinatorId+"");
+                localStorage.setItem('nwapp-task-1-areaCoordinator-slug', areaCoordinatorSlug);
+                this.props.history.push("/admin/task/1/"+this.state.uuid+"/step-4");
             }
         );
     }
