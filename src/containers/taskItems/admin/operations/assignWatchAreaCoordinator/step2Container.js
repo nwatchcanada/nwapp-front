@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AssignWatchAreaCoordinatorTaskStep2Component from "../../../../../components/taskItems/admin/operations/assignWatchAreaCoordinator/step2Component";
-import { getAreaCoordinatorReactSelectOptions } from '../../../../../actions/areaCoordinatorActions';
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem, localStorageGetArrayItem
-} from '../../../../../helpers/localStorageUtility';
+import { validateSearchInput } from "../../../../../validators/areaCoordinatorValidator";
+import { localStorageSetObjectOrArrayItem } from '../../../../../helpers/localStorageUtility';
 
 
 class AssignWatchAreaCoordinatorTaskStep2Container extends Component {
@@ -16,26 +14,27 @@ class AssignWatchAreaCoordinatorTaskStep2Container extends Component {
      */
 
     constructor(props) {
-        super(props);
+        super(props)
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
         const { uuid } = this.props.match.params;
 
         this.state = {
-            name: null,
-            errors: {},
-            isLoading: false,
             uuid: uuid,
-            areaCoordinator: localStorage.getItem('nwapp-task-2-areaCoordinator'),
-            areaCoordinatorOption: localStorageGetObjectItem('nwapp-task-2-areaCoordinatorOption'),
+            keyword: "",
+            advancedSearchActive: false,
+            firstName: "",
+            lastName: "",
+            telephone: "",
+            email: "",
+            errors: {},
         }
-
         this.onTextChange = this.onTextChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onAdvancedSearchPanelToggle = this.onAdvancedSearchPanelToggle.bind(this);
+        this.onSearchClick = this.onSearchClick.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.onAdvancedSearchClick = this.onAdvancedSearchClick.bind(this);
     }
 
     /**
@@ -45,17 +44,6 @@ class AssignWatchAreaCoordinatorTaskStep2Container extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-        this.setState({
-            areaCoordinatorData: {
-                results: [
-                    {'uuid': 'bob-page', 'name': 'Bob Page'},
-                    {'uuid': 'walter-simons', 'name': 'Walter Simons'},
-                    {'uuid': 'jc-denton', 'name': 'JC Denton'},
-                    {'uuid': 'paul-denton', 'name': 'Paul Denton'}
-                ]
-            }
-        });
     }
 
     componentWillUnmount() {
@@ -72,53 +60,99 @@ class AssignWatchAreaCoordinatorTaskStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(task) {
-        this.setState({ errors: {}, isLoading: true, })
-        this.props.history.push("/task/2/"+this.state.uuid+"/step-3");
-    }
-
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
+	handleKeyDown(e) {
+
+		if (e.keyCode === 13) {
+			this.setState({ advancedSearchActive: false, }, ()=> {
+				// Perform areaCoordinator-side validation.
+				const { errors, isValid } = validateSearchInput(this.state);
+
+				// CASE 1 OF 2: Validation passed successfully.
+				if (isValid) {
+
+					localStorageSetObjectOrArrayItem('nwapp-task-2-areaCoordinator', this.state);
+                    this.props.history.push("/admin/task/1/"+this.state.uuid+"/step-3");
+
+
+				// CASE 2 OF 2: Validation was a failure.
+				} else {
+					this.setState({ errors: errors });
+
+					// The following code will cause the screen to scroll to the top of
+					// the page. Please see ``react-scroll`` for more information:
+					// https://github.com/fisshy/react-scroll
+					var scroll = Scroll.animateScroll;
+					scroll.scrollToTop();
+				}
+			});
+		}
+	}
 
     onTextChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
+        this.setState({ [e.target.name]: e.target.value, });
     }
 
-    onSelectChange(option) {
-        const optionKey = [option.selectName]+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            optionKey: option,
-        });
-        localStorage.setItem('nwapp-task-2-'+[option.selectName], option.value);
-        localStorageSetObjectOrArrayItem('nwapp-task-2-'+optionKey, option);
-        localStorage.setItem('nwapp-task-2-'+[option.selectName]+"-label", option.label);
-        // console.log(option); // For debugging purposes only.
+    onAdvancedSearchPanelToggle() {
+        this.setState({ advancedSearchActive: !this.state.advancedSearchActive });
     }
 
-    onClick(e) {
+    onSearchClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
+        this.setState({ advancedSearchActive: false, }, ()=> {
+            // Perform areaCoordinator-side validation.
+            const { errors, isValid } = validateSearchInput(this.state);
 
-        this.onSuccessfulSubmissionCallback();
+            // CASE 1 OF 2: Validation passed successfully.
+            if (isValid) {
+
+                    localStorageSetObjectOrArrayItem('nwapp-task-2-areaCoordinator', this.state);
+                    this.props.history.push("/admin/task/1/"+this.state.uuid+"/step-3");
+
+
+            // CASE 2 OF 2: Validation was a failure.
+            } else {
+                this.setState({ errors: errors });
+
+                // The following code will cause the screen to scroll to the top of
+                // the page. Please see ``react-scroll`` for more information:
+                // https://github.com/fisshy/react-scroll
+                var scroll = Scroll.animateScroll;
+                scroll.scrollToTop();
+            }
+        });
     }
 
+    onAdvancedSearchClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+        this.setState({ advancedSearchActive: true, }, ()=> {
+            // Perform areaCoordinator-side validation.
+            const { errors, isValid } = validateSearchInput(this.state);
+
+            // CASE 1 OF 2: Validation passed successfully.
+            if (isValid) {
+
+                    localStorageSetObjectOrArrayItem('nwapp-task-2-areaCoordinator', this.state);
+                    this.props.history.push("/admin/task/1/"+this.state.uuid+"/step-3");
+
+
+            // CASE 2 OF 2: Validation was a failure.
+            } else {
+                this.setState({ errors: errors });
+
+                // The following code will cause the screen to scroll to the top of
+                // the page. Please see ``react-scroll`` for more information:
+                // https://github.com/fisshy/react-scroll
+                var scroll = Scroll.animateScroll;
+                scroll.scrollToTop();
+            }
+        });
+    }
 
     /**
      *  Main render function
@@ -126,16 +160,21 @@ class AssignWatchAreaCoordinatorTaskStep2Container extends Component {
      */
 
     render() {
-        const { areaCoordinator, areaCoordinatorData, errors, uuid, } = this.state;
         return (
             <AssignWatchAreaCoordinatorTaskStep2Component
-                uuid={uuid}
-                areaCoordinator={areaCoordinator}
-                areaCoordinatorOptions={getAreaCoordinatorReactSelectOptions(areaCoordinatorData)}
-                errors={errors}
+                uuid={this.state.uuid}
+                keyword={this.state.keyword}
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                telephone={this.state.telephone}
+                email={this.state.email}
                 onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
-                onClick={this.onClick}
+                advancedSearchActive={this.state.advancedSearchActive}
+                onAdvancedSearchPanelToggle={this.onAdvancedSearchPanelToggle}
+                onSearchClick={this.onSearchClick}
+				handleKeyDown={this.handleKeyDown}
+                onAdvancedSearchClick={this.onAdvancedSearchClick}
+                errors={this.state.errors}
             />
         );
     }
@@ -148,7 +187,8 @@ const mapStateToProps = function(store) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+    }
 }
 
 

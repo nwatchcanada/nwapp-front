@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AssignWatchAreaCoordinatorTaskStep3Component from "../../../components/tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep3Component";
-import { setFlashMessage } from "../../../actions/flashMessageActions";
-import { localStorageGetObjectItem } from '../../../helpers/localStorageUtility';
+import AssignWatchAreaCoordinatorTaskStep3Component from "../../../../../components/taskItems/admin/operations/assignWatchAreaCoordinator/step1Component";
+import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
 
 
 class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
@@ -17,13 +16,11 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
+        const { uuid } = this.props.match.params;
 
         // Update state.
         this.state = {
-            slug: slug,
-            areaCoordinator: localStorage.getItem('nwapp-task-2-areaCoordinator'),
-            areaCoordinatorLabel: localStorage.getItem('nwapp-task-2-areaCoordinator-label'),
+            uuid: uuid,
         }
 
         this.onClick = this.onClick.bind(this);
@@ -45,6 +42,9 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
          this.setState = (state,callback)=>{
              return;
          };
+
+         // Clear any and all flash messages in our queue to be rendered.
+         this.props.clearFlashMessage();
      }
 
     /**
@@ -68,8 +68,7 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.setFlashMessage("success", "Task has been successfully closed.");
-        this.props.history.push("/tasks");
+        this.props.history.push("/admin/task/1/"+this.state.uuid+"/step-2");
     }
 
     /**
@@ -78,20 +77,13 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
      */
 
     render() {
-        const taskData = {
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/task/argyle'
-        };
         return (
             <AssignWatchAreaCoordinatorTaskStep3Component
                 urlArgument={this.state.urlArgument}
-                slug={this.state.slug}
-                taskData={taskData}
+                uuid={this.state.uuid}
                 onBack={this.onBack}
                 onClick={this.onClick}
-                areaCoordinatorLabel={this.state.areaCoordinatorLabel}
+                flashMessage={this.props.flashMessage}
             />
         );
     }
@@ -100,13 +92,14 @@ class AssignWatchAreaCoordinatorTaskStep3Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        flashMessage: store.flashMessageState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFlashMessage: (typeOf, text) => {
-            dispatch(setFlashMessage(typeOf, text))
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
         }
     }
 }

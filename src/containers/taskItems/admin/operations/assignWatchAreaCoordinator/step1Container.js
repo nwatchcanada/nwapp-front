@@ -77,17 +77,10 @@ class AssignWatchAreaCoordinatorTaskStep1Container extends Component {
      */
 
     render() {
-        const taskData = {
-            'uuid': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/admin/task/1'
-        };
         return (
             <AssignWatchAreaCoordinatorTaskStep1Component
                 urlArgument={this.state.urlArgument}
                 uuid={this.state.uuid}
-                taskData={taskData}
                 onBack={this.onBack}
                 onClick={this.onClick}
                 flashMessage={this.props.flashMessage}

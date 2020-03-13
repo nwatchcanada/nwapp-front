@@ -392,6 +392,7 @@ import AdminTaskSearchContainer from "./taskItems/admin/search/searchContainer";
 import AdminTaskSearchResultContainer from "./taskItems/admin/search/searchResultContainer";
 import AssignWatchAreaCoordinatorTaskStep1Container from "./taskItems/admin/operations/assignWatchAreaCoordinator/step1Container";
 import AssignWatchAreaCoordinatorTaskStep2Container from "./taskItems/admin/operations/assignWatchAreaCoordinator/step2Container";
+import AssignWatchAreaCoordinatorTaskStep3Container from "./taskItems/admin/operations/assignWatchAreaCoordinator/step3Container";
 
 /*
 ----------
@@ -840,6 +841,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/tasks/search-results" exact component={requiresAuth(AdminTaskSearchResultContainer)} />
                                 <Route path="/admin/task/1/:uuid/step-1" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep1Container)} />
                                 <Route path="/admin/task/1/:uuid/step-2" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep2Container)} />
+                                <Route path="/admin/task/1/:uuid/step-3" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep3Container)} />
 
                                 /*
                                 -------------
