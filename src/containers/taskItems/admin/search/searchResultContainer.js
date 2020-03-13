@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AdminTaskSearchResultComponent from "../../../../components/taskItems/admin/search/taskSearchResultComponent";
+import AdminTaskSearchResultComponent from "../../../../components/taskItems/admin/search/searchResultComponent";
 
 
 class AdminTaskSearchResultContainer extends Component {
