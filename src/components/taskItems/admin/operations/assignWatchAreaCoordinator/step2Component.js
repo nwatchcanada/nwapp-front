@@ -27,7 +27,7 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-thumbtack"></i>&nbsp;Byron</h1>
+                <h1><i className="fas fa-thumbtack"></i>&nbsp;Assign Area Coordinator to Watch</h1>
 
                 <div className="row">
                     <div className="step-navigation">
