@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { camelizeKeys, decamelize } from 'humps';
+import Scroll from 'react-scroll';
 
 import AdminTaskSearchResultComponent from "../../../../components/taskItems/admin/search/searchResultComponent";
+import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import { pullTaskItemList } from "../../../../actions/taskItemActions";
+import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
+import { localStorageGetObjectItem } from '../../../../helpers/localStorageUtility';
 
 
 class AdminTaskSearchResultContainer extends Component {
@@ -12,11 +18,46 @@ class AdminTaskSearchResultContainer extends Component {
 
     constructor(props) {
         super(props);
+
+        const search = localStorageGetObjectItem('workery-search-task-details');
         this.state = {
-            results: [],
+            // Pagination
+            page: 1,
+            sizePerPage: 100,
+            totalSize: 0,
+
+            // Everything else
+            isLoading: true,
+            search: search,
         }
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.getParametersMapFromState = this.getParametersMapFromState.bind(this);
+        this.onTaskClick = this.onTaskClick.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
+        this.onNextClick = this.onNextClick.bind(this);
+        this.onPreviousClick = this.onPreviousClick.bind(this);
+    }
+
+    getParametersMapFromState() {
+        const search = localStorageGetObjectItem('workery-search-task-details');
+        const parametersMap = new Map();
+        if (search.keyword !== undefined && search.keyword !== "") {
+            parametersMap.set("search", search.keyword);
+        }
+        if (search.firstName !== undefined && search.firstName !== "") {
+            parametersMap.set("first_name", search.firstName);
+        }
+        if (search.lastName !== undefined && search.lastName !== "") {
+            parametersMap.set("last_name", search.lastName);
+        }
+        if (search.telephone !== undefined && search.telephone !== "") {
+            parametersMap.set("telephone", search.telephone);
+        }
+        if (search.email !== undefined && search.email !== "") {
+            parametersMap.set("email", search.email);
+        }
+        console.log("FILTERING", parametersMap); // For debugging purposes only.
+        return parametersMap;
     }
 
     /**
@@ -27,32 +68,14 @@ class AdminTaskSearchResultContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // Load from API...
-        const results = [{
-            'slug': 'argyle-task-1',
-            'dueDate': "July 20, 2019",
-            'taskName': "Assign Associate to Watch",
-            "watchName": "Argyle",
-            "category": "unassigned",
-            "typeOf": "unassigned-watch-associate",
-        },{
-            'slug': 'byron-task-1',
-            'dueDate': "April 10, 2019",
-            'taskName': "Assign Area Coordinator to Watch",
-            "watchName": "Byron",
-            "category": "unassigned",
-            "typeOf": "unassigned-watch-area-coordinator",
-        },{
-            'slug': 'carling-task-1',
-            'dueDate': "January 2, 2019",
-            'taskName': "Assign Area Coordinator to Watch",
-            "watchName": "Carling",
-            "category": "unassigned",
-            "typeOf": "unassigned-watch-associate",
-        }];
-        this.setState({
-            results: results,
-        });
+        this.setState(
+            { parametersMap: this.getParametersMapFromState(), isLoading: true, },
+            ()=>{
+                // STEP 3:
+                // SUBMIT TO OUR API.
+                this.props.pullTaskItemList(this.state.page, this.state.sizePerPage, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+            }
+        );
     }
 
     componentWillUnmount() {
@@ -62,6 +85,9 @@ class AdminTaskSearchResultContainer extends Component {
         this.setState = (state,callback)=>{
             return;
         };
+
+        // Clear any and all flash messages in our queue to be rendered.
+        this.props.clearFlashMessage();
     }
 
     /**
@@ -69,18 +95,74 @@ class AdminTaskSearchResultContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback | State (Pre-Fetch):", this.state);
+        this.setState(
+            {
+                page: response.page,
+                totalSize: response.count,
+                isLoading: false,
+            },
+            ()=>{
+                console.log("onSuccessCallback | Fetched:",response); // For debugging purposes only.
+                console.log("onSuccessCallback | State (Post-Fetch):", this.state);
+            }
+        )
     }
 
-    onFailedSubmissionCallback(errors) {
-        console.log(errors);
+    onFailureCallback(errors) {
+        this.setState({
+            errors: errors,
+            isLoading: false
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
     }
 
     /**
      *  Event handling functions
      *------------------------------------------------------------
      */
+
+    onTaskClick(e, taskId, taskGivenName, taskLastName) {
+        this.setState(
+            { isLoading: true },
+            ()=>{
+                this.props.history.push("/admin/task/"+taskId+"");
+            }
+        );
+    }
+
+    onNextClick(e) {
+        const page = this.state.page + 1;
+        this.setState(
+            {
+                page: page,
+                isLoading: true,
+            },
+            ()=>{
+                this.props.pullTaskItemList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+            }
+        )
+    }
+
+    onPreviousClick(e) {
+        const page = this.state.page - 1;
+        this.setState(
+            {
+                page: page,
+                isLoading: true,
+            },
+            ()=>{
+                this.props.pullTaskItemList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+            }
+        )
+    }
+
 
 
     /**
@@ -89,9 +171,23 @@ class AdminTaskSearchResultContainer extends Component {
      */
 
     render() {
+        const { page, sizePerPage, totalSize, isLoading, errors } = this.state;
+        const tasks = (this.props.taskItemList && this.props.taskItemList.results) ? this.props.taskItemList.results : [];
+        const hasNext = this.props.taskItemList.next !== null;
+        const hasPrevious = this.props.taskItemList.previous !== null;
         return (
             <AdminTaskSearchResultComponent
-                results={this.state.results}
+                page={page}
+                sizePerPage={sizePerPage}
+                totalSize={totalSize}
+                tasks={tasks}
+                isLoading={isLoading}
+                errors={errors}
+                onTaskClick={this.onTaskClick}
+                hasNext={hasNext}
+                onNextClick={this.onNextClick}
+                hasPrevious={hasPrevious}
+                onPreviousClick={this.onPreviousClick}
             />
         );
     }
@@ -100,11 +196,21 @@ class AdminTaskSearchResultContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        flashMessage: store.flashMessageState,
+        taskItemList: store.taskItemListState,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        clearFlashMessage: () => {
+            dispatch(clearFlashMessage())
+        },
+        pullTaskItemList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+            dispatch(
+                pullTaskItemList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+            )
+        },
     }
 }
 
