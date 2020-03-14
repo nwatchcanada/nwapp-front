@@ -89,7 +89,7 @@ class AssignWatchAreaCoordinatorTaskStep4Container extends Component {
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 localStorageRemoveItemsContaining("nwapp-task-1-areaCoordinator-");
                 this.props.setFlashMessage("success", "Task item has been successfully modified.");
-                this.props.history.push("/admin/task-items");
+                this.props.history.push("/admin/tasks");
             }
         )
     }
