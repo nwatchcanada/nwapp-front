@@ -17,7 +17,8 @@ import {
     FRONTLINE_STAFF_ROLE_ID,
     ASSOCIATE_ROLE_ID,
     AREA_COORDINATOR_ROLE_ID,
-    MEMBER_ROLE_ID
+    MEMBER_ROLE_ID,
+    TASK_ITEM_STATE_CLOSED
 } from "../../../../constants/api";
 import {
     TaskItemTypeOfLabelHelper, TaskItemStateLabelHelper
@@ -201,7 +202,7 @@ function emailFormatter(cell, row){
 
 
 function detailLinkFormatter(cell, row){
-    if (row.state === "inactive") {
+    if (row.state === TASK_ITEM_STATE_CLOSED) {
         return <div><i className="fas fa-box"></i>&nbsp;Archived</div>;
     } else {
         return (
