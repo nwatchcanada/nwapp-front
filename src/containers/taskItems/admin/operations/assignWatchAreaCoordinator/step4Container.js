@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { camelizeKeys, decamelize } from 'humps';
+import Scroll from 'react-scroll';
 
 import AssignWatchAreaCoordinatorTaskStep4Component from "../../../../../components/taskItems/admin/operations/assignWatchAreaCoordinator/step4Component";
-import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { putTaskItem } from "../../../../../actions/taskItemActions";
 
 
 class AssignWatchAreaCoordinatorTaskStep4Container extends Component {
@@ -21,9 +24,27 @@ class AssignWatchAreaCoordinatorTaskStep4Container extends Component {
         // Update state.
         this.state = {
             uuid: uuid,
+            areaCoordinatorSlug: localStorage.getItem('nwapp-task-1-areaCoordinator-slug')
         }
 
+        this.getPostData = this.getPostData.bind(this);
         this.onClick = this.onClick.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Assign our watch.
+        postData.areaCoordinatorSlug = this.state.areaCoordinatorSlug;
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -68,7 +89,21 @@ class AssignWatchAreaCoordinatorTaskStep4Container extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        alert("TODO - IMPl.")
+        // this.props.setFlashMessage("success", "Task has been successfully closed.");
+        // this.props.history.push("/tasks");
+
+        this.setState({
+            errors: {},
+            isLoading: true,
+        }, ()=>{
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.putTaskItem(
+                this.getPostData(),
+                this.onSuccessfulPUTCallback,
+                this.onFailedPUTCallback
+            );
+        });
     }
 
     /**
@@ -98,9 +133,12 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
-        }
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
+        putTaskItem: (postData, successCallback, failedCallback) => {
+            dispatch(putTaskItem(postData, successCallback, failedCallback))
+        },
     }
 }
 

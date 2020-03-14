@@ -57,7 +57,7 @@ export const WORKERY_ITEM_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/items/operation/
 export const WORKERY_ITEM_COMMENT_LIST_API_ENDPOINT = '/v1/item-comments';
 
 export const WORKERY_TASK_ITEM_LIST_API_ENDPOINT = '/v1/task-items';
-export const WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT = '/v1/task-item/';
+export const WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT = '/v1/task-item/<uuid>';
 
 /**
  *  The full address of certain API endpoints from our backend server.

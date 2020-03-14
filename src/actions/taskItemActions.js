@@ -27,7 +27,7 @@ export function pullTaskItemList(page=1, sizePerPage=10, filtersMap=new Map(), o
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setResourceItemListRequest()
+            setTaskItemListRequest()
         );
 
         console.log(page, sizePerPage, filtersMap, onSuccessCallback, onFailureCallback);
@@ -64,7 +64,7 @@ export function pullTaskItemList(page=1, sizePerPage=10, filtersMap=new Map(), o
             // Update the global state of the application to store our
             // user data for the application.
             store.dispatch(
-                setResourceItemListSuccess(data)
+                setTaskItemListSuccess(data)
             );
 
             // DEVELOPERS NOTE:
@@ -87,7 +87,7 @@ export function pullTaskItemList(page=1, sizePerPage=10, filtersMap=new Map(), o
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceItemListFailure({
+                    setTaskItemListFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -112,11 +112,11 @@ export function pullTaskItemList(page=1, sizePerPage=10, filtersMap=new Map(), o
 //                                 CREATE                                     //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function postResourceItem(postData, successCallback, failedCallback) {
+export function postTaskItem(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
-            setResourceItemDetailRequest()
+            setTaskItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
@@ -146,7 +146,7 @@ export function postResourceItem(postData, successCallback, failedCallback) {
             // Update the global state of the application to store our
             // user device for the application.
             store.dispatch(
-                setResourceItemDetailSuccess(device)
+                setTaskItemDetailSuccess(device)
             );
         }).catch( (exception) => {
             if (exception.response) {
@@ -157,11 +157,11 @@ export function postResourceItem(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("postResourceItem | error:", errors); // For debuggin purposes only.
+                console.log("postTaskItem | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceItemDetailFailure({
+                    setTaskItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -186,17 +186,17 @@ export function postResourceItem(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function pullResourceItem(slug, onSuccessCallback, onFailureCallback) {
+export function pullTaskItem(uuid, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setResourceItemDetailRequest()
+            setTaskItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT+slug;
+        const aURL = WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT.replace("<uuid>", uuid);
 
         customAxios.get(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -209,12 +209,12 @@ export function pullResourceItem(slug, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("pullResourceItem | Success:", profile); // For debugging purposes.
+            console.log("pullTaskItem | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
             store.dispatch(
-                setResourceItemDetailSuccess(profile)
+                setTaskItemDetailSuccess(profile)
             );
 
             // DEVELOPERS NOTE:
@@ -233,11 +233,11 @@ export function pullResourceItem(slug, onSuccessCallback, onFailureCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("pullResourceItem | error:", errors); // For debuggin purposes only.
+                console.log("pullTaskItem | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceItemDetailFailure({
+                    setTaskItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -262,11 +262,11 @@ export function pullResourceItem(slug, onSuccessCallback, onFailureCallback) {
 //                                UPDATE                                      //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function putResourceItem(postData, successCallback, failedCallback) {
+export function putTaskItem(postData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
-            setResourceItemDetailRequest()
+            setTaskItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
@@ -279,7 +279,7 @@ export function putResourceItem(postData, successCallback, failedCallback) {
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode(decamelizedData);
 
-        const aURL = WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT+postData.slug;
+        const aURL = WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT.replace("<uuid>", postData.uuid);
         console.log("URL:", aURL);
 
         // Perform our API submission.
@@ -295,7 +295,7 @@ export function putResourceItem(postData, successCallback, failedCallback) {
             // Update the global state of the application to store our
             // user device for the application.
             store.dispatch(
-                setResourceItemDetailSuccess(device)
+                setTaskItemDetailSuccess(device)
             );
 
             // Run our success callback function.
@@ -310,11 +310,11 @@ export function putResourceItem(postData, successCallback, failedCallback) {
 
                 let errors = camelizeKeys(responseData);
 
-                console.log("putResourceItem | error:", errors); // For debuggin purposes only.
+                console.log("putTaskItem | error:", errors); // For debuggin purposes only.
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceItemDetailFailure({
+                    setTaskItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -339,17 +339,17 @@ export function putResourceItem(postData, successCallback, failedCallback) {
 //                                RETRIEVE                                    //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function deleteResourceItem(slug, onSuccessCallback, onFailureCallback) {
+export function deleteTaskItem(uuid, onSuccessCallback, onFailureCallback) {
     return dispatch => {
         // Change the global state to attempting to fetch latest user details.
         store.dispatch(
-            setResourceItemDetailRequest()
+            setTaskItemDetailRequest()
         );
 
         // Generate our app's Axios instance.
         const customAxios = getCustomAxios();
 
-        const aURL = WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT+slug;
+        const aURL = WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT.replace("<uuid>", uuid);
 
         customAxios.delete(aURL).then( (successResponse) => { // SUCCESS
             // Decode our MessagePack (Buffer) into JS Object.
@@ -362,12 +362,12 @@ export function deleteResourceItem(slug, onSuccessCallback, onFailureCallback) {
             profile['isAPIRequestRunning'] = false;
             profile['errors'] = {};
 
-            console.log("deleteResourceItem | Success:", profile); // For debugging purposes.
+            console.log("deleteTaskItem | Success:", profile); // For debugging purposes.
 
             // Update the global state of the application to store our
             // user profile for the application.
             store.dispatch(
-                setResourceItemDetailSuccess(profile)
+                setTaskItemDetailSuccess(profile)
             );
 
             // DEVELOPERS NOTE:
@@ -390,7 +390,7 @@ export function deleteResourceItem(slug, onSuccessCallback, onFailureCallback) {
 
                 // Send our failure to the redux.
                 store.dispatch(
-                    setResourceItemDetailFailure({
+                    setTaskItemDetailFailure({
                         isAPIRequestRunning: false,
                         errors: errors
                     })
@@ -415,7 +415,7 @@ export function deleteResourceItem(slug, onSuccessCallback, onFailureCallback) {
 //                                REDUX ACTIONS                               //
 ////////////////////////////////////////////////////////////////////////////////
 
-export const setResourceItemListRequest = () => ({
+export const setTaskItemListRequest = () => ({
     type: TASK_ITEM_LIST_REQUEST,
     payload: {
         isAPIRequestRunning: true,
@@ -425,19 +425,19 @@ export const setResourceItemListRequest = () => ({
 });
 
 
-export const setResourceItemListFailure = (info) => ({
+export const setTaskItemListFailure = (info) => ({
     type: TASK_ITEM_LIST_FAILURE,
     payload: info,
 });
 
 
-export const setResourceItemListSuccess = (info) => ({
+export const setTaskItemListSuccess = (info) => ({
     type: TASK_ITEM_LIST_SUCCESS,
     payload: info,
 });
 
 
-export const setResourceItemDetailRequest = () => ({
+export const setTaskItemDetailRequest = () => ({
     type: TASK_ITEM_DETAIL_REQUEST,
     payload: {
         isAPIRequestRunning: true,
@@ -446,15 +446,15 @@ export const setResourceItemDetailRequest = () => ({
 });
 
 
-export const setResourceItemDetailSuccess = resourceDetail => ({
+export const setTaskItemDetailSuccess = taskDetail => ({
     type: RESOURCE_DETAIL_SUCCESS,
-    payload: resourceDetail,
+    payload: taskDetail,
 });
 
 
-export const setResourceItemDetailFailure = resourceDetail => ({
+export const setTaskItemDetailFailure = taskDetail => ({
     type: RESOURCE_DETAIL_FAILURE,
-    payload: resourceDetail,
+    payload: taskDetail,
 });
 
 
@@ -466,52 +466,52 @@ export const setResourceItemDetailFailure = resourceDetail => ({
  * Utility function takes the API data and converts it to HTML dropdown
  * options which will be consumed by the `react-select` library elements.
  */
-export function getResourceItemReactSelectOptions(resourceList=[], selectName="resource") {
-    const resourceOptions = [];
-    const isNotProductionsEmpty = isEmpty(resourceList) === false;
+export function getTaskItemReactSelectOptions(taskList=[], selectName="task") {
+    const taskOptions = [];
+    const isNotProductionsEmpty = isEmpty(taskList) === false;
     if (isNotProductionsEmpty) {
-        const results = resourceList.results;
+        const results = taskList.results;
         const isResultsNotEmpty = isEmpty(results) === false;
         if (isResultsNotEmpty) {
             for (let i = 0; i < results.length; i++) {
-                let resource = results[i];
-                resourceOptions.push({
+                let task = results[i];
+                taskOptions.push({
                     selectName: selectName,
-                    value: resource.id,
-                    label: resource.text
+                    value: task.id,
+                    label: task.text
                 });
-                // console.log(resource);
+                // console.log(task);
             }
         }
     }
-    return resourceOptions;
+    return taskOptions;
 }
 
 
 /**
- * Utlity function takes an array of `Resource` primary keys and the `Resources` results
+ * Utlity function takes an array of `Task` primary keys and the `Tasks` results
  * from the API and returns the HTML dropdown selections which will be consumed
  * by the GUI powered by `react-select`.
  */
-export function getPickedResourceItemReactSelectOptions(resourceTargetsArray, resourceList=[], selectName="resource") {
-    const resourceOptions = [];
-    if (isEmpty(resourceList) === false && isEmpty(resourceTargetsArray) === false) {
-        const results = resourceList.results;
+export function getPickedTaskItemReactSelectOptions(taskTargetsArray, taskList=[], selectName="task") {
+    const taskOptions = [];
+    if (isEmpty(taskList) === false && isEmpty(taskTargetsArray) === false) {
+        const results = taskList.results;
         const isResultsNotEmpty = results.length > 0;
-        // console.log("getPickedResourceItemReactSelectOptions | results:",results);
-        // console.log("getPickedResourceItemReactSelectOptions | isResultsNotEmpty:",isResultsNotEmpty);
+        // console.log("getPickedTaskItemReactSelectOptions | results:",results);
+        // console.log("getPickedTaskItemReactSelectOptions | isResultsNotEmpty:",isResultsNotEmpty);
         if (isResultsNotEmpty) {
-            for (let i = 0; i < resourceTargetsArray.length; i++) {
-                let resourceTarget = resourceTargetsArray[i];
+            for (let i = 0; i < taskTargetsArray.length; i++) {
+                let taskTarget = taskTargetsArray[i];
                 for (let j = 0; j < results.length; j++) {
-                    let resourceSearch = results[j];
-                    if (resourceSearch.id === resourceTarget.id) {
-                        resourceOptions.push({
+                    let taskSearch = results[j];
+                    if (taskSearch.id === taskTarget.id) {
+                        taskOptions.push({
                             selectName: selectName,
-                            value: resourceTarget.id,
-                            label: resourceTarget.text
+                            value: taskTarget.id,
+                            label: taskTarget.text
                         });
-                        // console.log(resourceSearch);
+                        // console.log(taskSearch);
                     } // end IF
 
                 } //end FOR
@@ -520,5 +520,5 @@ export function getPickedResourceItemReactSelectOptions(resourceTargetsArray, re
 
         } // end IF
     }
-    return resourceOptions;
+    return taskOptions;
 }
