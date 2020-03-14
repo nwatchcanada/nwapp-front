@@ -6,7 +6,7 @@ import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
 import { BootstrapTelephoneInput } from "../../../../bootstrap/bootstrapTelephoneInput";
 
 
-class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
+class AssignWatchAssociateTaskStep1Component extends Component {
 
     render() {
         const { onSearchClick, handleKeyDown, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle, onTextChange } = this.props;
@@ -22,17 +22,17 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                             <Link to={`/admin/tasks`}><i className="fas fa-tasks"></i>&nbsp;Tasks</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-thumbtack"></i>&nbsp;Assign Area Coordinator to Watch
+                            <i className="fas fa-thumbtack"></i>&nbsp;Assign Associate to Watch
                         </li>
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-thumbtack"></i>&nbsp;Assign Area Coordinator to Watch</h1>
+                <h1><i className="fas fa-thumbtack"></i>&nbsp;Assign Associate to Watch</h1>
 
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/task/1/${uuid}/step-1`}>
+                            <Link to={`/admin/task/2/${uuid}/step-1`}>
                                 <span className="num">1.</span><span className="">Info</span>
                             </Link>
                         </div>
@@ -95,7 +95,7 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                             <i className="fas fa-times"></i> Advanced Search
                         </button>
                         <div className="col-md-12 text-center">
-                            <Link to={`/admin/task/1/${uuid}/step-1`} className="btn btn-orange btn-lg mt-4 pl-4 pr-4">
+                            <Link to={`/admin/task/2/${uuid}/step-1`} className="btn btn-orange btn-lg mt-4 pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>
@@ -171,4 +171,4 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
     }
 }
 
-export default AssignWatchAreaCoordinatorTaskStep1Component;
+export default AssignWatchAssociateTaskStep1Component;

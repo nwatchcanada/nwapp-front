@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 
-class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
+class AssignWatchAssociateTaskStep1Component extends Component {
     render() {
         const { onClick, onBack } = this.props;
         return (
@@ -16,12 +16,12 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                             <Link to={`/admin/tasks`}><i className="fas fa-tasks"></i>&nbsp;Tasks</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-thumbtack"></i>&nbsp;Assign Area Coordinator to Watch
+                            <i className="fas fa-thumbtack"></i>&nbsp;Assign Associate to Watch
                         </li>
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-thumbtack"></i>&nbsp;Assign Area Coordinator to Watch</h1>
+                <h1><i className="fas fa-thumbtack"></i>&nbsp;Assign Associate to Watch</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -50,7 +50,7 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Description</th>
-                                <td>A new watch has been created and has the option of assigning an area coordinator. Please assign an area coordinator to the watch if there is one.</td>
+                                <td>A new watch has been created and has the option of assigning an associate. Please assign an associate to the watch if there is one.</td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Watch</th>
@@ -93,4 +93,4 @@ class AssignWatchAreaCoordinatorTaskStep1Component extends Component {
     }
 }
 
-export default AssignWatchAreaCoordinatorTaskStep1Component;
+export default AssignWatchAssociateTaskStep1Component;

@@ -394,6 +394,11 @@ import AssignWatchAreaCoordinatorTaskStep1Container from "./taskItems/admin/oper
 import AssignWatchAreaCoordinatorTaskStep2Container from "./taskItems/admin/operations/assignWatchAreaCoordinator/step2Container";
 import AssignWatchAreaCoordinatorTaskStep3Container from "./taskItems/admin/operations/assignWatchAreaCoordinator/step3Container";
 import AssignWatchAreaCoordinatorTaskStep4Container from "./taskItems/admin/operations/assignWatchAreaCoordinator/step4Container";
+import AssignWatchAssociateTaskStep1Container from "./taskItems/admin/operations/assignWatchAssociate/step1Container";
+import AssignWatchAssociateTaskStep2Container from "./taskItems/admin/operations/assignWatchAssociate/step2Container";
+import AssignWatchAssociateTaskStep3Container from "./taskItems/admin/operations/assignWatchAssociate/step3Container";
+import AssignWatchAssociateTaskStep4Container from "./taskItems/admin/operations/assignWatchAssociate/step4Container";
+
 
 /*
 ----------
@@ -844,6 +849,10 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/task/1/:uuid/step-2" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep2Container)} />
                                 <Route path="/admin/task/1/:uuid/step-3" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep3Container)} />
                                 <Route path="/admin/task/1/:uuid/step-4" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep4Container)} />
+                                <Route path="/admin/task/2/:uuid/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
+                                <Route path="/admin/task/2/:uuid/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />
+                                <Route path="/admin/task/2/:uuid/step-3" exact component={requiresAuth(AssignWatchAssociateTaskStep3Container)} />
+                                <Route path="/admin/task/2/:uuid/step-4" exact component={requiresAuth(AssignWatchAssociateTaskStep4Container)} />
 
                                 /*
                                 -------------
