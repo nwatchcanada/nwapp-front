@@ -10,6 +10,7 @@ class AssignWatchAreaCoordinatorTaskStep4Component extends Component {
         const { uuid, onClick, onBack, errors, isLoading } = this.props;
         return (
             <div>
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
