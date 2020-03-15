@@ -398,6 +398,10 @@ import AssignWatchAssociateTaskStep1Container from "./taskItems/admin/operations
 import AssignWatchAssociateTaskStep2Container from "./taskItems/admin/operations/assignWatchAssociate/step2Container";
 import AssignWatchAssociateTaskStep3Container from "./taskItems/admin/operations/assignWatchAssociate/step3Container";
 import AssignWatchAssociateTaskStep4Container from "./taskItems/admin/operations/assignWatchAssociate/step4Container";
+import AssignDistrictAssociateTaskStep1Container from "./taskItems/admin/operations/assignDistrictAssociate/step1Container";
+import AssignDistrictAssociateTaskStep2Container from "./taskItems/admin/operations/assignDistrictAssociate/step2Container";
+import AssignDistrictAssociateTaskStep3Container from "./taskItems/admin/operations/assignDistrictAssociate/step3Container";
+import AssignDistrictAssociateTaskStep4Container from "./taskItems/admin/operations/assignDistrictAssociate/step4Container";
 
 
 /*
@@ -405,12 +409,6 @@ import AssignWatchAssociateTaskStep4Container from "./taskItems/admin/operations
 TODO
 ----------
 */
-// import AssignWatchAssociateTaskStep1Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep1Container";
-// import AssignWatchAssociateTaskStep2Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep2Container";
-// import AssignWatchAssociateTaskStep3Container from "./tasks/assignWatchAssociate/assignWatchAssociateTaskStep3Container";
-// import AssignWatchAreaCoordinatorTaskStep1Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep1Container";
-// import AssignWatchAreaCoordinatorTaskStep2Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep2Container";
-// import AssignWatchAreaCoordinatorTaskStep3Container from "./tasks/assignWatchAreaCoordinator/assignWatchAreaCoordinatorTaskStep3Container";
 // import ActionConcernItemTaskStep1Container from "./tasks/actionConcernItem/actionConcernItemTaskStep1Container";
 // import ActionConcernItemTaskStep2Container from "./tasks/actionConcernItem/actionConcernItemTaskStep2Container";
 // import ActionConcernItemTaskStep3Container from "./tasks/actionConcernItem/actionConcernItemTaskStep3Container";
@@ -853,6 +851,10 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/task/2/:uuid/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />
                                 <Route path="/admin/task/2/:uuid/step-3" exact component={requiresAuth(AssignWatchAssociateTaskStep3Container)} />
                                 <Route path="/admin/task/2/:uuid/step-4" exact component={requiresAuth(AssignWatchAssociateTaskStep4Container)} />
+                                <Route path="/admin/task/3/:uuid/step-1" exact component={requiresAuth(AssignDistrictAssociateTaskStep1Container)} />
+                                <Route path="/admin/task/3/:uuid/step-2" exact component={requiresAuth(AssignDistrictAssociateTaskStep2Container)} />
+                                <Route path="/admin/task/3/:uuid/step-3" exact component={requiresAuth(AssignDistrictAssociateTaskStep3Container)} />
+                                <Route path="/admin/task/3/:uuid/step-4" exact component={requiresAuth(AssignDistrictAssociateTaskStep4Container)} />
 
                                 /*
                                 -------------
@@ -861,12 +863,6 @@ class AppContainer extends React.Component {
                                 */
 
                                 { /*
-                                <Route path="/task/1/:slug/step-1" exact component={requiresAuth(AssignWatchAssociateTaskStep1Container)} />
-                                <Route path="/task/1/:slug/step-2" exact component={requiresAuth(AssignWatchAssociateTaskStep2Container)} />
-                                <Route path="/task/1/:slug/step-3" exact component={requiresAuth(AssignWatchAssociateTaskStep3Container)} />
-                                <Route path="/task/2/:slug/step-1" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep1Container)} />
-                                <Route path="/task/2/:slug/step-2" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep2Container)} />
-                                <Route path="/task/2/:slug/step-3" exact component={requiresAuth(AssignWatchAreaCoordinatorTaskStep3Container)} />
                                 <Route path="/task/3/:slug/step-1" exact component={requiresAuth(ActionConcernItemTaskStep1Container)} />
                                 <Route path="/task/3/:slug/step-2" exact component={requiresAuth(ActionConcernItemTaskStep2Container)} />
                                 <Route path="/task/3/:slug/step-3" exact component={requiresAuth(ActionConcernItemTaskStep3Container)} />
