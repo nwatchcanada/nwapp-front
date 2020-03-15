@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
+// import { BootstrapCheckbox } from "../bootstrap/bootstrapCheckbox";
 import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
-import { BootstrapTelephoneInput } from "../../../../bootstrap/bootstrapTelephoneInput";
+import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapRadio } from "../../../../bootstrap/bootstrapRadio";
+import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
+import { WILL_ACTION_CHOICES, NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES } from "../../../../../constants/api";
 
 
-class ActionIncidentTaskStep1Component extends Component {
+class ActionIncidentTaskStep2Component extends Component {
 
     render() {
-        const { onSearchClick, handleKeyDown, onAdvancedSearchClick, advancedSearchActive, onAdvancedSearchPanelToggle, onTextChange } = this.props;
-        const { uuid, keyword, firstName, lastName, telephone, email, errors, isLoading } = this.props;
+        const { onHandleKeyDown } = this.props;
+        const { uuid, willAction, comment, reason, reasonOther, slug, errors, onTextChange, onSelectChange, onRadioChange, isLoading, onClick } = this.props;
+        const isOtherHowDidYouHearSelected = reason === 1;
         return (
             <div>
                 <nav aria-label="breadcrumb">
@@ -38,132 +43,92 @@ class ActionIncidentTaskStep1Component extends Component {
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Search</span>
+                                <span className="num">2.</span><span className="">Action</span>
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Selection</span>
+                            <span className="num">3.</span><span className="">Review</span>
                         </div>
                     </div>
                 </div>
 
-                <div id="m-search" className="col-sm-5 mx-auto mt-4 pt-4">
+                <div className="row">
+                    <div className="col-md-5 mx-auto mt-2">
+                        <form>
+                            <h1><i className="fas fa-vote-yea"></i>&nbsp;Action Form</h1>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
 
-                    <BootstrapErrorsProcessingAlert errors={errors} />
+                            <BootstrapErrorsProcessingAlert errors={errors} />
 
-                    <form id="searchForm" className="needs-validation" noValidate>
-                        <div className="input-group mb-2">
-
-                            <input
-                                type="text"
-                                className="form-control form-control-lg border border-primary"
-                                id="keyword"
-                                name="keyword"
-                                placeholder="Search..."
-                                minLength="3"
-                                required=""
-                                value={keyword}
-                                onChange={onTextChange}
-								onKeyDown={handleKeyDown}
+                            <BootstrapRadio
+                                inputClassName="form-check-input form-check-input-lg"
+                                borderColour="border-primary"
+                                error={errors.willAction}
+                                label="Do you need to action further? (*)"
+                                name="willAction"
+                                onChange={onRadioChange}
+                                selectedValue={willAction}
+                                options={WILL_ACTION_CHOICES}
                             />
 
-                            <div className="input-group-append">
-                                <button className="btn btn-primary btn-lg" type="button" onClick={onSearchClick} >
-                                    <i className="fas fa-search"></i>
-                                </button>
-                            </div>
-                            <div id="search-error" className="invalid-feedback"></div>
-                        </div>
-                    </form>
+                            {willAction === 0 &&
+                                <BootstrapSingleSelect
+                                    borderColour="border-primary"
+                                    label="Why will you not be responding directly to this incident? (*)"
+                                    name="reason"
+                                    defaultOptionLabel="Please select how you heard about us."
+                                    options={NOT_ACTIONING_CONCERN_ITEM_REASON_CHOICES}
+                                    value={reason}
+                                    error={errors.reason}
+                                    onSelectChange={onSelectChange}
+                                />
+                            }
 
-                    <div className="col-md-12 text-center">
-                        <h3 className="p-2">- or -</h3>
-                        <button id="advance_search_btn"
-                            className="btn btn-primary btn-lg"
-                            type="button"
-                            data-toggle="button"
-                            style={{ display: advancedSearchActive ? "none" : "inline-block" }}
-                            onClick = { onAdvancedSearchPanelToggle }>
-                            Advanced Search
-                        </button>
-                        <button id="advance_search_btn_x"
-                            className="btn btn-dark btn-lg"
-                            type="button"
-                            data-toggle="button"
-                            style={{ display: advancedSearchActive ? "inline-block" : "none" }}
-                            onClick = { onAdvancedSearchPanelToggle }>
-                            <i className="fas fa-times"></i> Advanced Search
-                        </button>
-                        <div className="col-md-12 text-center">
-                            <Link to={`/admin/task/4/${uuid}/step-1`} className="btn btn-orange btn-lg mt-4 pl-4 pr-4">
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </Link>
-                        </div>
+                            {willAction === 1 &&
+                                <BootstrapTextarea
+                                    name="comment"
+                                    borderColour="border-primary"
+                                    label="What action did you take? (*)"
+                                    placeholder="Write your text here."
+                                    rows="5"
+                                    value={comment}
+                                    helpText=""
+                                    onChange={onTextChange}
+                                    error={errors.comment}
+                                />
+                            }
+
+                            {isOtherHowDidYouHearSelected &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.reasonOther}
+                                    label="Other (*)"
+                                    onChange={onTextChange}
+                                    value={reasonOther}
+                                    name="reasonOther"
+                                    type="text"
+                                />
+                            }
+
+                            <div className="form-group">
+                                <button
+                                    className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4"
+                                    disabled={isLoading}
+                                    onClick={onClick}
+                                    onKeyDown={onHandleKeyDown}>
+                                        Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                                <Link to={`/admin/task/4/${slug}/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                </Link>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
-                <div id="adv-search"
-                    className="col-sm-5 mx-auto border-top mt-4"
-                    style={{ display: advancedSearchActive ? "block" : "none" }}>
-                    <p className="my-4"><strong>Please fill in atleast one field and hit search</strong></p>
 
-                    <form id="advanced-searchForm" method="get" className="needs-validation" action="" noValidate>
-                        <div className="form-row">
-                            <div className="form-group col-md-12 mb-4">
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.firstName}
-                                    label="First Name"
-                                    onChange={onTextChange}
-                                    value={firstName}
-                                    name="firstName"
-                                    type="text"
-                                    disabled={isLoading}
-                                />
-                                <BootstrapInput
-                                    inputClassName="form-control form-control-lg"
-                                    borderColour="border-primary"
-                                    error={errors.lastName}
-                                    label="Last Name"
-                                    onChange={onTextChange}
-                                    value={lastName}
-                                    name="lastName"
-                                    type="text"
-                                    disabled={isLoading}
-                                />
-								<BootstrapTelephoneInput
-									inputClassName="form-control form-control-lg"
-									borderColour="border-primary"
-									error={errors.telephone}
-									label="Phone #"
-									onChange={onTextChange}
-									value={telephone}
-									name="telephone"
-									type="text"
-									placeholder="+1 (xxx) xxx-xxxx"
-									disabled={isLoading}
-								/>
-								<BootstrapInput
-									inputClassName="form-control form-control-lg"
-									borderColour="border-primary"
-									error={errors.email}
-									label="Email"
-									onChange={onTextChange}
-									value={email}
-									name="email"
-									type="text"
-									disabled={isLoading}
-								/>
-                            </div>
-                        </div>
 
-                        <div className="form-group col-md-12 mb-3 mx-auto text-center">
-                            <button className="btn btn-primary btn-lg btn-fxw mt-3" type="button" onClick={onAdvancedSearchClick}>
-                                <i className="fas fa-search"></i>&nbsp;Search
-                            </button>
-                        </div>
-                    </form>
-                </div>
 
 
             </div>
@@ -171,4 +136,4 @@ class ActionIncidentTaskStep1Component extends Component {
     }
 }
 
-export default ActionIncidentTaskStep1Component;
+export default ActionIncidentTaskStep2Component;
