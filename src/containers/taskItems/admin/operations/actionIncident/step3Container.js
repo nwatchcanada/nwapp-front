@@ -38,7 +38,7 @@ class ActionIncidentTaskStep3Container extends Component {
         this.state = {
             uuid: uuid,
             willAction: localStorageGetIntegerItem("nwapp-task-4-willAction"),
-            comment: localStorageGetIntegerItem("nwapp-task-4-comment"),
+            comment: localStorage.getItem("nwapp-task-4-comment"),
             reason: localStorageGetIntegerItem("nwapp-task-4-reason"),
             reasonOther: localStorage.getItem("nwapp-task-4-reasonOther"),
         }
@@ -57,8 +57,9 @@ class ActionIncidentTaskStep3Container extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        // Assign our district.
-        postData.associateSlug = this.state.associateSlug;
+        if (isNaN(this.state.reason)) {
+            postData.reason = 0;
+        }
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -149,12 +150,13 @@ class ActionIncidentTaskStep3Container extends Component {
      */
 
     render() {
-        const { willAction, reason, reasonOther, errors, uuid, isLoading } = this.state;
+        const { willAction, comment, reason, reasonOther, errors, uuid, isLoading } = this.state;
 
         return (
             <ActionIncidentItemTaskStep3Component
                 uuid={uuid}
                 willAction={willAction}
+                comment={comment}
                 reason={reason}
                 reasonOther={reasonOther}
                 errors={errors}
