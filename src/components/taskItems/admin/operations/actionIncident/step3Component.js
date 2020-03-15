@@ -42,12 +42,12 @@ export default class ActionIncidentTaskStep3Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/task/3/${uuid}/step-1`}>
+                            <Link to={`/admin/task/4/${uuid}/step-1`}>
                                 <span className="num">1.</span><span className="">Info</span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/task/3/${uuid}/step-2`}>
+                            <Link to={`/admin/task/4/${uuid}/step-2`}>
                                 <span className="num">2.</span><span className="">Search</span>
                             </Link>
                         </div>
@@ -71,7 +71,7 @@ export default class ActionIncidentTaskStep3Component extends Component {
                                 <p className="lead">It appears nothing was found for your search results. Please try again by clicking below.</p>
 
                                 <p className="lead">
-                                    <Link className="btn btn-primary btn-lg" to={`/admin/task/3/${uuid}/step-2`}>Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
+                                    <Link className="btn btn-primary btn-lg" to={`/admin/task/4/${uuid}/step-2`}>Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
                                 </p>
                             </div>
                             :<div className="card-group row">
@@ -91,7 +91,7 @@ export default class ActionIncidentTaskStep3Component extends Component {
                         </div>
 
                         <div className="col-md-12 text-center">
-                            <Link to={`/admin/task/3/${uuid}/step-2`} className="btn btn-orange btn-lg mt-4 pl-4 pr-4">
+                            <Link to={`/admin/task/4/${uuid}/step-2`} className="btn btn-orange btn-lg mt-4 pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>

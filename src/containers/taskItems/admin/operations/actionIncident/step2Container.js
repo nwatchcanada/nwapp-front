@@ -75,7 +75,7 @@ class ActionIncidentTaskStep2Container extends Component {
 				if (isValid) {
 
 					localStorageSetObjectOrArrayItem('nwapp-task-1-associate', this.state);
-                    this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-3");
+                    this.props.history.push("/admin/task/4/"+this.state.uuid+"/step-3");
 
 
 				// CASE 2 OF 2: Validation was a failure.
@@ -111,7 +111,7 @@ class ActionIncidentTaskStep2Container extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('nwapp-task-1-associate', this.state);
-                    this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-3");
+                    this.props.history.push("/admin/task/4/"+this.state.uuid+"/step-3");
 
 
             // CASE 2 OF 2: Validation was a failure.
@@ -138,7 +138,7 @@ class ActionIncidentTaskStep2Container extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('nwapp-task-1-associate', this.state);
-                    this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-3");
+                    this.props.history.push("/admin/task/4/"+this.state.uuid+"/step-3");
 
 
             // CASE 2 OF 2: Validation was a failure.

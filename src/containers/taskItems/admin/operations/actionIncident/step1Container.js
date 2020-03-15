@@ -68,7 +68,7 @@ class ActionIncidentTaskStep1Container extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-2");
+        this.props.history.push("/admin/task/4/"+this.state.uuid+"/step-2");
     }
 
     /**

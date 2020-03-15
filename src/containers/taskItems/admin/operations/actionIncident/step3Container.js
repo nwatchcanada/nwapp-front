@@ -148,7 +148,7 @@ class ActionIncidentTaskStep3Container extends Component {
             { isLoading: true },
             ()=>{
                 localStorage.setItem('nwapp-task-1-associate-slug', associateSlug);
-                this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-4");
+                this.props.history.push("/admin/task/4/"+this.state.uuid+"/step-4");
             }
         );
     }
