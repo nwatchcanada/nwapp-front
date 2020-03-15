@@ -14,7 +14,7 @@ class ActionIncidentTaskStep2Component extends Component {
 
     render() {
         const { onHandleKeyDown } = this.props;
-        const { uuid, willAction, comment, reason, reasonOther, slug, errors, onTextChange, onSelectChange, onRadioChange, isLoading, onClick } = this.props;
+        const { willAction, comment, reason, reasonOther, uuid, errors, onTextChange, onSelectChange, onRadioChange, isLoading, onClick } = this.props;
         const isOtherHowDidYouHearSelected = reason === 1;
         return (
             <div>
@@ -119,7 +119,7 @@ class ActionIncidentTaskStep2Component extends Component {
                                     onKeyDown={onHandleKeyDown}>
                                         Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to={`/admin/task/4/${slug}/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/task/4/${uuid}/step-1`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

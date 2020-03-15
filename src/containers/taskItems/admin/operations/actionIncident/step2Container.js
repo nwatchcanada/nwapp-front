@@ -25,13 +25,13 @@ class ActionIncidentTaskStep2Container extends Component {
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
-        const { slug } = this.props.match.params;
+        const { uuid } = this.props.match.params;
 
         this.state = {
             name: null,
             errors: {},
             isLoading: false,
-            slug: slug,
+            uuid: uuid,
             willAction: localStorageGetIntegerItem("nwapp-task-4-willAction"),
             comment: localStorage.getItem("nwapp-task-4-comment"),
             reason: localStorageGetIntegerItem("nwapp-task-4-reason"),
@@ -160,7 +160,7 @@ class ActionIncidentTaskStep2Container extends Component {
      */
 
     render() {
-        const { uuid, willAction, comment, reason, reasonOther, errors, slug, } = this.state;
+        const { uuid, willAction, comment, reason, reasonOther, errors, } = this.state;
         return (
             <ActionIncidentTaskStep2Component
                 uuid={uuid}

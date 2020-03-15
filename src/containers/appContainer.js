@@ -405,7 +405,6 @@ import AssignDistrictAssociateTaskStep4Container from "./taskItems/admin/operati
 import ActionIncidentTaskStep1Container from "./taskItems/admin/operations/actionIncident/step1Container";
 import ActionIncidentTaskStep2Container from "./taskItems/admin/operations/actionIncident/step2Container";
 import ActionIncidentTaskStep3Container from "./taskItems/admin/operations/actionIncident/step3Container";
-import ActionIncidentTaskStep4Container from "./taskItems/admin/operations/actionIncident/step4Container";
 
 /*
 ----------
@@ -861,7 +860,6 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/task/4/:uuid/step-1" exact component={requiresAuth(ActionIncidentTaskStep1Container)} />
                                 <Route path="/admin/task/4/:uuid/step-2" exact component={requiresAuth(ActionIncidentTaskStep2Container)} />
                                 <Route path="/admin/task/4/:uuid/step-3" exact component={requiresAuth(ActionIncidentTaskStep3Container)} />
-                                <Route path="/admin/task/4/:uuid/step-4" exact component={requiresAuth(ActionIncidentTaskStep4Container)} />
 
                                 /*
                                 -------------
