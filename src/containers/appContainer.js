@@ -215,6 +215,7 @@ SETTINGS
 (*) HOW HEAR
 (*) RESOURCE
 (*) ITEM TYPE
+(*) ORGANIZATION
 ---------
 */
 
@@ -277,6 +278,9 @@ import AdminItemTypeUpdateContainer from "./settings/admin/itemType/update/admin
 import AdminItemTypeCreateStep1Container from "./settings/admin/itemType/create/adminCreateStep1Container";
 import AdminItemTypeCreateStep2Container from "./settings/admin/itemType/create/adminCreateStep2Container";
 import AdminItemTypeArchiveOperationContainer from "./settings/admin/itemType/operation/adminArchiveContainer";
+
+import AdminOrganizationSettingRetrieveContainer from "./settings/admin/organization/retrieve/adminRetrieveContainer";
+
 
 /*
 -------
@@ -573,6 +577,14 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/item-type/add/step-1" exact component={requiresAuth(AdminItemTypeCreateStep1Container)} />
                                 <Route path="/admin/settings/item-type/add/step-2" exact component={requiresAuth(AdminItemTypeCreateStep2Container)} />
                                 <Route path="/admin/settings/item-type/operation/archive/:slug" exact component={requiresAuth(AdminItemTypeArchiveOperationContainer)} />
+                                {/*
+                                    --------------------------------
+                                    SETTINGS - ORGANIZATION SETTINGS
+                                    --------------------------------
+                                */}
+                                <Route path="/admin/settings/organiztion" exact component={requiresAuth(AdminOrganizationSettingRetrieveContainer)} />
+
+
 
 
                                 {/*
