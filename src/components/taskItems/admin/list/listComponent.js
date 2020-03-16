@@ -55,7 +55,7 @@ class RemoteListComponent extends Component {
             1: 'Assign Area Coordinator to Watch',
             2: 'Assign Associate to Watch',
             3: 'Assign Associate to District',
-            4: 'Action a NW concern item',
+            4: 'Action a NW Incident item',
             5: 'Action a NW item item',
         };
 
