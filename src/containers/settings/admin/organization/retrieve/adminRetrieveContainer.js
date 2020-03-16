@@ -4,9 +4,13 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminOrganizationSettingRetrieveComponent from "../../../../../components/settings/admin/organization/retrieve/adminRetrieveComponent";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import {
-    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
-} from '../../../../../helpers/localStorageUtility';
+
+import validateInput from '../../../../../validators/organizationValidator';
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { getTimezoneReactSelectOptions } from "../../../../../helpers/timezoneUtlity";
+import { pullTenantDetail, putTenantDetail } from "../../../../../actions/tenantActions";
+import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../../constants/api";
+import { getSubdomain } from "../../../../../helpers/urlUtility";
 
 
 class AdminOrganizationSettingRetrieveContainer extends Component {
@@ -17,7 +21,31 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+
+        const schemaName = getSubdomain();
+
+        this.state = {
+            schema: schemaName,
+            schemaName: schemaName,
+            name: "-",
+            alternateName: "-",
+            description: "-",
+            country: "-",
+            province: "-",
+            city: "-",
+            streetNumber: "-",
+            streetName: "-",
+            streetType: "-",
+            apartmentUnit: "-",
+            streetTypeOption: "-",
+            streetTypeOther: "-",
+            streetDirection: "-",
+            streetDirectionOption: "-",
+            postalCode: "-",
+            timezone: "-",
+            errors: {},
+            isLoading: true, // Reason for `true` is because we need to fetch the data first.
+        }
 
         this.onBack = this.onBack.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -32,6 +60,11 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+        this.props.pullTenantDetail(
+            this.state.schemaName,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -51,17 +84,31 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessCallback(response) {
-        console.log("onSuccessCallback |", response);
-        this.setState({ isLoading: false, itemType: response, });
-
-        // The following code will save the object to the browser's local
-        // storage to be retrieved later more quickly.
-        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-itemType-"+this.state.slug.toString(), response);
+    onSuccessCallback(tenantDetail) {
+        console.log(tenantDetail);
+        this.setState({
+            name: tenantDetail.name,
+            alternateName: tenantDetail.alternateName,
+            description: tenantDetail.description,
+            country: tenantDetail.country,
+            province: tenantDetail.province,
+            city: tenantDetail.city,
+            streetNumber: tenantDetail.streetNumber,
+            streetName: tenantDetail.streetName,
+            streetType: tenantDetail.streetType,
+            apartmentUnit: tenantDetail.apartmentUnit,
+            // streetTypeOption: tenantDetail.streetTypeOption,
+            streetTypeOther: tenantDetail.streetTypeOther,
+            streetDirection: tenantDetail.streetDirection,
+            // streetDirectionOption: tenantDetail.streetDirectionOption,
+            postalCode: tenantDetail.postalCode,
+            timezone: tenantDetail.timezoneName,
+            isLoading: false, // Turn off because we have finished.
+        });
     }
 
     onFailureCallback(errors) {
-        console.log("onFailureCallback | errors:", errors);
+        this.setState({ errors: errors, isLoading: false, });
     }
 
     /**
@@ -87,8 +134,35 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
      */
 
     render() {
+        const {
+            schema, name, alternateName, description, country, province, city,
+            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,
+            timezone, errors, isLoading
+        } = this.state;
+
         return (
             <AdminOrganizationSettingRetrieveComponent
+                schema={schema}
+                name={name}
+                alternateName={alternateName}
+                description={description}
+                country={country}
+                province={province}
+                city={city}
+                streetNumber={streetNumber}
+                streetName={streetName}
+                streetType={streetType}
+                apartmentUnit={apartmentUnit}
+                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
+                streetTypeOther={streetTypeOther}
+                streetDirection={streetDirection}
+                streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                postalCode={postalCode}
+                timezone={timezone}
+                timezoneOptions={getTimezoneReactSelectOptions()}
+                errors={errors}
+                isLoading={isLoading}
+
                 onBack={this.onBack}
                 onClick={this.onClick}
                 isLoading={this.state.isLoading}
@@ -109,6 +183,11 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
+        pullTenantDetail: (schemaName, successCallback, errorCallback) => {
+            dispatch(
+                pullTenantDetail(schemaName, successCallback, errorCallback)
+            )
+        }
     }
 }
 

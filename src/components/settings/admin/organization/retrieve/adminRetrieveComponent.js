@@ -9,7 +9,12 @@ import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPa
 
 export default class AdminOrganizationSettingRetrieveComponent extends Component {
     render() {
-        const { itemTypeData, onClick, onBack, flashMessage, isLoading } = this.props;
+        const {
+            schema, name, alternateName, description, country, province, city,
+            streetNumber, streetName, streetType, apartmentUnit,
+            streetTypeOther, streetDirection, postalCode,
+            timezone, errors, isLoading, flashMessage, onBack, onClick
+        } = this.props;
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -30,6 +35,93 @@ export default class AdminOrganizationSettingRetrieveComponent extends Component
                 <FlashMessageComponent object={flashMessage} />
 
                 <h1><i className="fas fa-building"></i>&nbsp;Organization</h1>
+
+
+                <div className="row mt-4 pt-3 mb-4 pb-2">
+                    <div className="col-md-10 mx-auto p-2">
+                        <table className="table table-bordered custom-cell-w">
+                            <tbody>
+                                <tr className="bg-dark">
+                                    <th scope="row" colSpan="2" className="text-light">
+                                        <i className="fas fa-table"></i>&nbsp;Details
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Schema</th>
+                                    <td>{schema}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Name</th>
+                                    <td>{name}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Alternate Name</th>
+                                    <td>{alternateName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Description</th>
+                                    <td>{description}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Country</th>
+                                    <td>{country}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Province</th>
+                                    <td>{province}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">City</th>
+                                    <td>{city}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Number</th>
+                                    <td>{streetNumber}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Name</th>
+                                    <td>{streetName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Type</th>
+                                    <td>{streetType} (TODO)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Apartment Unit</th>
+                                    <td>{apartmentUnit}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Type Other</th>
+                                    <td>{streetTypeOther}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Street Direction</th>
+                                    <td>{streetDirection} (TODO)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Postal Code</th>
+                                    <td>{postalCode}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Timezone</th>
+                                    <td>{timezone}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
+                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
+                                <i className="fas fa-edit"></i>&nbsp;Edit (TODO)
+                            </button>
+
+                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onBack}>
+                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/*
 
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
@@ -92,6 +184,8 @@ export default class AdminOrganizationSettingRetrieveComponent extends Component
 
                     </div>
                 </div>
+
+                */}
 
 
             </div>
