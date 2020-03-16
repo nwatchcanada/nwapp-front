@@ -15,7 +15,8 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchStreetUpdateComponent extends Component {
     render() {
         const {
-            watchDetail, slug, errors, isLoading, onClick, onTextChange, onSelectChange, onMultiChange, streetMembership,
+            watchDetail, slug, errors, isLoading, onClick, onTextChange,
+            onSelectChange, onMultiChange, streetMembership,
 
             // Modal related.
             streetNumberStart, streetNumberEnd, streetName,
@@ -45,7 +46,7 @@ export default class AdminWatchStreetUpdateComponent extends Component {
 
                 <h1>Update Watch - Details</h1>
 
-                <div className="col-md-5 mx-auto mt-2">
+                <div className="col-md-10 mx-auto mt-2">
                     <h3 className="pt-4 pb-2 text-center"><i className="fas fa-road"></i>&nbsp;Street Membership</h3>
                     <form id="residential-form" method="post" className="needs-validation" action="" noValidate>
                         <div className="form-group">
