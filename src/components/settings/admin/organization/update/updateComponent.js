@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import Moment from 'react-moment';
-// import 'moment-timezone';
 
-import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
+import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
+import { BootstrapInput } from "../../../../bootstrap/bootstrapInput";
+import { BootstrapCountrySelect } from '../../../../bootstrap/bootstrapCountrySelect';
+import { BootstrapProvinceSelect } from '../../../../bootstrap/bootstrapRegionSelect';
+import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSelect";
 
 
-export default class AdminOrganizationSettingUpdateComponent extends Component {
+class AdminOrganizationSettingUpdateComponent extends Component {
     render() {
         const {
-            schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit,
-            streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
-            timezone, errors, isLoading, flashMessage, onBack, onClick
+            schema, name, alternateName, description, country, province, city, timezone, timezoneOptions,
+            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
+            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onProvinceChange, onClick, onBackClick
         } = this.props;
         return (
             <div>
@@ -26,169 +28,211 @@ export default class AdminOrganizationSettingUpdateComponent extends Component {
                         <li className="breadcrumb-item">
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
+                        <li className="breadcrumb-item" aria-current="page">
+                            <Link to="/admin/settings/organiztion"><i className="fas fa-building"></i>&nbsp;Organization</Link>
+                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-building"></i>&nbsp;Organization
+                            <i className="fas fa-edit"></i>&nbsp;Update
                         </li>
                     </ol>
                 </nav>
+                <h1><i className="fas fa-edit"></i>&nbsp;Edit Organization</h1>
 
-                <FlashMessageComponent object={flashMessage} />
+                <div className="row">
+                    <div className="col-md-5 mx-auto mt-2">
+                        <form>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
 
-                <h1><i className="fas fa-building"></i>&nbsp;Organization</h1>
+                            <BootstrapErrorsProcessingAlert errors={errors} />
 
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.schema}
+                                label="Schema (*)"
+                                onChange={onTextChange}
+                                value={schema}
+                                name="schema"
+                                type="text"
+                                helpText="This is the subdomain clientd with the tenant. Value must be uniue and cannot be changed afterwords!"
+                            />
 
-                <div className="row mt-4 pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto p-2">
-                        <table className="table table-bordered custom-cell-w">
-                            <tbody>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-table"></i>&nbsp;Details
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Schema</th>
-                                    <td>{schema}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Name</th>
-                                    <td>{name}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Alternate Name</th>
-                                    <td>{alternateName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Description</th>
-                                    <td>{description}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Country</th>
-                                    <td>{country}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Province</th>
-                                    <td>{province}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">City</th>
-                                    <td>{city}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Number</th>
-                                    <td>{streetNumber}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Name</th>
-                                    <td>{streetName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type</th>
-                                    <td>{streetTypeLabel}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Apartment Unit</th>
-                                    <td>{apartmentUnit}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type Other</th>
-                                    <td>{streetTypeOther}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Direction</th>
-                                    <td>{streetDirectionLabel}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Postal Code</th>
-                                    <td>{postalCode}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Timezone</th>
-                                    <td>{timezone}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.name}
+                                label="Name (*)"
+                                onChange={onTextChange}
+                                value={name}
+                                name="name"
+                                type="text"
+                                helpText="Please specify the full legal name as found on documents"
+                            />
 
-                        <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
-                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
-                                <i className="fas fa-edit"></i>&nbsp;Edit (TODO)
-                            </button>
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.alternateName}
+                                label="Alternate Name (*)"
+                                onChange={onTextChange}
+                                value={alternateName}
+                                name="alternateName"
+                                type="text"
+                                helpText="Please specify the alternate name"
+                            />
 
-                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onBack}>
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </button>
-                        </div>
+                            <BootstrapTextarea
+                                name="description"
+                                borderColour="border-primary"
+                                label="Description"
+                                placeholder="Please set the organization description"
+                                rows="5"
+                                value={description}
+                                helpText="This is the description of the organization."
+                                onChange={onTextChange}
+                                error={errors.description}
+                            />
+
+                            <BootstrapCountrySelect
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.country}
+                                label="Country (*)"
+                                value={country}
+                                onChange={onCountryChange}
+                                priorityOptions={["CA", "US", "MX"]}
+                                name="country"
+                            />
+                            <BootstrapProvinceSelect
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.province}
+                                label="Province / state (*)"
+                                country={country}
+                                value={province}
+                                onChange={onProvinceChange}
+                                name="province"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.city}
+                                label="City (*)"
+                                onChange={onTextChange}
+                                value={city}
+                                name="city"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.apartmentUnit}
+                                label="Apt. Unit"
+                                onChange={onTextChange}
+                                value={apartmentUnit}
+                                name="apartmentUnit"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetNumber}
+                                label="Street Number (*)"
+                                onChange={onTextChange}
+                                value={streetNumber}
+                                name="streetNumber"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.streetName}
+                                label="Street Name (*)"
+                                onChange={onTextChange}
+                                value={streetName}
+                                name="streetName"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Street Type (*)"
+                                name="streetType"
+                                defaultOptionLabel="Please select a street type."
+                                options={streetTypeOptions}
+                                value={streetType}
+                                error={errors.streetType}
+                                onSelectChange={onSelectChange}
+                            />
+
+                            {streetType === 'Other' && streetType === 'other' &&
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-primary"
+                                    error={errors.streetTypeOther}
+                                    label="Street Type Other (*)"
+                                    onChange={onTextChange}
+                                    value={streetTypeOther}
+                                    name="streetTypeOther"
+                                    type="text"
+                                />
+                            }
+
+                            <BootstrapSingleSelect
+                                borderColour="border-successs"
+                                label="Street Direction"
+                                name="streetDirection"
+                                defaultOptionLabel="Please select a street direction."
+                                options={streetDirectionOptions}
+                                value={streetDirection}
+                                error={errors.streetDirection}
+                                onSelectChange={onSelectChange}
+                                helpText="Please pick direction if address has legally designated direction, ex.: `123 Centre Street South`."
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-primary"
+                                error={errors.postalCode}
+                                label="Postal Code (*)"
+                                onChange={onTextChange}
+                                value={postalCode}
+                                name="postalCode"
+                                type="text"
+                            />
+
+                            <BootstrapSingleSelect
+                                borderColour="border-primary"
+                                label="Timezone (*)"
+                                name="timezone"
+                                defaultOptionLabel="Please select a timezone."
+                                options={timezoneOptions}
+                                value={timezone}
+                                error={errors.timezone}
+                                onSelectChange={onSelectChange}
+                                helpText="If organization's timezone is different then please specify here."
+                            />
+
+                            <div className="form-group">
+                                <button type="button" className="btn btn-lg float-left pl-4 pr-4 btn-secondary" onClick={onBackClick}>
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
+                                </button>
+                                <button type="button" className="btn btn-lg float-right pl-4 pr-4 btn-success" onClick={onClick} disabled={isLoading}>
+                                    <i className="fas fa-check-circle"></i>&nbsp;Save
+                                </button>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
-
-                {/*
-
-                <div className="row mt-4 pt-3 mb-4 pb-2">
-                    <div className="col-md-10 mx-auto p-2">
-                        <table className="table table-bordered custom-cell-w">
-                            <tbody>
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light"><i className="fas fa-table"></i>&nbsp;Item Type details</th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Category</th>
-                                    <td>{itemTypeData && itemTypeData.categoryLabel}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Text</th>
-                                    <td>{itemTypeData && itemTypeData.text}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Description</th>
-                                    <td>{itemTypeData && itemTypeData.description}</td>
-                                </tr>
-
-                                <tr className="bg-dark">
-                                    <th scope="row" colSpan="2" className="text-light">
-                                        <i className="fas fa-server"></i>&nbsp;System
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Created At</th>
-                                    <td>
-                                        {itemTypeData && <Moment format="MM/DD/YYYY hh:mm:ss a">{itemTypeData.created}</Moment>}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Created By</th>
-                                    <td>{itemTypeData && itemTypeData.createdBy}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Modified At</th>
-                                    <td>
-                                        {itemTypeData && <Moment format="MM/DD/YYYY hh:mm:ss a">{itemTypeData.lastModified}</Moment>}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Modified By</th>
-                                    <td>{itemTypeData && itemTypeData.lastModifiedBy}</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                        <div className="form-group col-md-12 mb-3 p-0 mx-auto text-center">
-                            <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" onClick={onClick}>
-                                <i className="fas fa-edit"></i>&nbsp;Edit
-                            </button>
-
-                            <button className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4" onClick={onBack}>
-                                <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-
-                */}
-
 
             </div>
         );
     }
 }
+
+export default AdminOrganizationSettingUpdateComponent;
