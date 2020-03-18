@@ -279,7 +279,8 @@ import AdminItemTypeCreateStep1Container from "./settings/admin/itemType/create/
 import AdminItemTypeCreateStep2Container from "./settings/admin/itemType/create/adminCreateStep2Container";
 import AdminItemTypeArchiveOperationContainer from "./settings/admin/itemType/operation/adminArchiveContainer";
 
-import AdminOrganizationSettingRetrieveContainer from "./settings/admin/organization/retrieve/adminRetrieveContainer";
+import AdminOrganizationSettingRetrieveContainer from "./settings/admin/organization/retrieve/retrieveContainer";
+import AdminOrganizationSettingUpdateContainer from "./settings/admin/organization/update/updateContainer";
 
 
 /*
@@ -583,10 +584,7 @@ class AppContainer extends React.Component {
                                     --------------------------------
                                 */}
                                 <Route path="/admin/settings/organiztion" exact component={requiresAuth(AdminOrganizationSettingRetrieveContainer)} />
-
-
-
-
+                                <Route path="/admin/settings/organiztion/update" exact component={requiresAuth(AdminOrganizationSettingUpdateContainer)} />
                                 {/*
                                     -------
                                     MEMBERS
