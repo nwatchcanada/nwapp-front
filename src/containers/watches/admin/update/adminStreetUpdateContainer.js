@@ -36,6 +36,7 @@ class AdminWatchStreetUpdateContainer extends Component {
             streetMembership: this.props.watchDetail.streetMembership,
             errors: {},
             isLoading: false,
+            streetAddress: "",
             streetNumberStart: "",
             streetNumberEnd: "",
             streetName: "",
@@ -44,7 +45,8 @@ class AdminWatchStreetUpdateContainer extends Component {
             streetTypeOther: "",
             streetDirection: "",
             streetDirectionLabel: "",
-            showModal: false, // Variable used to indicate if the modal should appear.
+            showAddModal: false, // Variable used to indicate if the modal should appear.
+            showEditModal: false,
         }
 
         // Page related.
@@ -55,9 +57,11 @@ class AdminWatchStreetUpdateContainer extends Component {
 
         // Modal related.
         this.onAddClick = this.onAddClick.bind(this);
+        this.onEditClick = this.onEditClick.bind(this);
         this.onRemoveClick = this.onRemoveClick.bind(this);
-        this.onSaveClick = this.onSaveClick.bind(this);
-        this.onCloseClick = this.onCloseClick.bind(this);
+        this.onSaveAddClick = this.onSaveAddClick.bind(this);
+        this.onSaveEditClick = this.onSaveEditClick.bind(this);
+        this.onModalCloseClick = this.onModalCloseClick.bind(this);
 
         // API related.
         this.getPostData = this.getPostData.bind(this);
@@ -196,8 +200,37 @@ class AdminWatchStreetUpdateContainer extends Component {
     onAddClick(e) {
         e.preventDefault();  // Prevent the default HTML form submit code to run on the browser side.
         this.setState({
-            showModal: true,
+            showAddModal: true,
             errors: {},
+        });  // Load the modal.
+    }
+
+    onEditClick(streetAddress) {
+        let streetMembershipObj;
+
+        // Iterate through all the street memberships and find the correct object.
+        const streetMembership = this.state.streetMembership;
+        for (let i = 0; i < streetMembership.length; i++) {
+            let row = streetMembership[i];
+
+            if (row.streetAddress === streetAddress) {
+                streetMembershipObj = row;
+                break;
+            }
+        }
+
+        this.setState({
+            showEditModal: true,
+            errors: {},
+            streetAddress: streetAddress,
+            streetNumberStart: streetMembershipObj.streetNumberStart,
+            streetNumberEnd: streetMembershipObj.streetNumberEnd,
+            streetName: streetMembershipObj.streetName,
+            streetType: streetMembershipObj.streetType,
+            streetTypeLabel: streetMembershipObj.streetTypeLabel,
+            streetTypeOther: streetMembershipObj.streetTypeOther,
+            streetDirection: streetMembershipObj.streetDirection,
+            streetDirectionLabel: streetMembershipObj.streetDirectionLabel,
         });  // Load the modal.
     }
 
@@ -237,7 +270,7 @@ class AdminWatchStreetUpdateContainer extends Component {
         }
     }
 
-    onSaveClick(e) {
+    onSaveAddClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
@@ -300,7 +333,7 @@ class AdminWatchStreetUpdateContainer extends Component {
 
             // Update the state.
             this.setState({
-                showModal: false,
+                showAddModal: false,
                 errors: {},
                 streetMembership: a,
                 streetNumberStart: "", // Clear fields.
@@ -330,9 +363,48 @@ class AdminWatchStreetUpdateContainer extends Component {
         }
     }
 
-    onCloseClick() {
+    onSaveEditClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Get our values.
+        const {
+            streetAddress,
+            streetNumberStart,
+            streetNumberEnd,
+            streetName,
+            streetType,
+            streetTypeOther,
+            streetDirection
+        } = this.state;
+
+        // Iterate through all the street memberships and find the correct object.
+        const streetMembership = this.state.streetMembership;
+        for (let i = 0; i < streetMembership.length; i++) {
+            let row = streetMembership[i];
+
+            if (row.streetAddress === streetAddress) {
+                row.streetNumberStart = streetNumberStart;
+                row.streetNumberEnd = streetNumberEnd;
+                row.streetName = streetName;
+                row.streetType = streetType;
+                row.streetTypeOther = streetTypeOther;
+                row.streetDirection = streetDirection;
+                this.setState({
+                    showEditModal: false,
+                    streetMembership: streetMembership,
+                }, ()=>{
+                    console.log("onSaveEditClick | state: ", streetMembership);
+                });
+                return;
+            }
+        }
+    }
+
+    onModalCloseClick() {
         this.setState({
-            showModal: false,
+            showAddModal: false,
+            showEditModal: false,
             errors: {},
             streetNumberStart: "", // Clear fields.
             streetNumberEnd: "",
@@ -354,7 +426,7 @@ class AdminWatchStreetUpdateContainer extends Component {
             slug, tags, name, description, associate, district, streetMembership, errors, isLoading,
 
             // Modal relate.
-            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
+            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showAddModal, showEditModal,
         } = this.state;
 
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
@@ -375,7 +447,8 @@ class AdminWatchStreetUpdateContainer extends Component {
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onMultiChange={this.onMultiChange}
-                showModal={showModal}
+                showAddModal={showAddModal}
+                showEditModal={showEditModal}
                 streetNumberStart={streetNumberStart}
                 streetNumberEnd={streetNumberEnd}
                 streetName={streetName}
@@ -385,9 +458,11 @@ class AdminWatchStreetUpdateContainer extends Component {
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 onAddClick={this.onAddClick}
+                onEditClick={this.onEditClick}
                 onRemoveClick={this.onRemoveClick}
-                onSaveClick={this.onSaveClick}
-                onCloseClick={this.onCloseClick}
+                onSaveAddClick={this.onSaveAddClick}
+                onSaveEditClick={this.onSaveEditClick}
+                onModalCloseClick={this.onModalCloseClick}
             />
         );
     }
