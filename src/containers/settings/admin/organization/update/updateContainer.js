@@ -152,7 +152,7 @@ class AdminOrganizationSettingUpdateContainer extends Component {
 
     onSuccessfulSubmissionCallback() {
         this.props.setFlashMessage("success", "Organization has been successfully updated.");
-        this.props.history.push("/organizations");
+        this.props.history.push("/admin/settings/organiztion");
     }
 
     onFailedSubmissionCallback(errors) {

@@ -55,6 +55,7 @@ class AdminOrganizationSettingUpdateComponent extends Component {
                                 name="schema"
                                 type="text"
                                 helpText="This is the subdomain clientd with the tenant. Value must be uniue and cannot be changed afterwords!"
+                                disabled={true}
                             />
 
                             <BootstrapInput
