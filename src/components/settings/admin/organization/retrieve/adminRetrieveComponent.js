@@ -13,7 +13,7 @@ export default class AdminOrganizationSettingRetrieveComponent extends Component
             schema, name, alternateName, description, country, province, city,
             streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit,
             streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
-            timezone, errors, isLoading, flashMessage, onBack, onClick
+            timezone, policeReportUrl, errors, isLoading, flashMessage, onBack, onClick
         } = this.props;
         return (
             <div>
@@ -105,6 +105,15 @@ export default class AdminOrganizationSettingRetrieveComponent extends Component
                                 <tr>
                                     <th scope="row" className="bg-light">Timezone</th>
                                     <td>{timezone}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Report to Police URL</th>
+                                    <td>
+                                        {policeReportUrl
+                                            ? <span><a href={policeReportUrl} target="_blank">View&nbsp;<i className="fas fa-external-link-alt"></i></a></span>
+                                            : "-"
+                                        }
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

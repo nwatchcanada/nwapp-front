@@ -42,6 +42,7 @@ class AdminOrganizationSettingUpdateContainer extends Component {
             streetDirectionOption: "-",
             postalCode: "-",
             timezone: "-",
+            policeReportUrl: "-",
             errors: {},
             isLoading: true, // Reason for `true` is because we need to fetch the data first.
         }
@@ -142,6 +143,7 @@ class AdminOrganizationSettingUpdateContainer extends Component {
             // streetDirectionOption: tenantDetail.streetDirectionOption,
             postalCode: tenantDetail.postalCode,
             timezone: tenantDetail.timezoneName,
+            policeReportUrl: tenantDetail.policeReportUrl,
             isLoading: false, // Turn off because we have finished.
         });
     }
@@ -233,8 +235,9 @@ class AdminOrganizationSettingUpdateContainer extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,
-            timezone, errors, isLoading
+            streetNumber, streetName, streetType, apartmentUnit,
+            streetTypeOther, streetDirection, postalCode, timezone,
+            policeReportUrl, errors, isLoading
         } = this.state;
         return (
             <AdminOrganizationSettingUpdateComponent
@@ -255,6 +258,7 @@ class AdminOrganizationSettingUpdateContainer extends Component {
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
                 timezone={timezone}
+                policeReportUrl={policeReportUrl}
                 timezoneOptions={getTimezoneReactSelectOptions()}
                 errors={errors}
                 isLoading={isLoading}

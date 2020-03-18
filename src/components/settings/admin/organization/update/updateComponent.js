@@ -13,9 +13,12 @@ import { BootstrapSingleSelect } from "../../../../bootstrap/bootstrapSingleSele
 class AdminOrganizationSettingUpdateComponent extends Component {
     render() {
         const {
-            schema, name, alternateName, description, country, province, city, timezone, timezoneOptions,
-            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
-            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onProvinceChange, onClick, onBackClick
+            schema, name, alternateName, description, country, province, city,
+            timezone, timezoneOptions, policeReportUrl, streetNumber,
+            streetName, apartmentUnit, streetType, streetTypeOptions,
+            streetTypeOther, streetDirection, streetDirectionOptions,
+            postalCode, errors={}, isLoading, onTextChange, onSelectChange,
+            onCountryChange, onProvinceChange, onClick, onBackClick
         } = this.props;
         return (
             <div>
@@ -216,6 +219,18 @@ class AdminOrganizationSettingUpdateComponent extends Component {
                                 error={errors.timezone}
                                 onSelectChange={onSelectChange}
                                 helpText="If organization's timezone is different then please specify here."
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.policeReportUrl}
+                                label="Report to Police URL"
+                                onChange={onTextChange}
+                                value={policeReportUrl}
+                                name="policeReportUrl"
+                                type="text"
+                                helpText="The URL where users can go to report crimes to local police services."
                             />
 
                             <div className="form-group">
