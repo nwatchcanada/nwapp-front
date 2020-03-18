@@ -11,8 +11,8 @@ export default class AdminOrganizationSettingRetrieveComponent extends Component
     render() {
         const {
             schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, apartmentUnit,
-            streetTypeOther, streetDirection, postalCode,
+            streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit,
+            streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
             timezone, errors, isLoading, flashMessage, onBack, onClick
         } = this.props;
         return (
@@ -84,7 +84,7 @@ export default class AdminOrganizationSettingRetrieveComponent extends Component
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Street Type</th>
-                                    <td>{streetType} (TODO)</td>
+                                    <td>{streetTypeLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Apartment Unit</th>
@@ -96,7 +96,7 @@ export default class AdminOrganizationSettingRetrieveComponent extends Component
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Street Direction</th>
-                                    <td>{streetDirection} (TODO)</td>
+                                    <td>{streetDirectionLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Postal Code</th>

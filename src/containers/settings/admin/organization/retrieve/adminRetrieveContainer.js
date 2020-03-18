@@ -36,11 +36,13 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
             streetNumber: "-",
             streetName: "-",
             streetType: "-",
+            streetTypeLabel: "-",
             apartmentUnit: "-",
             streetTypeOption: "-",
             streetTypeOther: "-",
             streetDirection: "-",
             streetDirectionOption: "-",
+            streetDirectionLabel: "-",
             postalCode: "-",
             timezone: "-",
             errors: {},
@@ -96,10 +98,12 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
             streetNumber: tenantDetail.streetNumber,
             streetName: tenantDetail.streetName,
             streetType: tenantDetail.streetType,
+            streetTypeLabel: tenantDetail.streetTypeLabel,
             apartmentUnit: tenantDetail.apartmentUnit,
             // streetTypeOption: tenantDetail.streetTypeOption,
             streetTypeOther: tenantDetail.streetTypeOther,
             streetDirection: tenantDetail.streetDirection,
+            streetDirectionLabel: tenantDetail.streetDirectionLabel,
             // streetDirectionOption: tenantDetail.streetDirectionOption,
             postalCode: tenantDetail.postalCode,
             timezone: tenantDetail.timezoneName,
@@ -136,8 +140,9 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,
-            timezone, errors, isLoading
+            streetNumber, streetName, streetType, apartmentUnit,
+            streetTypeOther, streetTypeLabel, streetDirection,
+            streetDirectionLabel, postalCode, timezone, errors, isLoading
         } = this.state;
 
         return (
@@ -152,11 +157,13 @@ class AdminOrganizationSettingRetrieveContainer extends Component {
                 streetNumber={streetNumber}
                 streetName={streetName}
                 streetType={streetType}
+                streetTypeLabel={streetTypeLabel}
                 apartmentUnit={apartmentUnit}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
                 streetTypeOther={streetTypeOther}
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
+                streetDirectionLabel={streetDirectionLabel}
                 postalCode={postalCode}
                 timezone={timezone}
                 timezoneOptions={getTimezoneReactSelectOptions()}
