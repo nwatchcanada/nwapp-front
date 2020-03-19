@@ -43,7 +43,7 @@ export default class AdminWatchCommentComponent extends Component {
 
                 <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}</h1>
 
-                {watch.isArchived === true &&
+                {watch.state === "inactive" &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This watch is archived and is read-only.
                     </div>

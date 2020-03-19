@@ -224,7 +224,7 @@ class AdminWatchFileUploadListComponent extends Component {
 
                 <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</h1>
 
-                {watch.state === 'inactive' &&
+                {watch.state === "inactive" &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This watch is archived and is read-only.
                     </div>

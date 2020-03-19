@@ -39,10 +39,10 @@ class RemoteListComponent extends Component {
             onTableChange, isLoading
         } = this.props;
 
-        // const selectOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
-        //     "active": 'Active',
-        //     "inactive": 'Archived',
-        // };
+        const selectOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            "active": 'Active',
+            "inactive": 'Archived',
+        };
 
         const columns = [{
             dataField: 'icon',
@@ -50,17 +50,17 @@ class RemoteListComponent extends Component {
             sort: false,
             formatter: iconFormatter
         },
-        // {
-        //     dataField: 'state',
-        //     text: 'Status',
-        //     sort: false,
-        //     // filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
-        //     //     options: selectOptions,
-        //     //     defaultValue: 1,
-        //     //     withoutEmptyOption: true
-        //     // }),
-        //     formatter: statusFormatter
-        // },
+        {
+            dataField: 'state',
+            text: 'Status',
+            sort: false,
+            filter: selectFilter({ // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+                options: selectOptions,
+                defaultValue: 1,
+                withoutEmptyOption: true
+            }),
+            formatter: statusFormatter
+        },
         {
             dataField: 'name',
             text: 'Name',
@@ -131,6 +131,24 @@ class RemoteListComponent extends Component {
 
 function iconFormatter(cell, row){
     switch(row.typeOf) {
+        case BUSINESS_TYPE_OF:
+            return <i className="fas fa-building"></i>;
+            break;
+        case RESIDENCE_TYPE_OF:
+            return <i className="fas fa-home"></i>;
+            break;
+        case COMMUNITY_CARES_TYPE_OF:
+            return <i className="fas fa-university"></i>;
+            break;
+        default:
+            return <i className="fas fa-question"></i>;
+            break;
+    }
+}
+
+
+function statusFormatter(cell, row){
+    switch(row.status) {
         case BUSINESS_TYPE_OF:
             return <i className="fas fa-building"></i>;
             break;

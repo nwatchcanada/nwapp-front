@@ -127,24 +127,24 @@ class AdminWatchListContainer extends Component {
             );
 
         } else if (type === "filter") {
-            ////
-            //// DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
-            ////
-            // console.log(type, filters); // For debugging purposes only.
-            // if (filters.state === undefined) {
-            //     parametersMap.delete("state");
-            // } else {
-            //     const filterVal = filters.state.filterVal;
-            //     parametersMap.set("state", filterVal);
-            // }
-            // this.setState(
-            //     { parametersMap: parametersMap, isLoading: true, },
-            //     ()=>{
-            //         // STEP 3:
-            //         // SUBMIT TO OUR API.
-            //         this.props.pullWatchList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
-            //     }
-            // );
+            //
+            // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            //
+            console.log(type, filters); // For debugging purposes only.
+            if (filters.state === undefined) {
+                parametersMap.delete("state");
+            } else {
+                const filterVal = filters.state.filterVal;
+                parametersMap.set("state", filterVal);
+            }
+            this.setState(
+                { parametersMap: parametersMap, isLoading: true, },
+                ()=>{
+                    // STEP 3:
+                    // SUBMIT TO OUR API.
+                    this.props.pullWatchList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
         }else {
             alert("Unsupported feature detected!!"+type);
         }

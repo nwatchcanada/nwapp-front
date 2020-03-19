@@ -36,7 +36,7 @@ export default class AdminWatchOperationsComponent extends Component {
 
                 <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}</h1>
 
-                {watch.isArchived === true &&
+                {watch.state === "inactive" &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This watch is archived and is read-only.
                     </div>
@@ -73,7 +73,7 @@ export default class AdminWatchOperationsComponent extends Component {
                     <div className="col-md-12">
                         <div className="card-group row">
 
-                            {watch && watch.isArchived === false
+                            {watch && watch.state === "inactive" === false
                                 ?<div className="col-sm-3 mb-4">
                                     <div className="card box-shadow text-center mx-auto h-100">
                                         <div className="card-custom-top-2">
