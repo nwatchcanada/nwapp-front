@@ -8,7 +8,7 @@ import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import {
-    ARCHIVE_REASON_CHOICES
+    WATCH_ARCHIVE_REASON_CHOICES
 } from '../../../../constants/api';
 
 
@@ -50,7 +50,7 @@ export default class AdminWatchArchiveOperationComponent extends Component {
                                 label="Reason(*)"
                                 name="reason"
                                 defaultOptionLabel="Please select the reason."
-                                options={ARCHIVE_REASON_CHOICES}
+                                options={WATCH_ARCHIVE_REASON_CHOICES}
                                 value={reason}
                                 error={errors.reason}
                                 onSelectChange={onSelectChange}

@@ -971,9 +971,9 @@ export const BADGE_TYPE_OF_CHOICES = [
 ];
 
 /*
- *-----------
- * TASK ITEM
- *-----------
+ *------------------------------------------------------------------------------
+ *                                  TASK ITEM
+ *------------------------------------------------------------------------------
  */
 export const TASK_ITEM_TYPE_OF_ASSIGN_AREA_COORDINATOR_TO_WATCH = 1
 export const TASK_ITEM_TYPE_OF_ASSIGN_ASSOCIATE_TO_WATCH = 2
@@ -984,3 +984,34 @@ export const TASK_ITEM_TYPE_OF_ACTION_CONCERNT_ITEM = 5
 export const TASK_ITEM_STATE_UNASSIGNED = 1
 export const TASK_ITEM_STATE_PENDING = 2
 export const TASK_ITEM_STATE_CLOSED = 3
+
+
+/*
+ *------------------------------------------------------------------------------
+ *                                    WATCH
+ *------------------------------------------------------------------------------
+ */
+
+export const WATCH_ARCHIVE_REASON_CHOICES = [
+    {
+        id: 'archive-reason-5-choice',
+        selectName: "reason",
+        value: 2,
+        label: "No Area Coordinator"
+    },{
+        id: 'archive-reason-4-choice',
+        selectName: "reason",
+        value: 3,
+        label: "Watch has collectively opted out of program"
+    },{
+        id: 'archive-reason-3-choice',
+        selectName: "reason",
+        value: 4,
+        label: "Watch Area not compliant"
+    },{
+        id: 'archive-reason-1-choice',
+        selectName: "reason",
+        value: 1,
+        label: "Other"
+    }
+];
