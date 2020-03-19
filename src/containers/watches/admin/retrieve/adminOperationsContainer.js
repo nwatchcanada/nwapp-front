@@ -1,9 +1,14 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminWatchOperationsComponent from "../../../../components/watches/admin/retrieve/adminOperationsComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
+import { pullWatchDetail } from '../../../../actions/watchActions';
+import {
+    localStorageGetObjectItem, localStorageSetObjectOrArrayItem
+} from '../../../../helpers/localStorageUtility';
 
 
 class AdminWatchOperationsContainer extends Component {
@@ -17,11 +22,16 @@ class AdminWatchOperationsContainer extends Component {
 
         const { slug } = this.props.match.params;
 
+        // The following code will extract our financial data from the local
+        // storage if the financial data was previously saved.
+        const watch = localStorageGetObjectItem("nwapp-admin-retrieve-watch-"+slug.toString() );
+        const isLoading = isEmpty(watch);
+
         // Update state.
         this.state = {
             slug: slug,
             isLoading: false,
-            invoice: {}
+            watch: watch
         }
 
         // Update functions.
@@ -37,6 +47,11 @@ class AdminWatchOperationsContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
+        this.props.pullWatchDetail(
+            this.state.slug,
+            this.onSuccessCallback,
+            this.onFailureCallback
+        );
     }
 
     componentWillUnmount() {
@@ -57,12 +72,16 @@ class AdminWatchOperationsContainer extends Component {
      */
 
     onSuccessCallback(response) {
-        // console.log(response);
-        this.setState({ isLoading: false, })
+        console.log("onSuccessCallback |", response);
+        this.setState({ isLoading: false, watch: response, });
+
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-watch-"+this.state.slug.toString(), response);
     }
 
     onFailureCallback(errors) {
-        console.log(errors);
+        console.log("onFailureCallback | errors:", errors);
     }
 
     /**
@@ -85,6 +104,8 @@ class AdminWatchOperationsContainer extends Component {
      */
 
     render() {
+        const { slug, isLoading } = this.state;
+        const watch = isEmpty(this.state.watch) ? {} : this.state.watch;
         return (
             <AdminWatchOperationsComponent
                 slug={this.state.slug}
@@ -110,6 +131,9 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
+        },
+        pullWatchDetail: (slug, successCallback, failedCallback) => {
+            dispatch(pullWatchDetail(slug, successCallback, failedCallback))
         },
     }
 }

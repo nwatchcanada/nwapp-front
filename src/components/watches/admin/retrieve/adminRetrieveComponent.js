@@ -136,6 +136,14 @@ export default class AdminWatchRetrieveComponent extends Component {
                                         </td>
                                     </tr>
                                 }
+                                {watch && watch.deactivationReason !== 0 &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Deactivation Reason</th>
+                                        <td>
+                                            {watch && watch.deactivationReasonLabel}
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
