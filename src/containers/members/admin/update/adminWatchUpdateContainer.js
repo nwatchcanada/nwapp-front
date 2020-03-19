@@ -91,9 +91,11 @@ class AdminMemberCreateStep6Container extends Component {
         // The following code will generate a `url parameter` specific to
         // our API endpoint which will list all the nearest watches based
         // on the specified address.
-        let nearbyAddress = this.state.typeOf+","+this.state.streetNumber+","+this.state.streetName;
+        let nearbyAddress = this.state.typeOf+","+this.state.streetNumber+","+this.state.streetName.replace(",", "COMMA");
         nearbyAddress += ","+this.state.streetType+","+this.state.streetTypeOther;
         this.state.parametersMap.set("searchNearbyAddress", nearbyAddress);
+
+        console.log("nearbyAddress |", nearbyAddress);
 
         this.props.pullWatchList(
             this.state.page,
