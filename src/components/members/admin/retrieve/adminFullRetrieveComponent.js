@@ -32,7 +32,7 @@ export default class AdminMemberFullRetrieveComponent extends Component {
 
                 <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
 
-                {member.state === 'inactive' &&
+                {member && member.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This member is archived and is read-only.
                     </div>
@@ -107,16 +107,16 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 {member && member.organizationName &&
                                     <tr>
                                         <th scope="row" className="bg-light">Company Name</th>
-                                        <td>{member.organizationName}</td>
+                                        <td>{member && member.organizationName}</td>
                                     </tr>
                                 }
                                 <tr>
                                     <th scope="row" className="bg-light">Full Name</th>
-                                    <td>{member.fullName}</td>
+                                    <td>{member && member.fullName}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Primary Telephone</th>
-                                    <td><a href={`tel:${member.primaryPhoneE164}`}>{member.primaryPhoneNational}</a></td>
+                                    <td><a href={`tel:${member && member.primaryPhoneE164}`}>{member && member.primaryPhoneNational}</a></td>
                                 </tr>
                                 {member && member.secondaryPhoneNational &&
                                     <tr>
@@ -126,12 +126,12 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 }
                                 <tr>
                                     <th scope="row" className="bg-light">Email</th>
-                                    <td><a href={`mailto:${member.email}`}>{member.email}</a></td>
+                                    <td><a href={`mailto:${member && member.email}`}>{member && member.email}</a></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Ok to Email?</th>
                                     <td>
-                                        {member.isOkToEmail
+                                        {member && member.isOkToEmail
                                             ?"Yes"
                                             :"No"
                                         }
@@ -140,7 +140,7 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Ok to Text?</th>
                                     <td>
-                                        {member.isOkToText
+                                        {member && member.isOkToText
                                             ?"Yes"
                                             :"No"
                                         }
@@ -159,7 +159,7 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Location</th>
                                     <td>
-                                        <a href={member.googleMapsUrl} target="_blank">{member.address}&nbsp;<i className="fas fa-external-link-alt"></i></a>
+                                        <a href={member && member.googleMapsUrl} target="_blank">{member && member.address}&nbsp;<i className="fas fa-external-link-alt"></i></a>
                                     </td>
                                 </tr>
 
@@ -176,7 +176,9 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 <tr>
                                     <th scope="row" className="bg-light">Membership</th>
                                     <td>
-                                        <a href={`/admin/watch/${member.watchSlug}`} target="_blank">{member.watchName}&nbsp;<i className="fas fa-external-link-alt"></i></a>
+                                        <a href={`/admin/watch/${member && member.watchSlug}`} target="_blank">
+                                            {member && member.watchName}{member && member.watchIsVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}&nbsp;<i className="fas fa-external-link-alt"></i>
+                                        </a>
                                     </td>
                                 </tr>
 
@@ -201,16 +203,16 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Gender</th>
-                                    <td>{member.genderLabel}</td>
+                                    <td>{member && member.genderLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Description</th>
-                                    <td>{member.description}</td>
+                                    <td>{member && member.description}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Tag(s)</th>
                                     <td>
-                                        {member.tags && member.tags.map(
+                                        {member && member.tags && member.tags.map(
                                             (tag) => <TagItem tag={tag} key={tag.id} />)
                                         }
                                     </td>
