@@ -51,6 +51,16 @@ class RemoteListComponent extends Component {
             formatter: iconFormatter
         },
         {
+            dataField: 'name',
+            text: 'Name',
+            sort: true,
+            formatter: nameFormatter
+        },{
+            dataField: 'districtName',
+            text: 'District',
+            sort: true,
+            formatter: districtFormatter
+        },{
             dataField: 'state',
             text: 'Status',
             sort: false,
@@ -60,16 +70,6 @@ class RemoteListComponent extends Component {
                 withoutEmptyOption: true
             }),
             formatter: statusFormatter
-        },
-        {
-            dataField: 'name',
-            text: 'Name',
-            sort: true
-        },{
-            dataField: 'districtName',
-            text: 'District',
-            sort: true,
-            formatter: districtFormatter
         },{
             dataField: 'slug',
             text: 'Details',
@@ -148,12 +148,12 @@ function iconFormatter(cell, row){
 
 
 function statusFormatter(cell, row){
-    switch(row.status) {
-        case BUSINESS_TYPE_OF:
-            return <i className="fas fa-building"></i>;
+    switch(row.state) {
+        case "active":
+            return <i className="fas fa-check-circle" style={{ color: 'green' }}></i>;
             break;
-        case RESIDENCE_TYPE_OF:
-            return <i className="fas fa-home"></i>;
+        case "inactive":
+            return <i className="fas fa-archive" style={{ color: 'blue' }}></i>;
             break;
         case COMMUNITY_CARES_TYPE_OF:
             return <i className="fas fa-university"></i>;
@@ -164,6 +164,12 @@ function statusFormatter(cell, row){
     }
 }
 
+
+function nameFormatter(cell, row){
+    return (
+       <span>{row.name}{row.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}</span>
+    );
+}
 
 
 function roleIdFormatter(cell, row){

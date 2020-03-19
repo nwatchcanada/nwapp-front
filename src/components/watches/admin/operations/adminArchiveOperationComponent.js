@@ -29,7 +29,7 @@ export default class AdminWatchArchiveOperationComponent extends Component {
                             <Link to={`/admin/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/watch/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{watch && watch.name}</Link>
+                            <Link to={`/admin/watch/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-archive"></i>&nbsp;Archive

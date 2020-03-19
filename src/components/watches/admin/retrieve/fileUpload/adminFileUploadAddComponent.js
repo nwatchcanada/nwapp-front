@@ -40,7 +40,7 @@ export default class AdminWatchFileUploadAddComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/watch/${slug}/files`}>
-                                <i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}
+                                <i className="fas fa-user"></i>&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -51,7 +51,7 @@ export default class AdminWatchFileUploadAddComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}</h1>
 
                 {watch.state === "inactive" &&
                     <div className="alert alert-info" role="alert">

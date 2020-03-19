@@ -42,14 +42,14 @@ export default class AdminWatchRetrieveComponent extends Component {
                             <Link to={`/admin/watches`}><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{watch && watch.name}
+                            <i className="fas fa-user"></i>&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}</h1>
+                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}</h1>
 
                 {watch.state === "inactive" &&
                     <div className="alert alert-info" role="alert">
