@@ -133,35 +133,6 @@ function statusFormatter(cell, row){
 }
 
 
-function fileFormatter(cell, row){
-    return (
-        <div>
-            {row.isArchived === false &&
-                <a href={row.fileUrl} target="_blank">
-                    <i className="fas fa-cloud-download-alt"></i>&nbsp;Download
-                </a>
-            }
-            {row.isArchived === true &&
-                <strong>
-                    <i className="fas fa-cloud-download-alt"></i>&nbsp;Download
-                </strong>
-            }
-            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-            {row.isArchived === false &&
-                <Link to={`/admin/settings/announcement/${row.user}/file/archive/${row.slug}`}>
-                    <i className="fas fa-archive"></i>&nbsp;Archive
-                </Link>
-            }
-            {row.isArchived === true &&
-                <strong>
-                    <i className="fas fa-archive"></i>&nbsp;Archived
-                </strong>
-            }
-        </div>
-    )
-}
-
-
 function createdAtFormatter(cell, row){
     return <Moment format="MM/DD/YYYY hh:mm:ss a">{row.createdAt}</Moment>
 }
@@ -175,7 +146,7 @@ function detailLinkFormatter(cell, row){
             <div>
                 <Link to={`/admin/settings/announcement/${row.slug}`} className="btn btn-success btn-xs">
                     <i className="fas fa-binoculars"></i>&nbsp;View
-                </Link>;
+                </Link>&nbsp;&nbsp;&nbsp;
                 <Link to={`/admin/settings/announcement/operation/archive/${row.slug}`} className="btn btn-danger btn-xs">
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>

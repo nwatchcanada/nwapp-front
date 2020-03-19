@@ -175,7 +175,7 @@ function detailLinkFormatter(cell, row){
             <div>
                 <Link to={`/admin/settings/how-hear/${row.id}`} className="btn btn-success btn-xs">
                     <i className="fas fa-binoculars"></i>&nbsp;View
-                </Link>;
+                </Link>&nbsp;&nbsp;&nbsp;
                 <Link to={`/admin/settings/how-hear/operation/archive/${row.id}`} className="btn btn-danger btn-xs">
                     <i className="fas fa-archive"></i>&nbsp;Archive
                 </Link>
