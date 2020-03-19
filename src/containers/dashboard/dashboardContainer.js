@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import {
     EXECUTIVE_ROLE_ID,
@@ -29,11 +30,11 @@ class DashboardContainer extends Component {
         super(props);
 
         this.state = {
-            referrer: '',
+            isLoading: true,
         }
 
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onSuccessCallback = this.onSuccessCallback.bind(this);
+        this.onFailureCallback = this.onFailureCallback.bind(this);
     }
 
     /**
@@ -42,8 +43,8 @@ class DashboardContainer extends Component {
      */
 
     componentDidMount() {
-        this.props.pullProfile(this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
-        this.props.pullDashboard(getSubdomain(), this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+        this.props.pullProfile(this.onSuccessCallback, this.onFailureCallback);
+        this.props.pullDashboard(getSubdomain(), this.onSuccessCallback, this.onFailureCallback);
         window.scrollTo(0, 0);  // Start the page at the top of the page.
     }
 
@@ -61,14 +62,14 @@ class DashboardContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    onSuccessCallback(response) {
+        console.log("onSuccessCallback |", response);
+        this.setState({ errors: [], isLoading: false, });
     }
 
-    onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+    onFailureCallback(errors) {
+        console.log("onFailureCallback | errors:", errors);
+        this.setState({ errors: errors, isLoading: true, });
 
         // // The following code will cause the screen to scroll to the top of
         // // the page. Please see ``react-scroll`` for more information:
@@ -89,6 +90,9 @@ class DashboardContainer extends Component {
      */
 
     render() {
+        const { isLoading, errors } = this.state;
+        const dashboardData = isEmpty(this.props.dashboard) ? {} : this.props.dashboard;
+
         const { roleId } = this.props.user;
 
         if (roleId === EXECUTIVE_ROLE_ID) {
@@ -96,7 +100,9 @@ class DashboardContainer extends Component {
                 <StaffDashboardComponent
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
-                    dashboardData={this.props.dashboard}
+                    dashboardData={dashboardData}
+                    isLoading={isLoading}
+                    errors={errors}
                 />
             );
         }
@@ -106,6 +112,8 @@ class DashboardContainer extends Component {
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
                     dashboardData={this.props.dashboard}
+                    isLoading={isLoading}
+                    errors={errors}
                 />
             );
         }
@@ -115,6 +123,8 @@ class DashboardContainer extends Component {
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
                     dashboardData={this.props.dashboard}
+                    isLoading={isLoading}
+                    errors={errors}
                 />
             );
         }
@@ -123,6 +133,8 @@ class DashboardContainer extends Component {
                 <AssociateDashboardComponent
                     user={this.props.user}
                     dashboardData={this.props.dashboard}
+                    isLoading={isLoading}
+                    errors={errors}
                 />
             );
         }
@@ -132,6 +144,8 @@ class DashboardContainer extends Component {
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
                     dashboardData={this.props.dashboard}
+                    isLoading={isLoading}
+                    errors={errors}
                 />
             );
         }
@@ -141,6 +155,8 @@ class DashboardContainer extends Component {
                     // dashboard={this.props.dashboard}
                     user={this.props.user}
                     dashboardData={this.props.dashboard}
+                    isLoading={isLoading}
+                    errors={errors}
                 />
             );
         } else {

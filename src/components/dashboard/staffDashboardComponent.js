@@ -8,11 +8,12 @@ import {
     TaskItemTypeOfLabelHelper,
     TaskItemStateLabelHelper
 } from "../../constants/helper";
+import { BootstrapPageLoadingAnimation } from "../bootstrap/bootstrapPageLoadingAnimation";
 
 
 export default class StaffDashboardComponent extends Component {
     render() {
-        const { dashboardData } = this.props;
+        const { dashboardData, isLoading } = this.props;
         const {
             activeMembersCount,
             activeWatchesCount,
@@ -23,6 +24,7 @@ export default class StaffDashboardComponent extends Component {
         } = dashboardData;
         return (
             <div className="container-fluid">
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <div className="d-flex align-items-stretch">
                     <main id="main">
                         <h1><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</h1>
