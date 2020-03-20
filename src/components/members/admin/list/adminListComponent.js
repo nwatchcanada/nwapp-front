@@ -44,6 +44,15 @@ class RemoteListComponent extends Component {
         //     "inactive": 'Archived',
         // };
 
+        const selectRoleIdOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            0: "All",
+            6: "Member",
+            5: "Area Coordinator",
+            4: "Associate",
+            3: "Frontline Staff",
+            2: "Manager",
+        };
+
         const columns = [{
             dataField: 'icon',
             text: '',
@@ -83,6 +92,11 @@ class RemoteListComponent extends Component {
             dataField: 'roleId',
             text: 'Role',
             sort: true,
+            filter: selectFilter({
+                options: selectRoleIdOptions,
+                defaultValue: 6,
+                withoutEmptyOption: true
+            }),
             formatter: roleIdFormatter,
         },{
             dataField: 'slug',
