@@ -144,6 +144,11 @@ class AdminMemberMetricUpdateContainer extends Component {
         //         therefore as a result we need to run this code.
         postData.over_18_years_household_count = isNaN(this.state.over18YearsHouseholdCount) ? 0 : this.state.over18YearsHouseholdCount;
 
+        // Year of birth is now optional.
+        if (this.state.yearOfBirth === undefined || this.state.yearOfBirth === null || this.state.yearOfBirth === "" || isNaN(this.state.yearOfBirth) ) {
+            postData.yearOfBirth = 0;
+        }
+
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
         return postData;

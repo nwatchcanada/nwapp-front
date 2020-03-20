@@ -167,6 +167,11 @@ class AdminMemberCreateStep8Container extends Component {
         // Assign our watch.
         postData.watch = this.state.watchSlug;
 
+        // Year of birth is now optional.
+        if (this.state.yearOfBirth === undefined || this.state.yearOfBirth === null || this.state.yearOfBirth === "" || isNaN(this.state.yearOfBirth) ) {
+            postData.yearOfBirth = 0;
+        }
+
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
         return postData;

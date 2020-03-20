@@ -184,9 +184,9 @@ export default class AdminMemberCreateStep7Component extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
+                                borderColour="border-success"
                                 error={errors.yearOfBirth}
-                                label="Year of Birth (*)"
+                                label="Year of Birth"
                                 onChange={onTextChange}
                                 value={yearOfBirth}
                                 name="yearOfBirth"

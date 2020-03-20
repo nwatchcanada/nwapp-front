@@ -144,17 +144,6 @@ export function validateInput(data) {
 
     // --- EXTRA --- //
 
-    if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
-        errors.yearOfBirth = 'This field is required';
-    } else {
-        try {
-            if (parseInt(data.yearOfBirth) < 1900) {
-                errors.yearOfBirth = 'Needs to be greater then 1900.';
-            }
-        } catch(err) {
-            errors.yearOfBirth = 'This field needs to be a number';
-        }
-    }
     if (data.gender === undefined || data.gender === null || data.gender === "") {
         errors.gender = 'This field is required';
     }
@@ -357,17 +346,6 @@ export function validateStep6CreateInput(data) {
 export function validateStep7CreateInput(data) {
     let errors = {};
 
-    if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
-        errors.yearOfBirth = 'This field is required';
-    } else {
-        try {
-            if (parseInt(data.yearOfBirth) < 1900) {
-                errors.yearOfBirth = 'Needs to be greater then 1900.';
-            }
-        } catch(err) {
-            errors.yearOfBirth = 'This field needs to be a number';
-        }
-    }
     if (data.gender === undefined || data.gender === null || data.gender === "") {
         errors.gender = 'This field is required';
     }
@@ -490,17 +468,6 @@ export function validateStep8CreateInput(data) {
 
     // --- EXTRA --- //
 
-    if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
-        errors.yearOfBirth = 'This field is required';
-    } else {
-        try {
-            if (parseInt(data.yearOfBirth) < 1900) {
-                errors.yearOfBirth = 'Needs to be greater then 1900.';
-            }
-        } catch(err) {
-            errors.yearOfBirth = 'This field needs to be a number';
-        }
-    }
     if (data.gender === undefined || data.gender === null || data.gender === "") {
         errors.gender = 'This field is required';
     }
