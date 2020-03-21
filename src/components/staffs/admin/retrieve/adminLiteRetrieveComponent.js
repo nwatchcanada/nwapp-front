@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
-import { BUSINESS_TYPE_OF } from "../../../../constants/api";
 
 
 export default class AdminStaffLiteRetrieveComponent extends Component {
@@ -87,9 +86,6 @@ export default class AdminStaffLiteRetrieveComponent extends Component {
                             </div>
 
                             <div className="col-sm-8 px-4 py-3">
-                                {staff && staff.organizationName && staff.roleId === BUSINESS_TYPE_OF &&
-                                    <h1>{staff.organizationName}</h1>
-                                }
                                 <h3>
                                     {staff && staff.fullName}
                                 </h3>
