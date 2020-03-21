@@ -20,6 +20,7 @@ class AdminStaffListContainer extends Component {
         // Force active users as per issue via https://github.com/over55/nwapp-front/issues/296
         var parametersMap = new Map();
         parametersMap.set("state", "active");
+        parametersMap.set("roleId", 6);
 
         this.state = {
             // Pagination
@@ -127,24 +128,30 @@ class AdminStaffListContainer extends Component {
             );
 
         } else if (type === "filter") {
-            ////
-            //// DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
-            ////
-            // console.log(type, filters); // For debugging purposes only.
-            // if (filters.state === undefined) {
-            //     parametersMap.delete("state");
-            // } else {
-            //     const filterVal = filters.state.filterVal;
-            //     parametersMap.set("state", filterVal);
-            // }
-            // this.setState(
-            //     { parametersMap: parametersMap, isLoading: true, },
-            //     ()=>{
-            //         // STEP 3:
-            //         // SUBMIT TO OUR API.
-            //         this.props.pullStaffList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
-            //     }
-            // );
+            //
+            // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            //
+            console.log(type, filters); // For debugging purposes only.
+            if (filters.state === undefined) {
+                parametersMap.delete("state");
+            } else {
+                const filterVal = filters.state.filterVal;
+                parametersMap.set("state", filterVal);
+            }
+            if (filters.roleId === undefined) {
+                parametersMap.delete("roleId");
+            } else {
+                const filterVal = filters.roleId.filterVal;
+                parametersMap.set("roleId", filterVal);
+            }
+            this.setState(
+                { parametersMap: parametersMap, isLoading: true, },
+                ()=>{
+                    // STEP 3:
+                    // SUBMIT TO OUR API.
+                    this.props.pullStaffList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                }
+            );
         }else {
             alert("Unsupported feature detected!!"+type);
         }

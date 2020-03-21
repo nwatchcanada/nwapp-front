@@ -44,12 +44,19 @@ class RemoteListComponent extends Component {
         //     "inactive": 'Archived',
         // };
 
-        const columns = [{
-            dataField: 'icon',
-            text: '',
-            sort: false,
-            formatter: iconFormatter
-        },
+        const selectRoleIdOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
+            0: "All",
+            3: "Frontline Staff",
+            2: "Manager",
+        };
+
+        const columns = [
+        // {
+        //     dataField: 'icon',
+        //     text: '',
+        //     sort: false,
+        //     formatter: iconFormatter
+        // },
         // {
         //     dataField: 'state',
         //     text: 'Status',
@@ -83,6 +90,11 @@ class RemoteListComponent extends Component {
             dataField: 'roleId',
             text: 'Role',
             sort: true,
+            filter: selectFilter({
+                options: selectRoleIdOptions,
+                defaultValue: 0,
+                withoutEmptyOption: true
+            }),
             formatter: roleIdFormatter,
         },{
             dataField: 'slug',
@@ -143,22 +155,22 @@ class RemoteListComponent extends Component {
 }
 
 
-function iconFormatter(cell, row){
-    switch(row.typeOf) {
-        case BUSINESS_TYPE_OF:
-            return <i className="fas fa-building"></i>;
-            break;
-        case RESIDENCE_TYPE_OF:
-            return <i className="fas fa-home"></i>;
-            break;
-        case COMMUNITY_CARES_TYPE_OF:
-            return <i className="fas fa-university"></i>;
-            break;
-        default:
-            return <i className="fas fa-question"></i>;
-            break;
-    }
-}
+// function iconFormatter(cell, row){
+//     switch(row.typeOf) {
+//         case BUSINESS_TYPE_OF:
+//             return <i className="fas fa-building"></i>;
+//             break;
+//         case RESIDENCE_TYPE_OF:
+//             return <i className="fas fa-home"></i>;
+//             break;
+//         case COMMUNITY_CARES_TYPE_OF:
+//             return <i className="fas fa-university"></i>;
+//             break;
+//         default:
+//             return <i className="fas fa-question"></i>;
+//             break;
+//     }
+// }
 
 // function statusFormatter(cell, row){
 //     switch(row.state) {
