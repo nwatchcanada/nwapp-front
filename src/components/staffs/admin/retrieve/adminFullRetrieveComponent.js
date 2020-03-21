@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
+import { BUSINESS_TYPE_OF } from "../../../../constants/api";
 
 
 export default class AdminStaffFullRetrieveComponent extends Component {
@@ -104,7 +105,7 @@ export default class AdminStaffFullRetrieveComponent extends Component {
                                         </Link>
                                     </th>
                                 </tr>
-                                {staff && staff.organizationName &&
+                                {staff && staff.organizationName && staff.roleId === BUSINESS_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Company Name</th>
                                         <td>{staff.organizationName}</td>
