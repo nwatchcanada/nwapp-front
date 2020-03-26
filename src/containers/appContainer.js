@@ -167,6 +167,7 @@ import AdminAssociateCreateStep1Container from "./associates/admin/create/adminC
 import AdminAssociateCreateStep2Container from "./associates/admin/create/adminCreateStep2Container";
 import AdminAssociateCreateStep3Container from "./associates/admin/create/adminCreateStep3Container";
 import AdminAssociateCreateStep4Container from "./associates/admin/create/adminCreateStep4Container";
+import AdminAssociateDistrictStep1Container from "./associates/admin/operations/district/step1Container";
 
 /*
 -----
@@ -703,6 +704,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/associate/:slug/demote/step-3" exact component={requiresAuth(AdminAssociateDemoteOperationStep3Container)} />
                                 <Route path="/admin/associate/:slug/archive" exact component={requiresAuth(AssociateArchiveOperationContainer)} />
                                 <Route path="/admin/associate/:slug/unarchive" exact component={requiresAuth(AdminAssociateUnarchiveOperationContainer)} />
+                                <Route path="/admin/associate/:slug/district/step-1" exact component={requiresAuth(AdminAssociateDistrictStep1Container)} />
 
                                 /*
                                 -----
