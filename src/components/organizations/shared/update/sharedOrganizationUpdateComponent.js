@@ -161,7 +161,7 @@ class SharedOrganizationUpdateComponent extends Component {
                                 onSelectChange={onSelectChange}
                             />
 
-                            {streetType === 'Other' && streetType === 'other' &&
+                            {streetType === 1 &&
                                 <BootstrapInput
                                     inputClassName="form-control form-control-lg"
                                     borderColour="border-primary"

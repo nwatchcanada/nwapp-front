@@ -38,7 +38,7 @@ export default function validateInput(data) {
     if (data.streetType === undefined || data.streetType === null || isNaN(data.streetType) || data.streetType === "") {
         errors.streetType = 'This field is required';
     } else {
-        if (data.streetType === "Other") {
+        if (data.streetType === "Other" || data.streetType === 1 || data.streetType === "1") {
             if (data.streetTypeOther === undefined || data.streetTypeOther === null || validator.isEmpty(data.streetTypeOther) || data.streetTypeOther === "") {
                 errors.streetTypeOther = 'This field is required';
             }
