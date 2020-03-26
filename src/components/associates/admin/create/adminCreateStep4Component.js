@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 // import 'moment-timezone';
 
-import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 
