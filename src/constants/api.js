@@ -98,6 +98,7 @@ export const WORKERY_ASSOCIATE_DETAIL_API_ENDPOINT = '/v1/associate/';
 export const WORKERY_ASSOCIATE_ARCHIVE_API_OPERATION_ENDPOINT = '/v1/associates/operation/archive';
 export const NWAPP_ASSOCIATE_PROMOTE_OPERATION_API_ENDPOINT = '/v1/associates/operation/promote';
 export const NWAPP_ASSOCIATE_DEMOTE_OPERATION_API_ENDPOINT = '/v1/associates/operation/demote';
+export const NWAPP_ASSOCIATE_DISTRICT_OPERATION_API_ENDPOINT = '/v1/associates/operation/district';
 export const WORKERY_ASSOCIATE_AVATAR_CREATE_OR_UPDATE_OPERATION_API_ENDPOINT = '/v1/associates/operation/avatar';
 export const WORKERY_ASSOCIATE_COMMENT_LIST_API_ENDPOINT = '/v1/associate-comments';
 export const WORKERY_ASSOCIATE_CONTACT_UPDATE_API_ENDPOINT = '/v1/associate/XXX/contact';

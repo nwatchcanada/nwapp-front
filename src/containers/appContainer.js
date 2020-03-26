@@ -706,7 +706,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/associate/:slug/archive" exact component={requiresAuth(AssociateArchiveOperationContainer)} />
                                 <Route path="/admin/associate/:slug/unarchive" exact component={requiresAuth(AdminAssociateUnarchiveOperationContainer)} />
                                 <Route path="/admin/associate/:slug/district/step-1" exact component={requiresAuth(AdminAssociateDistrictStep1Container)} />
-                                <Route path="/admin/associate/:slug/district/step-2/:districtSlug" exact component={requiresAuth(AdminAssociateDistrictStep2Container)} />
+                                <Route path="/admin/associate/:associateSlug/district/step-2/:districtSlug" exact component={requiresAuth(AdminAssociateDistrictStep2Container)} />
 
                                 /*
                                 -----

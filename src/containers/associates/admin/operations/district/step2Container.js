@@ -4,8 +4,8 @@ import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 
 import AdminAssociateDistrictStep2Component from "../../../../../components/associates/admin/operations/district/step2Component";
-import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullDistrictList } from "../../../../../actions/districtActions";
+import { setFlashMessage } from "../../../../../actions/flashMessageActions";
+import { postAssociateDistrictOperation } from "../../../../../actions/associateActions";
 import { validateInput } from "../../../../../validators/fileValidator"
 
 
@@ -24,8 +24,8 @@ class AdminAssociateDistrictStep2Container extends Component {
             errors: {},
         }
         this.getPostData = this.getPostData.bind(this);
-        this.onSuccessListCallback = this.onSuccessListCallback.bind(this);
-        this.onFailureListCallback = this.onFailureListCallback.bind(this);
+        this.onSuccessPostCallback = this.onSuccessPostCallback.bind(this);
+        this.onFailedPostCallback = this.onFailedPostCallback.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -37,8 +37,8 @@ class AdminAssociateDistrictStep2Container extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        // postData.about = this.state.id;
-        // postData.extraText = this.state.text;
+        postData.associate = this.state.associateSlug;
+        postData.district = this.state.districtSlug;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -61,9 +61,6 @@ class AdminAssociateDistrictStep2Container extends Component {
         this.setState = (state,callback)=>{
             return;
         };
-
-        // Clear any and all flash messages in our queue to be rendered.
-        this.props.clearFlashMessage();
     }
 
     /**
@@ -71,24 +68,23 @@ class AdminAssociateDistrictStep2Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessListCallback(response) {
-        console.log("onSuccessListCallback | State (Pre-Fetch):", this.state);
-        this.setState(
-            {
-                page: response.page,
-                totalSize: response.count,
-                isLoading: false,
-            },
-            ()=>{
-                console.log("onSuccessListCallback | Fetched:",response); // For debugging purposes only.
-                console.log("onSuccessListCallback | State (Post-Fetch):", this.state);
-            }
-        )
+    onSuccessPostCallback(response) {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Associate has been successfully assigned to the governing body of a district.");
+        this.props.history.push("/admin/associate/"+this.state.associateSlug+"/operations");
     }
 
-    onFailureListCallback(errors) {
-        console.log(errors);
-        this.setState({ isLoading: false });
+    onFailedPostCallback(errors) {
+        this.setState({
+            errors: errors,
+            isLoading: false,
+        });
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
     }
 
     /**
@@ -97,8 +93,20 @@ class AdminAssociateDistrictStep2Container extends Component {
      */
 
     onClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        alert("TODO");
+        this.setState({
+            isLoading: true,
+            errors: [],
+        });
+
+        // Once our state has been validated `client-side` then we will
+        // make an API request with the server to create our new production.
+        this.props.postAssociateDistrictOperation(
+            this.getPostData(),
+            this.onSuccessPostCallback,
+            this.onFailedPostCallback
+        );
     }
 
     /**
@@ -133,8 +141,11 @@ const mapStateToProps = function(store) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearFlashMessage: () => {
-            dispatch(clearFlashMessage())
+        setFlashMessage: (typeOf, text) => {
+            dispatch(setFlashMessage(typeOf, text))
+        },
+        postAssociateDistrictOperation: (postData, successCallback, failedCallback) => {
+            dispatch(postAssociateDistrictOperation(postData, successCallback, failedCallback))
         },
     }
 }
