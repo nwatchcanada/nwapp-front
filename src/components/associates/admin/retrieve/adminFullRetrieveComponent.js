@@ -178,7 +178,7 @@ export default class AdminAssociateFullRetrieveComponent extends Component {
                                     <th scope="row" className="bg-light">Date of Birth</th>
                                     <td>
                                         {associate && associate.yearOfBirth
-                                            ? associate.yearOfBirth
+                                             ? associate.yearOfBirth
                                             : "-"
                                         }
                                     </td>
@@ -256,6 +256,13 @@ export default class AdminAssociateFullRetrieveComponent extends Component {
                                 }
 
 
+                                {associate && associate.governing &&
+                                    <AllGoverningDistrictsComponent
+                                        governing={associate.governing}
+                                    />
+                                }
+
+
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
                                         <i className="fas fa-server"></i>&nbsp;System
@@ -303,4 +310,47 @@ class TagItem extends Component {
             <span className="badge badge-info badge-lg" value={id}>{text}</span>
         );
     };
+}
+
+
+function AllGoverningDistrictsComponent({ governing }) {
+    let elements = [];
+    for (let district of governing) {
+        elements.push(
+            <GoverningDistrictComponent district={district} key={district.slug} />
+        );
+    }
+    return elements;
+}
+
+
+function GoverningDistrictComponent({ district }) {
+    console.log(district);
+    let elements = []
+    elements.push(
+        <tr className="bg-dark">
+            <th scope="row" colSpan="2" className="text-light">
+                <i className="fas fa-map"></i>&nbsp;Governing District
+            </th>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">Name</th>
+            <td>
+                <Link to={`/admin/settings/district/${district.typeOfCode}/${district.slug}`} target="_blank">
+                    {district.name}&nbsp;<i className="fas fa-external-link-alt"></i>
+                </Link>
+            </td>
+        </tr>
+    );
+    elements.push(
+        <tr>
+            <th scope="row" className="bg-light">Description</th>
+            <td>
+                {district.description}
+            </td>
+        </tr>
+    );
+    return elements;
 }
