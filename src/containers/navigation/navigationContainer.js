@@ -97,7 +97,51 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-settings",
         icon: "cogs",
         title: "Settings",
-        url: "/admin/settings"
+        url: "/admin/settings",
+        children:[
+            {
+                id: "full-districts",
+                icon: "map",
+                title: "Districts",
+                url: "/admin/settings/districts",
+            },
+            {
+                id: "full-tags",
+                icon: "tags",
+                title: "Tags",
+                url: "/admin/settings/tags",
+            },
+            {
+                id: "full-howHear",
+                icon: "tty",
+                title: "How did you hear?",
+                url: "/admin/settings/how-hears",
+            },
+            {
+                id: "full-announcement",
+                icon: "bullhorn",
+                title: "Announcements",
+                url: "/admin/settings/announcements",
+            },
+            {
+                id: "full-resources",
+                icon: "atlas",
+                title: "Resources",
+                url: "/admin/settings/resources",
+            },
+            {
+                id: "full-itemType",
+                icon: "sliders-h",
+                title: "Item Types",
+                url: "/admin/settings/item-types",
+            },
+            {
+                id: "full-organization",
+                icon: "building",
+                title: "Organization",
+                url: "/admin/settings/organiztion",
+            },
+        ]
     },{
         id: "full-help",
         icon: "question-circle",

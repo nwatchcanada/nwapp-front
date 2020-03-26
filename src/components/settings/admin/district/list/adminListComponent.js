@@ -267,7 +267,7 @@ class AdminDistrictListComponent extends Component {
                 </nav>
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;Districts</h1>
+                <h1><i className="fas fa-map"></i>&nbsp;Districts</h1>
 
                 <div className="row">
                     <div className="col-md-6">
