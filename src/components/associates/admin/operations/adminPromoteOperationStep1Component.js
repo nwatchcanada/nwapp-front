@@ -24,7 +24,7 @@ export default class AdminAssociatePromoteOperationStep1Component extends Compon
                             <Link to="/admin/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/associate/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</Link>
+                            <Link to={`/admin/associate/${slug}/operations`}><UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote

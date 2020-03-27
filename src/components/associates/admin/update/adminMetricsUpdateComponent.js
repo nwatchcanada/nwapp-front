@@ -8,6 +8,7 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
 import { BUSINESS_TYPE_OF, ORGANIZATION_TYPE_OF_CHOICES, GENDER_RADIO_CHOICES, WILLING_TO_VOLUNTEER_CHOICES, ANOTHER_HOUSEHOLD_MEMBER_REGISTERED_CHOICES } from "../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAssociateMetricUpdateComponent extends Component {
@@ -34,7 +35,7 @@ export default class AdminAssociateMetricUpdateComponent extends Component {
                             <Link to={`/admin/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/associate/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</Link>
+                            <Link to={`/admin/associate/${slug}/full`}><UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update (Metrics)

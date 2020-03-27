@@ -7,6 +7,7 @@ import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect'
 import { BootstrapProvinceSelect } from '../../../bootstrap/bootstrapRegionSelect'
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 class AdminAssociateAddressUpdateComponent extends Component {
@@ -31,7 +32,7 @@ class AdminAssociateAddressUpdateComponent extends Component {
                             <Link to={`/admin/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/associate/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</Link>
+                            <Link to={`/admin/associate/${slug}/full`}><UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update (Address)
