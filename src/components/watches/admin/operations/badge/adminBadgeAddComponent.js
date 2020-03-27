@@ -19,6 +19,7 @@ import { BootstrapMultipleSelect } from "../../../../bootstrap/bootstrapMultiple
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BADGE_TYPE_OF_CHOICES } from "../../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminWatchBadgeAddComponent extends Component {
@@ -40,7 +41,7 @@ export default class AdminWatchBadgeAddComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/watch/${slug}/operations`}>
-                                <i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}
+                                <UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -51,7 +52,7 @@ export default class AdminWatchBadgeAddComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.fullName}</h1>
 
                 {watch.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

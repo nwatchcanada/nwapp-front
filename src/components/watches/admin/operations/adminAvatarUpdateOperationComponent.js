@@ -14,6 +14,7 @@ import Moment from 'react-moment';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapSingleImageUploadAndPreview } from "../../../bootstrap/bootstrapSingleImageUploadAndPreview";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminWatchAvatarUpdateOperationComponent extends Component {
@@ -34,7 +35,7 @@ export default class AdminWatchAvatarUpdateOperationComponent extends Component 
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/watch/${slug}`}>
-                                <i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}
+                                <UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -43,7 +44,7 @@ export default class AdminWatchAvatarUpdateOperationComponent extends Component 
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.fullName}</h1>
 
                 {watch.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

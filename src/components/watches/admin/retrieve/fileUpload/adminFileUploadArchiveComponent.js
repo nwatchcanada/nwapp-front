@@ -13,6 +13,7 @@ import Moment from 'react-moment';
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminWatchFileUploadArchiveComponent extends Component {
@@ -32,12 +33,12 @@ export default class AdminWatchFileUploadArchiveComponent extends Component {
                             <Link to="/admin/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}
+                            <UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}
                         </li>
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-user"></i>&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.name}{watch && watch.isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}</h1>
 
                 {watch.state === "inactive" &&
                     <div className="alert alert-info" role="alert">

@@ -7,6 +7,7 @@ import Moment from 'react-moment';
 import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminWatchPromoteOperationStep2Component extends Component {
@@ -25,7 +26,7 @@ export default class AdminWatchPromoteOperationStep2Component extends Component 
                             <Link to="/admin/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/watch/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</Link>
+                            <Link to={`/admin/watch/${slug}/operations`}><UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote

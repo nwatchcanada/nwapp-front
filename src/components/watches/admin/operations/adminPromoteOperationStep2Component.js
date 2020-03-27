@@ -11,6 +11,7 @@ import {
 import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminWatchPromoteOperationStep2Component extends Component {
@@ -31,7 +32,7 @@ export default class AdminWatchPromoteOperationStep2Component extends Component 
                             <Link to="/admin/watches"><i className="fas fa-shield-alt"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/watch/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{watch && watch.fullName}</Link>
+                            <Link to={`/admin/watch/${slug}/operations`}><UserTypeOfIconHelper typeOfId={watch && watch.typeOf} />&nbsp;{watch && watch.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote
