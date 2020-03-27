@@ -56,7 +56,7 @@ class AssignDistrictAssociateTaskStep1Component extends Component {
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Description</th>
-                                <td>A new district has been created and has the option of assigning an associate. Please assign an associate to the district if there is one.</td>
+                                <td>This Associate has no matching district in their profile. Please match them to a district.</td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Associate</th>

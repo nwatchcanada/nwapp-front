@@ -74,7 +74,7 @@ class AssignDistrictAssociateTaskStep2Container extends Component {
 				// CASE 1 OF 2: Validation passed successfully.
 				if (isValid) {
 
-					localStorageSetObjectOrArrayItem('nwapp-task-1-associate', this.state);
+					localStorageSetObjectOrArrayItem('nwapp-task-3-state', this.state);
                     this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-3");
 
 
@@ -110,7 +110,7 @@ class AssignDistrictAssociateTaskStep2Container extends Component {
             // CASE 1 OF 2: Validation passed successfully.
             if (isValid) {
 
-                    localStorageSetObjectOrArrayItem('nwapp-task-1-associate', this.state);
+                    localStorageSetObjectOrArrayItem('nwapp-task-3-state', this.state);
                     this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-3");
 
 
@@ -137,7 +137,7 @@ class AssignDistrictAssociateTaskStep2Container extends Component {
             // CASE 1 OF 2: Validation passed successfully.
             if (isValid) {
 
-                    localStorageSetObjectOrArrayItem('nwapp-task-1-associate', this.state);
+                    localStorageSetObjectOrArrayItem('nwapp-task-3-state', this.state);
                     this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-3");
 
 

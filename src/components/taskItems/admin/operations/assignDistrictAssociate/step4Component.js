@@ -36,7 +36,7 @@ class AssignDistrictAssociateTaskStep4Component extends Component {
 
                             <div className="jumbotron">
                                 <h1 className="display-4"><i className="fas fa-question-circle"></i>&nbsp;Are you sure?</h1>
-                                <p className="lead">You are about to assign this area coordinator to this watch.</p>
+                                <p className="lead">You are about to assign this associate to this district.</p>
                             </div>
 
                             <div className="form-group">

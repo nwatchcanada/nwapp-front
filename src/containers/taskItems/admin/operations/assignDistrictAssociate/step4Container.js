@@ -27,7 +27,7 @@ class AssignDistrictAssociateTaskStep4Container extends Component {
         // Update state.
         this.state = {
             uuid: uuid,
-            associateSlug: localStorage.getItem('nwapp-task-1-associate-slug'),
+            districtSlug: localStorage.getItem('nwapp-task-3-district-slug'),
             errors: {},
             isLoading: false
         }
@@ -47,7 +47,7 @@ class AssignDistrictAssociateTaskStep4Container extends Component {
         let postData = Object.assign({}, this.state);
 
         // Assign our district.
-        postData.associateSlug = this.state.associateSlug;
+        postData.districtSlug = this.state.districtSlug;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -87,7 +87,7 @@ class AssignDistrictAssociateTaskStep4Container extends Component {
             ()=>{
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                localStorageRemoveItemsContaining("nwapp-task-1-associate-");
+                localStorageRemoveItemsContaining("nwapp-task-3-");
                 this.props.setFlashMessage("success", "Task item has been successfully modified.");
                 this.props.history.push("/admin/tasks");
             }

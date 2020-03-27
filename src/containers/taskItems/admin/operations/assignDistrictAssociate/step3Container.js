@@ -1,12 +1,3 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-//
-//
-// import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-//
-//
-// class AssignDistrictAssociateTaskStep3Container extends Component {
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
@@ -14,7 +5,7 @@ import Scroll from 'react-scroll';
 
 import AssignDistrictAssociateTaskStep3Component from "../../../../../components/taskItems/admin/operations/assignDistrictAssociate/step3Component";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
-import { pullAssociateList } from "../../../../../actions/associateActions";
+import { pullDistrictList } from "../../../../../actions/districtActions";
 import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../../constants/api";
 import { localStorageGetObjectItem } from '../../../../../helpers/localStorageUtility';
 
@@ -28,7 +19,7 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
     constructor(props) {
         super(props);
 
-        const search = localStorageGetObjectItem('nwapp-task-1-associate');
+        const search = localStorageGetObjectItem('nwapp-task-3-state');
 
         // Since we are using the ``react-routes-dom`` library then we
         // fetch the URL argument as follows.
@@ -46,7 +37,7 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
             search: search,
         }
         this.getParametersMapFromState = this.getParametersMapFromState.bind(this);
-        this.onAssociateClick = this.onAssociateClick.bind(this);
+        this.onDistrictClick = this.onDistrictClick.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
         this.onNextClick = this.onNextClick.bind(this);
@@ -54,7 +45,7 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
     }
 
     getParametersMapFromState() {
-        const search = localStorageGetObjectItem('nwapp-task-1-associate');
+        const search = localStorageGetObjectItem('nwapp-task-3-state');
         const parametersMap = new Map();
         if (search.keyword !== undefined && search.keyword !== "") {
             parametersMap.set("search", search.keyword);
@@ -88,7 +79,7 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
             ()=>{
                 // STEP 3:
                 // SUBMIT TO OUR API.
-                this.props.pullAssociateList(this.state.page, this.state.sizePerPage, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullDistrictList(this.state.page, this.state.sizePerPage, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         );
     }
@@ -143,11 +134,11 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
      *------------------------------------------------------------
      */
 
-    onAssociateClick(e, associateSlug) {
+    onDistrictClick(e, districtSlug) {
         this.setState(
             { isLoading: true },
             ()=>{
-                localStorage.setItem('nwapp-task-1-associate-slug', associateSlug);
+                localStorage.setItem('nwapp-task-3-district-slug', districtSlug);
                 this.props.history.push("/admin/task/3/"+this.state.uuid+"/step-4");
             }
         );
@@ -161,7 +152,7 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
                 isLoading: true,
             },
             ()=>{
-                this.props.pullAssociateList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullDistrictList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         )
     }
@@ -174,7 +165,7 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
                 isLoading: true,
             },
             ()=>{
-                this.props.pullAssociateList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
+                this.props.pullDistrictList(page, 100, this.getParametersMapFromState(), this.onSuccessCallback, this.onFailureCallback);
             }
         )
     }
@@ -188,19 +179,19 @@ class AssignDistrictAssociateTaskStep3Container extends Component {
 
     render() {
         const { uuid, page, sizePerPage, totalSize, isLoading, errors } = this.state;
-        const associates = (this.props.associateList && this.props.associateList.results) ? this.props.associateList.results : [];
-        const hasNext = this.props.associateList.next !== null;
-        const hasPrevious = this.props.associateList.previous !== null;
+        const districts = (this.props.districtList && this.props.districtList.results) ? this.props.districtList.results : [];
+        const hasNext = this.props.districtList.next !== null;
+        const hasPrevious = this.props.districtList.previous !== null;
         return (
             <AssignDistrictAssociateTaskStep3Component
                 uuid={uuid}
                 page={page}
                 sizePerPage={sizePerPage}
                 totalSize={totalSize}
-                associates={associates}
+                districts={districts}
                 isLoading={isLoading}
                 errors={errors}
-                onAssociateClick={this.onAssociateClick}
+                onDistrictClick={this.onDistrictClick}
                 hasNext={hasNext}
                 onNextClick={this.onNextClick}
                 hasPrevious={hasPrevious}
@@ -214,7 +205,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        associateList: store.associateListState,
+        districtList: store.districtListState,
     };
 }
 
@@ -223,9 +214,9 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullAssociateList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+        pullDistrictList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                pullAssociateList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+                pullDistrictList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
     }

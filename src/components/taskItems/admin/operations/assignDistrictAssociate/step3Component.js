@@ -16,10 +16,10 @@ import { FlashMessageComponent } from "../../../../flashMessageComponent";
 export default class AssignDistrictAssociateTaskStep3Component extends Component {
     render() {
         const {
-            uuid, associates, isLoading, errors, hasNext, onNextClick,
-            hasPrevious, onPreviousClick, onAssociateClick
+            uuid, districts, isLoading, errors, hasNext, onNextClick,
+            hasPrevious, onPreviousClick, onDistrictClick
         } = this.props;
-        const hasNoAssociates = associates.length <= 0;
+        const hasNoAssociates = districts.length <= 0;
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -75,8 +75,8 @@ export default class AssignDistrictAssociateTaskStep3Component extends Component
                                 </p>
                             </div>
                             :<div className="card-group row">
-                                {associates && associates.map(
-                                    (associate) => <CardComponent associate={associate} key={associate.slug} isLoading={isLoading} onAssociateClick={onAssociateClick} />)
+                                {districts && districts.map(
+                                    (district) => <CardComponent district={district} key={district.slug} isLoading={isLoading} onDistrictClick={onDistrictClick} />)
                                 }
                             </div>
                         }
@@ -107,31 +107,28 @@ export default class AssignDistrictAssociateTaskStep3Component extends Component
 
 class CardComponent extends Component {
     render() {
-        const { associate, isLoading, onAssociateClick } = this.props;
+        const { district, isLoading, onDistrictClick } = this.props;
         return (
-            <div className="col-sm-3" id={associate.slug}>
+            <div className="col-sm-3" id={district.slug}>
                 <div className="card bg-light">
                     <div className="card-body">
                         <h5 className="card-title">
-                            <Link to={`/admin/area-coordinator/${associate.slug}`}>
-                                {associate.typeOf === 3 &&
-                                    <strong><i className="fas fa-building"></i>&nbsp;{associate.organizationName}</strong>
+                            <Link to={`/admin/area-coordinator/${district.slug}`}>
+                                {district.typeOf === 3 &&
+                                    <strong><i className="fas fa-building"></i>&nbsp;{district.name}</strong>
                                 }
-                                {associate.typeOf === 2 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{associate.firstName}&nbsp;{associate.lastName}</strong>
+                                {district.typeOf === 2 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{district.name}&nbsp;{district.lastName}</strong>
                                 }
-                                {associate.typeOf === 1 &&
-                                    <strong><i className="fas fa-home"></i>&nbsp;{associate.firstName}&nbsp;{associate.lastName}</strong>
+                                {district.typeOf === 1 &&
+                                    <strong><i className="fas fa-home"></i>&nbsp;{district.name}&nbsp;{district.lastName}</strong>
                                 }
                             </Link>
                         </h5>
                         <p className="card-text">
-                            {associate.streetAddress}<br />
-                            {associate.city}, {associate.province}, {associate.postalCode}<br />
-                            <a href={`email:${associate.email}`}>{associate.email}</a><br />
-                            <a href={`tel:${associate.primaryPhoneE164}`}>{associate.primaryPhoneNational}</a>
+                            {district.description}<br />
                         </p>
-                        <button className="btn btn-primary btn-lg btn-block" disabled={isLoading} onClick={(event, slug)=>{ onAssociateClick(event, associate.slug) }}>
+                        <button className="btn btn-primary btn-lg btn-block" disabled={isLoading} onClick={(event, slug)=>{ onDistrictClick(event, district.slug) }}>
                             Select&nbsp;<i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
