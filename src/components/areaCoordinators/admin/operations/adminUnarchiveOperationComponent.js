@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAreaCoordinatorUnarchiveOperationComponent extends Component {
@@ -23,7 +24,7 @@ export default class AdminAreaCoordinatorUnarchiveOperationComponent extends Com
                             <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/area-coordinator/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
+                            <Link to={`/admin/area-coordinator/${slug}/operations`}><UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-box-open"></i>&nbsp;Unarchive

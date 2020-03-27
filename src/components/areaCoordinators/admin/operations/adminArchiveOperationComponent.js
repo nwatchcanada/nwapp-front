@@ -10,6 +10,7 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import {
     ARCHIVE_REASON_CHOICES
 } from '../../../../constants/api';
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AreaCoordinatorArchiveOperationComponent extends Component {
@@ -29,7 +30,7 @@ export default class AreaCoordinatorArchiveOperationComponent extends Component 
                             <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/area-coordinator/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
+                            <Link to={`/admin/area-coordinator/${slug}/operations`}><UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-archive"></i>&nbsp;Archive

@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAreaCoordinatorDemoteOperationStep3Component extends Component {
@@ -24,7 +25,7 @@ export default class AdminAreaCoordinatorDemoteOperationStep3Component extends C
                             <Link to="/admin/area-coordinators"><i className="fas fa-crown"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/area-coordinator/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
+                            <Link to={`/admin/area-coordinator/${slug}/operations`}><UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star-half"></i>&nbsp;Demote

@@ -13,6 +13,7 @@ import Moment from 'react-moment';
 
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 const customTotal = (from, to, size) => (
@@ -216,13 +217,13 @@ class AdminAreaCoordinatorFileUploadListComponent extends Component {
                             <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}
+                            <UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}
                         </li>
                     </ol>
                 </nav>
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}</h1>
 
                 {areaCoordinator.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

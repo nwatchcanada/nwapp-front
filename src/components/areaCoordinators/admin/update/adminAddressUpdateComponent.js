@@ -7,6 +7,7 @@ import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
 import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect'
 import { BootstrapProvinceSelect } from '../../../bootstrap/bootstrapRegionSelect'
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 class AdminAreaCoordinatorAddressUpdateComponent extends Component {
@@ -31,7 +32,7 @@ class AdminAreaCoordinatorAddressUpdateComponent extends Component {
                             <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/area-coordinator/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
+                            <Link to={`/admin/area-coordinator/${slug}/full`}><UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update (Address)

@@ -20,6 +20,7 @@ import {
     IS_OK_TO_EMAIL_CHOICES,
     IS_OK_TO_TEXT_CHOICES,
 } from "../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAreaCoordinatorContactUpdateComponent extends Component {
@@ -47,7 +48,9 @@ export default class AdminAreaCoordinatorContactUpdateComponent extends Componen
                             <Link to={`/admin/area-coordinators`}><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/area-coordinator/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{firstName} {lastName}</Link>
+                            <Link to={`/admin/area-coordinator/${slug}/full`}>
+                                <UserTypeOfIconHelper typeOfId={typeOf} />&nbsp;{firstName} {lastName}
+                            </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update (Contact)

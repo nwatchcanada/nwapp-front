@@ -13,6 +13,7 @@ import Moment from 'react-moment';
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminAreaCoordinatorFileUploadArchiveComponent extends Component {
@@ -32,12 +33,12 @@ export default class AdminAreaCoordinatorFileUploadArchiveComponent extends Comp
                             <Link to="/admin/area-coordinators"><i className="fas fa-horse-head"></i>&nbsp;Area Coordinators</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}
+                            <UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}
                         </li>
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-user"></i>&nbsp;{areaCoordinator && areaCoordinator.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={areaCoordinator && areaCoordinator.typeOf} />&nbsp;{areaCoordinator && areaCoordinator.fullName}</h1>
 
                 {areaCoordinator.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

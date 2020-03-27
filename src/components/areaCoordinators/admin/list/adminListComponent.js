@@ -12,6 +12,7 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import { RESIDENCE_TYPE_OF, BUSINESS_TYPE_OF, COMMUNITY_CARES_TYPE_OF } from "../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 const customTotal = (from, to, size) => (
@@ -132,20 +133,7 @@ class RemoteListComponent extends Component {
 
 
 function iconFormatter(cell, row){
-    switch(row.typeOf) {
-        case BUSINESS_TYPE_OF:
-            return <i className="fas fa-building"></i>;
-            break;
-        case RESIDENCE_TYPE_OF:
-            return <i className="fas fa-home"></i>;
-            break;
-        case COMMUNITY_CARES_TYPE_OF:
-            return <i className="fas fa-university"></i>;
-            break;
-        default:
-            return <i className="fas fa-question"></i>;
-            break;
-    }
+    return <UserTypeOfIconHelper typeOfId={row.typeOf} />;
 }
 
 
