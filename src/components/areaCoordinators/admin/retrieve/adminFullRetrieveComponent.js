@@ -105,7 +105,7 @@ export default class AdminAreaCoordinatorFullRetrieveComponent extends Component
                                         </Link>
                                     </th>
                                 </tr>
-                                {areaCoordinator && areaCoordinator.organizationName && areaCoordinator.roleId === BUSINESS_TYPE_OF &&
+                                {areaCoordinator && areaCoordinator.organizationName && areaCoordinator.typeOf === BUSINESS_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Company Name</th>
                                         <td>{areaCoordinator.organizationName}</td>

@@ -105,7 +105,7 @@ export default class AdminAssociateFullRetrieveComponent extends Component {
                                         </Link>
                                     </th>
                                 </tr>
-                                {associate && associate.organizationName && associate.roleId === BUSINESS_TYPE_OF &&
+                                {associate && associate.organizationName && associate.typeOf === BUSINESS_TYPE_OF &&
                                     <tr>
                                         <th scope="row" className="bg-light">Company Name</th>
                                         <td>{associate.organizationName}</td>
