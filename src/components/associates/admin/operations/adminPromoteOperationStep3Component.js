@@ -7,6 +7,7 @@ import Moment from 'react-moment';
 import { AREA_COORDINATOR_ROLE_ID, ASSOCIATE_ROLE_ID } from "../../../../constants/api";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAssociatePromoteOperationStep2Component extends Component {

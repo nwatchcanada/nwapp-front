@@ -6,6 +6,7 @@ import { FRONTLINE_STAFF_ROLE_ID, MANAGEMENT_ROLE_ID } from "../../../../constan
 import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAssociatePromoteOperationStep2Component extends Component {

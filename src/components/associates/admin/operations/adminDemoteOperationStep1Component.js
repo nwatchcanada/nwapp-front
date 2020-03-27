@@ -9,6 +9,7 @@ import {
     FRONTLINE_STAFF_ROLE_ID,
     MANAGEMENT_ROLE_ID
 } from "../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAssociateDemoteOperationStep1Component extends Component {

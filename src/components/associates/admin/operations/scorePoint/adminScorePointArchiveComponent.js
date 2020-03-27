@@ -13,6 +13,7 @@ import Moment from 'react-moment';
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminAssociateScorePointArchiveComponent extends Component {
@@ -33,7 +34,7 @@ export default class AdminAssociateScorePointArchiveComponent extends Component 
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/associate/${slug}/operations`}>
-                                <i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}
+                                <UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -42,7 +43,7 @@ export default class AdminAssociateScorePointArchiveComponent extends Component 
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}</h1>
 
                 {associate.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

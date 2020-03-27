@@ -9,6 +9,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 // import {EXECUTIVE_GROUP_ID} from '../../../../constants/api';
 import { FlashMessageComponent } from "../../../flashMessageComponent";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAssociateOperationsComponent extends Component {
@@ -27,14 +28,14 @@ export default class AdminAssociateOperationsComponent extends Component {
                             <Link to={`/admin/associates`}><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}
+                            <UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}</h1>
 
                 {associate.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

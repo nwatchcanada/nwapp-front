@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAssociateUnarchiveOperationComponent extends Component {

@@ -10,6 +10,7 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 import {
     ARCHIVE_REASON_CHOICES
 } from '../../../../constants/api';
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AssociateArchiveOperationComponent extends Component {

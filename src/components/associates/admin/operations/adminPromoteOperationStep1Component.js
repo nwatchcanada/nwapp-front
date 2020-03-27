@@ -6,6 +6,7 @@ import {
     MANAGEMENT_ROLE_ID,
     FRONTLINE_STAFF_ROLE_ID
 } from "../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminAssociatePromoteOperationStep1Component extends Component {

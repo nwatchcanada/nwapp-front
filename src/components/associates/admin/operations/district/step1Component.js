@@ -13,6 +13,7 @@ import Moment from 'react-moment';
 
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 const customTotal = (from, to, size) => (
@@ -239,7 +240,7 @@ class AdminAssociateDistrictStep1Component extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/associate/${slug}/operations`}>
-                                <i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}
+                                <UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">

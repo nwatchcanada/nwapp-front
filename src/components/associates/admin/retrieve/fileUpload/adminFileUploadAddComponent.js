@@ -18,6 +18,7 @@ import { BootstrapMultipleSelect } from "../../../../bootstrap/bootstrapMultiple
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BootstrapSingleFileUploadAndPreview } from "../../../../bootstrap/bootstrapSingleFileUploadAndPreview";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminAssociateFileUploadAddComponent extends Component {
@@ -40,7 +41,7 @@ export default class AdminAssociateFileUploadAddComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/associate/${slug}/files`}>
-                                <i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}
+                                <UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -51,7 +52,7 @@ export default class AdminAssociateFileUploadAddComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}</h1>
 
                 {associate.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

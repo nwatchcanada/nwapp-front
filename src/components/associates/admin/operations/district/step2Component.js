@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 class AdminAssociateDistrictStep2Component extends Component {
@@ -26,7 +27,7 @@ class AdminAssociateDistrictStep2Component extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/associate/${associateSlug}/operations`}>
-                                <i className="fas fa-user"></i>&nbsp;{associate && associate.fullName}
+                                <UserTypeOfIconHelper typeOfId={associate && associate.typeOf} />&nbsp;{associate && associate.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
