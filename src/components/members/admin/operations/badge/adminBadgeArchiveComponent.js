@@ -13,6 +13,7 @@ import Moment from 'react-moment';
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminMemberBadgeArchiveComponent extends Component {
@@ -33,7 +34,7 @@ export default class AdminMemberBadgeArchiveComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/member/${slug}/operations`}>
-                                <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
+                                <UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -42,7 +43,7 @@ export default class AdminMemberBadgeArchiveComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}</h1>
 
                 {member.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

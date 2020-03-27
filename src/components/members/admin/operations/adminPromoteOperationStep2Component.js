@@ -11,6 +11,7 @@ import {
 import { BootstrapCheckbox } from "../../../bootstrap/bootstrapCheckbox";
 import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminMemberPromoteOperationStep2Component extends Component {
@@ -31,7 +32,7 @@ export default class AdminMemberPromoteOperationStep2Component extends Component
                             <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/member/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
+                            <Link to={`/admin/member/${slug}/operations`}><UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-star"></i>&nbsp;Promote

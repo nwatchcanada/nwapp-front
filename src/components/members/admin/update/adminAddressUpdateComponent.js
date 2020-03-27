@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
 import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
-import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect'
-import { BootstrapProvinceSelect } from '../../../bootstrap/bootstrapRegionSelect'
+import { BootstrapCountrySelect } from '../../../bootstrap/bootstrapCountrySelect';
+import { BootstrapProvinceSelect } from '../../../bootstrap/bootstrapRegionSelect';
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 class AdminMemberAddressUpdateComponent extends Component {
     render() {
         const {
-            slug, member,
+            slug, member, typeOf,
             streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode, city, province, country,
             errors, onTextChange, onSelectChange, isLoading, onClick, onProvinceChange, onCountryChange,
         } = this.props;
@@ -31,7 +32,7 @@ class AdminMemberAddressUpdateComponent extends Component {
                             <Link to={`/admin/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/member/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
+                            <Link to={`/admin/member/${slug}/full`}><UserTypeOfIconHelper typeOfId={typeOf} />&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update (Address)

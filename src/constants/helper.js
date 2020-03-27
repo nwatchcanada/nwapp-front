@@ -21,7 +21,10 @@ import {
    TASK_ITEM_TYPE_OF_ACTION_CONCERNT_ITEM,
    TASK_ITEM_STATE_UNASSIGNED,
    TASK_ITEM_STATE_PENDING,
-   TASK_ITEM_STATE_CLOSED
+   TASK_ITEM_STATE_CLOSED,
+   BUSINESS_TYPE_OF,
+   RESIDENCE_TYPE_OF,
+   COMMUNITY_CARES_TYPE_OF
 } from "./api";
 
 
@@ -143,5 +146,23 @@ export const TaskItemStateLabelHelper = ({ stateId }) => {
         return "Closed";
     } else {
         return null;
+    }
+}
+
+
+export function UserTypeOfIconHelper({ typeOfId }){
+    switch(typeOfId) {
+        case BUSINESS_TYPE_OF:
+            return <i className="fas fa-building"></i>;
+            break;
+        case RESIDENCE_TYPE_OF:
+            return <i className="fas fa-home"></i>;
+            break;
+        case COMMUNITY_CARES_TYPE_OF:
+            return <i className="fas fa-university"></i>;
+            break;
+        default:
+            return <i className="fas fa-question"></i>;
+            break;
     }
 }

@@ -15,6 +15,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAler
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminMemberCommentComponent extends Component {
@@ -34,14 +35,14 @@ export default class AdminMemberCommentComponent extends Component {
                             <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
+                            <UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}</h1>
 
                 {member.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

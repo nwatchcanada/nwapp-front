@@ -19,6 +19,7 @@ import { BootstrapMultipleSelect } from "../../../../bootstrap/bootstrapMultiple
 import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BADGE_TYPE_OF_CHOICES } from "../../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminMemberBadgeAddComponent extends Component {
@@ -40,7 +41,7 @@ export default class AdminMemberBadgeAddComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/member/${slug}/operations`}>
-                                <i className="fas fa-user"></i>&nbsp;{member && member.fullName}
+                                <UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}
                             </Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
@@ -51,7 +52,7 @@ export default class AdminMemberBadgeAddComponent extends Component {
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}</h1>
 
                 {member.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">

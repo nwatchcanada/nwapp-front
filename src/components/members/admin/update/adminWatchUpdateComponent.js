@@ -9,11 +9,12 @@ import {
     BUSINESS_TYPE_OF,
     COMMUNITY_CARES_TYPE_OF
 } from '../../../../constants/api';
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminMemberWatchUpdateComponent extends Component {
     render() {
-        const { slug, member, watchItems, errors, isLoading, onTableRowClick } = this.props;
+        const { slug, typeOf, member, watchItems, errors, isLoading, onTableRowClick } = this.props;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -26,7 +27,7 @@ export default class AdminMemberWatchUpdateComponent extends Component {
                             <Link to={`/admin/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/member/${slug}/full`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
+                            <Link to={`/admin/member/${slug}/full`}><UserTypeOfIconHelper typeOfId={typeOf} />&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update (Watch)

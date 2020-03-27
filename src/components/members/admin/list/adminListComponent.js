@@ -19,6 +19,7 @@ import {
     AREA_COORDINATOR_ROLE_ID,
     MEMBER_ROLE_ID
 } from "../../../../constants/api";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 const customTotal = (from, to, size) => (
@@ -46,11 +47,11 @@ class RemoteListComponent extends Component {
 
         const selectRoleIdOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
             0: "All",
-            6: "Member",
-            5: "Area Coordinator",
-            4: "Associate",
-            3: "Frontline Staff",
-            2: "Manager",
+            MEMBER_ROLE_ID: "Member",
+            AREA_COORDINATOR_ROLE_ID: "Area Coordinator",
+            ASSOCIATE_ROLE_ID: "Associate",
+            FRONTLINE_STAFF_ROLE_ID: "Frontline Staff",
+            MANAGEMENT_ROLE_ID: "Manager",
         };
 
         const columns = [{
@@ -158,20 +159,7 @@ class RemoteListComponent extends Component {
 
 
 function iconFormatter(cell, row){
-    switch(row.typeOf) {
-        case BUSINESS_TYPE_OF:
-            return <i className="fas fa-building"></i>;
-            break;
-        case RESIDENCE_TYPE_OF:
-            return <i className="fas fa-home"></i>;
-            break;
-        case COMMUNITY_CARES_TYPE_OF:
-            return <i className="fas fa-university"></i>;
-            break;
-        default:
-            return <i className="fas fa-question"></i>;
-            break;
-    }
+    return <UserTypeOfIconHelper typeOfId={row.typeOf} />;
 }
 
 

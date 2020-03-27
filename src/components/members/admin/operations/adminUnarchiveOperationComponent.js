@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
+import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminMemberUnarchiveOperationComponent extends Component {
@@ -23,7 +24,7 @@ export default class AdminMemberUnarchiveOperationComponent extends Component {
                             <Link to={`/admin/members`}><i className="fas fa-users"></i>&nbsp;Members</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/member/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{member && member.fullName}</Link>
+                            <Link to={`/admin/member/${slug}/operations`}><UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.fullName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-box-open"></i>&nbsp;Unarchive
