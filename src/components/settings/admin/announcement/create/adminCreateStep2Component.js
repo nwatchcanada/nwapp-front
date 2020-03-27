@@ -40,7 +40,9 @@ class AdminAnnouncementCreateStep2Component extends Component {
 
                         <div className="jumbotron">
                             <h1 className="display-4"><i className="fas fa-exclamation-triangle"></i>&nbsp;Confirmation</h1>
-                            <p className="lead">This will create our <strong>district</strong> in our system.</p>
+                            <p className="lead">
+                                This will create a new <strong>announcement</strong>.
+                            </p>
                             <hr />
                             <p>Please click <strong>save</strong> to proceed.</p>
                             <p>
