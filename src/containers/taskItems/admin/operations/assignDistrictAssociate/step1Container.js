@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import AssignDistrictAssociateTaskStep1Component from "../../../../../components/taskItems/admin/operations/assignDistrictAssociate/step1Component";
 import { clearFlashMessage } from "../../../../../actions/flashMessageActions";
+import { pullTaskItem } from "../../../../../actions/taskItemActions";
 
 
 class AssignDistrictAssociateTaskStep1Container extends Component {
@@ -21,8 +22,12 @@ class AssignDistrictAssociateTaskStep1Container extends Component {
         // Update state.
         this.state = {
             uuid: uuid,
+            isLoading: true,
+            errors: {}
         }
 
+        this.onSuccessfulPullCallback = this.onSuccessfulPullCallback.bind(this);
+        this.onFailedPullCallback = this.onFailedPullCallback.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -31,9 +36,14 @@ class AssignDistrictAssociateTaskStep1Container extends Component {
      *------------------------------------------------------------
      */
 
-     componentDidMount() {
-         window.scrollTo(0, 0);  // Start the page at the top of the page.
-     }
+    componentDidMount() {
+        window.scrollTo(0, 0);  // Start the page at the top of the page.
+        this.props.pullTaskItem(
+            this.state.uuid,
+            this.onSuccessfulPullCallback,
+            this.onFailedPullCallback,
+        );
+    }
 
      componentWillUnmount() {
          // This code will fix the "ReactJS & Redux: Can't perform a React state
@@ -52,12 +62,19 @@ class AssignDistrictAssociateTaskStep1Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    onSuccessfulPullCallback(taskItem) {
+        this.setState({
+            taskItem: taskItem,
+            isLoading: false,
+        });
     }
 
-    onFailedSubmissionCallback(errors) {
+    onFailedPullCallback(errors) {
         console.log(errors);
+        this.setState({
+            errors: errors,
+            isLoading: false,
+        });
     }
 
     /**
@@ -81,6 +98,9 @@ class AssignDistrictAssociateTaskStep1Container extends Component {
             <AssignDistrictAssociateTaskStep1Component
                 urlArgument={this.state.urlArgument}
                 uuid={this.state.uuid}
+                taskItem={this.state.taskItem}
+                isLoading={this.state.isLoading}
+                errors={this.state.errors}
                 onBack={this.onBack}
                 onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
@@ -92,6 +112,7 @@ class AssignDistrictAssociateTaskStep1Container extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        taskItem: store.taskItemDetailState,
         flashMessage: store.flashMessageState,
     };
 }
@@ -100,7 +121,10 @@ const mapDispatchToProps = dispatch => {
     return {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
-        }
+        },
+        pullTaskItem: (slug, successCallback, failedCallback) => {
+            dispatch(pullTaskItem(slug, successCallback, failedCallback))
+        },
     }
 }
 

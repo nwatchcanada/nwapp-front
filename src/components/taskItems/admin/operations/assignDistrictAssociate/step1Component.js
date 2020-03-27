@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
+import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+
 
 class AssignDistrictAssociateTaskStep1Component extends Component {
     render() {
-        const { onClick, onBack } = this.props;
+        const { taskItem, onClick, onBack, isLoading, errors } = this.props;
         return (
             <div>
+                <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -39,7 +43,9 @@ class AssignDistrictAssociateTaskStep1Component extends Component {
                     </div>
                 </div>
 
-                <div className="ow">
+                <BootstrapErrorsProcessingAlert errors={errors} />
+
+                <div className="row">
                     <div className="col-md-10 mx-auto p-2">
                         <table className="table table-bordered custom-cell-w">
                             <tbody>
@@ -50,11 +56,15 @@ class AssignDistrictAssociateTaskStep1Component extends Component {
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Description</th>
-                                <td>A new watch has been created and has the option of assigning an associate. Please assign an associate to the watch if there is one.</td>
+                                <td>A new district has been created and has the option of assigning an associate. Please assign an associate to the district if there is one.</td>
                             </tr>
                             <tr>
-                                <th scope="row" className="bg-light">District</th>
-                                <td>Byron District</td>
+                                <th scope="row" className="bg-light">Associate</th>
+                                <td>{taskItem && taskItem.associateLabel &&
+                                    <span>
+                                        {taskItem.associateLabel}
+                                    </span>
+                                }</td>
                             </tr>
                             <tr>
                                 <th scope="row" className="bg-light">Tags</th>
