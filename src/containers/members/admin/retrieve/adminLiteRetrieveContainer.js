@@ -31,12 +31,15 @@ class AdminMemberLiteRetrieveContainer extends Component {
             slug: slug,
             member: member,
             isLoading: isLoading,
+            showModal: false,
         }
 
         // Update functions.
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
         // this.onClientClick = this.onClientClick.bind(this);
+        this.onShowModalClick = this.onShowModalClick.bind(this);
+        this.onCloseModalClick = this.onCloseModalClick.bind(this);
     }
 
     /**
@@ -51,6 +54,18 @@ class AdminMemberLiteRetrieveContainer extends Component {
             this.onSuccessCallback,
             this.onFailureCallback
         );
+    }
+
+    onShowModalClick(event) {
+        this.setState({
+            showModal: true,
+        });
+    }
+
+    onCloseModalClick(event) {
+        this.setState({
+            showModal: false,
+        });
     }
 
     componentWillUnmount() {
@@ -103,7 +118,7 @@ class AdminMemberLiteRetrieveContainer extends Component {
      */
 
     render() {
-        const { slug, isLoading } = this.state;
+        const { slug, isLoading, showModal } = this.state;
         const member = isEmpty(this.state.member) ? {} : this.state.member;
         return (
             <AdminMemberLiteRetrieveComponent
@@ -111,6 +126,9 @@ class AdminMemberLiteRetrieveContainer extends Component {
                 member={member}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
+                showModal={showModal}
+                onShowModalClick={this.onShowModalClick}
+                onCloseModalClick={this.onCloseModalClick}
             />
         );
     }
