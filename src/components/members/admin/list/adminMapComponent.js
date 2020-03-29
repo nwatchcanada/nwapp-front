@@ -58,7 +58,7 @@ class AdminMemberMapComponent extends Component {
                     </div>
                 </div>
 
-                <h1><i className="fas fa-users"></i>&nbsp;Members</h1>
+                <h1><i className="fas fa-map"></i>&nbsp;Map</h1>
 
                 <div className="row">
                     <div className="col-md-12">
