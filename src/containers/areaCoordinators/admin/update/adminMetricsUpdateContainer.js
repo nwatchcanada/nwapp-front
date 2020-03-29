@@ -304,10 +304,13 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
 
     render() {
         const {
-            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
-            organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
-            errors
+            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading,
+            howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning,
+            meaningOther, isExpectationLoading, expectation, expectationOther,
+            willingToVolunteer, anotherHouseholdMemberRegistered,
+            totalHouseholdCount, over18YearsHouseholdCount,
+            organizationEmployeeCount, organizationFoundingYear,
+            organizationTypeOf, errors, isLoading
         } = this.state;
 
         const howDidYouHearOptions = getHowHearReactSelectOptions(this.props.howHearList, "howDidYouHear");
@@ -332,6 +335,7 @@ class AdminAreaCoordinatorMetricUpdateContainer extends Component {
                 yearOfBirth={yearOfBirth}
                 gender={gender}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 isHowHearLoading={isHowHearLoading}
                 howDidYouHear={howDidYouHear}

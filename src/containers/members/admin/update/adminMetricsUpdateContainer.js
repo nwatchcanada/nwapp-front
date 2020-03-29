@@ -321,10 +321,13 @@ class AdminMemberMetricUpdateContainer extends Component {
 
     render() {
         const {
-            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading, howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning, meaningOther, isExpectationLoading, expectation, expectationOther,
-            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount, over18YearsHouseholdCount,
+            typeOf, isTagsLoading, tags, yearOfBirth, gender, isHowHearLoading,
+            howDidYouHear, howDidYouHearOther,  isMeaningLoading, meaning,
+            meaningOther, isExpectationLoading, expectation, expectationOther,
+            willingToVolunteer, anotherHouseholdMemberRegistered, totalHouseholdCount,
+            over18YearsHouseholdCount,
             organizationEmployeeCount, organizationFoundingYear, organizationTypeOf,
-            errors,
+            errors, isLoading,
             isAboriginal, isTransgender, isVisibleMinority, isDisabledOrHasBarriers, isOverFiftyFive
         } = this.state;
 
@@ -350,6 +353,7 @@ class AdminMemberMetricUpdateContainer extends Component {
                 yearOfBirth={yearOfBirth}
                 gender={gender}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 isHowHearLoading={isHowHearLoading}
                 howDidYouHear={howDidYouHear}

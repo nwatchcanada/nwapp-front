@@ -103,9 +103,7 @@ class AdminMemberAddressUpdateContainer extends Component {
     }
 
     onFailedSubmissionCallback(errors) {
-        this.setState({
-            errors: errors
-        })
+        this.setState({ errors: errors, isLoading: false, });
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -183,7 +181,9 @@ class AdminMemberAddressUpdateContainer extends Component {
 
     render() {
         const {
-            slug, streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,  country, province, city, errors
+            slug, streetNumber, streetName, streetType, apartmentUnit,
+            streetTypeOther, streetDirection, postalCode,  country, province,
+            city, errors, isLoading,
         } = this.state;
         return (
             <AdminMemberAddressUpdateComponent
@@ -202,6 +202,7 @@ class AdminMemberAddressUpdateContainer extends Component {
                 province={province}
                 city={city}
                 errors={errors}
+                isLoading={isLoading}
                 onTextChange={this.onTextChange}
                 onSelectChange={this.onSelectChange}
                 onProvinceChange={this.onProvinceChange}
