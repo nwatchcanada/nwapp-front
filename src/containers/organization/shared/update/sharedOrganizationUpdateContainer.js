@@ -42,6 +42,10 @@ class SharedOrganizationUpdateContainer extends Component {
             streetDirection: "-",
             streetDirectionOption: "-",
             postalCode: "-",
+            default_position: "",
+            longitude: "",
+            latitude: "",
+            zoom: "",
             timezone: "-",
             errors: {},
             isLoading: true, // Reason for `true` is because we need to fetch the data first.
@@ -114,6 +118,12 @@ class SharedOrganizationUpdateContainer extends Component {
         // Schema Name: This field is required.
         postData.schemaName = this.state.schema;
 
+        postData.defaultPosition = {
+            "longitude": this.state.longitude,
+            "latitude": this.state.latitude,
+        }
+        postData.defaultZoom = this.state.zoom;
+
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
         return postData;
@@ -126,6 +136,11 @@ class SharedOrganizationUpdateContainer extends Component {
 
     onSuccessfulPullCallback(tenantDetail) {
         console.log(tenantDetail);
+
+        const defaultPosition = tenantDetail.defaultPosition;
+        const defaultPositionLat = defaultPosition !== undefined && defaultPosition !== null ? defaultPosition.latitude : null;
+        const defaultPositionLon = defaultPosition !== undefined && defaultPosition !== null ? defaultPosition.longitude : null;
+
         this.setState({
             name: tenantDetail.name,
             alternateName: tenantDetail.alternateName,
@@ -142,6 +157,10 @@ class SharedOrganizationUpdateContainer extends Component {
             streetDirection: tenantDetail.streetDirection,
             // streetDirectionOption: tenantDetail.streetDirectionOption,
             postalCode: tenantDetail.postalCode,
+            defaultPosition: tenantDetail.defaultPosition,
+            latitude: defaultPositionLat,
+            longitude: defaultPositionLon,
+            zoom: tenantDetail.defaultZoom,
             timezone: tenantDetail.timezoneName,
             isLoading: false, // Turn off because we have finished.
         });
@@ -234,7 +253,9 @@ class SharedOrganizationUpdateContainer extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,
+            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther,
+            streetDirection, postalCode, defaultPosition, zoom,
+            latitude, longitude,
             timezone, errors, isLoading
         } = this.state;
         return (
@@ -255,6 +276,10 @@ class SharedOrganizationUpdateContainer extends Component {
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
+                defaultPosition={defaultPosition}
+                zoom={zoom}
+                latitude={latitude}
+                longitude={longitude}
                 timezone={timezone}
                 timezoneOptions={getTimezoneReactSelectOptions()}
                 errors={errors}

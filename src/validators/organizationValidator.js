@@ -47,6 +47,15 @@ export default function validateInput(data) {
     if (data.postalCode === undefined || data.postalCode === null || validator.isEmpty(data.postalCode) || data.postalCode === "") {
         errors.postalCode = 'This field is required';
     }
+    if (data.latitude === undefined || data.latitude === null || data.latitude === "") {
+        errors.latitude = "This field is required"
+    }
+    if (data.longitude === undefined || data.longitude === null || data.longitude === "") {
+        errors.longitude = "This field is required"
+    }
+    if (data.zoom === undefined || data.zoom === null || data.zoom === "") {
+        errors.zoom = "This field is required"
+    }
     return {
         errors,
         isValid: isEmpty(errors)

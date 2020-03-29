@@ -13,9 +13,12 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 class SharedOrganizationCreateStep2Component extends Component {
     render() {
         const {
-            schema, name, alternateName, description, country, province, city, timezone, timezoneOptions,
-            streetNumber, streetName, apartmentUnit, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, postalCode,
-            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onProvinceChange, onClick, onBackClick
+            schema, name, alternateName, description, country, province, city,
+            timezone, timezoneOptions, streetNumber, streetName, apartmentUnit,
+            streetType, streetTypeOptions, streetTypeOther, streetDirection,
+            streetDirectionOptions, postalCode, latitude, longitude, zoom,
+            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange,
+            onProvinceChange, onClick, onBackClick
         } = this.props;
         return (
             <div>
@@ -209,6 +212,42 @@ class SharedOrganizationCreateStep2Component extends Component {
                                 value={postalCode}
                                 name="postalCode"
                                 type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.longitude}
+                                label="Longitude (*)"
+                                onChange={onTextChange}
+                                value={longitude}
+                                name="longitude"
+                                type="text"
+                                helpText="The longitude coordinate to be used to centre the map."
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.latitude}
+                                label="Latitude (*)"
+                                onChange={onTextChange}
+                                value={latitude}
+                                name="latitude"
+                                type="text"
+                                helpText="The latitude coordinate to be used to centre the map."
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control"
+                                borderColour="border-primary"
+                                error={errors.zoom}
+                                label="Zoom (*)"
+                                onChange={onTextChange}
+                                value={zoom}
+                                name="zoom"
+                                type="integer"
+                                helpText="The zoom number to be used to centre the map."
                             />
 
                             <BootstrapSingleSelect

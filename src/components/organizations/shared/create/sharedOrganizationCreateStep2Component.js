@@ -13,9 +13,13 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 class SharedOrganizationCreateStep2Component extends Component {
     render() {
         const {
-            schema, name, alternateName, description, country, province, city, timezone, timezoneOptions,
-            streetNumber, streetName, apartmentUnit, streetType, streetTypeLabel, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionLabel, streetDirectionOptions, postalCode,
-            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange, onProvinceChange, onClick, onBackClick
+            schema, name, alternateName, description, country, province, city,
+            timezone, timezoneOptions, streetNumber, streetName, apartmentUnit,
+            streetType, streetTypeLabel, streetTypeOptions, streetTypeOther,
+            streetDirection, streetDirectionLabel, streetDirectionOptions,
+            postalCode, latitude, longitude, zoom,
+            errors={}, isLoading, onTextChange, onSelectChange, onCountryChange,
+            onProvinceChange, onClick, onBackClick
         } = this.props;
         return (
             <div>
@@ -117,6 +121,18 @@ class SharedOrganizationCreateStep2Component extends Component {
                                     <tr>
                                         <th scope="row" className="bg-light">Postal Code</th>
                                         <td>{postalCode}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Longitude</th>
+                                        <td>{longitude}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Latitude</th>
+                                        <td>{latitude}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" className="bg-light">Zoom</th>
+                                        <td>{zoom}</td>
                                     </tr>
                                 </tbody>
                             </table>

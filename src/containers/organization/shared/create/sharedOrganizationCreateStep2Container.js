@@ -42,6 +42,9 @@ class SharedOrganizationCreateStep2Container extends Component {
             streetDirectionLabel: localStorage.getItem("nwapp-create-tenant-streetDirectionLabel"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-tenant-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-tenant-postalCode"),
+            latitude: localStorage.getItem("nwapp-create-tenant-latitude"),
+            longitude: localStorage.getItem("nwapp-create-tenant-longitude"),
+            zoom: localStorage.getItem("nwapp-create-tenant-zoom"),
             timezone: 'America/Toronto',
             errors: {},
             isLoading: false,
@@ -108,6 +111,12 @@ class SharedOrganizationCreateStep2Container extends Component {
 
         // Schema Name: This field is required.
         postData.schemaName = this.state.schema;
+
+        postData.defaultPosition = {
+            "longitude": this.state.longitude,
+            "latitude": this.state.latitude,
+        }
+        postData.defaultZoom = this.state.zoom;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -206,8 +215,9 @@ class SharedOrganizationCreateStep2Container extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit, streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
-            timezone, errors, isLoading
+            streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit,
+            streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
+            latitude, longitude, zoom, timezone, errors, isLoading
         } = this.state;
         return (
             <SharedOrganizationCreateStep2Component
@@ -229,6 +239,9 @@ class SharedOrganizationCreateStep2Container extends Component {
                 streetDirectionLabel={streetDirectionLabel}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
+                latitude={latitude}
+                longitude={longitude}
+                zoom={zoom}
                 timezone={timezone}
                 timezoneOptions={getTimezoneReactSelectOptions()}
                 errors={errors}

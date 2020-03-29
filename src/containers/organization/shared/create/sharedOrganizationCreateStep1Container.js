@@ -38,6 +38,9 @@ class SharedOrganizationCreateStep1Container extends Component {
             streetDirection: localStorageGetIntegerItem("nwapp-create-tenant-streetDirection"),
             streetDirectionOption: localStorageGetObjectItem('nwapp-create-tenant-streetDirectionOption'),
             postalCode: localStorage.getItem("nwapp-create-tenant-postalCode"),
+            latitude: localStorage.getItem("nwapp-create-tenant-latitude"),
+            longitude: localStorage.getItem("nwapp-create-tenant-longitude"),
+            zoom: localStorage.getItem("nwapp-create-tenant-zoom"),
             timezone: 'America/Toronto',
             errors: {},
             isLoading: false,
@@ -191,7 +194,8 @@ class SharedOrganizationCreateStep1Container extends Component {
     render() {
         const {
             schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther, streetDirection, postalCode,
+            streetNumber, streetName, streetType, apartmentUnit, streetTypeOther,
+            streetDirection, postalCode, latitude, longitude, zoom,
             timezone, errors, isLoading
         } = this.state;
         return (
@@ -212,6 +216,9 @@ class SharedOrganizationCreateStep1Container extends Component {
                 streetDirection={streetDirection}
                 streetDirectionOptions={STREET_DIRECTION_CHOICES}
                 postalCode={postalCode}
+                latitude={latitude}
+                longitude={longitude}
+                zoom={zoom}
                 timezone={timezone}
                 timezoneOptions={getTimezoneReactSelectOptions()}
                 errors={errors}
