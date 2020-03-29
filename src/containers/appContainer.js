@@ -97,6 +97,7 @@ AREA COORDINATORS
 -----------------
 */
 import AdminAreaCoordinatorListContainer from "./areaCoordinators/admin/list/adminListContainer";
+import AdminAreaCoordinatorMapContainer from "./areaCoordinators/admin/list/adminMapContainer";
 import AdminAreaCoordinatorSearchContainer from "./areaCoordinators/admin/search/adminSearchContainer";
 import AdminAreaCoordinatorSearchResultContainer from "./areaCoordinators/admin/search/adminSearchResultContainer";
 import AdminAreaCoordinatorLiteRetrieveContainer from "./areaCoordinators/admin/retrieve/adminLiteRetrieveContainer";
@@ -640,6 +641,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/area-coordinators/add/step-3" exact component={requiresAuth(AdminAreaCoordinatorCreateStep3Container)} />
                                 <Route path="/admin/area-coordinators/add/step-4" exact component={requiresAuth(AdminAreaCoordinatorCreateStep4Container)} />
                                 <Route path="/admin/area-coordinators" exact component={requiresAuth(AdminAreaCoordinatorListContainer)} />
+                                <Route path="/admin/area-coordinators/map" exact component={requiresAuth(AdminAreaCoordinatorMapContainer)} />
                                 <Route path="/admin/area-coordinators/search" exact component={requiresAuth(AdminAreaCoordinatorSearchContainer)} />
                                 <Route path="/admin/area-coordinators/search-results" exact component={requiresAuth(AdminAreaCoordinatorSearchResultContainer)} />
                                 <Route path="/admin/area-coordinator/:slug" exact component={requiresAuth(AdminAreaCoordinatorLiteRetrieveContainer)} />
