@@ -137,6 +137,7 @@ ASSOCIATE
 ---------
 */
 import AdminAssociateListContainer from "./associates/admin/list/adminListContainer";
+import AdminAssociateMapContainer from "./associates/admin/list/adminMapContainer";
 import AdminAssociateSearchContainer from "./associates/admin/search/adminSearchContainer";
 import AdminAssociateSearchResultContainer from "./associates/admin/search/adminSearchResultContainer";
 import AdminAssociateLiteRetrieveContainer from "./associates/admin/retrieve/adminLiteRetrieveContainer";
@@ -681,6 +682,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/associates/add/step-3" exact component={requiresAuth(AdminAssociateCreateStep3Container)} />
                                 <Route path="/admin/associates/add/step-4" exact component={requiresAuth(AdminAssociateCreateStep4Container)} />
                                 <Route path="/admin/associates" exact component={requiresAuth(AdminAssociateListContainer)} />
+                                <Route path="/admin/associates/map" exact component={requiresAuth(AdminAssociateMapContainer)} />
                                 <Route path="/admin/associates/search" exact component={requiresAuth(AdminAssociateSearchContainer)} />
                                 <Route path="/admin/associates/search-results" exact component={requiresAuth(AdminAssociateSearchResultContainer)} />
                                 <Route path="/admin/associate/:slug" exact component={requiresAuth(AdminAssociateLiteRetrieveContainer)} />

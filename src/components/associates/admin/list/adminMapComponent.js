@@ -15,7 +15,7 @@ import {
 import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
-class AdminMemberMapComponent extends Component {
+class AdminAssociateMapComponent extends Component {
     render() {
         const {
             // Pagination
@@ -23,13 +23,13 @@ class AdminMemberMapComponent extends Component {
             coords, zoom, onZoomEnd, onMoveEnd, onPopupOpen, onPopupClose, onClick,
 
             // Data
-            memberList,
+            associateList,
 
             // Everything else...
             flashMessage, onTableChange, isLoading
         } = this.props;
 
-        const members = memberList.results ? memberList.results : [];
+        const associates = associateList.results ? associateList.results : [];
 
         return (
             <div>
@@ -40,7 +40,7 @@ class AdminMemberMapComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/admin/members"><i className="fas fa-users"></i>&nbsp;Members</Link>
+                           <Link to="/admin/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-map"></i>&nbsp;Map
@@ -52,7 +52,7 @@ class AdminMemberMapComponent extends Component {
 
                 <div className="row">
                     <div className="col-sm-3 p-3 mb-2">
-                        <Link className="btn btn-primary btn-lg" to={`/admin/members`} role="button">
+                        <Link className="btn btn-primary btn-lg" to={`/admin/associates`} role="button">
                             <i className="fas fa-arrow-left"></i>&nbsp;Back to List
                         </Link>
                     </div>
@@ -81,9 +81,9 @@ class AdminMemberMapComponent extends Component {
                                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                 />
-                                {memberList !== undefined && memberList != null &&
-                                    <MemberMarker
-                                        members={memberList.results}
+                                {associateList !== undefined && associateList != null &&
+                                    <AssociateMarker
+                                        associates={associateList.results}
                                         onPopupOpen={onPopupOpen}
                                         onPopupClose={onPopupClose}
                                         onClick={onClick}
@@ -101,66 +101,66 @@ class AdminMemberMapComponent extends Component {
 
 
 
-function MemberMarker({ members, onPopupOpen, onPopupClose, onClick }) {
-    let memberMarkers = [];
-    for (let member of members) {
-        console.log(member); // For debugging purposes.
-        let memberMarker = (
-            <Marker position={member.position} key={member.slug}>
-                <Popup onOpen={ (slug)=> { onPopupOpen(member.slug) } } onClose={ (slug)=> { onPopupClose(member.slug) } }>
-                    <MemberMarkerContent
-                        member={member}
+function AssociateMarker({ associates, onPopupOpen, onPopupClose, onClick }) {
+    let associateMarkers = [];
+    for (let associate of associates) {
+        console.log(associate); // For debugging purposes.
+        let associateMarker = (
+            <Marker position={associate.position} key={associate.slug}>
+                <Popup onOpen={ (slug)=> { onPopupOpen(associate.slug) } } onClose={ (slug)=> { onPopupClose(associate.slug) } }>
+                    <AssociateMarkerContent
+                        associate={associate}
                         onClick={onClick}
                     />
                 </Popup>
             </Marker>
         );
-        memberMarkers.push(memberMarker);
+        associateMarkers.push(associateMarker);
     }
-    return memberMarkers;
+    return associateMarkers;
 }
 
 
-function MemberMarkerContent({ member, onClick }) {
+function AssociateMarkerContent({ associate, onClick }) {
     return (
         <div>
-            {member && member.organizationName && member.roleId === BUSINESS_TYPE_OF &&
-                <h1>{member.organizationName}</h1>
+            {associate && associate.organizationName && associate.roleId === BUSINESS_TYPE_OF &&
+                <h1>{associate.organizationName}</h1>
             }
             <h3>
-                {member.firstName}&nbsp;{member.lastName}
+                {associate.firstName}&nbsp;{associate.lastName}
             </h3>
-            {member && member.streetAddress &&
+            {associate && associate.streetAddress &&
                 <p className="text-muted">
                     <span>
-                        <i className="fas fa-map-marker-alt"></i>&nbsp;{member && member.streetAddress}
+                        <i className="fas fa-map-marker-alt"></i>&nbsp;{associate && associate.streetAddress}
                     </span>
                 </p>
             }
-            {member && member.email &&
+            {associate && associate.email &&
                 <p>
                     <strong>Email</strong>:&nbsp;
-                    <a href={`mailto:${member.email}`}><i className="fas fa-envelope"></i>&nbsp;{member.email}</a>
+                    <a href={`mailto:${associate.email}`}><i className="fas fa-envelope"></i>&nbsp;{associate.email}</a>
                 </p>
             }
-            {member && member.primaryPhoneE164 &&
+            {associate && associate.primaryPhoneE164 &&
                 <p>
                     <strong>Phone</strong>:&nbsp;
-                    <a href={`tel:${member.primaryPhoneE164}`}>
-                        <i className="fas fa-phone-square"></i>&nbsp;{member.primaryPhoneNational}
+                    <a href={`tel:${associate.primaryPhoneE164}`}>
+                        <i className="fas fa-phone-square"></i>&nbsp;{associate.primaryPhoneNational}
                     </a>
                 </p>
             }
             <p className="m-0"><strong>Tags:</strong></p>
-            {member &&
+            {associate &&
                 <p>
-                    {member.tags && member.tags.map(
+                    {associate.tags && associate.tags.map(
                         (tag) => <TagItem tag={tag} key={tag.id} />)
                     }
                 </p>
             }
             <p>
-            <button className="btn btn-success btn-lg" onClick={ (event,slug)=>onClick(event, member.slug) }>
+            <button className="btn btn-success btn-lg" onClick={ (event,slug)=>onClick(event, associate.slug) }>
                 View&nbsp;<i className="fas fa-arrow-circle-right"></i>
             </button>
             </p>
@@ -178,4 +178,4 @@ class TagItem extends Component {
     };
 }
 
-export default AdminMemberMapComponent;
+export default AdminAssociateMapComponent;

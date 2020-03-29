@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 
-import AdminMemberMapComponent from "../../../../components/members/admin/list/adminMapComponent";
+import AdminAssociateMapComponent from "../../../../components/associates/admin/list/adminMapComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
-import { pullMemberList } from "../../../../actions/memberActions";
+import { pullAssociateList } from "../../../../actions/associateActions";
 import { STANDARD_RESULTS_SIZE_PER_PAGE_PAGINATION } from "../../../../constants/api";
 
 
-class AdminMemberMapContainer extends Component {
+class AdminAssociateMapContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -56,7 +56,7 @@ class AdminMemberMapContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-        this.props.pullMemberList(
+        this.props.pullAssociateList(
             this.state.page,
             this.state.sizePerPage,
             this.state.parametersMap,
@@ -130,7 +130,7 @@ class AdminMemberMapContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullMemberList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                    this.props.pullAssociateList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
                 }
             );
 
@@ -140,7 +140,7 @@ class AdminMemberMapContainer extends Component {
             this.setState(
                 { page: page, sizePerPage:sizePerPage, isLoading: true, },
                 ()=>{
-                    this.props.pullMemberList(page, sizePerPage, this.state.parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                    this.props.pullAssociateList(page, sizePerPage, this.state.parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
                 }
             );
 
@@ -166,7 +166,7 @@ class AdminMemberMapContainer extends Component {
                 ()=>{
                     // STEP 3:
                     // SUBMIT TO OUR API.
-                    this.props.pullMemberList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+                    this.props.pullAssociateList(this.state.page, this.state.sizePerPage, parametersMap, this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
                 }
             );
         }else {
@@ -192,7 +192,7 @@ class AdminMemberMapContainer extends Component {
 
     onClick(event, slug) {
         event.preventDefault();
-        this.props.history.push("/admin/member/"+slug);
+        this.props.history.push("/admin/associate/"+slug);
     }
 
     /**
@@ -203,11 +203,11 @@ class AdminMemberMapContainer extends Component {
     render() {
         const { page, sizePerPage, totalSize, isLoading, coords, zoom } = this.state;
         return (
-            <AdminMemberMapComponent
+            <AdminAssociateMapComponent
                 page={page}
                 sizePerPage={sizePerPage}
                 totalSize={totalSize}
-                memberList={this.props.memberList}
+                associateList={this.props.associateList}
                 onTableChange={this.onTableChange}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
@@ -226,7 +226,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         flashMessage: store.flashMessageState,
-        memberList: store.memberListState,
+        associateList: store.associateListState,
     };
 }
 
@@ -235,9 +235,9 @@ const mapDispatchToProps = dispatch => {
         clearFlashMessage: () => {
             dispatch(clearFlashMessage())
         },
-        pullMemberList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
+        pullAssociateList: (page, sizePerPage, map, onSuccessCallback, onFailureCallback) => {
             dispatch(
-                pullMemberList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
+                pullAssociateList(page, sizePerPage, map, onSuccessCallback, onFailureCallback)
             )
         },
     }
@@ -247,4 +247,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminMemberMapContainer);
+)(AdminAssociateMapContainer);
