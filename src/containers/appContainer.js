@@ -55,6 +55,7 @@ MEMBERS
 -------
 */
 import AdminMemberListContainer from "./members/admin/list/adminListContainer";
+import AdminMemberMapContainer from "./members/admin/list/adminMapContainer";
 import AdminMemberSearchContainer from "./members/admin/search/adminSearchContainer";
 import AdminMemberSearchResultContainer from "./members/admin/search/adminSearchResultContainer";
 import AdminMemberLiteRetrieveContainer from "./members/admin/retrieve/adminLiteRetrieveContainer";
@@ -601,6 +602,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/members/add/step-7" exact component={requiresAuth(AdminMemberCreateStep7Container)} />
                                 <Route path="/admin/members/add/step-8" exact component={requiresAuth(AdminMemberCreateStep8Container)} />
                                 <Route path="/admin/members" exact component={requiresAuth(AdminMemberListContainer)} />
+                                <Route path="/admin/members/map" exact component={requiresAuth(AdminMemberMapContainer)} />
                                 <Route path="/admin/members/search" exact component={requiresAuth(AdminMemberSearchContainer)} />
                                 <Route path="/admin/members/search-results" exact component={requiresAuth(AdminMemberSearchResultContainer)} />
                                 <Route path="/admin/member/:slug" exact component={requiresAuth(AdminMemberLiteRetrieveContainer)} />
