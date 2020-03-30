@@ -20,17 +20,24 @@ class AdminAreaCoordinatorMapComponent extends Component {
         const {
             // Pagination
             page, sizePerPage, totalSize,
-            coords, zoom, onZoomEnd, onMoveEnd, onPopupOpen, onPopupClose, onClick,
+            onZoomEnd, onMoveEnd, onPopupOpen, onPopupClose, onClick,
 
             // Data
             areaCoordinatorList,
 
             // Everything else...
-            flashMessage, onTableChange, isLoading
+            flashMessage, onTableChange, isLoading, tenant
         } = this.props;
 
         const areaCoordinators = areaCoordinatorList.results ? areaCoordinatorList.results : [];
 
+        // Extract the default map zooming details.
+        const { defaultPosition, defaultZoom } = tenant;
+        const { latitude, longitude } = defaultPosition;
+        const coords = [longitude, latitude];
+        const zoom = defaultZoom;
+
+        // Finally render our page.
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />

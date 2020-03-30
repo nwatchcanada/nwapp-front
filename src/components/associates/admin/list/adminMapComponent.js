@@ -20,17 +20,24 @@ class AdminAssociateMapComponent extends Component {
         const {
             // Pagination
             page, sizePerPage, totalSize,
-            coords, zoom, onZoomEnd, onMoveEnd, onPopupOpen, onPopupClose, onClick,
+            onZoomEnd, onMoveEnd, onPopupOpen, onPopupClose, onClick,
 
             // Data
             associateList,
 
             // Everything else...
-            flashMessage, onTableChange, isLoading
+            flashMessage, onTableChange, isLoading, tenant
         } = this.props;
 
         const associates = associateList.results ? associateList.results : [];
 
+        // Extract the default map zooming details.
+        const { defaultPosition, defaultZoom } = tenant;
+        const { latitude, longitude } = defaultPosition;
+        const coords = [longitude, latitude];
+        const zoom = defaultZoom;
+
+        // Finally render our page.
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />

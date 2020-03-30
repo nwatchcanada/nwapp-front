@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { pullProfile } from "../../actions/profileAction";
+import { pullTenantDetail } from "../../actions/tenantActions";
 import TenantRedirectComponent from "../../components/dashboard/tenantRedirectComponent";
 import { setAccessTokenInLocalStorage, setRefreshTokenInLocalStorage } from '../../helpers/tokenUtility';
+import { getSubdomain } from '../../helpers/urlUtility';
 
 
 class TenantDashboardRedirectContainer extends Component {
@@ -27,8 +29,10 @@ class TenantDashboardRedirectContainer extends Component {
             refreshTokenString: refreshToken
         }
 
-        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
-        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+        this.onProfileOKCallback = this.onProfileOKCallback.bind(this);
+        this.onProfileBadCallback = this.onProfileBadCallback.bind(this);
+        this.onTenantOKCallback = this.onTenantOKCallback.bind(this);
+        this.onTenantBadCallback = this.onTenantBadCallback.bind(this);
     }
 
     /**
@@ -61,7 +65,7 @@ class TenantDashboardRedirectContainer extends Component {
 
         // IMPORTANT: NOW THAT WE HAVE ATTACHED OUR ACCESS TOKEN TO OUR LOCAL
         // STORAGE, WE CAN NOW MAKE API CALLS.
-        this.props.pullProfile(this.onSuccessfulSubmissionCallback, this.onFailedSubmissionCallback);
+        this.props.pullProfile(this.onProfileOKCallback, this.onProfileBadCallback);
     }
 
     /**
@@ -69,14 +73,27 @@ class TenantDashboardRedirectContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback() {
+    onProfileOKCallback(profileDetail) {
+        const schemaName = getSubdomain();
+        this.props.pullTenantDetail(
+            schemaName,
+            this.onTenantOKCallback,
+            this.onTenantBadCallback
+        );
+    }
+
+    onProfileBadCallback(errors) {
+        this.setState({ errors: errors, });
+    }
+
+    onTenantOKCallback() {
         this.setState({
             referrer: "/dashboard"
         })
     }
 
-    onFailedSubmissionCallback() {
-        // Do nothing.
+    onTenantBadCallback(errors) {
+        this.setState({ errors: errors, });
     }
 
     /**
@@ -111,7 +128,10 @@ const mapDispatchToProps = dispatch => {
     return {
         pullProfile: (successCallback, failureCallback) => {
             dispatch(pullProfile(successCallback, failureCallback))
-        }
+        },
+        pullTenantDetail: (schemaName, successCallback, failureCallback) => {
+            dispatch(pullTenantDetail(schemaName, successCallback, failureCallback))
+        },
     }
 }
 

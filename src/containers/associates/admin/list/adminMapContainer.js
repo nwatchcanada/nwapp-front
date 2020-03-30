@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminAssociateMapComponent from "../../../../components/associates/admin/list/adminMapComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
@@ -201,7 +202,12 @@ class AdminAssociateMapContainer extends Component {
      */
 
     render() {
-        const { page, sizePerPage, totalSize, isLoading, coords, zoom } = this.state;
+        const { page, sizePerPage, totalSize, isLoading } = this.state;
+
+        const tenant = isEmpty(this.props.tenant)
+            ? {latitude: 0, longitude: 0, zoom: 0,}
+            : this.props.tenant;
+            
         return (
             <AdminAssociateMapComponent
                 page={page}
@@ -211,8 +217,7 @@ class AdminAssociateMapContainer extends Component {
                 onTableChange={this.onTableChange}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
-                coords={coords}
-                zoom={zoom}
+                tenant={tenant}
                 onMoveEnd={this.onMoveEnd}
                 onPopupOpen={this.onPopupOpen}
                 onPopupClose={this.onPopupClose}
@@ -227,6 +232,7 @@ const mapStateToProps = function(store) {
         user: store.userState,
         flashMessage: store.flashMessageState,
         associateList: store.associateListState,
+        tenant: store.tenantDetailState,
     };
 }
 

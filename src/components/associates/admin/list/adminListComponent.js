@@ -277,7 +277,7 @@ class AdminAssociateListComponent extends Component {
                             <div className="col-sm-4 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
                                     <Link to="/admin/associates/map" className="d-block link-ndecor" title="Map">
-                                        <span className="r-circle"><i className="fas fa-search fa-3x"></i></span>
+                                        <span className="r-circle"><i className="fas fa-map fa-3x"></i></span>
                                     </Link>
                                 </div>
                                 <h4>Map</h4>
