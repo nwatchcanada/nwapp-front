@@ -37,6 +37,8 @@ class AdminAssociateLiteRetrieveContainer extends Component {
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
         // this.onClientClick = this.onClientClick.bind(this);
+        this.onShowModalClick = this.onShowModalClick.bind(this);
+        this.onCloseModalClick = this.onCloseModalClick.bind(this);
     }
 
     /**
@@ -96,6 +98,17 @@ class AdminAssociateLiteRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onShowModalClick(event) {
+        this.setState({
+            showModal: true,
+        });
+    }
+
+    onCloseModalClick(event) {
+        this.setState({
+            showModal: false,
+        });
+    }
 
     /**
      *  Main render function
@@ -103,7 +116,7 @@ class AdminAssociateLiteRetrieveContainer extends Component {
      */
 
     render() {
-        const { slug, isLoading } = this.state;
+        const { slug, isLoading, showModal } = this.state;
         const associate = isEmpty(this.state.associate) ? {} : this.state.associate;
         return (
             <AdminAssociateLiteRetrieveComponent
@@ -111,6 +124,9 @@ class AdminAssociateLiteRetrieveContainer extends Component {
                 associate={associate}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
+                showModal={showModal}
+                onShowModalClick={this.onShowModalClick}
+                onCloseModalClick={this.onCloseModalClick}
             />
         );
     }

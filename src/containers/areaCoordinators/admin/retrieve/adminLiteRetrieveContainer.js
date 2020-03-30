@@ -31,12 +31,15 @@ class AdminAreaCoordinatorLiteRetrieveContainer extends Component {
             slug: slug,
             areaCoordinator: areaCoordinator,
             isLoading: isLoading,
+            showModal: false,
         }
 
         // Update functions.
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
         // this.onClientClick = this.onClientClick.bind(this);
+        this.onShowModalClick = this.onShowModalClick.bind(this);
+        this.onCloseModalClick = this.onCloseModalClick.bind(this);
     }
 
     /**
@@ -96,6 +99,17 @@ class AdminAreaCoordinatorLiteRetrieveContainer extends Component {
      *------------------------------------------------------------
      */
 
+    onShowModalClick(event) {
+        this.setState({
+            showModal: true,
+        });
+    }
+
+    onCloseModalClick(event) {
+        this.setState({
+            showModal: false,
+        });
+    }
 
     /**
      *  Main render function
@@ -103,7 +117,7 @@ class AdminAreaCoordinatorLiteRetrieveContainer extends Component {
      */
 
     render() {
-        const { slug, isLoading } = this.state;
+        const { slug, isLoading, showModal } = this.state;
         const areaCoordinator = isEmpty(this.state.areaCoordinator) ? {} : this.state.areaCoordinator;
         return (
             <AdminAreaCoordinatorLiteRetrieveComponent
@@ -111,6 +125,9 @@ class AdminAreaCoordinatorLiteRetrieveContainer extends Component {
                 areaCoordinator={areaCoordinator}
                 flashMessage={this.props.flashMessage}
                 isLoading={isLoading}
+                showModal={showModal}
+                onShowModalClick={this.onShowModalClick}
+                onCloseModalClick={this.onCloseModalClick}
             />
         );
     }

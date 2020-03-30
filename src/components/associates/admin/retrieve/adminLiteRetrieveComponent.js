@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import ReactModal from 'react-modal';
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
@@ -9,7 +11,20 @@ import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 export default class AdminAssociateLiteRetrieveComponent extends Component {
     render() {
-        const { slug, flashMessage, associate, isLoading } = this.props;
+        const { slug, flashMessage, associate, isLoading, onShowModalClick, onCloseModalClick, showModal, } = this.props;
+
+        // Apply our styling for our modal component.
+        const customStyles = {
+            content : {
+                top                   : '50%',
+                left                  : '50%',
+                right                 : '25%',
+                bottom                : 'auto',
+                marginRight           : '-50%',
+                transform             : 'translate(-50%, -50%)'
+            }
+        };
+
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -97,7 +112,14 @@ export default class AdminAssociateLiteRetrieveComponent extends Component {
 
                                 {associate && associate.address &&
                                     <p className="text-muted">
-                                        <a href={associate.googleMapsUrl} target="_blank">{associate.address}&nbsp;<i className="fas fa-map-marker-alt"></i></a>
+                                        {associate.position
+                                            ? <Link onClick={ (event)=>{ onShowModalClick(event) } }>
+                                                <i className="fas fa-map-marker-alt"></i>&nbsp;{associate && associate.address}
+                                            </Link>
+                                            : <span>
+                                                <i className="fas fa-map-marker-alt"></i>&nbsp;{associate && associate.address}
+                                            </span>
+                                        }
                                     </p>
                                 }
 
@@ -140,6 +162,54 @@ export default class AdminAssociateLiteRetrieveComponent extends Component {
                     */}
                 </div>
 
+                <ReactModal
+                   isOpen={showModal}
+                    style={customStyles}
+             contentLabel="Minimal Modal Example"
+           onRequestClose={onCloseModalClick}>
+                   <div>
+
+                        <h1>
+                            <i className="fas fa-map"></i>&nbsp;Map View&nbsp;-&nbsp;{associate.address}&nbsp;
+                           <button type="button" className="btn btn-secondary btn-lg float-right" onClick={onCloseModalClick}>
+                               <span className="fa fa-times"></span>
+                           </button>
+                        </h1>
+
+                        <div className="row">
+                            <div className="col-md-12 mx-auto mt-2">
+
+                                <form className="needs-validation" noValidate>
+                                   <LeafletMap
+                                       center={associate.position}
+                                       zoom={18}
+                                       maxZoom={19}
+                                       attributionControl={ isLoading === false}
+                                       zoomControl={ isLoading === false }
+                                       doubleClickZoom={ isLoading === false }
+                                       scrollWheelZoom={ isLoading === false }
+                                       dragging={ isLoading === false }
+                                       animate={ isLoading === false }
+                                       easeLinearity={0.35}
+                                   >
+                                       <TileLayer
+                                           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                                           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                       />
+
+                                       <Marker position={associate.position} >
+                                           <Popup>
+                                               {associate.address}
+                                           </Popup>
+                                       </Marker>
+
+                                   </LeafletMap>
+
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+                </ReactModal>
 
             </div>
         );
