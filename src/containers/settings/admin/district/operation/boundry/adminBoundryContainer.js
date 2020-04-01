@@ -176,7 +176,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(setFlashMessage(typeOf, text))
         },
         putDistrict: (putData, onSuccessCallback, onFailureCallback) => {
-            putDistrict(deleteDistrict(putData, onSuccessCallback, onFailureCallback))
+            dispatch(putDistrict(putData, onSuccessCallback, onFailureCallback))
         },
     }
 }
