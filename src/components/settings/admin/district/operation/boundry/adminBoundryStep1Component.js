@@ -13,7 +13,7 @@ export default class AdminBoundryStep1Component extends Component {
     render() {
         const {
             districtPolygon, isLoading, slug, district, errors, onClick, tenant,
-            onEditPath, onCreatePath, onDeletePath, isPolygonToolLocked,
+            onEditPath, onCreatePath, onDeletePath, wasPolygonCreated,
         } = this.props;
 
         // Extract the default map zooming details.
@@ -104,7 +104,7 @@ export default class AdminBoundryStep1Component extends Component {
                                         onDeleted={onDeletePath}
                                         draw={{
                                             polyline: false,
-                                            polygon: isPolygonToolLocked === false,
+                                            polygon: wasPolygonCreated === false,
                                             rectangle: false,
                                             circle: false,
                                             marker: false,
@@ -117,10 +117,10 @@ export default class AdminBoundryStep1Component extends Component {
                         }
 
                         <div className="form-group">
-                            <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isPolygonToolLocked===false} onClick={onClick}>
+                            {/*<button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={wasPolygonCreated===false} onClick={onClick}>
                                 Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                            </button>
-                            <Link to="/admin/settings/district/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                            </button>*/}
+                            <Link to={`/admin/settings/district/${district && district.typeOfCode}/${district && district.slug}/operations`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>

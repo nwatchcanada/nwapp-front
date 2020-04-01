@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminBoundryComponent from "../../../../../../components/settings/admin/district/operation/boundry/adminBoundryComponent";
 import { setFlashMessage } from "../../../../../../actions/flashMessageActions";
-import { deleteDistrict } from "../../../../../../actions/districtActions";
+import { putDistrict } from "../../../../../../actions/districtActions";
 import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem
@@ -101,6 +101,11 @@ class AdminDistrictBoundryOperationContainer extends Component {
     }
 
     onCreatePath(e) {
+        // Special thanks:
+        // - https://gis.stackexchange.com/a/266103
+        // - https://github.com/alex3165/react-leaflet-draw
+        // - http://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html
+
         console.log("onCreatePath | e:", e);
         let layer = e.layer;
         let feature = layer.toGeoJSON();
@@ -170,8 +175,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        deleteDistrict: (slug, onSuccessCallback, onFailureCallback) => {
-            dispatch(deleteDistrict(slug, onSuccessCallback, onFailureCallback))
+        putDistrict: (putData, onSuccessCallback, onFailureCallback) => {
+            putDistrict(deleteDistrict(putData, onSuccessCallback, onFailureCallback))
         },
     }
 }

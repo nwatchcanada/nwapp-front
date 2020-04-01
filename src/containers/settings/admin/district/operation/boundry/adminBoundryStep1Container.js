@@ -31,7 +31,7 @@ class AdminDistrictBoundryOperationStep1Container extends Component {
             slug: slug,
             errors: {},
             districtPolygon: districtPolygon,
-            isPolygonToolLocked: isEmpty(districtPolygon) === false,
+            wasPolygonCreated: false,
         }
         this.onEditPath = this.onEditPath.bind(this);
         this.onCreatePath = this.onCreatePath.bind(this);
@@ -69,12 +69,15 @@ class AdminDistrictBoundryOperationStep1Container extends Component {
 
     onEditPath(e) {
         console.log("onEditPath | e:", e);
-        this.setState({
-            isPolygonToolLocked: true,
-        });
+        this.props.history.push("/admin/settings/district/operation/boundry-step-2/"+this.state.slug);
     }
 
     onCreatePath(e) {
+        // Special thanks:
+        // - https://gis.stackexchange.com/a/266103
+        // - https://github.com/alex3165/react-leaflet-draw
+        // - http://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html
+
         console.log("onCreatePath | e:", e);
         let layer = e.layer;
         let feature = layer.toGeoJSON();
@@ -96,7 +99,7 @@ class AdminDistrictBoundryOperationStep1Container extends Component {
     onDeletePath(e) {
         console.log("onDeletePath", e);
         this.setState({
-            isPolygonToolLocked: false,
+            wasPolygonCreated: true,
         });
     }
 
@@ -112,7 +115,7 @@ class AdminDistrictBoundryOperationStep1Container extends Component {
 
     render() {
         const {
-            districtPolygon,isLoading, slug, errors, isPolygonToolLocked
+            districtPolygon,isLoading, slug, errors, wasPolygonCreated
         } = this.state;
 
         const district = this.props.districtDetail
@@ -129,7 +132,7 @@ class AdminDistrictBoundryOperationStep1Container extends Component {
                 tenant={tenant}
                 slug={slug}
                 district={district}
-                isPolygonToolLocked={isPolygonToolLocked}
+                wasPolygonCreated={wasPolygonCreated}
                 isLoading={isLoading}
                 errors={errors}
                 onEditPath={this.onEditPath}
