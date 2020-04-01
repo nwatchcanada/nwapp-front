@@ -32,12 +32,28 @@ class AdminDistrictBoundryOperationContainer extends Component {
             slug: slug,
             errors: {},
             districtPolygon: districtPolygon,
+            wasPolygonCreated: false,
         }
+
+        this.getPostData = this.getPostData.bind(this);
         this.onEditPath = this.onEditPath.bind(this);
         this.onCreatePath = this.onCreatePath.bind(this);
         this.onDeletePath = this.onDeletePath.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
+    }
+
+    /**
+     *  Utility function used to create the `postData` we will be submitting to
+     *  the API; as a result, this function will structure some dictionary key
+     *  items under different key names to support our API web-service's API.
+     */
+    getPostData() {
+        let postData = Object.assign({}, this.state);
+
+        // Finally: Return our new modified data.
+        console.log("getPostData |", postData);
+        return postData;
     }
 
     /**
@@ -98,6 +114,20 @@ class AdminDistrictBoundryOperationContainer extends Component {
 
     onEditPath(e) {
         console.log("onEditPath | e:", e);
+
+        this.setState({
+            errors: {},
+            isLoading: true,
+            wasPolygonCreated: false,
+        }, ()=>{
+            // Once our state has been validated `client-side` then we will
+            // make an API request with the server to create our new production.
+            this.props.putDistrict(
+                this.getPostData(),
+                this.onSuccessCallback,
+                this.onFailureCallback
+            );
+        });
     }
 
     onCreatePath(e) {
@@ -121,11 +151,20 @@ class AdminDistrictBoundryOperationContainer extends Component {
             transformedPolygon.push(transformedCoord);
         }
         console.log(transformedPolygon);
-        localStorageSetObjectOrArrayItem('nwapp-district-new-boundry-polygon', transformedPolygon);
+
+        this.setState({
+            districtPolygon: transformedPolygon,
+        }, ()=>{
+            localStorageSetObjectOrArrayItem('nwapp-district-new-boundry-polygon', transformedPolygon);
+        });
     }
 
     onDeletePath(e) {
         console.log("onDeletePath", e);
+        this.setState({
+            districtPolygon: null,
+            wasPolygonCreated: false,
+        });
     }
 
     /**
