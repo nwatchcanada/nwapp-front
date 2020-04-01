@@ -4,7 +4,7 @@ import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 import isEmpty from 'lodash/isEmpty';
 
-import AdminSetMapComponent from "../../../../../components/settings/admin/district/operation/adminSetMapComponent";
+import AdminBoundryComponent from "../../../../../components/settings/admin/district/operation/adminBoundryComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { deleteDistrict } from "../../../../../actions/districtActions";
 import {
@@ -13,7 +13,7 @@ import {
 } from '../../../../../helpers/localStorageUtility';
 
 
-class AdminSetMapOperationContainer extends Component {
+class AdminDistrictBoundryOperationContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -142,7 +142,7 @@ class AdminSetMapOperationContainer extends Component {
             : this.props.tenant;
 
         return (
-            <AdminSetMapComponent
+            <AdminBoundryComponent
                 districtPolygon={districtPolygon}
                 tenant={tenant}
                 slug={slug}
@@ -180,4 +180,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminSetMapOperationContainer);
+)(AdminDistrictBoundryOperationContainer);

@@ -10,7 +10,7 @@ import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapA
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
-export default class AdminSetMapComponent extends Component {
+export default class AdminBoundryComponent extends Component {
     render() {
         const {
             districtPolygon, isLoading, slug, district, errors, onClick, tenant,

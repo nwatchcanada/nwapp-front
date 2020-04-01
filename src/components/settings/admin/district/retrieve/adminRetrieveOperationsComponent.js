@@ -78,7 +78,7 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                                         <p className="card-text">Adjust the boundry for this district.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
-                                        <Link className="btn btn-success btn-lg" to={`/admin/settings/district/operation/set-boundry/${districtData && districtData.slug}`}>
+                                        <Link className="btn btn-success btn-lg" to={`/admin/settings/district/operation/boundry/${districtData && districtData.slug}`}>
                                             Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                         </Link>
                                     </div>
