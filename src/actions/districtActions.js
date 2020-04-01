@@ -262,7 +262,7 @@ export function pullDistrictDetail(slug, onSuccessCallback, onFailureCallback) {
 //                                UPDATE                                      //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function putDistrict(postData, successCallback, failedCallback) {
+export function putDistrict(putData, successCallback, failedCallback) {
     return dispatch => {
         // Change the global state to attempting to log in.
         store.dispatch(
@@ -274,13 +274,13 @@ export function putDistrict(postData, successCallback, failedCallback) {
 
         // The following code will convert the `camelized` data into `snake case`
         // data so our API endpoint will be able to read it.
-        let decamelizedData = decamelizeKeys(postData);
+        let decamelizedData = decamelizeKeys(putData);
 
         // Encode from JS Object to MessagePack (Buffer)
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(NWAPP_DISTRICT_DETAIL_API_ENDPOINT.replace("<slug>", postData.slug), buffer).then( (successResponse) => {
+        customAxios.put(NWAPP_DISTRICT_DETAIL_API_ENDPOINT.replace("<slug>", putData.slug), buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let device = camelizeKeys(responseData);

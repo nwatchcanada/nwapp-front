@@ -236,6 +236,9 @@ import AdminDistrictCreateStep2CommunityCareContainer from "./settings/admin/dis
 import AdminDistrictCreateStep3Container from "./settings/admin/district/create/adminDistrictCreateStep3Container";
 import AdminDistrictArchiveOperationContainer from "./settings/admin/district/operation/adminArchiveContainer";
 import AdminDistrictBoundryOperationContainer from "./settings/admin/district/operation/boundry/adminBoundryContainer";
+import AdminDistrictBoundryOperationStep1Container from "./settings/admin/district/operation/boundry/adminBoundryStep1Container";
+import AdminDistrictBoundryOperationStep2Container from "./settings/admin/district/operation/boundry/adminBoundryStep2Container";
+import AdminDistrictBoundryOperationStep3Container from "./settings/admin/district/operation/boundry/adminBoundryStep3Container";
 import AdminDistrictRetrieveBizContainer from "./settings/admin/district/retrieve/adminRetrieveBizContainer";
 import AdminDistrictRetrieveComContainer from "./settings/admin/district/retrieve/adminRetrieveComContainer";
 import AdminDistrictRetrieveRezContainer from "./settings/admin/district/retrieve/adminRetrieveRezContainer";
@@ -515,6 +518,9 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/district/add/step-3" exact component={requiresAuth(AdminDistrictCreateStep3Container)} />
                                 <Route path="/admin/settings/district/operation/archive/:slug" exact component={requiresAuth(AdminDistrictArchiveOperationContainer)} />
                                 <Route path="/admin/settings/district/operation/boundry/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationContainer)} />
+                                <Route path="/admin/settings/district/operation/boundry-step-1/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationStep1Container)} />
+                                <Route path="/admin/settings/district/operation/boundry-step-2/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationStep2Container)} />
+                                <Route path="/admin/settings/district/operation/boundry-step-3/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationStep3Container)} />
                                 <Route path="/admin/settings/district/biz/:slug" exact component={requiresAuth(AdminDistrictRetrieveBizContainer)} />
                                 <Route path="/admin/settings/district/:typeOf/:slug/map" exact component={requiresAuth(AdminDistrictRetrieveMapContainer)} />
                                 <Route path="/admin/settings/district/:typeOf/:slug/operations" exact component={requiresAuth(AdminDistrictRetrieveOperationsContainer)} />
