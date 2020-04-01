@@ -4,7 +4,8 @@ import Scroll from 'react-scroll';
 
 import AdminDistrictCreateStep2BizComponent from "../../../../../components/settings/admin/district/create/adminDistrictCreateStep2BizComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { validateBusinessInput } from "../../../../../validators/districtValidator";import {
+import { validateBusinessInput } from "../../../../../validators/districtValidator";
+import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem
 } from '../../../../../helpers/localStorageUtility';

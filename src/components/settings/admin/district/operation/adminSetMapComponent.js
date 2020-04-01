@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Map as LeafletMap, TileLayer, FeatureGroup, Marker, Popup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, FeatureGroup, Marker, Popup, Polygon } from 'react-leaflet';
 // import { Map, TileLayer, FeatureGroup, Circle } from 'react-leaflet';
 import { EditControl } from "react-leaflet-draw"
+import ReactModal from 'react-modal';
+import "./gui.css"
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
@@ -11,8 +13,8 @@ import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPa
 export default class AdminSetMapComponent extends Component {
     render() {
         const {
-            isLoading, slug, district, errors, onClick, tenant,
-            onEditPath, onCreatePath, onDeletePath
+            districtPolygon, isLoading, slug, district, errors, onClick, tenant,
+            onEditPath, onCreatePath, onDeletePath,
         } = this.props;
 
         // Extract the default map zooming details.
@@ -20,6 +22,22 @@ export default class AdminSetMapComponent extends Component {
         const { latitude, longitude } = defaultPosition;
         const coords = [longitude, latitude];
         const zoom = defaultZoom;
+
+        // Apply our styling for our modal component.
+        const customStyles = {
+            content : {
+                top                   : '50%',
+                left                  : '50%',
+                right                 : '25%',
+                bottom                : 'auto',
+                marginRight           : '-50%',
+                transform             : 'translate(-50%, -50%)'
+            }
+        };
+
+        // For debugging purposes only.
+        // console.log("coords:", coords);
+        // console.log("polygon:", districtPolygon);
 
         return (
             <div>
@@ -88,6 +106,8 @@ export default class AdminSetMapComponent extends Component {
                                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                 />
 
+                                <Polygon color="purple" positions={districtPolygon} />
+
                                 <FeatureGroup>
                                     <EditControl
                                         position='topright'
@@ -96,6 +116,7 @@ export default class AdminSetMapComponent extends Component {
                                         onDeleted={onDeletePath}
                                         draw={{
                                             polyline: false,
+                                            polygon: true,
                                             rectangle: false,
                                             circle: false,
                                             marker: false,
@@ -103,6 +124,7 @@ export default class AdminSetMapComponent extends Component {
                                         }}
                                     />
                                 </FeatureGroup>
+
                             </LeafletMap>
                         }
                     </div>

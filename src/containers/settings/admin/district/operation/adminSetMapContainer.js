@@ -7,6 +7,10 @@ import isEmpty from 'lodash/isEmpty';
 import AdminSetMapComponent from "../../../../../components/settings/admin/district/operation/adminSetMapComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { deleteDistrict } from "../../../../../actions/districtActions";
+import {
+    localStorageGetObjectItem,
+    localStorageSetObjectOrArrayItem
+} from '../../../../../helpers/localStorageUtility';
 
 
 class AdminSetMapOperationContainer extends Component {
@@ -19,12 +23,15 @@ class AdminSetMapOperationContainer extends Component {
         super(props);
         const { slug } = this.props.match.params;
 
+        const districtPolygon = localStorageGetObjectItem("nwapp-district-new-boundry-polygon");
+        console.log("constructor | districtPolygon", districtPolygon);
+
         this.state = {
             isLoading: false,
             district: slug,
             slug: slug,
             errors: {},
-
+            districtPolygon: districtPolygon,
         }
         this.onEditPath = this.onEditPath.bind(this);
         this.onCreatePath = this.onCreatePath.bind(this);
@@ -90,15 +97,26 @@ class AdminSetMapOperationContainer extends Component {
      */
 
     onEditPath(e) {
-        console.log("onEditPath", e);
-        alert("TODO");
+        console.log("onEditPath | e:", e);
     }
 
     onCreatePath(e) {
-        console.log("onCreatePath", e);
+        console.log("onCreatePath | e:", e);
         let layer = e.layer;
         let feature = layer.toGeoJSON();
-        console.log(feature);
+        console.log("onCreatePath | feature:", feature);
+        let geometry = feature.geometry;
+        let polygon = geometry.coordinates[0];
+
+        let transformedPolygon = [];
+        for (let i=0; i < polygon.length; i++) {
+            let coord = polygon[i];
+            let transformedCoord = [coord[1], coord[0]];
+            console.log(coord, "->", transformedCoord);
+            transformedPolygon.push(transformedCoord);
+        }
+        console.log(transformedPolygon);
+        localStorageSetObjectOrArrayItem('nwapp-district-new-boundry-polygon', transformedPolygon);
     }
 
     onDeletePath(e) {
@@ -111,15 +129,21 @@ class AdminSetMapOperationContainer extends Component {
      */
 
     render() {
-        const { isLoading, slug, errors } = this.state;
+        const {
+            districtPolygon,isLoading, slug, errors, showModal
+        } = this.state;
 
-        const district = this.props.districtDetail ? this.props.districtDetail : {};
+        const district = this.props.districtDetail
+            ? this.props.districtDetail
+            : {};
+
         const tenant = isEmpty(this.props.tenant)
             ? {latitude: 0, longitude: 0, zoom: 0,}
             : this.props.tenant;
 
         return (
             <AdminSetMapComponent
+                districtPolygon={districtPolygon}
                 tenant={tenant}
                 slug={slug}
                 district={district}
