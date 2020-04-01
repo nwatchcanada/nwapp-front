@@ -4,13 +4,13 @@ import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
 import isEmpty from 'lodash/isEmpty';
 
-import AdminBoundryComponent from "../../../../../components/settings/admin/district/operation/adminBoundryComponent";
-import { setFlashMessage } from "../../../../../actions/flashMessageActions";
-import { deleteDistrict } from "../../../../../actions/districtActions";
+import AdminBoundryComponent from "../../../../../../components/settings/admin/district/operation/boundry/adminBoundryComponent";
+import { setFlashMessage } from "../../../../../../actions/flashMessageActions";
+import { deleteDistrict } from "../../../../../../actions/districtActions";
 import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem
-} from '../../../../../helpers/localStorageUtility';
+} from '../../../../../../helpers/localStorageUtility';
 
 
 class AdminDistrictBoundryOperationContainer extends Component {

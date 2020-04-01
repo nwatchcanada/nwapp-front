@@ -6,8 +6,8 @@ import { EditControl } from "react-leaflet-draw"
 import ReactModal from 'react-modal';
 import "./gui.css"
 
-import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
-import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { BootstrapErrorsProcessingAlert } from "../../../../../bootstrap/bootstrapAlert";
+import { BootstrapPageLoadingAnimation } from "../../../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
 export default class AdminBoundryComponent extends Component {

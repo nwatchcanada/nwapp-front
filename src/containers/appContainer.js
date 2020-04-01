@@ -235,7 +235,7 @@ import AdminDistrictCreateStep2BusinessContainer from "./settings/admin/district
 import AdminDistrictCreateStep2CommunityCareContainer from "./settings/admin/district/create/adminDistrictCreateStep2ComContainer";
 import AdminDistrictCreateStep3Container from "./settings/admin/district/create/adminDistrictCreateStep3Container";
 import AdminDistrictArchiveOperationContainer from "./settings/admin/district/operation/adminArchiveContainer";
-import AdminDistrictBoundryOperationContainer from "./settings/admin/district/operation/adminBoundryContainer";
+import AdminDistrictBoundryOperationContainer from "./settings/admin/district/operation/boundry/adminBoundryContainer";
 import AdminDistrictRetrieveBizContainer from "./settings/admin/district/retrieve/adminRetrieveBizContainer";
 import AdminDistrictRetrieveComContainer from "./settings/admin/district/retrieve/adminRetrieveComContainer";
 import AdminDistrictRetrieveRezContainer from "./settings/admin/district/retrieve/adminRetrieveRezContainer";
