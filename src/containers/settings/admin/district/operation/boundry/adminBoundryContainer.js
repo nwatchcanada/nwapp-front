@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import AdminBoundryComponent from "../../../../../../components/settings/admin/district/operation/boundry/adminBoundryComponent";
 import { setFlashMessage } from "../../../../../../actions/flashMessageActions";
-import { putDistrict } from "../../../../../../actions/districtActions";
+import { putDistrictBoundryOperation } from "../../../../../../actions/districtActions";
 import {
     localStorageGetObjectItem,
     localStorageSetObjectOrArrayItem
@@ -23,16 +23,26 @@ class AdminDistrictBoundryOperationContainer extends Component {
         super(props);
         const { slug } = this.props.match.params;
 
-        const districtPolygon = localStorageGetObjectItem("nwapp-district-new-boundry-polygon");
-        console.log("constructor | districtPolygon", districtPolygon);
+        const district = this.props.districtDetail
+            ? this.props.districtDetail
+            : {};
+
+        console.log("constructor | district:", district);
+
+        // const districtPolygon = localStorageGetObjectItem("nwapp-district-new-boundry-polygon");
+        // console.log("constructor | districtPolygon", districtPolygon);
+
+        const { defaultPosition, defaultZoom, districtPolygon } = this.props.tenant;
 
         this.state = {
+            // GUI
             isLoading: false,
-            district: slug,
             slug: slug,
             errors: {},
+            district: district,
+            districtPosition: defaultPosition,
+            districtZoom: defaultZoom,
             districtPolygon: districtPolygon,
-            wasPolygonCreated: false,
         }
 
         this.getPostData = this.getPostData.bind(this);
@@ -41,6 +51,8 @@ class AdminDistrictBoundryOperationContainer extends Component {
         this.onDeletePath = this.onDeletePath.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
+        this.onMoveEnd = this.onMoveEnd.bind(this);
+        this.onZoomEnd = this.onZoomEnd.bind(this);
     }
 
     /**
@@ -50,6 +62,8 @@ class AdminDistrictBoundryOperationContainer extends Component {
      */
     getPostData() {
         let postData = Object.assign({}, this.state);
+
+        delete postData.district;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -88,8 +102,8 @@ class AdminDistrictBoundryOperationContainer extends Component {
             ()=>{
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
-                this.props.setFlashMessage("success", "District have been successfully archived.");
-                this.props.history.push("/admin/settings/districts");
+                this.props.setFlashMessage("success", "District boundary has been successfully uodated.");
+                this.props.history.push("/admin/settings/district/" + this.state.district.typeOfCode + "/" + this.state.district.slug + "/operations");
             }
         )
     }
@@ -118,11 +132,10 @@ class AdminDistrictBoundryOperationContainer extends Component {
         this.setState({
             errors: {},
             isLoading: true,
-            wasPolygonCreated: false,
         }, ()=>{
             // Once our state has been validated `client-side` then we will
             // make an API request with the server to create our new production.
-            this.props.putDistrict(
+            this.props.putDistrictBoundryOperation(
                 this.getPostData(),
                 this.onSuccessCallback,
                 this.onFailureCallback
@@ -163,7 +176,48 @@ class AdminDistrictBoundryOperationContainer extends Component {
         console.log("onDeletePath", e);
         this.setState({
             districtPolygon: null,
-            wasPolygonCreated: false,
+        });
+    }
+
+    /**
+     *  Event handler function gets fired by `Leaflet` every time the user
+     *  moves the map and or zooms in or out.
+     *
+     *  Note: https://leafletjs.com/reference-1.6.0.html#map-moveend
+     */
+    onMoveEnd(e) {
+        // Defensive Code: Prevent function operation if still processing API call.
+        if (this.state.isLoading) {
+            return;
+        }
+
+        // Note: https://leafletjs.com/reference-1.6.0.html#map-getcenter
+        const centrePosition = e.target.getCenter();
+        console.log("onMoveEnd | centrePosition:", centrePosition);
+
+        const coords = [centrePosition.lat, centrePosition.lng];
+        console.log("onMoveEnd | coords:", coords);
+
+        this.setState({
+            districtPosition: coords,
+        },()=>{
+            console.log("onMoveEnd | updated state | districtPosition:", this.state.districtPosition);
+        });
+    }
+
+    onZoomEnd(e) {
+        // Defensive Code: Prevent function operation if still processing API call.
+        if (this.state.isLoading) {
+            return;
+        }
+
+        // Note: https://leafletjs.com/reference-1.6.0.html#map-getzoom
+        const zoom = e.target.getZoom();
+
+        this.setState({
+            zoom: zoom,
+        },()=>{
+            console.log("onZoomEnd | zoom:", zoom);
         });
     }
 
@@ -187,7 +241,7 @@ class AdminDistrictBoundryOperationContainer extends Component {
 
         return (
             <AdminBoundryComponent
-                districtPolygon={districtPolygon}
+                districtPolygon={isEmpty(districtPolygon) ? [] : districtPolygon}
                 tenant={tenant}
                 slug={slug}
                 district={district}
@@ -196,6 +250,8 @@ class AdminDistrictBoundryOperationContainer extends Component {
                 onEditPath={this.onEditPath}
                 onCreatePath={this.onCreatePath}
                 onDeletePath={this.onDeletePath}
+                onMoveEnd={this.onMoveEnd}
+                onZoomEnd={this.onZoomEnd}
             />
         );
     }
@@ -214,8 +270,8 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        putDistrict: (putData, onSuccessCallback, onFailureCallback) => {
-            dispatch(putDistrict(putData, onSuccessCallback, onFailureCallback))
+        putDistrictBoundryOperation: (putData, onSuccessCallback, onFailureCallback) => {
+            dispatch(putDistrictBoundryOperation(putData, onSuccessCallback, onFailureCallback))
         },
     }
 }

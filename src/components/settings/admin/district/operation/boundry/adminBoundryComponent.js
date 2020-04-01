@@ -14,13 +14,12 @@ export default class AdminBoundryComponent extends Component {
     render() {
         const {
             districtPolygon, isLoading, slug, district, errors, onClick, tenant,
-            onEditPath, onCreatePath, onDeletePath,
+            onEditPath, onCreatePath, onDeletePath, onZoomEnd, onMoveEnd,
         } = this.props;
 
         // Extract the default map zooming details.
         const { defaultPosition, defaultZoom } = tenant;
-        const { latitude, longitude } = defaultPosition;
-        const coords = [longitude, latitude];
+        const coords = [defaultPosition[0], defaultPosition[1]];
         const zoom = defaultZoom;
 
         // Apply our styling for our modal component.
@@ -88,6 +87,7 @@ export default class AdminBoundryComponent extends Component {
 
                 <div className="row ">
                     <div className="col-md-10 mx-auto p-2">
+                        <BootstrapErrorsProcessingAlert errors={errors} />
                         {isLoading===false &&
                             <LeafletMap
                                 center={coords}
@@ -99,7 +99,9 @@ export default class AdminBoundryComponent extends Component {
                                 scrollWheelZoom={ isLoading === false }
                                 dragging={ isLoading === false }
                                 animate={ isLoading === false }
-                                easeLinearity={0.35}>
+                                easeLinearity={0.35}
+                                onMoveEnd={onMoveEnd}
+                                onZoomEnd={onZoomEnd}>
 
                                 <TileLayer
                                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'

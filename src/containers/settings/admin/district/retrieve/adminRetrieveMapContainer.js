@@ -113,7 +113,7 @@ class AdminDistrictRetrieveMapContainer extends Component {
         return (
             <AdminDistrictRetrieveMapComponent
                 slug={slug}
-                districtData={this.props.district}
+                district={this.props.district}
                 onBack={this.onBack}
                 onClick={this.onClick}
                 isLoading={this.state.isLoading}

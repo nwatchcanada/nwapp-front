@@ -38,6 +38,7 @@ export const NWAPP_BADGE_DETAIL_API_ENDPOINT = '/v1/badge/<slug>';
 
 export const NWAPP_DISTRICT_LIST_API_ENDPOINT = '/v1/districts';
 export const NWAPP_DISTRICT_DETAIL_API_ENDPOINT = '/v1/district/<slug>';
+export const NWAPP_DISTRICT_BOUNDRY_OPERATION_API_ENDPOINT = '/v1/district/<slug>/operation/boundary';
 
 export const WORKERY_ANNOUNCEMENT_LIST_API_ENDPOINT = '/v1/announcements';
 export const WORKERY_ANNOUNCEMENT_DETAIL_API_ENDPOINT = '/v1/announcement/';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Map as LeafletMap, TileLayer, FeatureGroup, Marker, Popup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, FeatureGroup, Marker, Popup, Polygon } from 'react-leaflet';
 // import { Map, TileLayer, FeatureGroup, Circle } from 'react-leaflet';
 // import { EditControl } from "react-leaflet-draw"
 
@@ -10,9 +10,7 @@ import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPa
 
 export default class AdminDistrictRetrieveMapComponent extends Component {
     render() {
-        const { districtData, onClick, onBack, flashMessage, isLoading } = this.props;
-        const coords = [42.983611, -81.249722];
-        const zoom = 13;
+        const { district, onClick, onBack, flashMessage, isLoading } = this.props;
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -28,16 +26,16 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                             <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-building"></i>&nbsp;{districtData && districtData.name}
+                            <i className="fas fa-building"></i>&nbsp;{district && district.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-building"></i>&nbsp;{districtData && districtData.name}</h1>
+                <h1><i className="fas fa-building"></i>&nbsp;{district && district.name}</h1>
 
-                {districtData && districtData.state === 'inactive' &&
+                {district && district.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This district data is archived and is read-only.
                     </div>
@@ -46,7 +44,7 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/settings/district/${districtData && districtData.typeOfCode}/${districtData && districtData.slug}`}>
+                            <Link to={`/admin/settings/district/${district && district.typeOfCode}/${district && district.slug}`}>
                                 <span className="num">
                                     <i className="fas fa-table"></i>&nbsp;</span><span className="">Details
                                 </span>
@@ -60,7 +58,7 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-3" className="st-grey">
-                            <Link to={`/admin/settings/district/${districtData && districtData.typeOfCode}/${districtData && districtData.slug}/operations`}>
+                            <Link to={`/admin/settings/district/${district && district.typeOfCode}/${district && district.slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
                         </div>
@@ -74,9 +72,9 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
 
                         {isLoading===false &&
                             <LeafletMap
-                                center={coords}
-                                zoom={zoom}
-                                maxZoom={zoom}
+                                center={district.boundryPosition}
+                                zoom={district.boundryZoom}
+                                maxZoom={13}
                                 attributionControl={ isLoading === false}
                                 zoomControl={ isLoading === false }
                                 doubleClickZoom={ isLoading === false }
@@ -89,6 +87,9 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                 />
+
+                                <Polygon color="purple" positions={district.boundryPolygon} />
+
                             </LeafletMap>
                         }
                     </div>
