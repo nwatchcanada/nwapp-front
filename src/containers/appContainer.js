@@ -235,9 +235,12 @@ import AdminDistrictCreateStep2BusinessContainer from "./settings/admin/district
 import AdminDistrictCreateStep2CommunityCareContainer from "./settings/admin/district/create/adminDistrictCreateStep2ComContainer";
 import AdminDistrictCreateStep3Container from "./settings/admin/district/create/adminDistrictCreateStep3Container";
 import AdminDistrictArchiveOperationContainer from "./settings/admin/district/operation/adminArchiveContainer";
+import AdminSetMapOperationContainer from "./settings/admin/district/operation/adminSetMapContainer";
 import AdminDistrictRetrieveBizContainer from "./settings/admin/district/retrieve/adminRetrieveBizContainer";
 import AdminDistrictRetrieveComContainer from "./settings/admin/district/retrieve/adminRetrieveComContainer";
 import AdminDistrictRetrieveRezContainer from "./settings/admin/district/retrieve/adminRetrieveRezContainer";
+import AdminDistrictRetrieveMapContainer from "./settings/admin/district/retrieve/adminRetrieveMapContainer";
+import AdminDistrictRetrieveOperationsContainer from "./settings/admin/district/retrieve/adminRetrieveOperationsContainer";
 import AdminDistrictUpdateBizContainer from "./settings/admin/district/update/adminUpdateBizContainer";
 import AdminDistrictUpdateComContainer from "./settings/admin/district/update/adminUpdateComContainer";
 import AdminDistrictUpdateRezContainer from "./settings/admin/district/update/adminUpdateRezContainer";
@@ -511,7 +514,10 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/district/add/step-2-cc" exact component={requiresAuth(AdminDistrictCreateStep2CommunityCareContainer)} />
                                 <Route path="/admin/settings/district/add/step-3" exact component={requiresAuth(AdminDistrictCreateStep3Container)} />
                                 <Route path="/admin/settings/district/operation/archive/:slug" exact component={requiresAuth(AdminDistrictArchiveOperationContainer)} />
+                                <Route path="/admin/settings/district/operation/set-boundry/:slug" exact component={requiresAuth(AdminSetMapOperationContainer)} />
                                 <Route path="/admin/settings/district/biz/:slug" exact component={requiresAuth(AdminDistrictRetrieveBizContainer)} />
+                                <Route path="/admin/settings/district/:typeOf/:slug/map" exact component={requiresAuth(AdminDistrictRetrieveMapContainer)} />
+                                <Route path="/admin/settings/district/:typeOf/:slug/operations" exact component={requiresAuth(AdminDistrictRetrieveOperationsContainer)} />
                                 <Route path="/admin/settings/district/com/:slug" exact component={requiresAuth(AdminDistrictRetrieveComContainer)} />
                                 <Route path="/admin/settings/district/rez/:slug" exact component={requiresAuth(AdminDistrictRetrieveRezContainer)} />
                                 <Route path="/admin/settings/district/biz/:slug/update" exact component={requiresAuth(AdminDistrictUpdateBizContainer)} />

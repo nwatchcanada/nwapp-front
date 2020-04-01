@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import BootstrapTable from 'react-bootstrap-table-next';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
-import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
-import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
-// import overlayFactory from 'react-bootstrap-table2-overlay';
-import Moment from 'react-moment';
-// import 'moment-timezone';
+import { Map as LeafletMap, TileLayer, FeatureGroup, Marker, Popup } from 'react-leaflet';
+// import { Map, TileLayer, FeatureGroup, Circle } from 'react-leaflet';
+// import { EditControl } from "react-leaflet-draw"
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
 
 
-export default class AdminDistrictArchiveComponent extends Component {
+export default class AdminSetMapComponent extends Component {
     render() {
         const {
-            district, isLoading, slug, errors, onClick
+            isLoading, slug, district, errors, onClick
         } = this.props;
         return (
             <div>
@@ -30,7 +23,7 @@ export default class AdminDistrictArchiveComponent extends Component {
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to="/admin/settings">
-                                <i className="fas fa-cogs"></i>&nbsp;Setting
+                                <i className="fas fa-cogs"></i>&nbsp;Settings
                             </Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
@@ -38,13 +31,15 @@ export default class AdminDistrictArchiveComponent extends Component {
                                 <i className="fas fa-map"></i>&nbsp;Districts
                             </Link>
                         </li>
+
                         <li className="breadcrumb-item" aria-current="page">
                             <Link to={`/admin/settings/district/${district && district.typeOfCode}/${district && district.slug}/operations`}>
                                 <i className="fas fa-building"></i>&nbsp;{district && district.name}
                             </Link>
                         </li>
+
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-box"></i>&nbsp;Archive
+                            <i className="fas fa-map"></i>&nbsp;Set Boundary
                         </li>
                     </ol>
                 </nav>
@@ -57,7 +52,7 @@ export default class AdminDistrictArchiveComponent extends Component {
                     </div>
                 </div>
 
-                <h1><i className="fas fa-archive"></i>&nbsp;Archive</h1>
+                <h1><i className="fas fa-map"></i>&nbsp;Set Boundry</h1>
 
                 {district.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
@@ -72,10 +67,7 @@ export default class AdminDistrictArchiveComponent extends Component {
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <div className="jumbotron">
-                                <h1 className="display-4"><i className="fas fa-question-circle"></i>&nbsp;Are you sure?</h1>
-                                <p className="lead">You are about to archive the file, this file will no longer be available to the staff and the district.</p>
-                            </div>
+
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

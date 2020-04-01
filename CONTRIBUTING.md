@@ -50,6 +50,7 @@ npm install --save react-bootstrap-table2-overlay
 npm install --save react-bootstrap-table2-toolkit
 npm install --save dompurify
 npm install --save leaflet react-leaflet
+npm install --save leaflet-draw react-leaflet-draw
 ```
 
 ## What ``Chrome Plugins`` should I use?
