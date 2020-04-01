@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Map as LeafletMap, TileLayer, FeatureGroup, Marker, Popup } from 'react-leaflet';
 // import { Map, TileLayer, FeatureGroup, Circle } from 'react-leaflet';
-// import { EditControl } from "react-leaflet-draw"
+import { EditControl } from "react-leaflet-draw"
 
 import { BootstrapErrorsProcessingAlert } from "../../../../bootstrap/bootstrapAlert";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
@@ -11,8 +11,16 @@ import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPa
 export default class AdminSetMapComponent extends Component {
     render() {
         const {
-            isLoading, slug, district, errors, onClick
+            isLoading, slug, district, errors, onClick, tenant,
+            onEditPath, onCreatePath, onDeletePath
         } = this.props;
+
+        // Extract the default map zooming details.
+        const { defaultPosition, defaultZoom } = tenant;
+        const { latitude, longitude } = defaultPosition;
+        const coords = [longitude, latitude];
+        const zoom = defaultZoom;
+
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -60,25 +68,43 @@ export default class AdminSetMapComponent extends Component {
                     </div>
                 }
 
-                <div className="row">
-                    <div className="col-md-5 mx-auto mt-2">
-                        <form>
-                            <h1><i className="fas fa-archive"></i>&nbsp;Archive File</h1>
+                <div className="row ">
+                    <div className="col-md-10 mx-auto p-2">
+                        {isLoading===false &&
+                            <LeafletMap
+                                center={coords}
+                                zoom={zoom}
+                                maxZoom={19}
+                                attributionControl={ isLoading === false}
+                                zoomControl={ isLoading === false }
+                                doubleClickZoom={ isLoading === false }
+                                scrollWheelZoom={ isLoading === false }
+                                dragging={ isLoading === false }
+                                animate={ isLoading === false }
+                                easeLinearity={0.35}>
 
-                            <BootstrapErrorsProcessingAlert errors={errors} />
+                                <TileLayer
+                                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                />
 
-
-
-                            <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    <i className="fas fa-check-circle"></i>&nbsp;Save
-                                </button>
-                                <Link to={`/admin/settings/districts`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i> Back
-                                </Link>
-                            </div>
-
-                        </form>
+                                <FeatureGroup>
+                                    <EditControl
+                                        position='topright'
+                                        onEdited={onEditPath}
+                                        onCreated={onCreatePath}
+                                        onDeleted={onDeletePath}
+                                        draw={{
+                                            polyline: false,
+                                            rectangle: false,
+                                            circle: false,
+                                            marker: false,
+                                            circlemarker: false,
+                                        }}
+                                    />
+                                </FeatureGroup>
+                            </LeafletMap>
+                        }
                     </div>
                 </div>
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { camelizeKeys, decamelize } from 'humps';
 import Scroll from 'react-scroll';
+import isEmpty from 'lodash/isEmpty';
 
 import AdminSetMapComponent from "../../../../../components/settings/admin/district/operation/adminSetMapComponent";
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
@@ -23,8 +24,11 @@ class AdminSetMapOperationContainer extends Component {
             district: slug,
             slug: slug,
             errors: {},
+
         }
-        this.onClick = this.onClick.bind(this);
+        this.onEditPath = this.onEditPath.bind(this);
+        this.onCreatePath = this.onCreatePath.bind(this);
+        this.onDeletePath = this.onDeletePath.bind(this);
         this.onSuccessCallback = this.onSuccessCallback.bind(this);
         this.onFailureCallback = this.onFailureCallback.bind(this);
     }
@@ -85,11 +89,20 @@ class AdminSetMapOperationContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onClick(e) {
-        e.preventDefault();
-        this.setState({ isLoading: true }, ()=>{
-            this.props.deleteDistrict(this.state.slug, this.onSuccessCallback, this.onFailureCallback);
-        });
+    onEditPath(e) {
+        console.log("onEditPath", e);
+        alert("TODO");
+    }
+
+    onCreatePath(e) {
+        console.log("onCreatePath", e);
+        let layer = e.layer;
+        let feature = layer.toGeoJSON();
+        console.log(feature);
+    }
+
+    onDeletePath(e) {
+        console.log("onDeletePath", e);
     }
 
     /**
@@ -99,14 +112,22 @@ class AdminSetMapOperationContainer extends Component {
 
     render() {
         const { isLoading, slug, errors } = this.state;
+
         const district = this.props.districtDetail ? this.props.districtDetail : {};
+        const tenant = isEmpty(this.props.tenant)
+            ? {latitude: 0, longitude: 0, zoom: 0,}
+            : this.props.tenant;
+
         return (
             <AdminSetMapComponent
+                tenant={tenant}
                 slug={slug}
                 district={district}
                 isLoading={isLoading}
                 errors={errors}
-                onClick={this.onClick}
+                onEditPath={this.onEditPath}
+                onCreatePath={this.onCreatePath}
+                onDeletePath={this.onDeletePath}
             />
         );
     }
@@ -116,6 +137,7 @@ const mapStateToProps = function(store) {
     return {
         user: store.userState,
         districtDetail: store.districtDetailState,
+        tenant: store.tenantDetailState,
     };
 }
 
