@@ -215,7 +215,7 @@ class AdminDistrictBoundryOperationContainer extends Component {
         const zoom = e.target.getZoom();
 
         this.setState({
-            zoom: zoom,
+            watchZoom: zoom,
         },()=>{
             console.log("onZoomEnd | zoom:", zoom);
         });
