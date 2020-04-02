@@ -44,7 +44,7 @@ class AdminDistrictMapComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/admin/districtes"><i className="fas fa-users"></i>&nbsp;Districtes</Link>
+                           <Link to="/admin/settings"><i className="fas fa-users"></i>&nbsp;Districtes</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-map"></i>&nbsp;Map
@@ -56,7 +56,7 @@ class AdminDistrictMapComponent extends Component {
 
                 <div className="row">
                     <div className="col-sm-3 p-3 mb-2">
-                        <Link className="btn btn-primary btn-lg" to={`/admin/districtes`} role="button">
+                        <Link className="btn btn-primary btn-lg" to={`/admin/settings`} role="button">
                             <i className="fas fa-arrow-left"></i>&nbsp;Back to List
                         </Link>
                     </div>
