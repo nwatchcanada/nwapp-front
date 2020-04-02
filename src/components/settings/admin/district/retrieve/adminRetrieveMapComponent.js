@@ -74,7 +74,7 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                             <LeafletMap
                                 center={district.boundryPosition}
                                 zoom={district.boundryZoom}
-                                maxZoom={13}
+                                maxZoom={19}
                                 attributionControl={ isLoading === false}
                                 zoomControl={ isLoading === false }
                                 doubleClickZoom={ isLoading === false }

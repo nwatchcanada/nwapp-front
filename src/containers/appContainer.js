@@ -236,9 +236,6 @@ import AdminDistrictCreateStep2CommunityCareContainer from "./settings/admin/dis
 import AdminDistrictCreateStep3Container from "./settings/admin/district/create/adminDistrictCreateStep3Container";
 import AdminDistrictArchiveOperationContainer from "./settings/admin/district/operation/adminArchiveContainer";
 import AdminDistrictBoundryOperationContainer from "./settings/admin/district/operation/boundry/adminBoundryContainer";
-import AdminDistrictBoundryOperationStep1Container from "./settings/admin/district/operation/boundry/adminBoundryStep1Container";
-import AdminDistrictBoundryOperationStep2Container from "./settings/admin/district/operation/boundry/adminBoundryStep2Container";
-import AdminDistrictBoundryOperationStep3Container from "./settings/admin/district/operation/boundry/adminBoundryStep3Container";
 import AdminDistrictRetrieveBizContainer from "./settings/admin/district/retrieve/adminRetrieveBizContainer";
 import AdminDistrictRetrieveComContainer from "./settings/admin/district/retrieve/adminRetrieveComContainer";
 import AdminDistrictRetrieveRezContainer from "./settings/admin/district/retrieve/adminRetrieveRezContainer";
@@ -305,6 +302,7 @@ import AdminWatchCreateStep2Container from "./watches/admin/create/adminCreateSt
 import AdminWatchCreateStep3Container from "./watches/admin/create/adminCreateStep3Container";
 import AdminWatchCreateStep4Container from "./watches/admin/create/adminCreateStep4Container";
 import AdminWatchRetrieveContainer from "./watches/admin/retrieve/adminRetrieveContainer";
+import AdminWatchMapContainer from "./watches/admin/retrieve/adminRetrieveMapContainer";
 import AdminWatchCommentContainer from "./watches/admin/retrieve/adminCommentContainer";
 import AdminWatchOperationsContainer from "./watches/admin/retrieve/adminOperationsContainer";
 import AdminWatchInfoUpdateContainer from "./watches/admin/update/adminInfoUpdateContainer";
@@ -518,9 +516,6 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/settings/district/add/step-3" exact component={requiresAuth(AdminDistrictCreateStep3Container)} />
                                 <Route path="/admin/settings/district/operation/archive/:slug" exact component={requiresAuth(AdminDistrictArchiveOperationContainer)} />
                                 <Route path="/admin/settings/district/operation/boundry/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationContainer)} />
-                                <Route path="/admin/settings/district/operation/boundry-step-1/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationStep1Container)} />
-                                <Route path="/admin/settings/district/operation/boundry-step-2/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationStep2Container)} />
-                                <Route path="/admin/settings/district/operation/boundry-step-3/:slug" exact component={requiresAuth(AdminDistrictBoundryOperationStep3Container)} />
                                 <Route path="/admin/settings/district/biz/:slug" exact component={requiresAuth(AdminDistrictRetrieveBizContainer)} />
                                 <Route path="/admin/settings/district/:typeOf/:slug/map" exact component={requiresAuth(AdminDistrictRetrieveMapContainer)} />
                                 <Route path="/admin/settings/district/:typeOf/:slug/operations" exact component={requiresAuth(AdminDistrictRetrieveOperationsContainer)} />
@@ -776,6 +771,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/watches/step-3-create" exact component={requiresAuth(AdminWatchCreateStep3Container)} />
                                 <Route path="/admin/watches/step-4-create" exact component={requiresAuth(AdminWatchCreateStep4Container)} />
                                 <Route path="/admin/watch/:slug" exact component={requiresAuth(AdminWatchRetrieveContainer)} />
+                                <Route path="/admin/watch/:slug/map" exact component={requiresAuth(AdminWatchMapContainer)} />
                                 <Route path="/admin/watch/:slug/comments" exact component={requiresAuth(AdminWatchCommentContainer)} />
                                 <Route path="/admin/watch/:slug/operations" exact component={requiresAuth(AdminWatchOperationsContainer)} />
                                 <Route path="/admin/watch/:slug/operation/archive" exact component={requiresAuth(AdminWatchArchiveOperationContainer)} />

@@ -51,6 +51,11 @@ export default class AdminWatchOperationsComponent extends Component {
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
+                            <Link to={`/admin/watch/${slug}/map`}>
+                                <span className="num"><i className="fas fa-map"></i>&nbsp;</span><span className="">Map</span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey">
                             <Link to={`/admin/watch/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
@@ -62,7 +67,7 @@ export default class AdminWatchOperationsComponent extends Component {
                             </Link>
                         </div>
                         */}
-                        <div id="step-7" className="st-grey active">
+                        <div id="step-4" className="st-grey active">
                             <strong>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </strong>
@@ -108,6 +113,22 @@ export default class AdminWatchOperationsComponent extends Component {
                                     </div>
                                 </div>
                             }
+                            <div className="col-sm-3 mb-4">
+                                <div className="card box-shadow text-center mx-auto h-100">
+                                    <div className="card-custom-top-2">
+                                        <i className="fas fa-map-signs fa-3x"></i>
+                                    </div>
+                                    <div className="card-body">
+                                        <h3 className="card-title">Set Boundry</h3>
+                                        <p className="card-text">Adjust the boundry for this watch.</p>
+                                    </div>
+                                    <div className="card-footer bg-transparent border-0">
+                                        <Link className="btn btn-success btn-lg" to={`/admin/watch/${slug}/operation/boundry`}>
+                                            Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
 
                             { /*
                             <div className="col-sm-3 mb-4">

@@ -66,6 +66,11 @@ export default class AdminWatchRetrieveComponent extends Component {
                             </strong>
                         </div>
                         <div id="step-2" className="st-grey">
+                            <Link to={`/admin/watch/${slug}/map`}>
+                                <span className="num"><i className="fas fa-map"></i>&nbsp;</span><span className="">Map</span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey">
                             <Link to={`/admin/watch/${slug}/comments`}>
                                 <span className="num"><i className="fas fa-comments"></i>&nbsp;</span><span className="">Comments</span>
                             </Link>
@@ -77,7 +82,7 @@ export default class AdminWatchRetrieveComponent extends Component {
                             </Link>
                         </div>
                         */}
-                        <div id="step-7" className="st-grey">
+                        <div id="step-4" className="st-grey">
                             <Link to={`/admin/watch/${slug}/operations`}>
                                 <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
                             </Link>
