@@ -9,7 +9,7 @@ import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageL
 import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
-export default class AdminWatchMapComponent extends Component {
+export default class AdminWatchMapBoundryComponent extends Component {
     render() {
         const {
             slug, watch, onClick, onBack, flashMessage, isLoading

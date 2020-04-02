@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker, Popup, Polygon } from 'react-leaflet';
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
@@ -15,7 +15,7 @@ import {
 import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 
-class AdminAssociateMapComponent extends Component {
+class AdminWatchMapComponent extends Component {
     render() {
         const {
             // Pagination
@@ -23,13 +23,13 @@ class AdminAssociateMapComponent extends Component {
             onZoomEnd, onMoveEnd, onPopupOpen, onPopupClose, onClick,
 
             // Data
-            associateList,
+            watchList,
 
             // Everything else...
             flashMessage, onTableChange, isLoading, tenant
         } = this.props;
 
-        const associates = associateList.results ? associateList.results : [];
+        const watchs = watchList.results ? watchList.results : [];
 
         // Extract the default map zooming details.
         const { defaultPosition, defaultZoom } = tenant;
@@ -44,7 +44,7 @@ class AdminAssociateMapComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to="/admin/associates"><i className="fas fa-crown"></i>&nbsp;Associates</Link>
+                           <Link to="/admin/watches"><i className="fas fa-users"></i>&nbsp;Watches</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-map"></i>&nbsp;Map
@@ -56,14 +56,13 @@ class AdminAssociateMapComponent extends Component {
 
                 <div className="row">
                     <div className="col-sm-3 p-3 mb-2">
-                        <Link className="btn btn-primary btn-lg" to={`/admin/associates`} role="button">
+                        <Link className="btn btn-primary btn-lg" to={`/admin/watches`} role="button">
                             <i className="fas fa-arrow-left"></i>&nbsp;Back to List
                         </Link>
                     </div>
                 </div>
 
                 <h1><i className="fas fa-map"></i>&nbsp;Map</h1>
-
                 <div className="row">
                     <div className="col-md-12">
                         {isLoading===false &&
@@ -85,14 +84,16 @@ class AdminAssociateMapComponent extends Component {
                                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                 />
-                                {associateList !== undefined && associateList != null &&
-                                    <AssociateMarker
-                                        associates={associateList.results}
+
+                                {watchList !== undefined && watchList != null &&
+                                    <WatchMarker
+                                        watchs={watchList.results}
                                         onPopupOpen={onPopupOpen}
                                         onPopupClose={onPopupClose}
                                         onClick={onClick}
                                     />
                                 }
+
                             </LeafletMap>
                         }
                     </div>
@@ -105,69 +106,76 @@ class AdminAssociateMapComponent extends Component {
 
 
 
-function AssociateMarker({ associates, onPopupOpen, onPopupClose, onClick }) {
-    let associateMarkers = [];
-    for (let associate of associates) {
-        console.log(associate); // For debugging purposes.
-        let associateMarker = (
-            <Marker position={associate.position} key={associate.slug}>
-                <Popup onOpen={ (slug)=> { onPopupOpen(associate.slug) } } onClose={ (slug)=> { onPopupClose(associate.slug) } }>
-                    <AssociateMarkerContent
-                        associate={associate}
-                        onClick={onClick}
-                    />
-                </Popup>
-            </Marker>
-        );
-        associateMarkers.push(associateMarker);
+function WatchMarker({ watchs, onPopupOpen, onPopupClose, onClick }) {
+    let watchMarkers = [];
+    for (let watch of watchs) {
+        console.log(watch); // For debugging purposes.
+        if (watch.boundryPosition !== undefined && watch.boundryPosition !== null) {
+            let watchMarker = (
+                <Marker position={watch.boundryPosition} key={watch.slug}>
+                    <Popup onOpen={ (slug)=> { onPopupOpen(watch.slug) } } onClose={ (slug)=> { onPopupClose(watch.slug) } }>
+                        <WatchMarkerContent
+                            watch={watch}
+                            onClick={onClick}
+                        />
+                    </Popup>
+                </Marker>
+            );
+            watchMarkers.push(watchMarker);
+            watchMarkers.push(
+                <Polygon color="purple" positions={watch.boundryPolygon} />
+            );
+        }
     }
-    return associateMarkers;
+    return watchMarkers;
 }
 
 
-function AssociateMarkerContent({ associate, onClick }) {
+function WatchMarkerContent({ watch, onClick }) {
     return (
         <div>
-            {associate && associate.organizationName && associate.roleId === BUSINESS_TYPE_OF &&
-                <h1>{associate.organizationName}</h1>
-            }
-            <h3>
-                {associate.firstName}&nbsp;{associate.lastName}
-            </h3>
-            {associate && associate.streetAddress &&
-                <p className="text-muted">
-                    <span>
-                        <i className="fas fa-map-marker-alt"></i>&nbsp;{associate && associate.streetAddress}
-                    </span>
-                </p>
-            }
-            {associate && associate.email &&
-                <p>
-                    <strong>Email</strong>:&nbsp;
-                    <a href={`mailto:${associate.email}`}><i className="fas fa-envelope"></i>&nbsp;{associate.email}</a>
-                </p>
-            }
-            {associate && associate.primaryPhoneE164 &&
-                <p>
-                    <strong>Phone</strong>:&nbsp;
-                    <a href={`tel:${associate.primaryPhoneE164}`}>
-                        <i className="fas fa-phone-square"></i>&nbsp;{associate.primaryPhoneNational}
-                    </a>
-                </p>
-            }
+            <h3>{watch.name}</h3>
             <p className="m-0"><strong>Tags:</strong></p>
-            {associate &&
+            {watch &&
                 <p>
-                    {associate.tags && associate.tags.map(
+                    {watch.tags && watch.tags.map(
                         (tag) => <TagItem tag={tag} key={tag.id} />)
                     }
                 </p>
             }
             <p>
-            <button className="btn btn-success btn-lg" onClick={ (event,slug)=>onClick(event, associate.slug) }>
+            <button className="btn btn-success btn-lg" onClick={ (event,slug)=>onClick(event, watch.slug) }>
                 View&nbsp;<i className="fas fa-arrow-circle-right"></i>
             </button>
             </p>
+        </div>
+    );
+
+    return (
+        <div>
+
+            {watch && watch.streetAddress &&
+                <p className="text-muted">
+                    <span>
+                        <i className="fas fa-map-marker-alt"></i>&nbsp;{watch && watch.streetAddress}
+                    </span>
+                </p>
+            }
+            {watch && watch.email &&
+                <p>
+                    <strong>Email</strong>:&nbsp;
+                    <a href={`mailto:${watch.email}`}><i className="fas fa-envelope"></i>&nbsp;{watch.email}</a>
+                </p>
+            }
+            {watch && watch.primaryPhoneE164 &&
+                <p>
+                    <strong>Phone</strong>:&nbsp;
+                    <a href={`tel:${watch.primaryPhoneE164}`}>
+                        <i className="fas fa-phone-square"></i>&nbsp;{watch.primaryPhoneNational}
+                    </a>
+                </p>
+            }
+
         </div>
     );
 }
@@ -182,4 +190,4 @@ class TagItem extends Component {
     };
 }
 
-export default AdminAssociateMapComponent;
+export default AdminWatchMapComponent;

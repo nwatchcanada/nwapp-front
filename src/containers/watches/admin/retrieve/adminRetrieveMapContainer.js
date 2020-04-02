@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import AdminWatchRetrieveMapComponent from "../../../../components/watches/admin/retrieve/adminRetrieveMapComponent";
+import AdminWatchMapBoundryComponent from "../../../../components/watches/admin/retrieve/adminRetrieveMapComponent";
 import { clearFlashMessage } from "../../../../actions/flashMessageActions";
 import { pullWatchDetail } from '../../../../actions/watchActions';
 import {
@@ -11,7 +11,7 @@ import {
 } from '../../../../helpers/localStorageUtility';
 
 
-class AdminWatchMapContainer extends Component {
+class AdminWatchMapBoundaryContainer extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -111,7 +111,7 @@ class AdminWatchMapContainer extends Component {
     render() {
         const { slug } = this.state;
         return (
-            <AdminWatchRetrieveMapComponent
+            <AdminWatchMapBoundryComponent
                 slug={slug}
                 watch={this.props.watch}
                 onBack={this.onBack}
@@ -145,4 +145,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminWatchMapContainer);
+)(AdminWatchMapBoundaryContainer);

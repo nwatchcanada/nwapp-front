@@ -33,9 +33,6 @@ class AdminAreaCoordinatorMapComponent extends Component {
 
         // Extract the default map zooming details.
         const { defaultPosition, defaultZoom } = tenant;
-        const { latitude, longitude } = defaultPosition;
-        const coords = [longitude, latitude];
-        const zoom = defaultZoom;
 
         // Finally render our page.
         return (
@@ -71,8 +68,8 @@ class AdminAreaCoordinatorMapComponent extends Component {
                     <div className="col-md-12">
                         {isLoading === false &&
                             <LeafletMap
-                                center={coords}
-                                zoom={zoom}
+                                center={defaultPosition}
+                                zoom={defaultZoom}
                                 maxZoom={19}
                                 attributionControl={ isLoading === false}
                                 zoomControl={ isLoading === false }
