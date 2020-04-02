@@ -128,6 +128,7 @@ export const WORKERY_WATCH_COMMENT_LIST_API_ENDPOINT = '/v1/watch-comments';
 export const WORKERY_WATCH_INFORMATION_UPDATE_API_ENDPOINT = '/v1/watch/XXX/info';
 export const WORKERY_WATCH_STREET_MEMBERSHIP_UPDATE_API_ENDPOINT = '/v1/watch/XXX/street';
 export const WORKERY_WATCH_METRICS_UPDATE_API_ENDPOINT = '/v1/watch/XXX/metrics';
+export const NWAPP_WATCH_BOUNDRY_OPERATION_API_ENDPOINT = '/v1/watch/<slug>/operation/boundary';
 
 // TODO: DO SOMETHING WITH BELOW
 export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/register';
