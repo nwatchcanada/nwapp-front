@@ -11,8 +11,9 @@ import { UserTypeOfIconHelper } from "../../../../constants/helper";
 
 export default class AdminWatchMapComponent extends Component {
     render() {
-        const { slug, watch, onClick, onBack, flashMessage, isLoading } = this.props;
-        console.log();
+        const {
+            slug, watch, onClick, onBack, flashMessage, isLoading
+        } = this.props;
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />

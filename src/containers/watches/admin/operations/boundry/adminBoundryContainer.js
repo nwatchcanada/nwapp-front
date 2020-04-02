@@ -103,7 +103,7 @@ class AdminWatchBoundryOperationContainer extends Component {
                 console.log("onSuccessCallback | Response:",response); // For debugging purposes only.
                 console.log("onSuccessCallback | State (Post-Fetch):", this.state);
                 this.props.setFlashMessage("success", "Watch boundary has been successfully uodated.");
-                this.props.history.push("/admin/settings/watch/" + this.state.watch.typeOfCode + "/" + this.state.watch.slug + "/operations");
+                this.props.history.push("/admin/watch/" + this.state.slug + "/operations");
             }
         )
     }
