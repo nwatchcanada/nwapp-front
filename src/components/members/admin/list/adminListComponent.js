@@ -47,11 +47,11 @@ class RemoteListComponent extends Component {
 
         const selectRoleIdOptions = {  // DEPRECATED VIA https://github.com/over55/nwapp-front/issues/296
             0: "All",
-            MEMBER_ROLE_ID: "Member",
-            AREA_COORDINATOR_ROLE_ID: "Area Coordinator",
-            ASSOCIATE_ROLE_ID: "Associate",
-            FRONTLINE_STAFF_ROLE_ID: "Frontline Staff",
-            MANAGEMENT_ROLE_ID: "Manager",
+            [MEMBER_ROLE_ID]: "Member",
+            [AREA_COORDINATOR_ROLE_ID]: "Area Coordinator",
+            [ASSOCIATE_ROLE_ID]: "Associate",
+            [FRONTLINE_STAFF_ROLE_ID]: "Frontline Staff",
+            [MANAGEMENT_ROLE_ID]: "Manager",
         };
 
         const columns = [{
