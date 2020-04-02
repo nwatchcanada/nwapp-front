@@ -227,6 +227,7 @@ SETTINGS
 import AdminSettingLaunchpadContainer from "./settings/admin/adminLaunchpadContainer";
 
 import AdminDistrictListContainer from "./settings/admin/district/list/adminListContainer";
+import AdminDistrictMapContainer from "./settings/admin/district/list/adminMapContainer";
 import AdminDistrictSearchContainer from "./settings/admin/district/search/adminSearchContainer";
 import AdminDistrictSearchResultContainer from "./settings/admin/district/search/adminSearchResultContainer";
 import AdminDistrictCreateStep1Container from "./settings/admin/district/create/adminDistrictCreateStep1Container";
@@ -509,6 +510,7 @@ class AppContainer extends React.Component {
                                     --------------------
                                 */}
                                 <Route path="/admin/settings/districts" exact component={requiresAuth(AdminDistrictListContainer)} />
+                                <Route path="/admin/settings/districts/map" exact component={requiresAuth(AdminDistrictMapContainer)} />
                                 <Route path="/admin/settings/district/search" exact component={requiresAuth(AdminDistrictSearchContainer)} />
                                 <Route path="/admin/settings/district/search-results" exact component={requiresAuth(AdminDistrictSearchResultContainer)} />
                                 <Route path="/admin/settings/district/add/step-1" exact component={requiresAuth(AdminDistrictCreateStep1Container)} />

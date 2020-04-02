@@ -214,7 +214,7 @@ function detailLinkFormatter(cell, row){
                 </Link>;
                 break;
             case 3:
-                viewButtonCode = <Link to={`/admin/settings/district/com/${row.slug}`} className="btn btn-success btn-xs">
+                viewButtonCode = <Link to={`/admin/settings/district/${row.typeOfCode}/${row.slug}`} className="btn btn-success btn-xs">
                     <i className="fas fa-binoculars"></i>&nbsp;View
                 </Link>;
                 break;
@@ -270,7 +270,7 @@ class AdminDistrictListComponent extends Component {
                 <h1><i className="fas fa-map"></i>&nbsp;Districts</h1>
 
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
@@ -283,7 +283,7 @@ class AdminDistrictListComponent extends Component {
                             </div>
                         </section>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <section className="row text-center placeholders">
                             <div className="col-sm-12 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
@@ -293,6 +293,19 @@ class AdminDistrictListComponent extends Component {
                                 </div>
                                 <h4>Search</h4>
                                 <div className="text-muted">Search Districts</div>
+                            </div>
+                        </section>
+                    </div>
+                    <div className="col-md-4">
+                        <section className="row text-center placeholders">
+                            <div className="col-sm-12 placeholder">
+                                <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
+                                    <Link to={`/admin/settings/districts/map`} className="d-block link-ndecor" title="Search">
+                                        <span className="r-circle"><i className="fas fa-map fa-3x"></i></span>
+                                    </Link>
+                                </div>
+                                <h4>Map</h4>
+                                <div className="text-muted">Map Districts</div>
                             </div>
                         </section>
                     </div>
