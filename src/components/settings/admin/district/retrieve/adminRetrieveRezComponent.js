@@ -40,6 +40,31 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                     </div>
                 }
 
+                <div className="row">
+                    <div className="step-navigation">
+                        <div id="step-1" className="st-grey active">
+                            <strong>
+                                <span className="num">
+                                    <i className="fas fa-table"></i>&nbsp;</span><span className="">Details
+                                </span>
+                            </strong>
+                        </div>
+                        <div id="step-2" className="st-grey">
+                            <Link to={`/admin/settings/district/${districtData && districtData.typeOfCode}/${districtData && districtData.slug}/map`}>
+                                <span className="num">
+                                    <i className="fas fa-map"></i>&nbsp;</span><span className="">Map
+                                </span>
+                            </Link>
+                        </div>
+                        <div id="step-3" className="st-grey">
+                            <Link to={`/admin/settings/district/${districtData && districtData.typeOfCode}/${districtData && districtData.slug}/operations`}>
+                                <span className="num"><i className="fas fa-ellipsis-h"></i>&nbsp;</span><span className="">Operations</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div className="row mt-4 pt-3 mb-4 pb-2">
                     <div className="col-md-10 mx-auto p-2">
                         <table className="table table-bordered custom-cell-w">

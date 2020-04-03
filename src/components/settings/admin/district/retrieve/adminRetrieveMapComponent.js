@@ -6,11 +6,12 @@ import { Map as LeafletMap, TileLayer, FeatureGroup, Marker, Popup, Polygon } fr
 
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminDistrictRetrieveMapComponent extends Component {
     render() {
-        const { district, onClick, onBack, flashMessage, isLoading } = this.props;
+        const { slug, district, onClick, onBack, flashMessage, isLoading } = this.props;
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -26,14 +27,14 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                             <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-building"></i>&nbsp;{district && district.name}
+                            <UserTypeOfIconHelper typeOfId={district && district.typeOf} />&nbsp;{district && district.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-building"></i>&nbsp;{district && district.name}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={district && district.typeOf} />&nbsp;{district && district.name}</h1>
 
                 {district && district.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
@@ -70,27 +71,43 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
 
                         <h2><i className="fas fa-map"></i>&nbsp;Boundry Map</h2>
 
-                        {isLoading===false &&
-                            <LeafletMap
-                                center={district.boundryPosition}
-                                zoom={district.boundryZoom}
-                                maxZoom={19}
-                                attributionControl={ isLoading === false}
-                                zoomControl={ isLoading === false }
-                                doubleClickZoom={ isLoading === false }
-                                scrollWheelZoom={ isLoading === false }
-                                dragging={ isLoading === false }
-                                animate={ isLoading === false }
-                                easeLinearity={0.35}>
+                        {district.boundryPolygon
+                            ? <div>
+                                {isLoading===false &&
+                                    <LeafletMap
+                                        center={district.boundryPosition}
+                                        zoom={district.boundryZoom}
+                                        maxZoom={19}
+                                        attributionControl={ isLoading === false}
+                                        zoomControl={ isLoading === false }
+                                        doubleClickZoom={ isLoading === false }
+                                        scrollWheelZoom={ isLoading === false }
+                                        dragging={ isLoading === false }
+                                        animate={ isLoading === false }
+                                        easeLinearity={0.35}>
 
-                                <TileLayer
-                                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                                />
+                                        <TileLayer
+                                            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                                            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                        />
 
-                                <Polygon color="purple" positions={district.boundryPolygon} />
+                                        <Polygon color="purple" positions={district.boundryPolygon} />
 
-                            </LeafletMap>
+                                    </LeafletMap>
+                                }
+                            </div>
+                            : <div>
+                                <div className="jumbotron">
+                                    <h1 className="display-4"><i className="fas fa-bullhorn"></i>&nbsp;No Boundary</h1>
+                                    <p className="lead">There is no boundry set for this district.</p>
+
+                                    <p className="lead">
+                                        <Link className="btn btn-success btn-lg" to={`/admin/settings/district/operation/boundry/${slug}`}>
+                                            <i className="fas fa-edit"></i>&nbsp;Set
+                                        </Link>
+                                    </p>
+                                </div>
+                            </div>
                         }
                     </div>
                 </div>

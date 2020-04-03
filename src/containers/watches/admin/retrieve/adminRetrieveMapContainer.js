@@ -110,6 +110,7 @@ class AdminWatchMapBoundaryContainer extends Component {
 
     render() {
         const { slug } = this.state;
+        console.log("TEST!!!!!!!");
         return (
             <AdminWatchMapBoundryComponent
                 slug={slug}

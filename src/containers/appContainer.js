@@ -776,7 +776,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/watches/step-3-create" exact component={requiresAuth(AdminWatchCreateStep3Container)} />
                                 <Route path="/admin/watches/step-4-create" exact component={requiresAuth(AdminWatchCreateStep4Container)} />
                                 <Route path="/admin/watch/:slug" exact component={requiresAuth(AdminWatchRetrieveContainer)} />
-                                <Route path="/admin/watch/:slug/map" exact component={requiresAuth(AdminWatchMapContainer)} />
+                                <Route path="/admin/watch/:slug/map" exact component={requiresAuth(AdminWatchMapBoundaryContainer)} />
                                 <Route path="/admin/watch/:slug/comments" exact component={requiresAuth(AdminWatchCommentContainer)} />
                                 <Route path="/admin/watch/:slug/operations" exact component={requiresAuth(AdminWatchOperationsContainer)} />
                                 <Route path="/admin/watch/:slug/operation/archive" exact component={requiresAuth(AdminWatchArchiveOperationContainer)} />

@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 import { FlashMessageComponent } from "../../../../flashMessageComponent";
 import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPageLoadingAnimation";
+import { UserTypeOfIconHelper } from "../../../../../constants/helper";
 
 
 export default class AdminDistrictRetrieveMapComponent extends Component {
     render() {
-        const { districtData, onClick, onBack, flashMessage, isLoading } = this.props;
+        const { district, onClick, onBack, flashMessage, isLoading } = this.props;
         const coords = [42.983611, -81.249722];
         const zoom = 13;
         return (
@@ -25,16 +26,16 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                             <Link to="/admin/settings/districts"><i className="fas fa-map"></i>&nbsp;Districts</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-building"></i>&nbsp;{districtData && districtData.name}
+                            <UserTypeOfIconHelper typeOfId={district && district.typeOf} />&nbsp;{district && district.name}
                         </li>
                     </ol>
                 </nav>
 
                 <FlashMessageComponent object={flashMessage} />
 
-                <h1><i className="fas fa-building"></i>&nbsp;{districtData && districtData.name}</h1>
+                <h1><UserTypeOfIconHelper typeOfId={district && district.typeOf} />&nbsp;{district && district.name}</h1>
 
-                {districtData && districtData.state === 'inactive' &&
+                {district && district.state === 'inactive' &&
                     <div className="alert alert-info" role="alert">
                         <strong><i className="fas fa-archive"></i>&nbsp;Archived</strong> - This district data is archived and is read-only.
                     </div>
@@ -43,14 +44,14 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to={`/admin/settings/district/${districtData && districtData.typeOfCode}/${districtData && districtData.slug}`}>
+                            <Link to={`/admin/settings/district/${district && district.typeOfCode}/${district && district.slug}`}>
                                 <span className="num">
                                     <i className="fas fa-table"></i>&nbsp;</span><span className="">Details
                                 </span>
                             </Link>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/settings/district/${districtData && districtData.typeOfCode}/${districtData && districtData.slug}/map`}>
+                            <Link to={`/admin/settings/district/${district && district.typeOfCode}/${district && district.slug}/map`}>
                                 <span className="num">
                                     <i className="fas fa-map"></i>&nbsp;</span><span className="">Map
                                 </span>
@@ -78,7 +79,7 @@ export default class AdminDistrictRetrieveMapComponent extends Component {
                                         <p className="card-text">Adjust the boundry for this district.</p>
                                     </div>
                                     <div className="card-footer bg-transparent border-0">
-                                        <Link className="btn btn-success btn-lg" to={`/admin/settings/district/operation/boundry/${districtData && districtData.slug}`}>
+                                        <Link className="btn btn-success btn-lg" to={`/admin/settings/district/operation/boundry/${district && district.slug}`}>
                                             Go&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                         </Link>
                                     </div>

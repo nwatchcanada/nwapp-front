@@ -77,7 +77,7 @@ export default class AdminWatchMapBoundryComponent extends Component {
                     <div className="col-md-10 mx-auto p-2">
 
                         <h2><i className="fas fa-map"></i>&nbsp;Boundry Map</h2>
-                        {watch.boundryPolygon
+                        {watch && watch.boundryPolygon !== undefined && watch.boundryPolygon !== null && watch.boundryPolygon.length > 0
                             ? <div>
                                 {isLoading===false &&
                                     <LeafletMap
