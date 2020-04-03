@@ -423,6 +423,16 @@ import ActionIncidentTaskStep1Container from "./taskItems/admin/operations/actio
 import ActionIncidentTaskStep2Container from "./taskItems/admin/operations/actionIncident/step2Container";
 import ActionIncidentTaskStep3Container from "./taskItems/admin/operations/actionIncident/step3Container";
 
+
+/*
+--------------------
+UNIFIED SEARCH ITEMS
+---------------------
+*/
+import AdminSearchContainer from "./search/searchContainer";
+import AdminSearchResultsContainer from "./search/searchResultsContainer";
+
+
 /*
 ----------
 TODO
@@ -894,6 +904,15 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/task/4/:uuid/step-1" exact component={requiresAuth(ActionIncidentTaskStep1Container)} />
                                 <Route path="/admin/task/4/:uuid/step-2" exact component={requiresAuth(ActionIncidentTaskStep2Container)} />
                                 <Route path="/admin/task/4/:uuid/step-3" exact component={requiresAuth(ActionIncidentTaskStep3Container)} />
+
+                                /*
+                                ----------
+                                TASK ITEMS
+                                ----------
+                                */
+                                <Route path="/admin/search" exact component={requiresAuth(AdminSearchContainer)} />
+                                <Route path="/admin/search/results" exact component={requiresAuth(AdminSearchResultsContainer)} />
+
 
                                 /*
                                 -------------

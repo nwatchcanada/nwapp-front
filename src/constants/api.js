@@ -60,6 +60,8 @@ export const WORKERY_ITEM_COMMENT_LIST_API_ENDPOINT = '/v1/item-comments';
 export const WORKERY_TASK_ITEM_LIST_API_ENDPOINT = '/v1/task-items';
 export const WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT = '/v1/task-item/<uuid>';
 
+export const WORKERY_UNIFIED_SEARCH_ITEM_LIST_API_ENDPOINT = '/v1/search';
+
 /**
  *  The full address of certain API endpoints from our backend server.
  */

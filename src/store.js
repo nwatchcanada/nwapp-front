@@ -20,7 +20,7 @@ import {
     WATCH_LIST_SUCCESS, WATCH_DETAIL_SUCCESS, WATCH_COMMENT_LIST_SUCCESS,
     ITEM_TYPE_LIST_SUCCESS, ITEM_TYPE_DETAIL_SUCCESS,
     ITEM_LIST_SUCCESS, ITEM_DETAIL_SUCCESS, ITEM_COMMENT_LIST_SUCCESS,
-    TASK_ITEM_LIST_SUCCESS, TASK_ITEM_DETAIL_SUCCESS,
+    TASK_ITEM_LIST_SUCCESS, TASK_ITEM_DETAIL_SUCCESS, UNIFIED_SEARCH_ITEM_LIST_REQUEST
 } from "./constants/actionTypes";
 import userReducer from "./reducers/userReducer";
 import { tenantListReducer, tenantDetailReducer} from "./reducers/tenantReducers";
@@ -51,6 +51,7 @@ import { itemTypeListReducer, itemTypeDetailReducer } from "./reducers/itemTypeR
 import { itemListReducer, itemDetailReducer } from "./reducers/itemReducers";
 import { itemCommentListReducer } from "./reducers/itemCommentReducers";
 import { taskItemListReducer, taskItemDetailReducer } from "./reducers/taskItemReducers";
+import { unifiedSearchItemListReducer } from "./reducers/unifiedSearchItemReducers";
 
 // Combine Reducers
 const appReducer = combineReducers({
@@ -89,6 +90,7 @@ const appReducer = combineReducers({
     itemListState: itemListReducer, itemDetailState: itemDetailReducer,
     itemCommentListState: itemCommentListReducer,
     taskItemListState: taskItemListReducer, taskItemDetailState: taskItemDetailReducer,
+    unifiedSearchItemListState: unifiedSearchItemListReducer,
 });
 
 
@@ -133,6 +135,7 @@ const localStorageMiddleware = ({ getState }) => {
             WATCH_LIST_SUCCESS, WATCH_DETAIL_SUCCESS, WATCH_COMMENT_LIST_SUCCESS,
             ITEM_TYPE_LIST_SUCCESS, ITEM_TYPE_DETAIL_SUCCESS,
             ITEM_LIST_SUCCESS, ITEM_DETAIL_SUCCESS, ITEM_COMMENT_LIST_SUCCESS,
+            UNIFIED_SEARCH_ITEM_LIST_REQUEST
         ].includes(result.type)) {
             // console.log("De-hydrating store...");
             localStorage.setItem(APP_STATE, JSON.stringify(getState()))
