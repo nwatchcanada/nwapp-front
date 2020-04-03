@@ -53,14 +53,14 @@ class RemoteListComponent extends Component {
             sort: false,
             formatter: tagFormatter
         },{
-            dataField: 'id',
+            dataField: 'slug',
             text: 'Details',
             sort: false,
             formatter: detailLinkFormatter
         }];
 
         const defaultSorted = [{
-            dataField: 'id',
+            dataField: 'lastModifiedAt',
             order: 'asc'
         }];
 
@@ -92,7 +92,7 @@ class RemoteListComponent extends Component {
         return (
             <BootstrapTable
                 bootstrap4
-                keyField='id'
+                keyField='slug'
                 data={ tagItems }
                 columns={ columns }
                 defaultSorted={ defaultSorted }
@@ -116,21 +116,25 @@ function iconFormatter(cell, row){
         return (
             <i className="fas fa-cloud-download-alt"></i>
         )
-    } else if (row.typeOf === 5) {
+    } else if (row.typeOf === 6) {
         return (
             <i className="fas fa-handshake"></i>
         )
-    } else if (row.typeOf === 4) {
+    } else if (row.typeOf === 5) {
         return (
             <i className="fas fa-wrench"></i>
         )
-    } else if (row.typeOf === 3) {
+    } else if (row.typeOf === 4) {
         return (
             <i className="fas fa-user-tie"></i>
         )
-    } else if (row.typeOf === 2) {
+    } else if (row.typeOf === 3) {
         return (
             <i className="fas fa-crown"></i>
+        )
+    } else if (row.typeOf === 2) {
+        return (
+            <i className="fas fa-horse-head"></i>
         )
     } else if (row.typeOf === 1) {
         return (
@@ -203,31 +207,31 @@ function detailLinkFormatter(cell, row){
         )
     } else if (row.typeOf === 5) {
         return (
-            <Link to={`/partner/${row.id}`}>
+            <Link to={`/partner/${row.slug}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
     } else if (row.typeOf === 4) {
         return (
-            <Link to={`/order/${row.id}`}>
+            <Link to={`/order/${row.slug}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
     } else if (row.typeOf === 3) {
         return (
-            <Link to={`/staff/${row.id}`}>
+            <Link to={`/staff/${row.slug}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
     } else if (row.typeOf === 2) {
         return (
-            <Link to={`/associate/${row.id}`}>
+            <Link to={`/admin/area-coordinator/${row.slug}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
     } else if (row.typeOf === 1) {
         return (
-            <Link to={`/client/${row.id}`}>
+            <Link to={`/admin/member/${row.slug}`}>
                 View&nbsp;<i className="fas fa-chevron-right"></i>
             </Link>
         )
