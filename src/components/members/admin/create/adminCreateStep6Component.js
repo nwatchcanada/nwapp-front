@@ -130,7 +130,7 @@ export default class AdminMemberCreateStep6Component extends Component {
 
 class TableRow extends Component {
     render() {
-        const { typeOf, slug, name } = this.props.datum;
+        const { typeOf, slug, name, isVirtual } = this.props.datum;
         const { onTableRowClick, isLoading } = this.props;
 
         // Assign the icon based on the type of `Watch` object.
@@ -146,7 +146,7 @@ class TableRow extends Component {
         return (
             <tr slug={slug}>
                 <td><i className={`fas fa-${icon}`}></i></td>
-                <td>{name}</td>
+                <td>{name}&nbsp;{isVirtual && <span>&nbsp;(<i className={`fas fa-vr-cardboard`}></i>)</span>}</td>
                 <td>
 
                     <button className="btn btn-primary btn-sm float-right" disabled={isLoading} onClick={ (event) => { onTableRowClick(event, typeOf, slug, icon, name) } }>
