@@ -65,7 +65,7 @@ export function validateResidentialStep3Input(data) {
     if (data.isVirtualWatch === false) {
         if (data.streetMembership.length === 0) {
             errors.streetMembership = 'Please add at minimum one entry';
-        }    
+        }
     }
 
     return {
@@ -201,6 +201,9 @@ export function validateModalSaveInput(data) {
     }
     if (data.streetNumberEnd === undefined || data.streetNumberEnd === null || validator.isEmpty(data.streetNumberEnd) || data.streetNumberEnd === "" || data.streetNumberEnd === "null") {
         errors.streetNumberEnd = 'This field is required';
+    }
+    if (data.streetNumberRangeType === undefined || data.streetNumberRangeType === null || data.streetNumberRangeType === "" || data.streetNumberRangeType === "null") {
+        errors.streetNumberRangeType = 'This field is required';
     }
     if (data.streetName === undefined || data.streetName === null || validator.isEmpty(data.streetName) || data.streetName === "" || data.streetName === "null") {
         errors.streetName = 'This field is required';

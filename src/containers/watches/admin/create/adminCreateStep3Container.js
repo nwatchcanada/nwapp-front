@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import {
-    validateResidentialStep3Input, validateModalSaveInput
+    validateResidentialStep3Input,
+    validateModalSaveInput
 } from "../../../../validators/watchValidator";
 import AdminWatchCreateStep3Component from "../../../../components/watches/admin/create/adminCreateStep3Component";
 import {
@@ -16,7 +17,11 @@ import { getAssociateReactSelectOptions } from '../../../../actions/watchActions
 import { getDistrictReactSelectOptions } from '../../../../actions/districtActions';
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
-import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
+import {
+    BASIC_STREET_TYPE_CHOICES,
+    STREET_DIRECTION_CHOICES,
+    STREET_NUMBER_RANGE_TYPE_CHOICES
+} from "../../../../constants/api";
 
 
 class AdminWatchCreateStep3Container extends Component {
@@ -32,6 +37,7 @@ class AdminWatchCreateStep3Container extends Component {
             errors: {},
             streetNumberStart: "",
             streetNumberEnd: "",
+            streetNumberRangeType: "",
             streetName: "",
             streetType: "",
             streetTypeOption: localStorageGetObjectItem('nwapp-watch-streetTypeOption'),
@@ -301,7 +307,14 @@ class AdminWatchCreateStep3Container extends Component {
             streetMembership, errors, isVirtual,
 
             // Modal relate.
-            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showModal,
+            streetNumberStart,
+            streetNumberEnd,
+            streetNumberRangeType,
+            streetName,
+            streetType,
+            streetTypeOther,
+            streetDirection,
+            showModal,
         } = this.state;
 
         return (
@@ -315,6 +328,8 @@ class AdminWatchCreateStep3Container extends Component {
                 showModal={showModal}
                 streetNumberStart={streetNumberStart}
                 streetNumberEnd={streetNumberEnd}
+                streetNumberRangeType={streetNumberRangeType}
+                streetNumberRangeTypeOptions={STREET_NUMBER_RANGE_TYPE_CHOICES}
                 streetName={streetName}
                 streetType={streetType}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}

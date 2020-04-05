@@ -10,8 +10,23 @@ import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect"
 export default class AddModalComponent extends Component {
     render() {
         const {
-            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOptions, streetTypeOther, streetDirection, streetDirectionOptions, onTextChange, errors,
-            showAddModal, onSaveClick, onCloseClick, onSelectChange } = this.props;
+            streetNumberStart,
+            streetNumberEnd,
+            streetNumberRangeType,
+            streetNumberRangeTypeOptions,
+            streetName,
+            streetType,
+            streetTypeOptions,
+            streetTypeOther,
+            streetDirection,
+            streetDirectionOptions,
+            onTextChange,
+            errors,
+            showAddModal,
+            onSaveClick,
+            onCloseClick,
+            onSelectChange
+        } = this.props;
 
         // Apply our styling for our modal component.
         const customStyles = {
@@ -67,6 +82,17 @@ export default class AddModalComponent extends Component {
                                     value={streetNumberEnd}
                                     name="streetNumberEnd"
                                     type="number"
+                                />
+
+                                <BootstrapSingleSelect
+                                    borderColour="border-primary"
+                                    label="Street Number Range Type (*)"
+                                    name="streetType"
+                                    defaultOptionLabel="Please select a street type."
+                                    options={streetNumberRangeTypeOptions}
+                                    value={streetNumberRangeType}
+                                    error={errors.streetNumberRangeType}
+                                    onSelectChange={onSelectChange}
                                 />
 
                                 <BootstrapInput

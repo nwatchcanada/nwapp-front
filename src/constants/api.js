@@ -1020,3 +1020,22 @@ export const WATCH_ARCHIVE_REASON_CHOICES = [
         label: "Other"
     }
 ];
+
+export const STREET_NUMBER_RANGE_TYPE_CHOICES = [
+    {
+        id: 'street-number-range-type-1-choice',
+        selectName: "streetNumberRangeType",
+        value: 1,
+        label: "All"
+    },{
+        id: 'street-number-range-type-2-choice',
+        selectName: "streetNumberRangeType",
+        value: 2,
+        label: "Odd"
+    },{
+        id: 'street-number-range-type-3-choice',
+        selectName: "streetNumberRangeType",
+        value: 3,
+        label: "Even"
+    }
+];

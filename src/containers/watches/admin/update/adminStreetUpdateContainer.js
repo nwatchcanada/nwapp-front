@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import {
-    validateResidentialStep3Input, validateModalSaveInput
+    validateResidentialStep3Input,
+    validateModalSaveInput
 } from "../../../../validators/watchValidator";
 import AdminWatchStreetUpdateComponent from "../../../../components/watches/admin/update/adminStreetUpdateComponent";
 // import {
@@ -14,7 +15,11 @@ import { getDistrictReactSelectOptions } from '../../../../actions/districtActio
 import { getAreaCoordinatorReactSelectOptions } from '../../../../actions/areaCoordinatorActions';
 import { getTagReactSelectOptions } from "../../../../actions/tagActions";
 import { putWatchStreetMembership } from "../../../../actions/watchActions";
-import { BASIC_STREET_TYPE_CHOICES, STREET_DIRECTION_CHOICES } from "../../../../constants/api";
+import {
+    BASIC_STREET_TYPE_CHOICES,
+    STREET_DIRECTION_CHOICES,
+    STREET_NUMBER_RANGE_TYPE_CHOICES
+} from "../../../../constants/api";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
 
 
@@ -39,6 +44,7 @@ class AdminWatchStreetUpdateContainer extends Component {
             streetAddress: "",
             streetNumberStart: "",
             streetNumberEnd: "",
+            streetNumberRangeType: "",
             streetName: "",
             streetType: "",
             streetTypeLabel: "",
@@ -219,12 +225,31 @@ class AdminWatchStreetUpdateContainer extends Component {
             }
         }
 
+        // Perform client-side validation.
+        const { errors, isValid } = validateResidentialStep3Input(streetMembership);
+
+        // CASE 1 OF 2: Validation was a failure.
+        if (isValid === false) {
+            this.setState({ errors: errors, });
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop()
+            return;
+        }
+
+        // CASE 2 OF 2: Validation passed successfully.
+        // ...
+
         this.setState({
             showEditModal: true,
             errors: {},
             streetAddress: streetAddress,
             streetNumberStart: streetMembershipObj.streetNumberStart,
             streetNumberEnd: streetMembershipObj.streetNumberEnd,
+            streetNumberRangeType: streetMembershipObj.streetNumberRangeType,
             streetName: streetMembershipObj.streetName,
             streetType: streetMembershipObj.streetType,
             streetTypeLabel: streetMembershipObj.streetTypeLabel,
@@ -323,6 +348,7 @@ class AdminWatchStreetUpdateContainer extends Component {
                 streetAddress: streetAddress,
                 streetNumberStart: this.state.streetNumberStart,
                 streetNumberEnd: this.state.streetNumberEnd,
+                streetNumberRangeType: this.streetNumberRangeType,
                 streetName: this.state.streetName,
                 streetType: streetTypeOverride,
                 streetTypeLabel: streetTypeLabelOverride,
@@ -338,6 +364,7 @@ class AdminWatchStreetUpdateContainer extends Component {
                 streetMembership: a,
                 streetNumberStart: "", // Clear fields.
                 streetNumberEnd: "",
+                streetNumberRangeType: "",
                 streetName: "",
                 streetType: "",
                 streetTypeLabel: "",
@@ -372,6 +399,7 @@ class AdminWatchStreetUpdateContainer extends Component {
             streetAddress,
             streetNumberStart,
             streetNumberEnd,
+            streetNumberRangeType,
             streetName,
             streetType,
             streetTypeOther,
@@ -386,6 +414,7 @@ class AdminWatchStreetUpdateContainer extends Component {
             if (row.streetAddress === streetAddress) {
                 row.streetNumberStart = streetNumberStart;
                 row.streetNumberEnd = streetNumberEnd;
+                row.streetNumberRangeType = streetNumberRangeType;
                 row.streetName = streetName;
                 row.streetType = streetType;
                 row.streetTypeOther = streetTypeOther;
@@ -408,6 +437,7 @@ class AdminWatchStreetUpdateContainer extends Component {
             errors: {},
             streetNumberStart: "", // Clear fields.
             streetNumberEnd: "",
+            streetNumberRangeType: "",
             streetName: "",
             streetType: "",
             streetTypeOther: "",
@@ -423,10 +453,19 @@ class AdminWatchStreetUpdateContainer extends Component {
     render() {
         const {
             // Page related.
-            slug, tags, name, description, associate, district, streetMembership, errors, isLoading,
+            slug, tags, name, description, associate, district,
+            streetMembership, errors, isLoading,
 
             // Modal relate.
-            streetNumberStart, streetNumberEnd, streetName, streetType, streetTypeOther, streetDirection, showAddModal, showEditModal,
+            streetNumberStart,
+            streetNumberEnd,
+            streetNumberRangeType,
+            streetName,
+            streetType,
+            streetTypeOther,
+            streetDirection,
+            showAddModal,
+            showEditModal,
         } = this.state;
 
         const tagOptions = getTagReactSelectOptions(this.state.tagsData, "tags");
@@ -451,6 +490,8 @@ class AdminWatchStreetUpdateContainer extends Component {
                 showEditModal={showEditModal}
                 streetNumberStart={streetNumberStart}
                 streetNumberEnd={streetNumberEnd}
+                streetNumberRangeType={streetNumberRangeType}
+                streetNumberRangeTypeOptions={STREET_NUMBER_RANGE_TYPE_CHOICES}
                 streetName={streetName}
                 streetType={streetType}
                 streetTypeOptions={BASIC_STREET_TYPE_CHOICES}

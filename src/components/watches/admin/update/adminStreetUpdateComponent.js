@@ -17,9 +17,15 @@ export default class AdminWatchStreetUpdateComponent extends Component {
             onSelectChange, onMultiChange, streetMembership,
 
             // Modal related.
-            streetNumberStart, streetNumberEnd, streetName,
-            streetType, streetTypeOptions, streetTypeOther,
-            streetDirection, streetDirectionOptions,
+            streetNumberStart,
+            streetNumberEnd,
+            streetNumberRangeType,
+            streetNumberRangeTypeOptions,
+            streetName, streetType,
+            streetTypeOptions,
+            streetTypeOther,
+            streetDirection,
+            streetDirectionOptions,
             showAddModal, onAddClick,
             showEditModal,
             onRemoveClick, onEditClick, onSaveAddClick, onSaveEditClick, onModalCloseClick
@@ -75,6 +81,8 @@ export default class AdminWatchStreetUpdateComponent extends Component {
                             <EditModalComponent
                                 streetNumberStart={streetNumberStart}
                                 streetNumberEnd={streetNumberEnd}
+                                streetNumberRangeType={streetNumberRangeType}
+                                streetNumberRangeTypeOptions={streetNumberRangeTypeOptions}
                                 streetName={streetName}
                                 streetType={streetType}
                                 streetTypeOptions={streetTypeOptions}
