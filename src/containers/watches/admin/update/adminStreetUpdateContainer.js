@@ -348,7 +348,7 @@ class AdminWatchStreetUpdateContainer extends Component {
                 streetAddress: streetAddress,
                 streetNumberStart: this.state.streetNumberStart,
                 streetNumberEnd: this.state.streetNumberEnd,
-                streetNumberRangeType: this.streetNumberRangeType,
+                streetNumberRangeType: this.state.streetNumberRangeType,
                 streetName: this.state.streetName,
                 streetType: streetTypeOverride,
                 streetTypeLabel: streetTypeLabelOverride,

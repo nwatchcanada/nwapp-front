@@ -240,6 +240,7 @@ class AdminWatchCreateStep3Container extends Component {
                 streetAddress: streetAddress,
                 streetNumberStart: this.state.streetNumberStart,
                 streetNumberEnd: this.state.streetNumberEnd,
+                streetNumberRangeType: this.state.streetNumberRangeType,
                 streetName: this.state.streetName,
                 streetType: streetTypeOverride,
                 streetTypeLabel: streetTypeLabelOverride,
@@ -255,6 +256,7 @@ class AdminWatchCreateStep3Container extends Component {
                 streetMembership: a,
                 streetNumberStart: "", // Clear fields.
                 streetNumberEnd: "",
+                streetNumberRangeType: "",
                 streetName: "",
                 streetType: "",
                 streetTypeLabel: "",
@@ -289,6 +291,7 @@ class AdminWatchCreateStep3Container extends Component {
             errors: {},
             streetNumberStart: "", // Clear fields.
             streetNumberEnd: "",
+            streetNumberRangeType: "",
             streetName: "",
             streetType: "",
             streetTypeOther: "",
