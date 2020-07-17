@@ -9,7 +9,7 @@
     "humps": "^2.0.1",
     "leaflet": "^1.6.0",
     "leaflet-draw": "^1.0.4",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "msgpack-lite": "^0.1.26",
