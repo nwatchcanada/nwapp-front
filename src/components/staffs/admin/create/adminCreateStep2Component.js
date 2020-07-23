@@ -88,7 +88,7 @@ export default class AdminMemberCreateStep2Component extends Component {
 
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
-            		<h5>Would you like to add a NEW area coordinator?</h5>
+            		<h5>Would you like to add a NEW staff?</h5>
                     <a href="/admin/staffs/add/step-1">
             		    <button type="button" class="btn btn-lg btn-dark m-3">
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
