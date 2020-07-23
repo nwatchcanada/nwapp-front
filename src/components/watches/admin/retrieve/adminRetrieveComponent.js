@@ -132,6 +132,22 @@ export default class AdminWatchRetrieveComponent extends Component {
                                         }
                                     </td>
                                 </tr>
+                                {watch && watch.areaCoordinators &&
+                                    <tr>
+                                        <th scope="row" className="bg-light">Area Coordinator(s)</th>
+                                        <td>
+                                            <ul>
+                                                {watch && watch.areaCoordinators && watch.areaCoordinators.map(
+                                                    (ac, i) => <li>
+                                                        <a href={`/admin/area-coordinator/${ac.slug}`} target="_blank">
+                                                            {ac.firstName} {ac.lastName}&nbsp;<i className="fas fa-external-link-alt"></i>
+                                                        </a>
+                                                    </li>)
+                                                }
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
                                 {watch && watch.tags &&
                                     <tr>
                                         <th scope="row" className="bg-light">Tags</th>
