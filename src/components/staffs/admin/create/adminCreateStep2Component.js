@@ -94,7 +94,7 @@ export default class AdminMemberCreateStep2Component extends Component {
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
             		    </button>
                     </a>
-            		<a href="/admin/members/add/step-1" target="_blank">
+            		<a href="/admin/members/add/step-3" target="_blank">
             		    <button type="button" class="btn btn-lg btn-success m-3">
             		       <i class="fas fa-external-link-alt"></i>&nbsp;Yes - add a new member
             		    </button>
