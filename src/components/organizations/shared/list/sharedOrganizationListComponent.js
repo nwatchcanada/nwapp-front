@@ -8,6 +8,8 @@ import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.c
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 // import overlayFactory from 'react-bootstrap-table2-overlay';
+import { withTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
@@ -25,8 +27,8 @@ class RemoteListComponent extends Component {
             // Pagination
             page, sizePerPage, totalSize,
 
-            // Data
-            organizations,
+            // Data & Translations
+            organizations, t,
 
             // Everything else.
             onTableChange, isLoading
@@ -34,11 +36,11 @@ class RemoteListComponent extends Component {
 
         const columns = [{
             dataField: 'schemaName',
-            text: 'Schema',
+            text: t(`${'Schema'}`),
             sort: false,
         },{
             dataField: 'name',
-            text: 'name',
+            text: t(`${'Name'}`),
             sort: true
         },{
             dataField: 'schemaName',
@@ -80,7 +82,7 @@ class RemoteListComponent extends Component {
                 columns={ columns }
                 striped
                 bordered={ false }
-                noDataIndication="There are no organizations at the moment"
+                noDataIndication={t("There are no organizations at the moment")}
                 remote
                 onTableChange={ onTableChange }
                 pagination={ paginationFactory(paginationOption) }
@@ -95,6 +97,7 @@ class RemoteListComponent extends Component {
 
 function detailLinkFormatter(cell, row){
     const { schemaName, name } = row;
+
     const accessToken = getAccessTokenFromLocalStorage();
     const refreshToken = getRefreshTokenFromLocalStorage();
 
@@ -103,8 +106,8 @@ function detailLinkFormatter(cell, row){
 
     return (
         <div>
-            <a href={`/organization/${row.schemaName}/update`}><i className="fas fa-edit"></i>&nbsp;Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href={absoluteUrl}>View&nbsp;<i className="fas fa-chevron-right"></i></a>
+            <a href={`/organization/${row.schemaName}/update`}><i className="fas fa-edit"></i>&nbsp;{i18n.t("Edit")}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href={absoluteUrl}>{i18n.t("View")}&nbsp;<i className="fas fa-chevron-right"></i></a>
         </div>
     )
 }
@@ -116,11 +119,11 @@ class SharedOrganizationListComponent extends Component {
             // Pagination
             page, sizePerPage, totalSize,
 
-            // Data
-            tenantList,
+            // Data & Translations
+            tenantList, t,
 
             // Everything else...
-            flashMessage, onTableChange, isLoading
+            flashMessage, onTableChange, isLoading,
         } = this.props;
         const organizations = tenantList.results ? tenantList.results : [];
         return (
@@ -129,7 +132,7 @@ class SharedOrganizationListComponent extends Component {
 
                 <div className="d-flex align-items-stretch">
                     <main id="main" role="main">
-                <h1><i className="fas fa-building"></i>&nbsp;Organizations</h1>
+                <h1><i className="fas fa-building"></i>&nbsp;{t("Organizations")}</h1>
 
                 <FlashMessageComponent object={flashMessage} />
 
@@ -138,12 +141,12 @@ class SharedOrganizationListComponent extends Component {
                     <section className="row text-center placeholders">
                         <div className="col-sm-3 placeholder">
                             <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                <Link to="/organization/add/step-1" className="d-block link-ndecor" title="add">
+                                <Link to="/organization/add/step-1" className="d-block link-ndecor" title={`${t("Add")}`}>
                                     <span className="r-circle"><i className="fas fa-plus fa-3x"></i></span>
                                 </Link>
                             </div>
-                            <h4>Add</h4>
-                            <div className="text-muted">Add an organization</div>
+                            <h4>{t("Add")}</h4>
+                            <div className="text-muted">{t("Add an organization")}</div>
                         </div>
                         { /*
                         <div className="col-sm-3 placeholder">
@@ -177,6 +180,7 @@ class SharedOrganizationListComponent extends Component {
                     </section>
 
                     <RemoteListComponent
+                        t={t}
                         page={page}
                         sizePerPage={sizePerPage}
                         totalSize={totalSize}
@@ -193,4 +197,4 @@ class SharedOrganizationListComponent extends Component {
     }
 }
 
-export default SharedOrganizationListComponent;
+export default withTranslation()(SharedOrganizationListComponent);

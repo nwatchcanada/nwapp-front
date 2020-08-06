@@ -8,5 +8,13 @@
     "Please fill in the email": "Por favor complete el correo electrónico",
     "Email & Password are required.": "Se requiere correo electrónico y contraseña.",
     "Please fill in the password": "Por favor complete la contraseña",
-    "This E-Mail address is not registered.": "Esta dirección de email no está registrada."
+    "This E-Mail address is not registered.": "Esta dirección de email no está registrada.",
+    "Organizations": "Organizaciones",
+    "Add": "Añadir",
+    "Add an organization": "Agregar una organización",
+    "Schema": "Esquema",
+    "Name": "Nombre",
+    "Edit": "Editar",
+    "View": "Ver",
+    "There are no organizations at the moment": "No hay organizaciones en este momento"
 }

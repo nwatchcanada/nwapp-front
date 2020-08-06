@@ -8,5 +8,13 @@
     "Please fill in the email": "Please fill in the email",
     "Email & Password are required.": "Email & Password are required.",
     "Please fill in the password": "Please fill in the password",
-    "This E-Mail address is not registered.": "This E-Mail address is not registered."
+    "This E-Mail address is not registered.": "This E-Mail address is not registered.",
+    "Organizations": "Organizations",
+    "Add": "Add",
+    "Add an organization": "Add an organization",
+    "Schema": "Schema",
+    "Name": "Name",
+    "Edit": "Edit",
+    "View": "View",
+    "There are no organizations at the moment": "There are no organizations at the moment"
 }
