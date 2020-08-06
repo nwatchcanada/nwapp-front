@@ -212,18 +212,54 @@ export const BASIC_STREET_TYPE_CHOICES = [
     },{
         selectName: "streetType",
         value: 3,
-        label: "Drive"
+        label: "Boulevard"
     },{
         selectName: "streetType",
         value: 4,
-        label: "Road"
+        label: "Court"
     },{
         selectName: "streetType",
         value: 5,
-        label: "Street"
+        label: "Crescent"
     },{
         selectName: "streetType",
         value: 6,
+        label: "Drive"
+    },{
+        selectName: "streetType",
+        value: 7,
+        label: "Gate"
+    },{
+        selectName: "streetType",
+        value: 8,
+        label: "Grove"
+    },{
+        selectName: "streetType",
+        value: 9,
+        label: "Hill"
+    },{
+        selectName: "streetType",
+        value: 10,
+        label: "Lane"
+    },{
+        selectName: "streetType",
+        value: 11,
+        label: "Place"
+    },{
+        selectName: "streetType",
+        value: 12,
+        label: "Road"
+    },{
+        selectName: "streetType",
+        value: 13,
+        label: "Street"
+    },{
+        selectName: "streetType",
+        value: 14,
+        label: "Terrace"
+    },{
+        selectName: "streetType",
+        value: 15,
         label: "Way"
     },{
         selectName: "streetType",
