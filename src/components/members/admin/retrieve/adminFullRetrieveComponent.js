@@ -97,6 +97,10 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                     <th scope="row" className="bg-light">Type of Client</th>
                                     <td>{member && member.typeOfLabel}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Role</th>
+                                    <td>{member && member.roleLabel}</td>
+                                </tr>
 
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">
