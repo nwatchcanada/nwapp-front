@@ -6,7 +6,7 @@ import ReactModal from 'react-modal';
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import { BUSINESS_TYPE_OF } from "../../../../constants/api";
-import { UserTypeOfIconHelper } from "../../../../constants/helper";
+import { UserTypeOfIconHelper, UserRoleIconHelper } from "../../../../constants/helper";
 import "./adminFullRetrieveComponent.css"
 
 
@@ -110,6 +110,9 @@ export default class AdminMemberLiteRetrieveComponent extends Component {
                                 <h3>
                                     {member && member.fullName}
                                 </h3>
+                                <p className="text-muted">
+                                    <UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.typeOfLabel}&nbsp;|&nbsp;<UserRoleIconHelper roleId={member && member.roleId} />&nbsp;{member && member.roleLabel}
+                                </p>
                                 {member && member.address &&
                                     <p className="text-muted">
                                         {member.position

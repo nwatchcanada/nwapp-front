@@ -24,7 +24,14 @@ import {
    TASK_ITEM_STATE_CLOSED,
    BUSINESS_TYPE_OF,
    RESIDENCE_TYPE_OF,
-   COMMUNITY_CARES_TYPE_OF
+   COMMUNITY_CARES_TYPE_OF,
+   EXECUTIVE_ROLE_ID,
+   MANAGEMENT_ROLE_ID,
+   FRONTLINE_STAFF_ROLE_ID,
+   ASSOCIATE_ROLE_ID,
+   AREA_COORDINATOR_ROLE_ID,
+   MEMBER_ROLE_ID
+
 } from "./api";
 
 
@@ -160,6 +167,34 @@ export function UserTypeOfIconHelper({ typeOfId }){
             break;
         case COMMUNITY_CARES_TYPE_OF:
             return <i className="fas fa-university"></i>;
+            break;
+        default:
+            return <i className="fas fa-question"></i>;
+            break;
+    }
+}
+
+
+
+export function UserRoleIconHelper({ roleId }){
+    switch(roleId) {
+        case EXECUTIVE_ROLE_ID:
+            return <i className="fas fa-user-check"></i>;
+            break
+        case MANAGEMENT_ROLE_ID:
+            return <i className="fas fa-user-check"></i>;
+            break;
+        case FRONTLINE_STAFF_ROLE_ID:
+            return <i className="fas fa-user-check"></i>;
+            break;
+        case ASSOCIATE_ROLE_ID:
+            return <i className="fas fa-crown"></i>;
+            break;
+        case AREA_COORDINATOR_ROLE_ID:
+            return <i className="fas fa-horse-head"></i>;
+            break;
+        case MEMBER_ROLE_ID:
+            return <i className="fas fa-users"></i>;
             break;
         default:
             return <i className="fas fa-question"></i>;

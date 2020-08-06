@@ -7,7 +7,7 @@ import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageL
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { FlashMessageComponent } from "../../../flashMessageComponent";
 import { BUSINESS_TYPE_OF } from "../../../../constants/api";
-import { UserTypeOfIconHelper } from "../../../../constants/helper";
+import { UserTypeOfIconHelper, UserRoleIconHelper } from "../../../../constants/helper";
 
 
 export default class AdminMemberFullRetrieveComponent extends Component {
@@ -95,11 +95,11 @@ export default class AdminMemberFullRetrieveComponent extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Type of Client</th>
-                                    <td>{member && member.typeOfLabel}</td>
+                                    <td><UserTypeOfIconHelper typeOfId={member && member.typeOf} />&nbsp;{member && member.typeOfLabel}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="bg-light">Role</th>
-                                    <td>{member && member.roleLabel}</td>
+                                    <td><UserRoleIconHelper roleId={member && member.roleId} />&nbsp;{member && member.roleLabel}</td>
                                 </tr>
 
                                 <tr className="bg-dark">
