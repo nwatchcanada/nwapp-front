@@ -564,24 +564,33 @@ export const RESOURCE_TYPE_OF_CHOICES = [
  *  The reason why a user got demote
  */
 export const OTHER_DEMOTION_REASON = 1;
-export const SOME_REASON_DEMOTION_REASON = 2;
-export const ANOTHER_REASON_DEMOTION_REASON = 3;
+export const RETIRED_DEMOTION_REASON = 2;
+export const HEALTH_DEMOTION_REASON = 3;
+export const NO_LONGER_WANTS_ROLE_DEMOTION_REASON = 4;
+export const REPRIMAND_DEMOTION_REASON = 5;
 export const DEMOTION_REASON_CHOICES = [
     {
         selectName: "reason",
-        value: SOME_REASON_DEMOTION_REASON,
-        label: "Some reason"
+        value: RETIRED_DEMOTION_REASON,
+        label: "Retired"
     },{
         selectName: "reason",
-        value: ANOTHER_REASON_DEMOTION_REASON,
-        label: "Another reason"
+        value: HEALTH_DEMOTION_REASON,
+        label: "Health"
+    },{
+        selectName: "reason",
+        value: NO_LONGER_WANTS_ROLE_DEMOTION_REASON,
+        label: "No longer wants role"
+    },{
+        selectName: "reason",
+        value: REPRIMAND_DEMOTION_REASON,
+        label: "Reprimand"
     },{
         selectName: "reason",
         value: OTHER_DEMOTION_REASON,
         label: "Other"
     }
 ];
-
 
 /**
  *  The associate demotion roles.
