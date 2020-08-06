@@ -740,13 +740,13 @@ class AppContainer extends React.Component {
                                 STAFF
                                 -----
                                 */
-                                <Route path="/admin/staffs/add/step-1" exact component={requiresAuth(AdminStaffCreateStep1Container)} />
-                                <Route path="/admin/staffs/add/step-2" exact component={requiresAuth(AdminStaffCreateStep2Container)} />
-                                <Route path="/admin/staffs/add/step-3" exact component={requiresAuth(AdminStaffCreateStep3Container)} />
-                                <Route path="/admin/staffs/add/step-4" exact component={requiresAuth(AdminStaffCreateStep4Container)} />
-                                <Route path="/admin/staffs" exact component={requiresAuth(AdminStaffListContainer)} />
-                                <Route path="/admin/staffs/search" exact component={requiresAuth(AdminStaffSearchContainer)} />
-                                <Route path="/admin/staffs/search-results" exact component={requiresAuth(AdminStaffSearchResultContainer)} />
+                                <Route path="/admin/staff/add/step-1" exact component={requiresAuth(AdminStaffCreateStep1Container)} />
+                                <Route path="/admin/staff/add/step-2" exact component={requiresAuth(AdminStaffCreateStep2Container)} />
+                                <Route path="/admin/staff/add/step-3" exact component={requiresAuth(AdminStaffCreateStep3Container)} />
+                                <Route path="/admin/staff/add/step-4" exact component={requiresAuth(AdminStaffCreateStep4Container)} />
+                                <Route path="/admin/staff" exact component={requiresAuth(AdminStaffListContainer)} />
+                                <Route path="/admin/staff/search" exact component={requiresAuth(AdminStaffSearchContainer)} />
+                                <Route path="/admin/staff/search-results" exact component={requiresAuth(AdminStaffSearchResultContainer)} />
                                 <Route path="/admin/staff/:slug" exact component={requiresAuth(AdminStaffLiteRetrieveContainer)} />
                                 <Route path="/admin/staff/:slug/full" exact component={requiresAuth(AdminStaffFullRetrieveContainer)} />
                                 <Route path="/admin/staff/:slug/comments" exact component={requiresAuth(AdminStaffCommentContainer)} />

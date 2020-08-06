@@ -69,7 +69,7 @@ class AdminStaffCreateStep1Container extends Component {
 				if (isValid) {
 
                     localStorageSetObjectOrArrayItem('nwapp-staff-add-search', this.state);
-                    this.props.history.push("/admin/staffs/add/step-2");
+                    this.props.history.push("/admin/staff/add/step-2");
 
 
 				// CASE 2 OF 2: Validation was a failure.
@@ -105,7 +105,7 @@ class AdminStaffCreateStep1Container extends Component {
             if (isValid) {
 
                 localStorageSetObjectOrArrayItem('nwapp-staff-add-search', this.state);
-                this.props.history.push("/admin/staffs/add/step-2");
+                this.props.history.push("/admin/staff/add/step-2");
 
 
             // CASE 2 OF 2: Validation was a failure.
@@ -132,7 +132,7 @@ class AdminStaffCreateStep1Container extends Component {
             if (isValid) {
 
                 localStorageSetObjectOrArrayItem('nwapp-staff-add-search', this.state);
-                this.props.history.push("/admin/staffs/add/step-2");
+                this.props.history.push("/admin/staff/add/step-2");
 
 
             // CASE 2 OF 2: Validation was a failure.

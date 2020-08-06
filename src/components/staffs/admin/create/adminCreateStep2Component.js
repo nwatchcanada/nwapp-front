@@ -18,7 +18,7 @@ export default class AdminMemberCreateStep2Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/staffs"><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
+                            <Link to="/admin/staff"><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add Staff
@@ -31,7 +31,7 @@ export default class AdminMemberCreateStep2Component extends Component {
                 <div className="row">
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
-                            <Link to="/admin/staffs/add/step-1">
+                            <Link to="/admin/staff/add/step-1">
                                 <span className="num">1.</span><span className="">Search</span>
                             </Link>
                         </div>
@@ -64,7 +64,7 @@ export default class AdminMemberCreateStep2Component extends Component {
                                 <p className="lead">It appears nothing was found for your search results. Please try again by clicking below.</p>
 
                                 <p className="lead">
-                                    <Link className="btn btn-primary btn-lg" to="/admin/staffs/add/step-1">Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
+                                    <Link className="btn btn-primary btn-lg" to="/admin/staff/add/step-1">Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
                                 </p>
                             </div>
                             :<div className="card-group row">
@@ -89,7 +89,7 @@ export default class AdminMemberCreateStep2Component extends Component {
 
                 <div class="col-sm-12 mx-auto mt-3 mb-3 text-center">
             		<h5>Would you like to add a NEW staff?</h5>
-                    <a href="/admin/staffs/add/step-1">
+                    <a href="/admin/staff/add/step-1">
             		    <button type="button" class="btn btn-lg btn-dark m-3">
                             <i class="fas fa-arrow-circle-left"></i>&nbsp;No - use search again
             		    </button>
@@ -117,7 +117,7 @@ class CardComponent extends Component {
                 <div className="card bg-light">
                     <div className="card-body">
                         <h5 className="card-title">
-                            <Link to={`/admin/staffs/add/step-1`}>
+                            <Link to={`/admin/staff/add/step-1`}>
                                 {member.typeOf === 3 &&
                                     <strong><i className="fas fa-building"></i>&nbsp;{member.organizationName}</strong>
                                 }

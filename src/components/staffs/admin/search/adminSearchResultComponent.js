@@ -32,10 +32,10 @@ export default class AdminStaffSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/admin/staffs`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
+                           <Link to={`/admin/staff`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/admin/staffs/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
+                           <Link to={`/admin/staff/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-list"></i>&nbsp;Search Results
@@ -57,7 +57,7 @@ export default class AdminStaffSearchResultComponent extends Component {
                                 <p className="lead">It appears nothing was found for your search results. Please try again by clicking below.</p>
 
                                 <p className="lead">
-                                    <Link className="btn btn-primary btn-lg" to="/admin/staffs/search">Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
+                                    <Link className="btn btn-primary btn-lg" to="/admin/staff/search">Try Again&nbsp;<i class="fas fa-chevron-right"></i></Link>
                                 </p>
                             </div>
                             :<div className="card-group row">

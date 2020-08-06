@@ -76,7 +76,7 @@ class AdminStaffCreateStep3Container extends Component {
     onSuccessfulSubmissionCallback(staff) {
         this.setState({ errors: {}, isLoading: true, })
         localStorage.setItem("nwapp-staff-add-roleId", FRONTLINE_STAFF_ROLE_ID);
-        this.props.history.push("/admin/staffs/add/step-4");
+        this.props.history.push("/admin/staff/add/step-4");
     }
 
     onFailedSubmissionCallback(errors) {

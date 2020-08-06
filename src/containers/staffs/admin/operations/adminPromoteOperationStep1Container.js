@@ -54,7 +54,7 @@ class AdminStaffPromoteOperationStep1Container extends Component {
     onSuccessfulSubmissionCallback(staff) {
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "Staff has been successfully created.");
-        this.props.history.push("/admin/staffs");
+        this.props.history.push("/admin/staff");
     }
 
     onFailedSubmissionCallback(errors) {

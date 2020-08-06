@@ -19,7 +19,7 @@ class AdminStaffCreateStep1Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/staffs`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
+                            <Link to={`/admin/staff`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add Staff
@@ -98,7 +98,7 @@ class AdminStaffCreateStep1Component extends Component {
                             <i className="fas fa-times"></i> Advanced Search
                         </button>
                         <div className="col-md-12 text-center">
-                            <Link to="/admin/staffs" className="btn btn-orange btn-lg mt-4 pl-4 pr-4">
+                            <Link to="/admin/staff" className="btn btn-orange btn-lg mt-4 pl-4 pr-4">
                                 <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                             </Link>
                         </div>

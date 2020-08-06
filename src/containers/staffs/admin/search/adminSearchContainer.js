@@ -69,7 +69,7 @@ class AdminStaffListContainer extends Component {
 				if (isValid) {
 
 					localStorageSetObjectOrArrayItem('workery-search-staff-details', this.state);
-					this.props.history.push("/admin/staffs/search-results");
+					this.props.history.push("/admin/staff/search-results");
 
 
 				// CASE 2 OF 2: Validation was a failure.
@@ -105,7 +105,7 @@ class AdminStaffListContainer extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('workery-search-staff-details', this.state);
-                    this.props.history.push("/admin/staffs/search-results");
+                    this.props.history.push("/admin/staff/search-results");
 
 
             // CASE 2 OF 2: Validation was a failure.
@@ -132,7 +132,7 @@ class AdminStaffListContainer extends Component {
             if (isValid) {
 
                     localStorageSetObjectOrArrayItem('workery-search-staff-details', this.state);
-                    this.props.history.push("/admin/staffs/search-results");
+                    this.props.history.push("/admin/staff/search-results");
 
 
             // CASE 2 OF 2: Validation was a failure.

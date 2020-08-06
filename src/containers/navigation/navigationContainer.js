@@ -97,7 +97,7 @@ const AUTH_MANAGEMENT_STAFF_MENU_DATA = [
         id: "full-staff",
         icon: "user-check",
         title: "Staff",
-        url: "/admin/staffs"
+        url: "/admin/staff"
     },{
         id: "full-settings",
         icon: "cogs",
@@ -216,7 +216,7 @@ const AUTH_FRONTLINE_STAFF_MENU_DATA = [
         id: "full-staff",
         icon: "user-check",
         title: "Staff",
-        url: "/admin/staffs"
+        url: "/admin/staff"
     },
     // {
     //     id: "full-settings", // https://github.com/nwatchcanada/nwapp-front/issues/181

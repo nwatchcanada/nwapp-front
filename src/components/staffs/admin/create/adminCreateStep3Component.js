@@ -27,7 +27,7 @@ export default class AdminStaffCreateStep3Component extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/staffs"><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
+                            <Link to="/admin/staff"><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-plus"></i>&nbsp;Add Staff
@@ -41,11 +41,11 @@ export default class AdminStaffCreateStep3Component extends Component {
                     <div className="step-navigation">
                         <div id="step-1" className="st-grey">
                             <span className="num">1.</span><span className="">
-                                <Link to={`/admin/staffs/add/step-1`}>Selection</Link>
+                                <Link to={`/admin/staff/add/step-1`}>Selection</Link>
                             </span>
                         </div>
                         <div id="step-2" className="st-grey">
-                            <Link to={`/admin/staffs/add/step-2`}>
+                            <Link to={`/admin/staff/add/step-2`}>
                                 <span className="num">2.</span><span className="">Results</span>
                             </Link>
                         </div>
@@ -122,7 +122,7 @@ export default class AdminStaffCreateStep3Component extends Component {
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
                                     Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
-                                <Link to={`/admin/staffs/add/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
+                                <Link to={`/admin/staff/add/step-2`} className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>

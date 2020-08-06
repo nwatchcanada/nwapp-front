@@ -133,7 +133,7 @@ class AdminStaffCreateStep2Container extends Component {
             { isLoading: true },
             ()=>{
                 localStorage.setItem('nwapp-staff-add-member', memberSlug);
-                this.props.history.push("/admin/staffs/add/step-3");
+                this.props.history.push("/admin/staff/add/step-3");
             }
         );
     }
