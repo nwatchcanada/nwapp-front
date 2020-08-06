@@ -16,5 +16,14 @@
     "Name": "Nombre",
     "Edit": "Editar",
     "View": "Ver",
-    "There are no organizations at the moment": "No hay organizaciones en este momento"
+    "There are no organizations at the moment": "No hay organizaciones en este momento",
+    "Dashboard": "Tablero",
+    "Members": "Miembros",
+    "View Members": "Ver miembros",
+    "Watches": "Relojes",
+    "View Watches": "Ver relojes",
+    "Associates": "Asociados",
+    "View Associates": "Ver asociados",
+    "Tasks": "Tareas",
+    "View Tasks": "Ver tareas"
 }

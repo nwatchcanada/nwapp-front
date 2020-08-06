@@ -9,11 +9,11 @@ import {
     TaskItemStateLabelHelper
 } from "../../constants/helper";
 import { BootstrapPageLoadingAnimation } from "../bootstrap/bootstrapPageLoadingAnimation";
+import { withTranslation } from 'react-i18next';
 
-
-export default class StaffDashboardComponent extends Component {
+class StaffDashboardComponent extends Component {
     render() {
-        const { dashboardData, isLoading } = this.props;
+        const { dashboardData, isLoading, t } = this.props;
         const {
             activeMembersCount,
             activeWatchesCount,
@@ -27,51 +27,51 @@ export default class StaffDashboardComponent extends Component {
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
                 <div className="d-flex align-items-stretch">
                     <main id="main">
-                        <h1><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</h1>
+                        <h1><i className="fas fa-tachometer-alt"></i>&nbsp;{t("Dashboard")}</h1>
                         <section className="row text-center placeholders">
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-pink">
-                                    <Link to="/admin/members" className="d-block link-ndecor" title="Members">
+                                    <Link to="/admin/members" className="d-block link-ndecor" title={`${t("Members")}`}>
                                         <h1 className="circle-title">
                                             {activeMembersCount && activeMembersCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}
                                         </h1>
                                     </Link>
                                 </div>
-                                <h4><i className="fas fa-users"></i>&nbsp;Members</h4>
-                                <div className="text-muted">View Members</div>
+                                <h4><i className="fas fa-users"></i>&nbsp;{t("Members")}</h4>
+                                <div className="text-muted">{t("View Members")}</div>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dgreen">
-                                    <Link to="/admin/watches" className="d-block link-ndecor" title="Watches">
+                                    <Link to="/admin/watches" className="d-block link-ndecor" title={`${t("Watches")}`}>
                                         <h1 className="circle-title">
                                             {activeWatchesCount && activeWatchesCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}
                                         </h1>
                                     </Link>
                                 </div>
-                                <h4><i className="fas fa-shield-alt"></i>&nbsp;Watches</h4>
-                                <span className="text-muted">View Watches</span>
+                                <h4><i className="fas fa-shield-alt"></i>&nbsp;{t("Watches")}</h4>
+                                <span className="text-muted">{t("View Watches")}</span>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-dblue">
-                                    <Link to="/admin/associates" className="d-block link-ndecor" title="Associates">
+                                    <Link to="/admin/associates" className="d-block link-ndecor" title={`${t("Associates")}`}>
                                         <h1 className="circle-title">
                                             {activeAssociatesCount && activeAssociatesCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}
                                         </h1>
                                     </Link>
                                 </div>
-                                <h4><i className="fas fa-crown"></i>&nbsp;Associates</h4>
-                                <span className="text-muted">View Associates</span>
+                                <h4><i className="fas fa-crown"></i>&nbsp;{t("Associates")}</h4>
+                                <span className="text-muted">{t("View Associates")}</span>
                             </div>
                             <div className="col-sm-3 placeholder">
                                 <div className="rounded-circle mx-auto mt-4 mb-4 circle-200 bg-orange">
-                                    <Link to="/admin/tasks" className="d-block link-ndecor" title="Items">
+                                    <Link to="/admin/tasks" className="d-block link-ndecor" title={`${t("Tasks")}`}>
                                         <h1 className="circle-title">
                                             {activeTasksCount && activeTasksCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}
                                         </h1>
                                     </Link>
                                 </div>
-                                <h4><i className="fas fa-tasks"></i>&nbsp;Tasks</h4>
-                                <span className="text-muted">View Tasks</span>
+                                <h4><i className="fas fa-tasks"></i>&nbsp;{t("Tasks")}</h4>
+                                <span className="text-muted">{t("View Tasks")}</span>
                             </div>
                         </section>
 
@@ -172,3 +172,5 @@ function recentTaskLinkFormatter(cell, row){
         </Link>
     )
 }
+
+export default withTranslation()(StaffDashboardComponent);

@@ -16,5 +16,14 @@
     "Name": "Name",
     "Edit": "Edit",
     "View": "View",
-    "There are no organizations at the moment": "There are no organizations at the moment"
+    "There are no organizations at the moment": "There are no organizations at the moment",
+    "Dashboard": "Dashboard",
+    "Members": "Members",
+    "View Members": "View Members",
+    "Watches": "Watches",
+    "View Watches": "View Watches",
+    "Associates": "Associates",
+    "View Associates": "View Associates",
+    "Tasks": "Tasks",
+    "View Tasks": "View Tasks"
 }
