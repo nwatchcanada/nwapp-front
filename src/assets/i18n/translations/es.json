@@ -1,0 +1,12 @@
+{
+    "Sign In": "Registrarse",
+    "Email Address": "Dirección de correo electrónico",
+    "Password": "Contraseña",
+    "Forgot Password?": "¿Se te olvidó tu contraseña?",
+    "You have successfully logged out.": "Has terminado tu sesion satisfactoriamente.",
+    "This field is required": "Este campo es requerido",
+    "Please fill in the email": "Por favor complete el correo electrónico",
+    "Email & Password are required.": "Se requiere correo electrónico y contraseña.",
+    "Please fill in the password": "Por favor complete la contraseña",
+    "This E-Mail address is not registered.": "Esta dirección de email no está registrada."
+}

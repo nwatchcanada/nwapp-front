@@ -7,6 +7,7 @@ import AppContainer from "./containers/appContainer"
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
+import './i18n'
 
 import 'pace-js'
 import 'pace-js/themes/green/pace-theme-minimal.css'

@@ -51,6 +51,9 @@ npm install --save react-bootstrap-table2-toolkit
 npm install --save dompurify
 npm install --save leaflet react-leaflet
 npm install --save leaflet-draw react-leaflet-draw
+npm install --save i18next
+npm install --save i18next-browser-languagedetector
+npm install --save react-i18next
 ```
 
 ## What ``Chrome Plugins`` should I use?
