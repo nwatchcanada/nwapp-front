@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
 
+import { BootstrapErrorsProcessingAlert } from "../bootstrap/bootstrapAlert";
+import { BootstrapPageLoadingAnimation } from "../bootstrap/bootstrapPageLoadingAnimation";
 import { FlashMessageComponent } from "../flashMessageComponent";
 
 
 class Report01Component extends Component {
     render() {
-        const { flashMessage, t } = this.props;
+        const { errors, isLoading, onClick, flashMessage, t } = this.props;
         return (
             <div className="container-fluid">
                 <div className="d-flex align-items-stretch">
@@ -32,6 +34,18 @@ class Report01Component extends Component {
                         <h1><i className="fas fa-crown"></i>&nbsp;{t("Associate Report")}</h1>
                         <div className="row">
                             <div className="col-md-12">
+                                <p>There are no fields to choose from, simple click <strong>download</strong> to generate the report and download.</p>
+
+                                <BootstrapErrorsProcessingAlert errors={errors} />
+
+                                <div className="form-group">
+                                    <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                        <i className="fas fa-cloud-download-alt"></i>&nbsp;Download
+                                    </button>
+                                    <Link to={`/reports`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                        <i className="fas fa-arrow-circle-left"></i> Back
+                                    </Link>
+                                </div>
 
                             </div>
                         </div>

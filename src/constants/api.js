@@ -62,6 +62,8 @@ export const WORKERY_TASK_ITEM_DETAIL_API_ENDPOINT = '/v1/task-item/<uuid>';
 
 export const WORKERY_UNIFIED_SEARCH_ITEM_LIST_API_ENDPOINT = '/v1/search';
 
+export const NWAPP_REPORT_ONE_CSV_DOWNLOAD_API_ENDPOINT = '/v1/report/1/csv-download';
+
 /**
  *  The full address of certain API endpoints from our backend server.
  */
