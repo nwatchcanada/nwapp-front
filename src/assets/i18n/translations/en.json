@@ -25,5 +25,9 @@
     "Associates": "Associates",
     "View Associates": "View Associates",
     "Tasks": "Tasks",
-    "View Tasks": "View Tasks"
+    "View Tasks": "View Tasks",
+    "Announcements": "Announcements",
+    "There are no announcements. Feel free to add one.": "There are no announcements. Feel free to add one.",
+    "Latest Tasks": "Latest Tasks",
+    "There are latest tasks. Please check back later to see if the system created a task.": "There are latest tasks. Please check back later to see if the system created a task."
 }

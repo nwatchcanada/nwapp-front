@@ -77,12 +77,12 @@ class StaffDashboardComponent extends Component {
 
                         {announcements && announcements.length <= 0
                             ? <div className="jumbotron">
-                                <h1 className="display-4"><i className="fas fa-bullhorn"></i>&nbsp;Announcements</h1>
-                                <p className="lead">There are no announcements. Feel free to add one.</p>
+                                <h1 className="display-4"><i className="fas fa-bullhorn"></i>&nbsp;{t("Announcements")}</h1>
+                                <p className="lead">{t("There are no announcements. Feel free to add one.")}</p>
 
                                 <p className="lead">
                                     <Link className="btn btn-success btn-lg" to="/admin/settings/announcement/add/step-1">
-                                        <i className="fas fa-plus"></i>&nbsp;Add
+                                        <i className="fas fa-plus"></i>&nbsp;{t("Add")}
                                     </Link>
                                 </p>
                             </div>
@@ -92,8 +92,8 @@ class StaffDashboardComponent extends Component {
                         {latestTasks && latestTasks.length > 0
                             ? <RecentTaskListComponent latestTasks={latestTasks} />
                             : <div className="jumbotron">
-                                <h1 className="display-4"><i className="fas fa-tasks"></i>&nbsp;Latest Tasks</h1>
-                                <p className="lead">There are latest tasks. Please check back later to see if the system created a task.</p>
+                                <h1 className="display-4"><i className="fas fa-tasks"></i>&nbsp;{t("Latest Tasks")}</h1>
+                                <p className="lead">{t("There are latest tasks. Please check back later to see if the system created a task.")}</p>
                             </div>
                         }
                     </main>
