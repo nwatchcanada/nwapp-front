@@ -40,10 +40,10 @@ class Report01Component extends Component {
 
                                 <div className="form-group">
                                     <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                        <i className="fas fa-cloud-download-alt"></i>&nbsp;Download
+                                        <i className="fas fa-cloud-download-alt"></i>&nbsp;{t("Download")}
                                     </button>
-                                    <Link to={`/reports`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
-                                        <i className="fas fa-arrow-circle-left"></i> Back
+                                    <Link to={`/admin/reports`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
+                                        <i className="fas fa-arrow-circle-left"></i>&nbsp;{t("Back")}
                                     </Link>
                                 </div>
 
