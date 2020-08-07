@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { withTranslation } from 'react-i18next';
 
 import { FlashMessageComponent } from "../flashMessageComponent";
 
 
 class Report01Component extends Component {
     render() {
-        const { flashMessage } = this.props;
+        const { flashMessage, t } = this.props;
         return (
             <div className="container-fluid">
                 <div className="d-flex align-items-stretch">
@@ -15,20 +16,20 @@ class Report01Component extends Component {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item">
-                                   <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
+                                   <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;{t("Dashboard")}</Link>
                                 </li>
                                 <li className="breadcrumb-item">
-                                   <Link to="/admin/reports"><i className="fas fa-book"></i>&nbsp;Reports</Link>
+                                   <Link to="/admin/reports"><i className="fas fa-book"></i>&nbsp;{t("Reports")}</Link>
                                 </li>
                                 <li className="breadcrumb-item active" aria-current="page">
-                                    <i className="fas fa-crown"></i>&nbsp;Associate Report
+                                    <i className="fas fa-crown"></i>&nbsp;{t("Associate Report")}
                                 </li>
                             </ol>
                         </nav>
 
                         <FlashMessageComponent object={flashMessage} />
 
-                        <h1><i className="fas fa-crown"></i>&nbsp;Associate Report</h1>
+                        <h1><i className="fas fa-crown"></i>&nbsp;{t("Associate Report")}</h1>
                         <div className="row">
                             <div className="col-md-12">
 
@@ -42,4 +43,4 @@ class Report01Component extends Component {
     }
 }
 
-export default Report01Component;
+export default withTranslation()(Report01Component);
