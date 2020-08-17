@@ -7,7 +7,7 @@ import { BootstrapPageLoadingAnimation } from "../bootstrap/bootstrapPageLoading
 import { FlashMessageComponent } from "../flashMessageComponent";
 
 
-class Report07Component extends Component {
+class Report08Component extends Component {
     render() {
         const { errors, isLoading, onClick, flashMessage, t } = this.props;
         return (
@@ -24,14 +24,14 @@ class Report07Component extends Component {
                                    <Link to="/admin/reports"><i className="fas fa-book"></i>&nbsp;{t("Reports")}</Link>
                                 </li>
                                 <li className="breadcrumb-item active" aria-current="page">
-                                    <i className="fas fa-crown"></i>&nbsp;{t("Residential Report")}
+                                    <i className="fas fa-crown"></i>&nbsp;{t("Associate Report")}
                                 </li>
                             </ol>
                         </nav>
 
                         <FlashMessageComponent object={flashMessage} />
 
-                        <h1><i className="fas fa-crown"></i>&nbsp;{t("Residential Report")}</h1>
+                        <h1><i className="fas fa-crown"></i>&nbsp;{t("Associate Report")}</h1>
                         <div className="row">
                             <div className="col-md-12">
                                 <p>There are no fields to choose from, simple click <strong>download</strong> to generate the report and download.</p>
@@ -57,4 +57,4 @@ class Report07Component extends Component {
     }
 }
 
-export default withTranslation()(Report07Component);
+export default withTranslation()(Report08Component);

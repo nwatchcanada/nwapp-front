@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
-import Report07Component from "../../components/reports/report07Component";
+import Report08Component from "../../components/reports/report08Component";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
-import { NWAPP_REPORT_SEVEN_CSV_DOWNLOAD_API_ENDPOINT } from "../../constants/api";
+import { NWAPP_REPORT_EIGHT_CSV_DOWNLOAD_API_ENDPOINT } from "../../constants/api";
 import { getSubdomain } from "../../helpers/urlUtility";
 
 
-class Report07Container extends Component {
+class Report08Container extends Component {
     /**
      *  Initializer & Utility
      *------------------------------------------------------------
@@ -92,7 +92,7 @@ class Report07Container extends Component {
 
         // Extract the selected options and convert to ISO string format, also
         // create our URL to be used for submission.
-        const url = process.env.REACT_APP_API_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + "/api" + NWAPP_REPORT_SEVEN_CSV_DOWNLOAD_API_ENDPOINT;
+        const url = process.env.REACT_APP_API_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + "/api" + NWAPP_REPORT_EIGHT_CSV_DOWNLOAD_API_ENDPOINT;
         console.log(url);
 
         // The following code will open up a new browser tab and load up the
@@ -118,7 +118,7 @@ class Report07Container extends Component {
         } = this.state;
 
         return (
-            <Report07Component
+            <Report08Component
                 isLoading={isLoading}
                 errors={errors}
                 onClick={this.onClick}
@@ -147,4 +147,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Report07Container);
+)(Report08Container);
