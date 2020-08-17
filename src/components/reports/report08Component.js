@@ -24,14 +24,14 @@ class Report08Component extends Component {
                                    <Link to="/admin/reports"><i className="fas fa-book"></i>&nbsp;{t("Reports")}</Link>
                                 </li>
                                 <li className="breadcrumb-item active" aria-current="page">
-                                    <i className="fas fa-crown"></i>&nbsp;{t("Associate Report")}
+                                    <i className="fas fa-crown"></i>&nbsp;{t("TODO Report")}
                                 </li>
                             </ol>
                         </nav>
 
                         <FlashMessageComponent object={flashMessage} />
 
-                        <h1><i className="fas fa-crown"></i>&nbsp;{t("Associate Report")}</h1>
+                        <h1><i className="fas fa-crown"></i>&nbsp;{t("TODO Report")}</h1>
                         <div className="row">
                             <div className="col-md-12">
                                 <p>There are no fields to choose from, simple click <strong>download</strong> to generate the report and download.</p>
