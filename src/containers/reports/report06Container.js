@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Scroll from 'react-scroll';
 
 import Report06Component from "../../components/reports/report06Component";
 import { clearFlashMessage } from "../../actions/flashMessageActions";
+import { NWAPP_REPORT_SIX_CSV_DOWNLOAD_API_ENDPOINT } from "../../constants/api";
+import { getSubdomain } from "../../helpers/urlUtility";
 
 
 class Report06Container extends Component {
@@ -10,6 +13,18 @@ class Report06Container extends Component {
      *  Initializer & Utility
      *------------------------------------------------------------
      */
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            errors: {},
+            isLoading: false
+        }
+
+        this.onClick = this.onClick.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
+    }
 
     /**
      *  Component Life-cycle Management
@@ -37,12 +52,24 @@ class Report06Container extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessfulSubmissionCallback(profile) {
-        console.log(profile);
+    onSuccessfulSubmissionCallback(staff) {
+        // --- Update the GUI ---
+        this.setState({ errors: {}, isLoading: true, })
+
+        // --- Move to our next page ---
+        this.props.history.push("/reports");
     }
 
     onFailedSubmissionCallback(errors) {
-        console.log(errors);
+        this.setState({
+            errors: errors
+        })
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
     }
 
     /**
@@ -50,6 +77,35 @@ class Report06Container extends Component {
      *------------------------------------------------------------
      */
 
+    onClick(e) {
+        // Prevent the default HTML form submit code to run on the browser side.
+        e.preventDefault();
+
+        // Disable the button so the user cannot double click and download
+        // the file multiple times.
+        this.setState({ isLoading: true, })
+
+        // DEVELOPERS NOTE:
+        // Because we have a multi-tenant architecture, we need to make calls
+        // to the specific tenant for the CSV download API to work.
+        const schema = getSubdomain();
+
+        // Extract the selected options and convert to ISO string format, also
+        // create our URL to be used for submission.
+        const url = process.env.REACT_APP_API_PROTOCOL + "://" + schema + "." + process.env.REACT_APP_API_DOMAIN + "/api" + NWAPP_REPORT_SIX_CSV_DOWNLOAD_API_ENDPOINT;
+        console.log(url);
+
+        // The following code will open up a new browser tab and load up the
+        // URL that you inputted.
+        var win = window.open(url, '_blank');
+        win.focus();
+
+        // Add minor delay and then run to remove the button ``disable`` state
+        // so the user is able to click the download button again.
+        setTimeout(() => {
+            this.setState({ isLoading: false, errors: [], })
+        }, 100); // 0.10 seconds.
+    }
 
     /**
      *  Main render function
@@ -57,25 +113,15 @@ class Report06Container extends Component {
      */
 
     render() {
-        const tableData = [{
-            'slug': 'Argyle',
-            'number': 1,
-            'name': 'Argyle',
-            'absoluteUrl': '/report/argyle'
-        },{
-            'slug': 'byron',
-            'number': 2,
-            'name': 'Byron',
-            'absoluteUrl': '/report/byron'
-        },{
-            'slug': 'carling',
-            'number': 3,
-            'name': 'Carling',
-            'absoluteUrl': '/report/carling'
-        }];
+        const {
+            errors, isLoading
+        } = this.state;
+
         return (
             <Report06Component
-                tableData={tableData}
+                isLoading={isLoading}
+                errors={errors}
+                onClick={this.onClick}
                 flashMessage={this.props.flashMessage}
             />
         );

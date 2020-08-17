@@ -67,6 +67,7 @@ export const NWAPP_REPORT_TWO_CSV_DOWNLOAD_API_ENDPOINT = '/v1/report/2/csv-down
 export const NWAPP_REPORT_THREE_CSV_DOWNLOAD_API_ENDPOINT = '/v1/report/3/csv-download';
 export const NWAPP_REPORT_FOUR_CSV_DOWNLOAD_API_ENDPOINT = '/v1/report/4/csv-download';
 export const NWAPP_REPORT_FIVE_CSV_DOWNLOAD_API_ENDPOINT = '/v1/report/5/csv-download';
+export const NWAPP_REPORT_SIX_CSV_DOWNLOAD_API_ENDPOINT = '/v1/report/6/csv-download';
 
 /**
  *  The full address of certain API endpoints from our backend server.
