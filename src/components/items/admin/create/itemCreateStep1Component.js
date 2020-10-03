@@ -104,6 +104,7 @@ class ItemCreateStep1Component extends Component {
                             </div>
                         </div>
                     </div>
+                    {/*
                     <div className="col-sm-3">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
@@ -118,6 +119,7 @@ class ItemCreateStep1Component extends Component {
                             </div>
                         </div>
                     </div>
+                    */}
                     <div className="col-sm-3">
                         <div className="card box-shadow text-center mx-auto">
                             <div className="card-custom-top-2">
