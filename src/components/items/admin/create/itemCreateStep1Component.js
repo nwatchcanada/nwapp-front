@@ -90,20 +90,6 @@ class ItemCreateStep1Component extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-3">
-                        <div className="card box-shadow text-center mx-auto">
-                            <div className="card-custom-top-2">
-                                <i className="fas fa-exclamation-circle fa-3x"></i>
-                            </div>
-                            <div className="card-body">
-                                <h3 className="card-title">Concern</h3>
-                                <p className="card-text">Add a concern</p>
-                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, CONCERN_ITEM_TYPE_OF); } }>
-                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     {/*
                     <div className="col-sm-3">
                         <div className="card box-shadow text-center mx-auto">
@@ -157,6 +143,20 @@ class ItemCreateStep1Component extends Component {
                                 <h3 className="card-title">Resource</h3>
                                 <p className="card-text">Add a resource posting.</p>
                                 <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, RESOURCE_ITEM_TYPE_OF); } }>
+                                    Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className="card box-shadow text-center mx-auto">
+                            <div className="card-custom-top-2">
+                                <i className="fas fa-comment fa-3x"></i>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title">Feedback</h3>
+                                <p className="card-text">Add a feedback</p>
+                                <button className="btn btn-success btn-lg" onClick={ (event)=>{ onClick(event, CONCERN_ITEM_TYPE_OF); } }>
                                     Select&nbsp;<i className="fas fa-arrow-circle-right"></i>
                                 </button>
                             </div>

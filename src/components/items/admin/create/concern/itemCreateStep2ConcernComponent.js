@@ -22,7 +22,7 @@ class ItemCreateStep2ConcernComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-plus"></i>&nbsp;Add Concern Item</h1>
+                <h1><i className="fas fa-plus"></i>&nbsp;Add Feedback Item</h1>
 
                 <div className="row">
                     <div className="step-navigation">
@@ -33,17 +33,8 @@ class ItemCreateStep2ConcernComponent extends Component {
                         </div>
                         <div id="step-2" className="st-grey active">
                             <strong>
-                                <span className="num">2.</span><span className="">Notice</span>
+                                <span className="num">2.</span><span className="">Message</span>
                             </strong>
-                        </div>
-                        <div id="step-3" className="st-grey">
-                            <span className="num">3.</span><span className="">Category</span>
-                        </div>
-                        <div id="step-4" className="st-grey">
-                            <span className="num">4.</span><span className="">Details</span>
-                        </div>
-                        <div id="step-5" className="st-grey">
-                            <span className="num">5.</span><span className="">Photo(s)</span>
                         </div>
                     </div>
                 </div>
@@ -51,16 +42,15 @@ class ItemCreateStep2ConcernComponent extends Component {
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-exclamation-circle"></i>&nbsp;Concern Form</h1>
-                            <p>This section is for sending feedback to Neighbourhood Watch on its members and operations. Due to the number of messages, it may not be possible to respond personally to each one, but all messages will be read.</p>                            <div className="form-group">
-                                <button className="btn btn-primary btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
-                                    Next&nbsp;<i className="fas fa-arrow-circle-right"></i>
-                                </button>
+                            <h1><i className="fas fa-comment"></i>&nbsp;Feedback Form</h1>
+                            <h3>Do you have feedback, questions or concerns?</h3>
+                            <p>Please email your concern at <a href="mailto:info@nwlondon.ca" target="_blank">info@nwlondon.ca&nbsp;<i className="fas fa-external-link-alt"></i></a></p>
+                            <p>Thank you</p>
+                            <div className="form-group">
                                 <Link to="/admin/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">
                                     <i className="fas fa-arrow-circle-left"></i> Back
                                 </Link>
                             </div>
-
                         </form>
                     </div>
                 </div>
