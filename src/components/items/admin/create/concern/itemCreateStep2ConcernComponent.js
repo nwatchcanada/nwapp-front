@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 class ItemCreateStep2ConcernComponent extends Component {
     render() {
-        const { onClick, isLoading } = this.props;
+        const { email, onClick, isLoading } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -44,7 +44,7 @@ class ItemCreateStep2ConcernComponent extends Component {
                         <form>
                             <h1><i className="fas fa-comment"></i>&nbsp;Feedback Form</h1>
                             <h3>Do you have feedback, questions or concerns?</h3>
-                            <p>Please email your concern at <a href="mailto:info@nwlondon.ca" target="_blank">info@nwlondon.ca&nbsp;<i className="fas fa-external-link-alt"></i></a></p>
+                            <p>Please email your concern at <a href={`mailto:${email}`} target="_blank">{email}&nbsp;<i className="fas fa-external-link-alt"></i></a></p>
                             <p>Thank you</p>
                             <div className="form-group">
                                 <Link to="/admin/item/add/step-1" className="btn btn-secondary btn-lg mt-4 float-left pl-4 pr-4">

@@ -73,6 +73,7 @@ class ItemCreateStep2ConcernContainer extends Component {
     render() {
         return (
             <ItemCreateStep2ConcernComponent
+                email={this.props.tenantDetail.email}
                 onClick={this.onClick}
             />
         );
@@ -81,6 +82,7 @@ class ItemCreateStep2ConcernContainer extends Component {
 
 const mapStateToProps = function(store) {
     return {
+        tenantDetail: store.tenantDetailState,
         user: store.userState,
         itemTypeList: store.itemTypeListState,
     };
