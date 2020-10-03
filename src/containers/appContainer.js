@@ -291,6 +291,9 @@ import AdminItemTypeArchiveOperationContainer from "./settings/admin/itemType/op
 import AdminOrganizationSettingRetrieveContainer from "./settings/admin/organization/retrieve/retrieveContainer";
 import AdminOrganizationSettingUpdateContainer from "./settings/admin/organization/update/updateContainer";
 
+import AdminContactInfoSettingRetrieveContainer from "./settings/admin/contactInfo/retrieve/retrieveContainer";
+import AdminContactInfoSettingUpdateContainer from "./settings/admin/contactInfo/update/updateContainer";
+
 
 /*
 -------
@@ -611,6 +614,13 @@ class AppContainer extends React.Component {
                                 */}
                                 <Route path="/admin/settings/organiztion" exact component={requiresAuth(AdminOrganizationSettingRetrieveContainer)} />
                                 <Route path="/admin/settings/organiztion/update" exact component={requiresAuth(AdminOrganizationSettingUpdateContainer)} />
+                                {/*
+                                    -----------------------
+                                    SETTINGS - CONTACT INFO
+                                    -----------------------
+                                */}
+                                <Route path="/admin/settings/contact-info" exact component={requiresAuth(AdminContactInfoSettingRetrieveContainer)} />
+                                <Route path="/admin/settings/contact-info/update" exact component={requiresAuth(AdminContactInfoSettingUpdateContainer)} />
                                 {/*
                                     -------
                                     MEMBERS
