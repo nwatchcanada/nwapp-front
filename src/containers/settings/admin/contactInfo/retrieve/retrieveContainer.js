@@ -22,7 +22,11 @@ class AdminContactInfoSettingRetrieveContainer extends Component {
     constructor(props) {
         super(props);
 
+        const schemaName = getSubdomain();
+
         this.state = {
+            schema: schemaName,
+            schemaName: schemaName,
             email: "-",
             phone: "-",
             websiteUrl: "-",

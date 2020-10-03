@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminContactInfoSettingUpdateComponent from "../../../../../components/settings/admin/contactInfo/update/updateComponent";
-import validateInput from '../../../../../validators/contactInfoValidator';
+import validateInput from '../../../../../validators/organizationContactInfoValidator';
 import { setFlashMessage } from "../../../../../actions/flashMessageActions";
 import { getTimezoneReactSelectOptions } from "../../../../../helpers/timezoneUtlity";
 import { pullTenantDetail, putTenantDetail } from "../../../../../actions/tenantActions";
@@ -26,14 +26,38 @@ class AdminContactInfoSettingUpdateContainer extends Component {
         this.state = {
             schema: schemaName,
             schemaName: schemaName,
-            email: "-",
-            phone: "-",
-            websiteUrl: "-",
-            facebookUrl: "-",
-            twitterUrl: "-",
-            instagramUrl: "-",
-            youtubeUrl: "-",
+            name: props.tenantDetail.name,
+            alternateName: props.tenantDetail.alternateName,
+            description: props.tenantDetail.description,
+            country: props.tenantDetail.country,
+            province: props.tenantDetail.province,
+            city: props.tenantDetail.city,
+            streetNumber: props.tenantDetail.streetNumber,
+            streetName: props.tenantDetail.streetName,
+            streetType: props.tenantDetail.streetType,
+            streetTypeLabel: props.tenantDetail.streetTypeLabel,
+            apartmentUnit: props.tenantDetail.apartmentUnit,
+            // streetTypeOption: tenantDetail.streetTypeOption,
+            streetTypeOther: props.tenantDetail.streetTypeOther,
+            streetDirection: props.tenantDetail.streetDirection,
+            streetDirectionLabel: props.tenantDetail.streetDirectionLabel,
+            // streetDirectionOption: tenantDetail.streetDirectionOption,
+            postalCode: props.tenantDetail.postalCode,
+            timezoneName: props.tenantDetail.timezoneName,
+            policeReportUrl: props.tenantDetail.policeReportUrl,
+            districtPosition: props.tenantDetail.districtPosition,
+            districtZoom: props.tenantDetail.districtZoom,
+            districtPolygon: props.tenantDetail.districtPolygon,
+
+            email: props.tenantDetail.email,
+            phone: props.tenantDetail.phone,
+            websiteUrl: props.tenantDetail.websiteUrl,
+            facebookUrl: props.tenantDetail.facebookUrl,
+            twitterUrl: props.tenantDetail.twitterUrl,
+            instagramUrl: props.tenantDetail.instagramUrl,
+            youtubeUrl: props.tenantDetail.youtubeUrl,
             errors: {},
+
             isLoading: true, // Reason for `true` is because we need to fetch the data first.
         }
 
@@ -219,6 +243,7 @@ class AdminContactInfoSettingUpdateContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
+        tenantDetail: store.tenantDetailState,
     };
 }
 

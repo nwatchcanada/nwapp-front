@@ -29,7 +29,7 @@ class AdminContactInfoSettingUpdateComponent extends Component {
                            <Link to="/admin/settings"><i className="fas fa-cogs"></i>&nbsp;Settings</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to="/admin/settings/organiztion"><i className="fas fa-phone-square"></i>&nbsp;Contact Information</Link>
+                            <Link to="/admin/settings/contact-info"><i className="fas fa-phone-square"></i>&nbsp;Contact Information</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-edit"></i>&nbsp;Update
@@ -61,7 +61,7 @@ class AdminContactInfoSettingUpdateComponent extends Component {
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-primary"
                                 error={errors.phone}
-                                label="Phone"
+                                label="Phone (*)"
                                 onChange={onTextChange}
                                 value={phone}
                                 name="phone"
@@ -73,7 +73,7 @@ class AdminContactInfoSettingUpdateComponent extends Component {
                                 inputClassName="form-control"
                                 borderColour="border-primary"
                                 error={errors.websiteUrl}
-                                label="Website"
+                                label="Website (*)"
                                 onChange={onTextChange}
                                 value={websiteUrl}
                                 name="websiteUrl"
@@ -93,7 +93,7 @@ class AdminContactInfoSettingUpdateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
+                                borderColour="border-success"
                                 error={errors.twitterUrl}
                                 label="Twitter URL"
                                 onChange={onTextChange}
@@ -104,7 +104,7 @@ class AdminContactInfoSettingUpdateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
+                                borderColour="border-success"
                                 error={errors.instagramUrl}
                                 label="Instagram URL"
                                 onChange={onTextChange}
@@ -115,7 +115,7 @@ class AdminContactInfoSettingUpdateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
+                                borderColour="border-success"
                                 error={errors.youtubeUrl}
                                 label="YouTube URL"
                                 onChange={onTextChange}
