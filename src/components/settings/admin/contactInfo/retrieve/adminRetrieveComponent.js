@@ -10,10 +10,7 @@ import { BootstrapPageLoadingAnimation } from "../../../../bootstrap/bootstrapPa
 export default class AdminContactInfoSettingRetrieveComponent extends Component {
     render() {
         const {
-            schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, streetTypeLabel, apartmentUnit,
-            streetTypeOther, streetDirection, streetDirectionLabel, postalCode,
-            timezone, policeReportUrl, errors, isLoading, flashMessage, onBack, onClick
+            email, phone, websiteUrl, facebookUrl, twitterUrl, instagramUrl, youtubeUrl, errors, isLoading, flashMessage, onBack, onClick
         } = this.props;
         return (
             <div>
@@ -47,73 +44,39 @@ export default class AdminContactInfoSettingRetrieveComponent extends Component 
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">Schema</th>
-                                    <td>{schema}</td>
+                                    <th scope="row" className="bg-light">E-Mail</th>
+                                    <td>{email}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">Name</th>
-                                    <td>{name}</td>
+                                    <th scope="row" className="bg-light">Phone</th>
+                                    <td>{phone}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" className="bg-light">Alternate Name</th>
-                                    <td>{alternateName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Description</th>
-                                    <td>{description}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Country</th>
-                                    <td>{country}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Province</th>
-                                    <td>{province}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">City</th>
-                                    <td>{city}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Number</th>
-                                    <td>{streetNumber}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Name</th>
-                                    <td>{streetName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type</th>
-                                    <td>{streetTypeLabel}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Apartment Unit</th>
-                                    <td>{apartmentUnit}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Type Other</th>
-                                    <td>{streetTypeOther}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Street Direction</th>
-                                    <td>{streetDirectionLabel}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Postal Code</th>
-                                    <td>{postalCode}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Timezone</th>
-                                    <td>{timezone}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="bg-light">Report to Police URL</th>
+                                    <th scope="row" className="bg-light">Website</th>
                                     <td>
-                                        {policeReportUrl
-                                            ? <span><a href={policeReportUrl} target="_blank">View&nbsp;<i className="fas fa-external-link-alt"></i></a></span>
+                                        {websiteUrl
+                                            ? <span>
+                                                <a href={websiteUrl} target="_blank">View&nbsp;<i className="fas fa-external-link-alt"></i></a>
+                                            </span>
                                             : "-"
                                         }
                                     </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Facebook Page</th>
+                                    <td>{facebookUrl}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Twitter</th>
+                                    <td>{twitterUrl}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Instagram</th>
+                                    <td>{instagramUrl}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Youtube</th>
+                                    <td>{youtubeUrl}</td>
                                 </tr>
                             </tbody>
                         </table>

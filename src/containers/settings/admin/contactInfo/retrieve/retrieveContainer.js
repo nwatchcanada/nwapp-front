@@ -22,30 +22,14 @@ class AdminContactInfoSettingRetrieveContainer extends Component {
     constructor(props) {
         super(props);
 
-        const schemaName = getSubdomain();
-
         this.state = {
-            schema: schemaName,
-            schemaName: schemaName,
-            name: "-",
-            alternateName: "-",
-            description: "-",
-            country: "-",
-            province: "-",
-            city: "-",
-            streetNumber: "-",
-            streetName: "-",
-            streetType: "-",
-            streetTypeLabel: "-",
-            apartmentUnit: "-",
-            streetTypeOption: "-",
-            streetTypeOther: "-",
-            streetDirection: "-",
-            streetDirectionOption: "-",
-            streetDirectionLabel: "-",
-            postalCode: "-",
-            timezone: "-",
-            policeReportUrl: "-",
+            email: "-",
+            phone: "-",
+            websiteUrl: "-",
+            facebookUrl: "-",
+            twitterUrl: "-",
+            instagramUrl: "-",
+            youtubeUrl: "-",
             errors: {},
             isLoading: true, // Reason for `true` is because we need to fetch the data first.
         }
@@ -90,25 +74,13 @@ class AdminContactInfoSettingRetrieveContainer extends Component {
     onSuccessCallback(tenantDetail) {
         console.log(tenantDetail);
         this.setState({
-            name: tenantDetail.name,
-            alternateName: tenantDetail.alternateName,
-            description: tenantDetail.description,
-            country: tenantDetail.country,
-            province: tenantDetail.province,
-            city: tenantDetail.city,
-            streetNumber: tenantDetail.streetNumber,
-            streetName: tenantDetail.streetName,
-            streetType: tenantDetail.streetType,
-            streetTypeLabel: tenantDetail.streetTypeLabel,
-            apartmentUnit: tenantDetail.apartmentUnit,
-            // streetTypeOption: tenantDetail.streetTypeOption,
-            streetTypeOther: tenantDetail.streetTypeOther,
-            streetDirection: tenantDetail.streetDirection,
-            streetDirectionLabel: tenantDetail.streetDirectionLabel,
-            // streetDirectionOption: tenantDetail.streetDirectionOption,
-            postalCode: tenantDetail.postalCode,
-            timezone: tenantDetail.timezoneName,
-            policeReportUrl: tenantDetail.policeReportUrl,
+            email: tenantDetail.email,
+            phone: tenantDetail.phone,
+            websiteUrl: tenantDetail.websiteUrl,
+            facebookUrl: tenantDetail.facebookUrl,
+            twitterUrl: tenantDetail.twitterUrl,
+            instagramUrl: tenantDetail.instagramUrl,
+            youtubeUrl: tenantDetail.youtubeUrl,
             isLoading: false, // Turn off because we have finished.
         });
     }
@@ -131,7 +103,7 @@ class AdminContactInfoSettingRetrieveContainer extends Component {
     onClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
-        this.props.history.push("/admin/settings/organiztion/update");
+        this.props.history.push("/admin/settings/contact-info/update");
     }
 
     /**
@@ -141,36 +113,18 @@ class AdminContactInfoSettingRetrieveContainer extends Component {
 
     render() {
         const {
-            schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, apartmentUnit,
-            streetTypeOther, streetTypeLabel, streetDirection,
-            streetDirectionLabel, postalCode, timezone, policeReportUrl,
-            errors, isLoading
+            email, phone, websiteUrl, facebookUrl, twitterUrl, instagramUrl, youtubeUrl, errors, isLoading
         } = this.state;
 
         return (
             <AdminContactInfoSettingRetrieveComponent
-                schema={schema}
-                name={name}
-                alternateName={alternateName}
-                description={description}
-                country={country}
-                province={province}
-                city={city}
-                streetNumber={streetNumber}
-                streetName={streetName}
-                streetType={streetType}
-                streetTypeLabel={streetTypeLabel}
-                apartmentUnit={apartmentUnit}
-                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
-                streetTypeOther={streetTypeOther}
-                streetDirection={streetDirection}
-                streetDirectionOptions={STREET_DIRECTION_CHOICES}
-                streetDirectionLabel={streetDirectionLabel}
-                postalCode={postalCode}
-                timezone={timezone}
-                timezoneOptions={getTimezoneReactSelectOptions()}
-                policeReportUrl={policeReportUrl}
+                email={email}
+                phone={phone}
+                websiteUrl={websiteUrl}
+                facebookUrl={facebookUrl}
+                twitterUrl={twitterUrl}
+                instagramUrl={instagramUrl}
+                youtubeUrl={youtubeUrl}
                 errors={errors}
                 isLoading={isLoading}
 

@@ -26,23 +26,13 @@ class AdminContactInfoSettingUpdateContainer extends Component {
         this.state = {
             schema: schemaName,
             schemaName: schemaName,
-            name: "-",
-            alternateName: "-",
-            description: "-",
-            country: "-",
-            province: "-",
-            city: "-",
-            streetNumber: "-",
-            streetName: "-",
-            streetType: "-",
-            apartmentUnit: "-",
-            streetTypeOption: "-",
-            streetTypeOther: "-",
-            streetDirection: "-",
-            streetDirectionOption: "-",
-            postalCode: "-",
-            timezone: "-",
-            policeReportUrl: "-",
+            email: "-",
+            phone: "-",
+            websiteUrl: "-",
+            facebookUrl: "-",
+            twitterUrl: "-",
+            instagramUrl: "-",
+            youtubeUrl: "-",
             errors: {},
             isLoading: true, // Reason for `true` is because we need to fetch the data first.
         }
@@ -234,32 +224,17 @@ class AdminContactInfoSettingUpdateContainer extends Component {
 
     render() {
         const {
-            schema, name, alternateName, description, country, province, city,
-            streetNumber, streetName, streetType, apartmentUnit,
-            streetTypeOther, streetDirection, postalCode, timezone,
-            policeReportUrl, errors, isLoading
+            email, phone, websiteUrl, facebookUrl, twitterUrl, instagramUrl, youtubeUrl, errors, isLoading
         } = this.state;
         return (
             <AdminContactInfoSettingUpdateComponent
-                schema={schema}
-                name={name}
-                alternateName={alternateName}
-                description={description}
-                country={country}
-                province={province}
-                city={city}
-                streetNumber={streetNumber}
-                streetName={streetName}
-                streetType={streetType}
-                apartmentUnit={apartmentUnit}
-                streetTypeOptions={BASIC_STREET_TYPE_CHOICES}
-                streetTypeOther={streetTypeOther}
-                streetDirection={streetDirection}
-                streetDirectionOptions={STREET_DIRECTION_CHOICES}
-                postalCode={postalCode}
-                timezone={timezone}
-                policeReportUrl={policeReportUrl}
-                timezoneOptions={getTimezoneReactSelectOptions()}
+                email={email}
+                phone={phone}
+                websiteUrl={websiteUrl}
+                facebookUrl={facebookUrl}
+                twitterUrl={twitterUrl}
+                instagramUrl={instagramUrl}
+                youtubeUrl={youtubeUrl}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}
