@@ -79,28 +79,6 @@ class AdminContactInfoSettingUpdateContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
-        // Alternate Name: This field is required.
-        //
-        // Timezone Name: This field is required.
-        postData.timezoneName = this.state.timezone;
-
-        // Street Address: This field is required.
-        postData.addressCountry = this.state.country;
-
-        // Address Province: This field is required.
-        postData.addressProvince = this.state.province
-
-        // Address City: This field is required.
-        postData.addressCity = this.state.city;
-
-        // Street Direction: Cannot be NaN.
-        if (isNaN(this.state.streetDirection)) {
-            postData.streetDirection = 0;
-        }
-
-        // Postal Code: This field is required.
-        postData.postalCode = this.state.postalCode;
-
         // Schema Name: This field is required.
         postData.schemaName = this.state.schema;
 
@@ -117,23 +95,13 @@ class AdminContactInfoSettingUpdateContainer extends Component {
     onSuccessfulPullCallback(tenantDetail) {
         console.log(tenantDetail);
         this.setState({
-            name: tenantDetail.name,
-            alternateName: tenantDetail.alternateName,
-            description: tenantDetail.description,
-            country: tenantDetail.country,
-            province: tenantDetail.province,
-            city: tenantDetail.city,
-            streetNumber: tenantDetail.streetNumber,
-            streetName: tenantDetail.streetName,
-            streetType: tenantDetail.streetType,
-            apartmentUnit: tenantDetail.apartmentUnit,
-            // streetTypeOption: tenantDetail.streetTypeOption,
-            streetTypeOther: tenantDetail.streetTypeOther,
-            streetDirection: tenantDetail.streetDirection,
-            // streetDirectionOption: tenantDetail.streetDirectionOption,
-            postalCode: tenantDetail.postalCode,
-            timezone: tenantDetail.timezoneName,
-            policeReportUrl: tenantDetail.policeReportUrl,
+            email: tenantDetail.email,
+            phone: tenantDetail.phone,
+            websiteUrl: tenantDetail.websiteUrl,
+            facebookUrl: tenantDetail.facebookUrl,
+            twitterUrl: tenantDetail.twitterUrl,
+            instagramUrl: tenantDetail.instagramUrl,
+            youtubeUrl: tenantDetail.youtubeUrl,
             isLoading: false, // Turn off because we have finished.
         });
     }
@@ -143,8 +111,8 @@ class AdminContactInfoSettingUpdateContainer extends Component {
     }
 
     onSuccessfulSubmissionCallback() {
-        this.props.setFlashMessage("success", "ContactInfo has been successfully updated.");
-        this.props.history.push("/admin/settings/organiztion");
+        this.props.setFlashMessage("success", "Contact information has been successfully updated.");
+        this.props.history.push("/admin/settings/contact-info");
     }
 
     onFailedSubmissionCallback(errors) {
@@ -179,7 +147,7 @@ class AdminContactInfoSettingUpdateContainer extends Component {
     }
 
     onBackClick() {
-        this.props.history.push("/admin/settings/organiztion");
+        this.props.history.push("/admin/settings/contact-info");
     }
 
     onCountryChange(value) {
