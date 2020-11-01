@@ -88,14 +88,18 @@ class AdminMemberCreateStep6Container extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
 
-        // The following code will generate a `url parameter` specific to
-        // our API endpoint which will list all the nearest watches based
-        // on the specified address.
-        let nearbyAddress = this.state.typeOf+","+this.state.streetNumber+","+this.state.streetName.replace(",", "COMMA");
-        nearbyAddress += ","+this.state.streetType+","+this.state.streetTypeOther;
-        this.state.parametersMap.set("searchNearbyAddress", nearbyAddress);
+        if (this.state.typeOf === BUSINESS_TYPE_OF) {
+            this.state.parametersMap.set("type_of", BUSINESS_TYPE_OF);
+        } else {
+            // The following code will generate a `url parameter` specific to
+            // our API endpoint which will list all the nearest watches based
+            // on the specified address.
+            let nearbyAddress = this.state.typeOf+","+this.state.streetNumber+","+this.state.streetName.replace(",", "COMMA");
+            nearbyAddress += ","+this.state.streetType+","+this.state.streetTypeOther;
 
-        console.log("nearbyAddress |", nearbyAddress);
+            this.state.parametersMap.set("searchNearbyAddress", nearbyAddress);
+            console.log("nearbyAddress |", nearbyAddress);
+        }
 
         this.props.pullWatchList(
             this.state.page,

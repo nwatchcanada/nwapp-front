@@ -66,7 +66,13 @@ class AdminMemberCreateStep6Container extends Component {
         let modifiedStreetName = this.state.streetName.replace(",", "COMMA");
         let nearbyAddress = this.state.typeOf+","+this.state.streetNumber+","+modifiedStreetName;
         nearbyAddress += ","+this.state.streetType+","+this.state.streetTypeOther;
-        this.state.parametersMap.set("searchNearbyAddress", nearbyAddress);
+
+        const memberTypeOf = parseInt(localStorage.getItem("nwapp-create-member-typeOf"));
+        if (memberTypeOf === BUSINESS_TYPE_OF) {
+            this.state.parametersMap.set("type_of", BUSINESS_TYPE_OF);
+        } else {
+            this.state.parametersMap.set("searchNearbyAddress", nearbyAddress);
+        }
 
         this.props.pullWatchList(
             this.state.page,
