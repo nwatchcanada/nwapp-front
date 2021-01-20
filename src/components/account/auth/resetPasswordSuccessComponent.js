@@ -15,11 +15,11 @@ class ResetPasswordSuccessComponent extends React.Component {
                     <div className="col-sm-6 mx-auto">
                         <h2 className="text-center mb-3">Succesfull Password Reset</h2>
                         <form id="sign-in" className="form-signin needs-validation">
-                            <p>Your password has been reset, please go to the dashboard to begin using the system.</p>
+                            <p>Your password has been reset, please go to the <b>login page</b> and enter your new password.</p>
 
                             <h5 className="text-center mt-3 mb-3">
-                                <Link to="/dashboard" className="text-primary plain-link">
-                                    <i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard
+                                <Link to="/" className="text-primary plain-link">
+                                    Login&nbsp;<i className="fas fa-chevron-right"></i>
                                 </Link>
                             </h5>
 

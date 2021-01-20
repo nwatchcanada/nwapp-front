@@ -18,7 +18,7 @@ class SendResetPasswordSuccessComponent extends React.Component {
                             <p>Your password reset has been sent to your email inbox which will grant you access to change your password. Please wait 24 hours for the email to be sent.</p>
 
                             <h5 className="text-center mt-3 mb-3">
-                                <Link to="/reset-password/xxxx" className="text-primary plain-link">
+                                <Link to="/" className="text-primary plain-link">
                                     <i className="fas fa-arrow-left"></i>&nbsp;Back
                                 </Link>
                             </h5>

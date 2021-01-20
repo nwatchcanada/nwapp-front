@@ -146,8 +146,8 @@ export const NWAPP_WATCH_BOUNDRY_OPERATION_API_ENDPOINT = '/v1/watch/<slug>/oper
 export const NWAPP_REGISTER_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/register';
 export const NWAPP_ACTIVATE_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/activate';
 export const NWAPP_ACTIVATE_API_ENDPOINT = '/api/v1/activate';
-export const NWAPP_SEND_PASSWORD_RESET_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/send-password-reset';
-export const NWAPP_PASSWORD_RESET_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/reset-password';
+export const NWAPP_SEND_PASSWORD_RESET_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/send-password-reset';
+export const NWAPP_PASSWORD_RESET_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/public/reset-password';
 export const NWAPP_ONBOARDING_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/onboarding';
 export const NWAPP_PURCHASE_DEVICE_API_URL = process.env.REACT_APP_API_HOST+'/api/v1/purchase-device';
 

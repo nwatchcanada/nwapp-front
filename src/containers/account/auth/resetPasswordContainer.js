@@ -1,8 +1,11 @@
+import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 import { Redirect } from "react-router-dom";
+import { camelizeKeys } from 'humps';
 
+import { NWAPP_PASSWORD_RESET_API_URL } from '../../../constants/api';
 import ResetPasswordComponent from '../../../components/account/auth/resetPasswordComponent';
 // import { postResetPassword } from '../../../actions/resetPasswordAction';
 
@@ -56,28 +59,40 @@ class ResetPasswordContainer extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.history.push("/reset-password-success");
-        // this.props.postResetPassword(
-        //     this.state,
-        //     (data) => {
-        //         this.setState({
-        //             wasSubmitOK: true,
-        //             errors: {}
-        //         })
-        //     },
-        //     (data) => {
-        //         this.setState({
-        //             wasSubmitOK: false,
-        //             errors: data
-        //         })
-        //
-        //         // The following code will cause the screen to scroll to the top of
-        //         // the page. Please see ``react-scroll`` for more information:
-        //         // https://github.com/fisshy/react-scroll
-        //         var scroll = Scroll.animateScroll;
-        //         scroll.scrollToTop();
-        //     }
-        // );
+        this.setState({ errors: {}, isLoading: true, })
+        axios.post(NWAPP_PASSWORD_RESET_API_URL, {
+            'password': this.state.password,
+            'password_repeat': this.state.passwordConfirmation,
+            'pr_access_code': this.state.accessCode,
+        }).then( (successResult) => {
+            // const responseData = successResult.data;
+            // let profile = camelizeKeys(responseData);
+            console.log("Result:", successResult);
+            this.setState({
+                errors: {},
+                isLoading: false,
+                referrer: '/send-password-reset-success'
+            },()=>{
+                this.props.history.push("/reset-password-success");
+            })
+        }).catch( (errorResult) => {
+            const responseData = errorResult.response.data;
+            let errors = camelizeKeys(responseData);
+
+            this.setState({
+                errors: errors,
+                isLoading: false,
+            })
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
+
+        }).then( () => {
+            // Do nothing.
+        });
     }
 
     render () {
