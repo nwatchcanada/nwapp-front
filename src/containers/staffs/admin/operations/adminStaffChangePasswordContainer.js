@@ -5,7 +5,7 @@ import Scroll from 'react-scroll';
 import AdminStaffChangePasswordComponent from "../../../../components/staffs/admin/operations/adminStaffChangePasswordComponent";
 import { validateChangePasswordOperationInput } from "../../../../validators/staffValidator";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-// import { putStaffChangePasswordOperation } from '../../../../actions/staffActions';
+import { putStaffChangePasswordOperation } from '../../../../actions/staffActions';
 
 
 class AdminStaffChangePasswordContainer extends Component {
@@ -26,7 +26,7 @@ class AdminStaffChangePasswordContainer extends Component {
             givenName: this.props.staffDetail.givenName,
             lastName: this.props.staffDetail.lastName,
             password: "",
-            passwordRepeat: "",
+            repeatPassword: "",
             errors: {},
             isLoading: false
         }
@@ -118,11 +118,11 @@ class AdminStaffChangePasswordContainer extends Component {
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
             this.setState({ isLoading: true, errors:{} }, ()=>{
-                // this.props.putStaffChangePasswordOperation(
-                //     this.getPostData(),
-                //     this.onSuccessfulSubmissionCallback,
-                //     this.onFailedSubmissionCallback
-                // );
+                this.props.putStaffChangePasswordOperation(
+                    this.getPostData(),
+                    this.onSuccessfulSubmissionCallback,
+                    this.onFailedSubmissionCallback
+                );
             });
 
         // CASE 2 OF 2: Validation was a failure.
@@ -140,7 +140,7 @@ class AdminStaffChangePasswordContainer extends Component {
     render() {
         const {
             slug, givenName, lastName, description, policeCheck, password,
-            passwordRepeat, errors, isLoading, returnURL
+            repeatPassword, errors, isLoading, returnURL
         } = this.state;
 
         const { user } = this.props;
@@ -151,7 +151,7 @@ class AdminStaffChangePasswordContainer extends Component {
                 lastName={lastName}
 
                 password={password}
-                passwordRepeat={passwordRepeat}
+                repeatPassword={repeatPassword}
                 onTextChange={this.onTextChange}
 
                 onNextClick={this.onNextClick}
@@ -175,9 +175,9 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        // putStaffChangePasswordOperation: (postData, onSuccessfulSubmissionCallback, onFailedSubmissionCallback) => {
-        //     dispatch(putStaffChangePasswordOperation(postData, onSuccessfulSubmissionCallback, onFailedSubmissionCallback))
-        // },
+        putStaffChangePasswordOperation: (postData, onSuccessfulSubmissionCallback, onFailedSubmissionCallback) => {
+            dispatch(putStaffChangePasswordOperation(postData, onSuccessfulSubmissionCallback, onFailedSubmissionCallback))
+        },
     }
 }
 

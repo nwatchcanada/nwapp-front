@@ -17,8 +17,8 @@ import { IS_ACTIVE_TYPE_OF_CHOICES } from "../../../../constants/api";
 class AdminStaffChangePasswordComponent extends Component {
     render() {
         const {
-            slug, givenName, lastName, errors, isLoading, onNextClick, onSelectChange,
-            password, passwordRepeat, onTextChange,
+            slug, givenName, lastName, errors, isLoading, onNextClick,
+            onSelectChange, password, repeatPassword, onTextChange,
         } = this.props;
 
         return (
@@ -73,11 +73,11 @@ class AdminStaffChangePasswordComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control"
                                 borderColour="border-primary"
-                                error={errors.passwordRepeat}
+                                error={errors.repeatPassword}
                                 label="Repeat Password (*)"
                                 onChange={onTextChange}
-                                value={passwordRepeat}
-                                name="passwordRepeat"
+                                value={repeatPassword}
+                                name="repeatPassword"
                                 type="password"
                             />
 
