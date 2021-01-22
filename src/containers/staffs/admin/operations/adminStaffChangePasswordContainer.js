@@ -46,6 +46,8 @@ class AdminStaffChangePasswordContainer extends Component {
     getPostData() {
         let postData = Object.assign({}, this.state);
 
+        postData.staff = this.state.slug;
+
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
         return postData;

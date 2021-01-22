@@ -813,7 +813,7 @@ export function putStaffChangePasswordOperation(postData, onSuccessCallback, onF
         var buffer = msgpack.encode(decamelizedData);
 
         // Perform our API submission.
-        customAxios.put(WORKERY_STAFF_CHANGE_PASSWORD_OPERATION_API_ENDPOINT.replace("XXX", postData.slug), buffer).then( (successResponse) => {
+        customAxios.post(WORKERY_STAFF_CHANGE_PASSWORD_OPERATION_API_ENDPOINT, buffer).then( (successResponse) => {
             // Decode our MessagePack (Buffer) into JS Object.
             const responseData = msgpack.decode(Buffer(successResponse.data));
             let staff = camelizeKeys(responseData);
