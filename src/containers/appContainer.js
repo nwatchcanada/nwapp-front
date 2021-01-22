@@ -200,6 +200,7 @@ import AdminStaffDemoteOperationStep2Container from "./staffs/admin/operations/a
 import AdminStaffDemoteOperationStep3Container from "./staffs/admin/operations/adminDemoteOperationStep3Container";
 import StaffArchiveOperationContainer from "./staffs/admin/operations/adminArchiveOperationContainer";
 import AdminStaffUnarchiveOperationContainer from "./staffs/admin/operations/adminUnarchiveOperationContainer";
+import AdminStaffChangePasswordContainer from "./staffs/admin/operations/adminStaffChangePasswordContainer";
 import AdminStaffScorePointListContainer from "./staffs/admin/operations/scorePoint/adminScorePointListContainer";
 import AdminStaffScorePointAddContainer from "./staffs/admin/operations/scorePoint/adminScorePointAddContainer";
 import AdminStaffScorePointArchiveContainer from "./staffs/admin/operations/scorePoint/adminScorePointArchiveContainer";
@@ -784,6 +785,7 @@ class AppContainer extends React.Component {
                                 <Route path="/admin/staff/:slug/demote/step-3" exact component={requiresAuth(AdminStaffDemoteOperationStep3Container)} />
                                 <Route path="/admin/staff/:slug/archive" exact component={requiresAuth(StaffArchiveOperationContainer)} />
                                 <Route path="/admin/staff/:slug/unarchive" exact component={requiresAuth(AdminStaffUnarchiveOperationContainer)} />
+                                <Route path="/admin/staff/:slug/password" exact component={requiresAuth(AdminStaffChangePasswordContainer)} />
 
                                 /*
                                 -------
