@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import Scroll from 'react-scroll';
 
 import AdminStaffChangePasswordComponent from "../../../../components/staffs/admin/operations/adminStaffChangePasswordComponent";
+import { validateChangePasswordOperationInput } from "../../../../validators/staffValidator";
 import { setFlashMessage } from "../../../../actions/flashMessageActions";
-import { postStaffDeactivationDetail } from "../../../../actions/staffActions";
-import { validateDeactivationInput } from "../../../../validators/staffValidator";
+// import { putStaffChangePasswordOperation } from '../../../../actions/staffActions';
 
 
 class AdminStaffChangePasswordContainer extends Component {
@@ -17,25 +17,25 @@ class AdminStaffChangePasswordContainer extends Component {
     constructor(props) {
         super(props);
 
+        // Since we are using the ``react-routes-dom`` library then we
+        // fetch the URL argument as follows.
         const { slug } = this.props.match.params;
 
-        // Update state.
         this.state = {
             slug: slug,
-            staff: {},
-            reason: "",
-            reasonOther: "",
-            isLoading: false,
-            errors: [],
+            givenName: this.props.staffDetail.givenName,
+            lastName: this.props.staffDetail.lastName,
+            password: "",
+            passwordRepeat: "",
+            errors: {},
+            isLoading: false
         }
 
-        // Update functions.
-        this.onSuccessCallback = this.onSuccessCallback.bind(this);
-        this.onFailureCallback = this.onFailureCallback.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
         this.getPostData = this.getPostData.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
+        this.onNextClick = this.onNextClick.bind(this);
+        this.onSuccessfulSubmissionCallback = this.onSuccessfulSubmissionCallback.bind(this);
+        this.onFailedSubmissionCallback = this.onFailedSubmissionCallback.bind(this);
     }
 
     /**
@@ -45,11 +45,6 @@ class AdminStaffChangePasswordContainer extends Component {
      */
     getPostData() {
         let postData = Object.assign({}, this.state);
-
-        postData.staff = this.props.staffDetail.slug;
-        postData.state = "inactive";
-        postData.deactivationReason = this.state.reason;
-        postData.deactivationReasonOther = this.state.reasonOther;
 
         // Finally: Return our new modified data.
         console.log("getPostData |", postData);
@@ -63,7 +58,6 @@ class AdminStaffChangePasswordContainer extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);  // Start the page at the top of the page.
-
     }
 
     componentWillUnmount() {
@@ -80,19 +74,16 @@ class AdminStaffChangePasswordContainer extends Component {
      *------------------------------------------------------------
      */
 
-    onSuccessCallback(response) {
-        console.log("onSuccessCallback | Fetched:", response);
-        this.props.setFlashMessage("success", "Staff has been successfully deactivated.");
-        this.props.history.push("/admin/staff/"+this.props.staffDetail.slug+"/operations");
+    onSuccessfulSubmissionCallback(staff) {
+        this.setState({ errors: {}, isLoading: true, })
+        this.props.setFlashMessage("success", "Staff password has been successfully updated.");
+        this.props.history.push("/admin/staff/"+this.state.slug+"/operations");
     }
 
-    onFailureCallback(errors) {
-        console.log("onFailureCallback | errors:", errors);
-
+    onFailedSubmissionCallback(errors) {
         this.setState({
-            errors: errors,
-            isLoading: false
-        });
+            errors: errors, isLoading: false,
+        })
 
         // The following code will cause the screen to scroll to the top of
         // the page. Please see ``react-scroll`` for more information:
@@ -107,41 +98,37 @@ class AdminStaffChangePasswordContainer extends Component {
      */
 
     onTextChange(e) {
+        // Update our state.
         this.setState({
             [e.target.name]: e.target.value,
-        })
+        });
+
+        // Update our persistent storage.
+        const key = "nwapp-create-staff-"+[e.target.name];
+        localStorage.setItem(key, e.target.value)
     }
 
-    onClick(e) {
+    onNextClick(e) {
         // Prevent the default HTML form submit code to run on the browser side.
         e.preventDefault();
 
         // Perform staff-side validation.
-        const { errors, isValid } = validateDeactivationInput(this.state);
+        const { errors, isValid } = validateChangePasswordOperationInput(this.state);
 
         // CASE 1 OF 2: Validation passed successfully.
         if (isValid) {
-            this.setState({ isLoading: true, errors: [], }, ()=>{
-                this.props.postStaffDeactivationDetail(
-                    this.getPostData(),
-                    this.onSuccessCallback,
-                    this.onFailureCallback,
-                );
+            this.setState({ isLoading: true, errors:{} }, ()=>{
+                // this.props.putStaffChangePasswordOperation(
+                //     this.getPostData(),
+                //     this.onSuccessfulSubmissionCallback,
+                //     this.onFailedSubmissionCallback
+                // );
             });
 
         // CASE 2 OF 2: Validation was a failure.
         } else {
-            this.onFailureCallback(errors);
+            this.onFailedSubmissionCallback(errors);
         }
-    }
-
-    onSelectChange(option) {
-        const optionKey = [option.selectName].toString()+"Option";
-        this.setState({
-            [option.selectName]: option.value,
-            [optionKey]: option,
-        });
-        console.log([option.selectName], optionKey, "|",option); // For debugging purposes only.
     }
 
 
@@ -151,19 +138,26 @@ class AdminStaffChangePasswordContainer extends Component {
      */
 
     render() {
-        const { slug, errors, isLoading, reason, reasonOther } = this.state;
-        const staff = this.props.staffDetail ? this.props.staffDetail : [];
+        const {
+            slug, givenName, lastName, description, policeCheck, password,
+            passwordRepeat, errors, isLoading, returnURL
+        } = this.state;
+
+        const { user } = this.props;
         return (
             <AdminStaffChangePasswordComponent
                 slug={slug}
-                errors={errors}
-                isLoading={isLoading}
-                reason={reason}
-                reasonOther={reasonOther}
-                staff={staff}
-                onClick={this.onClick}
+                givenName={givenName}
+                lastName={lastName}
+
+                password={password}
+                passwordRepeat={passwordRepeat}
                 onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
+
+                onNextClick={this.onNextClick}
+                errors={errors}
+                returnURL={returnURL}
+                isLoading={isLoading}
             />
         );
     }
@@ -172,7 +166,6 @@ class AdminStaffChangePasswordContainer extends Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState,
-        flashMessage: store.flashMessageState,
         staffDetail: store.staffDetailState,
     };
 }
@@ -182,14 +175,11 @@ const mapDispatchToProps = dispatch => {
         setFlashMessage: (typeOf, text) => {
             dispatch(setFlashMessage(typeOf, text))
         },
-        postStaffDeactivationDetail: (postData, onSuccessCallback, onFailureCallback) => {
-            dispatch(
-                postStaffDeactivationDetail(postData, onSuccessCallback, onFailureCallback)
-            )
-        },
+        // putStaffChangePasswordOperation: (postData, onSuccessfulSubmissionCallback, onFailedSubmissionCallback) => {
+        //     dispatch(putStaffChangePasswordOperation(postData, onSuccessfulSubmissionCallback, onFailedSubmissionCallback))
+        // },
     }
 }
-
 
 export default connect(
     mapStateToProps,

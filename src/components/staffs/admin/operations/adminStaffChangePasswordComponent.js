@@ -5,18 +5,22 @@ import { Link } from "react-router-dom";
 import { BootstrapPageLoadingAnimation } from "../../../bootstrap/bootstrapPageLoadingAnimation";
 import { BootstrapErrorsProcessingAlert } from "../../../bootstrap/bootstrapAlert";
 import { BootstrapInput } from "../../../bootstrap/bootstrapInput";
-import { BootstrapSingleSelect } from "../../../bootstrap/bootstrapSingleSelect";
+import { BootstrapSingleSelect } from '../../../bootstrap/bootstrapSingleSelect';
+import { BootstrapMultipleSelect } from "../../../bootstrap/bootstrapMultipleSelect";
 import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
-import {
-    ARCHIVE_REASON_CHOICES
-} from '../../../../constants/api';
+import { BootstrapDatePicker } from '../../../bootstrap/bootstrapDatePicker';
+import { BootstrapTelephoneInput } from "../../../bootstrap/bootstrapTelephoneInput";
+import { BootstrapRadio } from "../../../bootstrap/bootstrapRadio";
+import { IS_ACTIVE_TYPE_OF_CHOICES } from "../../../../constants/api";
 
 
-export default class AdminStaffChangePasswordComponent extends Component {
+class AdminStaffChangePasswordComponent extends Component {
     render() {
-        // Common
-        const { reason, reasonOther, comment, slug, errors, onTextChange, onSelectChange, isLoading, onClick, staff } = this.props;
-        const isReasonOther = reason === 1;
+        const {
+            slug, givenName, lastName, errors, isLoading, onNextClick, onSelectChange,
+            password, passwordRepeat, onTextChange,
+        } = this.props;
+
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -26,68 +30,63 @@ export default class AdminStaffChangePasswordComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/staff`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
+                            <Link to="/staff"><i className="fas fa-user-tie"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/staff/${slug}/operations`}><i className="fas fa-user"></i>&nbsp;{staff && staff.fullName}</Link>
+                            <Link to={`/admin/staff/${slug}/operations`}><i className="fas fa-user-tie"></i>&nbsp;{givenName} {lastName}</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            <i className="fas fa-archive"></i>&nbsp;Archive
+                            <i className="fas fa-key"></i>&nbsp;Change Password
                         </li>
                     </ol>
                 </nav>
 
+                <h1>
+                    <i className="fas fa-key"></i>&nbsp;Change Password
+                </h1>
+
                 <div className="row">
                     <div className="col-md-5 mx-auto mt-2">
                         <form>
-                            <h1><i className="fas fa-archive"></i>&nbsp;Archive Staff</h1>
-                            <p>You are about to <strong>archive the staff</strong> this means the staff will be in a read-only state and the staff cannot create work orders for our staffs. Please explain why. All fields which have the (*) symbol are required to be filled out.</p>
+                            <h2>
+                                <i className="fas fa-key"></i>&nbsp;Change Password Form
+                            </h2>
+                            <p>All fields which have the (*) symbol are required to be filled out.</p>
 
                             <BootstrapErrorsProcessingAlert errors={errors} />
 
-                            <BootstrapSingleSelect
+                            <p className="border-bottom mb-3 pb-1 text-secondary">
+                                <i className="fas fa-user-friends"></i>&nbsp;Emergency Contact
+                            </p>
+
+                            <BootstrapInput
+                                inputClassName="form-control"
                                 borderColour="border-primary"
-                                label="Reason(*)"
-                                name="reason"
-                                defaultOptionLabel="Please select the reason."
-                                options={ARCHIVE_REASON_CHOICES}
-                                value={reason}
-                                error={errors.reason}
-                                onSelectChange={onSelectChange}
-                                disabled={isLoading}
+                                error={errors.password}
+                                label="Password (*)"
+                                onChange={onTextChange}
+                                value={password}
+                                name="password"
+                                type="password"
                             />
 
-                            {isReasonOther &&
-                                <BootstrapInput
-                                    inputClassName="form-control"
-                                    borderColour="border-primary"
-                                    error={errors.reasonOther}
-                                    label="Reason (other) (*)"
-                                    onChange={onTextChange}
-                                    value={reasonOther}
-                                    name="reasonOther"
-                                    type="text"
-                                />
-                            }
-
-                            <BootstrapTextarea
-                                name="comment"
+                            <BootstrapInput
+                                inputClassName="form-control"
                                 borderColour="border-primary"
-                                label="Additional Comments (*)"
-                                placeholder="Write any additional comments here."
-                                rows="5"
-                                value={comment}
-                                helpText="This is the comment with additional details."
+                                error={errors.passwordRepeat}
+                                label="Repeat Password (*)"
                                 onChange={onTextChange}
-                                error={errors.comment}
+                                value={passwordRepeat}
+                                name="passwordRepeat"
+                                type="password"
                             />
 
                             <div className="form-group">
-                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>
+                                <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onNextClick}>
                                     <i className="fas fa-check-circle"></i>&nbsp;Save
                                 </button>
                                 <Link to={`/admin/staff/${slug}/operations`} className="btn btn-orange btn-lg mt-4 float-left pl-4 pr-4">
-                                    <i className="fas fa-arrow-circle-left"></i> Back
+                                    <i className="fas fa-arrow-circle-left"></i>&nbsp;Back
                                 </Link>
                             </div>
 
@@ -99,3 +98,5 @@ export default class AdminStaffChangePasswordComponent extends Component {
         );
     }
 }
+
+export default AdminStaffChangePasswordComponent;
