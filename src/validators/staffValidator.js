@@ -146,10 +146,11 @@ export function validateInput(data) {
     // --- EXTRA --- //
 
     if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
-        errors.yearOfBirth = 'This field is required';
+        //errors.yearOfBirth = 'This field is required';
+        // Do nothing because of https://github.com/nwatchcanada/nwapp-front/issues/335
     } else {
         try {
-            if (parseInt(data.yearOfBirth) < 1900) {
+            if (parseInt(data.yearOfBirth) < 1900 && parseInt(data.yearOfBirth) != 0) {
                 errors.yearOfBirth = 'Needs to be greater then 1900.';
             }
         } catch(err) {
@@ -359,10 +360,11 @@ export function validateStep7CreateInput(data) {
     let errors = {};
 
     if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
-        errors.yearOfBirth = 'This field is required';
+        // errors.yearOfBirth = 'This field is required';
+        // Do nothing because of https://github.com/nwatchcanada/nwapp-front/issues/335
     } else {
         try {
-            if (parseInt(data.yearOfBirth) < 1900) {
+            if (parseInt(data.yearOfBirth) < 1900 && parseInt(data.yearOfBirth) != 0) {
                 errors.yearOfBirth = 'Needs to be greater then 1900.';
             }
         } catch(err) {
@@ -492,10 +494,11 @@ export function validateStep8CreateInput(data) {
     // --- EXTRA --- //
 
     if (data.yearOfBirth === undefined || data.yearOfBirth === null || data.yearOfBirth === "") {
-        errors.yearOfBirth = 'This field is required';
+        // errors.yearOfBirth = 'This field is required';
+        // Do nothing because of https://github.com/nwatchcanada/nwapp-front/issues/335
     } else {
         try {
-            if (parseInt(data.yearOfBirth) < 1900) {
+            if (parseInt(data.yearOfBirth) < 1900 && parseInt(data.yearOfBirth) != 0) {
                 errors.yearOfBirth = 'Needs to be greater then 1900.';
             }
         } catch(err) {

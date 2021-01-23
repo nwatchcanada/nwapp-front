@@ -85,11 +85,11 @@ export default class AdminStaffMetricUpdateComponent extends Component {
 
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
-                                borderColour="border-primary"
+                                borderColour="border-success"
                                 error={errors.yearOfBirth}
-                                label="Year of Birth (*)"
+                                label="Year of Birth"
                                 onChange={onTextChange}
-                                value={yearOfBirth}
+                                value={yearOfBirth != 0 && yearOfBirth}
                                 name="yearOfBirth"
                                 type="number"
                             />
