@@ -43,6 +43,7 @@ class AdminWatchCreateStep4Container extends Component {
             district: localStorage.getItem('nwapp-watch-district'),
             districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
             streetMembership: localStorageGetArrayItem('nwapp-watch-streetMembership'),
+            facebookUrl: "",
         }
 
         this.getPostData = this.getPostData.bind(this);

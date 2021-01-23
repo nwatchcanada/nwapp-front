@@ -46,6 +46,7 @@ class AdminWatchInfoUpdateContainer extends Component {
             // associateOption: localStorageGetObjectItem('nwapp-watch-associateOption'),
             district: this.props.watchDetail.districtSlug,
             // districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
+            facebookUrl: "",
             isDistrictLoading: true,
             isVirtual: this.props.watchDetail.isVirtual,
             errors: {},

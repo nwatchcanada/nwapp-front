@@ -49,6 +49,7 @@ class AdminDistrictCreateStep3Container extends Component {
             isLoading: false,
             uploadContent: localStorage.getItem('nwapp-district-add-file-upload-content'),
             uploadFilename: localStorage.getItem('nwapp-district-add-file-upload-filename'),
+            facebookUrl: "",
         }
 
         // localStorageSetObjectOrArrayItem('nwapp-district-add-file-upload-content', this.state.upload_content);

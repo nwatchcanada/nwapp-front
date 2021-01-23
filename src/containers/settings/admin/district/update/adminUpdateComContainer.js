@@ -54,6 +54,7 @@ class AdminDistrictUpdateComContainer extends Component {
             name: district.name,
             description: district.description,
             typeOf: COMMUNITY_CARES_TYPE_OF,
+            facebookUrl: "",
         }
 
         this.onTextChange = this.onTextChange.bind(this);

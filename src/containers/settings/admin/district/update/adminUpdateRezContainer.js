@@ -43,6 +43,7 @@ class AdminDistrictUpdateRezContainer extends Component {
             district: district,
             isLoading: isLoading,
             typeOf :RESIDENCE_TYPE_OF,
+            facebookUrl: "",
         }
 
         this.onTextChange = this.onTextChange.bind(this);

@@ -42,6 +42,7 @@ class AdminDistrictUpdateBizContainer extends Component {
             errors: {},
             district: district,
             isLoading: isLoading,
+            facebookUrl: "",
         }
 
         this.onTextChange = this.onTextChange.bind(this);
