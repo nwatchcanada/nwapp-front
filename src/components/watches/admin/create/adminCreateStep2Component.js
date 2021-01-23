@@ -15,7 +15,7 @@ export default class AdminWatchCreateStep2Component extends Component {
     render() {
         const {
             tags, isTagLoading, tagOptions, name, description, district, isDistrictLoading, isVirtual,
-            districtOptions, errors, isLoading, onClick, onTextChange,
+            districtOptions, websiteUrl, facebookUrl, errors, isLoading, onClick, onTextChange,
             onSelectChange, onMultiChange, onCheckboxChange
         } = this.props;
         return (
@@ -132,6 +132,28 @@ export default class AdminWatchCreateStep2Component extends Component {
                                     value={isVirtual}
                                     name="isVirtual"
                                     helpText="By selecting this field, the street membership will not be necessary."
+                                />
+
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-success"
+                                    error={errors.websiteUrl}
+                                    label="Website URL"
+                                    onChange={onTextChange}
+                                    value={websiteUrl}
+                                    name="websiteUrl"
+                                    type="text"
+                                />
+
+                                <BootstrapInput
+                                    inputClassName="form-control form-control-lg"
+                                    borderColour="border-success"
+                                    error={errors.facebookUrl}
+                                    label="Facebook URL"
+                                    onChange={onTextChange}
+                                    value={facebookUrl}
+                                    name="facebookUrl"
+                                    type="text"
                                 />
 
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

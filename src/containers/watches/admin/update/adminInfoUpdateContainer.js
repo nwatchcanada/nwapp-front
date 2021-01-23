@@ -46,7 +46,8 @@ class AdminWatchInfoUpdateContainer extends Component {
             // associateOption: localStorageGetObjectItem('nwapp-watch-associateOption'),
             district: this.props.watchDetail.districtSlug,
             // districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
-            facebookUrl: "",
+            websiteUrl: this.props.watchDetail.websiteUrl,
+            facebookUrl: this.props.watchDetail.facebookUrl,
             isDistrictLoading: true,
             isVirtual: this.props.watchDetail.isVirtual,
             errors: {},
@@ -261,7 +262,9 @@ class AdminWatchInfoUpdateContainer extends Component {
 
     render() {
         const {
-            slug, tags, isTagLoading, name, description, district, isDistrictLoading, isVirtual, errors, isLoading
+            slug, tags, isTagLoading, name, description, district,
+            isDistrictLoading, isVirtual, websiteUrl, facebookUrl, errors,
+            isLoading
         } = this.state;
 
         const districtOptions = getDistrictReactSelectOptions(this.props.districtList, "district");
@@ -284,6 +287,8 @@ class AdminWatchInfoUpdateContainer extends Component {
                 isDistrictLoading={isDistrictLoading}
                 isVirtual={isVirtual}
                 districtOptions={districtOptions}
+                websiteUrl={websiteUrl}
+                facebookUrl={facebookUrl}
                 errors={errors}
                 isLoading={isLoading}
                 onClick={this.onClick}

@@ -15,7 +15,8 @@ import { BootstrapTextarea } from "../../../bootstrap/bootstrapTextarea";
 export default class AdminWatchInfoUpdateComponent extends Component {
     render() {
         const {
-            watchDetail, tags, isTagLoading, tagOptions, name, description, district, isDistrictLoading, isVirtual,
+            watchDetail, tags, isTagLoading, tagOptions, name, description,
+            district, isDistrictLoading, isVirtual, websiteUrl, facebookUrl,
             districtOptions, errors, isLoading, onClick, onTextChange,
             onSelectChange, onMultiChange, onCheckboxChange, slug, error
         } = this.props;
@@ -106,6 +107,28 @@ export default class AdminWatchInfoUpdateComponent extends Component {
                                 value={isVirtual}
                                 name="isVirtual"
                                 helpText="By selecting this field, the street membership will not be necessary."
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.websiteUrl}
+                                label="Website URL"
+                                onChange={onTextChange}
+                                value={websiteUrl}
+                                name="websiteUrl"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.facebookUrl}
+                                label="Facebook URL"
+                                onChange={onTextChange}
+                                value={facebookUrl}
+                                name="facebookUrl"
+                                type="text"
                             />
 
                             <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

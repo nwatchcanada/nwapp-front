@@ -45,6 +45,8 @@ class AdminWatchCreateStep2Container extends Component {
             districtOption: localStorageGetObjectItem('nwapp-watch-districtOption'),
             isDistrictLoading: true,
             isVirtual: localStorageGetBooleanItem('nwapp-watch-isVirtual'),
+            websiteUrl: localStorage.getItem('nwapp-watch-websiteUrl'),
+            facebookUrl: localStorage.getItem('nwapp-watch-facebookUrl'),
             errors: {},
         }
 
@@ -216,7 +218,8 @@ class AdminWatchCreateStep2Container extends Component {
 
     render() {
         const {
-            tags, isTagLoading, name, description, district, isDistrictLoading, isVirtual, errors
+            tags, isTagLoading, name, description, district, isDistrictLoading,
+            websiteUrl, facebookUrl, isVirtual, errors
         } = this.state;
 
         const districtOptions = getDistrictReactSelectOptions(this.props.districtList, "district");
@@ -236,6 +239,8 @@ class AdminWatchCreateStep2Container extends Component {
                 district={district}
                 isDistrictLoading={isDistrictLoading}
                 isVirtual={isVirtual}
+                websiteUrl={websiteUrl}
+                facebookUrl={facebookUrl}
                 districtOptions={districtOptions}
                 errors={errors}
                 onClick={this.onClick}

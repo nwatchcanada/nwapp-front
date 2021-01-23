@@ -166,6 +166,26 @@ export default class AdminWatchRetrieveComponent extends Component {
                                         </td>
                                     </tr>
                                 }
+                                <tr>
+                                    <th scope="row" className="bg-light">Website URL</th>
+                                    <td>
+                                        {watch && watch.websiteUrl && watch.websiteUrl != "" &&
+                                            <a href={watch.websiteUrl} target="_blank">
+                                                {watch.websiteUrl}&nbsp;<i className="fas fa-external-link-alt"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Facebook URL</th>
+                                    <td>
+                                        {watch && watch.websiteUrl && watch.websiteUrl != "" &&
+                                            <a href={watch.facebookUrl} target="_blank">
+                                                {watch.facebookUrl}&nbsp;<i className="fas fa-external-link-alt"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
