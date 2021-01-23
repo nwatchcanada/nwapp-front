@@ -54,7 +54,8 @@ class AdminDistrictUpdateComContainer extends Component {
             name: district.name,
             description: district.description,
             typeOf: COMMUNITY_CARES_TYPE_OF,
-            facebookUrl: "",
+            websiteUrl: district.websiteUrl,
+            facebookUrl: district.facebookUrl,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -108,6 +109,10 @@ class AdminDistrictUpdateComContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(district) {
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), district);
+
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
         this.props.history.push("/admin/settings/district/com/"+this.state.slug);
@@ -125,11 +130,12 @@ class AdminDistrictUpdateComContainer extends Component {
 
     onSuccessCallback(response) {
         console.log("onSuccessCallback |", response);
-        this.setState({ isLoading: false, district: response, });
 
         // The following code will save the object to the browser's local
         // storage to be retrieved later more quickly.
         localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
+
+        this.setState({ isLoading: false, district: response, });
     }
 
     onFailureCallback(errors) {
@@ -190,12 +196,14 @@ class AdminDistrictUpdateComContainer extends Component {
      */
 
     render() {
-        const { slug, name, description, errors, isLoading } = this.state;
+        const { slug, name, description, websiteUrl, facebookUrl, errors, isLoading } = this.state;
         return (
             <AdminDistrictUpdateComComponent
                 slug={slug}
                 name={name}
                 description={description}
+                websiteUrl={websiteUrl}
+                facebookUrl={facebookUrl}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}

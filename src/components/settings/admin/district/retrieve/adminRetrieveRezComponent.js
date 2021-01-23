@@ -99,6 +99,14 @@ export default class AdminDistrictRetrieveRezComponent extends Component {
                                     <th scope="row" className="bg-light">Counselor Phone</th>
                                     <td>{districtData && districtData.counselorPhone}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Website URL</th>
+                                    <td>{districtData && districtData.websiteUrl}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="bg-light">Facebook URL</th>
+                                    <td>{districtData && districtData.facebookUrl}</td>
+                                </tr>
 
                                 <tr className="bg-dark">
                                     <th scope="row" colSpan="2" className="text-light">

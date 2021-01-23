@@ -42,7 +42,7 @@ class AdminDistrictUpdateBizContainer extends Component {
             errors: {},
             district: district,
             isLoading: isLoading,
-            facebookUrl: "",
+            facebookUrl: district.facebookUrl,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -99,6 +99,10 @@ class AdminDistrictUpdateBizContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(district) {
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), district);
+
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
         this.props.history.push("/admin/settings/district/biz/"+this.state.slug);
@@ -116,11 +120,12 @@ class AdminDistrictUpdateBizContainer extends Component {
 
     onSuccessCallback(response) {
         console.log("onSuccessCallback |", response);
-        this.setState({ isLoading: false, district: response, });
 
         // The following code will save the object to the browser's local
         // storage to be retrieved later more quickly.
         localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
+
+        this.setState({ isLoading: false, district: response, });
     }
 
     onFailureCallback(errors) {
@@ -203,7 +208,7 @@ class AdminDistrictUpdateBizContainer extends Component {
      */
 
     render() {
-        const { slug, icon, number, name, description, websiteUrl, isLoading, logo, errors } = this.state;
+        const { slug, icon, number, name, description, websiteUrl, facebookUrl, isLoading, logo, errors } = this.state;
         return (
             <AdminDistrictUpdateBizComponent
                 slug={slug}
@@ -212,6 +217,7 @@ class AdminDistrictUpdateBizContainer extends Component {
                 name={name}
                 description={description}
                 websiteUrl={websiteUrl}
+                facebookUrl={facebookUrl}
                 logo={logo}
                 isLoading={isLoading}
                 errors={errors}

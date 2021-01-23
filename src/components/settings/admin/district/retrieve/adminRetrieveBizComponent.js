@@ -106,6 +106,10 @@ export default class AdminDistrictRetrieveBizComponent extends Component {
                                     </td>
                                 </tr>
                             }
+                            <tr>
+                                <th scope="row" className="bg-light">Facebook URL</th>
+                                <td>{districtData && districtData.facebookUrl}</td>
+                            </tr>
 
                             </tbody>
                         </table>

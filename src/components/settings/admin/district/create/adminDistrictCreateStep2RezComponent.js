@@ -12,7 +12,7 @@ class AdminDistrictCreateStep2RezComponent extends Component {
     render() {
         const {
             name, description, counselorName, counselorEmail, counselorPhone,
-            errors, isLoading, onTextChange, onClick
+            websiteUrl, facebookUrl, errors, isLoading, onTextChange, onClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -111,6 +111,28 @@ class AdminDistrictCreateStep2RezComponent extends Component {
                                 onChange={onTextChange}
                                 value={counselorPhone}
                                 name="counselorPhone"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.websiteUrl}
+                                label="Website URL"
+                                onChange={onTextChange}
+                                value={websiteUrl}
+                                name="websiteUrl"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.facebookUrl}
+                                label="Facebook URL"
+                                onChange={onTextChange}
+                                value={facebookUrl}
+                                name="facebookUrl"
                                 type="text"
                             />
 

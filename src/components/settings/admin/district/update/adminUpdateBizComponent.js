@@ -11,7 +11,7 @@ import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/boot
 
 class AdminDistrictUpdateBizComponent extends Component {
     render() {
-        const { slug, name, description, websiteUrl, logo, errors, onTextChange, isLoading, onClick, onDrop } = this.props;
+        const { slug, name, description, websiteUrl, facebookUrl, logo, errors, onTextChange, isLoading, onClick, onDrop } = this.props;
         return (
             <main id="main" role="main">
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -76,6 +76,17 @@ class AdminDistrictUpdateBizComponent extends Component {
                                 onChange={onTextChange}
                                 value={websiteUrl}
                                 name="websiteUrl"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.facebookUrl}
+                                label="Facebook URL"
+                                onChange={onTextChange}
+                                value={facebookUrl}
+                                name="facebookUrl"
                                 type="text"
                             />
 

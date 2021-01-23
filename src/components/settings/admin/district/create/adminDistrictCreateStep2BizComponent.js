@@ -11,7 +11,10 @@ import { BootstrapSingleImageUploadAndPreview } from "../../../../bootstrap/boot
 
 class AdminDistrictCreateStep2BizComponent extends Component {
     render() {
-        const { name, description, websiteURL, file, errors, onTextChange, isLoading, onClick, onDrop, onRemoveUploadClick } = this.props;
+        const {
+            name, description, websiteUrl, facebookUrl, file, errors,
+            onTextChange, isLoading, onClick, onDrop, onRemoveUploadClick
+        } = this.props;
         return (
             <main id="main" role="main">
                 <nav aria-label="breadcrumb">
@@ -93,11 +96,22 @@ class AdminDistrictCreateStep2BizComponent extends Component {
                             <BootstrapInput
                                 inputClassName="form-control form-control-lg"
                                 borderColour="border-success"
-                                error={errors.websiteURL}
+                                error={errors.websiteUrl}
                                 label="Website URL"
                                 onChange={onTextChange}
-                                value={websiteURL}
-                                name="websiteURL"
+                                value={websiteUrl}
+                                name="websiteUrl"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.facebookUrl}
+                                label="Facebook URL"
+                                onChange={onTextChange}
+                                value={facebookUrl}
+                                name="facebookUrl"
                                 type="text"
                             />
 

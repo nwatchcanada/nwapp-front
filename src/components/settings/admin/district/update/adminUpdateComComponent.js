@@ -11,7 +11,7 @@ import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 export default class AdminDistrictUpdateComComponent extends Component {
     render() {
         const {
-            slug, name, description, errors, onTextChange, isLoading, onClick,
+            slug, name, description, websiteUrl, facebookUrl, errors, onTextChange, isLoading, onClick,
         } = this.props;
         return (
             <main id="main" role="main">
@@ -68,6 +68,29 @@ export default class AdminDistrictUpdateComComponent extends Component {
                                 onChange={onTextChange}
                                 error={errors.description}
                             />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.websiteUrl}
+                                label="Website URL"
+                                onChange={onTextChange}
+                                value={websiteUrl}
+                                name="websiteUrl"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.facebookUrl}
+                                label="Facebook URL"
+                                onChange={onTextChange}
+                                value={facebookUrl}
+                                name="facebookUrl"
+                                type="text"
+                            />
+
 
                             <div className="form-group">
                                 <button className="btn btn-success btn-lg mt-4 float-right pl-4 pr-4" disabled={isLoading} onClick={onClick}>

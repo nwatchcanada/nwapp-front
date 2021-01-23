@@ -39,11 +39,12 @@ class AdminDistrictUpdateRezContainer extends Component {
             counselorName: district.counselorName,
             counselorEmail: district.counselorEmail,
             counselorPhone: district.counselorPhone,
+            websiteUrl: district.websiteUrl,
             errors: {},
             district: district,
             isLoading: isLoading,
             typeOf :RESIDENCE_TYPE_OF,
-            facebookUrl: "",
+            facebookUrl: district.facebookUrl,
         }
 
         this.onTextChange = this.onTextChange.bind(this);
@@ -97,6 +98,10 @@ class AdminDistrictUpdateRezContainer extends Component {
      */
 
     onSuccessfulSubmissionCallback(district) {
+        // The following code will save the object to the browser's local
+        // storage to be retrieved later more quickly.
+        localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), district);
+
         this.setState({ errors: {}, isLoading: true, })
         this.props.setFlashMessage("success", "District has been successfully updated.");
         this.props.history.push("/admin/settings/district/rez/"+this.state.slug);
@@ -114,11 +119,12 @@ class AdminDistrictUpdateRezContainer extends Component {
 
     onSuccessCallback(response) {
         console.log("onSuccessCallback |", response);
-        this.setState({ isLoading: false, district: response, });
 
         // The following code will save the object to the browser's local
         // storage to be retrieved later more quickly.
         localStorageSetObjectOrArrayItem("nwapp-admin-retrieve-district-"+this.state.slug.toString(), response);
+
+        this.setState({ isLoading: false, district: response, });
     }
 
     onFailureCallback(errors) {
@@ -180,7 +186,7 @@ class AdminDistrictUpdateRezContainer extends Component {
      */
 
     render() {
-        const { slug, name, description, counselorName, counselorEmail, counselorPhone, errors, isLoading } = this.state;
+        const { slug, name, description, counselorName, counselorEmail, counselorPhone, websiteUrl, facebookUrl, errors, isLoading } = this.state;
         return (
             <AdminDistrictUpdateRezComponent
                 slug={slug}
@@ -189,6 +195,8 @@ class AdminDistrictUpdateRezContainer extends Component {
                 counselorName={counselorName}
                 counselorEmail={counselorEmail}
                 counselorPhone={counselorPhone}
+                websiteUrl={websiteUrl}
+                facebookUrl={facebookUrl}
                 errors={errors}
                 isLoading={isLoading}
                 onTextChange={this.onTextChange}

@@ -11,7 +11,7 @@ import { BootstrapTextarea } from "../../../../bootstrap/bootstrapTextarea";
 export default class AdminDistrictCreateStep2ComComponent extends Component {
     render() {
         const {
-            name, description, errors, onTextChange, isLoading, onClick
+            name, description, websiteUrl, facebookUrl, errors, onTextChange, isLoading, onClick
         } = this.props;
         return (
             <main id="main" role="main">
@@ -89,6 +89,28 @@ export default class AdminDistrictCreateStep2ComComponent extends Component {
                                 helpText="This is the description of the business district."
                                 onChange={onTextChange}
                                 error={errors.description}
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.websiteUrl}
+                                label="Website URL"
+                                onChange={onTextChange}
+                                value={websiteUrl}
+                                name="websiteUrl"
+                                type="text"
+                            />
+
+                            <BootstrapInput
+                                inputClassName="form-control form-control-lg"
+                                borderColour="border-success"
+                                error={errors.facebookUrl}
+                                label="Facebook URL"
+                                onChange={onTextChange}
+                                value={facebookUrl}
+                                name="facebookUrl"
+                                type="text"
                             />
 
                             <div className="form-group">
