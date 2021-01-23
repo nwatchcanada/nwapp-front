@@ -22,7 +22,7 @@ export default class AdminStaffSearchResultComponent extends Component {
         const {
             staffs, isLoading, errors, hasNext, onNextClick, hasPrevious, onPreviousClick, onStaffClick
         } = this.props;
-        const hasNoStaffs = staffs.length <= 0;
+        const hasNoStaff = staffs.length <= 0;
         return (
             <div>
                 <BootstrapPageLoadingAnimation isLoading={isLoading} />
@@ -32,7 +32,7 @@ export default class AdminStaffSearchResultComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item">
-                           <Link to={`/admin/staff`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
+                           <Link to={`/admin/staff`}><i className="fas fa-user-check"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to={`/admin/staff/search`}><i className="fas fa-search"></i>&nbsp;Search</Link>
@@ -43,7 +43,7 @@ export default class AdminStaffSearchResultComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-search"></i>&nbsp;Staffs Search</h1>
+                <h1><i className="fas fa-search"></i>&nbsp;Staff Search</h1>
 
                 <div className="row">
                     <div className="col-md-12">
@@ -51,7 +51,7 @@ export default class AdminStaffSearchResultComponent extends Component {
                             <i className="fas fa-list"></i>&nbsp;Search Results
                         </h2>
 
-                        {hasNoStaffs
+                        {hasNoStaff
                             ?<div className="jumbotron">
                                 <h1 className="display-4">No Results Found</h1>
                                 <p className="lead">It appears nothing was found for your search results. Please try again by clicking below.</p>

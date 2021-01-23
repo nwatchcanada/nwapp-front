@@ -19,7 +19,7 @@ class AdminStaffSearchComponent extends Component {
                            <Link to="/dashboard"><i className="fas fa-tachometer-alt"></i>&nbsp;Dashboard</Link>
                         </li>
                         <li className="breadcrumb-item" aria-current="page">
-                            <Link to={`/admin/staff`}><i className="fas fa-user-check"></i>&nbsp;Staffs</Link>
+                            <Link to={`/admin/staff`}><i className="fas fa-user-check"></i>&nbsp;Staff</Link>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
                             <i className="fas fa-search"></i>&nbsp;Search
@@ -27,7 +27,7 @@ class AdminStaffSearchComponent extends Component {
                     </ol>
                 </nav>
 
-                <h1><i className="fas fa-search"></i>&nbsp;Staffs Search</h1>
+                <h1><i className="fas fa-search"></i>&nbsp;Staff Search</h1>
 
                 <div id="m-search" className="col-sm-5 mx-auto mt-4 pt-4">
 
